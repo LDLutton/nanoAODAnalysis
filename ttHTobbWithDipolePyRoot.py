@@ -406,7 +406,7 @@ DrawPlot(h_InitialJetAltIM_pt,"h_InitialJetAltIM_pt",saveName)
 #Max jet pt cut
 DrawPlot(h_InitialJetAltLJ_Eta,"h_InitialJetAltLJ_Eta",saveName)
 DrawPlot(h_InitialJetAltLJ_EtaSep,"h_InitialJetAltLJ_EtaSep",saveName)
-DrawPlot(h_InitialJetAltLJ_pt,"h_InitialJetAltLJ_pt"),saveName
+DrawPlot(h_InitialJetAltLJ_pt,"h_InitialJetAltLJ_pt",saveName)
 
 
 print("Done.","time:",time.time()-startt)
