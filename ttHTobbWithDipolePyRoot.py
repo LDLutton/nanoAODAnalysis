@@ -55,7 +55,7 @@ fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMH
 
 
 
-print("Making Histos/Defining variables",time.time()-startt)
+print("Making Histos/Defining variables.","time:",time.time()-startt)
 h_CaloMET_phi    = TH1F("h_CaloMET_phi","h_CaloMET_phi", 200, -3.5, 3.5)
 h_CaloMET_pt     = TH1F("h_CaloMET_pt","h_CaloMET_pt", 200, 0, 200)
 h_CaloMET_sumEt  = TH1F("h_CaloMET_sumEt","h_CaloMET_sumEt", 500, 0, 1000)
@@ -110,12 +110,12 @@ ifTwoCount = 0
 ifThreeCount = 0
 ifFourCount = 0
 
-print("Going into file loop",time.time()-startt)
+print("Going into file loop.","time:",time.time()-startt)
 for k,fileName in enumerate(fileAr):
     #Open the file, get the Events tree
     tmpfile = TFile.Open(fileName)
     mytree = tmpfile.Events
-    print("Going into event loop for file {0}".format(k),time.time()-startt)
+    print("Going into event loop for file {0}.".format(k),"time:",time.time()-startt)
 
     for ev in mytree:
         if evCount % 1000 == 0:
@@ -322,7 +322,7 @@ for k,fileName in enumerate(fileAr):
         #Increment event count
         evCount += 1
 
-print("Finished file loop",time.time()-startt)
+print("Finished file loop.","time:",time.time()-startt)
 #Printing out different counters:
 #Counters for problems during jet matching:
 print("Number of events with no matching jet:",noMatchCount)
@@ -336,7 +336,7 @@ print("Number of events with jet pair inv mass >",jetInvMassCut,"-",ifFourCount)
 #Setting up outfile for histograms
 outFile = TFile("histosFromNanoAODWithDipoleRecoil.root","recreate")
 
-print("Drawing plots",time.time()-startt)
+print("Drawing plots.","time:",time.time()-startt)
 #General stuff:
 DrawPlot(h_CaloMET_phi, "h_CaloMET_phi")
 DrawPlot(h_CaloMET_pt, "h_CaloMET_pt")
@@ -383,6 +383,6 @@ DrawPlot(h_InitialJetAltLJ_EtaSep,"h_InitialJetAltLJ_EtaSep")
 DrawPlot(h_InitialJetAltLJ_pt,"h_InitialJetAltLJ_pt")
 
 
-print("Done",time.time()-startt)
+print("Done.","time:",time.time()-startt)
 
 
