@@ -6,10 +6,18 @@ from ROOT import TH2D, TH2F
 from math import sqrt,pi
 import time as time
 
+withDipoleRecoil = True
+
+if withDipoleRecoil:
+    saveName = "WithDipoleRecoil"
+else:
+    saveName = "WithoutDipoleRecoil"
+
 #For drawing and saving histograms
 #Saves a png and a pdf version
 #Saves histogram to the currently active root file
-def DrawPlot(plot,name):
+
+def DrawPlot(plot,name,saveName):
     c1 = TCanvas("c1","c1",3600,2400)
 
 
@@ -17,9 +25,11 @@ def DrawPlot(plot,name):
     plot.SetFillColorAlpha(30,0.35)
 
     plot.Draw("hist")
-    c1.SaveAs((name+"WithDipoleRecoil.png"))
-    c1.SaveAs((name+"WithDipoleRecoil.pdf"))
+    c1.SaveAs((name+"{0}.png".format(saveName)))
+    c1.SaveAs((name+"{0}.pdf".format(saveName)))
     plot.Write()
+
+
 
 #For calculating DeltaR for two particles from their respective etas and phis
 def calcDeltaR(phi1,eta1,phi2,eta2):
@@ -36,22 +46,38 @@ startt = time.time()
 #Analyzer will run over all files put into fileAr
 fileAr = []
 
-fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev1546Seed_3_WithDR_1cHW_0.root")
-fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev1758Seed_7_WithDR_1cHW_1.root")
-fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev2683Seed_12_WithDR_1cHW_2.root")
-fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev3340Seed_5_WithDR_1cHW_3.root")
-fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev3514Seed_0_WithDR_1cHW_4.root")
-fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev4130Seed_16_WithDR_1cHW_5.root")
-fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev4675Seed_9_WithDR_1cHW_6.root")
-fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev5610Seed_4_WithDR_1cHW_7.root")
-fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev6045Seed_10_WithDR_1cHW_8.root")
-fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev6155Seed_4_WithDR_1cHW_9.root")
-fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev7078Seed_2_WithDR_1cHW_11.root")
-fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev7167Seed_5_WithDR_1cHW_12.root")
-fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev8069Seed_6_WithDR_1cHW_13.root")
-fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev9608Seed_13_WithDR_1cHW_15.root")
-fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev9884Seed_19_WithDR_1cHW_16.root")
-
+if withDipoleRecoil:
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev1546Seed_3_WithDR_1cHW_0.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev1758Seed_7_WithDR_1cHW_1.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev2683Seed_12_WithDR_1cHW_2.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev3340Seed_5_WithDR_1cHW_3.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev3514Seed_0_WithDR_1cHW_4.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev4130Seed_16_WithDR_1cHW_5.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev4675Seed_9_WithDR_1cHW_6.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev5610Seed_4_WithDR_1cHW_7.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev6045Seed_10_WithDR_1cHW_8.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev6155Seed_4_WithDR_1cHW_9.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev7078Seed_2_WithDR_1cHW_11.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev7167Seed_5_WithDR_1cHW_12.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev8069Seed_6_WithDR_1cHW_13.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev9608Seed_13_WithDR_1cHW_15.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev9884Seed_19_WithDR_1cHW_16.root")
+else:
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev1546Seed_3_1cHW_1.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev1758Seed_7_1cHW_2.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev2683Seed_12_1cHW_3.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev3340Seed_5_1cHW_4.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev3514Seed_0_1cHW_5.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev4130Seed_16_1cHW_6.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev4675Seed_9_1cHW_7.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev5610Seed_4_1cHW_8.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev6045Seed_10_1cHW_9.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev6155Seed_4_1cHW_10.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev7078Seed_2_1cHW_13.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev7167Seed_5_1cHW_14.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev8069Seed_6_1cHW_15.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev9608Seed_13_1cHW_17.root")
+    fileAr.append("root://eosuser.cern.ch//eos/user/d/dlutton/condorS/pphzzjjQCD0SMHLOOP0QEDE5ResMasAllVer2000Ev9884Seed_19_1cHW_18.root")
 
 
 
@@ -334,7 +360,7 @@ print("Number of events with jet pair etaDif >",jetEtaDifCut,"-",ifThreeCount)
 print("Number of events with jet pair inv mass >",jetInvMassCut,"-",ifFourCount)
 
 #Setting up outfile for histograms
-outFile = TFile("histosFromNanoAODWithDipoleRecoil.root","recreate")
+outFile = TFile("histosFromNanoAODW{0}.root".format(saveName),"recreate")
 
 print("Drawing plots.","time:",time.time()-startt)
 #General stuff:
