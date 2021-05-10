@@ -364,49 +364,49 @@ outFile = TFile("histosFromNanoAODW{0}.root".format(saveName),"recreate")
 
 print("Drawing plots.","time:",time.time()-startt)
 #General stuff:
-DrawPlot(h_CaloMET_phi, "h_CaloMET_phi")
-DrawPlot(h_CaloMET_pt, "h_CaloMET_pt")
-DrawPlot(h_CaloMET_sumEt, "h_CaloMET_sumEt")
+DrawPlot(h_CaloMET_phi, "h_CaloMET_phi",saveName)
+DrawPlot(h_CaloMET_pt, "h_CaloMET_pt",saveName)
+DrawPlot(h_CaloMET_sumEt, "h_CaloMET_sumEt",saveName)
 
-DrawPlot(h_Electron_eta,"h_Electron_eta")
-DrawPlot(h_Electron_hoe,"h_Electron_hoe")
-DrawPlot(h_Electron_mass,"h_Electron_mass")
-DrawPlot(h_Electron_phi,"h_Electron_phi")
-DrawPlot(h_Electron_pt,"h_Electron_pt")
-DrawPlot(h_Electron_r9,"h_Electron_r9")
-DrawPlot(h_Electron_sieie,"h_Electron_sieie")
+DrawPlot(h_Electron_eta,"h_Electron_eta",saveName)
+DrawPlot(h_Electron_hoe,"h_Electron_hoe",saveName)
+DrawPlot(h_Electron_mass,"h_Electron_mass",saveName)
+DrawPlot(h_Electron_phi,"h_Electron_phi",saveName)
+DrawPlot(h_Electron_pt,"h_Electron_pt",saveName)
+DrawPlot(h_Electron_r9,"h_Electron_r9",saveName)
+DrawPlot(h_Electron_sieie,"h_Electron_sieie",saveName)
 
-DrawPlot(h_Muon_eta,"h_Muon_eta")
-DrawPlot(h_Muon_mass,"h_Muon_mass")
-DrawPlot(h_Muon_phi,"h_Muon_phi")
-DrawPlot(h_Muon_pt,"h_Muon_pt")
+DrawPlot(h_Muon_eta,"h_Muon_eta",saveName)
+DrawPlot(h_Muon_mass,"h_Muon_mass",saveName)
+DrawPlot(h_Muon_phi,"h_Muon_phi",saveName)
+DrawPlot(h_Muon_pt,"h_Muon_pt",saveName)
 
 #Jets:
-DrawPlot(h_Jet_eta,"h_Jet_eta")
-DrawPlot(h_Jet_mass,"h_Jet_mass")
-DrawPlot(h_Jet_phi,"h_Jet_phi")
-DrawPlot(h_Jet_pt,"h_Jet_pt")
-DrawPlot(h_nJet,"h_nJet")
-DrawPlot(h_nFatJet,"h_nFatJet")
+DrawPlot(h_Jet_eta,"h_Jet_eta",saveName)
+DrawPlot(h_Jet_mass,"h_Jet_mass",saveName)
+DrawPlot(h_Jet_phi,"h_Jet_phi",saveName)
+DrawPlot(h_Jet_pt,"h_Jet_pt",saveName)
+DrawPlot(h_nJet,"h_nJet",saveName)
+DrawPlot(h_nFatJet,"h_nFatJet",saveName)
 
 #Gen matched jets:
-DrawPlot(h_InitialJet_Eta,"h_InitialJet_Eta")
-DrawPlot(h_InitialJet_EtaSep,"h_InitialJet_EtaSep")
-DrawPlot(h_InitialJet_pt,"h_InitialJet_pt")
+DrawPlot(h_InitialJet_Eta,"h_InitialJet_Eta",saveName)
+DrawPlot(h_InitialJet_EtaSep,"h_InitialJet_EtaSep",saveName)
+DrawPlot(h_InitialJet_pt,"h_InitialJet_pt",saveName)
 
 #Jet matching with Cuts:
 #summed pt cut
-DrawPlot(h_InitialJetAlt_Eta,"h_InitialJetAlt_Eta")
-DrawPlot(h_InitialJetAlt_EtaSep,"h_InitialJetAlt_EtaSep")
-DrawPlot(h_InitialJetAlt_pt,"h_InitialJetAlt_pt")
+DrawPlot(h_InitialJetAlt_Eta,"h_InitialJetAlt_Eta",saveName)
+DrawPlot(h_InitialJetAlt_EtaSep,"h_InitialJetAlt_EtaSep",saveName)
+DrawPlot(h_InitialJetAlt_pt,"h_InitialJetAlt_pt",saveName)
 #InvMass cut
-DrawPlot(h_InitialJetAltIM_Eta,"h_InitialJetAltIM_Eta")
-DrawPlot(h_InitialJetAltIM_EtaSep,"h_InitialJetAltIM_EtaSep")
-DrawPlot(h_InitialJetAltIM_pt,"h_InitialJetAltIM_pt")
+DrawPlot(h_InitialJetAltIM_Eta,"h_InitialJetAltIM_Eta",saveName)
+DrawPlot(h_InitialJetAltIM_EtaSep,"h_InitialJetAltIM_EtaSep",saveName)
+DrawPlot(h_InitialJetAltIM_pt,"h_InitialJetAltIM_pt",saveName)
 #Max jet pt cut
-DrawPlot(h_InitialJetAltLJ_Eta,"h_InitialJetAltLJ_Eta")
-DrawPlot(h_InitialJetAltLJ_EtaSep,"h_InitialJetAltLJ_EtaSep")
-DrawPlot(h_InitialJetAltLJ_pt,"h_InitialJetAltLJ_pt")
+DrawPlot(h_InitialJetAltLJ_Eta,"h_InitialJetAltLJ_Eta",saveName)
+DrawPlot(h_InitialJetAltLJ_EtaSep,"h_InitialJetAltLJ_EtaSep",saveName)
+DrawPlot(h_InitialJetAltLJ_pt,"h_InitialJetAltLJ_pt"),saveName
 
 
 print("Done.","time:",time.time()-startt)
