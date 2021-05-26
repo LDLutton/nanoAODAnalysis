@@ -360,7 +360,7 @@ print("Number of events with jet pair etaDif >",jetEtaDifCut,"-",ifThreeCount)
 print("Number of events with jet pair inv mass >",jetInvMassCut,"-",ifFourCount)
 
 #Setting up outfile for histograms
-outFile = TFile("histosFromNanoAODW{0}.root".format(saveName),"recreate")
+outFile = TFile("histosFromNanoAOD{0}.root".format(saveName),"recreate")
 
 print("Drawing plots.","time:",time.time()-startt)
 #General stuff:

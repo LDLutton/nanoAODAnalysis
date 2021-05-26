@@ -2,7 +2,7 @@ from ROOT import TFile, TChain, gDirectory, TApplication, TMath, Math, TMinuit, 
 # You probably also want to import TH1D and TCanvas,
 # unless you're not making any histograms.
 from ROOT import TH1F, TCanvas, TPad, TF1, TGraph, TGraphErrors, TLegend, TLine, TPaveText, TStyle
-from ROOT import TH2D, TH2F
+from ROOT import TH2D, TH2F,gPad
 from math import sqrt,pi
 import time as time
 
@@ -69,66 +69,97 @@ def makePTHistos(histAr,histName,tmpHistWoD,tmpHistWD):
 print("start")
 startt = time.time()
 #Analyzer will run over all files put into fileAr
-
-fileWithoutDipole = TFile.Open("histosFromNanoAOD.root")
-fileWithDipole = TFile.Open("histosFromNanoAODWithDipoleRecoil.root")
-listOfKeysWithoutDipole = fileWithoutDipole.GetListOfKeys()
-listOfKeysWithDipole = fileWithDipole.GetListOfKeys()
+#Compare to withoutDipole files
+#fileWithoutDipole = TFile.Open("histosFromNanoAODWWithoutDipoleRecoil.root")
+#Compare to background files
+fileOne = TFile.Open("histosFromNanoAODWttHBackground.root")
+#With Dipole files
+fileTwo = TFile.Open("histosFromNanoAODWWithDipoleRecoil.root")
+listOfKeysOne = fileOne.GetListOfKeys()
+listOfKeysTwo = fileTwo.GetListOfKeys()
 
 canAr = []
 padAr = []
 legAr = []
 histAr = []
 
-for keyWoD,keyWD in zip(listOfKeysWithoutDipole,listOfKeysWithDipole):
-    tmpObjWoD = keyWoD.ReadObj()
-    tmpObjWD = keyWD.ReadObj()
-    histName = tmpObjWoD.GetName()
+skipCounter = 0
+#for keyWoD,keyWD in zip(listOfKeysOne,listOfKeysTwo):
+for i,keyTwo in enumerate(listOfKeysTwo):
+    tmpObjTwo = keyTwo.ReadObj()
+    histName = tmpObjTwo.GetName()
+    if "InitialJet_" in tmpObjTwo.GetName():
+      skipCounter += 1
+      continue
+    tmpObjOne = listOfKeysOne[i-skipCounter].ReadObj()
     #if "pt" in histName:
-        makePTHistos(histAr,tmpObjWoD,tmpObjWD)
+    #    makePTHistos(histAr,tmpObjWoD,tmpObjWD)
     canAr.append(TCanvas("{0}Can".format(histName),"{0}Can".format(histName),1920,1440))
+    
     setUpLegend(legAr)
     setUpPadsAr(padAr,"{0}Pad".format(histName))
-    tmpObjWoD.SetLineColor(4)
-    tmpObjWoD.SetLineWidth(3)
-    tmpObjWD.SetLineColor(6)
-    tmpObjWD.SetLineWidth(3)
+    
+    tmpObjOne.SetLineColor(4)
+    tmpObjOne.SetLineWidth(3)
+    tmpObjTwo.SetLineColor(6)
+    tmpObjTwo.SetLineWidth(3)
     canAr[-1].cd()
     padAr[-1][0].Draw()
     padAr[-1][0].cd()
-    makeNiceHistos(tmpObjWoD,"","Events",True)
-    tmpObjWoD.SetTitle("{0}".format(histName)+" With and Without Dipole Recoil On")
-    legAr[-1].AddEntry(tmpObjWoD,"Without DR","l")
+    makeNiceHistos(tmpObjOne"","Events",True)
+    tmpObjOne.SetTitle("{0}".format(histName)+" SM+EFT and ttH background")
+    legAr[-1].AddEntry(tmpObjOne,"ttH","l")
     histMax = 0
     
-    tmpMaxWoD = tmpObjWoD.GetMaximum()
-    tmpMaxWD = tmpObjWD.GetMaximum()
-    if tmpMaxWD < tmpMaxWoD:
-        histMax = tmpMaxWoD
+    tmpMaxOne = tmpObjOne.GetMaximum()
+    tmpMaxTwo = tmpObjTwo.GetMaximum()
+    if tmpMaxTwo < tmpMaxOne:
+        histMax = tmpMaxOne
     else:
-        histMax = tmpMaxWD
-    tmpObjWoD.GetYaxis().SetRangeUser(0,histMax)
-    tmpObjWoD.Draw("hist")
+        histMax = tmpMaxTwo
+    tmpObjOne.GetYaxis().SetRangeUser(0,histMax)
+    tmpObjOne.Draw("hist")
     
-    tmpObjWD.SetTitle("{0}".format(histName)+" With and Without Dipole Recoil On")
-    legAr[-1].AddEntry(tmpObjWD,"With DR","l")
-    tmpObjWD.DrawCopy("same hist")
+    tmpObjTwo.SetTitle("{0}".format(histName)+" SM+EFT and ttH background"")
+    legAr[-1].AddEntry(tmpObjTwo,"SM+EFT","l")
+    tmpObjTwo.DrawCopy("same hist")
     legAr[-1].Draw()
-
+    """
+    if "pt" in histName:
+         #padAr[-1][0].SetLogx()
+         #tmpObjWoD.GetXaxis().SetLimits(5.0,tmpObjWoD.GetXaxis().GetXmax())
+         #tmpObjWD.GetXaxis().SetLimits(5.0,tmpObjWD.GetXaxis().GetXmax())
+         #tmpObjWoD.GetXaxis().SetRangeUser(5.0,tmpObjWoD.GetXaxis().GetXmax())
+         #tmpObjWD.GetXaxis().SetRangeUser(5.0,tmpObjWD.GetXaxis().GetXmax())
+         print(tmpObjWoD,tmpObjWoD.GetXaxis().GetXmax())
+         print(tmpObjWD,tmpObjWD.GetXaxis().GetXmax())
+         gPad.Modified()
+    #    padAr[-1][0].SetLogy()
+    #    tmpObjWoD.SetMinimum(0.01)
+    #    tmpObjWD.SetMinimum(0.01)
+    """
     canAr[-1].cd()
     setUpBottomPadsAr(padAr[-1])
-    tmpObjWD.Sumw2()
-    tmpObjWD.Divide(tmpObjWoD)
-    makeNiceHistos(tmpObjWD,"","Ratio to Without Dipole Recoil",False)
-    tmpRatioMax = tmpObjWD.GetMaximum()
+    tmpObjTwo.Sumw2()
+    tmpObjTwo.Divide(tmpObjOne)
+    makeNiceHistos(tmpObjTwo,"","Ratio to ttH",False)
+    tmpRatioMax = tmpObjTwo.GetMaximum()
     if tmpRatioMax > 4:
-        tmpObjWD.GetYaxis().SetRangeUser(0,4)
-    tmpObjWD.SetLineWidth(2)
-    tmpObjWD.Draw("et same")
+        tmpObjTwo.GetYaxis().SetRangeUser(0,4)
+    tmpObjTwo.SetLineWidth(2)
+    tmpObjTwo.Draw("et same")
+    """
+    if "pt" in histName:
+         #tmpObjWoD.GetXaxis().SetRangeUser(5.0,tmpObjWoD.GetXaxis().GetXmax())
+         #tmpObjWD.GetXaxis().SetRangeUser(5.0,tmpObjWD.GetXaxis().GetXmax())
+         #padAr[-1][1].SetLogx()
+         #tmpObjWoD.GetXaxis().SetRangeUser(5.0,tmpObjWoD.GetXaxis().GetXmax())
+         #tmpObjWD.GetXaxis().SetRangeUser(5.0,tmpObjWD.GetXaxis().GetXmax())
+    """
     canAr[-1].Update()
     #Saving canvas
 
-    canAr[-1].SaveAs("{0}ComparingWithAndWithoutDR.png".format(histName))
+    canAr[-1].SaveAs("{0}ComparingSMEFTWithTTHtoBB.png".format(histName))
 
 
 print("Done.","time:",time.time()-startt)
