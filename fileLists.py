@@ -780,3 +780,9 @@ MGEFTAr = ["unweighted_eventspphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100E
 "unweighted_eventspphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev9863Seed_0p999cHW100GeVIMJetCut_196.root",
 "unweighted_eventspphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev9915Seed_0p999cHW100GeVIMJetCut_197.root",
 "unweighted_eventspphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev9975Seed_0p999cHW100GeVIMJetCut_198.root"]
+
+ttHToBBBackgroundAr = ["root://cmsxrootd.fnal.gov///store/mc/RunIISummer19UL18NanoAODv2/ttHiggs0PMtoBB_M125_TuneCP5_PSWeights_13TeV_JHUGenV7011_pythia8/NANOAODSIM/106X_upgrade2018_realistic_v15_L1v1-v1/40000/D56A3CD3-8D5B-B440-A4EE-93AAD0CE5B55.root",
+"root://cmsxrootd.fnal.gov///store/mc/RunIISummer19UL18NanoAODv2/ttHiggs0PMtoBB_M125_TuneCP5_PSWeights_13TeV_JHUGenV7011_pythia8/NANOAODSIM/106X_upgrade2018_realistic_v15_L1v1-v1/50000/B992B172-26E0-1946-9CBB-C8220979669F.root",
+"root://cmsxrootd.fnal.gov///store/mc/RunIISummer19UL18NanoAODv2/ttHiggs0PMtoBB_M125_TuneCP5_PSWeights_13TeV_JHUGenV7011_pythia8/NANOAODSIM/106X_upgrade2018_realistic_v15_L1v1-v1/280000/42A433BE-B6D0-0B41-AD0E-077D4F3CA3BD.root",
+"root://cmsxrootd.fnal.gov///store/mc/RunIISummer19UL18NanoAODv2/ttHiggs0PMtoBB_M125_TuneCP5_PSWeights_13TeV_JHUGenV7011_pythia8/NANOAODSIM/106X_upgrade2018_realistic_v15_L1v1-v1/280000/BA8BE9CC-6C7C-4647-921B-8051DA1E493D.root",
+"root://cmsxrootd.fnal.gov///store/mc/RunIISummer19UL18NanoAODv2/ttHiggs0PMtoBB_M125_TuneCP5_PSWeights_13TeV_JHUGenV7011_pythia8/NANOAODSIM/106X_upgrade2018_realistic_v15_L1v1-v1/280000/98A40531-5EEB-7E45-8F3B-F8B6F47EB7BD.root"]

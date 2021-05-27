@@ -12,25 +12,29 @@ import time as time
 
 MGSM = False
 MGEFT = True
+ttHToBBBackground = False
 
 #For drawing and saving histograms
 #Saves a png and, optionally, a pdf version
 #Saves histogram to the currently active root file
 
 def DrawPlot(plot,name,saveName):
-    c1 = TCanvas("c1","c1",3600,2400)
+    if plot.GetEntries() > 0:
+        c1 = TCanvas("c1","c1",3600,2400)
 
-    plot.SetFillColorAlpha(30,0.35)
+        plot.SetFillColorAlpha(30,0.35)
 
-    plot.Draw("hist")
-    c1.SaveAs((name+"{0}.png".format(saveName)))
-    plot.Write(name)
-    plot.Scale(1.0 / plot.Integral())
+        plot.Draw("hist")
+        c1.SaveAs((name+"{0}.png".format(saveName)))
+        plot.Write(name)
+        plot.Scale(1.0 / plot.Integral())
 
-    plot.Draw("hist")
-    c1.SaveAs((name+"{0}Normalized.png".format(saveName)))
-    #c1.SaveAs((name+"{0}.pdf".format(saveName)))
-    plot.Write(name+"Normalized")
+        plot.Draw("hist")
+        c1.SaveAs((name+"{0}Normalized.png".format(saveName)))
+        #c1.SaveAs((name+"{0}.pdf".format(saveName)))
+        plot.Write(name+"Normalized")
+    else:
+        print(name,"has no entries")
 
 
 
@@ -50,10 +54,15 @@ startt = time.time()
 fileAr = []
 
 if MGEFT:
-    saveName = "pphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev10179Seed_0p999cHW100GeVIMJetCut"
+    saveName = "pphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev_0p999cHW100GeVIMJetCut"
     for fileName in MGEFTAr:
         fileAr.append("/scratch365/dlutton/NanoAODFiles/"+fileName)
 elif MGSM:
+    saveName = "pphzzjjQCD0SMHLOOP0QEDE5NPE0ResMasAllVer100Ev_0p999cHW100GeVIMJetCut"
+    for fileName in MGSMAr:
+        fileAr.append("/scratch365/dlutton/NanoAODFiles/"+fileName)
+elif ttHToBBBackground:
+    saveName = "ttHToBBBackground"
     for fileName in MGSMAr:
         fileAr.append("/scratch365/dlutton/NanoAODFiles/"+fileName)
     
