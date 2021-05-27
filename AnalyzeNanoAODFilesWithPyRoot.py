@@ -49,7 +49,6 @@ startt = time.time()
 #Analyzer will run over all files put into fileAr
 fileAr = []
 
-MGEFTCrossSection = 
 if MGEFT:
     saveName = "pphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev10179Seed_0p999cHW100GeVIMJetCut"
     for fileName in MGEFTAr:
@@ -62,8 +61,8 @@ elif MGSM:
 print("Making Histos/Defining variables.","time:",time.time()-startt)
 h_CaloMET_phi    = TH1F("h_CaloMET_phi","h_CaloMET_phi", 100, -3.5, 3.5)
 h_CaloMET_pt     = TH1F("h_CaloMET_pt","h_CaloMET_pt", 20, 0, 200)
-h_CaloMET_sumEt  = TH1F("h_CaloMET_sumEt","h_CaloMET_sumEt", 500, 0, 1000)
-h_LHEWeight      = TH1F("h_LHEWeight","h_LHEWeight",100,0.25,0.30)
+h_CaloMET_sumEt  = TH1F("h_CaloMET_sumEt","h_CaloMET_sumEt", 500, 0, 4000)
+h_LHEWeight      = TH1F("h_LHEWeight","h_LHEWeight",100,0.025,0.030)
 
 h_Electron_eta   = TH1F("h_Electron_eta","h_Electron_eta", 100, -5.0, 5.0)
 h_Electron_hoe   = TH1F("h_Electron_hoe","h_Electron_hoe", 200, 0, 5.0)
@@ -117,18 +116,26 @@ ifFourCount = 0
 
 print("Going into file loop.","time:",time.time()-startt)
 for k,fileName in enumerate(fileAr):
+    #if evCount > 15:
+    #    break
     #Open the file, get the Events tree
     tmpfile = TFile.Open(fileName)
     mytree = tmpfile.Events
     runTree = tmpfile.Runs
-    crossSection = runTree[0].genEventSumw
+    for i,runEv in enumerate(runTree):
+        if i > 0:
+            print("uhoh it has two",i,k,fileName)
+        crossSection = runEv.genEventSumw
     h_LHEWeight.Fill(crossSection)
     if k % 10 == 0:
         print("Going into event loop for file {0}.".format(k),"time:",time.time()-startt)
 
     for ev in mytree:
+        #if evCount > 15:
+        #    break
         if evCount % 1000 == 0:
             print("Event: "+str(evCount))
+        print(ev.CaloMET_sumEt,crossSection)
         h_CaloMET_phi.Fill(ev.CaloMET_phi,crossSection)
         h_CaloMET_pt.Fill(ev.CaloMET_pt,crossSection)
         h_CaloMET_sumEt.Fill(ev.CaloMET_sumEt,crossSection)
@@ -283,7 +290,7 @@ for k,fileName in enumerate(fileAr):
         if ptOneInd != ptTwoInd:
             h_InitialJetAlt_Eta.Fill(ev.Jet_eta[ptOneInd],crossSection)
             h_InitialJetAlt_Eta.Fill(ev.Jet_eta[ptTwoInd],crossSection)
-            h_InitialJetAlt_EtaSep.Fill(abs(ev.Jet_eta[ptOneInd]-ev.Jet_eta[ptTwoInd],crossSection))
+            h_InitialJetAlt_EtaSep.Fill(abs(ev.Jet_eta[ptOneInd]-ev.Jet_eta[ptTwoInd]),crossSection)
             h_InitialJetAlt_pt.Fill(ev.Jet_pt[ptOneInd],crossSection)
             h_InitialJetAlt_pt.Fill(ev.Jet_pt[ptTwoInd],crossSection)
             #print(evCount,i,deltaRMinOne,deltaRMinTwo,jOneInd,jTwoInd)
@@ -292,7 +299,7 @@ for k,fileName in enumerate(fileAr):
         if invMassOneInd != invMassTwoInd:
             h_InitialJetAltIM_Eta.Fill(ev.Jet_eta[invMassOneInd],crossSection)
             h_InitialJetAltIM_Eta.Fill(ev.Jet_eta[invMassTwoInd],crossSection)
-            h_InitialJetAltIM_EtaSep.Fill(abs(ev.Jet_eta[invMassOneInd]-ev.Jet_eta[invMassTwoInd],crossSection))
+            h_InitialJetAltIM_EtaSep.Fill(abs(ev.Jet_eta[invMassOneInd]-ev.Jet_eta[invMassTwoInd]),crossSection)
             h_InitialJetAltIM_pt.Fill(ev.Jet_pt[invMassOneInd],crossSection)
             h_InitialJetAltIM_pt.Fill(ev.Jet_pt[invMassTwoInd],crossSection)
             #print(evCount,i,deltaRMinOne,deltaRMinTwo,jOneInd,jTwoInd)
@@ -301,7 +308,7 @@ for k,fileName in enumerate(fileAr):
         if LJOneInd != LJTwoInd:
             h_InitialJetAltLJ_Eta.Fill(ev.Jet_eta[LJOneInd],crossSection)
             h_InitialJetAltLJ_Eta.Fill(ev.Jet_eta[LJTwoInd],crossSection)
-            h_InitialJetAltLJ_EtaSep.Fill(abs(ev.Jet_eta[LJOneInd]-ev.Jet_eta[LJTwoInd],crossSection))
+            h_InitialJetAltLJ_EtaSep.Fill(abs(ev.Jet_eta[LJOneInd]-ev.Jet_eta[LJTwoInd]),crossSection)
             h_InitialJetAltLJ_pt.Fill(ev.Jet_pt[LJOneInd],crossSection)
             h_InitialJetAltLJ_pt.Fill(ev.Jet_pt[LJTwoInd],crossSection)
             #print(evCount,i,deltaRMinOne,deltaRMinTwo,jOneInd,jTwoInd)
@@ -325,7 +332,7 @@ for k,fileName in enumerate(fileAr):
         else:
             h_InitialJet_Eta.Fill(ev.Jet_eta[jOneInd],crossSection)
             h_InitialJet_Eta.Fill(ev.Jet_eta[jTwoInd],crossSection)
-            h_InitialJet_EtaSep.Fill(abs(ev.Jet_eta[jOneInd]-ev.Jet_eta[jTwoInd],crossSection))
+            h_InitialJet_EtaSep.Fill(abs(ev.Jet_eta[jOneInd]-ev.Jet_eta[jTwoInd]),crossSection)
             h_InitialJet_pt.Fill(ev.Jet_pt[jOneInd],crossSection)
             h_InitialJet_pt.Fill(ev.Jet_pt[jTwoInd],crossSection)
         #Increment event count
@@ -347,49 +354,51 @@ outFile = TFile("histosFromNanoAOD{0}.root".format(saveName),"recreate")
 
 print("Drawing plots.","time:",time.time()-startt)
 #General stuff:
-DrawPlot(h_CaloMET_phi, "h_CaloMET_phi",saveName)
-DrawPlot(h_CaloMET_pt, "h_CaloMET_pt",saveName)
-DrawPlot(h_CaloMET_sumEt, "h_CaloMET_sumEt",saveName)
+DrawPlot(h_CaloMET_phi, "h_CaloMET_phi_",saveName)
+DrawPlot(h_CaloMET_pt, "h_CaloMET_pt_",saveName)
+DrawPlot(h_CaloMET_sumEt, "h_CaloMET_sumEt_",saveName)
 
-DrawPlot(h_Electron_eta,"h_Electron_eta",saveName)
-DrawPlot(h_Electron_hoe,"h_Electron_hoe",saveName)
-DrawPlot(h_Electron_mass,"h_Electron_mass",saveName)
-DrawPlot(h_Electron_phi,"h_Electron_phi",saveName)
-DrawPlot(h_Electron_pt,"h_Electron_pt",saveName)
-DrawPlot(h_Electron_r9,"h_Electron_r9",saveName)
-DrawPlot(h_Electron_sieie,"h_Electron_sieie",saveName)
+DrawPlot(h_Electron_eta,"h_Electron_eta_",saveName)
+DrawPlot(h_Electron_hoe,"h_Electron_hoe_",saveName)
+DrawPlot(h_Electron_mass,"h_Electron_mass_",saveName)
+DrawPlot(h_Electron_phi,"h_Electron_phi_",saveName)
+DrawPlot(h_Electron_pt,"h_Electron_pt_",saveName)
+DrawPlot(h_Electron_r9,"h_Electron_r9_",saveName)
+DrawPlot(h_Electron_sieie,"h_Electron_sieie_",saveName)
 
-DrawPlot(h_Muon_eta,"h_Muon_eta",saveName)
-DrawPlot(h_Muon_mass,"h_Muon_mass",saveName)
-DrawPlot(h_Muon_phi,"h_Muon_phi",saveName)
-DrawPlot(h_Muon_pt,"h_Muon_pt",saveName)
+DrawPlot(h_Muon_eta,"h_Muon_eta_",saveName)
+DrawPlot(h_Muon_mass,"h_Muon_mass_",saveName)
+DrawPlot(h_Muon_phi,"h_Muon_phi_",saveName)
+DrawPlot(h_Muon_pt,"h_Muon_pt_",saveName)
 
 #Jets:
-DrawPlot(h_Jet_eta,"h_Jet_eta",saveName)
-DrawPlot(h_Jet_mass,"h_Jet_mass",saveName)
-DrawPlot(h_Jet_phi,"h_Jet_phi",saveName)
-DrawPlot(h_Jet_pt,"h_Jet_pt",saveName)
-DrawPlot(h_nJet,"h_nJet",saveName)
-DrawPlot(h_nFatJet,"h_nFatJet",saveName)
+DrawPlot(h_Jet_eta,"h_Jet_eta_",saveName)
+DrawPlot(h_Jet_mass,"h_Jet_mass_",saveName)
+DrawPlot(h_Jet_phi,"h_Jet_phi_",saveName)
+DrawPlot(h_Jet_pt,"h_Jet_pt_",saveName)
+DrawPlot(h_nJet,"h_nJet_",saveName)
+DrawPlot(h_nFatJet,"h_nFatJet_",saveName)
 
 #Gen matched jets:
-DrawPlot(h_InitialJet_Eta,"h_InitialJet_Eta",saveName)
-DrawPlot(h_InitialJet_EtaSep,"h_InitialJet_EtaSep",saveName)
-DrawPlot(h_InitialJet_pt,"h_InitialJet_pt",saveName)
+DrawPlot(h_InitialJet_Eta,"h_InitialJet_Eta_",saveName)
+DrawPlot(h_InitialJet_EtaSep,"h_InitialJet_EtaSep_",saveName)
+DrawPlot(h_InitialJet_pt,"h_InitialJet_pt_",saveName)
 
 #Jet matching with Cuts:
 #summed pt cut
-DrawPlot(h_InitialJetAlt_Eta,"h_InitialJetAlt_Eta",saveName)
-DrawPlot(h_InitialJetAlt_EtaSep,"h_InitialJetAlt_EtaSep",saveName)
-DrawPlot(h_InitialJetAlt_pt,"h_InitialJetAlt_pt",saveName)
+DrawPlot(h_InitialJetAlt_Eta,"h_InitialJetAlt_Eta_",saveName)
+DrawPlot(h_InitialJetAlt_EtaSep,"h_InitialJetAlt_EtaSep_",saveName)
+DrawPlot(h_InitialJetAlt_pt,"h_InitialJetAlt_pt_",saveName)
 #InvMass cut
-DrawPlot(h_InitialJetAltIM_Eta,"h_InitialJetAltIM_Eta",saveName)
-DrawPlot(h_InitialJetAltIM_EtaSep,"h_InitialJetAltIM_EtaSep",saveName)
-DrawPlot(h_InitialJetAltIM_pt,"h_InitialJetAltIM_pt",saveName)
+DrawPlot(h_InitialJetAltIM_Eta,"h_InitialJetAltIM_Eta_",saveName)
+DrawPlot(h_InitialJetAltIM_EtaSep,"h_InitialJetAltIM_EtaSep_",saveName)
+DrawPlot(h_InitialJetAltIM_pt,"h_InitialJetAltIM_pt_",saveName)
 #Max jet pt cut
-DrawPlot(h_InitialJetAltLJ_Eta,"h_InitialJetAltLJ_Eta",saveName)
-DrawPlot(h_InitialJetAltLJ_EtaSep,"h_InitialJetAltLJ_EtaSep",saveName)
-DrawPlot(h_InitialJetAltLJ_pt,"h_InitialJetAltLJ_pt",saveName)
+DrawPlot(h_InitialJetAltLJ_Eta,"h_InitialJetAltLJ_Eta_",saveName)
+DrawPlot(h_InitialJetAltLJ_EtaSep,"h_InitialJetAltLJ_EtaSep_",saveName)
+DrawPlot(h_InitialJetAltLJ_pt,"h_InitialJetAltLJ_pt_",saveName)
+
+DrawPlot(h_LHEWeight,"h_LHEWeight_",saveName)
 
 
 print("Done.","time:",time.time()-startt)
