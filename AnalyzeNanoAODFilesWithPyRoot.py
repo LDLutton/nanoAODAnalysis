@@ -6,13 +6,14 @@ from ROOT import TH2D, TH2F
 from math import sqrt,pi
 from fileLists import MGEFTAr
 from fileLists import MGSMAr
+from fileLists import ttHToBBBackgroundAr
 import time as time
 
 #withDipoleRecoil = True
 
 MGSM = False
-MGEFT = True
-ttHToBBBackground = False
+MGEFT = False
+ttHToBBBackground = True
 
 #For drawing and saving histograms
 #Saves a png and, optionally, a pdf version
@@ -34,7 +35,12 @@ def DrawPlot(plot,name,saveName):
         #c1.SaveAs((name+"{0}.pdf".format(saveName)))
         plot.Write(name+"Normalized")
     else:
-        print(name,"has no entries")
+        print(name,"has no entries. Adding empty histograms")
+        c1 = TCanvas()
+        plot.Draw("hist")
+        plot.Write(name)
+        plot.Write(name+"Normalized")
+
 
 
 
@@ -63,9 +69,11 @@ elif MGSM:
         fileAr.append("/scratch365/dlutton/NanoAODFiles/"+fileName)
 elif ttHToBBBackground:
     saveName = "ttHToBBBackground"
-    for fileName in MGSMAr:
-        fileAr.append("/scratch365/dlutton/NanoAODFiles/"+fileName)
+    crossSection = 0.6*0.584
+    for fileName in ttHToBBBackgroundAr:
+        fileAr.append(fileName)
     
+
 
 print("Making Histos/Defining variables.","time:",time.time()-startt)
 h_CaloMET_phi    = TH1F("h_CaloMET_phi","h_CaloMET_phi", 100, -3.5, 3.5)
@@ -123,6 +131,7 @@ ifTwoCount = 0
 ifThreeCount = 0
 ifFourCount = 0
 
+
 print("Going into file loop.","time:",time.time()-startt)
 for k,fileName in enumerate(fileAr):
     #if evCount > 15:
@@ -131,11 +140,12 @@ for k,fileName in enumerate(fileAr):
     tmpfile = TFile.Open(fileName)
     mytree = tmpfile.Events
     runTree = tmpfile.Runs
-    for i,runEv in enumerate(runTree):
-        if i > 0:
-            print("uhoh it has two",i,k,fileName)
-        crossSection = runEv.genEventSumw
-    h_LHEWeight.Fill(crossSection)
+    if not ttHToBBBackground:
+        for i,runEv in enumerate(runTree):
+            if i > 0:
+                print("uhoh it has two",i,k,fileName)
+            crossSection = runEv.genEventSumw
+        h_LHEWeight.Fill(crossSection)
     if k % 10 == 0:
         print("Going into event loop for file {0}.".format(k),"time:",time.time()-startt)
 
@@ -144,7 +154,7 @@ for k,fileName in enumerate(fileAr):
         #    break
         if evCount % 1000 == 0:
             print("Event: "+str(evCount))
-        print(ev.CaloMET_sumEt,crossSection)
+        #print(ev.CaloMET_sumEt,crossSection)
         h_CaloMET_phi.Fill(ev.CaloMET_phi,crossSection)
         h_CaloMET_pt.Fill(ev.CaloMET_pt,crossSection)
         h_CaloMET_sumEt.Fill(ev.CaloMET_sumEt,crossSection)
