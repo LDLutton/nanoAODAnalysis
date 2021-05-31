@@ -11,16 +11,16 @@ import time as time
 
 #withDipoleRecoil = True
 
-MGSM = False
+MGSM = True
 MGEFT = False
-ttHToBBBackground = True
+ttHToBBBackground = False
 
 #For drawing and saving histograms
 #Saves a png and, optionally, a pdf version
 #Saves histogram to the currently active root file
 
-def DrawPlot(plot,name,saveName):
-    if plot.GetEntries() > 0:
+def DrawPlot(plot,name,saveName,normalizeOrNot):
+    if normalizeOrNot and plot.GetEntries() > 0:
         c1 = TCanvas("c1","c1",3600,2400)
 
         plot.SetFillColorAlpha(30,0.35)
@@ -61,25 +61,31 @@ fileAr = []
 
 if MGEFT:
     saveName = "pphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev_0p999cHW100GeVIMJetCut"
+    h_LHEWeight      = TH1F("h_LHEWeight","h_LHEWeight",100,0.000262,0.000272)
+
     for fileName in MGEFTAr:
         fileAr.append("/scratch365/dlutton/NanoAODFiles/pphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev_0p999cHW100GeVIMJetCut/"+fileName)
 elif MGSM:
     saveName = "pphzzjjQCD0SMHLOOP0QEDE5NPE0ResMasAllVer100Ev_0p999cHW100GeVIMJetCut"
+    h_LHEWeight      = TH1F("h_LHEWeight","h_LHEWeight",100,8.0e-05,8.5e-05)
     for fileName in MGSMAr:
         fileAr.append("/scratch365/dlutton/NanoAODFiles/pphzzjjQCD0SMHLOOP0QEDE5NPE0ResMasAllVer100Ev_0p999cHW100GeVIMJetCut/"+fileName)
 elif ttHToBBBackground:
     saveName = "ttHToBBBackground"
+    h_LHEWeight      = TH1F("h_LHEWeight","h_LHEWeight",100,8.0e-05,8.5e-05) #Non-functional, just to keep the program from crashing
     crossSection = 0.6*0.584
     for fileName in ttHToBBBackgroundAr:
         fileAr.append(fileName)
     
-
+if not ttHToBBBackground:
+    crossSectionAvg = 0
+    crossSectionCtr = 0
 
 print("Making Histos/Defining variables.","time:",time.time()-startt)
 h_CaloMET_phi    = TH1F("h_CaloMET_phi","h_CaloMET_phi", 100, -3.5, 3.5)
 h_CaloMET_pt     = TH1F("h_CaloMET_pt","h_CaloMET_pt", 20, 0, 200)
 h_CaloMET_sumEt  = TH1F("h_CaloMET_sumEt","h_CaloMET_sumEt", 500, 0, 4000)
-h_LHEWeight      = TH1F("h_LHEWeight","h_LHEWeight",100,0.025,0.030)
+
 
 h_Electron_eta   = TH1F("h_Electron_eta","h_Electron_eta", 100, -5.0, 5.0)
 h_Electron_hoe   = TH1F("h_Electron_hoe","h_Electron_hoe", 200, 0, 5.0)
@@ -134,7 +140,7 @@ ifFourCount = 0
 
 print("Going into file loop.","time:",time.time()-startt)
 for k,fileName in enumerate(fileAr):
-    #if evCount > 15:
+    #if evCount > 450:
     #    break
     #Open the file, get the Events tree
     tmpfile = TFile.Open(fileName)
@@ -146,20 +152,22 @@ for k,fileName in enumerate(fileAr):
                 print("uhoh it has two",i,k,fileName)
             crossSection = runEv.genEventSumw
         h_LHEWeight.Fill(crossSection)
+        crossSectionAvg += crossSection
+        crossSectionCtr += 1
     if k % 10 == 0:
         print("Going into event loop for file {0}.".format(k),"time:",time.time()-startt)
 
     for ev in mytree:
-        #if evCount > 15:
+        #if evCount > 450:
         #    break
         if evCount % 1000 == 0:
             print("Event: "+str(evCount))
-        #print(ev.CaloMET_sumEt,crossSection)
-        h_CaloMET_phi.Fill(ev.CaloMET_phi,crossSection)
-        h_CaloMET_pt.Fill(ev.CaloMET_pt,crossSection)
-        h_CaloMET_sumEt.Fill(ev.CaloMET_sumEt,crossSection)
-        h_nJet.Fill(ev.nJet,crossSection)
-        h_nFatJet.Fill(ev.nFatJet,crossSection)
+        #print(ev.CaloMET_sumEt)
+        h_CaloMET_phi.Fill(ev.CaloMET_phi)
+        h_CaloMET_pt.Fill(ev.CaloMET_pt)
+        h_CaloMET_sumEt.Fill(ev.CaloMET_sumEt)
+        h_nJet.Fill(ev.nJet)
+        h_nFatJet.Fill(ev.nFatJet)
         #Initializing temporary, per event, variables for jet matching
         #Gen matching:
         #These for saving the index of the jet pair in jet matching
@@ -197,27 +205,27 @@ for k,fileName in enumerate(fileAr):
         ifFourBool = False
         #Electrons loop
         for i in range(ev.nElectron):
-            h_Electron_eta.Fill(ev.Electron_eta[i],crossSection)
-            h_Electron_hoe.Fill(ev.Electron_hoe[i],crossSection)
-            h_Electron_mass.Fill(ev.Electron_mass[i],crossSection)
-            h_Electron_phi.Fill(ev.Electron_phi[i],crossSection)
-            h_Electron_pt.Fill(ev.Electron_pt[i],crossSection)
-            h_Electron_r9.Fill(ev.Electron_r9[i],crossSection)
-            h_Electron_sieie.Fill(ev.Electron_sieie[i],crossSection)
+            h_Electron_eta.Fill(ev.Electron_eta[i])
+            h_Electron_hoe.Fill(ev.Electron_hoe[i])
+            h_Electron_mass.Fill(ev.Electron_mass[i])
+            h_Electron_phi.Fill(ev.Electron_phi[i])
+            h_Electron_pt.Fill(ev.Electron_pt[i])
+            h_Electron_r9.Fill(ev.Electron_r9[i])
+            h_Electron_sieie.Fill(ev.Electron_sieie[i])
         #Muons loop
         for i in range(ev.nMuon):
-            h_Muon_eta.Fill(ev.Muon_eta[i],crossSection)
-            h_Muon_mass.Fill(ev.Muon_mass[i],crossSection)
-            h_Muon_phi.Fill(ev.Muon_phi[i],crossSection)
-            h_Muon_pt.Fill(ev.Muon_pt[i],crossSection)
+            h_Muon_eta.Fill(ev.Muon_eta[i])
+            h_Muon_mass.Fill(ev.Muon_mass[i])
+            h_Muon_phi.Fill(ev.Muon_phi[i])
+            h_Muon_pt.Fill(ev.Muon_pt[i])
         #Jets loop
         for i in range(ev.nJet):
             #Getting jet PT
             tmpJetPT = ev.Jet_pt[i]
-            h_Jet_eta.Fill(ev.Jet_eta[i],crossSection)
-            h_Jet_mass.Fill(ev.Jet_mass[i],crossSection)
-            h_Jet_phi.Fill(ev.Jet_phi[i],crossSection)
-            h_Jet_pt.Fill(tmpJetPT,crossSection)
+            h_Jet_eta.Fill(ev.Jet_eta[i])
+            h_Jet_mass.Fill(ev.Jet_mass[i])
+            h_Jet_phi.Fill(ev.Jet_phi[i])
+            h_Jet_pt.Fill(tmpJetPT)
             #Getting jet DeltaR from first outgoing quark
             tmpDeltaR = calcDeltaR(ev.Jet_phi[i],ev.Jet_eta[i],ev.GenPart_phi[5],ev.GenPart_eta[5])
             #Checking if it's less than the current lowest deltaR
@@ -307,29 +315,29 @@ for k,fileName in enumerate(fileAr):
         #Filling histograms based on summed jet pt
         #Checking that it didn't select the same jet for both parts of the pair                    
         if ptOneInd != ptTwoInd:
-            h_InitialJetAlt_Eta.Fill(ev.Jet_eta[ptOneInd],crossSection)
-            h_InitialJetAlt_Eta.Fill(ev.Jet_eta[ptTwoInd],crossSection)
-            h_InitialJetAlt_EtaSep.Fill(abs(ev.Jet_eta[ptOneInd]-ev.Jet_eta[ptTwoInd]),crossSection)
-            h_InitialJetAlt_pt.Fill(ev.Jet_pt[ptOneInd],crossSection)
-            h_InitialJetAlt_pt.Fill(ev.Jet_pt[ptTwoInd],crossSection)
+            h_InitialJetAlt_Eta.Fill(ev.Jet_eta[ptOneInd])
+            h_InitialJetAlt_Eta.Fill(ev.Jet_eta[ptTwoInd])
+            h_InitialJetAlt_EtaSep.Fill(abs(ev.Jet_eta[ptOneInd]-ev.Jet_eta[ptTwoInd]))
+            h_InitialJetAlt_pt.Fill(ev.Jet_pt[ptOneInd])
+            h_InitialJetAlt_pt.Fill(ev.Jet_pt[ptTwoInd])
             #print(evCount,i,deltaRMinOne,deltaRMinTwo,jOneInd,jTwoInd)
         #Filling histograms based on diJet invMass
         #Checking that it didn't select the same jet for both parts of the pair 
         if invMassOneInd != invMassTwoInd:
-            h_InitialJetAltIM_Eta.Fill(ev.Jet_eta[invMassOneInd],crossSection)
-            h_InitialJetAltIM_Eta.Fill(ev.Jet_eta[invMassTwoInd],crossSection)
-            h_InitialJetAltIM_EtaSep.Fill(abs(ev.Jet_eta[invMassOneInd]-ev.Jet_eta[invMassTwoInd]),crossSection)
-            h_InitialJetAltIM_pt.Fill(ev.Jet_pt[invMassOneInd],crossSection)
-            h_InitialJetAltIM_pt.Fill(ev.Jet_pt[invMassTwoInd],crossSection)
+            h_InitialJetAltIM_Eta.Fill(ev.Jet_eta[invMassOneInd])
+            h_InitialJetAltIM_Eta.Fill(ev.Jet_eta[invMassTwoInd])
+            h_InitialJetAltIM_EtaSep.Fill(abs(ev.Jet_eta[invMassOneInd]-ev.Jet_eta[invMassTwoInd]))
+            h_InitialJetAltIM_pt.Fill(ev.Jet_pt[invMassOneInd])
+            h_InitialJetAltIM_pt.Fill(ev.Jet_pt[invMassTwoInd])
             #print(evCount,i,deltaRMinOne,deltaRMinTwo,jOneInd,jTwoInd)
         #Filling histograms based on max jet pt in pair, with secondary jet pt as a tiebreaker
         #Checking that it didn't select the same jet for both parts of the pair 
         if LJOneInd != LJTwoInd:
-            h_InitialJetAltLJ_Eta.Fill(ev.Jet_eta[LJOneInd],crossSection)
-            h_InitialJetAltLJ_Eta.Fill(ev.Jet_eta[LJTwoInd],crossSection)
-            h_InitialJetAltLJ_EtaSep.Fill(abs(ev.Jet_eta[LJOneInd]-ev.Jet_eta[LJTwoInd]),crossSection)
-            h_InitialJetAltLJ_pt.Fill(ev.Jet_pt[LJOneInd],crossSection)
-            h_InitialJetAltLJ_pt.Fill(ev.Jet_pt[LJTwoInd],crossSection)
+            h_InitialJetAltLJ_Eta.Fill(ev.Jet_eta[LJOneInd])
+            h_InitialJetAltLJ_Eta.Fill(ev.Jet_eta[LJTwoInd])
+            h_InitialJetAltLJ_EtaSep.Fill(abs(ev.Jet_eta[LJOneInd]-ev.Jet_eta[LJTwoInd]))
+            h_InitialJetAltLJ_pt.Fill(ev.Jet_pt[LJOneInd])
+            h_InitialJetAltLJ_pt.Fill(ev.Jet_pt[LJTwoInd])
             #print(evCount,i,deltaRMinOne,deltaRMinTwo,jOneInd,jTwoInd)
 
         #Filling gen matching histos:
@@ -349,11 +357,11 @@ for k,fileName in enumerate(fileAr):
             print("uhoh",str(jOneInd),str(jTwoInd),evCount,ev.GenPart_pdgId[5],ev.GenPart_pdgId[6],deltaRMinOne,deltaRMinTwo)
         #If it passes all the checks above, fill the gen matching histograms    
         else:
-            h_InitialJet_Eta.Fill(ev.Jet_eta[jOneInd],crossSection)
-            h_InitialJet_Eta.Fill(ev.Jet_eta[jTwoInd],crossSection)
-            h_InitialJet_EtaSep.Fill(abs(ev.Jet_eta[jOneInd]-ev.Jet_eta[jTwoInd]),crossSection)
-            h_InitialJet_pt.Fill(ev.Jet_pt[jOneInd],crossSection)
-            h_InitialJet_pt.Fill(ev.Jet_pt[jTwoInd],crossSection)
+            h_InitialJet_Eta.Fill(ev.Jet_eta[jOneInd])
+            h_InitialJet_Eta.Fill(ev.Jet_eta[jTwoInd])
+            h_InitialJet_EtaSep.Fill(abs(ev.Jet_eta[jOneInd]-ev.Jet_eta[jTwoInd]))
+            h_InitialJet_pt.Fill(ev.Jet_pt[jOneInd])
+            h_InitialJet_pt.Fill(ev.Jet_pt[jTwoInd])
         #Increment event count
         evCount += 1
 
@@ -368,56 +376,62 @@ print("Number of events with Two Jet pt > ",jetPTCut,"-",ifTwoCount)
 print("Number of events with jet pair etaDif >",jetEtaDifCut,"-",ifThreeCount)
 print("Number of events with jet pair inv mass >",jetInvMassCut,"-",ifFourCount)
 
+print("Cross section average before division:",crossSectionAvg)
+print("Cross section counter:",crossSectionCtr)
+crossSectionAvg = crossSectionAvg / crossSectionCtr
+print("Cross section average after division:",crossSectionAvg)
+
 #Setting up outfile for histograms
 outFile = TFile("histosFromNanoAOD{0}.root".format(saveName),"recreate")
 
 print("Drawing plots.","time:",time.time()-startt)
 #General stuff:
-DrawPlot(h_CaloMET_phi, "h_CaloMET_phi_",saveName)
-DrawPlot(h_CaloMET_pt, "h_CaloMET_pt_",saveName)
-DrawPlot(h_CaloMET_sumEt, "h_CaloMET_sumEt_",saveName)
+DrawPlot(h_CaloMET_phi, "h_CaloMET_phi_",saveName,True)
+DrawPlot(h_CaloMET_pt, "h_CaloMET_pt_",saveName,True)
+DrawPlot(h_CaloMET_sumEt, "h_CaloMET_sumEt_",saveName,True)
 
-DrawPlot(h_Electron_eta,"h_Electron_eta_",saveName)
-DrawPlot(h_Electron_hoe,"h_Electron_hoe_",saveName)
-DrawPlot(h_Electron_mass,"h_Electron_mass_",saveName)
-DrawPlot(h_Electron_phi,"h_Electron_phi_",saveName)
-DrawPlot(h_Electron_pt,"h_Electron_pt_",saveName)
-DrawPlot(h_Electron_r9,"h_Electron_r9_",saveName)
-DrawPlot(h_Electron_sieie,"h_Electron_sieie_",saveName)
+DrawPlot(h_Electron_eta,"h_Electron_eta_",saveName,True)
+DrawPlot(h_Electron_hoe,"h_Electron_hoe_",saveName,True)
+DrawPlot(h_Electron_mass,"h_Electron_mass_",saveName,True)
+DrawPlot(h_Electron_phi,"h_Electron_phi_",saveName,True)
+DrawPlot(h_Electron_pt,"h_Electron_pt_",saveName,True)
+DrawPlot(h_Electron_r9,"h_Electron_r9_",saveName,True)
+DrawPlot(h_Electron_sieie,"h_Electron_sieie_",saveName,True)
 
-DrawPlot(h_Muon_eta,"h_Muon_eta_",saveName)
-DrawPlot(h_Muon_mass,"h_Muon_mass_",saveName)
-DrawPlot(h_Muon_phi,"h_Muon_phi_",saveName)
-DrawPlot(h_Muon_pt,"h_Muon_pt_",saveName)
+DrawPlot(h_Muon_eta,"h_Muon_eta_",saveName,True)
+DrawPlot(h_Muon_mass,"h_Muon_mass_",saveName,True)
+DrawPlot(h_Muon_phi,"h_Muon_phi_",saveName,True)
+DrawPlot(h_Muon_pt,"h_Muon_pt_",saveName,True)
 
 #Jets:
-DrawPlot(h_Jet_eta,"h_Jet_eta_",saveName)
-DrawPlot(h_Jet_mass,"h_Jet_mass_",saveName)
-DrawPlot(h_Jet_phi,"h_Jet_phi_",saveName)
-DrawPlot(h_Jet_pt,"h_Jet_pt_",saveName)
-DrawPlot(h_nJet,"h_nJet_",saveName)
-DrawPlot(h_nFatJet,"h_nFatJet_",saveName)
+DrawPlot(h_Jet_eta,"h_Jet_eta_",saveName,True)
+DrawPlot(h_Jet_mass,"h_Jet_mass_",saveName,True)
+DrawPlot(h_Jet_phi,"h_Jet_phi_",saveName,True)
+DrawPlot(h_Jet_pt,"h_Jet_pt_",saveName,True)
+DrawPlot(h_nJet,"h_nJet_",saveName,True)
+DrawPlot(h_nFatJet,"h_nFatJet_",saveName,True)
 
 #Gen matched jets:
-DrawPlot(h_InitialJet_Eta,"h_InitialJet_Eta_",saveName)
-DrawPlot(h_InitialJet_EtaSep,"h_InitialJet_EtaSep_",saveName)
-DrawPlot(h_InitialJet_pt,"h_InitialJet_pt_",saveName)
+DrawPlot(h_InitialJet_Eta,"h_InitialJet_Eta_",saveName,True)
+DrawPlot(h_InitialJet_EtaSep,"h_InitialJet_EtaSep_",saveName,True)
+DrawPlot(h_InitialJet_pt,"h_InitialJet_pt_",saveName,True)
 
 #Jet matching with Cuts:
 #summed pt cut
-DrawPlot(h_InitialJetAlt_Eta,"h_InitialJetAlt_Eta_",saveName)
-DrawPlot(h_InitialJetAlt_EtaSep,"h_InitialJetAlt_EtaSep_",saveName)
-DrawPlot(h_InitialJetAlt_pt,"h_InitialJetAlt_pt_",saveName)
+DrawPlot(h_InitialJetAlt_Eta,"h_InitialJetAlt_Eta_",saveName,True)
+DrawPlot(h_InitialJetAlt_EtaSep,"h_InitialJetAlt_EtaSep_",saveName,True)
+DrawPlot(h_InitialJetAlt_pt,"h_InitialJetAlt_pt_",saveName,True)
 #InvMass cut
-DrawPlot(h_InitialJetAltIM_Eta,"h_InitialJetAltIM_Eta_",saveName)
-DrawPlot(h_InitialJetAltIM_EtaSep,"h_InitialJetAltIM_EtaSep_",saveName)
-DrawPlot(h_InitialJetAltIM_pt,"h_InitialJetAltIM_pt_",saveName)
+DrawPlot(h_InitialJetAltIM_Eta,"h_InitialJetAltIM_Eta_",saveName,True)
+DrawPlot(h_InitialJetAltIM_EtaSep,"h_InitialJetAltIM_EtaSep_",saveName,True)
+DrawPlot(h_InitialJetAltIM_pt,"h_InitialJetAltIM_pt_",saveName,True)
 #Max jet pt cut
-DrawPlot(h_InitialJetAltLJ_Eta,"h_InitialJetAltLJ_Eta_",saveName)
-DrawPlot(h_InitialJetAltLJ_EtaSep,"h_InitialJetAltLJ_EtaSep_",saveName)
-DrawPlot(h_InitialJetAltLJ_pt,"h_InitialJetAltLJ_pt_",saveName)
+DrawPlot(h_InitialJetAltLJ_Eta,"h_InitialJetAltLJ_Eta_",saveName,True)
+DrawPlot(h_InitialJetAltLJ_EtaSep,"h_InitialJetAltLJ_EtaSep_",saveName,True)
+DrawPlot(h_InitialJetAltLJ_pt,"h_InitialJetAltLJ_pt_",saveName,True)
 
-DrawPlot(h_LHEWeight,"h_LHEWeight_",saveName)
+DrawPlot(h_LHEWeight,"h_LHEWeight_",saveName,False)
+
 
 
 print("Done.","time:",time.time()-startt)

@@ -84,17 +84,22 @@ weightsAr = []
 #fileWithoutDipole = TFile.Open("histosFromNanoAODWWithoutDipoleRecoil.root")
 #With Dipole files
 #fileTwo = TFile.Open("histosFromNanoAODWithDipoleRecoil.root")
-fileAr.append(TFile.Open("histosFromNanoAODWithDipoleRecoil.root"))
-nameAr.append("SMAndEFT")
+fileAr.append(TFile.Open("histosFromNanoAODpphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev_0p999cHW100GeVIMJetCut.root"))
+nameAr.append("EFT")
 colorAr.append(6)
-weightsAr.append(1.0)
+weightsAr.append(0.000265840527334)
+
+fileAr.append(TFile.Open("histosFromNanoAODpphzzjjQCD0SMHLOOP0QEDE5NPE0ResMasAllVer100Ev_0p999cHW100GeVIMJetCut.root"))
+nameAr.append("SM")
+colorAr.append(2)
+weightsAr.append(8.21001467187e-05)
 
 #Compare to background files
 #fileOne = TFile.Open("histosFromNanoAODttHBackground.root")
-fileAr.append(TFile.Open("histosFromNanoAODttHBackground.root"))
+fileAr.append(TFile.Open("histosFromNanoAODttHToBBBackground.root"))
 nameAr.append("ttHToBBBackground")
 colorAr.append(4)
-weightsAr.append(1.0)
+weightsAr.append(0.6*0.584)
 
 #Put in the key lists in the same order as in the fileAr
 keysAr = []
@@ -123,8 +128,11 @@ skipCounter = 0
 #Main loop over each histogram
 for i in range(lenKeys):
     tmpObjAr = []
+    histName = keysAr[0][i].GetName()
+    if "Normalized" not in histName:
+        continue
     tmpObj = keysAr[0][i].ReadObj()
-    histName = tmpObj.GetName()
+    
     canAr.append(TCanvas("{0}Can".format(histName),"{0}Can".format(histName),1920,1440))
     setUpLegend(legAr)
     setUpPadsAr(padAr,"{0}Pad".format(histName))
@@ -137,7 +145,8 @@ for i in range(lenKeys):
         tmpObjAr.append(keyA[i].ReadObj())
         tmpObjAr[-1].Scale(weightsA)
         #Sanity check
-        tmpName = tmpObjAr[-1].GetName()
+        tmpName = keyA[i].GetName()
+        #tmpName = tmpObjAr[-1].GetName()
         if tmpName != histName:
             print("weeooweooo error alert:",histName,tmpName)
         tmpObjAr[-1].SetLineColor(colorA)
@@ -162,7 +171,7 @@ for i in range(lenKeys):
     for j in range(1,len(tmpObjAr)):
         tmpObjAr[j].Sumw2()
         tmpObjAr[j].Divide(tmpObjAr[0])
-        makeNiceHistos(tmpObjAr[j],"","Ratio to ttH",False)
+        makeNiceHistos(tmpObjAr[j],"","Ratio to EFT",False)
         tmpRatioMax = tmpObjAr[j].GetMaximum()
         if tmpRatioMax > ratioMax:
             ratioMax = tmpRatioMax
@@ -171,7 +180,7 @@ for i in range(lenKeys):
     tmpObjAr[1].SetLineWidth(2)
     tmpObjAr[1].Draw("et same")
     for j in range(2,len(tmpObjAr)):
-        makeNiceHistos(tmpObjAr[j],"","Ratio to ttH",False)
+        makeNiceHistos(tmpObjAr[j],"","Ratio to EFT",False)
         tmpObjAr[j].SetLineWidth(2)
         tmpObjAr[j].Draw("et same")
     canAr[-1].Update()
