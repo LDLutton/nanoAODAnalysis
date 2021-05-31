@@ -150,7 +150,7 @@ for k,fileName in enumerate(fileAr):
         for i,runEv in enumerate(runTree):
             if i > 0:
                 print("uhoh it has two",i,k,fileName)
-            crossSection = runEv.genEventSumw
+            crossSection = runEv.genEventSumw / runEv.genEventCount
         h_LHEWeight.Fill(crossSection)
         crossSectionAvg += crossSection
         crossSectionCtr += 1
