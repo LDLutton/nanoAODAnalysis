@@ -61,7 +61,7 @@ fileAr = []
 
 if MGEFT:
     saveName = "pphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev_0p999cHW100GeVIMJetCut"
-    h_LHEWeight      = TH1F("h_LHEWeight","h_LHEWeight",100,0.000262,0.000272)
+    h_LHEWeight      = TH1F("h_LHEWeight","h_LHEWeight",100,0.000262,0.000273)
 
     for fileName in MGEFTAr:
         fileAr.append("/scratch365/dlutton/NanoAODFiles/pphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev_0p999cHW100GeVIMJetCut/"+fileName)
