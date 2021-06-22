@@ -1145,42 +1145,42 @@ for k,fileName in enumerate(fileAr):
                     if muonLeading:
                         if muonZ2Pair:
                             if ev.Muon_sip3d[lepPairOneLeadInd] > 4:
-                                passesSipCut = False
+                                passesSIPCut = False
                             elif ev.Muon_sip3d[lepPairOneTrailingInd] > 4:
-                                passesSipCut = False
+                                passesSIPCut = False
                             elif ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][0]] > 4:
-                                passesSipCut = False
+                                passesSIPCut = False
                             elif ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][1]] > 4:
-                                passesSipCut = False
+                                passesSIPCut = False
                         else:
                             if ev.Muon_sip3d[lepPairOneLeadInd] > 4:
-                                passesSipCut = False
+                                passesSIPCut = False
                             elif ev.Muon_sip3d[lepPairOneTrailingInd] > 4:
-                                passesSipCut = False
+                                passesSIPCut = False
                             elif ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] > 4:
-                                passesSipCut = False
+                                passesSIPCut = False
                             elif ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] > 4:
-                                passesSipCut = False
+                                passesSIPCut = False
                     elif muonZ2Pair:
                         if ev.Electron_sip3d[lepPairOneLeadInd] > 4:
-                            passesSipCut = False
+                            passesSIPCut = False
                         elif ev.Electron_sip3d[lepPairOneTrailingInd] > 4:
-                            passesSipCut = False
+                            passesSIPCut = False
                         elif ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][0]] > 4:
-                            passesSipCut = False
+                            passesSIPCut = False
                         elif ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][1]] > 4:
-                            passesSipCut = False
+                            passesSIPCut = False
                     else:
                         if ev.Electron_sip3d[lepPairOneLeadInd] > 4:
-                            passesSipCut = False
+                            passesSIPCut = False
                         elif ev.Electron_sip3d[lepPairOneTrailingInd] > 4:
-                            passesSipCut = False
+                            passesSIPCut = False
                         elif ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] > 4:
-                            passesSipCut = False
+                            passesSIPCut = False
                         elif ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] > 4:
-                            passesSipCut = False
+                            passesSIPCut = False
                 #Now just check that the Z1 and Z2 inv mass falls within the Z low and Z high cuts (60 and 120GeV)
-                if passesSipCut:
+                if passesSIPCut:
                     if not passesSIPCutBool:
                         passesSIPCutCount += 1
                         passesSIPCutBool = True
