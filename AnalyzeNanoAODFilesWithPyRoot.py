@@ -213,26 +213,26 @@ for cutOnZTagStr in cutOnZTagStrAr:
 
 #Lepton
 #histograms for full ZZ cuts
-LepFullCut_Z1Leadpt         = TH1F("LepFullCut_Z1Leadpt","LepFullCut_Z1Leadpt", 250, 0, 500)
-LepFullCut_Z1Trailingpt         = TH1F("LepFullCut_Z1Trailingpt","LepFullCut_Z1Trailingpt", 250, 0, 500)
-LepFullCut_Z2Leadpt         = TH1F("LepFullCut_Z2Leadpt","LepFullCut_Z2Leadpt", 250, 0, 500)
-LepFullCut_Z2Trailingpt         = TH1F("LepFullCut_Z2Trailingpt","LepFullCut_Z2Trailingpt", 250, 0, 500)
-LepFullCut_Z1Leadeta        = TH1F("LepFullCut_Z1Leadeta","LepFullCut_Z1Leadeta", 100, -5.0, 5.0)
-LepFullCut_Z1Trailingeta        = TH1F("LepFullCut_Z1Trailingeta","LepFullCut_Z1Trailingeta", 100, -5.0, 5.0)
-LepFullCut_Z2Leadeta        = TH1F("LepFullCut_Z2Leadeta","LepFullCut_Z2Leadeta", 100, -5.0, 5.0)
-LepFullCut_Z2Trailingeta        = TH1F("LepFullCut_Z2Trailingeta","LepFullCut_Z2Trailingeta", 100, -5.0, 5.0)
-LepFullCut_Z1Leadmass       = TH1F("LepFullCut_Z1Leadmass","LepFullCut_Z1Leadmass", 200, 0, 200)
-LepFullCut_Z1Trailingmass       = TH1F("LepFullCut_Z1Trailingmass","LepFullCut_Z1Trailingmass", 200, 0, 200)
-LepFullCut_Z2Leadmass       = TH1F("LepFullCut_Z2Leadmass","LepFullCut_Z2Leadmass", 200, 0, 200)
-LepFullCut_Z2Trailingmass       = TH1F("LepFullCut_Z2Trailingmass","LepFullCut_Z2Trailingmass", 200, 0, 200)
-LepFullCut_Z1Leadphi        = TH1F("LepFullCut_Z1Leadphi","LepFullCut_Z1Leadphi", 100, -3.5, 3.5)
-LepFullCut_Z1Trailingphi        = TH1F("LepFullCut_Z1Trailingphi","LepFullCut_Z1Trailingphi", 100, -3.5, 3.5)
-LepFullCut_Z2Leadphi        = TH1F("LepFullCut_Z2Leadphi","LepFullCut_Z2Leadphi", 100, -3.5, 3.5)
-LepFullCut_Z2Trailingphi        = TH1F("LepFullCut_Z2Trailingphi","LepFullCut_Z2Trailingphi", 100, -3.5, 3.5)
-LepFullCut_Z1EtaSep        = TH1F("LepFullCut_Z1EtaSep","LepFullCut_Z1EtaSep", 100, 0, 10)
-LepFullCut_Z2EtaSep        = TH1F("LepFullCut_Z2EtaSep","LepFullCut_Z2EtaSep", 100, 0, 10)
-LepFullCut_Z1InvMass        = TH1F("LepFullCut_Z1InvMass","LepFullCut_Z1InvMass", 100, 60, 120)
-LepFullCut_Z2InvMass        = TH1F("LepFullCut_Z2InvMass","LepFullCut_Z2InvMass", 100, 60, 120)
+h_LepFullCut_Z1Leadpt         = TH1F("h_LepFullCut_Z1Leadpt","h_LepFullCut_Z1Leadpt", 250, 0, 500)
+h_LepFullCut_Z1Trailingpt         = TH1F("h_LepFullCut_Z1Trailingpt","h_LepFullCut_Z1Trailingpt", 250, 0, 500)
+h_LepFullCut_Z2Leadpt         = TH1F("h_LepFullCut_Z2Leadpt","h_LepFullCut_Z2Leadpt", 250, 0, 500)
+h_LepFullCut_Z2Trailingpt         = TH1F("h_LepFullCut_Z2Trailingpt","h_LepFullCut_Z2Trailingpt", 250, 0, 500)
+h_LepFullCut_Z1Leadeta        = TH1F("h_LepFullCut_Z1Leadeta","h_LepFullCut_Z1Leadeta", 100, -5.0, 5.0)
+h_LepFullCut_Z1Trailingeta        = TH1F("h_LepFullCut_Z1Trailingeta","h_LepFullCut_Z1Trailingeta", 100, -5.0, 5.0)
+h_LepFullCut_Z2Leadeta        = TH1F("h_LepFullCut_Z2Leadeta","h_LepFullCut_Z2Leadeta", 100, -5.0, 5.0)
+h_LepFullCut_Z2Trailingeta        = TH1F("h_LepFullCut_Z2Trailingeta","h_LepFullCut_Z2Trailingeta", 100, -5.0, 5.0)
+h_LepFullCut_Z1Leadmass       = TH1F("h_LepFullCut_Z1Leadmass","h_LepFullCut_Z1Leadmass", 200, 0, 200)
+h_LepFullCut_Z1Trailingmass       = TH1F("h_LepFullCut_Z1Trailingmass","h_LepFullCut_Z1Trailingmass", 200, 0, 200)
+h_LepFullCut_Z2Leadmass       = TH1F("h_LepFullCut_Z2Leadmass","h_LepFullCut_Z2Leadmass", 200, 0, 200)
+h_LepFullCut_Z2Trailingmass       = TH1F("h_LepFullCut_Z2Trailingmass","h_LepFullCut_Z2Trailingmass", 200, 0, 200)
+h_LepFullCut_Z1Leadphi        = TH1F("h_LepFullCut_Z1Leadphi","h_LepFullCut_Z1Leadphi", 100, -3.5, 3.5)
+h_LepFullCut_Z1Trailingphi        = TH1F("h_LepFullCut_Z1Trailingphi","h_LepFullCut_Z1Trailingphi", 100, -3.5, 3.5)
+h_LepFullCut_Z2Leadphi        = TH1F("h_LepFullCut_Z2Leadphi","h_LepFullCut_Z2Leadphi", 100, -3.5, 3.5)
+h_LepFullCut_Z2Trailingphi        = TH1F("h_LepFullCut_Z2Trailingphi","h_LepFullCut_Z2Trailingphi", 100, -3.5, 3.5)
+h_LepFullCut_Z1EtaSep        = TH1F("h_LepFullCut_Z1EtaSep","h_LepFullCut_Z1EtaSep", 100, 0, 10)
+h_LepFullCut_Z2EtaSep        = TH1F("h_LepFullCut_Z2EtaSep","h_LepFullCut_Z2EtaSep", 100, 0, 10)
+h_LepFullCut_Z1InvMass        = TH1F("h_LepFullCut_Z1InvMass","h_LepFullCut_Z1InvMass", 100, 60, 120)
+h_LepFullCut_Z2InvMass        = TH1F("h_LepFullCut_Z2InvMass","h_LepFullCut_Z2InvMass", 100, 60, 120)
 
 
 
@@ -1187,61 +1187,61 @@ for k,fileName in enumerate(fileAr):
                             passesSIPCut = False
                         elif ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] > 4:
                             passesSIPCut = False
-                #Now just check that the Z1 and Z2 inv mass falls within the Z low and Z high cuts (60 and 120GeV)
-                if passesSIPCut:
-                    if not passesSIPCutBool:
-                        passesSIPCutCount += 1
-                        passesSIPCutBool = True
+                    #Now just check that the Z1 and Z2 inv mass falls within the Z low and Z high cuts (60 and 120GeV)
+                    if passesSIPCut:
+                        if not passesSIPCutBool:
+                            passesSIPCutCount += 1
+                            passesSIPCutBool = True
 
-                    tmpVec = leadLepPairOneVec + trailingLepPairOneVec
-                    tmpZ1InvMass = tmpVec.M()
-                    if tmpZ1InvMass < 120:
-                        if muonZ2Pair:
-                            tmpLeadZ2Vec = muonPassesZ2CutsAr[leadZ2LepPairInd][1][0]
-                            tmpTrailingZ2Vec = muonPassesZ2CutsAr[leadZ2LepPairInd][1][1]
-                            tmpVecTwo = tmpLeadZ2Vec + tmpTrailingZ2Vec
-                        else:
-                            tmpLeadZ2Vec = elecPassesZ2CutsAr[leadZ2LepPairInd][1][0]
-                            tmpTrailingZ2Vec = elecPassesZ2CutsAr[leadZ2LepPairInd][1][1]
-                            tmpVecTwo = tmpLeadZ2Vec + tmpTrailingZ2Vec
-                        tmpZ2InvMass = tmpVecTwo.M()
-                        if tmpZ2InvMass > 60 and tmpZ2InvMass < 120:
-                            #at this point all lepton cuts have been passed. Filling histograms
-                            if not allCutPassBool:
-                                allCutPassCount += 1
-                                allCutPassBool = True
-                            LepFullCut_Z1Leadpt.Fill(leadLepPairOneVec.Pt())
-                            LepFullCut_Z1Trailingpt.Fill(trailingLepPairOneVec.Pt())
-                            tmpLeadEta = leadLepPairOneVec.Eta()
-                            tmpTrailingEta = trailingLepPairOneVec.Eta()
-                            LepFullCut_Z1Leadeta.Fill(tmpLeadEta)
-                            LepFullCut_Z1Trailingeta.Fill(tmpTrailingEta)
-                            
-                            LepFullCut_Z1Leadmass.Fill(leadLepPairOneVec.M())
-                            LepFullCut_Z1Trailingmass.Fill(trailingLepPairOneVec.M())
-                            LepFullCut_Z1Leadphi.Fill(leadLepPairOneVec.Phi())
-                            LepFullCut_Z1Trailingphi.Fill(trailingLepPairOneVec.Phi())
-                            #tmpVec = leadLepPairOneVec + trailingLepPairOneVec
-
-                            LepFullCut_Z1InvMass.Fill(tmpZ1InvMass)
-                            LepFullCut_Z1EtaSep.Fill(abs(tmpLeadEta - tmpTrailingEta))
-                            
-
-                            LepFullCut_Z2Leadpt.Fill(tmpLeadZ2Vec.Pt())
-                            LepFullCut_Z2Trailingpt.Fill(tmpTrailingZ2Vec.Pt())
-                            LepFullCut_Z2Leadmass.Fill(tmpLeadZ2Vec.M())
-                            LepFullCut_Z2Trailingmass.Fill(tmpTrailingZ2Vec.M())
-                            LepFullCut_Z2Leadphi.Fill(tmpLeadZ2Vec.Phi())
-                            LepFullCut_Z2Trailingphi.Fill(tmpTrailingZ2Vec.Phi())
-
-                            tmpLeadEta = tmpLeadZ2Vec.Eta()
-                            tmpTrailingEta = tmpTrailingZ2Vec.Eta()
-
+                        tmpVec = leadLepPairOneVec + trailingLepPairOneVec
+                        tmpZ1InvMass = tmpVec.M()
+                        if tmpZ1InvMass < 120:
+                            if muonZ2Pair:
+                                tmpLeadZ2Vec = muonPassesZ2CutsAr[leadZ2LepPairInd][1][0]
+                                tmpTrailingZ2Vec = muonPassesZ2CutsAr[leadZ2LepPairInd][1][1]
+                                tmpVecTwo = tmpLeadZ2Vec + tmpTrailingZ2Vec
+                            else:
+                                tmpLeadZ2Vec = elecPassesZ2CutsAr[leadZ2LepPairInd][1][0]
+                                tmpTrailingZ2Vec = elecPassesZ2CutsAr[leadZ2LepPairInd][1][1]
+                                tmpVecTwo = tmpLeadZ2Vec + tmpTrailingZ2Vec
+                            tmpZ2InvMass = tmpVecTwo.M()
+                            if tmpZ2InvMass > 60 and tmpZ2InvMass < 120:
+                                #at this point all lepton cuts have been passed. Filling histograms
+                                if not allCutPassBool:
+                                    allCutPassCount += 1
+                                    allCutPassBool = True
+                                h_LepFullCut_Z1Leadpt.Fill(leadLepPairOneVec.Pt())
+                                h_LepFullCut_Z1Trailingpt.Fill(trailingLepPairOneVec.Pt())
+                                tmpLeadEta = leadLepPairOneVec.Eta()
+                                tmpTrailingEta = trailingLepPairOneVec.Eta()
+                                h_LepFullCut_Z1Leadeta.Fill(tmpLeadEta)
+                                h_LepFullCut_Z1Trailingeta.Fill(tmpTrailingEta)
                                 
-                            LepFullCut_Z2Leadeta.Fill(tmpLeadEta)
-                            LepFullCut_Z2Trailingeta.Fill(tmpTrailingEta)
-                            LepFullCut_Z2InvMass.Fill(tmpZ2InvMass)
-                            LepFullCut_Z2EtaSep.Fill(abs(tmpLeadEta - tmpTrailingEta))
+                                h_LepFullCut_Z1Leadmass.Fill(leadLepPairOneVec.M())
+                                h_LepFullCut_Z1Trailingmass.Fill(trailingLepPairOneVec.M())
+                                h_LepFullCut_Z1Leadphi.Fill(leadLepPairOneVec.Phi())
+                                h_LepFullCut_Z1Trailingphi.Fill(trailingLepPairOneVec.Phi())
+                                #tmpVec = leadLepPairOneVec + trailingLepPairOneVec
+
+                                h_LepFullCut_Z1InvMass.Fill(tmpZ1InvMass)
+                                h_LepFullCut_Z1EtaSep.Fill(abs(tmpLeadEta - tmpTrailingEta))
+                                
+
+                                h_LepFullCut_Z2Leadpt.Fill(tmpLeadZ2Vec.Pt())
+                                h_LepFullCut_Z2Trailingpt.Fill(tmpTrailingZ2Vec.Pt())
+                                h_LepFullCut_Z2Leadmass.Fill(tmpLeadZ2Vec.M())
+                                h_LepFullCut_Z2Trailingmass.Fill(tmpTrailingZ2Vec.M())
+                                h_LepFullCut_Z2Leadphi.Fill(tmpLeadZ2Vec.Phi())
+                                h_LepFullCut_Z2Trailingphi.Fill(tmpTrailingZ2Vec.Phi())
+
+                                tmpLeadEta = tmpLeadZ2Vec.Eta()
+                                tmpTrailingEta = tmpTrailingZ2Vec.Eta()
+
+                                    
+                                h_LepFullCut_Z2Leadeta.Fill(tmpLeadEta)
+                                h_LepFullCut_Z2Trailingeta.Fill(tmpTrailingEta)
+                                h_LepFullCut_Z2InvMass.Fill(tmpZ2InvMass)
+                                h_LepFullCut_Z2EtaSep.Fill(abs(tmpLeadEta - tmpTrailingEta))
                     
 
         #FatJets loop
@@ -1568,32 +1568,32 @@ DrawPlot(h_Muon_phi,"h_Muon_phi_",saveName,True)
 DrawPlot(h_Muon_pt,"h_Muon_pt_",saveName,True)
 
 #Cut Leptons
-DrawPlot(LepFullCut_Z1Leadpt,"LepFullCut_Z1Leadpt",saveName,True)
-DrawPlot(LepFullCut_Z1Trailingpt,"LepFullCut_Z1Trailingpt",saveName,True)
-DrawPlot(LepFullCut_Z1Leadeta,"LepFullCut_Z1Leadeta",saveName,True)
-DrawPlot(LepFullCut_Z1Trailingeta,"LepFullCut_Z1Trailingeta",saveName,True)
+DrawPlot(h_LepFullCut_Z1Leadpt,"h_LepFullCut_Z1Leadpt",saveName,True)
+DrawPlot(h_LepFullCut_Z1Trailingpt,"h_LepFullCut_Z1Trailingpt",saveName,True)
+DrawPlot(h_LepFullCut_Z1Leadeta,"h_LepFullCut_Z1Leadeta",saveName,True)
+DrawPlot(h_LepFullCut_Z1Trailingeta,"h_LepFullCut_Z1Trailingeta",saveName,True)
 
-DrawPlot(LepFullCut_Z1Leadmass,"LepFullCut_Z1Leadmass",saveName,True)
-DrawPlot(LepFullCut_Z1Trailingmass,"LepFullCut_Z1Trailingmass",saveName,True)
-DrawPlot(LepFullCut_Z1Leadphi,"LepFullCut_Z1Leadphi",saveName,True)
-DrawPlot(LepFullCut_Z1Trailingphi,"LepFullCut_Z1Trailingphi",saveName,True)
+DrawPlot(h_LepFullCut_Z1Leadmass,"h_LepFullCut_Z1Leadmass",saveName,True)
+DrawPlot(h_LepFullCut_Z1Trailingmass,"h_LepFullCut_Z1Trailingmass",saveName,True)
+DrawPlot(h_LepFullCut_Z1Leadphi,"h_LepFullCut_Z1Leadphi",saveName,True)
+DrawPlot(h_LepFullCut_Z1Trailingphi,"h_LepFullCut_Z1Trailingphi",saveName,True)
 
-DrawPlot(LepFullCut_Z1InvMass,"LepFullCut_Z1InvMass",saveName,True)
-DrawPlot(LepFullCut_Z1EtaSep,"LepFullCut_Z1EtaSep",saveName,True)
+DrawPlot(h_LepFullCut_Z1InvMass,"h_LepFullCut_Z1InvMass",saveName,True)
+DrawPlot(h_LepFullCut_Z1EtaSep,"h_LepFullCut_Z1EtaSep",saveName,True)
 
 
-DrawPlot(LepFullCut_Z2Leadpt,"LepFullCut_Z2Leadpt",saveName,True)
-DrawPlot(LepFullCut_Z2Trailingpt,"LepFullCut_Z2Trailingpt",saveName,True)
-DrawPlot(LepFullCut_Z2Leadmass,"LepFullCut_Z2Leadmass",saveName,True)
-DrawPlot(LepFullCut_Z2Trailingmass,"LepFullCut_Z2Trailingmass",saveName,True)
-DrawPlot(LepFullCut_Z2Leadphi,"LepFullCut_Z2Leadphi",saveName,True)
-DrawPlot(LepFullCut_Z2Trailingphi,"LepFullCut_Z2Trailingphi",saveName,True)
+DrawPlot(h_LepFullCut_Z2Leadpt,"h_LepFullCut_Z2Leadpt",saveName,True)
+DrawPlot(h_LepFullCut_Z2Trailingpt,"h_LepFullCut_Z2Trailingpt",saveName,True)
+DrawPlot(h_LepFullCut_Z2Leadmass,"h_LepFullCut_Z2Leadmass",saveName,True)
+DrawPlot(h_LepFullCut_Z2Trailingmass,"h_LepFullCut_Z2Trailingmass",saveName,True)
+DrawPlot(h_LepFullCut_Z2Leadphi,"h_LepFullCut_Z2Leadphi",saveName,True)
+DrawPlot(h_LepFullCut_Z2Trailingphi,"h_LepFullCut_Z2Trailingphi",saveName,True)
 
     
-DrawPlot(LepFullCut_Z2Leadeta,"LepFullCut_Z2Leadeta",saveName,True)
-DrawPlot(LepFullCut_Z2Trailingeta,"LepFullCut_Z2Trailingeta",saveName,True)
-DrawPlot(LepFullCut_Z2InvMass,"LepFullCut_Z2InvMass",saveName,True)
-DrawPlot(LepFullCut_Z2EtaSep,"LepFullCut_Z2EtaSep",saveName,True)
+DrawPlot(h_LepFullCut_Z2Leadeta,"h_LepFullCut_Z2Leadeta",saveName,True)
+DrawPlot(h_LepFullCut_Z2Trailingeta,"h_LepFullCut_Z2Trailingeta",saveName,True)
+DrawPlot(h_LepFullCut_Z2InvMass,"h_LepFullCut_Z2InvMass",saveName,True)
+DrawPlot(h_LepFullCut_Z2EtaSep,"h_LepFullCut_Z2EtaSep",saveName,True)
 
 #Jets:
 DrawPlot(h_Jet_eta,"h_Jet_eta_",saveName,True)
