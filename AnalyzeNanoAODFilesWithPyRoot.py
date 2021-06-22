@@ -221,10 +221,10 @@ h_LepFullCut_Z1Leadeta        = TH1F("h_LepFullCut_Z1Leadeta","h_LepFullCut_Z1Le
 h_LepFullCut_Z1Trailingeta        = TH1F("h_LepFullCut_Z1Trailingeta","h_LepFullCut_Z1Trailingeta", 100, -5.0, 5.0)
 h_LepFullCut_Z2Leadeta        = TH1F("h_LepFullCut_Z2Leadeta","h_LepFullCut_Z2Leadeta", 100, -5.0, 5.0)
 h_LepFullCut_Z2Trailingeta        = TH1F("h_LepFullCut_Z2Trailingeta","h_LepFullCut_Z2Trailingeta", 100, -5.0, 5.0)
-h_LepFullCut_Z1Leadmass       = TH1F("h_LepFullCut_Z1Leadmass","h_LepFullCut_Z1Leadmass", 200, 0, 200)
-h_LepFullCut_Z1Trailingmass       = TH1F("h_LepFullCut_Z1Trailingmass","h_LepFullCut_Z1Trailingmass", 200, 0, 200)
-h_LepFullCut_Z2Leadmass       = TH1F("h_LepFullCut_Z2Leadmass","h_LepFullCut_Z2Leadmass", 200, 0, 200)
-h_LepFullCut_Z2Trailingmass       = TH1F("h_LepFullCut_Z2Trailingmass","h_LepFullCut_Z2Trailingmass", 200, 0, 200)
+h_LepFullCut_Z1Leadmass       = TH1F("h_LepFullCut_Z1Leadmass","h_LepFullCut_Z1Leadmass", 200, 0, 0.2)
+h_LepFullCut_Z1Trailingmass       = TH1F("h_LepFullCut_Z1Trailingmass","h_LepFullCut_Z1Trailingmass", 200, 0, 0.2)
+h_LepFullCut_Z2Leadmass       = TH1F("h_LepFullCut_Z2Leadmass","h_LepFullCut_Z2Leadmass", 200, 0, 0.2)
+h_LepFullCut_Z2Trailingmass       = TH1F("h_LepFullCut_Z2Trailingmass","h_LepFullCut_Z2Trailingmass", 200, 0, 0.2)
 h_LepFullCut_Z1Leadphi        = TH1F("h_LepFullCut_Z1Leadphi","h_LepFullCut_Z1Leadphi", 100, -3.5, 3.5)
 h_LepFullCut_Z1Trailingphi        = TH1F("h_LepFullCut_Z1Trailingphi","h_LepFullCut_Z1Trailingphi", 100, -3.5, 3.5)
 h_LepFullCut_Z2Leadphi        = TH1F("h_LepFullCut_Z2Leadphi","h_LepFullCut_Z2Leadphi", 100, -3.5, 3.5)
@@ -534,7 +534,7 @@ for k,fileName in enumerate(fileAr):
                             else:
                                 tmpLeadVec = Math.PtEtaPhiMVector(tmpPtTwo, tmpEtaTwo, tmpPhiTwo, tmpMassTwo)
                                 tmpTrailingVec = Math.PtEtaPhiMVector(tmpPtOne, tmpEtaOne, tmpPhiOne, tmpMassOne)
-                            tmpDiElectronVec = tmpVecOne+tmpVecTwo
+                            tmpDiElectronVec = tmpLeadVec+tmpTrailingVec
                             tmpDiElectronInvMass = tmpDiElectronVec.M()
                             if tmpDiElectronInvMass > leptonZ2Cut:
                                 elecPassesZ2CutsAr.append([[tmpLeadInd,tmpSecondInd],[tmpLeadVec,tmpTrailingVec],[tmpLeadCharge,tmpTrailingCharge]])
@@ -663,7 +663,7 @@ for k,fileName in enumerate(fileAr):
                             else:
                                 tmpLeadVec = Math.PtEtaPhiMVector(tmpPtTwo, tmpEtaTwo, tmpPhiTwo, tmpMassTwo)
                                 tmpTrailingVec = Math.PtEtaPhiMVector(tmpPtOne, tmpEtaOne, tmpPhiOne, tmpMassOne)
-                            tmpDiMuonVec = tmpVecOne+tmpVecTwo
+                            tmpDiMuonVec = tmpLeadVec+tmpTrailingVec
                             tmpDiMuonInvMass = tmpDiMuonVec.M()
                             if tmpDiMuonInvMass > leptonZ2Cut:
                                 muonPassesZ2CutsAr.append([[tmpLeadInd,tmpSecondInd],[tmpLeadVec,tmpTrailingVec],[tmpLeadCharge,tmpTrailingCharge]])
