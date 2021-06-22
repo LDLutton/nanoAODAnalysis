@@ -349,8 +349,8 @@ for k,fileName in enumerate(fileAr):
         diJetMaxInvMass = 0
 
         #IndicesForLeptonPairs
-        lepPairOneLeadInd = 0
-        lepPairOneTrailingInd = 0
+        lepPairOneLeadInd = -1
+        lepPairOneTrailingInd = -1
         #lepPairTwoLeadInd = 0
         #lepPairTwoTrailingInd = 0
 
@@ -407,6 +407,7 @@ for k,fileName in enumerate(fileAr):
         nElecCandidatesNeg = 0
         nElecCandidatesPos = 0
         #Looping over electrons
+        
         for i in range(tmpnElectron):
             #Checking for electron candidates with the initial eta and pt cuts. Keeping track of whether there is a negative and/or a positive electron present
             if abs(ev.Electron_eta[i]) < elecCandEtaCut and ev.Electron_pt[i] > elecCandPTCut:
@@ -537,7 +538,7 @@ for k,fileName in enumerate(fileAr):
                             tmpDiElectronInvMass = tmpDiElectronVec.M()
                             if tmpDiElectronInvMass > leptonZ2Cut:
                                 elecPassesZ2CutsAr.append([[tmpLeadInd,tmpSecondInd],[tmpLeadVec,tmpTrailingVec],[tmpLeadCharge,tmpTrailingCharge]])
-                                
+                                #print()
                             #Check that the pt of the second electron passes the lower pt cut
                             if tmpPtTwo > firstZTrailingCut:
                                 #Sort the electrons into leading and trailing based on pt
@@ -808,88 +809,89 @@ for k,fileName in enumerate(fileAr):
 
                     trailingLepPairVec = Math.PtEtaPhiMVector(0,0,0,0)
             """
-        passesCandCuts = False
-        muonZ2Pair = False
-        if len(muonPassesCutsAr) + len(elecPassesCutsAr) > 0 and len(muonPassesZ2CutsAr) + len(elecPassesZ2CutsAr) > 0:
-            for i,elecZ2Cand in enumerate(elecPassesZ2CutsAr):
-                if elecZ2Cand[0][0] != lepPairOneLeadInd and elecZ2Cand[0][0] != lepPairOneTrailingInd and elecZ2Cand[0][1] != lepPairOneLeadInd and elecZ2Cand[0][1] != lepPairOneTrailingInd: 
-                    fourLepVec = elecZ2Cand[1][0] + elecZ2Cand[1][1] + leadLepPairOneVec + trailingLepPairOneVec
-                    fourLepInvMass = fourLepVec.M()
-                    if fourLepInvMass > fourLeptonInvMassCut:
-                        passesCandCuts = True
-                        if not muonLeading:
-                            passesCandCuts = False
-                            if elecZ2Cand[2][0] != leadLepPairCharge:
-                                tmpCrossCandVec = elecZ2Cand[1][0] + leadLepPairOneVec
-                                if tmpCrossCandVec.M() > 12:
-                                    passesCandCuts = True
-                                else:
-                                    tmpCrossCandVec = elecZ2Cand[1][1] + trailingLepPairOneVec
+        if lepPairOneLeadInd >= 0 and lepPairOneTrailingInd >= 0:
+            passesCandCuts = False
+            muonZ2Pair = False
+            if len(muonPassesCutsAr) + len(elecPassesCutsAr) > 0 and len(muonPassesZ2CutsAr) + len(elecPassesZ2CutsAr) > 0:
+                for i,elecZ2Cand in enumerate(elecPassesZ2CutsAr):
+                    if elecZ2Cand[0][0] != lepPairOneLeadInd and elecZ2Cand[0][0] != lepPairOneTrailingInd and elecZ2Cand[0][1] != lepPairOneLeadInd and elecZ2Cand[0][1] != lepPairOneTrailingInd: 
+                        fourLepVec = elecZ2Cand[1][0] + elecZ2Cand[1][1] + leadLepPairOneVec + trailingLepPairOneVec
+                        fourLepInvMass = fourLepVec.M()
+                        if fourLepInvMass > fourLeptonInvMassCut:
+                            passesCandCuts = True
+                            if not muonLeading:
+                                passesCandCuts = False
+                                if elecZ2Cand[2][0] != leadLepPairCharge:
+                                    tmpCrossCandVec = elecZ2Cand[1][0] + leadLepPairOneVec
                                     if tmpCrossCandVec.M() > 12:
                                         passesCandCuts = True
-                            else:
-                                tmpCrossCandVec = elecZ2Cand[1][1] + leadLepPairOneVec
-                                if tmpCrossCandVec.M() > 12:
-                                    passesCandCuts = True
+                                    else:
+                                        tmpCrossCandVec = elecZ2Cand[1][1] + trailingLepPairOneVec
+                                        if tmpCrossCandVec.M() > 12:
+                                            passesCandCuts = True
                                 else:
-                                    tmpCrossCandVec = elecZ2Cand[1][0] + trailingLepPairOneVec
+                                    tmpCrossCandVec = elecZ2Cand[1][1] + leadLepPairOneVec
                                     if tmpCrossCandVec.M() > 12:
                                         passesCandCuts = True
-                        if passesCandCuts:
-                            if not ifZ2ElecPairCandBool:
-                                ifZ2ElecPairCandCount += 1
-                                ifZ2ElecPairCandBool = True
-                            if elecZ2Cand[1][0].Pt() > leadZ2Pt:
-                                leadZ2Pt = elecZ2Cand[1][0].Pt()
-                                trailingZ2Pt = elecZ2Cand[1][1].Pt()
-                                leadZ2LepPairInd = i
-                            elif elecZ2Cand[1][0].Pt() == leadZ2Pt:
-                                if elecZ2Cand[1][1].Pt() == trailingZ2Pt:
+                                    else:
+                                        tmpCrossCandVec = elecZ2Cand[1][0] + trailingLepPairOneVec
+                                        if tmpCrossCandVec.M() > 12:
+                                            passesCandCuts = True
+                            if passesCandCuts:
+                                if not ifZ2ElecPairCandBool:
+                                    ifZ2ElecPairCandCount += 1
+                                    ifZ2ElecPairCandBool = True
+                                if elecZ2Cand[1][0].Pt() > leadZ2Pt:
+                                    leadZ2Pt = elecZ2Cand[1][0].Pt()
                                     trailingZ2Pt = elecZ2Cand[1][1].Pt()
                                     leadZ2LepPairInd = i
+                                elif elecZ2Cand[1][0].Pt() == leadZ2Pt:
+                                    if elecZ2Cand[1][1].Pt() == trailingZ2Pt:
+                                        trailingZ2Pt = elecZ2Cand[1][1].Pt()
+                                        leadZ2LepPairInd = i
 
 
-                            
+                                
 
 
-            for i,muonZ2Cand in enumerate(muonPassesZ2CutsAr):
-                if muonZ2Cand[0][0] != lepPairOneLeadInd and muonZ2Cand[0][0] != lepPairOneTrailingInd and muonZ2Cand[0][1] != lepPairOneLeadInd and muonZ2Cand[0][1] != lepPairOneTrailingInd: 
-                    fourLepVec = muonZ2Cand[1][0] + muonZ2Cand[1][1] + leadLepPairOneVec + trailingLepPairOneVec
-                    fourLepInvMass = fourLepVec.M()
-                    if fourLepInvMass > fourLeptonInvMassCut:
-                        passesCandCuts = True
-                        if muonLeading:
-                            passesCandCuts = False
-                            if muonZ2Cand[2][0] != leadLepPairCharge:
-                                tmpCrossCandVec = muonZ2Cand[1][0] + leadLepPairOneVec
-                                if tmpCrossCandVec.M() > 12:
-                                    passesCandCuts = True
-                                else:
-                                    tmpCrossCandVec = muonZ2Cand[1][1] + trailingLepPairOneVec
+                for i,muonZ2Cand in enumerate(muonPassesZ2CutsAr):
+                    if muonZ2Cand[0][0] != lepPairOneLeadInd and muonZ2Cand[0][0] != lepPairOneTrailingInd and muonZ2Cand[0][1] != lepPairOneLeadInd and muonZ2Cand[0][1] != lepPairOneTrailingInd: 
+                        fourLepVec = muonZ2Cand[1][0] + muonZ2Cand[1][1] + leadLepPairOneVec + trailingLepPairOneVec
+                        fourLepInvMass = fourLepVec.M()
+                        if fourLepInvMass > fourLeptonInvMassCut:
+                            passesCandCuts = True
+                            if muonLeading:
+                                passesCandCuts = False
+                                if muonZ2Cand[2][0] != leadLepPairCharge:
+                                    tmpCrossCandVec = muonZ2Cand[1][0] + leadLepPairOneVec
                                     if tmpCrossCandVec.M() > 12:
                                         passesCandCuts = True
-                            else:
-                                tmpCrossCandVec = muonZ2Cand[1][1] + leadLepPairOneVec
-                                if tmpCrossCandVec.M() > 12:
-                                    passesCandCuts = True
+                                    else:
+                                        tmpCrossCandVec = muonZ2Cand[1][1] + trailingLepPairOneVec
+                                        if tmpCrossCandVec.M() > 12:
+                                            passesCandCuts = True
                                 else:
-                                    tmpCrossCandVec = muonZ2Cand[1][0] + trailingLepPairOneVec
+                                    tmpCrossCandVec = muonZ2Cand[1][1] + leadLepPairOneVec
                                     if tmpCrossCandVec.M() > 12:
                                         passesCandCuts = True
-                        if passesCandCuts:
-                            if not ifZ2MuonPairCandBool:
-                                ifZ2MuonPairCandCount += 1
-                                ifZ2MuonPairCandBool = True
-                            if muonZ2Cand[1][0].Pt() > leadZ2Pt:
-                                muonZ2Pair = True
-                                leadZ2Pt = muonZ2Cand[1][0].Pt()
-                                trailingZ2Pt = muonZ2Cand[1][1].Pt()
-                                leadZ2LepPairInd = i
-                            elif muonZ2Cand[1][0].Pt() == leadZ2Pt:
-                                if muonZ2Cand[1][1].Pt() == trailingZ2Pt:
+                                    else:
+                                        tmpCrossCandVec = muonZ2Cand[1][0] + trailingLepPairOneVec
+                                        if tmpCrossCandVec.M() > 12:
+                                            passesCandCuts = True
+                            if passesCandCuts:
+                                if not ifZ2MuonPairCandBool:
+                                    ifZ2MuonPairCandCount += 1
+                                    ifZ2MuonPairCandBool = True
+                                if muonZ2Cand[1][0].Pt() > leadZ2Pt:
                                     muonZ2Pair = True
+                                    leadZ2Pt = muonZ2Cand[1][0].Pt()
                                     trailingZ2Pt = muonZ2Cand[1][1].Pt()
                                     leadZ2LepPairInd = i
+                                elif muonZ2Cand[1][0].Pt() == leadZ2Pt:
+                                    if muonZ2Cand[1][1].Pt() == trailingZ2Pt:
+                                        muonZ2Pair = True
+                                        trailingZ2Pt = muonZ2Cand[1][1].Pt()
+                                        leadZ2LepPairInd = i
             #At this point, if the cuts were passed, should have two pairs of leptons. The first reprsented by
             #lepPairOneLeadInd,lepPairOneTrailingInd variables (also lead/trailingLepPairOneVec and lead/trailingLepPairCharge)
             #which can be used to index ev.Electron/Muon_Branch
@@ -1162,6 +1164,12 @@ for k,fileName in enumerate(fileAr):
                             elif ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] > 4:
                                 passesSIPCut = False
                     elif muonZ2Pair:
+                        #print("lepPairOneLeadInd",lepPairOneLeadInd,"len(ev.Electron_sip3d)",len(ev.Electron_sip3d))
+                        #print("len(ev.Electron_pt)",len(ev.Electron_pt))
+                        #print("nElecCandidates",nElecCandidates,"nMuonCandidates",nMuonCandidates,"enoughLepCands",enoughLepCands,"enoughElecCands",enoughElecCands,"enoughMuonCands",enoughMuonCands)
+                        #print("leadLepPairOneVec",leadLepPairOneVec,"trailingLepPairOneVec",trailingLepPairOneVec)
+                        #print("muonLeading",muonLeading,"muonZ2Pair",muonZ2Pair)
+                        #print()
                         if ev.Electron_sip3d[lepPairOneLeadInd] > 4:
                             passesSIPCut = False
                         elif ev.Electron_sip3d[lepPairOneTrailingInd] > 4:
