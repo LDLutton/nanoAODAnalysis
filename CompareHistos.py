@@ -84,15 +84,17 @@ weightsAr = []
 #fileWithoutDipole = TFile.Open("histosFromNanoAODWWithoutDipoleRecoil.root")
 #With Dipole files
 #fileTwo = TFile.Open("histosFromNanoAODWithDipoleRecoil.root")
+couplingModifierAr = [10,0.1,0.01,0.001]
+couplingModifierStrAr = ["EFTCouplingTimes10","EFTCouplingTimes0p1","EFTCouplingTimes0p01","EFTCouplingTimes0p001","EFTCouplingTimes0p0001"]
 fileAr.append(TFile.Open("histosFromNanoAODpphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev_0p999cHW100GeVIMJetCut.root"))
 nameAr.append("EFT")
 colorAr.append(6)
-weightsAr.append(0.000265840527334)
+weightsAr.append(0.00026785303750000004)
 
 fileAr.append(TFile.Open("histosFromNanoAODpphzzjjQCD0SMHLOOP0QEDE5NPE0ResMasAllVer100Ev_0p999cHW100GeVIMJetCut.root"))
 nameAr.append("SM")
 colorAr.append(2)
-weightsAr.append(8.21001467187e-05)
+weightsAr.append(8.37391538525e-05)
 
 #Compare to background files
 #fileOne = TFile.Open("histosFromNanoAODttHBackground.root")
@@ -100,6 +102,8 @@ fileAr.append(TFile.Open("histosFromNanoAODttHToBBBackground.root"))
 nameAr.append("ttHToBBBackground")
 colorAr.append(4)
 weightsAr.append(0.6*0.584)
+
+useModifiedCouplingAr = [True,False,False]
 
 #Put in the key lists in the same order as in the fileAr
 keysAr = []
@@ -123,15 +127,26 @@ print("lenKeys:",lenKeys)
 for i,keyA in enumerate(keysAr):
     if len(keyA) != lenKeys:
         print("oh no the length is wrong",i,len(keyA),keyA)
-skipCounter = 0
 
+moddedCouplingHistAr = []
+moddedCouplingCanAr = []
+moddedCouplingPadAr = []
+moddedCouplingLegAr = []
+skipCtr = [0,0,0]
 #Main loop over each histogram
 for i in range(lenKeys):
+    #print(i,moddedCouplingHistAr)
+    moddedCouplingHistAr.append([])
+    moddedCouplingCanAr.append([])
+    moddedCouplingLegAr.append([])
+    moddedCouplingPadAr.append([])
     tmpObjAr = []
     histName = keysAr[0][i].GetName()
     if "Normalized" not in histName:
         continue
-    tmpObj = keysAr[0][i].ReadObj()
+    elif "LHEWeight" in histName:
+        skipCtr[2] += 2
+        continue
     
     canAr.append(TCanvas("{0}Can".format(histName),"{0}Can".format(histName),1920,1440))
     setUpLegend(legAr)
@@ -140,12 +155,15 @@ for i in range(lenKeys):
     padAr[-1][0].Draw()
     padAr[-1][0].cd()
     #Loop over all files
-    histMax = 0
-    for j,keyA,colorA,nameA,weightsA in zip(range(lenKeys),keysAr,colorAr,nameAr,weightsAr):
-        tmpObjAr.append(keyA[i].ReadObj())
+    
+    combinedHistInt = 0
+    combinedModdedHistIntAr = [0 for couplingModifier in couplingModifierAr]
+    for j,keyA,colorA,nameA,weightsA,skipC,useModifiedCoupling in zip(range(len(keysAr)),keysAr,colorAr,nameAr,weightsAr,skipCtr,useModifiedCouplingAr):
+        moddedCouplingHistAr[-1].append([])
+        tmpObjAr.append(keyA[i-skipC].ReadObj())
         tmpObjAr[-1].Scale(weightsA)
         #Sanity check
-        tmpName = keyA[i].GetName()
+        tmpName = keyA[i-skipC].GetName()
         #tmpName = tmpObjAr[-1].GetName()
         if tmpName != histName:
             print("weeooweooo error alert:",histName,tmpName)
@@ -155,11 +173,34 @@ for i in range(lenKeys):
             makeNiceHistos(tmpObjAr[-1],"","Events",True)
         tmpObjAr[-1].SetTitle(histName)
         legAr[-1].AddEntry(tmpObjAr[-1],nameA,"l")
-        tmpMax = tmpObjAr[-1].GetMaximum()
+        combinedHistInt += tmpObjAr[-1].Integral()
+        for k,modifiedCoupling,modifiedCouplingStr in zip(range(len(couplingModifierAr)),couplingModifierAr,couplingModifierStrAr):
+            """
+            print(i,j,k)
+            print("moddedCouplingHistAr:",moddedCouplingHistAr)
+            print("moddedCouplingHistAr[-1]:",moddedCouplingHistAr[-1])
+            print("tmpObjAr:",tmpObjAr)
+            print("tmpObjAr[-1]:",tmpObjAr[-1])
+            """
+            moddedCouplingHistAr[-1][-1].append(tmpObjAr[-1].Clone())
+            moddedCouplingHistAr[-1][-1][-1].SetTitle(histName+"EFTcHWE{0}".format(modifiedCouplingStr))
+            if useModifiedCoupling:
+                moddedCouplingCanAr[-1].append(TCanvas("{0}EFTcHWE{1}Can".format(histName,modifiedCouplingStr),"{0}EFTcHWE{1}Can".format(histName,modifiedCouplingStr),1920,1440))
+                setUpLegend(moddedCouplingLegAr[-1])
+                setUpPadsAr(moddedCouplingPadAr[-1],"{0}EFTcHWE{1}Pad".format(histName,modifiedCouplingStr))
+                moddedCouplingHistAr[-1][-1][-1].Scale(modifiedCoupling)
+            combinedModdedHistIntAr[k] += moddedCouplingHistAr[-1][-1][-1].Integral()
+    canAr[-1].cd()
+    padAr[-1][0].cd()
+
+    histMax = 0
+    for j in range(len(tmpObjAr)):
+        tmpObjAr[j].Scale(1.0 / combinedHistInt)
+        tmpMax = tmpObjAr[j].GetMaximum()
         if tmpMax > histMax:
             histMax = tmpMax
-    
     tmpObjAr[0].GetYaxis().SetRangeUser(0,histMax)
+    
     tmpObjAr[0].Draw("hist")
     for j in range(1,len(tmpObjAr)):
         tmpObjAr[j].DrawCopy("same hist")
@@ -188,6 +229,49 @@ for i in range(lenKeys):
 
     canAr[-1].SaveAs("{0}{1}.png".format(histName,saveString))
 
+
+    for k,couplingModifier,couplingModifierStr,combinedModdedHistInt in zip(range(len(couplingModifierAr)),couplingModifierAr,couplingModifierStrAr,combinedModdedHistIntAr):
+        #moddedCouplingHistAr[-1][0][k]
+        moddedCouplingCanAr[-1][k].cd()
+        moddedCouplingPadAr[-1][k][0].Draw()
+        moddedCouplingPadAr[-1][k][0].cd()
+        histMax = 0
+        for j in range(len(moddedCouplingHistAr[-1])):
+            moddedCouplingHistAr[-1][j][k].Scale(1.0 / combinedModdedHistInt)
+            tmpMax = moddedCouplingHistAr[-1][j][k].GetMaximum()
+            if tmpMax > histMax:
+                histMax = tmpMax
+        moddedCouplingHistAr[-1][0][k].GetYaxis().SetRangeUser(0,histMax)
+        
+        moddedCouplingHistAr[-1][0][k].Draw("hist")
+        for j in range(1,len(moddedCouplingHistAr[-1])):
+            moddedCouplingHistAr[-1][j][k].DrawCopy("same hist")
+        moddedCouplingLegAr[-1][k].Draw()
+
+        moddedCouplingCanAr[-1][k].cd()
+        setUpBottomPadsAr(moddedCouplingPadAr[-1][k])
+        ratioMax = 0
+        for j in range(1,len(moddedCouplingHistAr[-1])):
+            moddedCouplingHistAr[-1][j][k].Sumw2()
+            moddedCouplingHistAr[-1][j][k].Divide(moddedCouplingHistAr[-1][0][k])
+            makeNiceHistos(moddedCouplingHistAr[-1][0][k],"","Ratio to EFT",False)
+            tmpRatioMax = moddedCouplingHistAr[-1][0][k].GetMaximum()
+            if tmpRatioMax > ratioMax:
+                ratioMax = tmpRatioMax
+        print(i,k,ratioMax)
+        if ratioMax > 4:
+            moddedCouplingHistAr[-1][1][k].GetYaxis().SetRangeUser(0,4)
+        moddedCouplingHistAr[-1][1][k].SetLineWidth(2)
+        moddedCouplingHistAr[-1][1][k].Draw("et same")
+        for j in range(2,len(moddedCouplingHistAr[-1])):
+            makeNiceHistos(moddedCouplingHistAr[-1][j][k],"","Ratio to EFT",False)
+            moddedCouplingHistAr[-1][j][k].SetLineWidth(2)
+            moddedCouplingHistAr[-1][j][k].Draw("et same")
+        moddedCouplingCanAr[-1][k].Update()
+        #Saving canvas
+
+        moddedCouplingCanAr[-1][k].SaveAs("{0}{1}{2}.png".format(histName,saveString,couplingModifierStr))
+            
 print("Done.","time:",time.time()-startt)
 
 
