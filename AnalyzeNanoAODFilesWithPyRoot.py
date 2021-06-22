@@ -197,15 +197,15 @@ h_InitialFatJetAltLJ_pt    = TH1F("h_InitialFatJetAltLJ_pt","h_InitialFatJetAltL
 
 
 #Fat jets with cut and tagging
-h_InitialFatJetAlt_EtaZAr = []
-h_InitialFatJetAlt_EtaSepZAr = []
-h_InitialFatJetAlt_ptZAr = []
+h_InitialFatJetAltLJ_EtaZAr = []
+h_InitialFatJetAltLJ_EtaSepZAr = []
+h_InitialFatJetAltLJ_ptZAr = []
 
 #Histograms for different levels of cut on the Z tagging
 for cutOnZTagStr in cutOnZTagStrAr:
-    h_InitialFatJetAlt_EtaZAr.append(TH1F("h_InitialFatJetAltLJ_Eta_ZTag{0}MTR".format(cutOnZTagStr),"h_InitialFatJetAltLJ_Eta_ZTag{0}MTR".format(cutOnZTagStr), 100, -5.0, 5.0))
-    h_InitialFatJetAlt_EtaSepZAr.append(TH1F("h_InitialFatJetAltLJ_EtaSep_ZTag{0}MTR".format(cutOnZTagStr),"h_InitialFatJetAltLJ_EtaSep_ZTag{0}MTR".format(cutOnZTagStr), 100, 0, 10))
-    h_InitialFatJetAlt_ptZAr.append(TH1F("h_InitialFatJetAltLJ_pt_ZTag{0}MTR".format(cutOnZTagStr),"h_InitialFatJetAltLJ_pt_ZTag{0}MTR".format(cutOnZTagStr), 25, 0, 500))
+    h_InitialFatJetAltLJ_EtaZAr.append(TH1F("h_InitialFatJetAltLJ_Eta_ZTag{0}MTR".format(cutOnZTagStr),"h_InitialFatJetAltLJ_Eta_ZTag{0}MTR".format(cutOnZTagStr), 100, -5.0, 5.0))
+    h_InitialFatJetAltLJ_EtaSepZAr.append(TH1F("h_InitialFatJetAltLJ_EtaSep_ZTag{0}MTR".format(cutOnZTagStr),"h_InitialFatJetAltLJ_EtaSep_ZTag{0}MTR".format(cutOnZTagStr), 100, 0, 10))
+    h_InitialFatJetAltLJ_ptZAr.append(TH1F("h_InitialFatJetAltLJ_pt_ZTag{0}MTR".format(cutOnZTagStr),"h_InitialFatJetAltLJ_pt_ZTag{0}MTR".format(cutOnZTagStr), 25, 0, 500))
     h_FatJet_etaZAr.append(TH1F("h_FatJet_Eta_ZTag{0}MTR".format(cutOnZTagStr),"h_FatJet_Eta_ZTag{0}MTR".format(cutOnZTagStr), 100, -5.0, 5.0))
     h_FatJet_massZAr.append(TH1F("h_FatJet_Mass_ZTag{0}MTR".format(cutOnZTagStr),"h_FatJet_Mass_ZTag{0}MTR".format(cutOnZTagStr), 200, 0, 200))
     h_FatJet_ptZAr.append(TH1F("h_FatJet_pt_ZTag{0}MTR".format(cutOnZTagStr),"h_FatJet_pt_ZTag{0}MTR".format(cutOnZTagStr), 25, 0, 500))
@@ -370,7 +370,7 @@ for k,fileName in enumerate(fileAr):
         ifZ1MuonPairCandBool = False
         ifZ2ElecPairCandBool = False
         ifZ2MuonPairCandBool = False
-        passesIsoCutsCount = False
+        passesIsoCutsBool = False
         passesSIPCutBool = False
         allCutPassBool = False
 
@@ -527,7 +527,7 @@ for k,fileName in enumerate(fileAr):
                                 tmpSecondInd = i
                                 tmpLeadCharge = tmpElecChargeTwo
                                 tmpTrailingCharge = tmpElecCharge
-                            if tmpLeadInd = i:
+                            if tmpLeadInd == i:
                                 tmpLeadVec = Math.PtEtaPhiMVector(tmpPtOne, tmpEtaOne, tmpPhiOne, tmpMassOne)
                                 tmpTrailingVec = Math.PtEtaPhiMVector(tmpPtTwo, tmpEtaTwo, tmpPhiTwo, tmpMassTwo)
                             else:
@@ -656,7 +656,7 @@ for k,fileName in enumerate(fileAr):
                                 tmpSecondInd = i
                                 tmpLeadCharge = tmpMuonChargeTwo
                                 tmpTrailingCharge = tmpMuonCharge
-                            if tmpLeadInd = i:
+                            if tmpLeadInd == i:
                                 tmpLeadVec = Math.PtEtaPhiMVector(tmpPtOne, tmpEtaOne, tmpPhiOne, tmpMassOne)
                                 tmpTrailingVec = Math.PtEtaPhiMVector(tmpPtTwo, tmpEtaTwo, tmpPhiTwo, tmpMassTwo)
                             else:
@@ -843,8 +843,8 @@ for k,fileName in enumerate(fileAr):
                                 leadZ2Pt = elecZ2Cand[1][0].Pt()
                                 trailingZ2Pt = elecZ2Cand[1][1].Pt()
                                 leadZ2LepPairInd = i
-                            elif elecZ2Cand[1][0].Pt() = leadZ2Pt:
-                                if elecZ2Cand[1][1].Pt() = trailingZ2Pt:
+                            elif elecZ2Cand[1][0].Pt() == leadZ2Pt:
+                                if elecZ2Cand[1][1].Pt() == trailingZ2Pt:
                                     trailingZ2Pt = elecZ2Cand[1][1].Pt()
                                     leadZ2LepPairInd = i
 
@@ -885,8 +885,8 @@ for k,fileName in enumerate(fileAr):
                                 leadZ2Pt = muonZ2Cand[1][0].Pt()
                                 trailingZ2Pt = muonZ2Cand[1][1].Pt()
                                 leadZ2LepPairInd = i
-                            elif muonZ2Cand[1][0].Pt() = leadZ2Pt:
-                                if muonZ2Cand[1][1].Pt() = trailingZ2Pt:
+                            elif muonZ2Cand[1][0].Pt() == leadZ2Pt:
+                                if muonZ2Cand[1][1].Pt() == trailingZ2Pt:
                                     muonZ2Pair = True
                                     trailingZ2Pt = muonZ2Cand[1][1].Pt()
                                     leadZ2LepPairInd = i
@@ -948,7 +948,7 @@ for k,fileName in enumerate(fileAr):
                             if muonPassesZ2CutsAr[leadZ2LepPairInd][1][1].Pt() > 35:
                                 tmpIsoThree = ev.Muon_pfRelIso03_all[muonPassesZ2CutsAr[leadZ2LepPairInd][0][0]]
                                 tmpIsoFour = ev.Muon_pfRelIso03_all[muonPassesZ2CutsAr[leadZ2LepPairInd][0][1]]
-                                elif tmpIsoThree + tmpIsoFour > 0.35:
+                                if tmpIsoThree + tmpIsoFour > 0.35:
                                     passesIsoCuts = False
                     else:
                         #muon Z1, elec Z2
@@ -1060,7 +1060,7 @@ for k,fileName in enumerate(fileAr):
                             if muonPassesZ2CutsAr[leadZ2LepPairInd][1][1].Pt() > 35:
                                 tmpIsoThree = ev.Muon_pfRelIso03_all[muonPassesZ2CutsAr[leadZ2LepPairInd][0][0]]
                                 tmpIsoFour = ev.Muon_pfRelIso03_all[muonPassesZ2CutsAr[leadZ2LepPairInd][0][1]]
-                                elif tmpIsoThree + tmpIsoFour > 0.35:
+                                if tmpIsoThree + tmpIsoFour > 0.35:
                                     passesIsoCuts = False
                     else:
                         #Elec Z1, elec Z2
@@ -1137,7 +1137,7 @@ for k,fileName in enumerate(fileAr):
                 #Now, assuming all *these* cuts pass, on to cut 6.
                 #Want the SIP of the leptons
                 if passesIsoCuts:
-                    if passesIsoCutsBool:
+                    if not passesIsoCutsBool:
                         passesIsoCutsCount += 1
                         passesIsoCutsBool = True
 
@@ -1157,31 +1157,31 @@ for k,fileName in enumerate(fileAr):
                                 passesSipCut = False
                             elif ev.Muon_sip3d[lepPairOneTrailingInd] > 4:
                                 passesSipCut = False
-                            elif ev.Elec_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] > 4:
+                            elif ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] > 4:
                                 passesSipCut = False
-                            elif ev.Elec_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] > 4:
+                            elif ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] > 4:
                                 passesSipCut = False
                     elif muonZ2Pair:
-                        if ev.Elec_sip3d[lepPairOneLeadInd] > 4:
+                        if ev.Electron_sip3d[lepPairOneLeadInd] > 4:
                             passesSipCut = False
-                        elif ev.Elec_sip3d[lepPairOneTrailingInd] > 4:
+                        elif ev.Electron_sip3d[lepPairOneTrailingInd] > 4:
                             passesSipCut = False
                         elif ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][0]] > 4:
                             passesSipCut = False
                         elif ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][1]] > 4:
                             passesSipCut = False
                     else:
-                        if ev.Elec_sip3d[lepPairOneLeadInd] > 4:
+                        if ev.Electron_sip3d[lepPairOneLeadInd] > 4:
                             passesSipCut = False
-                        elif ev.Elec_sip3d[lepPairOneTrailingInd] > 4:
+                        elif ev.Electron_sip3d[lepPairOneTrailingInd] > 4:
                             passesSipCut = False
-                        elif ev.Elec_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] > 4:
+                        elif ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] > 4:
                             passesSipCut = False
-                        elif ev.Elec_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] > 4:
+                        elif ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] > 4:
                             passesSipCut = False
                 #Now just check that the Z1 and Z2 inv mass falls within the Z low and Z high cuts (60 and 120GeV)
                 if passesSipCut:
-                    if passesSIPCutBool:
+                    if not passesSIPCutBool:
                         passesSIPCutCount += 1
                         passesSIPCutBool = True
 
@@ -1199,7 +1199,7 @@ for k,fileName in enumerate(fileAr):
                         tmpZ2InvMass = tmpVecTwo.M()
                         if tmpZ2InvMass > 60 and tmpZ2InvMass < 120:
                             #at this point all lepton cuts have been passed. Filling histograms
-                            if allCutPassBool:
+                            if not allCutPassBool:
                                 allCutPassCount += 1
                                 allCutPassBool = True
                             LepFullCut_Z1Leadpt.Fill(leadLepPairOneVec.Pt())
@@ -1261,14 +1261,14 @@ for k,fileName in enumerate(fileAr):
                     if tmpZVsQCD > zCut:
                         h_FatJet_etaZAr[j].Fill(tmpFJEta)
                         h_FatJet_ptZAr[j].Fill(tmpFatJetPT)
-                        h_FatJet_massZAr.Fill(tmpFJMass)
-                        h_FatJet_phiZAr.Fill(tmpFJPhi)
+                        h_FatJet_massZAr[j].Fill(tmpFJMass)
+                        h_FatJet_phiZAr[j].Fill(tmpFJPhi)
                         tmpTagBoolAr[-1].append(True)
                     else:
                         tmpTagBoolAr[-1].append(False)
         
         #Running a loop for cut jets with the tagging information
-        for i in range(ev.nFatJet)
+        for i in range(ev.nFatJet):
             #Fat Jets with cut but no tagging
             #Also Fat Jets with cuts and tagging
             if tmpFatJetPT > fatJetPTCut:
