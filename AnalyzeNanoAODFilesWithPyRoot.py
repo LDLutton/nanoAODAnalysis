@@ -1540,10 +1540,11 @@ print("Number of events with at least one Z1Z2 pair passing iso cuts:",passesIso
 print("Number of events with at least one Z1Z2 pair passing SIP cuts:",passesSIPCutCount)
 print("Number of events with at least one Z1Z2 pair passing all cuts:",allCutPassCount)
 print("----------------------------------------------------------")
-print("Cross section average before division:",crossSectionAvg)
-print("Cross section counter:",crossSectionCtr)
-crossSectionAvg = crossSectionAvg / crossSectionCtr
-print("Cross section average after division:",crossSectionAvg)
+if not ttHToBBBackground:
+    print("Cross section average before division:",crossSectionAvg)
+    print("Cross section counter:",crossSectionCtr)
+    crossSectionAvg = crossSectionAvg / crossSectionCtr
+    print("Cross section average after division:",crossSectionAvg)
 
 #Setting up outfile for histograms
 outFile = TFile("histosFromNanoAOD{0}.root".format(saveName),"recreate")
