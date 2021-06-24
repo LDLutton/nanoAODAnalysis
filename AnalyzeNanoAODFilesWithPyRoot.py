@@ -9,6 +9,9 @@ from fileLists import MGSMAr
 from fileLists import ttHToBBBackgroundAr
 import time as time
 
+#To enable heavy printing for debug
+debug = True
+
 #withDipoleRecoil = True
 
 MGSM = True
@@ -407,8 +410,11 @@ for k,fileName in enumerate(fileAr):
         nElecCandidatesNeg = 0
         nElecCandidatesPos = 0
         #Looping over electrons
-        
+        if debug:
+            print("------------------------------------------------------")
         for i in range(tmpnElectron):
+            if debug:
+                print("ev.Electron_eta[i]",ev.Electron_eta[i],"ev.Electron_pt[i]",ev.Electron_pt[i],"ev.Electron_charge[i]",ev.Electron_charge[i])
             #Checking for electron candidates with the initial eta and pt cuts. Keeping track of whether there is a negative and/or a positive electron present
             if abs(ev.Electron_eta[i]) < elecCandEtaCut and ev.Electron_pt[i] > elecCandPTCut:
 
@@ -427,6 +433,8 @@ for k,fileName in enumerate(fileAr):
             nElecCandPairs = nElecCandidatesNeg
         else:
             nElecCandPairs = nElecCandidatesPos
+        if debug:
+            print("nElecCandidatesNeg",nElecCandidatesNeg,"nElecCandidatesPos",nElecCandidatesPos,"nElecCandPairs",nElecCandPairs)
         
         #Counting Muon Candidates Loop
         nMuonCandidates = 0
@@ -437,6 +445,8 @@ for k,fileName in enumerate(fileAr):
         nMuonCandidatesPos = 0
         #Loop over muons
         for i in range(tmpnMuon):
+            if debug:
+                print("ev.Muon_eta[i]",ev.Muon_eta[i],"ev.Muon_pt[i]",ev.Muon_pt[i],"ev.Muon_charge[i]",ev.Muon_charge[i])
             #Checking for muon candidates with the initial eta and pt cuts. Keeping track of whether there is a negative and/or a positive muon present
             if abs(ev.Muon_eta[i]) < muonCandEtaCut and ev.Muon_pt[i] > muonCandPTCut:
                 nMuonCandidates += 1
@@ -454,6 +464,8 @@ for k,fileName in enumerate(fileAr):
             nMuonCandPairs = nMuonCandidatesNeg
         else:
             nMuonCandPairs = nMuonCandidatesPos
+        if debug:
+            print("nMuonCandidatesNeg",nMuonCandidatesNeg,"nMuonCandidatesPos",nMuonCandidatesPos,"nMuonCandPairs",nMuonCandPairs)
         
         enoughElecCands = False
         enoughLepCands = False
@@ -474,11 +486,15 @@ for k,fileName in enumerate(fileAr):
             elif not enoughLepCands and enoughElecCands:
                 enoughLepCands = True
 
-
+        if debug:
+            print("enoughElecCands",enoughElecCands,"enoughMuonCands",enoughMuonCands,"enoughLepCands",enoughLepCands)
         #leptonCandSum = nElecCandidates + nMuonCandidates
         #Electrons loop
+        if debug:
+            print("entering electrons loop")
         for i in range(tmpnElectron):
-            
+            if debug:
+                print("Electron",i)
             tmpPtOne = ev.Electron_pt[i]
             tmpEtaOne = ev.Electron_eta[i]
             tmpMassOne = ev.Electron_mass[i]
@@ -496,21 +512,33 @@ for k,fileName in enumerate(fileAr):
             #If enough lepton candidates and enough electron candidates, begin the loop
             #if leptonCandSum >= 4:
             if enoughLepCands and enoughElecCands:
+                if debug:
+                    print(i,"enough LepCands and ElecCands")
                 if not ifEnoughElecCandBool:
                     ifEnoughElecCandCount += 1
                     ifEnoughElecCandBool = True
                     
                 if tmpPtOne > firstZTrailingCut:
+                    if debug:
+                        print(i,"Electron passed first trailing pt cut",firstZTrailingCut)
                     #Looping over other electrons
+                    if debug:
+                        print(i,"Loop over remaining electrons")
                     for j in range(i+1,tmpnElectron):
+                        if debug:
+                            print("Electron",j)
                         #Check that the electrons have the opposite charge
                         tmpElecCharge = ev.Electron_charge[i]
                         tmpElecChargeTwo = ev.Electron_charge[j]
                         if tmpElecCharge == - tmpElecChargeTwo:
+                            if debug:
+                                print(i,j,"Electrons have the opposite charge")
                             #Get variables from second electron
                             tmpPtTwo = ev.Electron_pt[j]
 
                             tmpEtaTwo = ev.Electron_eta[j]
+                            if debug:
+                                print(i,j,"ev.Electron_mass",ev.Electron_mass[i],ev.Electron_mass[j])
                             tmpMassTwo = ev.Electron_mass[j]
                             tmpPhiTwo = ev.Electron_phi[j]
 
@@ -534,13 +562,21 @@ for k,fileName in enumerate(fileAr):
                             else:
                                 tmpLeadVec = Math.PtEtaPhiMVector(tmpPtTwo, tmpEtaTwo, tmpPhiTwo, tmpMassTwo)
                                 tmpTrailingVec = Math.PtEtaPhiMVector(tmpPtOne, tmpEtaOne, tmpPhiOne, tmpMassOne)
+                            
                             tmpDiElectronVec = tmpLeadVec+tmpTrailingVec
                             tmpDiElectronInvMass = tmpDiElectronVec.M()
+                            if debug:
+                                print(i,j,"tmpLeadInd",tmpLeadInd,"tmpSecondInd",tmpSecondInd,"tmpMaxPtLead",tmpMaxPtLead,"tmpMaxPtSecond",tmpMaxPtSecond,"tmpLeadCharge",tmpLeadCharge,"tmpTrailingCharge",tmpTrailingCharge)
+                            if debug:
+                                print("tmpDiElectronInvMass",tmpDiElectronInvMass)
                             if tmpDiElectronInvMass > leptonZ2Cut:
+                                if debug:
+                                    print(i,j,"Electron pair passed Z2 cut",leptonZ2Cut)
                                 elecPassesZ2CutsAr.append([[tmpLeadInd,tmpSecondInd],[tmpLeadVec,tmpTrailingVec],[tmpLeadCharge,tmpTrailingCharge]])
-                                #print()
                             #Check that the pt of the second electron passes the lower pt cut
                             if tmpPtTwo > firstZTrailingCut:
+                                if debug:
+                                    print(i,j,"Electron trailing pt passed Z1 trailing cut",firstZTrailingCut)
                                 #Sort the electrons into leading and trailing based on pt
                                 #Actually get these earlier
                                 """
@@ -557,6 +593,8 @@ for k,fileName in enumerate(fileAr):
                                 """
                                 #Check that the lead electron passes the higher pt cut
                                 if tmpMaxPtLead > firstZLeadingCut:
+                                    if debug:
+                                        print(i,j,"Electron lead pt passed Z1 lead cut",firstZLeadingCut)
                                     #If so, get variables from the second electron (actually now it works better to get them earlier)
                                     #Also get the vectors and inv mass earlier
                                     """
@@ -576,6 +614,8 @@ for k,fileName in enumerate(fileAr):
                                     
                                     #Check that invmass passes the Cut
                                     if tmpDiElectronInvMass > leptonInvMassCutLow:
+                                        if debug:
+                                            print(i,j,"Electron pair passed Z1 inv mass cut",leptonInvMassCutLow)
                                         if not ifZ1ElecPairCandBool:
                                             ifZ1ElecPairCandCount += 1
                                             ifZ1ElecPairCandBool = True
@@ -583,7 +623,11 @@ for k,fileName in enumerate(fileAr):
                                         #Check if the mass is closer to Z than current candidate
                                         tmpDifFromZMass = abs(tmpDiElectronInvMass-ZMass)
                                         #Switching over variables
+                                        if debug:
+                                            print(i,j,"tmpDifFromZMass",tmpDifFromZMass)
                                         if tmpDifFromZMass < difFromZMassOne:
+                                            if debug:
+                                                print(i,j,"Electron pair has lowest current dif from Zmass. Old ZMassdif:",difFromZMassOne)
                                             #Switching ZMassDif
                                             #difFromZMassTwo = difFromZMassOne
                                             difFromZMassOne = tmpDifFromZMass
@@ -606,14 +650,21 @@ for k,fileName in enumerate(fileAr):
                                         #    lepPairTwoTrailingInd = tmpSecondInd
                                         #    leadLepPairTwoVec = tmpLeadVec
                                         #    trailingLepPairTwoVec = tmpTrailingVec
-                                            
+        if debug:
+            print("ELECTRON LOOP OVER")
+            print("difFromZMassOne",difFromZMassOne,"lepPairOneLeadInd",lepPairOneLeadInd,"lepPairOneTrailingInd",lepPairOneTrailingInd,"leadLepPairCharge",leadLepPairCharge,"trailingLepPairCharge",trailingLepPairCharge)
+
                         
         muonLeading = False
         muonPassesCutsAr = []
         muonPassesZ2CutsAr = []
 
         #Muons loop
+        if debug:
+            print("Entering muons loop")
         for i in range(tmpnMuon):
+            if debug:
+                print("Muon",i)
             #No cuts
             tmpPtOne = ev.Muon_pt[i]
             tmpEtaOne = ev.Muon_eta[i]
@@ -627,19 +678,31 @@ for k,fileName in enumerate(fileAr):
             
             #First Z Cuts
             if enoughLepCands and enoughMuonCands:
+                if debug:
+                    print(i,"enough LepCands and MuonCands")
                 if not ifEnoughMuonCandBool:
                     ifEnoughMuonCandCount += 1
                     ifEnoughMuonCandBool = True
                 if tmpPtOne > firstZTrailingCut:
+                    if debug:
+                        print(i,"Muon passed first trailing pt cut", firstZTrailingCut)
                     #Looping over other muons
+                    if debug:
+                        print(i,"Loop over remaining muons")
                     for j in range(i+1,tmpnMuon):
+                        if debug:
+                            print("Muon",j)
                         #Check that muons have the opposite charge
                         tmpMuonCharge = ev.Muon_charge[i]
                         tmpMuonChargeTwo = ev.Muon_charge[j]
                         if tmpMuonCharge == - tmpMuonChargeTwo:
+                            if debug:
+                                print(i,j,"Muons have the opposite charge")
                             #Get vaariables from second electron
                             tmpPtTwo = ev.Muon_pt[j]
                             tmpEtaTwo = ev.Muon_eta[j]
+                            if debug:
+                                print(i,j,"ev.Muon_mass",ev.Muon_mass[i],ev.Muon_mass[j])
                             tmpMassTwo = ev.Muon_mass[j]
                             tmpPhiTwo = ev.Muon_phi[j]
 
@@ -665,17 +728,28 @@ for k,fileName in enumerate(fileAr):
                                 tmpTrailingVec = Math.PtEtaPhiMVector(tmpPtOne, tmpEtaOne, tmpPhiOne, tmpMassOne)
                             tmpDiMuonVec = tmpLeadVec+tmpTrailingVec
                             tmpDiMuonInvMass = tmpDiMuonVec.M()
+                            if debug:
+                                print(i,j,"tmpLeadInd",tmpLeadInd,"tmpSecondInd",tmpSecondInd,"tmpMaxPtLead",tmpMaxPtLead,"tmpMaxPtSecond",tmpMaxPtSecond,"tmpLeadCharge",tmpLeadCharge,"tmpTrailingCharge",tmpTrailingCharge)
+                            if debug:
+                                print("tmpDiMuonInvMass",tmpDiMuonInvMass)
                             if tmpDiMuonInvMass > leptonZ2Cut:
+                                if debug:
+                                    print(i,j,"Muon pair passed Z2 cut",leptonZ2Cut)
                                 muonPassesZ2CutsAr.append([[tmpLeadInd,tmpSecondInd],[tmpLeadVec,tmpTrailingVec],[tmpLeadCharge,tmpTrailingCharge]])
                             
                             #Check that the pt of the second muon passes the lower pt cut
                             if tmpPtTwo > firstZTrailingCut:
+                                if debug:
+                                    print(i,j,"Muon trailing pt passed Z1 trailing cut",firstZTrailingCut)
                                 #Sort the muons into leading and trailing based on pt
                                 #Check that the lead muon passes the higher pt cut
                                 if tmpMaxPtLead > firstZLeadingCut:
-                                    
+                                    if debug:
+                                        print(i,j,"Muon lead pt passed Z1 lead cut",firstZLeadingCut)
                                     #Check that invmass passes the Cut
                                     if tmpDiMuonInvMass > leptonInvMassCutLow:
+                                        if debug:
+                                            print(i,j,"Muon pair passed Z1 inv mass cut",leptonInvMassCutLow)
                                         if not ifZ1MuonPairCandBool:
                                             ifZ1MuonPairCandCount += 1
                                             ifZ1MuonPairCandBool = True
@@ -683,7 +757,11 @@ for k,fileName in enumerate(fileAr):
                                         #Check if the mass is closer to Z than current candidate
                                         tmpDifFromZMass = abs(tmpDiMuonInvMass-ZMass)
                                         #Switching over variables
+                                        if debug:
+                                            print(i,j,"tmpDifFromZMass",tmpDifFromZMass)
                                         if tmpDifFromZMass < difFromZMassOne:
+                                            if debug:
+                                                print(i,j,"Muon pair has lowest current dif from Zmass. Old ZMassdif:",difFromZMassOne)
                                             muonLeading = True
                                             #Switching ZMassDif
                                             #difFromZMassTwo = difFromZMassOne
@@ -809,46 +887,109 @@ for k,fileName in enumerate(fileAr):
 
                     trailingLepPairVec = Math.PtEtaPhiMVector(0,0,0,0)
             """
+
+        if debug:
+            print("MUON LOOP OVER")
+            print("difFromZMassOne",difFromZMassOne,"lepPairOneLeadInd",lepPairOneLeadInd,"lepPairOneTrailingInd",lepPairOneTrailingInd,"leadLepPairCharge",leadLepPairCharge,"trailingLepPairCharge",trailingLepPairCharge,"muonLeading",muonLeading)
+
+
+        if debug:
+            print("Going to find Z2 if Z1 has been found")
         if lepPairOneLeadInd >= 0 and lepPairOneTrailingInd >= 0:
+            if debug:
+                print("Z1 was found")
             passesCandCuts = False
             muonZ2Pair = False
-            if len(muonPassesCutsAr) + len(elecPassesCutsAr) > 0 and len(muonPassesZ2CutsAr) + len(elecPassesZ2CutsAr) > 0:
+            if debug:
+                print("len(muonPassesCutsAr)",len(muonPassesCutsAr),"len(elecPassesCutsAr)",len(elecPassesCutsAr),"len(muonPassesZ2CutsAr)",len(muonPassesZ2CutsAr),"len(elecPassesZ2CutsAr",len(elecPassesZ2CutsAr))
+            if len(muonPassesCutsAr) + len(elecPassesCutsAr) > 0 and len(muonPassesZ2CutsAr) + len(elecPassesZ2CutsAr) - 1 > 0: #-1 for the lead Z1 pair
+                if debug:
+                    print("Passed check for there being enough candidates for Z2")
+                    print("entering loop on Electron Z2 candidates")
                 for i,elecZ2Cand in enumerate(elecPassesZ2CutsAr):
-                    if elecZ2Cand[0][0] != lepPairOneLeadInd and elecZ2Cand[0][0] != lepPairOneTrailingInd and elecZ2Cand[0][1] != lepPairOneLeadInd and elecZ2Cand[0][1] != lepPairOneTrailingInd: 
+                    if debug:
+                        print(i,"elecZ2Cand",elecZ2Cand)
+                    if elecZ2Cand[0][0] != lepPairOneLeadInd and elecZ2Cand[0][0] != lepPairOneTrailingInd and elecZ2Cand[0][1] != lepPairOneLeadInd and elecZ2Cand[0][1] != lepPairOneTrailingInd:
+                        if debug:
+                            print("Passed the check that we aren't looking at the Z1 pair")
                         fourLepVec = elecZ2Cand[1][0] + elecZ2Cand[1][1] + leadLepPairOneVec + trailingLepPairOneVec
                         fourLepInvMass = fourLepVec.M()
+                        if debug:
+                            print("fourLepInvMass",fourLepInvMass)
                         if fourLepInvMass > fourLeptonInvMassCut:
+                            if debug:
+                                print("passed four lepton invmass cut",fourLeptonInvMassCut)
                             passesCandCuts = True
                             if not muonLeading:
+                                if debug:
+                                    print("not muonLeading. checking 4 e cuts")
                                 passesCandCuts = False
                                 if elecZ2Cand[2][0] != leadLepPairCharge:
+                                    if debug:
+                                        print("elecZ2Can[2][0] != leadLepPairCharge","elecZ2Can[2][0]",elecZ2Cand[2][0],"leadLepPairCharge",leadLepPairCharge)
                                     tmpCrossCandVec = elecZ2Cand[1][0] + leadLepPairOneVec
+                                    if debug:
+                                        print("tmpCrossCandVec = elecZ2Cand[1][0] + leadLepPairOneVec",tmpCrossCandVec)
+                                        print("tmpCrossCandVec.M()",tmpCrossCandVec.M())
                                     if tmpCrossCandVec.M() > 12:
+                                        if debug:
+                                            print("passed check that the invmass is > 12")
                                         passesCandCuts = True
                                     else:
                                         tmpCrossCandVec = elecZ2Cand[1][1] + trailingLepPairOneVec
+                                        if debug:
+                                            print("Less than 12 so trying other electron electron combination")
+                                            print("tmpCrossCandVec = elecZ2Cand[1][1] + trailingLepPairOneVec",tmpCrossCandVec)
+                                            print("tmpCrossCandVec.M()",tmpCrossCandVec.M())
                                         if tmpCrossCandVec.M() > 12:
+                                            if debug:
+                                                print("passed check that the invmass is > 12")
                                             passesCandCuts = True
                                 else:
+                                    if debug:
+                                        print("elecZ2Can[2][0] == leadLepPairCharge","elecZ2Can[2][0]",elecZ2Cand[2][0],"leadLepPairCharge",leadLepPairCharge)
                                     tmpCrossCandVec = elecZ2Cand[1][1] + leadLepPairOneVec
+                                    if debug:
+                                        print("tmpCrossCandVec = elecZ2Cand[1][1] + leadLepPairOneVec",tmpCrossCandVec)
+                                        print("tmpCrossCandVec.M()",tmpCrossCandVec.M())
                                     if tmpCrossCandVec.M() > 12:
+                                        if debug:
+                                            print("passed check that the invmass is > 12")
                                         passesCandCuts = True
                                     else:
                                         tmpCrossCandVec = elecZ2Cand[1][0] + trailingLepPairOneVec
+                                        if debug:
+                                            print("Less than 12 so trying other electron electron combination")
+                                            print("tmpCrossCandVec = elecZ2Cand[1][0] + trailingLepPairOneVec",tmpCrossCandVec)
+                                            print("tmpCrossCandVec.M()",tmpCrossCandVec.M())
                                         if tmpCrossCandVec.M() > 12:
+                                            if debug:
+                                                print("passed check that the invmass is > 12")
                                             passesCandCuts = True
+                            if debug:
+                                print("checking if passed potential 4e cut","passesCandCuts",passesCandCuts)
                             if passesCandCuts:
+                                if debug:
+                                    print("passed cut. Checking for highest Pt in lead of Z2")
                                 if not ifZ2ElecPairCandBool:
                                     ifZ2ElecPairCandCount += 1
                                     ifZ2ElecPairCandBool = True
+                                if debug:
+                                    print("elecZ2Cand[1][0].Pt()",elecZ2Cand[1][0].Pt())
                                 if elecZ2Cand[1][0].Pt() > leadZ2Pt:
+                                    print("New highest pt found. Old pt:",leadZ2Pt)
                                     leadZ2Pt = elecZ2Cand[1][0].Pt()
                                     trailingZ2Pt = elecZ2Cand[1][1].Pt()
                                     leadZ2LepPairInd = i
                                 elif elecZ2Cand[1][0].Pt() == leadZ2Pt:
+                                    print("Highest pt equal. checking trailing Z2 pt")
                                     if elecZ2Cand[1][1].Pt() == trailingZ2Pt:
+                                        print("New highest trailing pt found. Old pt:",trailingZ2Pt)
                                         trailingZ2Pt = elecZ2Cand[1][1].Pt()
                                         leadZ2LepPairInd = i
+
+                print("ELECTRON Z2 LOOP FINISHED")
+                print("leadZ2LepPairInd",leadZ2LepPairInd,"leadZ2Pt",leadZ2Pt,"trailingZ2Pt",trailingZ2Pt)
 
 
                                 
