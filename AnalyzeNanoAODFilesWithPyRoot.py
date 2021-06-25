@@ -1115,26 +1115,26 @@ for k,fileName in enumerate(fileAr):
                     print("muonOrNotAr",muonOrNotAr)
                 passesPtCutAr = [False,False,False,False]
                 Z1Z2VecPtAr = []
-                Z1Z2VecAr.append(leadLepPairOneVec.Pt())
-                Z1Z2VecAr.append(trailingLepPairOneVec.Pt())
+                Z1Z2VecPtAr.append(leadLepPairOneVec.Pt())
+                Z1Z2VecPtAr.append(trailingLepPairOneVec.Pt())
                 Z1Z2IndAr = [lepPairOneLeadInd,lepPairOneTrailingInd,leadZ2LepPairInd,leadZ2LepPairInd]
-                if Z1Z2VecAr[0] > 35:
+                if Z1Z2VecPtAr[0] > 35:
                     passesPtCutAr[0] = True
-                if Z1Z2VecAr[1] > 35:
+                if Z1Z2VecPtAr[1] > 35:
                     passesPtCutAr[1] = True
                 if muonZ2Pair:
-                    Z1Z2VecAr.append(muonPassesZ2CutsAr[leadZ2LepPairInd][1][0].Pt())
-                    Z1Z2VecAr.append(muonPassesZ2CutsAr[leadZ2LepPairInd][1][1].Pt())
-                    if Z1Z2VecAr[2] > 35:
+                    Z1Z2VecPtAr.append(muonPassesZ2CutsAr[leadZ2LepPairInd][1][0].Pt())
+                    Z1Z2VecPtAr.append(muonPassesZ2CutsAr[leadZ2LepPairInd][1][1].Pt())
+                    if Z1Z2VecPtAr[2] > 35:
                         passesPtCutAr[2] = True
-                    if Z1Z2VecAr[3] > 35:
+                    if Z1Z2VecPtAr[3] > 35:
                         passesPtCutAr[3] = True
                 else:
-                    Z1Z2VecAr.append(elecPassesZ2CutsAr[leadZ2LepPairInd][1][0].Pt())
-                    Z1Z2VecAr.append(elecPassesZ2CutsAr[leadZ2LepPairInd][1][1].Pt())
-                    if Z1Z2VecAr[2] > 35:
+                    Z1Z2VecPtAr.append(elecPassesZ2CutsAr[leadZ2LepPairInd][1][0].Pt())
+                    Z1Z2VecPtAr.append(elecPassesZ2CutsAr[leadZ2LepPairInd][1][1].Pt())
+                    if Z1Z2VecPtAr[2] > 35:
                         passesPtCutAr[2] = True
-                    if Z1Z2VecAr[3] > 35:
+                    if Z1Z2VecPtAr[3] > 35:
                         passesPtCutAr[3] = True
                 if debug:
                     print("Z1Z2VecPtAr",Z1Z2VecPtAr,"Z1Z2IndAr",Z1Z2IndAr,"passesPtCutAr",passesPtCutAr)
