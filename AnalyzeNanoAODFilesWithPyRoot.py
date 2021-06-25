@@ -1175,7 +1175,7 @@ for k,fileName in enumerate(fileAr):
                                 if j < 2:
                                     tmpIsoTwo = ev.Muon_pfRelIso03_all[Z1Z2IndTwo]
                                 else:
-                                    if abs(ev.Electron_eta[elecPassesZ2CutsAr[Z1Z2IndTwo]][0][j-2]]) < 1.4:
+                                    if abs(ev.Electron_eta[elecPassesZ2CutsAr[Z1Z2IndTwo]][0][j-2]) < 1.4:
                                         if debug:
                                             print("electron in barrel")
                                         tmpIsoTwo= ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[Z1Z2IndTwo]][0][j-2]] + max(0., ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[Z1Z2IndTwo[0][j-2]] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[Z1Z2IndTwo[0][j-2]] ) / ev.Electron_pt[elecPassesZ2CutsAr[Z1Z2IndTwo[0][j-2]]
@@ -1219,7 +1219,7 @@ for k,fileName in enumerate(fileAr):
                                 if j < 2:
                                     tmpIsoTwo = ev.Muon_pfRelIso03_all[Z1Z2IndTwo]
                                 else:
-                                    if abs(ev.Electron_eta[elecPassesZ2CutsAr[Z1Z2IndTwo]][0][j-2]]) < 1.4:
+                                    if abs(ev.Electron_eta[elecPassesZ2CutsAr[Z1Z2IndTwo]][0][j-2]) < 1.4:
                                         if debug:
                                             print("electron in barrel")
                                         tmpIsoTwo= ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[Z1Z2IndTwo]][0][j-2]] + max(0., ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[Z1Z2IndTwo[0][j-2]] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[Z1Z2IndTwo[0][j-2]] ) / ev.Electron_pt[elecPassesZ2CutsAr[Z1Z2IndTwo[0][j-2]]
