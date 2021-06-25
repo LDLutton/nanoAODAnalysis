@@ -1640,7 +1640,7 @@ for k,fileName in enumerate(fileAr):
                             if debug:
                                 print("muonZ2Pair",muonZ2Pair)
                                 print("ev.Muon_sip3d[lepPairOneLeadInd]",ev.Muon_sip3d[lepPairOneLeadInd],"ev.Muon_sip3d[lepPairOneTrailingInd]",ev.Muon_sip3d[lepPairOneTrailingInd])
-                                print("ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]",ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0],"ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]",ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0])
+                                print("ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]]",ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]],"ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]]",ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]])
                             if ev.Muon_sip3d[lepPairOneLeadInd] > 4:
                                 passesSIPCut = False
                             elif ev.Muon_sip3d[lepPairOneTrailingInd] > 4:
