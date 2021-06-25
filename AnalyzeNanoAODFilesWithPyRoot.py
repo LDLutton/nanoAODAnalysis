@@ -414,7 +414,7 @@ for k,fileName in enumerate(fileAr):
             print("------------------------------------------------------")
         for i in range(tmpnElectron):
             if debug:
-                print("ev.Electron_eta[i]",ev.Electron_eta[i],"ev.Electron_pt[i]",ev.Electron_pt[i],"ev.Electron_charge[i]",ev.Electron_charge[i])
+                print("ev.Electron_eta[i]",ev.Electron_eta[i],"ev.Electron_pt[i]",ev.Electron_pt[i],"ev.Electron_charge[i]",ev.Electron_charge[i],"ev.Electron_mass[i]",ev.Electron_mass[i])
             #Checking for electron candidates with the initial eta and pt cuts. Keeping track of whether there is a negative and/or a positive electron present
             if abs(ev.Electron_eta[i]) < elecCandEtaCut and ev.Electron_pt[i] > elecCandPTCut:
 
@@ -468,6 +468,7 @@ for k,fileName in enumerate(fileAr):
             print("nMuonCandidatesNeg",nMuonCandidatesNeg,"nMuonCandidatesPos",nMuonCandidatesPos,"nMuonCandPairs",nMuonCandPairs)
         
         enoughElecCands = False
+        enoughMuonCands = False
         enoughLepCands = False
         #Checking if there is an electron positron pair
         if nElecCandPairs >= 1:
@@ -571,7 +572,7 @@ for k,fileName in enumerate(fileAr):
                                 print("tmpDiElectronInvMass",tmpDiElectronInvMass)
                             if tmpDiElectronInvMass > leptonZ2Cut:
                                 if debug:
-                                    print(i,j,"Electron pair passed Z2 cut",leptonZ2Cut)
+                                    print(i,j,"Electron pair passed invmass Z2 cut",leptonZ2Cut)
                                 elecPassesZ2CutsAr.append([[tmpLeadInd,tmpSecondInd],[tmpLeadVec,tmpTrailingVec],[tmpLeadCharge,tmpTrailingCharge]])
                             #Check that the pt of the second electron passes the lower pt cut
                             if tmpPtTwo > firstZTrailingCut:
@@ -977,14 +978,17 @@ for k,fileName in enumerate(fileAr):
                                 if debug:
                                     print("elecZ2Cand[1][0].Pt()",elecZ2Cand[1][0].Pt())
                                 if elecZ2Cand[1][0].Pt() > leadZ2Pt:
-                                    print("New highest pt found. Old pt:",leadZ2Pt)
+                                    if debug:
+                                        print("New highest pt found. Old pt:",leadZ2Pt)
                                     leadZ2Pt = elecZ2Cand[1][0].Pt()
                                     trailingZ2Pt = elecZ2Cand[1][1].Pt()
                                     leadZ2LepPairInd = i
                                 elif elecZ2Cand[1][0].Pt() == leadZ2Pt:
-                                    print("Highest pt equal. checking trailing Z2 pt")
+                                    if debug:
+                                        print("Highest pt equal. checking trailing Z2 pt")
                                     if elecZ2Cand[1][1].Pt() == trailingZ2Pt:
-                                        print("New highest trailing pt found. Old pt:",trailingZ2Pt)
+                                        if debug:
+                                            print("New highest trailing pt found. Old pt:",trailingZ2Pt)
                                         trailingZ2Pt = elecZ2Cand[1][1].Pt()
                                         leadZ2LepPairInd = i
 
@@ -996,40 +1000,88 @@ for k,fileName in enumerate(fileAr):
 
 
                 for i,muonZ2Cand in enumerate(muonPassesZ2CutsAr):
+                    if debug:
+                        print(i,"muonZ2Cand",muonZ2Cand)
                     if muonZ2Cand[0][0] != lepPairOneLeadInd and muonZ2Cand[0][0] != lepPairOneTrailingInd and muonZ2Cand[0][1] != lepPairOneLeadInd and muonZ2Cand[0][1] != lepPairOneTrailingInd: 
+                        if debug:
+                            print("Passed the check that we aren't looking at the Z1 pair")
                         fourLepVec = muonZ2Cand[1][0] + muonZ2Cand[1][1] + leadLepPairOneVec + trailingLepPairOneVec
                         fourLepInvMass = fourLepVec.M()
+                        if debug:
+                            print("fourLepInvMass",fourLepInvMass)
                         if fourLepInvMass > fourLeptonInvMassCut:
+                            if debug:
+                                print("passed four lepton invmass cut",fourLeptonInvMassCut)
                             passesCandCuts = True
                             if muonLeading:
+                                if debug:
+                                    print("muonLeading. checking 4 e cuts")
                                 passesCandCuts = False
                                 if muonZ2Cand[2][0] != leadLepPairCharge:
+                                    if debug:
+                                        print("muonZ2Can[2][0] != leadLepPairCharge","muonZ2Can[2][0]",muonZ2Cand[2][0],"leadLepPairCharge",leadLepPairCharge)
                                     tmpCrossCandVec = muonZ2Cand[1][0] + leadLepPairOneVec
+                                    if debug:
+                                        print("tmpCrossCandVec = muonZ2Cand[1][0] + leadLepPairOneVec",tmpCrossCandVec)
+                                        print("tmpCrossCandVec.M()",tmpCrossCandVec.M())
                                     if tmpCrossCandVec.M() > 12:
+                                        if debug:
+                                            print("passed check that the invmass is > 12")
                                         passesCandCuts = True
                                     else:
+                                        
                                         tmpCrossCandVec = muonZ2Cand[1][1] + trailingLepPairOneVec
+                                        if debug:
+                                            print("Less than 12 so trying other muon muon combination")
+                                            print("tmpCrossCandVec = muonZ2Cand[1][1] + trailingLepPairOneVec",tmpCrossCandVec)
+                                            print("tmpCrossCandVec.M()",tmpCrossCandVec.M())
                                         if tmpCrossCandVec.M() > 12:
+                                            if debug:
+                                                print("passed check that the invmass is > 12")
                                             passesCandCuts = True
                                 else:
+                                    if debug:
+                                        print("muonZ2Can[2][0] == leadLepPairCharge","muonZ2Can[2][0]",muonZ2Cand[2][0],"leadLepPairCharge",leadLepPairCharge)
                                     tmpCrossCandVec = muonZ2Cand[1][1] + leadLepPairOneVec
+                                    if debug:
+                                        print("tmpCrossCandVec = muonZ2Cand[1][1] + leadLepPairOneVec",tmpCrossCandVec)
+                                        print("tmpCrossCandVec.M()",tmpCrossCandVec.M())
                                     if tmpCrossCandVec.M() > 12:
+                                        if debug:
+                                            print("passed check that the invmass is > 12")
                                         passesCandCuts = True
+                                        
                                     else:
                                         tmpCrossCandVec = muonZ2Cand[1][0] + trailingLepPairOneVec
+                                        if debug:
+                                            print("Less than 12 so trying other muon muon combination")
+                                            print("tmpCrossCandVec = muonZ2Cand[1][0] + trailingLepPairOneVec",tmpCrossCandVec)
+                                            print("tmpCrossCandVec.M()",tmpCrossCandVec.M())
                                         if tmpCrossCandVec.M() > 12:
+                                            if debug:
+                                                print("passed check that the invmass is > 12")
                                             passesCandCuts = True
                             if passesCandCuts:
+                                if debug:
+                                    print("passed cut. Checking for highest Pt in lead of Z2")
                                 if not ifZ2MuonPairCandBool:
                                     ifZ2MuonPairCandCount += 1
                                     ifZ2MuonPairCandBool = True
+                                if debug:
+                                    print("muonZ2Cand[1][0].Pt()",muonZ2Cand[1][0].Pt())
                                 if muonZ2Cand[1][0].Pt() > leadZ2Pt:
+                                    if debug:
+                                        print("New highest pt found. Old pt:",leadZ2Pt)
                                     muonZ2Pair = True
                                     leadZ2Pt = muonZ2Cand[1][0].Pt()
                                     trailingZ2Pt = muonZ2Cand[1][1].Pt()
                                     leadZ2LepPairInd = i
                                 elif muonZ2Cand[1][0].Pt() == leadZ2Pt:
+                                    if debug:
+                                        print("Highest pt equal. checking trailing Z2 pt")
                                     if muonZ2Cand[1][1].Pt() == trailingZ2Pt:
+                                        if debug:
+                                            print("New highest trailing pt found. Old pt:",trailingZ2Pt)
                                         muonZ2Pair = True
                                         trailingZ2Pt = muonZ2Cand[1][1].Pt()
                                         leadZ2LepPairInd = i
@@ -1040,7 +1092,13 @@ for k,fileName in enumerate(fileAr):
             #leadZ2LepPairInd which can be used to index elec/muonPassesZ2CutsAr
             #which contains the indices for accessing the ev.Electron/Muon_branch, the four vector, and the charge)
             #So first check that the cuts were passed:
+            if debug:
+                print("MUON Z2 LOOP FINISHED")
+                print("muonZ2Pair",muonZ2Pair,"leadZ2LepPairInd",leadZ2LepPairInd,"leadZ2Pt",leadZ2Pt,"trailingZ2Pt",trailingZ2Pt)
+                print("now checking if the Z2 cuts were passed")
             if leadZ2LepPairInd >= 0:
+                if debug:
+                    print("The Z2 cuts were passed")
                 #Now we want to cut based on the relative isolation
                 #For each lepton this is obtained as follows
                 #Sum up the Pt for all the tracks, the energy deposits in the ECAL, and the energy deposits in the HCAL, within a DeltaR < 0.3 cone around the lepton
@@ -1051,81 +1109,297 @@ for k,fileName in enumerate(fileAr):
                 #Particularly the Muon_pfRelIso03_all branch
                 #Not sure if it's at all proper to add these together, but I think to not bias things I'll only do the cut if both leptons have E > 35GeV
                 passesIsoCuts = True
+                
+                muonOrNotAr = [muonLeading,muonZ2Pair]
+                if debug:
+                    print("muonOrNotAr",muonOrNotAr)
+                passesPtCutAr = [False,False,False,False]
+                Z1Z2VecPtAr = []
+                Z1Z2VecAr.append(leadLepPairOneVec.Pt())
+                Z1Z2VecAr.append(trailingLepPairOneVec.Pt())
+                Z1Z2IndAr = [lepPairOneLeadInd,lepPairOneTrailingInd,leadZ2LepPairInd,leadZ2LepPairInd]
+                if Z1Z2VecAr[0] > 35:
+                    passesPtCutAr[0] = True
+                if Z1Z2VecAr[1] > 35:
+                    passesPtCutAr[1] = True
+                if muonZ2Pair:
+                    Z1Z2VecAr.append(muonPassesZ2CutsAr[leadZ2LepPairInd][1][0].Pt())
+                    Z1Z2VecAr.append(muonPassesZ2CutsAr[leadZ2LepPairInd][1][1].Pt())
+                    if Z1Z2VecAr[2] > 35:
+                        passesPtCutAr[2] = True
+                    if Z1Z2VecAr[3] > 35:
+                        passesPtCutAr[3] = True
+                else:
+                    Z1Z2VecAr.append(elecPassesZ2CutsAr[leadZ2LepPairInd][1][0].Pt())
+                    Z1Z2VecAr.append(elecPassesZ2CutsAr[leadZ2LepPairInd][1][1].Pt())
+                    if Z1Z2VecAr[2] > 35:
+                        passesPtCutAr[2] = True
+                    if Z1Z2VecAr[3] > 35:
+                        passesPtCutAr[3] = True
+                if debug:
+                    print("Z1Z2VecPtAr",Z1Z2VecPtAr,"Z1Z2IndAr",Z1Z2IndAr,"passesPtCutAr",passesPtCutAr)
+
+                for i,Z1Z2Ind in enumerate(Z1Z2IndAr):
+                    if not passesPtCutAr[i]:
+                        continue
+                    for j,Z1Z2IndTwo in enumerate(Z1Z2IndAr[i+1]):
+                        if not passesPtCutAr[j]:
+                            continue
+                        if debug:
+                            print(i,j,"pass Pt cut")
+                        if muonLeading:
+                            if debug:
+                                print(i,j,"muonLeading",muonLeading)
+                            if i < 2:
+                                tmpIsoOne = ev.Muon_pfRelIso03_all[Z1Z2Ind]
+                            else:
+                                tmpIsoOne = ev.Muon_pfRelIso03_all[muonPassesZ2CutsAr[Z1Z2Ind][0][i-2]]
+                            if debug:
+                                print(i,j,"tmpIsoOne",tmpIsoOne)
+                            if muonZ2Pair:
+                                if debug:
+                                    print(i,j,"muonZ2Pair",muonZ2Pair)
+                                if i < 2:
+                                    tmpIsoTwo = ev.Muon_pfRelIso03_all[Z1Z2IndTwo]
+                                else:
+                                    tmpIsoTwo = ev.Muon_pfRelIso03_all[muonPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]]
+                                if debug:
+                                    print(i,j,"tmpIsoTwo",tmpIsoTwo)
+                                if tmpIsoOne + tmpIsoTwo > 0.35:
+                                    if debug:
+                                        print(i,j,"summed isos > 0.35. cuts not passed")
+                                    passesIsoCuts = False
+                            else:
+                                if debug:
+                                    print(i,j,"muonZ2Pair",muonZ2Pair)
+                                if j < 2:
+                                    tmpIsoTwo = ev.Muon_pfRelIso03_all[Z1Z2IndTwo]
+                                else:
+                                    if abs(ev.Electron_eta[elecPassesZ2CutsAr[Z1Z2IndTwo]][0][j-2]]) < 1.4:
+                                        if debug:
+                                            print("electron in barrel")
+                                        tmpIsoTwo= ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[Z1Z2IndTwo]][0][j-2]] + max(0., ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[Z1Z2IndTwo[0][j-2]] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[Z1Z2IndTwo[0][j-2]] ) / ev.Electron_pt[elecPassesZ2CutsAr[Z1Z2IndTwo[0][j-2]]
+                                    else:
+                                        if debug:
+                                            print("electron in endcap")
+                                        tmpIsoTwo = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[Z1Z2IndTwo]][0][j-2]] + ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[Z1Z2IndTwo[0][j-2]] + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[Z1Z2IndTwo[0][j-2]] ) / ev.Electron_pt[elecPassesZ2CutsAr[Z1Z2IndTwo[0][j-2]]
+                                if debug:
+                                    print(i,j,"tmpIsoTwo",tmpIsoTwo)
+                                if tmpIsoOne + tmpIsoTwo > 0.35:
+                                    if debug:
+                                        print(i,j,"summed isos > 0.35. cuts not passed")
+                                    passesIsoCuts = False
+                        else:
+                            if debug:
+                                print(i,j,"muonLeading",muonLeading)
+                            if abs(ev.Electron_eta[Z1Z2Ind]) < 1.4:
+                                if debug:
+                                    print("electron in barrel")
+                                tmpIsoOne = ( ev.Electron_dr03TkSumPt[Z1Z2Ind] + max(0., ev.Electron_dr03EcalRecHitSumEt[Z1Z2Ind] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[Z1Z2Ind] ) / ev.Electron_pt[Z1Z2Ind]
+                            else:
+                                tmpIsoOne = ( ev.Electron_dr03TkSumPt[Z1Z2Ind] + ev.Electron_dr03EcalRecHitSumEt[Z1Z2Ind] + ev.Electron_dr03HcalDepth1TowerSumEt[Z1Z2Ind] ) / ev.Electron_pt[Z1Z2Ind]
+                            if debug:
+                                print(i,j,"tmpIsoOne",tmpIsoOne)
+                            if muonZ2Pair:
+                                if debug:
+                                    print(i,j,"muonZ2Pair",muonZ2Pair)
+                                if i < 2:
+                                    tmpIsoTwo = ev.Muon_pfRelIso03_all[Z1Z2IndTwo]
+                                else:
+                                    tmpIsoTwo = ev.Muon_pfRelIso03_all[muonPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]]
+                                if debug:
+                                    print(i,j,"tmpIsoTwo",tmpIsoTwo)
+                                if tmpIsoOne + tmpIsoTwo > 0.35:
+                                    if debug:
+                                        print(i,j,"summed isos > 0.35. cuts not passed")
+                                    passesIsoCuts = False
+                            else:
+                                if debug:
+                                    print(i,j,"muonZ2Pair",muonZ2Pair)
+                                if j < 2:
+                                    tmpIsoTwo = ev.Muon_pfRelIso03_all[Z1Z2IndTwo]
+                                else:
+                                    if abs(ev.Electron_eta[elecPassesZ2CutsAr[Z1Z2IndTwo]][0][j-2]]) < 1.4:
+                                        if debug:
+                                            print("electron in barrel")
+                                        tmpIsoTwo= ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[Z1Z2IndTwo]][0][j-2]] + max(0., ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[Z1Z2IndTwo[0][j-2]] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[Z1Z2IndTwo[0][j-2]] ) / ev.Electron_pt[elecPassesZ2CutsAr[Z1Z2IndTwo[0][j-2]]
+                                    else:
+                                        if debug:
+                                            print("electron in endcap")
+                                        tmpIsoTwo = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[Z1Z2IndTwo]][0][j-2]] + ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[Z1Z2IndTwo[0][j-2]] + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[Z1Z2IndTwo[0][j-2]] ) / ev.Electron_pt[elecPassesZ2CutsAr[Z1Z2IndTwo[0][j-2]]
+                                if debug:
+                                    print(i,j,"tmpIsoTwo",tmpIsoTwo)
+                                if tmpIsoOne + tmpIsoTwo > 0.35:
+                                    if debug:
+                                        print(i,j,"summed isos > 0.35. cuts not passed")
+                                    passesIsoCuts = False
+                if debug:
+                    print("FINISHED WITH ISO CUTS","passesIsoCuts",passesIsoCuts)
+                """
+
+
                 #There is absolutely a better way to do this than these awful if blocks. should be able to just put each isolation variable in an array
                 #at the start, with an array that says whether or not they have pt over 35 and then loop over those arrays. Do it later
                 if muonLeading:
+                    if debug:
+                        print("muonLeading")
                     if muonZ2Pair:
+                        if debug:
+                            print("Muon Z2")
                         #muon Z1, muon Z2
                         if leadLepPairOneVec.Pt() > 35:
+                            if debug:
+                                print("lead lepton in Z1 pt > 35")
                             if trailingLepPairOneVec.Pt() > 35:
+                                if debug:
+                                    print("trailing lepton in Z1 pt > 35. Checking isolation")
                                 tmpIsoOne = ev.Muon_pfRelIso03_all[lepPairOneLeadInd]
                                 tmpIsoTwo = ev.Muon_pfRelIso03_all[lepPairOneTrailingInd]
+                                if debug:
+                                    print("tmpIsoOne",tmpIsoOne,"tmpIsoTwo",tmpIsoTwo)
                                 if tmpIsoOne + tmpIsoTwo > 0.35:
+                                    if debug:
+                                        print("tmpIsoOne+tmpIsoTwo > 0.35. cuts not passed")
                                     passesIsoCuts = False
                                 elif muonPassesZ2CutsAr[leadZ2LepPairInd][1][0].Pt() > 35:
+                                    if debug:
+                                        print("lead lepton in Z2 pt > 35")
                                     tmpIsoThree = ev.Muon_pfRelIso03_all[muonPassesZ2CutsAr[leadZ2LepPairInd][0][0]]
+                                    if debug:
+                                        print("tmpIsoThree",tmpIsoThree)
                                     if tmpIsoOne + tmpIsoThree > 0.35:
+                                        if debug:
+                                            print("tmpIsoOne+tmpIsoThree > 0.35. cuts not passed")
                                         passesIsoCuts = False
                                     elif tmpIsoTwo + tmpIsoThree > 0.35:
+                                        if debug:
+                                            print("tmpIsoTwo+tmpIsoThree > 0.35. cuts not passed")
                                         passesIsoCuts = False
                                     elif muonPassesZ2CutsAr[leadZ2LepPairInd][1][1].Pt() > 35:
+                                        if debug:
+                                            print("trailing lepton in Z2 pt > 35")
                                         tmpIsoFour = ev.Muon_pfRelIso03_all[muonPassesZ2CutsAr[leadZ2LepPairInd][0][1]]
+                                        if debug:
+                                            print("tmpIsoFour",tmpIsoFour)
                                         if tmpIsoOne + tmpIsoFour > 0.35:
-                                            passesIsoCuts = False
+                                            if debug:
+                                                print("tmpIsoOne+tmpIsoFour > 0.35. cuts not passed")
+                                           passesIsoCuts = False
                                         elif tmpIsoTwo + tmpIsoFour > 0.35:
+                                            if debug:
+                                                print("tmpIsoTwo+tmpIsoFour > 0.35. cuts not passed")
                                             passesIsoCuts = False
                                         elif tmpIsoThree + tmpIsoFour > 0.35:
-                                            passesIsoCuts = False
+                                            if debug:
+                                                print("tmpIsoThree+tmpIsoFour > 0.35. cuts not passed")
+                                           passesIsoCuts = False
                             elif muonPassesZ2CutsAr[leadZ2LepPairInd][1][0].Pt() > 35:
+                                if debug:
+                                    print("lead lepton in Z2 pt > 35. Checking isolation")
                                 tmpIsoOne = ev.Muon_pfRelIso03_all[lepPairOneLeadInd]
                                 tmpIsoThree = ev.Muon_pfRelIso03_all[muonPassesZ2CutsAr[leadZ2LepPairInd][0][0]]
                                 if tmpIsoOne + tmpIsoThree > 0.35:
+                                    if debug:
+                                        print("tmpIsoOne+tmpIsoThree > 0.35. cuts not passed")
                                     passesIsoCuts = False
                                 elif muonPassesZ2CutsAr[leadZ2LepPairInd][1][1].Pt() > 35:
+                                    if debug:
+                                        print("trailing lepton in Z2 pt > 35. Checking isolation")
                                     tmpIsoFour = ev.Muon_pfRelIso03_all[muonPassesZ2CutsAr[leadZ2LepPairInd][0][1]]
+                                    if debug:
+                                        print("tmpIsoFour",tmpIsoFour)
                                     if tmpIsoOne + tmpIsoFour > 0.35:
+                                        if debug:
+                                            print("tmpIsoOne+tmpIsoFour > 0.35. cuts not passed")
                                         passesIsoCuts = False
                                     elif tmpIsoThree + tmpIsoFour > 0.35:
+                                        if debug:
+                                            print("tmpIsoThree+tmpIsoFour > 0.35. cuts not passed")
                                         passesIsoCuts = False
                         elif muonPassesZ2CutsAr[leadZ2LepPairInd][1][0].Pt() > 35:
+                            if debug:
+                                print("lead lepton in Z2 pt > 35. Checking isolation")
                             if muonPassesZ2CutsAr[leadZ2LepPairInd][1][1].Pt() > 35:
+                                if debug:
+                                    print("trailing lepton in Z2 pt > 35. Checking isolation")
                                 tmpIsoThree = ev.Muon_pfRelIso03_all[muonPassesZ2CutsAr[leadZ2LepPairInd][0][0]]
                                 tmpIsoFour = ev.Muon_pfRelIso03_all[muonPassesZ2CutsAr[leadZ2LepPairInd][0][1]]
+                                if debug:
+                                    print("tmpIsoThree",tmpIsoThree,"tmpIsoFour",tmpIsoFour)
                                 if tmpIsoThree + tmpIsoFour > 0.35:
+                                    if debug:
+                                        print("tmpIsoThree+tmpIsoFour > 0.35. cuts not passed")
                                     passesIsoCuts = False
                     else:
+                        if debug:
+                            print("Elec Z2")
                         #muon Z1, elec Z2
                         if leadLepPairOneVec.Pt() > 35:
+                            if debug:
+                                print("lead lepton in Z1 pt > 35")
                             if trailingLepPairOneVec.Pt() > 35:
+                                if debug:
+                                    print("trailing lepton in Z1 pt > 35")
                                 tmpIsoOne = ev.Muon_pfRelIso03_all[lepPairOneLeadInd]
                                 tmpIsoTwo = ev.Muon_pfRelIso03_all[lepPairOneTrailingInd]
+                                if debug:
+                                    print("tmpIsoOne",tmpIsoOne,"tmpIsoTwo",tmpIsoTwo)
                                 if tmpIsoOne + tmpIsoTwo > 0.35:
+                                    if debug:
+                                        print("tmpIsoOne",tmpIsoOne,"tmpIsoTwo",tmpIsoTwo)
                                     passesIsoCuts = False
                                 elif elecPassesZ2CutsAr[leadZ2LepPairInd][1][0].Pt() > 35:
+                                    if debug:
+                                        print("lead lepton in Z1 pt > 35")
+                                        print("ev.Electron_eta[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]]",ev.Electron_eta[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]])
                                     if abs(ev.Electron_eta[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]]) < 1.4:
+                                        if debug:
+                                            print("electron in barrel")
                                         tmpIsoThree = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] + max(0., ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] ) / ev.Electron_pt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]]
                                     else:
+                                        if debug:
+                                            print("electron in endcap")
                                         tmpIsoThree = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] + ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] ) / ev.Electron_pt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]]
-                                        
+                                    if debug:
+                                        print("tmpIsoThree",tmpIsoThree)
                                     if tmpIsoOne + tmpIsoThree > 0.35:
+                                        if debug:
+                                            print("tmpIsoOne+tmpIsoThree > 0.35. cuts not passed")
                                         passesIsoCuts = False
                                     elif tmpIsoTwo + tmpIsoThree > 0.35:
+                                        if debug:
+                                            print("tmpIsoTwo+tmpIsoThree > 0.35. cuts not passed")
                                         passesIsoCuts = False
                                     elif elecPassesZ2CutsAr[leadZ2LepPairInd][1][1].Pt() > 35:
+                                        if debug:
+                                            print("trailing lepton in Z1 pt > 35")
+                                            print("ev.Electron_eta[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]]",ev.Electron_eta[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]])
                                         if abs(ev.Electron_eta[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]]) < 1.4:
+                                            if debug:
+                                                print("electron in barrel")
                                             tmpIsoFour = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] + max(0., ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] ) / ev.Electron_pt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]]
                                         else:
+                                            if debug:
+                                                print("electron in endcap")
                                             tmpIsoFour = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] + ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] ) / ev.Electron_pt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]]
                                         
                                         if tmpIsoOne + tmpIsoFour > 0.35:
+                                            if debug:
+                                                print("tmpIsoOne+tmpIsoFour > 0.35. cuts not passed")
                                             passesIsoCuts = False
                                         elif tmpIsoTwo + tmpIsoFour > 0.35:
+                                            if debug:
+                                                print("tmpIsoTwo+tmpIsoFour > 0.35. cuts not passed")
                                             passesIsoCuts = False
                                         elif tmpIsoThree + tmpIsoFour > 0.35:
-                                            passesIsoCuts = False
+                                            if debug:
+                                                print("tmpIsoThree+tmpIsoFour > 0.35. cuts not passed")
+                                           passesIsoCuts = False
                             elif elecPassesZ2CutsAr[leadZ2LepPairInd][1][0].Pt() > 35:
                                 tmpIsoOne = ev.Muon_pfRelIso03_all[lepPairOneLeadInd]
                                 if abs(ev.Electron_eta[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]]) < 1.4:
+                                    if debug:
+                                        print("electron in barrel")
                                     tmpIsoThree = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] + max(0., ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] ) / ev.Electron_pt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]]
                                 else:
                                     tmpIsoThree = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] + ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] ) / ev.Electron_pt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]]
@@ -1133,21 +1407,29 @@ for k,fileName in enumerate(fileAr):
                                     passesIsoCuts = False
                                 elif elecPassesZ2CutsAr[leadZ2LepPairInd][1][1].Pt() > 35:
                                     if abs(ev.Electron_eta[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]]) < 1.4:
+                                        if debug:
+                                            print("electron in barrel")
                                         tmpIsoFour = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] + max(0., ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] ) / ev.Electron_pt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]]
                                     else:
                                         tmpIsoFour = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] + ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] ) / ev.Electron_pt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]]
                                         
                                     if tmpIsoOne + tmpIsoFour > 0.35:
+                                        if debug:
+                                            print("tmpIsoOne+tmpIsoFour > 0.35. cuts not passed")
                                         passesIsoCuts = False
                                     elif tmpIsoThree + tmpIsoFour > 0.35:
                                         passesIsoCuts = False
                         elif elecPassesZ2CutsAr[leadZ2LepPairInd][1][0].Pt() > 35:
                             if elecPassesZ2CutsAr[leadZ2LepPairInd][1][1].Pt() > 35:
                                 if abs(ev.Electron_eta[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]]) < 1.4:
+                                    if debug:
+                                        print("electron in barrel")
                                     tmpIsoThree = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] + max(0., ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] ) / ev.Electron_pt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]]
                                 else:
                                     tmpIsoThree = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] + ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] ) / ev.Electron_pt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]]
                                 if abs(ev.Electron_eta[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]]) < 1.4:
+                                    if debug:
+                                        print("electron in barrel")
                                     tmpIsoFour = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] + max(0., ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] ) / ev.Electron_pt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]]
                                 else:
                                     tmpIsoFour = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] + ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] ) / ev.Electron_pt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]]
@@ -1159,11 +1441,15 @@ for k,fileName in enumerate(fileAr):
                         if leadLepPairOneVec.Pt() > 35:
                             if trailingLepPairOneVec.Pt() > 35:
                                 if abs(ev.Electron_eta[lepPairOneLeadInd]) < 1.4:
+                                    if debug:
+                                        print("electron in barrel")
                                     tmpIsoOne = ( ev.Electron_dr03TkSumPt[lepPairOneLeadInd] + max(0., ev.Electron_dr03EcalRecHitSumEt[lepPairOneLeadInd] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[lepPairOneLeadInd] ) / ev.Electron_pt[lepPairOneLeadInd]
                                 else:
                                     tmpIsoOne = ( ev.Electron_dr03TkSumPt[lepPairOneLeadInd] + ev.Electron_dr03EcalRecHitSumEt[lepPairOneLeadInd] + ev.Electron_dr03HcalDepth1TowerSumEt[lepPairOneLeadInd] ) / ev.Electron_pt[lepPairOneLeadInd]
                                 
                                 if abs(ev.Electron_eta[lepPairOneTrailingInd]) < 1.4:
+                                    if debug:
+                                        print("electron in barrel")
                                     tmpIsoTwo = ( ev.Electron_dr03TkSumPt[lepPairOneTrailingInd] + max(0., ev.Electron_dr03EcalRecHitSumEt[lepPairOneTrailingInd] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[lepPairOneTrailingInd] ) / ev.Electron_pt[lepPairOneTrailingInd]
                                 else:
                                     tmpIsoTwo = ( ev.Electron_dr03TkSumPt[lepPairOneTrailingInd] + ev.Electron_dr03EcalRecHitSumEt[lepPairOneTrailingInd] + ev.Electron_dr03HcalDepth1TowerSumEt[lepPairOneTrailingInd] ) / ev.Electron_pt[lepPairOneTrailingInd]
@@ -1173,19 +1459,29 @@ for k,fileName in enumerate(fileAr):
                                 elif muonPassesZ2CutsAr[leadZ2LepPairInd][1][0].Pt() > 35:
                                     tmpIsoThree = ev.Muon_pfRelIso03_all[muonPassesZ2CutsAr[leadZ2LepPairInd][0][0]]
                                     if tmpIsoOne + tmpIsoThree > 0.35:
+                                        if debug:
+                                            print("tmpIsoOne+tmpIsoThree > 0.35. cuts not passed")
                                         passesIsoCuts = False
                                     elif tmpIsoTwo + tmpIsoThree > 0.35:
+                                        if debug:
+                                            print("tmpIsoTwo+tmpIsoThree > 0.35. cuts not passed")
                                         passesIsoCuts = False
                                     elif muonPassesZ2CutsAr[leadZ2LepPairInd][1][1].Pt() > 35:
                                         tmpIsoFour = ev.Muon_pfRelIso03_all[muonPassesZ2CutsAr[leadZ2LepPairInd][0][1]]
                                         if tmpIsoOne + tmpIsoFour > 0.35:
-                                            passesIsoCuts = False
+                                            if debug:
+                                                print("tmpIsoOne+tmpIsoFour > 0.35. cuts not passed")
+                                           passesIsoCuts = False
                                         elif tmpIsoTwo + tmpIsoFour > 0.35:
                                             passesIsoCuts = False
                                         elif tmpIsoThree + tmpIsoFour > 0.35:
-                                            passesIsoCuts = False
+                                            if debug:
+                                                print("tmpIsoThree+tmpIsoFour > 0.35. cuts not passed")
+                                           passesIsoCuts = False
                             elif muonPassesZ2CutsAr[leadZ2LepPairInd][1][0].Pt() > 35:
                                 if abs(ev.Electron_eta[lepPairOneLeadInd]) < 1.4:
+                                    if debug:
+                                        print("electron in barrel")
                                     tmpIsoOne = ( ev.Electron_dr03TkSumPt[lepPairOneLeadInd] + max(0., ev.Electron_dr03EcalRecHitSumEt[lepPairOneLeadInd] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[lepPairOneLeadInd] ) / ev.Electron_pt[lepPairOneLeadInd]
                                 else:
                                     tmpIsoOne = ( ev.Electron_dr03TkSumPt[lepPairOneLeadInd] + ev.Electron_dr03EcalRecHitSumEt[lepPairOneLeadInd] + ev.Electron_dr03HcalDepth1TowerSumEt[lepPairOneLeadInd] ) / ev.Electron_pt[lepPairOneLeadInd]
@@ -1196,6 +1492,8 @@ for k,fileName in enumerate(fileAr):
                                 elif muonPassesZ2CutsAr[leadZ2LepPairInd][1][1].Pt() > 35:
                                     tmpIsoFour = ev.Muon_pfRelIso03_all[muonPassesZ2CutsAr[leadZ2LepPairInd][0][1]]
                                     if tmpIsoOne + tmpIsoFour > 0.35:
+                                        if debug:
+                                            print("tmpIsoOne+tmpIsoFour > 0.35. cuts not passed")
                                         passesIsoCuts = False
                                     elif tmpIsoThree + tmpIsoFour > 0.35:
                                         passesIsoCuts = False
@@ -1210,11 +1508,16 @@ for k,fileName in enumerate(fileAr):
                         if leadLepPairOneVec.Pt() > 35:
                             if trailingLepPairOneVec.Pt() > 35:
                                 if abs(ev.Electron_eta[lepPairOneLeadInd]) < 1.4:
+                                    if debug:
+                                        print("electron in barrel")
+                                    
                                     tmpIsoOne = ( ev.Electron_dr03TkSumPt[lepPairOneLeadInd] + max(0., ev.Electron_dr03EcalRecHitSumEt[lepPairOneLeadInd] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[lepPairOneLeadInd] ) / ev.Electron_pt[lepPairOneLeadInd]
                                 else:
                                     tmpIsoOne = ( ev.Electron_dr03TkSumPt[lepPairOneLeadInd] + ev.Electron_dr03EcalRecHitSumEt[lepPairOneLeadInd] + ev.Electron_dr03HcalDepth1TowerSumEt[lepPairOneLeadInd] ) / ev.Electron_pt[lepPairOneLeadInd]
                                 
                                 if abs(ev.Electron_eta[lepPairOneTrailingInd]) < 1.4:
+                                    if debug:
+                                        print("electron in barrel")
                                     tmpIsoTwo = ( ev.Electron_dr03TkSumPt[lepPairOneTrailingInd] + max(0., ev.Electron_dr03EcalRecHitSumEt[lepPairOneTrailingInd] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[lepPairOneTrailingInd] ) / ev.Electron_pt[lepPairOneTrailingInd]
                                 else:
                                     tmpIsoTwo = ( ev.Electron_dr03TkSumPt[lepPairOneTrailingInd] + ev.Electron_dr03EcalRecHitSumEt[lepPairOneTrailingInd] + ev.Electron_dr03HcalDepth1TowerSumEt[lepPairOneTrailingInd] ) / ev.Electron_pt[lepPairOneTrailingInd]
@@ -1223,33 +1526,49 @@ for k,fileName in enumerate(fileAr):
                                     passesIsoCuts = False
                                 elif elecPassesZ2CutsAr[leadZ2LepPairInd][1][0].Pt() > 35:
                                     if abs(ev.Electron_eta[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]]) < 1.4:
+                                        if debug:
+                                            print("electron in barrel")
                                         tmpIsoThree = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] + max(0., ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] ) / ev.Electron_pt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]]
                                     else:
                                         tmpIsoThree = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] + ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] ) / ev.Electron_pt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]]
                                         
                                     if tmpIsoOne + tmpIsoThree > 0.35:
+                                        if debug:
+                                            print("tmpIsoOne+tmpIsoThree > 0.35. cuts not passed")
                                         passesIsoCuts = False
                                     elif tmpIsoTwo + tmpIsoThree > 0.35:
+                                        if debug:
+                                            print("tmpIsoTwo+tmpIsoThree > 0.35. cuts not passed")
                                         passesIsoCuts = False
                                     elif elecPassesZ2CutsAr[leadZ2LepPairInd][1][1].Pt() > 35:
                                         if abs(ev.Electron_eta[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]]) < 1.4:
+                                            if debug:
+                                                print("electron in barrel")
                                             tmpIsoFour = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] + max(0., ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] ) / ev.Electron_pt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]]
                                         else:
                                             tmpIsoFour = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] + ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] ) / ev.Electron_pt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]]
                                         
                                         if tmpIsoOne + tmpIsoFour > 0.35:
-                                            passesIsoCuts = False
+                                            if debug:
+                                                print("tmpIsoOne+tmpIsoFour > 0.35. cuts not passed")
+                                           passesIsoCuts = False
                                         elif tmpIsoTwo + tmpIsoFour > 0.35:
                                             passesIsoCuts = False
                                         elif tmpIsoThree + tmpIsoFour > 0.35:
-                                            passesIsoCuts = False
+                                            if debug:
+                                                print("tmpIsoThree+tmpIsoFour > 0.35. cuts not passed")
+                                           passesIsoCuts = False
                             elif elecPassesZ2CutsAr[leadZ2LepPairInd][1][0].Pt() > 35:
                                 if abs(ev.Electron_eta[lepPairOneLeadInd]) < 1.4:
+                                    if debug:
+                                        print("electron in barrel")
                                     tmpIsoOne = ( ev.Electron_dr03TkSumPt[lepPairOneLeadInd] + max(0., ev.Electron_dr03EcalRecHitSumEt[lepPairOneLeadInd] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[lepPairOneLeadInd] ) / ev.Electron_pt[lepPairOneLeadInd]
                                 else:
                                     tmpIsoOne = ( ev.Electron_dr03TkSumPt[lepPairOneLeadInd] + ev.Electron_dr03EcalRecHitSumEt[lepPairOneLeadInd] + ev.Electron_dr03HcalDepth1TowerSumEt[lepPairOneLeadInd] ) / ev.Electron_pt[lepPairOneLeadInd]
                                 
                                 if abs(ev.Electron_eta[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]]) < 1.4:
+                                    if debug:
+                                        print("electron in barrel")
                                     tmpIsoThree = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] + max(0., ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] ) / ev.Electron_pt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]]
                                 else:
                                     tmpIsoThree = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] + ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] ) / ev.Electron_pt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]]
@@ -1257,36 +1576,56 @@ for k,fileName in enumerate(fileAr):
                                     passesIsoCuts = False
                                 elif elecPassesZ2CutsAr[leadZ2LepPairInd][1][1].Pt() > 35:
                                     if abs(ev.Electron_eta[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]]) < 1.4:
+                                        if debug:
+                                            print("electron in barrel")
                                         tmpIsoFour = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] + max(0., ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] ) / ev.Electron_pt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]]
                                     else:
                                         tmpIsoFour = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] + ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] ) / ev.Electron_pt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]]
                                         
                                     if tmpIsoOne + tmpIsoFour > 0.35:
+                                        if debug:
+                                            print("tmpIsoOne+tmpIsoFour > 0.35. cuts not passed")
                                         passesIsoCuts = False
                                     elif tmpIsoThree + tmpIsoFour > 0.35:
+                                        if debug:
+                                            print("tmpIsoThree+tmpIsoFour > 0.35. cuts not passed")
                                         passesIsoCuts = False
                         elif elecPassesZ2CutsAr[leadZ2LepPairInd][1][0].Pt() > 35:
                             if elecPassesZ2CutsAr[leadZ2LepPairInd][1][1].Pt() > 35:
                                 if abs(ev.Electron_eta[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]]) < 1.4:
+                                    if debug:
+                                        print("electron in barrel")
                                     tmpIsoThree = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] + max(0., ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] ) / ev.Electron_pt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]]
                                 else:
                                     tmpIsoThree = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] + ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] ) / ev.Electron_pt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]]
                                 if abs(ev.Electron_eta[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]]) < 1.4:
+                                    if debug:
+                                        print("electron in barrel")
                                     tmpIsoFour = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] + max(0., ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] ) / ev.Electron_pt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]]
                                 else:
                                     tmpIsoFour = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] + ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] ) / ev.Electron_pt[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]]
                                 if tmpIsoThree + tmpIsoFour > 0.35:
                                     passesIsoCuts = False
+                """
                 #Now, assuming all *these* cuts pass, on to cut 6.
                 #Want the SIP of the leptons
+                
                 if passesIsoCuts:
+                    if debug:
+                        print("passed iso cuts. Starting SIP cuts")
                     if not passesIsoCutsBool:
                         passesIsoCutsCount += 1
                         passesIsoCutsBool = True
 
                     passesSIPCut = True
                     if muonLeading:
+                        if debug:
+                            print("muonLeading",muonLeading)
                         if muonZ2Pair:
+                            if debug:
+                                print("muonZ2Pair",muonZ2Pair)
+                                print("ev.Muon_sip3d[lepPairOneLeadInd]",ev.Muon_sip3d[lepPairOneLeadInd],"ev.Muon_sip3d[lepPairOneTrailingInd]",ev.Muon_sip3d[lepPairOneTrailingInd])
+                                print("ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][0]]",ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][0]],"ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][1]]",ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][1]])
                             if ev.Muon_sip3d[lepPairOneLeadInd] > 4:
                                 passesSIPCut = False
                             elif ev.Muon_sip3d[lepPairOneTrailingInd] > 4:
@@ -1295,7 +1634,13 @@ for k,fileName in enumerate(fileAr):
                                 passesSIPCut = False
                             elif ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][1]] > 4:
                                 passesSIPCut = False
+                            if debug:
+                                print("passesSIPCut",passesSIPCut)
                         else:
+                            if debug:
+                                print("muonZ2Pair",muonZ2Pair)
+                                print("ev.Muon_sip3d[lepPairOneLeadInd]",ev.Muon_sip3d[lepPairOneLeadInd],"ev.Muon_sip3d[lepPairOneTrailingInd]",ev.Muon_sip3d[lepPairOneTrailingInd])
+                                print("ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]",ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0],"ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]",ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0])
                             if ev.Muon_sip3d[lepPairOneLeadInd] > 4:
                                 passesSIPCut = False
                             elif ev.Muon_sip3d[lepPairOneTrailingInd] > 4:
@@ -1304,7 +1649,14 @@ for k,fileName in enumerate(fileAr):
                                 passesSIPCut = False
                             elif ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] > 4:
                                 passesSIPCut = False
+                            if debug:
+                                print("passesSIPCut",passesSIPCut)
                     elif muonZ2Pair:
+                        if debug:
+                            print("muonLeading",muonLeading)
+                            print("muonZ2Pair",muonZ2Pair)
+                            print("ev.Electron_sip3d[lepPairOneLeadInd]",ev.Electron_sip3d[lepPairOneLeadInd],"ev.Electron_sip3d[lepPairOneTrailingInd]",ev.Electron_sip3d[lepPairOneTrailingInd])
+                            print("ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][0]]",ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][0]],"ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][1]]",ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][1]])
                         #print("lepPairOneLeadInd",lepPairOneLeadInd,"len(ev.Electron_sip3d)",len(ev.Electron_sip3d))
                         #print("len(ev.Electron_pt)",len(ev.Electron_pt))
                         #print("nElecCandidates",nElecCandidates,"nMuonCandidates",nMuonCandidates,"enoughLepCands",enoughLepCands,"enoughElecCands",enoughElecCands,"enoughMuonCands",enoughMuonCands)
@@ -1319,7 +1671,14 @@ for k,fileName in enumerate(fileAr):
                             passesSIPCut = False
                         elif ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][1]] > 4:
                             passesSIPCut = False
+                        if debug:
+                            print("passesSIPCut",passesSIPCut)
                     else:
+                        if debug:
+                            print("muonLeading",muonLeading)
+                            print("muonZ2Pair",muonZ2Pair)
+                            print("ev.Electron_sip3d[lepPairOneLeadInd]",ev.Electron_sip3d[lepPairOneLeadInd],"ev.Electron_sip3d[lepPairOneTrailingInd]",ev.Electron_sip3d[lepPairOneTrailingInd])
+                            print("ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]]",ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]],"ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]]",ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]])
                         if ev.Electron_sip3d[lepPairOneLeadInd] > 4:
                             passesSIPCut = False
                         elif ev.Electron_sip3d[lepPairOneTrailingInd] > 4:
@@ -1328,25 +1687,46 @@ for k,fileName in enumerate(fileAr):
                             passesSIPCut = False
                         elif ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] > 4:
                             passesSIPCut = False
+                        if debug:
+                            print("passesSIPCut",passesSIPCut)
                     #Now just check that the Z1 and Z2 inv mass falls within the Z low and Z high cuts (60 and 120GeV)
                     if passesSIPCut:
+                        if debug:
+                            print("passed SIP Cut")
                         if not passesSIPCutBool:
                             passesSIPCutCount += 1
                             passesSIPCutBool = True
 
                         tmpVec = leadLepPairOneVec + trailingLepPairOneVec
                         tmpZ1InvMass = tmpVec.M()
+                        if debug:
+                            print("tmpVec",tmpVec,"tmpZ1InvMass",tmpZ1InvMass)
                         if tmpZ1InvMass < 120:
+                            if debug:
+                                print("Passed Z1 invmass cut",120)
                             if muonZ2Pair:
+                                if debug:
+                                    print("muonZ2Pair",muonZ2Pair)
                                 tmpLeadZ2Vec = muonPassesZ2CutsAr[leadZ2LepPairInd][1][0]
                                 tmpTrailingZ2Vec = muonPassesZ2CutsAr[leadZ2LepPairInd][1][1]
                                 tmpVecTwo = tmpLeadZ2Vec + tmpTrailingZ2Vec
+                                if debug:
+                                    print("tmpLeadZ2Vec",tmpLeadZ2Vec,"tmpTrailingZ2Vec",tmpTrailingZ2Vec,"tmpVecTwo",tmpVecTwo)
                             else:
+                                if debug:
+                                    print("muonZ2Pair",muonZ2Pair)
                                 tmpLeadZ2Vec = elecPassesZ2CutsAr[leadZ2LepPairInd][1][0]
                                 tmpTrailingZ2Vec = elecPassesZ2CutsAr[leadZ2LepPairInd][1][1]
                                 tmpVecTwo = tmpLeadZ2Vec + tmpTrailingZ2Vec
+                                if debug:
+                                    print("tmpLeadZ2Vec",tmpLeadZ2Vec,"tmpTrailingZ2Vec",tmpTrailingZ2Vec,"tmpVecTwo",tmpVecTwo)
                             tmpZ2InvMass = tmpVecTwo.M()
+                            if debug:
+                                print("tmpZ2InvMass",tmpZ2InvMass)
                             if tmpZ2InvMass > 60 and tmpZ2InvMass < 120:
+                                if debug:
+                                    print("passed Z2 inv mass check",60,120)
+                                    print("all checks passed")
                                 #at this point all lepton cuts have been passed. Filling histograms
                                 if not allCutPassBool:
                                     allCutPassCount += 1
