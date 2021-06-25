@@ -1142,7 +1142,7 @@ for k,fileName in enumerate(fileAr):
                 for i,Z1Z2Ind in enumerate(Z1Z2IndAr):
                     if not passesPtCutAr[i]:
                         continue
-                    for j,Z1Z2IndTwo in enumerate(Z1Z2IndAr[i+1]):
+                    for j,Z1Z2IndTwo in enumerate(Z1Z2IndAr[i+1:]):
                         if not passesPtCutAr[j]:
                             continue
                         if debug:
@@ -1203,7 +1203,7 @@ for k,fileName in enumerate(fileAr):
                             if muonZ2Pair:
                                 if debug:
                                     print(i,j,"muonZ2Pair",muonZ2Pair)
-                                if i < 2:
+                                if j < 2:
                                     tmpIsoTwo = ev.Muon_pfRelIso03_all[Z1Z2IndTwo]
                                 else:
                                     tmpIsoTwo = ev.Muon_pfRelIso03_all[muonPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]]
@@ -1217,7 +1217,13 @@ for k,fileName in enumerate(fileAr):
                                 if debug:
                                     print(i,j,"muonZ2Pair",muonZ2Pair)
                                 if j < 2:
-                                    tmpIsoTwo = ev.Muon_pfRelIso03_all[Z1Z2IndTwo]
+                                    if abs(ev.Electron_eta[Z1Z2IndTwo]) < 1.4:
+                                        if debug:
+                                            print("electron in barrel")
+                                        tmpIsoTwo = ( ev.Electron_dr03TkSumPt[Z1Z2IndTwo] + max(0., ev.Electron_dr03EcalRecHitSumEt[Z1Z2IndTwo] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[Z1Z2IndTwo] ) / ev.Electron_pt[Z1Z2IndTwo]
+                                    else:
+                                        tmpIsoTwo = ( ev.Electron_dr03TkSumPt[Z1Z2IndTwo] + ev.Electron_dr03EcalRecHitSumEt[Z1Z2IndTwo] + ev.Electron_dr03HcalDepth1TowerSumEt[Z1Z2IndTwo] ) / ev.Electron_pt[Z1Z2IndTwo]
+                                
                                 else:
                                     if abs(ev.Electron_eta[elecPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]]) < 1.4:
                                         if debug:
