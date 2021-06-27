@@ -1142,11 +1142,12 @@ for k,fileName in enumerate(fileAr):
                 for i,Z1Z2Ind in enumerate(Z1Z2IndAr):
                     if not passesPtCutAr[i]:
                         continue
-                    for j,Z1Z2IndTwo in enumerate(Z1Z2IndAr[i+1:]):
+                    for j in range(i+1,len(Z1Z2IndAr)):
                         if not passesPtCutAr[j]:
                             continue
                         if debug:
                             print(i,j,"pass Pt cut")
+                        Z1Z2IndTwo = Z1Z2IndAr[j]
                         if muonLeading:
                             if debug:
                                 print(i,j,"muonLeading",muonLeading)
