@@ -910,7 +910,7 @@ for k,fileName in enumerate(fileAr):
                 for i,elecZ2Cand in enumerate(elecPassesZ2CutsAr):
                     if debug:
                         print(i,"elecZ2Cand",elecZ2Cand)
-                    if elecZ2Cand[0][0] != lepPairOneLeadInd and elecZ2Cand[0][0] != lepPairOneTrailingInd and elecZ2Cand[0][1] != lepPairOneLeadInd and elecZ2Cand[0][1] != lepPairOneTrailingInd:
+                    if muonLeading or (elecZ2Cand[0][0] != lepPairOneLeadInd and elecZ2Cand[0][0] != lepPairOneTrailingInd and elecZ2Cand[0][1] != lepPairOneLeadInd and elecZ2Cand[0][1] != lepPairOneTrailingInd):
                         if debug:
                             print("Passed the check that we aren't looking at the Z1 pair")
                         fourLepVec = elecZ2Cand[1][0] + elecZ2Cand[1][1] + leadLepPairOneVec + trailingLepPairOneVec
@@ -1002,7 +1002,7 @@ for k,fileName in enumerate(fileAr):
                 for i,muonZ2Cand in enumerate(muonPassesZ2CutsAr):
                     if debug:
                         print(i,"muonZ2Cand",muonZ2Cand)
-                    if muonZ2Cand[0][0] != lepPairOneLeadInd and muonZ2Cand[0][0] != lepPairOneTrailingInd and muonZ2Cand[0][1] != lepPairOneLeadInd and muonZ2Cand[0][1] != lepPairOneTrailingInd: 
+                    if not muonLeading or (muonZ2Cand[0][0] != lepPairOneLeadInd and muonZ2Cand[0][0] != lepPairOneTrailingInd and muonZ2Cand[0][1] != lepPairOneLeadInd and muonZ2Cand[0][1] != lepPairOneTrailingInd): 
                         if debug:
                             print("Passed the check that we aren't looking at the Z1 pair")
                         fourLepVec = muonZ2Cand[1][0] + muonZ2Cand[1][1] + leadLepPairOneVec + trailingLepPairOneVec
@@ -1175,7 +1175,7 @@ for k,fileName in enumerate(fileAr):
                                 if j < 2:
                                     tmpIsoTwo = ev.Muon_pfRelIso03_all[Z1Z2IndTwo]
                                 else:
-                                    if abs(ev.Electron_eta[elecPassesZ2CutsAr[Z1Z2IndTwo]][0][j-2]) < 1.4:
+                                    if abs(ev.Electron_eta[elecPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]]) < 1.4:
                                         if debug:
                                             print("electron in barrel")
                                         tmpIsoTwo= ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]] + max(0., ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]] ) / ev.Electron_pt[elecPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]]
