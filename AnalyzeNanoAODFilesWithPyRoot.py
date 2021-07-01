@@ -991,9 +991,10 @@ for k,fileName in enumerate(fileAr):
                                             print("New highest trailing pt found. Old pt:",trailingZ2Pt)
                                         trailingZ2Pt = elecZ2Cand[1][1].Pt()
                                         leadZ2LepPairInd = i
+                if debug:
 
-                print("ELECTRON Z2 LOOP FINISHED")
-                print("leadZ2LepPairInd",leadZ2LepPairInd,"leadZ2Pt",leadZ2Pt,"trailingZ2Pt",trailingZ2Pt)
+                    print("ELECTRON Z2 LOOP FINISHED")
+                    print("leadZ2LepPairInd",leadZ2LepPairInd,"leadZ2Pt",leadZ2Pt,"trailingZ2Pt",trailingZ2Pt)
 
 
                                 
