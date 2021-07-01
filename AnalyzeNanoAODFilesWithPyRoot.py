@@ -1161,26 +1161,35 @@ for k,fileName in enumerate(fileAr):
 
                 for i,Z1Z2Ind in enumerate(Z1Z2IndAr):
                     for j in range(i+1,len(Z1Z2IndAr)):
+                        Z1Z2IndTwo = Z1Z2IndAr[j]
                         if debug:
-                            print(i,j,"muonLeading",muonLeading,"muonZ2Pair",muonZ2Pair)
+                            print(i,j,"muonLeading",muonLeading,"muonZ2Pair",muonZ2Pair,"Z1Z2Ind",Z1Z2Ind,"Z1Z2IndTwo",Z1Z2IndTwo)
                         #Getting indices for accessing the different arrays for Z1
+                        tmpIsMuonOne = True
                         if i < 2:
                             tmpIsoOneInd = Z1Z2Ind
-                        elif muonLeading:
+                            if not muonLeading:
+                                tmpIsMuonOne = False
+                        elif muonZ2Pair:
                             tmpIsoOneInd = muonPassesZ2CutsAr[Z1Z2Ind][0][i-2]
                         else:
                             tmpIsoOneInd = elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]
+                            tmpIsMuonOne = False
                         #Getting indices for accessing the different arrays for Z2
+                        tmpIsMuonTwo = True
                         if j < 2:
-                            tmpIsoTwoInd = Z1Z2Ind
-                        elif muonLeading:
-                            tmpIsoTwoInd = muonPassesZ2CutsAr[Z1Z2Ind][0][j-2]
+                            tmpIsoTwoInd = Z1Z2IndTwo
+                            if not muonZ2Pair:
+                                tmpIsMuonTwo = False
+                        elif muonZ2Pair:
+                            tmpIsoTwoInd = muonPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]
                         else:
-                            tmpIsoTwoInd = elecPassesZ2CutsAr[Z1Z2Ind][0][j-2]
+                            tmpIsoTwoInd = elecPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]
+                            tmpIsMuonTwo = False
                         if debug:
                             print(i,j,"tmpIsoOneInd",tmpIsoOneInd,"tmpIsoTwoInd",tmpIsoTwoInd)
                         #Getting tmpIsoOne
-                        if muonLeading:
+                        if tmpIsMuonOne:
                             tmpIsoOne = ev.Muon_pfRelIso03_all[tmpIsoOneInd]
                         elif passesPtCutAr[i]:
                             if abs(ev.Electron_eta[tmpIsoOneInd]) < 1.4:
@@ -1195,7 +1204,7 @@ for k,fileName in enumerate(fileAr):
                         else:
                             tmpIsoOne = ev.Electron_pfRelIso03_all[tmpIsoOneInd]
                         #Getting tmpIsoTwo
-                        if muonLeading:
+                        if tmpIsMuonTwo:
                             tmpIsoTwo = ev.Muon_pfRelIso03_all[tmpIsoTwoInd]
                         elif passesPtCutAr[i]:
                             if abs(ev.Electron_eta[tmpIsoTwoInd]) < 1.4:
