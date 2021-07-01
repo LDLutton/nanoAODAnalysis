@@ -1179,7 +1179,7 @@ for k,fileName in enumerate(fileAr):
                         tmpIsMuonTwo = True
                         if j < 2:
                             tmpIsoTwoInd = Z1Z2IndTwo
-                            if not muonZ2Pair:
+                            if not muonLeading:
                                 tmpIsMuonTwo = False
                         elif muonZ2Pair:
                             tmpIsoTwoInd = muonPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]
