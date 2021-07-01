@@ -1108,17 +1108,34 @@ for k,fileName in enumerate(fileAr):
                 #There are branches that have precalculated them, but only for electrons with Pt > 35GeV
                 #The muon branches don't have these, but rather have values based on particle flow
                 #Particularly the Muon_pfRelIso03_all branch
-                #Not sure if it's at all proper to add these together, but I think to not bias things I'll only do the cut if both leptons have E > 35GeV
+                #Not sure if it's at all proper to add these together, but will use the electron PF isolation also when Pt < 35GeV
                 passesIsoCuts = True
                 
                 muonOrNotAr = [muonLeading,muonZ2Pair]
                 if debug:
                     print("muonOrNotAr",muonOrNotAr)
-                passesPtCutAr = [False,False,False,False]
+                passesPtCutAr = [True,True,True,True]
                 Z1Z2VecPtAr = []
                 Z1Z2VecPtAr.append(leadLepPairOneVec.Pt())
                 Z1Z2VecPtAr.append(trailingLepPairOneVec.Pt())
                 Z1Z2IndAr = [lepPairOneLeadInd,lepPairOneTrailingInd,leadZ2LepPairInd,leadZ2LepPairInd]
+                #Previously used passesPtCutAr to bypass the cuts if the Pt was less than 35,
+                #but now just using it to switch different types of isolation used in the cuts for electrons
+                for i in range(4):
+                    if i < 2: 
+                        if muonLeading:
+                            continue
+                        elif Z1Z2VecPtAr[i] < 35:
+                            passesPtCutAr[i] = False
+                    elif muonZ2Pair:
+                        Z1Z2VecPtAr.append(muonPassesZ2CutsAr[leadZ2LepPairInd][1][i-2].Pt())
+                    else:
+                        Z1Z2VecPtAr.append(elecPassesZ2CutsAr[leadZ2LepPairInd][1][i-2].Pt())
+                        if Z1Z2VecPtAr[i] < 35:
+                            passesPtCutAr[i] = False
+
+                        
+                """
                 if Z1Z2VecPtAr[0] > 35:
                     passesPtCutAr[0] = True
                 if Z1Z2VecPtAr[1] > 35:
@@ -1137,15 +1154,88 @@ for k,fileName in enumerate(fileAr):
                         passesPtCutAr[2] = True
                     if Z1Z2VecPtAr[3] > 35:
                         passesPtCutAr[3] = True
+                """
+
                 if debug:
                     print("Z1Z2VecPtAr",Z1Z2VecPtAr,"Z1Z2IndAr",Z1Z2IndAr,"passesPtCutAr",passesPtCutAr)
 
                 for i,Z1Z2Ind in enumerate(Z1Z2IndAr):
-                    if not passesPtCutAr[i]:
-                        continue
                     for j in range(i+1,len(Z1Z2IndAr)):
-                        if not passesPtCutAr[j]:
-                            continue
+                        if debug:
+                            print(i,j,"muonLeading",muonLeading,"muonZ2Pair",muonZ2Pair)
+                        #Getting indices for accessing the different arrays for Z1
+                        if i < 2:
+                            tmpIsoOneInd = Z1Z2Ind
+                        elif muonLeading:
+                            tmpIsoOneInd = muonPassesZ2CutsAr[Z1Z2Ind][0][i-2]
+                        else:
+                            tmpIsoOneInd = elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]
+                        #Getting indices for accessing the different arrays for Z2
+                        if j < 2:
+                            tmpIsoTwoInd = Z1Z2Ind
+                        elif muonLeading:
+                            tmpIsoTwoInd = muonPassesZ2CutsAr[Z1Z2Ind][0][j-2]
+                        else:
+                            tmpIsoTwoInd = elecPassesZ2CutsAr[Z1Z2Ind][0][j-2]
+                        if debug:
+                            print(i,j,"tmpIsoOneInd",tmpIsoOneInd,"tmpIsoTwoInd",tmpIsoTwoInd)
+                        #Getting tmpIsoOne
+                        if muonLeading:
+                            tmpIsoOne = ev.Muon_pfRelIso03_all[tmpIsoOneInd]
+                        elif passesPtCutAr[i]:
+                            if abs(ev.Electron_eta[tmpIsoOneInd]) < 1.4:
+                                if debug:
+                                    print("electron in barrel")
+                                tmpAdd = max(0., ev.Electron_dr03EcalRecHitSumEt[tmpIsoOneInd] - 1.)
+                            else:
+                                if debug:
+                                    print("electron in endcap")
+                                tmpAdd = ev.Electron_dr03EcalRecHitSumEt[tmpIsoOneInd]
+                            tmpIsoOne = ( ev.Electron_dr03TkSumPt[tmpIsoOneInd] + tmpAdd + ev.Electron_dr03HcalDepth1TowerSumEt[tmpIsoOneInd] ) / ev.Electron_pt[tmpIsoOneInd]
+                        else:
+                            tmpIsoOne = ev.Electron_pfRelIso03_all[tmpIsoOneInd]
+                        #Getting tmpIsoTwo
+                        if muonLeading:
+                            tmpIsoTwo = ev.Muon_pfRelIso03_all[tmpIsoTwoInd]
+                        elif passesPtCutAr[i]:
+                            if abs(ev.Electron_eta[tmpIsoTwoInd]) < 1.4:
+                                if debug:
+                                    print("electron in barrel")
+                                tmpAdd = max(0., ev.Electron_dr03EcalRecHitSumEt[tmpIsoTwoInd] - 1.)
+                            else:
+                                if debug:
+                                    print("electron in endcap")
+                                tmpAdd = ev.Electron_dr03EcalRecHitSumEt[tmpIsoTwoInd]
+                            tmpIsoTwo = ( ev.Electron_dr03TkSumPt[tmpIsoTwoInd] + tmpAdd + ev.Electron_dr03HcalDepth1TowerSumEt[tmpIsoTwoInd] ) / ev.Electron_pt[tmpIsoTwoInd]
+                        else:
+                            tmpIsoTwo = ev.Electron_pfRelIso03_all[tmpIsoTwoInd]
+                        if debug:
+                            print(i,j,"tmpIsoOne",tmpIsoOne,"tmpIsoTwo",tmpIsoTwo)
+                        if tmpIsoOne + tmpIsoTwo > 0.35:
+                            if debug:
+                                print(i,j,"summed isos > 0.35. cuts not passed")
+                            passesIsoCuts = False
+                        
+
+
+                        
+                            
+                if debug:
+                    print("FINISHED WITH ISO CUTS","passesIsoCuts",passesIsoCuts)
+
+
+
+
+                ##########################################################################################
+                #Old code for iso cuts temporarily here in case new code doesn't work
+
+                """
+                for i,Z1Z2Ind in enumerate(Z1Z2IndAr):
+                    #if not passesPtCutAr[i]:
+                    #    continue
+                    for j in range(i+1,len(Z1Z2IndAr)):
+                        #if not passesPtCutAr[j]:
+                        #    continue
                         if debug:
                             print(i,j,"pass Pt cut")
                         Z1Z2IndTwo = Z1Z2IndAr[j]
@@ -1155,10 +1245,12 @@ for k,fileName in enumerate(fileAr):
                             if muonZ2Pair: #M1M2
                                 if debug:
                                     print(i,j,"muonZ2Pair",muonZ2Pair)
+                                #First getting tmpIsoOne
                                 if i < 2:
                                     tmpIsoOne = ev.Muon_pfRelIso03_all[Z1Z2Ind]
                                 else:
                                     tmpIsoOne = ev.Muon_pfRelIso03_all[muonPassesZ2CutsAr[Z1Z2Ind][0][i-2]]
+                                #Now getting tmpIsoTwo
                                 if j < 2:
                                     tmpIsoTwo = ev.Muon_pfRelIso03_all[Z1Z2IndTwo]
                                 else:
@@ -1172,28 +1264,36 @@ for k,fileName in enumerate(fileAr):
                             else: #M1E2
                                 if debug:
                                     print(i,j,"muonZ2Pair",muonZ2Pair)
+                                #First getting tmpIsoOne
                                 if i < 2:
                                     tmpIsoOne = ev.Muon_pfRelIso03_all[Z1Z2Ind]
                                 else:
-                                    if abs(ev.Electron_eta[elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]]) < 1.4:
-                                        if debug:
-                                            print("electron in barrel")
-                                        tmpIsoOne= ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]] + max(0., ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]] ) / ev.Electron_pt[elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]]
+                                    if passesPtCutAr[i]:
+                                        if abs(ev.Electron_eta[elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]]) < 1.4:
+                                            if debug:
+                                                print("electron in barrel")
+                                            tmpIsoOne= ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]] + max(0., ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]] ) / ev.Electron_pt[elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]]
+                                        else:
+                                            if debug:
+                                                print("electron in endcap")
+                                            tmpIsoOne = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]] + ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]] + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]] ) / ev.Electron_pt[elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]]
                                     else:
-                                        if debug:
-                                            print("electron in endcap")
-                                        tmpIsoOne = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]] + ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]] + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]] ) / ev.Electron_pt[elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]]
+                                        tmpIsoOne = ev.Electron_pfRelIso03_all[elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]]
+                                #Now getting tmpIsoTwo
                                 if j < 2:
                                     tmpIsoTwo = ev.Muon_pfRelIso03_all[Z1Z2IndTwo]
                                 else:
-                                    if abs(ev.Electron_eta[elecPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]]) < 1.4:
-                                        if debug:
-                                            print("electron in barrel")
-                                        tmpIsoTwo= ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]] + max(0., ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]] ) / ev.Electron_pt[elecPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]]
+                                    if passesPtCutAr[j]:
+                                        if abs(ev.Electron_eta[elecPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]]) < 1.4:
+                                            if debug:
+                                                print("electron in barrel")
+                                            tmpIsoTwo= ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]] + max(0., ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]] ) / ev.Electron_pt[elecPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]]
+                                        else:
+                                            if debug:
+                                                print("electron in endcap")
+                                            tmpIsoTwo = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]] + ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]] + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]] ) / ev.Electron_pt[elecPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]]
                                     else:
-                                        if debug:
-                                            print("electron in endcap")
-                                        tmpIsoTwo = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]] + ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]] + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]] ) / ev.Electron_pt[elecPassesZ2CutsAr[Z1Z2IndTwo][0][j-2]]
+                                        tmpIsoTwo = ev.Electron_pfRelIso03_all[elecPassesZ2CutsAr[Z1Z2Ind][0][j-2]]
                                 if debug:
                                     print(i,j,"tmpIsoOne",tmpIsoOne,"tmpIsoTwo",tmpIsoTwo)
                                 if tmpIsoOne + tmpIsoTwo > 0.35:
@@ -1206,18 +1306,22 @@ for k,fileName in enumerate(fileAr):
                             if muonZ2Pair: #E1M2
                                 if debug:
                                     print(i,j,"muonZ2Pair",muonZ2Pair)
-
+                                #First getting tmpIsoOne
                                 if i < 2:
-                                    if abs(ev.Electron_eta[Z1Z2Ind]) < 1.4:
-                                        if debug:
-                                            print("electron in barrel")
-                                        tmpIsoOne= ( ev.Electron_dr03TkSumPt[Z1Z2Ind] + max(0., ev.Electron_dr03EcalRecHitSumEt[Z1Z2Ind] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[Z1Z2Ind] ) / ev.Electron_pt[Z1Z2Ind]
+                                    if passesPtCutAr[i]:
+                                        if abs(ev.Electron_eta[Z1Z2Ind]) < 1.4:
+                                            if debug:
+                                                print("electron in barrel")
+                                            tmpIsoOne= ( ev.Electron_dr03TkSumPt[Z1Z2Ind] + max(0., ev.Electron_dr03EcalRecHitSumEt[Z1Z2Ind] - 1.) + ev.Electron_dr03HcalDepth1TowerSumEt[Z1Z2Ind] ) / ev.Electron_pt[Z1Z2Ind]
+                                        else:
+                                            if debug:
+                                                print("electron in endcap")
+                                            tmpIsoOne = ( ev.Electron_dr03TkSumPt[Z1Z2Ind] + ev.Electron_dr03EcalRecHitSumEt[Z1Z2Ind] + ev.Electron_dr03HcalDepth1TowerSumEt[Z1Z2Ind] ) / ev.Electron_pt[Z1Z2Ind]
                                     else:
-                                        if debug:
-                                            print("electron in endcap")
-                                        tmpIsoOne = ( ev.Electron_dr03TkSumPt[Z1Z2Ind] + ev.Electron_dr03EcalRecHitSumEt[Z1Z2Ind] + ev.Electron_dr03HcalDepth1TowerSumEt[Z1Z2Ind] ) / ev.Electron_pt[Z1Z2Ind]
+                                        tmpIsoOne = ev.Electron_pfRelIso03_all[elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]]
                                 else:
                                     tmpIsoOne = ev.Muon_pfRelIso03_all[muonPassesZ2CutsAr[Z1Z2Ind][0][i-2]]
+                                #Now getting tmpIsoTwo
                                 if j < 2:
                                     if abs(ev.Electron_eta[Z1Z2IndTwo]) < 1.4:
                                         if debug:
@@ -1238,7 +1342,7 @@ for k,fileName in enumerate(fileAr):
                             else: #E1E2
                                 if debug:
                                     print(i,j,"muonZ2Pair",muonZ2Pair)
-
+                                #First getting tmpIsoOne
                                 if i < 2:
                                     if abs(ev.Electron_eta[Z1Z2Ind]) < 1.4:
                                         if debug:
@@ -1257,6 +1361,7 @@ for k,fileName in enumerate(fileAr):
                                         if debug:
                                             print("electron in endcap")
                                         tmpIsoOne = ( ev.Electron_dr03TkSumPt[elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]] + ev.Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]] + ev.Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]] ) / ev.Electron_pt[elecPassesZ2CutsAr[Z1Z2Ind][0][i-2]]
+                                #Now getting tmpIsoTwo
                                 if j < 2:
                                     if abs(ev.Electron_eta[Z1Z2IndTwo]) < 1.4:
                                         if debug:
@@ -1281,10 +1386,9 @@ for k,fileName in enumerate(fileAr):
                                     if debug:
                                         print(i,j,"summed isos > 0.35. cuts not passed")
                                     passesIsoCuts = False
-
+                """
                         
-                if debug:
-                    print("FINISHED WITH ISO CUTS","passesIsoCuts",passesIsoCuts)
+                
                 """
 
 
