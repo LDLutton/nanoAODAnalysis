@@ -115,7 +115,7 @@ for k,fileName in enumerate(fileAr):
 print("elecPairExistsCtr","muonPairExistsCtr",elecPairExistsCtr,muonPairExistsCtr)
 print("passedCutsCtr",passedCutsCtr)
 
-outFile = TFile("histosFromNanoAODFirstLeptonCuts{0}.root".format(saveName),"recreate")
+outFile = r.TFile("histosFromNanoAODFirstLeptonCuts{0}.root".format(saveName),"recreate")
 
 
 #h_nElectron.Draw("hist")
