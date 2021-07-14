@@ -9,7 +9,7 @@ from fileLists import ttHToBBBackgroundAr
 import time as time
 
 def DrawPlot(plot,name,saveName,normalizeOrNot):
-    c1 = TCanvas("c1","c1",3600,2400)
+    c1 = r.TCanvas("c1","c1",3600,2400)
 
     plot.SetFillColorAlpha(30,0.35)
 
