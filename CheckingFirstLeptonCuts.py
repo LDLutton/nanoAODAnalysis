@@ -1,7 +1,7 @@
-#import ROOT as r
-from ROOT import TFile, TChain, gDirectory, TApplication, TMath, Math, TMinuit, TROOT, TSystem, TTree, TVector2
-from ROOT import TH1F, TCanvas, TF1, TGraph, TGraphErrors, TLegend, TLine, TPaveText, TStyle
-from ROOT import TH2D, TH2F
+import ROOT as r
+#from ROOT import TFile, TChain, gDirectory, TApplication, TMath, Math, TMinuit, TROOT, TSystem, TTree, TVector2
+#from ROOT import TH1F, TCanvas, TF1, TGraph, TGraphErrors, TLegend, TLine, TPaveText, TStyle
+#from ROOT import TH2D, TH2F
 from math import sqrt,pi
 from fileLists import MGEFTAr
 from fileLists import MGSMAr
