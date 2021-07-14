@@ -61,7 +61,7 @@ for k,fileName in enumerate(fileAr):
     #if evCount > 450:
     #    break
     #Open the file, get the Events tree
-    tmpfile = TFile.Open(fileName)
+    tmpfile = r.TFile.Open(fileName)
     mytree = tmpfile.Events
     for ev in mytree:
         h_nElectron.Fill(ev.nElectron)
