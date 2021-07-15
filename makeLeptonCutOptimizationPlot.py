@@ -985,7 +985,7 @@ for k,fileName in enumerate(fileAr):
 
 print("Finished file loop.","time:",time.time()-startt)
 #Writing different counters to output file:
-outputFile = open("leptonCutOptimizationResults","w")
+outputFile = open("leptonCutOptimizationResults{0}".format(saveName),"w")
 for l in range(masterCutsLen):
     outputFile.write("~~~~~~~~~~~~~~~~~~ "+"for cut number"+str(i)+" ~~~~~~~~~~~~~~~~~~"+"\n")
     outputFile.write("----------------------------------------------------------"+"\n")
