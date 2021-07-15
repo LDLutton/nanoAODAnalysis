@@ -984,20 +984,23 @@ for k,fileName in enumerate(fileAr):
             evCount += 1
 
 print("Finished file loop.","time:",time.time()-startt)
-#Printing out different counters:
+#Writing different counters to output file:
+outputFile = open("leptonCutOptimizationResults","w")
 for l in range(masterCutsLen):
-    print("~~~~~~~~~~~~~~~~~~","for cut number",i,"~~~~~~~~~~~~~~~~~~")
-    print("----------------------------------------------------------")
-    print("Number of events with at least one electron candidate pair:",ifEnoughElecCandCount[l])
-    print("Number of events with at least one muon candidate pair:",ifEnoughMuonCandCount[l])
-    print("Number of events with at least one Z1 electron pair:",ifZ1ElecPairCandCount[l])
-    print("Number of events with at least one Z1 muon pair:",ifZ1MuonPairCandCount[l])
-    print("Number of events with at least one Z2 Electron pair:",ifZ2ElecPairCandCount[l])
-    print("Number of events with at least one Z2 Muon pair:",ifZ2MuonPairCandCount[l])
-    print("Number of events with at least one Z1Z2 pair passing iso cuts:",passesIsoCutsCount[l])
-    print("Number of events with at least one Z1Z2 pair passing SIP cuts:",passesSIPCutCount[l])
-    print("Number of events with at least one Z1Z2 pair passing all cuts:",allCutPassCount[l])
-    print("----------------------------------------------------------")
+    outputFile.write("~~~~~~~~~~~~~~~~~~ "+"for cut number"+str(i)+" ~~~~~~~~~~~~~~~~~~")
+    outputFile.write("----------------------------------------------------------")
+    outputFile.write("Number of events with at least one electron candidate pair:"+str(ifEnoughElecCandCount[l]))
+    outputFile.write("Number of events with at least one muon candidate pair:"+str(ifEnoughMuonCandCount[l]))
+    outputFile.write("Number of events with at least one Z1 electron pair:"+str(ifZ1ElecPairCandCount[l]))
+    outputFile.write("Number of events with at least one Z1 muon pair:"+str(ifZ1MuonPairCandCount[l]))
+    outputFile.write("Number of events with at least one Z2 Electron pair:"+str(ifZ2ElecPairCandCount[l]))
+    outputFile.write("Number of events with at least one Z2 Muon pair:"+str(ifZ2MuonPairCandCount[l]))
+    outputFile.write("Number of events with at least one Z1Z2 pair passing iso cuts:"+str(passesIsoCutsCount[l]))
+    outputFile.write("Number of events with at least one Z1Z2 pair passing SIP cuts:"+str(passesSIPCutCount[l]))
+    outputFile.write("Number of events with at least one Z1Z2 pair passing all cuts:"+str(allCutPassCount[l]))
+    outputFile.write("----------------------------------------------------------")
+
+outputFile.close()
 
 
 #General stuff:
