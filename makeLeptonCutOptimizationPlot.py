@@ -158,11 +158,12 @@ for k,fileName in enumerate(fileAr):
 
     #EvLoop
     for ev in mytree:
+        if evCount % 1000 == 0:
+            print("Event: "+str(evCount))
         for l,cutSet in enumerate(masterCutsAr):
             #if evCount > 450:
             #    break
-            if evCount % 1000 == 0:
-                print("Event: "+str(evCount))
+            
             #IndicesForLeptonPairs
             lepPairOneLeadInd = -1
             lepPairOneTrailingInd = -1
@@ -1092,7 +1093,7 @@ for l in range(masterCutsLen):
         allCutPassRatio      = 0
     
     
-    outputFile.write("~~~~~~~~~~~~~~~~~~ "+"for cut number"+str(i)+" ~~~~~~~~~~~~~~~~~~"+"\n")
+    outputFile.write("~~~~~~~~~~~~~~~~~~ "+"for cut number"+str(l)+" ~~~~~~~~~~~~~~~~~~"+"\n")
     outputFile.write("----------------------------------------------------------"+"\n")
     outputFile.write("Number of events with at least one electron candidate pair:"+str(ifEnoughElecCandCount[l])+" ("+str(elecCandRatio)+")"+"\n")
     outputFile.write("Number of events with at least one muon candidate pair:"+str(ifEnoughMuonCandCount[l])+" ("+str(muonCandRatio)+")"+"\n")
