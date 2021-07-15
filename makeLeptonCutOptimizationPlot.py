@@ -980,8 +980,8 @@ for k,fileName in enumerate(fileAr):
                         
 
             
-            #Increment event count
-            evCount += 1
+        #Increment event count
+        evCount += 1
 
 print("Finished file loop.","time:",time.time()-startt)
 #Writing different counters to output file:
