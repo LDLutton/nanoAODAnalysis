@@ -1007,9 +1007,86 @@ print("Finished file loop.","time:",time.time()-startt)
 #Writing different counters to output file:
 outputFile = open("leptonCutOptimizationResults{0}".format(saveName),"w")
 for l in range(masterCutsLen):
-    elecCandRatio   = (ifEnoughElecCandCount[l]/evCount)*100
-    muonCandRatio   = (ifEnoughMuonCandCount[l]/evCount)*100
-    lepCandRatio    = (ifEnoughLepCandCount[l]/evCount)*100
+    if evCount>0:
+        elecCandRatio   = (ifEnoughElecCandCount[l]/evCount)*100
+        muonCandRatio   = (ifEnoughMuonCandCount[l]/evCount)*100
+        lepCandRatio    = (ifEnoughLepCandCount[l]/evCount)*100
+        if ifEnoughLepCandCount[l]>0:
+            Z1Ratio             = (ifZ1PairCandCount[l]/ifEnoughLepCandCount[l])*100
+            if ifEnoughElecCandCount[l]>0:
+                Z1ElecPairRatio = (ifZ1ElecPairCandCount[l]/ifEnoughElecCandCount[l])*100
+            else:
+                Z1ElecPairRatio = 0
+            if ifEnoughMuonCandCount[l]>0:
+                Z1MuonPairRatio = (ifZ1MuonPairCandCount[l]/ifEnoughMuonCandCount[l])*100
+            else:
+                Z1MuonPairRatio = 0
+            if ifZ1PairCandCount[l]>0:
+                Z1Z2PairRatio   = (ifZ1Z2LepPairCandCount[l]/ifZ1PairCandCount[l])*100
+                Z2ElecPairRatio = (ifZ2ElecPairCandCount[l]/ifZ1PairCandCount[l])*100
+                Z2MuonPairRatio = (ifZ2MuonPairCandCount[l]/ifZ1PairCandCount[l])*100
+
+                Z1Z2PairAllElecRatio = (ifZ1Z2PairAllElecCount[l]/ifZ1PairCandCount[l])*100
+                Z1Z2PairAllMuonRatio = (ifZ1Z2PairAllMuonCount[l]/ifZ1PairCandCount[l])*100
+                Z1ElecZ2MuonRatio    = (ifZ1ElecZ2MuonCount[l]/ifZ1PairCandCount[l])*100
+                Z1MuonZ2ElecRatio    = (ifZ1MuonZ2ElecCount[l]/ifZ1PairCandCount[l])*100
+                if ifZ1Z2LepPairCandCount[l]>0:
+                    passesIsoCutsRatio   = (passesIsoCutsCount[l]/ifZ1Z2LepPairCandCount[l])*100
+                    if passesIsoCutsCount[l]>0:
+                        passesSIPCutRatio   = (passesSIPCutCount[l]/passesIsoCutsCount[l])*100
+                        if passesSIPCutCount[l]>0:
+                            allCutPassRatio      = (allCutPassCount[l]/passesSIPCutCount[l])*100
+                        else:
+                            allCutPassRatio      = 0
+                    else:
+                        passesSIPCutRatio        = 0
+                        allCutPassRatio      = 0
+                else:
+                    passesIsoCutsRatio   = 0
+                    passesSIPCutRatio        = 0
+                    allCutPassRatio      = 0
+            else:
+                Z1Z2PairRatio   = 0
+                Z2ElecPairRatio = 0
+                Z2MuonPairRatio = 0
+
+                Z1Z2PairAllElecRatio = 0
+                Z1Z2PairAllMuonRatio = 0
+                Z1ElecZ2MuonRatio    = 0
+                Z1MuonZ2ElecRatio    = 0
+                passesIsoCutsRatio   = 0
+                passesSIPCutRatio    = 0
+                allCutPassRatio      = 0
+        else:
+            Z1Ratio         = 0
+            Z1Z2PairRatio   = 0
+            Z2ElecPairRatio = 0
+            Z2MuonPairRatio = 0
+
+            Z1Z2PairAllElecRatio = 0
+            Z1Z2PairAllMuonRatio = 0
+            Z1ElecZ2MuonRatio    = 0
+            Z1MuonZ2ElecRatio    = 0
+            passesIsoCutsRatio   = 0
+            passesSIPCutRatio    = 0
+            allCutPassRatio      = 0
+    else:
+        elecCandRatio   = 0
+        muonCandRatio   = 0
+        lepCandRatio    = 0
+        Z1Ratio         = 0
+        Z1Z2PairRatio   = 0
+        Z2ElecPairRatio = 0
+        Z2MuonPairRatio = 0
+
+        Z1Z2PairAllElecRatio = 0
+        Z1Z2PairAllMuonRatio = 0
+        Z1ElecZ2MuonRatio    = 0
+        Z1MuonZ2ElecRatio    = 0
+        passesIsoCutsRatio   = 0
+        passesSIPCutRatio    = 0
+        allCutPassRatio      = 0
+    
 
     Z1Ratio         = (ifZ1PairCandCount[l]/ifEnoughLepCandCount[l])*100
     Z1Z2PairRatio   = (ifZ1Z2LepPairCandCount[l]/ifZ1PairCandCount[l])*100
@@ -1025,7 +1102,7 @@ for l in range(masterCutsLen):
     Z1MuonZ2ElecRatio    = (ifZ1MuonZ2ElecCount[l]/ifZ1PairCandCount[l])*100
 
     passesIsoCutsRatio   = (passesIsoCutsCount[l]/ifZ1Z2LepPairCandCount[l])*100
-    passesSIPCutsRatio   = (passesSIPCutCount[l]/passesIsoCutsCount[l])*100
+    passesSIPCutRatio   = (passesSIPCutCount[l]/passesIsoCutsCount[l])*100
     allCutPassRatio      = (allCutPassCount[l]/passesSIPCutCount[l])*100
 
     
@@ -1045,7 +1122,7 @@ for l in range(masterCutsLen):
     outputFile.write("Number of events with a Z1 elec Z2 muon pair:"+str(ifZ1ElecZ2MuonCount[l])+" ("+str(Z1ElecZ2MuonRatio)+")"+"\n")
     outputFile.write("Number of events with a Z1 muon Z2 elec pair:"+str(ifZ1MuonZ2ElecCount[l])+" ("+str(Z1MuonZ2ElecRatio)+")"+"\n")
     outputFile.write("Number of events with at least one Z1Z2 pair passing iso cuts:"+str(passesIsoCutsCount[l])+" ("+str(passesIsoCutsRatio)+")"+"\n")
-    outputFile.write("Number of events with at least one Z1Z2 pair passing SIP cuts:"+str(passesSIPCutCount[l])+" ("+str(passesSIPCutsRatio)+")"+"\n")
+    outputFile.write("Number of events with at least one Z1Z2 pair passing SIP cuts:"+str(passesSIPCutCount[l])+" ("+str(passesSIPCutRatio)+")"+"\n")
     outputFile.write("Number of events with at least one Z1Z2 pair passing all cuts:"+str(allCutPassCount[l])+" ("+str(allCutPassRatio)+")"+"\n")
     outputFile.write("----------------------------------------------------------"+"\n")
 
