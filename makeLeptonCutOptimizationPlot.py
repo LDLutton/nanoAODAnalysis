@@ -118,7 +118,7 @@ cutIncrementHighAr = [abs(lepCut-lepCutHigh)/splitUpIntoInt for lepCut,lepCutHig
 
 masterCutsLowAr = [[lepCutMid-(cutIncLow*splitUpItr) if not lessThanBool else lepCutMid+(cutIncLow*splitUpItr) for lepCutMid,cutIncLow,lessThanBool in zip(lepCutsAr,cutIncrementLowAr,lessThanAr)] for splitUpItr in range(2,0,-1)]
 masterCutsHighAr = [[lepCutMid+(cutIncHigh*splitUpItr) if not lessThanBool else lepCutMid-(cutIncHigh*splitUpItr) for lepCutMid,cutIncHigh,lessThanBool in zip(lepCutsAr,cutIncrementHighAr,lessThanAr)] for splitUpItr in range(1,3)]
-masterCutsAr = masterCutsLowAr+lepCutsAr+masterCutsHighAr
+masterCutsAr = masterCutsLowAr+[lepCutsAr]+masterCutsHighAr
 #counter Ars
 masterCutsLen = len(masterCutsAr)
 ifEnoughElecCandCount = [0]*masterCutsLen
@@ -151,7 +151,7 @@ for k,fileName in enumerate(fileAr):
 
     #EvLoop
     for ev in mytree:
-        for i,cutSet in enumerate(masterCutsAr):
+        for l,cutSet in enumerate(masterCutsAr):
             #if evCount > 450:
             #    break
             if evCount % 1000 == 0:
@@ -213,7 +213,7 @@ for k,fileName in enumerate(fileAr):
                 if debug:
                     print(evCount,"ev.Electron_eta[i]",ev.Electron_eta[i],"ev.Electron_pt[i]",ev.Electron_pt[i],"ev.Electron_charge[i]",ev.Electron_charge[i],"ev.Electron_mass[i]",ev.Electron_mass[i])
                 #Checking for electron candidates with the initial eta and pt cuts. Keeping track of whether there is a negative and/or a positive electron present
-                if abs(ev.Electron_eta[i]) < cutSet[0] and ev.Electron_pt[i] > elecCandPTCut:
+                if abs(ev.Electron_eta[i]) < cutSet[0] and ev.Electron_pt[i] > cutSet[1]:
 
                     nElecCandidates += 1
                     if ev.Electron_charge[i] == -1:
@@ -304,7 +304,7 @@ for k,fileName in enumerate(fileAr):
                     if debug:
                         print(i,"enough LepCands and ElecCands")
                     if not ifEnoughElecCandBool:
-                        ifEnoughElecCandCount[i] += 1
+                        ifEnoughElecCandCount[l] += 1
                         ifEnoughElecCandBool = True
                         
                     if tmpPtOne > cutSet[4]:
@@ -381,7 +381,7 @@ for k,fileName in enumerate(fileAr):
                                             if debug:
                                                 print(i,j,"Electron pair passed Z1 inv mass cut",cutSet[7])
                                             if not ifZ1ElecPairCandBool:
-                                                ifZ1ElecPairCandCount[i]+= 1
+                                                ifZ1ElecPairCandCount[l]+= 1
                                                 ifZ1ElecPairCandBool = True
                                             elecPassesCutsAr.append([tmpLeadInd,tmpSecondInd])
                                             #Check if the mass is closer to Z than current candidate
@@ -429,7 +429,7 @@ for k,fileName in enumerate(fileAr):
                     if debug:
                         print(i,"enough LepCands and MuonCands")
                     if not ifEnoughMuonCandBool:
-                        ifEnoughMuonCandCount[i]+= 1
+                        ifEnoughMuonCandCount[l]+= 1
                         ifEnoughMuonCandBool = True
                     if tmpPtOne > cutSet[4]:
                         if debug:
@@ -499,7 +499,7 @@ for k,fileName in enumerate(fileAr):
                                             if debug:
                                                 print(i,j,"Muon pair passed Z1 inv mass cut",cutSet[7])
                                             if not ifZ1MuonPairCandBool:
-                                                ifZ1MuonPairCandCount[i]+= 1
+                                                ifZ1MuonPairCandCount[l]+= 1
                                                 ifZ1MuonPairCandBool = True
                                             muonPassesCutsAr.append([tmpLeadInd,tmpSecondInd])
                                             #Check if the mass is closer to Z than current candidate
@@ -611,7 +611,7 @@ for k,fileName in enumerate(fileAr):
                                     if debug:
                                         print("passed cut. Checking for highest Pt in lead of Z2")
                                     if not ifZ2ElecPairCandBool:
-                                        ifZ2ElecPairCandCount[i]+= 1
+                                        ifZ2ElecPairCandCount[l]+= 1
                                         ifZ2ElecPairCandBool = True
                                     if debug:
                                         print("elecZ2Cand[1][0].Pt()",elecZ2Cand[1][0].Pt())
@@ -704,7 +704,7 @@ for k,fileName in enumerate(fileAr):
                                     if debug:
                                         print("passed cut. Checking for highest Pt in lead of Z2")
                                     if not ifZ2MuonPairCandBool:
-                                        ifZ2MuonPairCandCount[i]+= 1
+                                        ifZ2MuonPairCandCount[l]+= 1
                                         ifZ2MuonPairCandBool = True
                                     if debug:
                                         print("muonZ2Cand[1][0].Pt()",muonZ2Cand[1][0].Pt())
@@ -859,7 +859,7 @@ for k,fileName in enumerate(fileAr):
                         if debug:
                             print("passed iso cuts. Starting SIP cuts")
                         if not passesIsoCutsBool:
-                            passesIsoCutsCount[i]+= 1
+                            passesIsoCutsCount[l]+= 1
                             passesIsoCutsBool = True
 
                         passesSIPCut = True
@@ -939,7 +939,7 @@ for k,fileName in enumerate(fileAr):
                             if debug:
                                 print("passed SIP Cut")
                             if not passesSIPCutBool:
-                                passesSIPCutCount[i] += 1
+                                passesSIPCutCount[l] += 1
                                 passesSIPCutBool = True
 
                             tmpVec = leadLepPairOneVec + trailingLepPairOneVec
@@ -974,7 +974,7 @@ for k,fileName in enumerate(fileAr):
                                         print("all checks passed")
                                     #at this point all lepton cuts have been passed.
                                     if not allCutPassBool:
-                                        allCutPassCount[i]+= 1
+                                        allCutPassCount[l]+= 1
                                         allCutPassBool = True
                                     
                         
@@ -985,18 +985,18 @@ for k,fileName in enumerate(fileAr):
 
 print("Finished file loop.","time:",time.time()-startt)
 #Printing out different counters:
-for i in range(masterCutsLen):
+for l in range(masterCutsLen):
     print("~~~~~~~~~~~~~~~~~~","for cut number",i,"~~~~~~~~~~~~~~~~~~")
     print("----------------------------------------------------------")
-    print("Number of events with at least one electron candidate pair:",ifEnoughElecCandCount[i])
-    print("Number of events with at least one muon candidate pair:",ifEnoughMuonCandCount[i])
-    print("Number of events with at least one Z1 electron pair:",ifZ1ElecPairCandCount[i])
-    print("Number of events with at least one Z1 muon pair:",ifZ1MuonPairCandCount[i])
-    print("Number of events with at least one Z2 Electron pair:",ifZ2ElecPairCandCount[i])
-    print("Number of events with at least one Z2 Muon pair:",ifZ2MuonPairCandCount[i])
-    print("Number of events with at least one Z1Z2 pair passing iso cuts:",passesIsoCutsCount[i])
-    print("Number of events with at least one Z1Z2 pair passing SIP cuts:",passesSIPCutCount[i])
-    print("Number of events with at least one Z1Z2 pair passing all cuts:",allCutPassCount[i])
+    print("Number of events with at least one electron candidate pair:",ifEnoughElecCandCount[l])
+    print("Number of events with at least one muon candidate pair:",ifEnoughMuonCandCount[l])
+    print("Number of events with at least one Z1 electron pair:",ifZ1ElecPairCandCount[l])
+    print("Number of events with at least one Z1 muon pair:",ifZ1MuonPairCandCount[l])
+    print("Number of events with at least one Z2 Electron pair:",ifZ2ElecPairCandCount[l])
+    print("Number of events with at least one Z2 Muon pair:",ifZ2MuonPairCandCount[l])
+    print("Number of events with at least one Z1Z2 pair passing iso cuts:",passesIsoCutsCount[l])
+    print("Number of events with at least one Z1Z2 pair passing SIP cuts:",passesSIPCutCount[l])
+    print("Number of events with at least one Z1Z2 pair passing all cuts:",allCutPassCount[l])
     print("----------------------------------------------------------")
 
 
