@@ -10,7 +10,7 @@ from fileLists import ttHToBBBackgroundAr
 import time as time
 
 #To enable heavy printing for debug
-debug = True
+debug = False
 
 #withDipoleRecoil = True
 

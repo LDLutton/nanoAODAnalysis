@@ -10,7 +10,7 @@ from fileLists import ttHToBBBackgroundAr
 import time as time
 
 #To enable heavy printing for debug
-debug = True
+debug = False
 
 #withDipoleRecoil = True
 
@@ -538,9 +538,10 @@ for k,fileName in enumerate(fileAr):
                             tmpPtTwo = ev.Electron_pt[j]
 
                             tmpEtaTwo = ev.Electron_eta[j]
-                            if debug:
-                                print(i,j,"ev.Electron_mass",ev.Electron_mass[i],ev.Electron_mass[j])
                             tmpMassTwo = ev.Electron_mass[j]
+                            if debug:
+                                print(i,j,"ev.Electron_mass",tmpMassOne,tmpMassTwo)
+                            
                             tmpPhiTwo = ev.Electron_phi[j]
 
                             if tmpPtOne > tmpPtTwo:
@@ -577,7 +578,7 @@ for k,fileName in enumerate(fileAr):
                             #Check that the pt of the second electron passes the lower pt cut
                             if tmpPtTwo > firstZTrailingCut:
                                 if debug:
-                                    print(i,j,"Electron trailing pt passed Z1 trailing cut",firstZTrailingCut)
+                                    print(i,j,"Second electron pt passed Z1 trailing cut",firstZTrailingCut)
                                 #Sort the electrons into leading and trailing based on pt
                                 #Actually get these earlier
                                 """
