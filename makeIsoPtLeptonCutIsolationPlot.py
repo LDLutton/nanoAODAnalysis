@@ -192,7 +192,7 @@ for k,fileName in enumerate(fileAr):
         #Vectors for Leptons
         leadLepPairOneVecAr = [Math.PtEtaPhiMVector(0,0,0,0) for i in range(len(firstZLeadingPtCutAr))]
         trailingLepPairOneVecAr = [Math.PtEtaPhiMVector(0,0,0,0) for i in range(len(firstZLeadingPtCutAr))]
-        elecPassesCutsAr   = []
+        elecPassesCutsAr   = [[] for i in range(len(firstZLeadingPtCutAr))]
         elecPassesZ2CutsAr = []
         leadLepPairChargeAr = [0 for i in range(len(firstZLeadingPtCutAr))]
         trailingLepPairChargeAr = [0 for i in range(len(firstZLeadingPtCutAr))]
