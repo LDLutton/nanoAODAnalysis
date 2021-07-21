@@ -978,7 +978,7 @@ for k,fileName in enumerate(fileAr):
 
 print("Finished file loop.","time:",time.time()-startt)
 #Writing different counters to output file:
-outputFile = open("leptonCutOptimizationResults{0}".format(saveName),"w")
+outputFile = open("leptonIsoPtCutOptimizationResults{0}".format(saveName),"w")
 if evCount>0:
     outputFile.write("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"+"\n")
     
