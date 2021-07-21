@@ -620,29 +620,29 @@ for k,fileName in enumerate(fileAr):
                                                     print("passed check that the invmass is > leptonInvMassCutTwo")
                                                 passesCandCuts = True
                                     if debug:
-                                    print("checking if passed potential 4e cut","passesCandCuts",passesCandCuts)
+                                        print("checking if passed potential 4e cut","passesCandCuts",passesCandCuts)
                                     if passesCandCuts:
-                                    if debug:
-                                        print("passed cut. Checking for highest Pt in lead of Z2")
-                                    if not ifZ2ElecPairCandBoolAr[ptCutItr]:
-                                        ifZ2ElecPairCandCount[ptCutItr] += 1
-                                        ifZ2ElecPairCandBoolAr[ptCutItr] = True
-                                    if debug:
-                                        print("elecZ2Cand[1][0].Pt()",elecZ2Cand[1][0].Pt())
-                                    if elecZ2Cand[1][0].Pt() > leadZ2Pt:
                                         if debug:
-                                            print("New highest pt found. Old pt:",leadZ2Pt)
-                                        leadZ2Pt = elecZ2Cand[1][0].Pt()
-                                        trailingZ2Pt = elecZ2Cand[1][1].Pt()
-                                        leadZ2LepPairInd = i
-                                    elif elecZ2Cand[1][0].Pt() == leadZ2Pt:
+                                            print("passed cut. Checking for highest Pt in lead of Z2")
+                                        if not ifZ2ElecPairCandBoolAr[ptCutItr]:
+                                            ifZ2ElecPairCandCount[ptCutItr] += 1
+                                            ifZ2ElecPairCandBoolAr[ptCutItr] = True
                                         if debug:
-                                            print("Highest pt equal. checking trailing Z2 pt")
-                                        if elecZ2Cand[1][1].Pt() == trailingZ2Pt:
+                                            print("elecZ2Cand[1][0].Pt()",elecZ2Cand[1][0].Pt())
+                                        if elecZ2Cand[1][0].Pt() > leadZ2Pt:
                                             if debug:
-                                                print("New highest trailing pt found. Old pt:",trailingZ2Pt)
+                                                print("New highest pt found. Old pt:",leadZ2Pt)
+                                            leadZ2Pt = elecZ2Cand[1][0].Pt()
                                             trailingZ2Pt = elecZ2Cand[1][1].Pt()
                                             leadZ2LepPairInd = i
+                                        elif elecZ2Cand[1][0].Pt() == leadZ2Pt:
+                                            if debug:
+                                                print("Highest pt equal. checking trailing Z2 pt")
+                                            if elecZ2Cand[1][1].Pt() == trailingZ2Pt:
+                                                if debug:
+                                                    print("New highest trailing pt found. Old pt:",trailingZ2Pt)
+                                                trailingZ2Pt = elecZ2Cand[1][1].Pt()
+                                                leadZ2LepPairInd = i
                     if debug:
                         print("ELECTRON Z2 LOOP FINISHED")
                         print("leadZ2LepPairInd",leadZ2LepPairInd,"leadZ2Pt",leadZ2Pt,"trailingZ2Pt",trailingZ2Pt)
