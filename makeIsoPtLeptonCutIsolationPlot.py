@@ -305,7 +305,7 @@ for k,fileName in enumerate(fileAr):
         #Electrons loop
         if debug and evCount == evToDebug:
             print("entering electrons loop")
-        for i in range(tmpnElectron):
+        for i in range(tmpnElectron-1):
             if debug and evCount == evToDebug:
                 print("Electron",i)
             tmpPtOne = ev.Electron_pt[i]
@@ -421,7 +421,8 @@ for k,fileName in enumerate(fileAr):
         if debug and evCount == evToDebug:
             print("ELECTRON LOOP OVER")
             for ptCutItr,firstZLeadingPtCut in enumerate(firstZLeadingPtCutAr):
-                print("ptCutItr",ptCutItr,"difFromZMassOneAr[ptCutItr]",difFromZMassOneAr[ptCutItr],"lepPairOneLeadIndAr[ptCutItr]",lepPairOneLeadIndAr[ptCutItr],"lepPairOneTrailingIndAr[ptCutItr]",lepPairOneTrailingIndAr[ptCutItr],"leadLepPairChargeAr[ptCutItr]",leadLepPairChargeAr[ptCutItr],"trailingLepPairChargeAr[ptCutItr]",trailingLepPairChargeAr[ptCutItr])
+                if ptCutItr == ptCutToDebug:
+                    print("ptCutItr",ptCutItr,"difFromZMassOneAr[ptCutItr]",difFromZMassOneAr[ptCutItr],"lepPairOneLeadIndAr[ptCutItr]",lepPairOneLeadIndAr[ptCutItr],"lepPairOneTrailingIndAr[ptCutItr]",lepPairOneTrailingIndAr[ptCutItr],"leadLepPairChargeAr[ptCutItr]",leadLepPairChargeAr[ptCutItr],"trailingLepPairChargeAr[ptCutItr]",trailingLepPairChargeAr[ptCutItr])
 
                     
         muonLeadingAr = [False for i in range(len(firstZLeadingPtCutAr))]
@@ -431,7 +432,7 @@ for k,fileName in enumerate(fileAr):
         #Muons loop
         if debug and evCount == evToDebug:
             print("Entering muons loop")
-        for i in range(tmpnMuon):
+        for i in range(tmpnMuon-1):
             if debug and evCount == evToDebug:
                 print("Muon",i)
             #No cuts
@@ -548,8 +549,8 @@ for k,fileName in enumerate(fileAr):
             print("MUON LOOP OVER")
             for ptCutItr,firstZLeadingPtCut in enumerate(firstZLeadingPtCutAr):
                 if ptCutItr == ptCutToDebug:
-                    print("difFromZMassOneAr[ptCutItr]",difFromZMassOneAr[ptCutItr],"lepPairOneLeadIndAr[ptCutItr]",lepPairOneLeadIndAr[ptCutItr],"lepPairOneTrailingIndAr[ptCutItr]",lepPairOneTrailingIndAr[ptCutItr],"leadLepPairChargeAr[ptCutItr]",leadLepPairChargeAr[ptCutItr],"trailingLepPairChargeAr[ptCutItr]",trailingLepPairChargeAr[ptCutItr],"muonLeadingAr[ptCutItr]",muonLeadingAr[ptCutItr])
-                    print("Going to find Z2 if Z1 has been found")
+                    print("ptCutItr",ptCutItr,"difFromZMassOneAr[ptCutItr]",difFromZMassOneAr[ptCutItr],"lepPairOneLeadIndAr[ptCutItr]",lepPairOneLeadIndAr[ptCutItr],"lepPairOneTrailingIndAr[ptCutItr]",lepPairOneTrailingIndAr[ptCutItr],"leadLepPairChargeAr[ptCutItr]",leadLepPairChargeAr[ptCutItr],"trailingLepPairChargeAr[ptCutItr]",trailingLepPairChargeAr[ptCutItr],"muonLeadingAr[ptCutItr]",muonLeadingAr[ptCutItr])
+            print("Going to find Z2 if Z1 has been found")
         for ptCutItr,firstZLeadingPtCut in enumerate(firstZLeadingPtCutAr):
             #uncomment to debug on every pt cut
             #ptCutToDebug = ptCutItr
@@ -630,30 +631,30 @@ for k,fileName in enumerate(fileAr):
                                                 if debug and evCount == evToDebug and ptCutItr == ptCutToDebug:
                                                     print("passed check that the invmass is > leptonInvMassCutTwo")
                                                 passesCandCuts = True
+                                if debug and evCount == evToDebug and ptCutItr == ptCutToDebug:
+                                    print("checking if passed potential 4e cut","passesCandCuts",passesCandCuts)
+                                if passesCandCuts:
                                     if debug and evCount == evToDebug and ptCutItr == ptCutToDebug:
-                                        print("checking if passed potential 4e cut","passesCandCuts",passesCandCuts)
-                                    if passesCandCuts:
+                                        print("passed cut. Checking for highest Pt in lead of Z2")
+                                    if not ifZ2ElecPairCandBoolAr[ptCutItr]:
+                                        ifZ2ElecPairCandCount[ptCutItr] += 1
+                                        ifZ2ElecPairCandBoolAr[ptCutItr] = True
+                                    if debug and evCount == evToDebug and ptCutItr == ptCutToDebug:
+                                        print("elecZ2Cand[1][0].Pt()",elecZ2Cand[1][0].Pt())
+                                    if elecZ2Cand[1][0].Pt() > leadZ2Pt:
                                         if debug and evCount == evToDebug and ptCutItr == ptCutToDebug:
-                                            print("passed cut. Checking for highest Pt in lead of Z2")
-                                        if not ifZ2ElecPairCandBoolAr[ptCutItr]:
-                                            ifZ2ElecPairCandCount[ptCutItr] += 1
-                                            ifZ2ElecPairCandBoolAr[ptCutItr] = True
+                                            print("New highest pt found. Old pt:",leadZ2Pt)
+                                        leadZ2Pt = elecZ2Cand[1][0].Pt()
+                                        trailingZ2Pt = elecZ2Cand[1][1].Pt()
+                                        leadZ2LepPairInd = i
+                                    elif elecZ2Cand[1][0].Pt() == leadZ2Pt:
                                         if debug and evCount == evToDebug and ptCutItr == ptCutToDebug:
-                                            print("elecZ2Cand[1][0].Pt()",elecZ2Cand[1][0].Pt())
-                                        if elecZ2Cand[1][0].Pt() > leadZ2Pt:
+                                            print("Highest pt equal. checking trailing Z2 pt")
+                                        if elecZ2Cand[1][1].Pt() == trailingZ2Pt:
                                             if debug and evCount == evToDebug and ptCutItr == ptCutToDebug:
-                                                print("New highest pt found. Old pt:",leadZ2Pt)
-                                            leadZ2Pt = elecZ2Cand[1][0].Pt()
+                                                print("New highest trailing pt found. Old pt:",trailingZ2Pt)
                                             trailingZ2Pt = elecZ2Cand[1][1].Pt()
                                             leadZ2LepPairInd = i
-                                        elif elecZ2Cand[1][0].Pt() == leadZ2Pt:
-                                            if debug and evCount == evToDebug and ptCutItr == ptCutToDebug:
-                                                print("Highest pt equal. checking trailing Z2 pt")
-                                            if elecZ2Cand[1][1].Pt() == trailingZ2Pt:
-                                                if debug and evCount == evToDebug and ptCutItr == ptCutToDebug:
-                                                    print("New highest trailing pt found. Old pt:",trailingZ2Pt)
-                                                trailingZ2Pt = elecZ2Cand[1][1].Pt()
-                                                leadZ2LepPairInd = i
                     if debug and evCount == evToDebug and ptCutItr == ptCutToDebug:
                         print("ELECTRON Z2 LOOP FINISHED")
                         print("leadZ2LepPairInd",leadZ2LepPairInd,"leadZ2Pt",leadZ2Pt,"trailingZ2Pt",trailingZ2Pt)
@@ -721,6 +722,8 @@ for k,fileName in enumerate(fileAr):
                                                 if debug and evCount == evToDebug and ptCutItr == ptCutToDebug:
                                                     print("passed check that the invmass is > leptonInvMassCutTwo")
                                                 passesCandCuts = True
+                                if debug and evCount == evToDebug and ptCutItr == ptCutToDebug:
+                                    print("checking if passed potential 4e cut","passesCandCuts",passesCandCuts)
                                 if passesCandCuts:
                                     if debug and evCount == evToDebug and ptCutItr == ptCutToDebug:
                                         print("passed cut. Checking for highest Pt in lead of Z2")
@@ -811,7 +814,7 @@ for k,fileName in enumerate(fileAr):
                         if debug and evCount == evToDebug and ptCutItr == ptCutToDebug and isoItr == isoCutToDebug:
                             print("Z1Z2VecPtAr",Z1Z2VecPtAr,"Z1Z2IndAr",Z1Z2IndAr,"passesPtCutAr",passesPtCutAr)
 
-                        for i,Z1Z2Ind in enumerate(Z1Z2IndAr):
+                        for i,Z1Z2Ind in enumerate(Z1Z2IndAr-1):
                             for j in range(i+1,len(Z1Z2IndAr)):
                                 Z1Z2IndTwo = Z1Z2IndAr[j]
                                 if debug and evCount == evToDebug and ptCutItr == ptCutToDebug and isoItr == isoCutToDebug:
