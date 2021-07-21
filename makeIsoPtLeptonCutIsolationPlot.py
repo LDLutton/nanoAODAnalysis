@@ -109,8 +109,8 @@ leptonInvMassCutHigh = 120     #<
 sipCut               = 4
 
 
-isoCutAr = [0.25,0.30,0.35,0.40,0.45]
-firstZLeadingPtCutAr = [10,15,20,25,30]
+isoCutAr = [0.05,0.15,0.35,0.65,0.95]
+firstZLeadingPtCutAr = [10,20,40,60,80]
 #lepCutsAr = [2.5,7,2.4,5,10,12,20,60,100,12,120]
 #cutsLowAr  = [3.5,0,3.4,0,0,0,5,30,50,0,150]
 #cutsHighAr = [0.5,14,0.4,10,20,24,40,89,200,24,95]
