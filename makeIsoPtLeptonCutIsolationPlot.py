@@ -554,8 +554,7 @@ for k,fileName in enumerate(fileAr):
         for ptCutItr,firstZLeadingPtCut in enumerate(firstZLeadingPtCutAr):
             #uncomment to debug on every pt cut
             #ptCutToDebug = ptCutItr
-            passesIsoCutsBool    = False
-            allCutPassBool       = False
+            
             leadZ2LepPairInd = -1
             leadZ2Pt = 0
             trailingZ2Pt = 0
@@ -784,6 +783,8 @@ for k,fileName in enumerate(fileAr):
                     for isoItr,isoCut in enumerate(isoCutAr):
                         #uncomment to debug on every iso cut
                         #isoCutToDebug = isoItr
+                        passesIsoCutsBool    = False
+                        allCutPassBool       = False
                         passesIsoCuts = True
                         
                         muonOrNotAr = [muonLeadingAr[ptCutItr],muonZ2Pair]
