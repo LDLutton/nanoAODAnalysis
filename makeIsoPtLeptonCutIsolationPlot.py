@@ -106,6 +106,7 @@ leptonInvMassCutLow = 60       #>
 fourLeptonInvMassCut = 100     #>
 leptonInvMassCutTwo = 12       #>
 leptonInvMassCutHigh = 120     #<
+sipCut               = 4
 
 
 isoCutAr = [0.25,0.30,0.35,0.40,0.45]
@@ -876,9 +877,9 @@ for k,fileName in enumerate(fileAr):
                                     tmpIsoTwo = ev.Electron_pfRelIso03_all[tmpIsoTwoInd]
                                 if debug and evCount == evToDebug and ptCutItr == ptCutToDebug and isoItr == isoCutToDebug:
                                     print(i,j,"tmpIsoOne",tmpIsoOne,"tmpIsoTwo",tmpIsoTwo)
-                                if tmpIsoOne + tmpIsoTwo > 0.35:
+                                if tmpIsoOne + tmpIsoTwo > isoCut:
                                     if debug and evCount == evToDebug and ptCutItr == ptCutToDebug and isoItr == isoCutToDebug:
-                                        print(i,j,"summed isos > 0.35. cuts not passed")
+                                        print(i,j,"summed isos < {0}. cuts not passed".format(isoCut))
                                     passesIsoCuts = False
                                 
 
@@ -909,13 +910,13 @@ for k,fileName in enumerate(fileAr):
                                         print("muonZ2Pair",muonZ2Pair)
                                         print("ev.Muon_sip3d[lepPairOneLeadIndAr[ptCutItr]]",ev.Muon_sip3d[lepPairOneLeadIndAr[ptCutItr]],"ev.Muon_sip3d[lepPairOneTrailingIndAr[ptCutItr]]",ev.Muon_sip3d[lepPairOneTrailingIndAr[ptCutItr]])
                                         print("ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][0]]",ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][0]],"ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][1]]",ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][1]])
-                                    if ev.Muon_sip3d[lepPairOneLeadIndAr[ptCutItr]] > 4:
+                                    if ev.Muon_sip3d[lepPairOneLeadIndAr[ptCutItr]] > sipCut:                    
                                         passesSIPCut = False
-                                    elif ev.Muon_sip3d[lepPairOneTrailingIndAr[ptCutItr]] > 4:
+                                    elif ev.Muon_sip3d[lepPairOneTrailingIndAr[ptCutItr]] > sipCut:                    
                                         passesSIPCut = False
-                                    elif ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][0]] > 4:
+                                    elif ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][0]] > sipCut:                    
                                         passesSIPCut = False
-                                    elif ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][1]] > 4:
+                                    elif ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][1]] > sipCut:                    
                                         passesSIPCut = False
                                     if debug and evCount == evToDebug and ptCutItr == ptCutToDebug and isoItr == isoCutToDebug:
                                         print("passesSIPCut",passesSIPCut)
@@ -924,13 +925,13 @@ for k,fileName in enumerate(fileAr):
                                         print("muonZ2Pair",muonZ2Pair)
                                         print("ev.Muon_sip3d[lepPairOneLeadIndAr[ptCutItr]]",ev.Muon_sip3d[lepPairOneLeadIndAr[ptCutItr]],"ev.Muon_sip3d[lepPairOneTrailingIndAr[ptCutItr]]",ev.Muon_sip3d[lepPairOneTrailingIndAr[ptCutItr]])
                                         print("ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]]",ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]],"ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]]",ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]])
-                                    if ev.Muon_sip3d[lepPairOneLeadIndAr[ptCutItr]] > 4:
+                                    if ev.Muon_sip3d[lepPairOneLeadIndAr[ptCutItr]] > sipCut:                    
                                         passesSIPCut = False
-                                    elif ev.Muon_sip3d[lepPairOneTrailingIndAr[ptCutItr]] > 4:
+                                    elif ev.Muon_sip3d[lepPairOneTrailingIndAr[ptCutItr]] > sipCut:                    
                                         passesSIPCut = False
-                                    elif ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] > 4:
+                                    elif ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] > sipCut:                    
                                         passesSIPCut = False
-                                    elif ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] > 4:
+                                    elif ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] > sipCut:                    
                                         passesSIPCut = False
                                     if debug and evCount == evToDebug and ptCutItr == ptCutToDebug and isoItr == isoCutToDebug:
                                         print("passesSIPCut",passesSIPCut)
@@ -946,13 +947,13 @@ for k,fileName in enumerate(fileAr):
                                 #print("leadLepPairOneVecAr[ptCutItr]",leadLepPairOneVecAr[ptCutItr],"trailingLepPairOneVecAr[ptCutItr]",trailingLepPairOneVecAr[ptCutItr])
                                 #print("muonLeadingAr[ptCutItr]",muonLeadingAr[ptCutItr],"muonZ2Pair",muonZ2Pair)
                                 #print()
-                                if ev.Electron_sip3d[lepPairOneLeadIndAr[ptCutItr]] > 4:
+                                if ev.Electron_sip3d[lepPairOneLeadIndAr[ptCutItr]] > sipCut:                    
                                     passesSIPCut = False
-                                elif ev.Electron_sip3d[lepPairOneTrailingIndAr[ptCutItr]] > 4:
+                                elif ev.Electron_sip3d[lepPairOneTrailingIndAr[ptCutItr]] > sipCut:                    
                                     passesSIPCut = False
-                                elif ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][0]] > 4:
+                                elif ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][0]] > sipCut:                    
                                     passesSIPCut = False
-                                elif ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][1]] > 4:
+                                elif ev.Muon_sip3d[muonPassesZ2CutsAr[leadZ2LepPairInd][0][1]] > sipCut:                    
                                     passesSIPCut = False
                                 if debug and evCount == evToDebug and ptCutItr == ptCutToDebug and isoItr == isoCutToDebug:
                                     print("passesSIPCut",passesSIPCut)
@@ -962,13 +963,13 @@ for k,fileName in enumerate(fileAr):
                                     print("muonZ2Pair",muonZ2Pair)
                                     print("ev.Electron_sip3d[lepPairOneLeadIndAr[ptCutItr]]",ev.Electron_sip3d[lepPairOneLeadIndAr[ptCutItr]],"ev.Electron_sip3d[lepPairOneTrailingIndAr[ptCutItr]]",ev.Electron_sip3d[lepPairOneTrailingIndAr[ptCutItr]])
                                     print("ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]]",ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]],"ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]]",ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]])
-                                if ev.Electron_sip3d[lepPairOneLeadIndAr[ptCutItr]] > 4:
+                                if ev.Electron_sip3d[lepPairOneLeadIndAr[ptCutItr]] > sipCut:                    
                                     passesSIPCut = False
-                                elif ev.Electron_sip3d[lepPairOneTrailingIndAr[ptCutItr]] > 4:
+                                elif ev.Electron_sip3d[lepPairOneTrailingIndAr[ptCutItr]] > sipCut:                    
                                     passesSIPCut = False
-                                elif ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] > 4:
+                                elif ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][0]] > sipCut:                    
                                     passesSIPCut = False
-                                elif ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] > 4:
+                                elif ev.Electron_sip3d[elecPassesZ2CutsAr[leadZ2LepPairInd][0][1]] > sipCut:                    
                                     passesSIPCut = False
                                 if debug and evCount == evToDebug and ptCutItr == ptCutToDebug and isoItr == isoCutToDebug:
                                     print("passesSIPCut",passesSIPCut)
