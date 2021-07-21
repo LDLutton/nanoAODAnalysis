@@ -814,7 +814,7 @@ for k,fileName in enumerate(fileAr):
                         if debug and evCount == evToDebug and ptCutItr == ptCutToDebug and isoItr == isoCutToDebug:
                             print("Z1Z2VecPtAr",Z1Z2VecPtAr,"Z1Z2IndAr",Z1Z2IndAr,"passesPtCutAr",passesPtCutAr)
 
-                        for i,Z1Z2Ind in enumerate(Z1Z2IndAr-1):
+                        for i,Z1Z2Ind in enumerate(Z1Z2IndAr[:-1):
                             for j in range(i+1,len(Z1Z2IndAr)):
                                 Z1Z2IndTwo = Z1Z2IndAr[j]
                                 if debug and evCount == evToDebug and ptCutItr == ptCutToDebug and isoItr == isoCutToDebug:
