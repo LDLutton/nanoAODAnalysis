@@ -515,8 +515,6 @@ for k,fileName in enumerate(fileAr):
                                     if tmpMaxPtLead > firstZLeadingPtCut:
                                         if debug and evCount == evToDebug and ptCutItr == ptCutToDebug:
                                             print(i,j,"Muon lead pt passed Z1 lead cut",firstZLeadingPtCut)
-                                        if debug and evCount == evToDebug and ptCutItr == ptCutToDebug:
-                                            print(i,j,"Muon pair passed Z1 inv mass cut",leptonInvMassCutLow,leptonInvMassCutHigh)
                                         if not ifZ1MuonPairCandBoolAr[ptCutItr]:
                                             ifZ1MuonPairCandCount[ptCutItr] += 1
                                             ifZ1MuonPairCandBoolAr[ptCutItr] = True
