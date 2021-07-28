@@ -78,7 +78,6 @@ def checkForMuonCands(ev,nMuonInt):
             print("ev.Muon_eta[i]",ev.Muon_eta[i],"ev.Muon_pt[i]",ev.Muon_pt[i],"ev.Muon_charge[i]",ev.Muon_charge[i])
         #Checking for muon candidates with the initial eta and pt cuts. Keeping track of whether there is a negative and/or a positive muon present
         if abs(ev.Muon_eta[i]) < muonCandEtaCut and ev.Muon_pt[i] > muonCandPTCut:
-            nMuonCandidates += 1
             if ev.Muon_charge[i] == -1:
                 #muonHasNeg = True
                 nMuonCandidatesNeg += 1
@@ -98,6 +97,9 @@ def checkForMuonCands(ev,nMuonInt):
     return nMuonCandPairs
 
 def checkForLepCands(nElecCandPairs,nMuonCandPairs):
+    enoughElecCands = False
+    enoughMuonCands = False
+    enoughLepCands = False
     if nElecCandPairs >= 1:
         enoughElecCands = True
         #Checking if electrons alone satisfy the lep candidates
@@ -115,7 +117,7 @@ def checkForLepCands(nElecCandPairs,nMuonCandPairs):
             enoughLepCands = True
     return (enoughElecCands,enoughMuonCands,enoughLepCands)
 
-def checkForElecPair(ev,i,tmpnElectron,elecPassesZ2CutsAr,elecPassesCutsAr,difFromZMassOne):
+def checkForElecPair(ev,i,tmpnElectron,elecPassesZ2CutsAr,elecPassesCutsAr,difFromZMassOne,ifZ1ElecPairCandBool):
     for j in range(i+1,tmpnElectron):
         if debug:
             print("Electron",j)
@@ -204,9 +206,9 @@ def checkForElecPair(ev,i,tmpnElectron,elecPassesZ2CutsAr,elecPassesCutsAr,difFr
                             trailingLepPairOneVec = tmpTrailingVec
                             leadLepPairCharge = tmpLeadCharge
                             trailingLepPairCharge = tmpTrailingCharge
-    return (difFromZMassOne,lepPairOneLeadInd,lepPairOneTrailingInd,leadLepPairOneVec,trailingLepPairOneVec,leadLepPairCharge,trailingLepPairCharge)
+    return (difFromZMassOne,lepPairOneLeadInd,lepPairOneTrailingInd,leadLepPairOneVec,trailingLepPairOneVec,leadLepPairCharge,trailingLepPairCharge,ifZ1ElecPairCandBool)
 
-def checkForMuonPair(ev,i,tmpnMuon,muonPassesZ2CutsAr,muonPassesCutsAr,difFromZMassOne):
+def checkForMuonPair(ev,i,tmpnMuon,muonPassesZ2CutsAr,muonPassesCutsAr,difFromZMassOne,ifZ1ElecPairCandBool):
     for j in range(i+1,tmpnMuon):
         if debug:
             print("Muon",j)
@@ -296,7 +298,7 @@ def checkForMuonPair(ev,i,tmpnMuon,muonPassesZ2CutsAr,muonPassesCutsAr,difFromZM
                             trailingLepPairOneVec = tmpTrailingVec
                             leadLepPairCharge = tmpLeadCharge
                             trailingLepPairCharge = tmpTrailingCharge
-    return (difFromZMassOne,lepPairOneLeadInd,lepPairOneTrailingInd,leadLepPairOneVec,trailingLepPairOneVec,leadLepPairCharge,trailingLepPairCharge)
+    return (difFromZMassOne,lepPairOneLeadInd,lepPairOneTrailingInd,leadLepPairOneVec,trailingLepPairOneVec,leadLepPairCharge,trailingLepPairCharge,ifZ1ElecPairCandBool)
 
 #For calculating DeltaR for two particles from their respective etas and phis
 def calcDeltaR(phi1,eta1,phi2,eta2):
@@ -660,12 +662,12 @@ for k,fileName in enumerate(fileAr):
         trailingZ2Pt = 0
         #Checking double lepton HLT triggers
         elecPassHLT = False
-        if ev.HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL[0] or ev.HLT_DoubleEle25_CaloIdL_MW[0]:
+        if ev.HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL or ev.HLT_DoubleEle25_CaloIdL_MW:
             elecPassHLT = True
         muonPassHLT = False
-        if ev.HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8[0] or ev.HLT_TripleMu_10_5_5_DZ[0] or ev.HLT_TripleMu_12_10_5[0]:
+        if ev.HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8 or ev.HLT_TripleMu_10_5_5_DZ or ev.HLT_TripleMu_12_10_5:
             muonPassHLT = True
-        if ev.HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL[0] or ev.HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_ DZ[0] or ev.HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_ DZ[0] or ev.HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_ DZ[0] or ev.HLT_DiMu9_Ele9_CaloIdL_TrackIdL_ DZ[0] or ev.HLT_Mu8_DiEle12_CaloIdL_TrackIdL_ DZ[0]:
+        if ev.HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL or ev.HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ or ev.HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ or ev.HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ or ev.HLT_DiMu9_Ele9_CaloIdL_TrackIdL_DZ or ev.HLT_Mu8_DiEle12_CaloIdL_TrackIdL_DZ:
             elecPassHLT = True
             muonPassHLT = True
 
@@ -731,7 +733,7 @@ for k,fileName in enumerate(fileAr):
                     #Looping over other electrons
                     if debug:
                         print(i,"Loop over remaining electrons")
-                    difFromZMassOne,lepPairOneLeadInd,lepPairOneTrailingInd,leadLepPairOneVec,trailingLepPairOneVec,leadLepPairCharge,trailingLepPairCharge = checkForElecPair(ev,i,tmpnElectron,elecPassesZ2CutsAr,elecPassesCutsAr,difFromZMassOne)
+                    difFromZMassOne,lepPairOneLeadInd,lepPairOneTrailingInd,leadLepPairOneVec,trailingLepPairOneVec,leadLepPairCharge,trailingLepPairCharge,ifZ1ElecPairCandBool = checkForElecPair(ev,i,tmpnElectron,elecPassesZ2CutsAr,elecPassesCutsAr,difFromZMassOne,ifZ1ElecPairCandBool)
         if debug:
             print("ELECTRON LOOP OVER")
             print("difFromZMassOne",difFromZMassOne,"lepPairOneLeadInd",lepPairOneLeadInd,"lepPairOneTrailingInd",lepPairOneTrailingInd,"leadLepPairCharge",leadLepPairCharge,"trailingLepPairCharge",trailingLepPairCharge)
@@ -771,7 +773,7 @@ for k,fileName in enumerate(fileAr):
                     #Looping over other muons
                     if debug:
                         print(i,"Loop over remaining muons")
-                    difFromZMassOne,lepPairOneLeadInd,lepPairOneTrailingInd,leadLepPairOneVec,trailingLepPairOneVec,leadLepPairCharge,trailingLepPairCharge = checkForMuonPair(ev,i,tmpnMuon,muonPassesZ2CutsAr,muonPassesCutsAr,difFromZMassOne)
+                    difFromZMassOne,lepPairOneLeadInd,lepPairOneTrailingInd,leadLepPairOneVec,trailingLepPairOneVec,leadLepPairCharge,trailingLepPairCharge,ifZ1ElecPairCandBool = checkForMuonPair(ev,i,tmpnMuon,muonPassesZ2CutsAr,muonPassesCutsAr,difFromZMassOne,ifZ1ElecPairCandBool)
 
         if debug:
             print("MUON LOOP OVER")
@@ -1259,17 +1261,17 @@ for k,fileName in enumerate(fileAr):
         semiLepMuon = False
         semiLep = False
         if not allCutPassBool:
-            if ev.HLT_Ele32_WPTight_Gsf[0]:
+            if ev.HLT_Ele32_WPTight_Gsf:
                 semiLepElec = True
                 elecSemiLeptonicCount += 1
-            if ev.HLT_IsoMu24[0]:
+            if ev.HLT_IsoMu24:
                 semiLepMuon = True
                 muonSemiLeptonicCount += 1
             if semiLepElec or semiLepMuon:
                 semiLep = True
                 semiLeptonicCount += 1
         if not (allCutPassBool or semiLep):
-            if ev.HLT_PFHT1050[0] or ev.HLT_AK8PFJet500[0] or ev.HLT_AK8PFJet360_TrimMass30[0] or ev.HLT_AK8PFHT750_TrimMass50[0]:
+            if ev.HLT_PFHT1050 or ev.HLT_AK8PFJet500 or ev.HLT_AK8PFJet360_TrimMass30 or ev.HLT_AK8PFHT750_TrimMass50:
                 hadronicCount += 1
 
         #FatJets loop
