@@ -426,9 +426,10 @@ cutOnZTag2p5MTR = 0.479
 cutOnZTag1MTR = 0.704
 cutOnZTag0p5MTR = 0.806
 
-cutOnZTagAr = [cutOnZTag0p5MTR,cutOnZTag1MTR,cutOnZTag2p5MTR,cutOnZTag5MTR]
-
-cutOnZTagStrAr = ["0p5","1","2p5","5"]
+#cutOnZTagAr = [cutOnZTag0p5MTR,cutOnZTag1MTR,cutOnZTag2p5MTR,cutOnZTag5MTR]
+cutOnZTagAr = [cutOnZTag1MTR]
+#cutOnZTagStrAr = ["0p5","1","2p5","5"]
+cutOnZTagStrAr = ["1"]
 #Fat Jets with no cut and no tagging
 h_FatJet_pt         = TH1F("h_FatJet_pt","h_FatJet_pt", 250, 0, 500)
 h_nFatJet           = TH1F("h_nFatJet","h_nFatJet", 7, 0, 7)
@@ -1661,7 +1662,29 @@ DrawPlot(h_InitialJetAltLJ_pt,"h_InitialJetAltLJ_pt_",saveName,True)
 
 DrawPlot(h_LHEWeight,"h_LHEWeight_",saveName,False)
 
+#Fat Jets:
+DrawPlot(h_FatJet_pt,"h_FatJet_pt",saveName,True)
+DrawPlot(h_nFatJet,"h_nFatJet",saveName,True)
+DrawPlot(h_FatJet_eta,"h_FatJet_eta","h_FatJet_eta",saveName,True)
+DrawPlot(h_FatJet_mass,"h_FatJet_mass","h_FatJet_mass",saveName,True)
+DrawPlot(h_FatJet_phi,"h_FatJet_phi","h_FatJet_phi",saveName,True)
 
+
+#Fat Jets with tagging but no cut:
+DrawPlot(h_FatJet_etaZAr,"h_FatJet_etaZAr",saveName,True)
+DrawPlot(h_FatJet_massZAr,"h_FatJet_massZAr",saveName,True)
+DrawPlot(h_FatJet_ptZAr,"h_FatJet_ptZAr",saveName,True)
+DrawPlot(h_FatJet_phiZAr,"h_FatJet_phiZAr",saveName,True)
+
+DrawPlot(h_InitialFatJetAltLJ_Eta,"h_InitialFatJetAltLJ_Eta",saveName,True)
+DrawPlot(h_InitialFatJetAltLJ_EtaSep,"h_InitialFatJetAltLJ_EtaSep",saveName,True)
+DrawPlot(h_InitialFatJetAltLJ_pt,"h_InitialFatJetAltLJ_pt",saveName,True)
+
+
+#Fat jets with cut and tagging
+DrawPlot(h_InitialFatJetAltLJ_EtaZAr,"h_InitialFatJetAltLJ_EtaZAr",saveName,True)
+DrawPlot(h_InitialFatJetAltLJ_EtaSepZAr,"h_InitialFatJetAltLJ_EtaSepZAr",saveName,True)
+DrawPlot(h_InitialFatJetAltLJ_ptZAr,"h_InitialFatJetAltLJ_ptZAr",saveName,True)
 
 print("Done.","time:",time.time()-startt)
 
