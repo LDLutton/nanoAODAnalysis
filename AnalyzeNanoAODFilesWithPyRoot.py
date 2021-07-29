@@ -1282,6 +1282,7 @@ for k,fileName in enumerate(fileAr):
 
         #FatJets loop
         tmpTagBoolAr = []
+        fatJetEtaCutPassCtr = 0
         for i in range(ev.nFatJet):
             tmpFatJetPT = ev.FatJet_pt[i]
             #FatJets with no tagging no cuts
@@ -1295,6 +1296,7 @@ for k,fileName in enumerate(fileAr):
             h_FatJet_pt.Fill(tmpFatJetPT)
 
             if abs(tmpFJEta) < 2.4:
+                fatJetEtaCutPassCtr += 1
                 h_FatJetEtaCut_eta.Fill(tmpFJEta)
                 h_FatJetEtaCut_mass.Fill(tmpFJMass)
                 h_FatJetEtaCut_phi.Fill(tmpFJPhi)
@@ -1318,6 +1320,7 @@ for k,fileName in enumerate(fileAr):
                         tmpTagBoolAr[-1].append(False)
         
         #Running a loop for cut jets with the tagging information
+        h_nFatJetEtaCut.Fill(fatJetEtaCutPassCtr)
         for i in range(ev.nFatJet):
             #Fat Jets with cut but no tagging
             #Also Fat Jets with cuts and tagging
@@ -1686,6 +1689,7 @@ DrawPlot(h_FatJetEtaCut_pt,"h_FatJetEtaCut_pt",saveName,True)
 DrawPlot(h_FatJetEtaCut_eta,"h_FatJetEtaCut_eta",saveName,True)
 DrawPlot(h_FatJetEtaCut_mass,"h_FatJetEtaCut_mass",saveName,True)
 DrawPlot(h_FatJetEtaCut_phi,"h_FatJetEtaCut_phi",saveName,True)
+DrawPlot(h_nFatJetEtaCut,"h_nFatJetEtaCut",saveName,True)
 
 DrawPlot(h_InitialFatJetAltLJ_Eta,"h_InitialFatJetAltLJ_Eta",saveName,True)
 DrawPlot(h_InitialFatJetAltLJ_EtaSep,"h_InitialFatJetAltLJ_EtaSep",saveName,True)
