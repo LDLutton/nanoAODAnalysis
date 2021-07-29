@@ -437,6 +437,14 @@ h_FatJet_eta        = TH1F("h_FatJet_eta","h_FatJet_eta", 100, -5.0, 5.0)
 h_FatJet_mass       = TH1F("h_FatJet_mass","h_FatJet_mass", 200, 0, 200)
 h_FatJet_phi        = TH1F("h_FatJet_phi","h_FatJet_phi", 100, -3.5, 3.5)
 
+#FatJets with eta cut
+
+h_FatJetEtaCut_pt         = TH1F("h_FatJetEtaCut_pt","h_FatJetEtaCut_pt", 250, 0, 500)
+h_nFatJetEtaCut           = TH1F("h_nFatJetEtaCut","h_nFatJetEtaCut", 7, 0, 7)
+h_FatJetEtaCut_eta        = TH1F("h_FatJetEtaCut_eta","h_FatJetEtaCut_eta", 100, -5.0, 5.0)
+h_FatJetEtaCut_mass       = TH1F("h_FatJetEtaCut_mass","h_FatJetEtaCut_mass", 200, 0, 200)
+h_FatJetEtaCut_phi        = TH1F("h_FatJetEtaCut_phi","h_FatJetEtaCut_phi", 100, -3.5, 3.5)
+
 
 #Fat Jets with tagging but no cut
 h_FatJet_etaZAr = []
@@ -1286,6 +1294,12 @@ for k,fileName in enumerate(fileAr):
             h_FatJet_phi.Fill(tmpFJPhi)
             h_FatJet_pt.Fill(tmpFatJetPT)
 
+            if abs(tmpFJEta) < 2.4:
+                h_FatJetEtaCut_eta.Fill(tmpFJEta)
+                h_FatJetEtaCut_mass.Fill(tmpFJMass)
+                h_FatJetEtaCut_phi.Fill(tmpFJPhi)
+                h_FatJetEtaCut_pt.Fill(tmpFatJetPT)
+
             #Fat Jets with tagging and no cuts
             tmpTagBoolAr.append([])
             tmpZVsQCD = ev.FatJet_deepTagMD_ZvsQCD[i]
@@ -1667,6 +1681,11 @@ DrawPlot(h_FatJet_pt,"h_FatJet_pt",saveName,True)
 DrawPlot(h_FatJet_eta,"h_FatJet_eta",saveName,True)
 DrawPlot(h_FatJet_mass,"h_FatJet_mass",saveName,True)
 DrawPlot(h_FatJet_phi,"h_FatJet_phi",saveName,True)
+
+DrawPlot(h_FatJetEtaCut_pt,"h_FatJetEtaCut_pt",saveName,True)
+DrawPlot(h_FatJetEtaCut_eta,"h_FatJetEtaCut_eta",saveName,True)
+DrawPlot(h_FatJetEtaCut_mass,"h_FatJetEtaCut_mass",saveName,True)
+DrawPlot(h_FatJetEtaCut_phi,"h_FatJetEtaCut_phi",saveName,True)
 
 DrawPlot(h_InitialFatJetAltLJ_Eta,"h_InitialFatJetAltLJ_Eta",saveName,True)
 DrawPlot(h_InitialFatJetAltLJ_EtaSep,"h_InitialFatJetAltLJ_EtaSep",saveName,True)

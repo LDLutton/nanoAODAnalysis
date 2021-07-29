@@ -68,7 +68,7 @@ def makePTHistos(histAr,histName,tmpHistWoD,tmpHistWD):
 # will probably NOT be experiment.root.
 print("start")
 startt = time.time()
-
+includeBackgroundBool = False
 #Analyzer will run over all files put into fileAr
 fileAr = []
 #Give the names of the files as well as how you want it to appear in the legend
@@ -77,7 +77,8 @@ nameAr = []
 colorAr = []
 #Give the weights for each file
 weightsAr = []
-
+useModifiedCouplingAr = []
+skipCtr = []
 #First put in file to compare to other files
 #This file will be used as the baseline in the ratio plots
 #Compare to withoutDipole files
@@ -90,20 +91,26 @@ fileAr.append(TFile.Open("histosFromNanoAODpphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5Re
 nameAr.append("EFT")
 colorAr.append(6)
 weightsAr.append(0.00026785303750000004)
+#useModifiedCouplingAr.append(True)
+useModifiedCouplingAr.append(False)
+skipCtr.append(0)
 
 fileAr.append(TFile.Open("histosFromNanoAODpphzzjjQCD0SMHLOOP0QEDE5NPE0ResMasAllVer100Ev_0p999cHW100GeVIMJetCut.root"))
 nameAr.append("SM")
 colorAr.append(2)
 weightsAr.append(8.37391538525e-05)
+useModifiedCouplingAr.append(False)
+skipCtr.append(0)
 
-#Compare to background files
-#fileOne = TFile.Open("histosFromNanoAODttHBackground.root")
-fileAr.append(TFile.Open("histosFromNanoAODttHToBBBackground.root"))
-nameAr.append("ttHToBBBackground")
-colorAr.append(4)
-weightsAr.append(0.6*0.584)
-
-useModifiedCouplingAr = [True,False,False]
+if includeBackgroundBool:
+    #Compare to background files
+    #fileOne = TFile.Open("histosFromNanoAODttHBackground.root")
+    fileAr.append(TFile.Open("histosFromNanoAODttHToBBBackground.root"))
+    nameAr.append("ttHToBBBackground")
+    colorAr.append(4)
+    weightsAr.append(0.6*0.584)
+    useModifiedCouplingAr.append(False)
+    skipCtr.append(0)
 
 #Put in the key lists in the same order as in the fileAr
 keysAr = []
@@ -132,7 +139,7 @@ moddedCouplingHistAr = []
 moddedCouplingCanAr = []
 moddedCouplingPadAr = []
 moddedCouplingLegAr = []
-skipCtr = [0,0,0]
+
 #Main loop over each histogram
 for i in range(lenKeys):
     #print(i,moddedCouplingHistAr)
@@ -141,10 +148,12 @@ for i in range(lenKeys):
     moddedCouplingLegAr.append([])
     moddedCouplingPadAr.append([])
     tmpObjAr = []
+    altNormalizationAr = []
+    altNormalizationIntAr = []
     histName = keysAr[0][i].GetName()
     if "Normalized" not in histName:
         continue
-    elif "LHEWeight" in histName:
+    elif "LHEWeight" in histName and includeBackgroundBool:
         skipCtr[2] += 2
         continue
     
@@ -160,7 +169,6 @@ for i in range(lenKeys):
     combinedModdedHistIntAr = [0 for couplingModifier in couplingModifierAr]
     #Loop over different signal/background types
     for j,keyA,colorA,nameA,weightsA,skipC,useModifiedCoupling in zip(range(len(keysAr)),keysAr,colorAr,nameAr,weightsAr,skipCtr,useModifiedCouplingAr):
-        moddedCouplingHistAr[-1].append([])
         tmpObjAr.append(keyA[i-skipC].ReadObj())
         tmpObjAr[-1].Scale(weightsA)
         #Sanity check
@@ -175,32 +183,40 @@ for i in range(lenKeys):
         tmpObjAr[-1].SetTitle(histName)
         legAr[-1].AddEntry(tmpObjAr[-1],nameA,"l")
         combinedHistInt += tmpObjAr[-1].Integral()
+        altNormalizationAr.append(tmpObjAr[-1].Clone())
+        altNormalizationIntAr.append(altNormalizationAr[-1].Integral())
         #Loop over different couplings
-        for k,modifiedCoupling,modifiedCouplingStr in zip(range(len(couplingModifierAr)),couplingModifierAr,couplingModifierStrAr):
-            """
-            print(i,j,k)
-            print("moddedCouplingHistAr:",moddedCouplingHistAr)
-            print("moddedCouplingHistAr[-1]:",moddedCouplingHistAr[-1])
-            print("tmpObjAr:",tmpObjAr)
-            print("tmpObjAr[-1]:",tmpObjAr[-1])
-            """
-            moddedCouplingHistAr[-1][-1].append(tmpObjAr[-1].Clone())
-            if j == 0:
-                makeNiceHistos(moddedCouplingHistAr[-1][-1][-1],"","Events",True)
-                moddedCouplingLegAr[-1].append([])
-            moddedCouplingHistAr[-1][-1][-1].SetTitle(histName+"EFTcHWE{0}".format(modifiedCouplingStr))
-            #Will need to change this if I ever do more than one with modified coupling
-            if useModifiedCoupling:
-                moddedCouplingCanAr[-1].append(TCanvas("{0}EFTcHWE{1}Can".format(histName,modifiedCouplingStr),"{0}EFTcHWE{1}Can".format(histName,modifiedCouplingStr),1920,1440))
-                setUpLegend(moddedCouplingLegAr[-1][k])
-                setUpPadsAr(moddedCouplingPadAr[-1],"{0}EFTcHWE{1}Pad".format(histName,modifiedCouplingStr))
-                moddedCouplingHistAr[-1][-1][-1].Scale(modifiedCoupling)
-            moddedCouplingLegAr[-1][k][-1].AddEntry(moddedCouplingHistAr[-1][-1][-1],nameA,"l")
-            combinedModdedHistIntAr[k] += moddedCouplingHistAr[-1][-1][-1].Integral()
+        if True in useModifiedCouplingAr:
+            moddedCouplingHistAr[-1].append([])
+            for k,modifiedCoupling,modifiedCouplingStr in zip(range(len(couplingModifierAr)),couplingModifierAr,couplingModifierStrAr):
+                """
+                print(i,j,k)
+                print("moddedCouplingHistAr:",moddedCouplingHistAr)
+                print("moddedCouplingHistAr[-1]:",moddedCouplingHistAr[-1])
+                print("tmpObjAr:",tmpObjAr)
+                print("tmpObjAr[-1]:",tmpObjAr[-1])
+                """
+                moddedCouplingHistAr[-1][-1].append(tmpObjAr[-1].Clone())
+                if j == 0:
+                    makeNiceHistos(moddedCouplingHistAr[-1][-1][-1],"","Events",True)
+                    moddedCouplingLegAr[-1].append([])
+                moddedCouplingHistAr[-1][-1][-1].SetTitle(histName+"EFTcHWE{0}".format(modifiedCouplingStr))
+                #Will need to change this if I ever do more than one with modified coupling
+                if useModifiedCoupling:
+                    moddedCouplingCanAr[-1].append(TCanvas("{0}EFTcHWE{1}Can".format(histName,modifiedCouplingStr),"{0}EFTcHWE{1}Can".format(histName,modifiedCouplingStr),1920,1440))
+                    setUpLegend(moddedCouplingLegAr[-1][k])
+                    setUpPadsAr(moddedCouplingPadAr[-1],"{0}EFTcHWE{1}Pad".format(histName,modifiedCouplingStr))
+                    moddedCouplingHistAr[-1][-1][-1].Scale(modifiedCoupling)
+                    moddedCouplingLegAr[-1][k][-1].AddEntry(moddedCouplingHistAr[-1][-1][-1],nameA,"l")
+                    combinedModdedHistIntAr[k] += moddedCouplingHistAr[-1][-1][-1].Integral()
     canAr[-1].cd()
     padAr[-1][0].cd()
 
     histMax = 0
+    if combinedHistInt == 0:
+        continue
+
+
     for j in range(len(tmpObjAr)):
         tmpObjAr[j].Scale(1.0 / combinedHistInt)
         tmpMax = tmpObjAr[j].GetMaximum()
@@ -236,52 +252,96 @@ for i in range(lenKeys):
 
     canAr[-1].SaveAs("{0}{1}.png".format(histName,saveString))
 
+    #Normalizing each distribution to itself
+    canAr.append(TCanvas("{0}Can".format(histName),"{0}Can".format(histName),1920,1440))
+    setUpLegend(legAr)
+    setUpPadsAr(padAr,"{0}Pad".format(histName))
+    canAr[-1].cd()
+    padAr[-1][0].Draw()
+    padAr[-1][0].cd()
+    for j,nameA in zip(range(len(altNormalizationAr)),nameAr):
+        altNormalizationAr[j].Scale(1.0 / altNormalizationIntAr[j])
+        tmpMax = altNormalizationAr[j].GetMaximum()
+        if tmpMax > histMax:
+            histMax = tmpMax
+        legAr[-1].AddEntry(altNormalizationAr[j],nameA,"l")
+    altNormalizationAr[0].GetYaxis().SetRangeUser(0,histMax)
+    
+    altNormalizationAr[0].Draw("hist")
+    for j in range(1,len(altNormalizationAr)):
+        altNormalizationAr[j].DrawCopy("same hist")
+    legAr[-1].Draw()
+
+    canAr[-1].cd()
+    setUpBottomPadsAr(padAr[-1])
+    ratioMax = 0
+    for j in range(1,len(altNormalizationAr)):
+        altNormalizationAr[j].Sumw2()
+        altNormalizationAr[j].Divide(altNormalizationAr[0])
+        makeNiceHistos(altNormalizationAr[j],"","Ratio to EFT",False)
+        tmpRatioMax = altNormalizationAr[j].GetMaximum()
+        if tmpRatioMax > ratioMax:
+            ratioMax = tmpRatioMax
+    if ratioMax > 4:
+        altNormalizationAr[1].GetYaxis().SetRangeUser(0,4)
+    altNormalizationAr[1].SetLineWidth(2)
+    altNormalizationAr[1].Draw("et same")
+    for j in range(2,len(altNormalizationAr)):
+        makeNiceHistos(altNormalizationAr[j],"","Ratio to EFT",False)
+        altNormalizationAr[j].SetLineWidth(2)
+        altNormalizationAr[j].Draw("et same")
+    canAr[-1].Update()
+    #Saving canvas
+
+    canAr[-1].SaveAs("{0}{1}_altNormalization.png".format(histName,saveString))
+
     #Loop over the different couplings
-    for k,couplingModifier,couplingModifierStr,combinedModdedHistInt in zip(range(len(couplingModifierAr)),couplingModifierAr,couplingModifierStrAr,combinedModdedHistIntAr):
-        #moddedCouplingHistAr[-1][0][k]
-        moddedCouplingCanAr[-1][k].cd()
-        moddedCouplingPadAr[-1][k][0].Draw()
-        moddedCouplingPadAr[-1][k][0].cd()
-        histMax = 0
-        #loop over the different signal/background types
-        #Each are scaled to the total integral sum of all, and we check the maximum for each to find the biggest
-        for j in range(len(moddedCouplingHistAr[-1])):
-            moddedCouplingHistAr[-1][j][k].Scale(1.0 / combinedModdedHistInt)
-            tmpMax = moddedCouplingHistAr[-1][j][k].GetMaximum()
-            if tmpMax > histMax:
-                histMax = tmpMax
-        moddedCouplingHistAr[-1][0][k].GetYaxis().SetRangeUser(0,histMax)
-        
-        moddedCouplingHistAr[-1][0][k].Draw("hist") #MAIN OBJ
-        for j in range(1,len(moddedCouplingHistAr[-1])):
-            moddedCouplingHistAr[-1][j][k].DrawCopy("same hist")
-        #Will need to change this if I ever do more than one with modified coupling
-        moddedCouplingLegAr[-1][k][0].Draw()
+    if True in useModifiedCouplingAr:
+        for k,couplingModifier,couplingModifierStr,combinedModdedHistInt in zip(range(len(couplingModifierAr)),couplingModifierAr,couplingModifierStrAr,combinedModdedHistIntAr):
+            #moddedCouplingHistAr[-1][0][k]
+            moddedCouplingCanAr[-1][k].cd()
+            moddedCouplingPadAr[-1][k][0].Draw()
+            moddedCouplingPadAr[-1][k][0].cd()
+            histMax = 0
+            #loop over the different signal/background types
+            #Each are scaled to the total integral sum of all, and we check the maximum for each to find the biggest
+            for j in range(len(moddedCouplingHistAr[-1])):
+                moddedCouplingHistAr[-1][j][k].Scale(1.0 / combinedModdedHistInt)
+                tmpMax = moddedCouplingHistAr[-1][j][k].GetMaximum()
+                if tmpMax > histMax:
+                    histMax = tmpMax
+            moddedCouplingHistAr[-1][0][k].GetYaxis().SetRangeUser(0,histMax)
+            
+            moddedCouplingHistAr[-1][0][k].Draw("hist") #MAIN OBJ
+            for j in range(1,len(moddedCouplingHistAr[-1])):
+                moddedCouplingHistAr[-1][j][k].DrawCopy("same hist")
+            #Will need to change this if I ever do more than one with modified coupling
+            moddedCouplingLegAr[-1][k][0].Draw()
 
-        moddedCouplingCanAr[-1][k].cd()
-        setUpBottomPadsAr(moddedCouplingPadAr[-1][k])
-        ratioMax = 0
-        for j in range(1,len(moddedCouplingHistAr[-1])):
-            moddedCouplingHistAr[-1][j][k].Sumw2()
-            moddedCouplingHistAr[-1][j][k].Divide(moddedCouplingHistAr[-1][0][k])
-            makeNiceHistos(moddedCouplingHistAr[-1][j][k],"","Ratio to EFT",False)
-            tmpRatioMax = moddedCouplingHistAr[-1][j][k].GetMaximum()
-            if tmpRatioMax > ratioMax:
-                ratioMax = tmpRatioMax
-        print(i,k,ratioMax)
-        if ratioMax > 4:
-            moddedCouplingHistAr[-1][1][k].GetYaxis().SetRangeUser(0,4)
-        moddedCouplingHistAr[-1][1][k].SetLineWidth(2)
-        moddedCouplingHistAr[-1][1][k].Draw("et same")
-        #Loop over the remaining signal/background types
-        for j in range(2,len(moddedCouplingHistAr[-1])):
-            makeNiceHistos(moddedCouplingHistAr[-1][j][k],"","Ratio to EFT",False)
-            moddedCouplingHistAr[-1][j][k].SetLineWidth(2)
-            moddedCouplingHistAr[-1][j][k].Draw("et same")
-        moddedCouplingCanAr[-1][k].Update()
-        #Saving canvas
+            moddedCouplingCanAr[-1][k].cd()
+            setUpBottomPadsAr(moddedCouplingPadAr[-1][k])
+            ratioMax = 0
+            for j in range(1,len(moddedCouplingHistAr[-1])):
+                moddedCouplingHistAr[-1][j][k].Sumw2()
+                moddedCouplingHistAr[-1][j][k].Divide(moddedCouplingHistAr[-1][0][k])
+                makeNiceHistos(moddedCouplingHistAr[-1][j][k],"","Ratio to EFT",False)
+                tmpRatioMax = moddedCouplingHistAr[-1][j][k].GetMaximum()
+                if tmpRatioMax > ratioMax:
+                    ratioMax = tmpRatioMax
+            print(i,k,ratioMax)
+            if ratioMax > 4:
+                moddedCouplingHistAr[-1][1][k].GetYaxis().SetRangeUser(0,4)
+            moddedCouplingHistAr[-1][1][k].SetLineWidth(2)
+            moddedCouplingHistAr[-1][1][k].Draw("et same")
+            #Loop over the remaining signal/background types
+            for j in range(2,len(moddedCouplingHistAr[-1])):
+                makeNiceHistos(moddedCouplingHistAr[-1][j][k],"","Ratio to EFT",False)
+                moddedCouplingHistAr[-1][j][k].SetLineWidth(2)
+                moddedCouplingHistAr[-1][j][k].Draw("et same")
+            moddedCouplingCanAr[-1][k].Update()
+            #Saving canvas
 
-        moddedCouplingCanAr[-1][k].SaveAs("{0}{1}{2}.png".format(histName,saveString,couplingModifierStr))
+            moddedCouplingCanAr[-1][k].SaveAs("{0}_{1}_{2}.png".format(histName,saveString,couplingModifierStr))
             
 print("Done.","time:",time.time()-startt)
 
