@@ -444,7 +444,7 @@ h_nFatJetEtaCut           = TH1F("h_nFatJetEtaCut","h_nFatJetEtaCut", 7, 0, 7)
 h_FatJetEtaCut_eta        = TH1F("h_FatJetEtaCut_eta","h_FatJetEtaCut_eta", 100, -5.0, 5.0)
 h_FatJetEtaCut_mass       = TH1F("h_FatJetEtaCut_mass","h_FatJetEtaCut_mass", 200, 0, 200)
 h_FatJetEtaCut_phi        = TH1F("h_FatJetEtaCut_phi","h_FatJetEtaCut_phi", 100, -3.5, 3.5)
-
+h_FatJetEtaCutHT          = TH1F("h_FatJetEtaCutHT","h_FatJetEtaCutHT", 500, 0, 3000)
 
 #Fat Jets with tagging but no cut
 h_FatJet_etaZAr = []
@@ -1282,7 +1282,8 @@ for k,fileName in enumerate(fileAr):
 
         #FatJets loop
         tmpTagBoolAr = []
-        fatJetEtaCutPassCtr = 0
+        tmpFatJetEtaCutPassCtr = 0
+        tmpFatJetEtaCutHT = 0
         for i in range(ev.nFatJet):
             tmpFatJetPT = ev.FatJet_pt[i]
             #FatJets with no tagging no cuts
@@ -1296,11 +1297,12 @@ for k,fileName in enumerate(fileAr):
             h_FatJet_pt.Fill(tmpFatJetPT)
 
             if abs(tmpFJEta) < 2.4:
-                fatJetEtaCutPassCtr += 1
+                tmpFatJetEtaCutPassCtr += 1
                 h_FatJetEtaCut_eta.Fill(tmpFJEta)
                 h_FatJetEtaCut_mass.Fill(tmpFJMass)
                 h_FatJetEtaCut_phi.Fill(tmpFJPhi)
                 h_FatJetEtaCut_pt.Fill(tmpFatJetPT)
+                tmpFatJetEtaCutHT += tmpFatJetPT
 
             #Fat Jets with tagging and no cuts
             tmpTagBoolAr.append([])
@@ -1320,7 +1322,9 @@ for k,fileName in enumerate(fileAr):
                         tmpTagBoolAr[-1].append(False)
         
         #Running a loop for cut jets with the tagging information
-        h_nFatJetEtaCut.Fill(fatJetEtaCutPassCtr)
+        h_nFatJetEtaCut.Fill(tmpFatJetEtaCutPassCtr)
+        h_FatJetEtaCutHT.Fill(tmpFatJetEtaCutHT)
+
         for i in range(ev.nFatJet):
             #Fat Jets with cut but no tagging
             #Also Fat Jets with cuts and tagging
@@ -1690,6 +1694,7 @@ DrawPlot(h_FatJetEtaCut_eta,"h_FatJetEtaCut_eta",saveName,True)
 DrawPlot(h_FatJetEtaCut_mass,"h_FatJetEtaCut_mass",saveName,True)
 DrawPlot(h_FatJetEtaCut_phi,"h_FatJetEtaCut_phi",saveName,True)
 DrawPlot(h_nFatJetEtaCut,"h_nFatJetEtaCut",saveName,True)
+DrawPlot(h_FatJetEtaCutHT,"h_FatJetEtaCutHT",saveName,True)
 
 DrawPlot(h_InitialFatJetAltLJ_Eta,"h_InitialFatJetAltLJ_Eta",saveName,True)
 DrawPlot(h_InitialFatJetAltLJ_EtaSep,"h_InitialFatJetAltLJ_EtaSep",saveName,True)
