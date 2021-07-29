@@ -1323,7 +1323,8 @@ for k,fileName in enumerate(fileAr):
         
         #Running a loop for cut jets with the tagging information
         h_nFatJetEtaCut.Fill(tmpFatJetEtaCutPassCtr)
-        h_FatJetEtaCutHT.Fill(tmpFatJetEtaCutHT)
+        if tmpFatJetEtaCutHT > 0:
+            h_FatJetEtaCutHT.Fill(tmpFatJetEtaCutHT)
 
         for i in range(ev.nFatJet):
             #Fat Jets with cut but no tagging
