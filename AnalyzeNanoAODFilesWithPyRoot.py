@@ -1676,14 +1676,14 @@ DrawPlot(h_InitialFatJetAltLJ_pt,"h_InitialFatJetAltLJ_pt",saveName,True)
 
 for i,cutOnZTagStr in enumerate(cutOnZTagStrAr):
     #Fat Jets with tagging but no cut:
-    DrawPlot(h_FatJet_etaZAr[i],"h_FatJet_etaZAr{0}MTR",saveName,True)
-    DrawPlot(h_FatJet_massZAr[i],"h_FatJet_massZAr{0}MTR",saveName,True)
-    DrawPlot(h_FatJet_ptZAr[i],"h_FatJet_ptZAr{0}MTR",saveName,True)
-    DrawPlot(h_FatJet_phiZAr[i],"h_FatJet_phiZAr{0}MTR",saveName,True)
+    DrawPlot(h_FatJet_etaZAr[i],"h_FatJet_etaZAr{0}MTR".format(cutOnZTagStr),saveName,True)
+    DrawPlot(h_FatJet_massZAr[i],"h_FatJet_massZAr{0}MTR".format(cutOnZTagStr),saveName,True)
+    DrawPlot(h_FatJet_ptZAr[i],"h_FatJet_ptZAr{0}MTR".format(cutOnZTagStr),saveName,True)
+    DrawPlot(h_FatJet_phiZAr[i],"h_FatJet_phiZAr{0}MTR".format(cutOnZTagStr),saveName,True)
 
     #Fat jets with cut and tagging
-    DrawPlot(h_InitialFatJetAltLJ_EtaZAr[i],"h_InitialFatJetAltLJ_EtaZAr{0}MTR",saveName,True)
-    DrawPlot(h_InitialFatJetAltLJ_EtaSepZAr[i],"h_InitialFatJetAltLJ_EtaSepZAr{0}MTR",saveName,True)
-    DrawPlot(h_InitialFatJetAltLJ_ptZAr[i],"h_InitialFatJetAltLJ_ptZAr{0}MTR",saveName,True)
+    DrawPlot(h_InitialFatJetAltLJ_EtaZAr[i],"h_InitialFatJetAltLJ_EtaZAr{0}MTR".format(cutOnZTagStr),saveName,True)
+    DrawPlot(h_InitialFatJetAltLJ_EtaSepZAr[i],"h_InitialFatJetAltLJ_EtaSepZAr{0}MTR".format(cutOnZTagStr),saveName,True)
+    DrawPlot(h_InitialFatJetAltLJ_ptZAr[i],"h_InitialFatJetAltLJ_ptZAr{0}MTR".format(cutOnZTagStr),saveName,True)
 
 print("Done.","time:",time.time()-startt)
