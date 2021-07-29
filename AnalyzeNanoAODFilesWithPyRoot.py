@@ -1664,7 +1664,6 @@ DrawPlot(h_LHEWeight,"h_LHEWeight_",saveName,False)
 
 #Fat Jets:
 DrawPlot(h_FatJet_pt,"h_FatJet_pt",saveName,True)
-DrawPlot(h_nFatJet,"h_nFatJet",saveName,True)
 DrawPlot(h_FatJet_eta,"h_FatJet_eta",saveName,True)
 DrawPlot(h_FatJet_mass,"h_FatJet_mass",saveName,True)
 DrawPlot(h_FatJet_phi,"h_FatJet_phi",saveName,True)
