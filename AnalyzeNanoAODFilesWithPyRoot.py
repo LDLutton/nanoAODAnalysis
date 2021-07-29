@@ -84,9 +84,6 @@ def checkForMuonCands(ev,nMuonInt):
             else:
                 #muonHasPos = True
                 nMuonCandidatesPos += 1
-        else:
-            #Keeping track of muons that didn't pass
-            muonVetoAr.append(i)
     nMuonCandPairs = 0
     if nMuonCandidatesNeg <= nMuonCandidatesPos:
         nMuonCandPairs = nMuonCandidatesNeg
@@ -117,10 +114,10 @@ def checkForLepCands(nElecCandPairs,nMuonCandPairs):
             enoughLepCands = True
     return (enoughElecCands,enoughMuonCands,enoughLepCands)
 
-def checkForElecPair(ev,i,tmpnElectron,elecPassesZ2CutsAr,elecPassesCutsAr,difFromZMassOne,ifZ1ElecPairCandBool):
+def checkForElecPair(ev,i,tmpnElectron,elecPassesZ2CutsAr,elecPassesCutsAr,difFromZMassOne,lepPairOneLeadInd,lepPairOneTrailingInd,leadLepPairOneVec,trailingLepPairOneVec,leadLepPairCharge,trailingLepPairCharge,ifZ1ElecPairCandBool,ifZ1ElecPairCandCount):
     for j in range(i+1,tmpnElectron):
         if debug:
-            print("Electron",j)
+            print("Second Electron",j)
         #Check that the electrons have the opposite charge
         tmpElecCharge = ev.Electron_charge[i]
         tmpElecChargeTwo = ev.Electron_charge[j]
@@ -206,12 +203,12 @@ def checkForElecPair(ev,i,tmpnElectron,elecPassesZ2CutsAr,elecPassesCutsAr,difFr
                             trailingLepPairOneVec = tmpTrailingVec
                             leadLepPairCharge = tmpLeadCharge
                             trailingLepPairCharge = tmpTrailingCharge
-    return (difFromZMassOne,lepPairOneLeadInd,lepPairOneTrailingInd,leadLepPairOneVec,trailingLepPairOneVec,leadLepPairCharge,trailingLepPairCharge,ifZ1ElecPairCandBool)
+    return (difFromZMassOne,lepPairOneLeadInd,lepPairOneTrailingInd,leadLepPairOneVec,trailingLepPairOneVec,leadLepPairCharge,trailingLepPairCharge,ifZ1ElecPairCandBool,ifZ1ElecPairCandCount)
 
-def checkForMuonPair(ev,i,tmpnMuon,muonPassesZ2CutsAr,muonPassesCutsAr,difFromZMassOne,ifZ1ElecPairCandBool):
+def checkForMuonPair(ev,i,tmpnMuon,muonPassesZ2CutsAr,muonPassesCutsAr,difFromZMassOne,lepPairOneLeadInd,lepPairOneTrailingInd,leadLepPairOneVec,trailingLepPairOneVec,leadLepPairCharge,trailingLepPairCharge,ifZ1MuonPairCandBool,ifZ1MuonPairCandCount,muonLeading):
     for j in range(i+1,tmpnMuon):
         if debug:
-            print("Muon",j)
+            print("Second Muon",j)
         #Check that muons have the opposite charge
         tmpMuonCharge = ev.Muon_charge[i]
         tmpMuonChargeTwo = ev.Muon_charge[j]
@@ -254,7 +251,7 @@ def checkForMuonPair(ev,i,tmpnMuon,muonPassesZ2CutsAr,muonPassesCutsAr,difFromZM
                 print("tmpDiMuonInvMass",tmpDiMuonInvMass)
             if tmpDiMuonInvMass > leptonZ2Cut:
                 if debug:
-                    print(i,j,"Muon pair passed Z2 cut",leptonZ2Cut)
+                    print(i,j,"Muon pair passed invmass Z2 cut",leptonZ2Cut)
                 muonPassesZ2CutsAr.append([[tmpLeadInd,tmpSecondInd],[tmpLeadVec,tmpTrailingVec],[tmpLeadCharge,tmpTrailingCharge]])
             
             #Check that the pt of the second muon passes the lower pt cut
@@ -298,7 +295,7 @@ def checkForMuonPair(ev,i,tmpnMuon,muonPassesZ2CutsAr,muonPassesCutsAr,difFromZM
                             trailingLepPairOneVec = tmpTrailingVec
                             leadLepPairCharge = tmpLeadCharge
                             trailingLepPairCharge = tmpTrailingCharge
-    return (difFromZMassOne,lepPairOneLeadInd,lepPairOneTrailingInd,leadLepPairOneVec,trailingLepPairOneVec,leadLepPairCharge,trailingLepPairCharge,ifZ1ElecPairCandBool)
+    return (difFromZMassOne,lepPairOneLeadInd,lepPairOneTrailingInd,leadLepPairOneVec,trailingLepPairOneVec,leadLepPairCharge,trailingLepPairCharge,ifZ1MuonPairCandBool,ifZ1MuonPairCandCount,muonLeading)
 
 #For calculating DeltaR for two particles from their respective etas and phis
 def calcDeltaR(phi1,eta1,phi2,eta2):
@@ -703,7 +700,7 @@ for k,fileName in enumerate(fileAr):
             print("entering electrons loop")
         for i in range(tmpnElectron):
             if debug:
-                print("Electron",i)
+                print("First Electron",i)
             tmpPtOne = ev.Electron_pt[i]
             tmpEtaOne = ev.Electron_eta[i]
             tmpMassOne = ev.Electron_mass[i]
@@ -733,7 +730,7 @@ for k,fileName in enumerate(fileAr):
                     #Looping over other electrons
                     if debug:
                         print(i,"Loop over remaining electrons")
-                    difFromZMassOne,lepPairOneLeadInd,lepPairOneTrailingInd,leadLepPairOneVec,trailingLepPairOneVec,leadLepPairCharge,trailingLepPairCharge,ifZ1ElecPairCandBool = checkForElecPair(ev,i,tmpnElectron,elecPassesZ2CutsAr,elecPassesCutsAr,difFromZMassOne,ifZ1ElecPairCandBool)
+                    difFromZMassOne,lepPairOneLeadInd,lepPairOneTrailingInd,leadLepPairOneVec,trailingLepPairOneVec,leadLepPairCharge,trailingLepPairCharge,ifZ1ElecPairCandBool,ifZ1ElecPairCandCount = checkForElecPair(ev,i,tmpnElectron,elecPassesZ2CutsAr,elecPassesCutsAr,difFromZMassOne,lepPairOneLeadInd,lepPairOneTrailingInd,leadLepPairOneVec,trailingLepPairOneVec,leadLepPairCharge,trailingLepPairCharge,ifZ1ElecPairCandBool,ifZ1ElecPairCandCount)
         if debug:
             print("ELECTRON LOOP OVER")
             print("difFromZMassOne",difFromZMassOne,"lepPairOneLeadInd",lepPairOneLeadInd,"lepPairOneTrailingInd",lepPairOneTrailingInd,"leadLepPairCharge",leadLepPairCharge,"trailingLepPairCharge",trailingLepPairCharge)
@@ -748,7 +745,7 @@ for k,fileName in enumerate(fileAr):
             print("Entering muons loop")
         for i in range(tmpnMuon):
             if debug:
-                print("Muon",i)
+                print("First Muon",i)
             #No cuts
             tmpPtOne = ev.Muon_pt[i]
             tmpEtaOne = ev.Muon_eta[i]
@@ -773,7 +770,7 @@ for k,fileName in enumerate(fileAr):
                     #Looping over other muons
                     if debug:
                         print(i,"Loop over remaining muons")
-                    difFromZMassOne,lepPairOneLeadInd,lepPairOneTrailingInd,leadLepPairOneVec,trailingLepPairOneVec,leadLepPairCharge,trailingLepPairCharge,ifZ1ElecPairCandBool = checkForMuonPair(ev,i,tmpnMuon,muonPassesZ2CutsAr,muonPassesCutsAr,difFromZMassOne,ifZ1ElecPairCandBool)
+                    difFromZMassOne,lepPairOneLeadInd,lepPairOneTrailingInd,leadLepPairOneVec,trailingLepPairOneVec,leadLepPairCharge,trailingLepPairCharge,ifZ1MuonPairCandBool,ifZ1MuonPairCandCount,muonLeading = checkForMuonPair(ev,i,tmpnMuon,muonPassesZ2CutsAr,muonPassesCutsAr,difFromZMassOne,lepPairOneLeadInd,lepPairOneTrailingInd,leadLepPairOneVec,trailingLepPairOneVec,leadLepPairCharge,trailingLepPairCharge,ifZ1MuonPairCandBool,ifZ1MuonPairCandCount,muonLeading)
 
         if debug:
             print("MUON LOOP OVER")
