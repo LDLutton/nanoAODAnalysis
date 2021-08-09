@@ -446,6 +446,40 @@ h_FatJetEtaCut_mass       = TH1F("h_FatJetEtaCut_mass","h_FatJetEtaCut_mass", 20
 h_FatJetEtaCut_phi        = TH1F("h_FatJetEtaCut_phi","h_FatJetEtaCut_phi", 100, -3.5, 3.5)
 h_FatJetEtaCutHT          = TH1F("h_FatJetEtaCutHT","h_FatJetEtaCutHT", 500, 0, 3000)
 
+#Fat Jets HT with eta cut by channel
+
+h_FatJetEtaCutHTLeptonic          = TH1F("h_FatJetEtaCutHTLeptonic","h_FatJetEtaCutHTLeptonic", 500, 0, 3000)
+h_FatJetEtaCutHTSemiLeptonic          = TH1F("h_FatJetEtaCutHTSemiLeptonic","h_FatJetEtaCutHTSemiLeptonic", 500, 0, 3000)
+h_FatJetEtaCutHTHadronic         = TH1F("h_FatJetEtaCutHTHadronic","h_FatJetEtaCutHTHadronic", 500, 0, 3000)
+h_FatJetEtaCutHTNeutrinos       = TH1F("h_FatJetEtaCutHTNeutrinos","h_FatJetEtaCutHTNeutrinos", 500, 0, 3000)
+h_FatJetEtaCutHTOther          = TH1F("h_FatJetEtaCutHTOther","h_FatJetEtaCutHTOther", 500, 0, 3000)
+
+#Len of decays
+h_LeptonicZDecayLen         = TH1F("h_LeptonicZDecayLen","h_LeptonicZDecayLen", 20, 0, 20)
+h_SemiLeptonicZDecayLen         = TH1F("h_SemiLeptonicZDecayLen","h_SemiLeptonicZDecayLen", 20, 0, 20)
+h_HadronicZDecayLen         = TH1F("h_HadronicZDecayLen","h_HadronicZDecayLen", 20, 0, 20)
+h_NeutrinosZDecayLen         = TH1F("h_NeutrinosZDecayLen","h_NeutrinosZDecayLen", 20, 0, 20)
+h_OtherZDecayLen         = TH1F("h_OtherZDecayLen","h_OtherZDecayLen", 20, 0, 20)
+
+#PDGIds for each channel
+h_LeptonicZDecays         = TH1F("h_LeptonicZDecays","h_LeptonicZDecays", 100, -50, 50)
+h_SemiLeptonicZDecays         = TH1F("h_SemiLeptonicZDecays","h_SemiLeptonicZDecays", 100, -50, 50)
+h_HadronicZDecays         = TH1F("h_HadronicZDecays","h_HadronicZDecays", 100, -50, 50)
+h_NeutrinosZDecays         = TH1F("h_NeutrinosZDecays","h_NeutrinosZDecays", 100, -50, 50)
+leptonicZDecaysCtr = 0
+semiLeptonicZDecaysCtr = 0
+hadronicZDecaysCtr = 0
+neutrinosZDecaysCtr = 0
+
+#PDGIds that don't line up with any of the channels
+h_OtherZDecays         = TH1F("h_OtherZDecays","h_OtherZDecays", 100, -50, 50)
+h_OtherZDecaysAr = []
+otherZDecaysCtr = 0
+
+#2D graph for type of decay of both Zs
+
+h_2DZDecayType      = TH2F("h_2DZDecayType","h_2DZDecayType", 4, 0, 4, 4, 0, 4)
+
 #Fat Jets with tagging but no cut
 h_FatJet_etaZAr = []
 h_FatJet_massZAr = []
@@ -1279,11 +1313,222 @@ for k,fileName in enumerate(fileAr):
         if not (allCutPassBool or semiLep):
             if ev.HLT_PFHT1050 or ev.HLT_AK8PFJet500 or ev.HLT_AK8PFJet360_TrimMass30 or ev.HLT_AK8PFHT750_TrimMass50:
                 hadronicCount += 1
+        
+
+        #Get channel types
+        Z1Ind = -1
+        Z2Ind = -1
+        foundBothZBool = False
+        Z1LepHadNeuOthr = -1
+        Z2LepHadNeuOthr = -1
+        foundZ1Channel = False
+        foundZ2Channel = False
+        isLeptonic = False
+        isSemiLeptonic = False
+        isHadronic = False
+        isNeutrinos = False
+        isOther = False
+        tmpZDecAr = []
+        tmpZ1PDGIdAr = []
+        tmpZ2PDGIdAr = []
+        Z1HasLepton = False
+        Z1HasHadron = False
+        Z1HasNeutrino = False
+        Z1HasOther = False
+        Z2HasLepton = False
+        Z2HasHadron = False
+        Z2HasNeutrino = False
+        Z2HasOther = False
+        
+        for i in range(ev.nLHEPart):
+            if ev.LHEPart_pdgId[i] == 23:
+                Z1Ind = Z2Ind
+                Z2Ind = i
+        if Z1Ind < 0 or Z2Ind < 0:
+            print("LHE CHECK DID NOT FIND TWO Zs",evCount,Z1Ind,Z2Ind)
+
+        for i in range(ev.nLHEPart,ev.nGenPart):
+            """
+            if not foundBothZBool:
+                if Z1Ind < 0 and ev.GenPart_pdgId[i] == 23 and ev.GenPart_genPartIdxMother[i] == 0:
+                    Z1Ind = i
+                elif Z2Ind < 0 and ev.GenPart_pdgId[i] == 23 and ev.GenPart_genPartIdxMother[i] == 0:
+                    Z2Ind = i
+                    foundBothZBool = True
+            
+            else:
+            """
+            tmpMotherID = ev.genPartIdxMother[i]
+            if tmpMotherID == Z1Ind:
+                tmpPdgId = ev.GenPart_pdgId[i]
+                if tmpPdgId == 23:
+                    if foundZ1Channel:
+                        print("ERROR, ERROR, FOUNDZ1CHANNEL YET DAUGHTER PARTICLE IS Z")
+                    else:
+                        Z1Ind = i
+                else:
+                    tmpZ1PDGIdAr.append(tmpPdgId)
+                    foundZ1Channel = True
+            elif tmpMotherID == Z2Ind:
+                tmpPdgId = ev.GenPart_pdgId[i]
+                if tmpPdgId == 23:
+                    if foundZ2Channel:
+                        print("ERROR, ERROR, FOUNDZ2CHANNEL YET DAUGHTER PARTICLE IS Z")
+                    else:
+                        Z2Ind = i
+                else:
+                    tmpZ2PDGIdAr.append(tmpPdgId)
+                    foundZ2Channel = True
+        tmpZDecAr = []
+        if len(tmpZ1PDGIdAr):
+            for tmpZ1PDGId in tmpZ1PDGIdAr:
+                if tmpZ1PdgId < 9 or tmpZ1PdgId > -9:
+                    Z1HasHadron = True
+                elif abs(tmpZ1PdgId == 11 or abs(tmpZ1PdgId) == 13 or abs(tmpZ1PdgId) == 15 or abs(tmpZ1PdgId) == 17:
+                    Z1HasLepton = True
+                elif abs(tmpZ1PdgId) == 12 or abs(tmpZ1PdgId) == 14 or abs(tmpZ1PdgId) == 16 or abs(tmpZ1PdgId) == 18:
+                    Z1HasNeutrino = True
+                else:
+                    Z1HasOther = True
+                    tmpZDecAr.append(tmpPdgId)
+        if len(tmpZ2PDGIdAr):
+            for tmpZ2PDGId in tmpZ2PDGIdAr:
+                if tmpZ2PdgId < 9 or tmpZ2PdgId > -9:
+                    Z2HasHadron = True
+                elif abs(tmpZ2PdgId == 11 or abs(tmpZ2PdgId) == 13 or abs(tmpZ2PdgId) == 15 or abs(tmpZ2PdgId) == 17:
+                    Z2HasLepton = True
+                elif abs(tmpZ2PdgId) == 12 or abs(tmpZ2PdgId) == 14 or abs(tmpZ2PdgId) == 16 or abs(tmpZ2PdgId) == 18:
+                    Z2HasNeutrino = True
+                else:
+                    Z2HasOther = True
+                    tmpZDecAr.append(tmpPdgId)
+        tmpZ1DecType = -1
+        tmpZ2DecType = -1
+        if Z1HasLepton:
+            tmpZ1DecType = 0
+        elif Z1HasHadron:
+            tmpZ1DecType = 1
+        elif Z1HasNeutrino:
+            tmpZ1DecType = 2
+        elif Z1HasOther:
+            tmpZ1DecType = 3
+        if Z2HasLepton:
+            tmpZ2DecType = 0
+        elif Z2HasHadron:
+            tmpZ2DecType = 1
+        elif Z2HasNeutrino:
+            tmpZ2DecType = 2
+        elif Z2HasOther:
+            tmpZ2DecType = 3
+        
+        if tmpZ1DecType >= 0 and tmpZ2DecType >= 0:
+            h_2DZDecayType.Fill(tmpZ1DecType,tmpZ2DecType)
+
+        if Z1HasLepton and Z2HasLepton:
+            isLeptonic = True
+            leptonicZDecaysCtr += 1
+            h_LeptonicZDecayLen.Fill(len(tmpZ1PDGIdAr))
+            h_LeptonicZDecayLen.Fill(len(tmpZ2PDGIdAr))
+        elif Z1HasLepton or Z2HasLepton:
+            isSemiLeptonic = True
+            semiLeptonicZDecaysCtr += 1
+            h_SemiLeptonicZDecayLen.Fill(len(tmpZ1PDGIdAr))
+            h_SemiLeptonicZDecayLen.Fill(len(tmpZ2PDGIdAr))
+        elif Z1HasHadron and Z2HasHadron:
+            isHadronic = True
+            hadronicZDecaysCtr += 1
+            h_HadronicZDecayLen.Fill(len(tmpZ1PDGIdAr))
+            h_HadronicZDecayLen.Fill(len(tmpZ2PDGIdAr))
+        elif Z1HasNeutrino and Z2HasNeutrino:
+            isNeutrinos = True
+            neutrinosZDecaysCtr += 1
+            h_NeutrinosZDecayLen.Fill(len(tmpZ1PDGIdAr))
+            h_NeutrinoosZDecayLen.Fill(len(tmpZ2PDGIdAr))
+        elif Z1HasOther or Z2HasOther:
+            isOther = True
+            h_OtherZDecayLen.Fill(len(tmpZ1PDGIdAr))
+            h_OtherZDecayLen.Fill(len(tmpZ2PDGIdAr))
+            h_OtherZDecaysAr.append(tmpZDecAr)
+            otherZDecaysCtr += 1
+            for tmpZDec in tmpZDecAr:
+                h_OtherZDecays.Fill(tmpZDec)
+        
+
+
+                        
+            """
+            else:
+                tmpMotherID = ev.GenPart_genPartIdxMother[i]
+                if not foundZ1Channel:
+                    if tmpMotherID == Z1Ind:
+                        tmpPdgId = ev.GenPart_pdgId[i]
+                        if tmpPdgId == 23:
+                            Z1Ind = i
+                        else:
+                            foundZ1Channel = True
+                            tmpZ1PDGIdAr.append(tmpPdgId)
+                            if tmpPdgId < 9 or tmpPdgId > -9:
+                                Z1LepHadNeuOthr = 1
+                            elif abs(tmpPdgId) == 11 or abs(tmpPdgId) == 13 or abs(tmpPdgId) == 15 or abs(tmpPdgId) == 17:
+                                Z1LepHadNeuOthr = 0
+                            elif abs(tmpPdgId) == 12 or abs(tmpPdgId) == 14 or abs(tmpPdgId) == 16 or abs(tmpPdgId) == 18:
+                                Z1LepHadNeuOthr = 2
+                            else:
+                                Z1LepHadNeuOthr = 3
+                                tmpZDecAr.append(tmpPdgId)
+                else:
+                    if tmpMotherID == Z1Ind:
+                        tmpPdgId = ev.GenPart_pdgId[i]
+                        tmpZ1PDGIdAr.append(tmpPdgId)
+                if not foundZ2Channel:
+                    if tmpMotherID == Z2Ind:
+                        tmpPdgId = ev.GenPart_pdgId[i]
+                        if tmpPdgId == 23:
+                            Z2Ind = i
+                        else:
+                            foundZ2Channel = True
+                            tmpZ2PDGIdAr.append(tmpPdgId)
+                            if tmpPdgId < 9 or tmpPdgId > -9:
+                                Z2LepHadNeuOthr = 1
+                            elif abs(tmpPdgId) == 11 or abs(tmpPdgId) == 13 or abs(tmpPdgId) == 15 or abs(tmpPdgId) == 17:
+                                Z2LepHadNeuOthr = 0
+                            elif abs(tmpPdgId) == 12 or abs(tmpPdgId) == 14 or abs(tmpPdgId) == 16 or abs(tmpPdgId) == 18:
+                                Z2LepHadNeuOthr = 2
+                            else:
+                                Z2LepHadNeuOthr = 3
+                                tmpZDecAr.append(tmpPdgId)
+                else:
+                    if tmpMotherID == Z2Ind:
+                        tmpPdgId = ev.GenPart_pdgId[i]
+                        tmpZ2PDGIdAr.append(tmpPdgId)
+            """
+        """
+        if Z1LepHadNeuOthr == 0 and Z2LepHadNeuOthr == 0:
+            isLeptonic = True
+            leptonicZDecaysCtr += 1
+        elif Z1LepHadNeuOthr == 0 or Z2LepHadNeuOthr == 0:
+            isSemiLeptonic = True
+            semiLeptonicZDecaysCtr += 1
+        elif Z1LepHadNeuOthr == 1 and Z2LepHadNeuOthr == 1:
+            isHadronic = True
+            hadronicZDecaysCtr += 1
+        elif Z1LepHadNeuOthr == 2 and Z2LepHadNeuOthr == 2:
+            isNeutrinos = True
+            neutrinosZDecaysCtr += 1
+        elif Z1LepHadNeuOthr == 3 or Z2LepHadNeuOthr == 3:
+            isOther = True
+            h_OtherZDecaysAr.append(tmpZDecAr)
+            otherZDecaysCtr += 1
+            for tmpZDec in tmpZDecAr:
+                h_OtherZDecays.Fill(tmpZDec)
+        """
 
         #FatJets loop
         tmpTagBoolAr = []
         tmpFatJetEtaCutPassCtr = 0
         tmpFatJetEtaCutHT = 0
+        h_LeptonicZDecays.Fill(tmpPdgId)
+
         for i in range(ev.nFatJet):
             tmpFatJetPT = ev.FatJet_pt[i]
             #FatJets with no tagging no cuts
@@ -1325,6 +1570,40 @@ for k,fileName in enumerate(fileAr):
         h_nFatJetEtaCut.Fill(tmpFatJetEtaCutPassCtr)
         if tmpFatJetEtaCutHT > 0:
             h_FatJetEtaCutHT.Fill(tmpFatJetEtaCutHT)
+            if isLeptonic:
+                h_FatJetEtaCutHTLeptonic.Fill(tmpFatJetEtaCutHT)
+            elif isSemiLeptonic:
+                h_FatJetEtaCutHTSemiLeptonic.Fill(tmpFatJetEtaCutHT)
+            elif isHadronic:
+                h_FatJetEtaCutHTHadronic.Fill(tmpFatJetEtaCutHT)
+            elif isNeutrinos:
+                h_FatJetEtaCutHTNeutrinos.Fill(tmpFatJetEtaCutHT)
+            elif isOther:
+                h_FatJetEtaCutHTOther.Fill(tmpFatJetEtaCutHT)
+            if len(tmpZ1PDGIdAr):
+                for tmpZ1PDGId in tmpZ1PDGIdAr:
+                    if isLeptonic:
+                        h_LeptonicZDecays.Fill(tmpZ1PDGId)
+                    elif isSemiLeptonic:
+                        h_SemiLeptonicZDecays.Fill(tmpZ1PDGId)
+                    elif isHadronic:
+                        h_HadronicZDecays.Fill(tmpZ1PDGId)
+                    elif isNeutrinos:
+                        h_NeutrinosZDecays.Fill(tmpZ1PDGId)
+                    #elif isOther:
+                    #    h_OtherZDecays.Fill(tmpZ1PDGId)
+            if len(tmpZ2DGIdAr):
+                for tmpZ2PDGId in tmpZ2PDGIdAr:
+                    if isLeptonic:
+                        h_LeptonicZDecays.Fill(tmpZ2PDGId)
+                    elif isSemiLeptonic:
+                        h_SemiLeptonicZDecays.Fill(tmpZ2PDGId)
+                    elif isHadronic:
+                        h_HadronicZDecays.Fill(tmpZ2PDGId)
+                    elif isNeutrinos:
+                        h_NeutrinosZDecays.Fill(tmpZ2PDGId)
+                    elif isSemiLeptonic:
+                        h_SemiLeptonicZDecays.Fill(tmpZ2PDGId)
 
         for i in range(ev.nFatJet):
             #Fat Jets with cut but no tagging
@@ -1598,6 +1877,12 @@ print("----------------------------------------------------------")
 print("Number of events passing semi-leptonic trigger:",semiLeptonicCount)
 print("Number of events passing hadronic trigger:",hadronicCount)
 print("----------------------------------------------------------")
+print("Number of events passing gen level Leptonic check:",leptonicZDecaysCtr)
+print("Number of events passing gen level SemiLeptonic check:",semiLeptonicZDecaysCtr)
+print("Number of events passing gen level Hadronic check:",hadronicZDecaysCtr)
+print("Number of events passing gen level Neutrinos check:",neutrinosZDecaysCtr)
+print("Number of events with other decays on gen level:",otherZDecaysCtr)
+print("----------------------------------------------------------")
 
 if not ttHToBBBackground:
     print("Cross section average before division:",crossSectionAvg)
@@ -1696,6 +1981,26 @@ DrawPlot(h_FatJetEtaCut_mass,"h_FatJetEtaCut_mass",saveName,True)
 DrawPlot(h_FatJetEtaCut_phi,"h_FatJetEtaCut_phi",saveName,True)
 DrawPlot(h_nFatJetEtaCut,"h_nFatJetEtaCut",saveName,True)
 DrawPlot(h_FatJetEtaCutHT,"h_FatJetEtaCutHT",saveName,True)
+
+DrawPlot(h_FatJetEtaCutHTLeptonic,"h_FatJetEtaCutHTLeptonic",saveName,True)
+DrawPlot(h_FatJetEtaCutHTSemiLeptonic,"h_FatJetEtaCutHTSemiLeptonic",saveName,True)
+DrawPlot(h_FatJetEtaCutHTHadronic,"h_FatJetEtaCutHTHadronic",saveName,True)
+DrawPlot(h_FatJetEtaCutHTNeutrinos,"h_FatJetEtaCutHTNeutrinos",saveName,True)
+DrawPlot(h_FatJetEtaCutHTOther,"h_FatJetEtaCutHTOther",saveName,True)
+
+DrawPlot(h_LeptonicZDecayLen,"h_LeptonicZDecayLen",saveName,True)
+DrawPlot(h_SemiLeptonicZDecayLen,"h_SemiLeptonicZDecayLen",saveName,True)
+DrawPlot(h_HadronicZDecayLen,"h_HadronicZDecayLen",saveName,True)
+DrawPlot(h_NeutrinosZDecayLen,"h_NeutrinosZDecayLen",saveName,True)
+DrawPlot(h_OtherZDecayLen,"h_OtherZDecayLen",saveName,True)
+
+DrawPlot(h_LeptonicZDecays,"h_LeptonicZDecays",saveName,True)
+DrawPlot(h_SemiLeptonicZDecays,"h_SemiLeptonicZDecays",saveName,True)
+DrawPlot(h_HadronicZDecays,"h_HadronicZDecays",saveName,True)
+DrawPlot(h_NeutrinosZDecays,"h_NeutrinosZDecays",saveName,True)
+DrawPlot(h_OtherZDecays,"h_OtherZDecays",saveName,True)
+
+DrawPlot(h_2DZDecayType,"h_2DZDecayType",saveName,True)
 
 DrawPlot(h_InitialFatJetAltLJ_Eta,"h_InitialFatJetAltLJ_Eta",saveName,True)
 DrawPlot(h_InitialFatJetAltLJ_EtaSep,"h_InitialFatJetAltLJ_EtaSep",saveName,True)
