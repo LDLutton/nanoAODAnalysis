@@ -1358,7 +1358,7 @@ for k,fileName in enumerate(fileAr):
             
             else:
             """
-            tmpMotherID = ev.genPartIdxMother[i]
+            tmpMotherID = ev.GenPart_genPartIdxMother[i]
             if tmpMotherID == Z1Ind:
                 tmpPdgId = ev.GenPart_pdgId[i]
                 if tmpPdgId == 23:
@@ -1382,22 +1382,22 @@ for k,fileName in enumerate(fileAr):
         tmpZDecAr = []
         if len(tmpZ1PDGIdAr):
             for tmpZ1PDGId in tmpZ1PDGIdAr:
-                if tmpZ1PdgId < 9 or tmpZ1PdgId > -9:
+                if tmpZ1PDGId < 9 and tmpZ1PDGId > -9:
                     Z1HasHadron = True
-                elif abs(tmpZ1PdgId == 11 or abs(tmpZ1PdgId) == 13 or abs(tmpZ1PdgId) == 15 or abs(tmpZ1PdgId) == 17:
+                elif abs(tmpZ1PDGId) == 11 or abs(tmpZ1PDGId) == 13 or abs(tmpZ1PDGId) == 15 or abs(tmpZ1PDGId) == 17:
                     Z1HasLepton = True
-                elif abs(tmpZ1PdgId) == 12 or abs(tmpZ1PdgId) == 14 or abs(tmpZ1PdgId) == 16 or abs(tmpZ1PdgId) == 18:
+                elif abs(tmpZ1PDGId) == 12 or abs(tmpZ1PDGId) == 14 or abs(tmpZ1PDGId) == 16 or abs(tmpZ1PDGId) == 18:
                     Z1HasNeutrino = True
                 else:
                     Z1HasOther = True
                     tmpZDecAr.append(tmpPdgId)
         if len(tmpZ2PDGIdAr):
             for tmpZ2PDGId in tmpZ2PDGIdAr:
-                if tmpZ2PdgId < 9 or tmpZ2PdgId > -9:
+                if tmpZ2PDGId < 9 and tmpZ2PDGId > -9:
                     Z2HasHadron = True
-                elif abs(tmpZ2PdgId == 11 or abs(tmpZ2PdgId) == 13 or abs(tmpZ2PdgId) == 15 or abs(tmpZ2PdgId) == 17:
+                elif abs(tmpZ2PDGId) == 11 or abs(tmpZ2PDGId) == 13 or abs(tmpZ2PDGId) == 15 or abs(tmpZ2PDGId) == 17:
                     Z2HasLepton = True
-                elif abs(tmpZ2PdgId) == 12 or abs(tmpZ2PdgId) == 14 or abs(tmpZ2PdgId) == 16 or abs(tmpZ2PdgId) == 18:
+                elif abs(tmpZ2PDGId) == 12 or abs(tmpZ2PDGId) == 14 or abs(tmpZ2PDGId) == 16 or abs(tmpZ2PDGId) == 18:
                     Z2HasNeutrino = True
                 else:
                     Z2HasOther = True
@@ -1443,7 +1443,7 @@ for k,fileName in enumerate(fileAr):
             isNeutrinos = True
             neutrinosZDecaysCtr += 1
             h_NeutrinosZDecayLen.Fill(len(tmpZ1PDGIdAr))
-            h_NeutrinoosZDecayLen.Fill(len(tmpZ2PDGIdAr))
+            h_NeutrinosZDecayLen.Fill(len(tmpZ2PDGIdAr))
         elif Z1HasOther or Z2HasOther:
             isOther = True
             h_OtherZDecayLen.Fill(len(tmpZ1PDGIdAr))
@@ -1592,7 +1592,7 @@ for k,fileName in enumerate(fileAr):
                         h_NeutrinosZDecays.Fill(tmpZ1PDGId)
                     #elif isOther:
                     #    h_OtherZDecays.Fill(tmpZ1PDGId)
-            if len(tmpZ2DGIdAr):
+            if len(tmpZ2PDGIdAr):
                 for tmpZ2PDGId in tmpZ2PDGIdAr:
                     if isLeptonic:
                         h_LeptonicZDecays.Fill(tmpZ2PDGId)
