@@ -1375,7 +1375,7 @@ for k,fileName in enumerate(fileAr):
 
             tmpMotherID = ev.GenPart_genPartIdxMother[i]
             if debugChannelSort:
-                print("i","tmpMotherID",i,tmpMotherID)
+                print("i",i,"tmpMotherID",tmpMotherID,"ev.GenPart_pdgId[i]",ev.GenPart_pdgId[i])
             if tmpMotherID == Z1Ind:
                 tmpPdgId = ev.GenPart_pdgId[i]
                 if debugChannelSort:
