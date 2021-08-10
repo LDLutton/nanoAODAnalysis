@@ -473,7 +473,7 @@ neutrinosZDecaysCtr = 0
 
 #PDGIds that don't line up with any of the channels
 h_OtherZDecays         = TH1F("h_OtherZDecays","h_OtherZDecays", 100, -50, 50)
-h_OtherZDecaysAr = []
+otherZDecaysAr = []
 otherZDecaysCtr = 0
 
 #2D graph for type of decay of both Zs
@@ -1390,7 +1390,7 @@ for k,fileName in enumerate(fileAr):
                     Z1HasNeutrino = True
                 else:
                     Z1HasOther = True
-                    tmpZDecAr.append(tmpPdgId)
+                    tmpZDecAr.append(tmpZ1PDGId)
         if len(tmpZ2PDGIdAr):
             for tmpZ2PDGId in tmpZ2PDGIdAr:
                 if tmpZ2PDGId < 9 and tmpZ2PDGId > -9:
@@ -1401,7 +1401,7 @@ for k,fileName in enumerate(fileAr):
                     Z2HasNeutrino = True
                 else:
                     Z2HasOther = True
-                    tmpZDecAr.append(tmpPdgId)
+                    tmpZDecAr.append(tmpZ2PDGId)
         tmpZ1DecType = -1
         tmpZ2DecType = -1
         if Z1HasLepton:
@@ -1448,7 +1448,7 @@ for k,fileName in enumerate(fileAr):
             isOther = True
             h_OtherZDecayLen.Fill(len(tmpZ1PDGIdAr))
             h_OtherZDecayLen.Fill(len(tmpZ2PDGIdAr))
-            h_OtherZDecaysAr.append(tmpZDecAr)
+            otherZDecaysAr.append(tmpZDecAr)
             otherZDecaysCtr += 1
             for tmpZDec in tmpZDecAr:
                 h_OtherZDecays.Fill(tmpZDec)
@@ -1882,6 +1882,10 @@ print("Number of events passing gen level SemiLeptonic check:",semiLeptonicZDeca
 print("Number of events passing gen level Hadronic check:",hadronicZDecaysCtr)
 print("Number of events passing gen level Neutrinos check:",neutrinosZDecaysCtr)
 print("Number of events with other decays on gen level:",otherZDecaysCtr)
+print("List of other decays:")
+for otherZDecays in otherZDecaysAr:
+    for otherZDecay in otherZDecays:
+        print(otherZDecay,end=",")
 print("----------------------------------------------------------")
 
 if not ttHToBBBackground:
