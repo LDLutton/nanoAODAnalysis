@@ -11,6 +11,7 @@ import time as time
 
 #To enable heavy printing for debug
 debug = False
+debugChannelSort = False
 
 #withDipoleRecoil = True
 
@@ -1339,13 +1340,21 @@ for k,fileName in enumerate(fileAr):
         Z2HasHadron = False
         Z2HasNeutrino = False
         Z2HasOther = False
-        
+        if debugChannelSort:
+            print("Starting loop over LHE. ev.nLHEPart",ev.nLHEPart)
         for i in range(ev.nLHEPart):
+            if debugChannelSort:
+                print("i","ev.LHEPart_pdgId[i]",i,ev.LHEPart_pdgId[i])
             if ev.LHEPart_pdgId[i] == 23:
                 Z1Ind = Z2Ind
                 Z2Ind = i
+                if debugChannelSort:
+                    print("Z found.","Z1Ind, Z2Ind",Z1Ind,Z2Ind)
         if Z1Ind < 0 or Z2Ind < 0:
             print("LHE CHECK DID NOT FIND TWO Zs",evCount,Z1Ind,Z2Ind)
+        if debugChannelSort:
+            print("LHE Loop finished. Z1Ind, Z2Ind", Z1Ind,Z2Ind)
+            print("Starting loop over Gen particles - LHE particles. ev.nGenPart",ev.nGenPart)
 
         for i in range(ev.nLHEPart,ev.nGenPart):
             """
@@ -1358,29 +1367,48 @@ for k,fileName in enumerate(fileAr):
             
             else:
             """
+
             tmpMotherID = ev.GenPart_genPartIdxMother[i]
+            if debugChannelSort:
+                print("i","tmpMotherID",i,tmpMotherID)
             if tmpMotherID == Z1Ind:
                 tmpPdgId = ev.GenPart_pdgId[i]
+                if debugChannelSort:
+                    print("tmpMotherID == Z1Ind. tmpPdgId",tmpPdgId)
                 if tmpPdgId == 23:
                     if foundZ1Channel:
                         print("ERROR, ERROR, FOUNDZ1CHANNEL YET DAUGHTER PARTICLE IS Z")
                     else:
                         Z1Ind = i
+                        if debugChannelSort:
+                            print("Z1Ind Updated. Z1Ind",Z1Ind)
                 else:
                     tmpZ1PDGIdAr.append(tmpPdgId)
                     foundZ1Channel = True
             elif tmpMotherID == Z2Ind:
                 tmpPdgId = ev.GenPart_pdgId[i]
+                if debugChannelSort:
+                    print("tmpMotherID == Z2Ind. tmpPdgId",tmpPdgId)
                 if tmpPdgId == 23:
                     if foundZ2Channel:
                         print("ERROR, ERROR, FOUNDZ2CHANNEL YET DAUGHTER PARTICLE IS Z")
                     else:
                         Z2Ind = i
+                        if debugChannelSort:
+                            print("Z2Ind Updated. Z2Ind",Z2Ind)
                 else:
                     tmpZ2PDGIdAr.append(tmpPdgId)
                     foundZ2Channel = True
+        if debugChannelSort:
+            print("Finished genPart Loop check."
+            print("len(tmpZ1PDGIdAr),tmpZ1PDGIdAr",len(tmpZ1PDGIdAr),tmpZ1PDGIdAr)
+            print("len(tmpZ2PDGIdAr),tmpZ2PDGIdAr",len(tmpZ2PDGIdAr),tmpZ2PDGIdAr)
+
         tmpZDecAr = []
         if len(tmpZ1PDGIdAr):
+            if debugChannelSort:
+                print("entering loop through tmpZ1PDGIdAr")
+                debugLoopCtr = 0
             for tmpZ1PDGId in tmpZ1PDGIdAr:
                 if tmpZ1PDGId < 9 and tmpZ1PDGId > -9:
                     Z1HasHadron = True
@@ -1391,7 +1419,13 @@ for k,fileName in enumerate(fileAr):
                 else:
                     Z1HasOther = True
                     tmpZDecAr.append(tmpZ1PDGId)
+                if debugChannelSort:
+                    print("debugLoopCtr, tmpZ1PDGId, Z1HasLepton, Z1HasHadron, Z1HasNeutrino, Z1HasOther, tmpZDecAr",debugLoopCtr,tmpZ1PDGId,Z1HasLepton,Z1HasHadron,Z1HasNeutrino,Z1HasOther,tmpZDecAr)
+                    debugLoopCtr += 1
         if len(tmpZ2PDGIdAr):
+            if debugChannelSort:
+                print("entering loop through tmpZ2PDGIdAr")
+                debugLoopCtr = 0
             for tmpZ2PDGId in tmpZ2PDGIdAr:
                 if tmpZ2PDGId < 9 and tmpZ2PDGId > -9:
                     Z2HasHadron = True
@@ -1402,6 +1436,11 @@ for k,fileName in enumerate(fileAr):
                 else:
                     Z2HasOther = True
                     tmpZDecAr.append(tmpZ2PDGId)
+                if debugChannelSort:
+                    print("debugLoopCtr, tmpZ2PDGId, Z2HasLepton, Z2HasHadron, Z2HasNeutrino, Z2HasOther, tmpZDecAr",debugLoopCtr,tmpZ2PDGId,Z2HasLepton,Z2HasHadron,Z2HasNeutrino,Z2HasOther,tmpZDecAr)
+                    debugLoopCtr += 1
+        if debugChannelSort:
+            print("Finished Z1 and Z2 PDGIdAr loops")
         tmpZ1DecType = -1
         tmpZ2DecType = -1
         if Z1HasLepton:
@@ -1420,7 +1459,8 @@ for k,fileName in enumerate(fileAr):
             tmpZ2DecType = 2
         elif Z2HasOther:
             tmpZ2DecType = 3
-        
+        if debugChannelSort:
+            print("tmpZ1DecType, tmpZ1DecType",tmpZ1DecType,tmpZ1DecType)
         if tmpZ1DecType >= 0 and tmpZ2DecType >= 0:
             h_2DZDecayType.Fill(tmpZ1DecType,tmpZ2DecType)
 
@@ -1452,11 +1492,14 @@ for k,fileName in enumerate(fileAr):
             otherZDecaysCtr += 1
             for tmpZDec in tmpZDecAr:
                 h_OtherZDecays.Fill(tmpZDec)
+
+        if debugChannelSort:
+            print("isLeptonic, isSemiLeptonic, isHadronic, isNeutrinos, isOther",isLeptonic,isSemiLeptonic,isHadronic,isNeutrinos,isOther)
         
 
 
                         
-            """
+        """
             else:
                 tmpMotherID = ev.GenPart_genPartIdxMother[i]
                 if not foundZ1Channel:
@@ -1501,8 +1544,7 @@ for k,fileName in enumerate(fileAr):
                     if tmpMotherID == Z2Ind:
                         tmpPdgId = ev.GenPart_pdgId[i]
                         tmpZ2PDGIdAr.append(tmpPdgId)
-            """
-        """
+
         if Z1LepHadNeuOthr == 0 and Z2LepHadNeuOthr == 0:
             isLeptonic = True
             leptonicZDecaysCtr += 1
@@ -1527,7 +1569,6 @@ for k,fileName in enumerate(fileAr):
         tmpTagBoolAr = []
         tmpFatJetEtaCutPassCtr = 0
         tmpFatJetEtaCutHT = 0
-        h_LeptonicZDecays.Fill(tmpPdgId)
 
         for i in range(ev.nFatJet):
             tmpFatJetPT = ev.FatJet_pt[i]
