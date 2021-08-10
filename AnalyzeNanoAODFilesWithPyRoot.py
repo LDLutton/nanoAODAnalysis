@@ -14,6 +14,7 @@ debug = False
 debugChannelSort = False
 #To break out of loops after NToEnd events
 endAfter = False
+NToStart = 900
 NToEnd = 1500
 
 #withDipoleRecoil = True
@@ -26,18 +27,23 @@ ttHToBBBackground = False
 #Saves a png and, optionally, a pdf version
 #Saves histogram to the currently active root file
 
-def DrawPlot(plot,name,saveName,normalizeOrNot):
+def DrawPlot(plot,name,saveName,normalizeOrNot,COLZOrNot = False):
     if normalizeOrNot and plot.GetEntries() > 0:
         c1 = TCanvas("c1","c1",3600,2400)
 
         plot.SetFillColorAlpha(30,0.35)
-
-        plot.Draw("hist")
+        if not COLZOrNot:
+            plot.Draw("hist")
+        else:
+            plot.Draw("COLZ")
         c1.SaveAs((name+"{0}.png".format(saveName)))
         plot.Write(name)
         plot.Scale(1.0 / plot.Integral())
 
-        plot.Draw("hist")
+        if not COLZOrNot:
+            plot.Draw("hist")
+        else:
+            plot.Draw("COLZ")
         c1.SaveAs((name+"{0}Normalized.png".format(saveName)))
         #c1.SaveAs((name+"{0}.pdf".format(saveName)))
         plot.Write(name+"Normalized")
@@ -448,15 +454,15 @@ h_nFatJetEtaCut           = TH1F("h_nFatJetEtaCut","h_nFatJetEtaCut", 7, 0, 7)
 h_FatJetEtaCut_eta        = TH1F("h_FatJetEtaCut_eta","h_FatJetEtaCut_eta", 100, -5.0, 5.0)
 h_FatJetEtaCut_mass       = TH1F("h_FatJetEtaCut_mass","h_FatJetEtaCut_mass", 200, 0, 200)
 h_FatJetEtaCut_phi        = TH1F("h_FatJetEtaCut_phi","h_FatJetEtaCut_phi", 100, -3.5, 3.5)
-h_FatJetEtaCutHT          = TH1F("h_FatJetEtaCutHT","h_FatJetEtaCutHT", 500, 0, 3000)
+h_FatJetEtaCutHT          = TH1F("h_FatJetEtaCutHT","h_FatJetEtaCutHT", 125, 0, 3000)
 
 #Fat Jets HT with eta cut by channel
 
-h_FatJetEtaCutHTLeptonic          = TH1F("h_FatJetEtaCutHTLeptonic","h_FatJetEtaCutHTLeptonic", 500, 0, 3000)
-h_FatJetEtaCutHTSemiLeptonic          = TH1F("h_FatJetEtaCutHTSemiLeptonic","h_FatJetEtaCutHTSemiLeptonic", 500, 0, 3000)
-h_FatJetEtaCutHTHadronic         = TH1F("h_FatJetEtaCutHTHadronic","h_FatJetEtaCutHTHadronic", 500, 0, 3000)
-h_FatJetEtaCutHTNeutrinos       = TH1F("h_FatJetEtaCutHTNeutrinos","h_FatJetEtaCutHTNeutrinos", 500, 0, 3000)
-h_FatJetEtaCutHTOther          = TH1F("h_FatJetEtaCutHTOther","h_FatJetEtaCutHTOther", 500, 0, 3000)
+h_FatJetEtaCutHTLeptonic          = TH1F("h_FatJetEtaCutHTLeptonic","h_FatJetEtaCutHTLeptonic", 125, 0, 3000)
+h_FatJetEtaCutHTSemiLeptonic          = TH1F("h_FatJetEtaCutHTSemiLeptonic","h_FatJetEtaCutHTSemiLeptonic", 125, 0, 3000)
+h_FatJetEtaCutHTHadronic         = TH1F("h_FatJetEtaCutHTHadronic","h_FatJetEtaCutHTHadronic", 125, 0, 3000)
+h_FatJetEtaCutHTNeutrinos       = TH1F("h_FatJetEtaCutHTNeutrinos","h_FatJetEtaCutHTNeutrinos", 125, 0, 3000)
+h_FatJetEtaCutHTOther          = TH1F("h_FatJetEtaCutHTOther","h_FatJetEtaCutHTOther", 125, 0, 3000)
 
 #Len of decays
 h_LeptonicZDecayLen         = TH1F("h_LeptonicZDecayLen","h_LeptonicZDecayLen", 20, 0, 20)
@@ -594,8 +600,12 @@ for k,fileName in enumerate(fileAr):
 
     #EvLoop
     for ev in mytree:
-        if endAfter and evCount > NToEnd:
-            break
+        if endAfter:
+            if evCount < NToStart:
+                evCount += 1
+                continue
+            if evCount > NToEnd:
+                break
         if evCount % 1000 == 0:
             print("Event: "+str(evCount))
         #print(ev.CaloMET_sumEt)
@@ -1934,6 +1944,7 @@ print("List of other decays:")
 for otherZDecays in otherZDecaysAr:
     for otherZDecay in otherZDecays:
         print(otherZDecay,end=",")
+print("")
 print("----------------------------------------------------------")
 
 if not ttHToBBBackground:
@@ -2052,7 +2063,7 @@ DrawPlot(h_HadronicZDecays,"h_HadronicZDecays",saveName,True)
 DrawPlot(h_NeutrinosZDecays,"h_NeutrinosZDecays",saveName,True)
 DrawPlot(h_OtherZDecays,"h_OtherZDecays",saveName,True)
 
-DrawPlot(h_2DZDecayType,"h_2DZDecayType",saveName,True)
+DrawPlot(h_2DZDecayType,"h_2DZDecayType",saveName,True,COLZOrNot=True)
 
 DrawPlot(h_InitialFatJetAltLJ_Eta,"h_InitialFatJetAltLJ_Eta",saveName,True)
 DrawPlot(h_InitialFatJetAltLJ_EtaSep,"h_InitialFatJetAltLJ_EtaSep",saveName,True)
