@@ -12,6 +12,9 @@ import time as time
 #To enable heavy printing for debug
 debug = False
 debugChannelSort = False
+#To break out of loops after NToEnd events
+endAfter = False
+NToEnd = 1500
 
 #withDipoleRecoil = True
 
@@ -570,8 +573,8 @@ hadronicCount = 0
 
 print("Going into file loop.","time:",time.time()-startt)
 for k,fileName in enumerate(fileAr):
-    #if evCount > 450:
-    #    break
+    if endAfter and evCount > NToEnd:
+        break
     #Open the file, get the Events tree
     tmpfile = TFile.Open(fileName)
     mytree = tmpfile.Events
@@ -591,8 +594,8 @@ for k,fileName in enumerate(fileAr):
 
     #EvLoop
     for ev in mytree:
-        #if evCount > 450:
-        #    break
+        if endAfter and evCount > NToEnd:
+            break
         if evCount % 1000 == 0:
             print("Event: "+str(evCount))
         #print(ev.CaloMET_sumEt)
@@ -1400,7 +1403,7 @@ for k,fileName in enumerate(fileAr):
                     tmpZ2PDGIdAr.append(tmpPdgId)
                     foundZ2Channel = True
         if debugChannelSort:
-            print("Finished genPart Loop check."
+            print("Finished genPart Loop check.")
             print("len(tmpZ1PDGIdAr),tmpZ1PDGIdAr",len(tmpZ1PDGIdAr),tmpZ1PDGIdAr)
             print("len(tmpZ2PDGIdAr),tmpZ2PDGIdAr",len(tmpZ2PDGIdAr),tmpZ2PDGIdAr)
 
