@@ -1343,6 +1343,8 @@ for k,fileName in enumerate(fileAr):
         Z2HasHadron = False
         Z2HasNeutrino = False
         Z2HasOther = False
+        if debugChannelSort and not debug:
+            print("EVENT",evCount)
         if debugChannelSort:
             print("Starting loop over LHE. ev.nLHEPart",ev.nLHEPart)
         for i in range(ev.nLHEPart):
@@ -1498,6 +1500,8 @@ for k,fileName in enumerate(fileAr):
 
         if debugChannelSort:
             print("isLeptonic, isSemiLeptonic, isHadronic, isNeutrinos, isOther",isLeptonic,isSemiLeptonic,isHadronic,isNeutrinos,isOther)
+        if debugChannelSort and not debug:
+            print("------------------------------------------------------------------------------------------------------------------------")
         
 
 
