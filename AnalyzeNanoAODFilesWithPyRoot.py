@@ -1357,10 +1357,86 @@ for k,fileName in enumerate(fileAr):
             print("EVENT",evCount)
         if debugChannelSort:
             print("Starting loop over LHE. ev.nLHEPart",ev.nLHEPart)
+
+
+        outQuarkOne = ev.LHEPart_pdgId[-1]
+        outQuarkTwo = ev.LHEPart_pdgId[-2]
+        tmpZAr = []
+        for i in range(ev.nGenPart):
+            tmpPDGId = ev.GenPart_pdgId[i]
+            tmpMotherId = ev.GenPart_genPartIdxMother[i]
+            if debugChannelSort:
+                print("i",i,"ev.GenPart_pdgId[i]",tmpPDGId)
+            
+            for tmpZItr in range(len(tmpZAr)):
+                if tmpMotherID == tmpZAr[tmpZItr][0]:
+                    if tmpPDGId == 23:
+                        print("ERROR, ERROR, DAUGHTER PARTICLE IS Z")
+                    else:
+                        tmpZAr[tmpZItr].append(tmpPDGId)
+            if ev.GenPart_pdgId[i] == 23:
+                tmpStatusBin = bin(ev.GenPart_statusFlags[i])
+                if len(tmpStatusBin >= 16):
+                    tmpIsEnd = tmpStatusBin[-14]
+                    if tmpIsEnd == 1:
+                        tmpZAr.append([i])
+        tmpZFinalAr = []
+        intermediaryZ = -1
+        if len(tmpZAr) >= 3:
+            for tmpZItr in range(len(tmpZAr)):
+                if len(tmpZAr[tmpZItr]) == 3 and outQuarkOne in tmpZAr[tmpZItr][1:] and outQuarkTwo in tmpZAr[tmpZItr][1:]:
+                    intermediaryZ = tmpZItr
+                    break
+        finalZAr = []
+        for tmpZItr in range(len(tmpZAr)):
+            if not tmpZItr == intermediaryZ:
+                finalZAr.append(tmpZAr[tmpZItr][1:])
+        tmpZDecAr = []
+        if not len(finalZAr) == 2:
+            print("ERROR ERROR, MORE OR LESS THAN TWO Zs,evCount,tmpZAr,outQuarkOne,outQuarkTwo",evCount,tmpZAr,outQuarkOne,outQuarkTwo)
+        else:
+            if debugChannelSort:
+                print("entering loop through finalZAr[0]")
+                debugLoopCtr = 0
+            for tmpZ1PDGId in finalZAr[0]:
+                if tmpZ1PDGId < 9 and tmpZ1PDGId > -9:
+                    Z1HasHadron = True
+                elif abs(tmpZ1PDGId) == 11 or abs(tmpZ1PDGId) == 13 or abs(tmpZ1PDGId) == 15 or abs(tmpZ1PDGId) == 17:
+                    Z1HasLepton = True
+                elif abs(tmpZ1PDGId) == 12 or abs(tmpZ1PDGId) == 14 or abs(tmpZ1PDGId) == 16 or abs(tmpZ1PDGId) == 18:
+                    Z1HasNeutrino = True
+                else:
+                    Z1HasOther = True
+                    tmpZDecAr.append(tmpZ1PDGId)
+                if debugChannelSort:
+                    print("debugLoopCtr, tmpZ1PDGId, Z1HasLepton, Z1HasHadron, Z1HasNeutrino, Z1HasOther, tmpZDecAr",debugLoopCtr,tmpZ1PDGId,Z1HasLepton,Z1HasHadron,Z1HasNeutrino,Z1HasOther,tmpZDecAr)
+                    debugLoopCtr += 1
+            if debugChannelSort:
+                print("entering loop through finalZAr[1]")
+                debugLoopCtr = 0
+            for tmpZ2PDGId in finalZAr[1]:
+                if tmpZ2PDGId < 9 and tmpZ2PDGId > -9:
+                    Z2HasHadron = True
+                elif abs(tmpZ2PDGId) == 11 or abs(tmpZ2PDGId) == 13 or abs(tmpZ2PDGId) == 15 or abs(tmpZ2PDGId) == 17:
+                    Z2HasLepton = True
+                elif abs(tmpZ2PDGId) == 12 or abs(tmpZ2PDGId) == 14 or abs(tmpZ2PDGId) == 16 or abs(tmpZ2PDGId) == 18:
+                    Z2HasNeutrino = True
+                else:
+                    Z2HasOther = True
+                    tmpZDecAr.append(tmpZ2PDGId)
+                if debugChannelSort:
+                    print("debugLoopCtr, tmpZ2PDGId, Z2HasLepton, Z2HasHadron, Z2HasNeutrino, Z2HasOther, tmpZDecAr",debugLoopCtr,tmpZ2PDGId,Z2HasLepton,Z2HasHadron,Z2HasNeutrino,Z2HasOther,tmpZDecAr)
+                    debugLoopCtr += 1
+
+            
+            
+
+
+        """
         for i in range(ev.nLHEPart):
             if debugChannelSort:
                 print("i","ev.LHEPart_pdgId[i]",i,ev.LHEPart_pdgId[i])
-            if ev.LHEPart_pdgId[i] == 23:
+            if ev.GenPart_pdgId[i] == 23:
                 Z1Ind = Z2Ind
                 Z2Ind = i
                 if debugChannelSort:
@@ -1372,7 +1448,8 @@ for k,fileName in enumerate(fileAr):
             print("Starting loop over Gen particles - LHE particles. ev.nGenPart",ev.nGenPart)
 
         for i in range(ev.nLHEPart,ev.nGenPart):
-            """
+        """
+        """
             if not foundBothZBool:
                 if Z1Ind < 0 and ev.GenPart_pdgId[i] == 23 and ev.GenPart_genPartIdxMother[i] == 0:
                     Z1Ind = i
@@ -1381,7 +1458,8 @@ for k,fileName in enumerate(fileAr):
                     foundBothZBool = True
             
             else:
-            """
+        """
+        """
 
             tmpMotherID = ev.GenPart_genPartIdxMother[i]
             if debugChannelSort:
@@ -1454,6 +1532,7 @@ for k,fileName in enumerate(fileAr):
                 if debugChannelSort:
                     print("debugLoopCtr, tmpZ2PDGId, Z2HasLepton, Z2HasHadron, Z2HasNeutrino, Z2HasOther, tmpZDecAr",debugLoopCtr,tmpZ2PDGId,Z2HasLepton,Z2HasHadron,Z2HasNeutrino,Z2HasOther,tmpZDecAr)
                     debugLoopCtr += 1
+        """
         if debugChannelSort:
             print("Finished Z1 and Z2 PDGIdAr loops")
         tmpZ1DecType = -1
