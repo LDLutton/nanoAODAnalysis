@@ -1343,8 +1343,8 @@ for k,fileName in enumerate(fileAr):
         isNeutrinos = False
         isOther = False
         tmpZDecAr = []
-        tmpZ1PDGIdAr = []
-        tmpZ2PDGIdAr = []
+        #tmpZ1PDGIdAr = []
+        #tmpZ2PDGIdAr = []
         Z1HasLepton = False
         Z1HasHadron = False
         Z1HasNeutrino = False
@@ -1573,27 +1573,27 @@ for k,fileName in enumerate(fileAr):
         if Z1HasLepton and Z2HasLepton:
             isLeptonic = True
             leptonicZDecaysCtr += 1
-            h_LeptonicZDecayLen.Fill(len(tmpZ1PDGIdAr))
-            h_LeptonicZDecayLen.Fill(len(tmpZ2PDGIdAr))
+            h_LeptonicZDecayLen.Fill(len(finalZAr[0]))
+            h_LeptonicZDecayLen.Fill(len(finalZAr[1]))
         elif Z1HasLepton or Z2HasLepton:
             isSemiLeptonic = True
             semiLeptonicZDecaysCtr += 1
-            h_SemiLeptonicZDecayLen.Fill(len(tmpZ1PDGIdAr))
-            h_SemiLeptonicZDecayLen.Fill(len(tmpZ2PDGIdAr))
+            h_SemiLeptonicZDecayLen.Fill(len(finalZAr[0]))
+            h_SemiLeptonicZDecayLen.Fill(len(finalZAr[1]))
         elif Z1HasHadron and Z2HasHadron:
             isHadronic = True
             hadronicZDecaysCtr += 1
-            h_HadronicZDecayLen.Fill(len(tmpZ1PDGIdAr))
-            h_HadronicZDecayLen.Fill(len(tmpZ2PDGIdAr))
+            h_HadronicZDecayLen.Fill(len(finalZAr[0]))
+            h_HadronicZDecayLen.Fill(len(finalZAr[1]))
         elif Z1HasNeutrino and Z2HasNeutrino:
             isNeutrinos = True
             neutrinosZDecaysCtr += 1
-            h_NeutrinosZDecayLen.Fill(len(tmpZ1PDGIdAr))
-            h_NeutrinosZDecayLen.Fill(len(tmpZ2PDGIdAr))
+            h_NeutrinosZDecayLen.Fill(len(finalZAr[0]))
+            h_NeutrinosZDecayLen.Fill(len(finalZAr[1]))
         elif Z1HasOther or Z2HasOther:
             isOther = True
-            h_OtherZDecayLen.Fill(len(tmpZ1PDGIdAr))
-            h_OtherZDecayLen.Fill(len(tmpZ2PDGIdAr))
+            h_OtherZDecayLen.Fill(len(finalZAr[0]))
+            h_OtherZDecayLen.Fill(len(finalZAr[1]))
             otherZDecaysAr.append(tmpZDecAr)
             otherZDecaysCtr += 1
             for tmpZDec in tmpZDecAr:
@@ -1729,8 +1729,8 @@ for k,fileName in enumerate(fileAr):
                 h_FatJetEtaCutHTNeutrinos.Fill(tmpFatJetEtaCutHT)
             elif isOther:
                 h_FatJetEtaCutHTOther.Fill(tmpFatJetEtaCutHT)
-            if len(tmpZ1PDGIdAr):
-                for tmpZ1PDGId in tmpZ1PDGIdAr:
+            if len(finalZAr[0]):
+                for tmpZ1PDGId in finalZAr[0]:
                     if isLeptonic:
                         h_LeptonicZDecays.Fill(tmpZ1PDGId)
                     elif isSemiLeptonic:
@@ -1741,8 +1741,8 @@ for k,fileName in enumerate(fileAr):
                         h_NeutrinosZDecays.Fill(tmpZ1PDGId)
                     #elif isOther:
                     #    h_OtherZDecays.Fill(tmpZ1PDGId)
-            if len(tmpZ2PDGIdAr):
-                for tmpZ2PDGId in tmpZ2PDGIdAr:
+            if len(finalZAr[1]):
+                for tmpZ2PDGId in finalZAr[1]:
                     if isLeptonic:
                         h_LeptonicZDecays.Fill(tmpZ2PDGId)
                     elif isSemiLeptonic:
