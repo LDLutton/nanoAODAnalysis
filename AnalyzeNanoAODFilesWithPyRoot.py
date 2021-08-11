@@ -1355,31 +1355,43 @@ for k,fileName in enumerate(fileAr):
         Z2HasOther = False
         if debugChannelSort and not debug:
             print("EVENT",evCount)
+        #if debugChannelSort:
+        #    print("Starting loop over LHE. ev.nLHEPart",ev.nLHEPart)
         if debugChannelSort:
-            print("Starting loop over LHE. ev.nLHEPart",ev.nLHEPart)
+            print("Starting loop over genPart. ev.nGenPart",ev.nGenPart)
 
 
         outQuarkOne = ev.LHEPart_pdgId[-1]
         outQuarkTwo = ev.LHEPart_pdgId[-2]
+        if debugChannelSort:
+            print("outQuarkOne",outQuarkOne,"outQuarkTwo",outQuarkTwo)
         tmpZAr = []
         for i in range(ev.nGenPart):
             tmpPDGId = ev.GenPart_pdgId[i]
-            tmpMotherId = ev.GenPart_genPartIdxMother[i]
+            tmpMotherID = ev.GenPart_genPartIdxMother[i]
             if debugChannelSort:
                 print("i",i,"ev.GenPart_pdgId[i]",tmpPDGId)
             
             for tmpZItr in range(len(tmpZAr)):
+                if debugChannelSort:
+                    print("tmpZItr",tmpZItr,"tmpMotherID",tmpMotherID)
                 if tmpMotherID == tmpZAr[tmpZItr][0]:
                     if tmpPDGId == 23:
                         print("ERROR, ERROR, DAUGHTER PARTICLE IS Z")
                     else:
                         tmpZAr[tmpZItr].append(tmpPDGId)
             if ev.GenPart_pdgId[i] == 23:
+                
                 tmpStatusBin = bin(ev.GenPart_statusFlags[i])
-                if len(tmpStatusBin >= 16):
+                if debugChannelSort:
+                    print("len(tmpStatusBin)",len(tmpStatusBin),"tmpStatusBin",tmpStatusBin)
+                
+                if len(tmpStatusBin) >= 16:
                     tmpIsEnd = tmpStatusBin[-14]
-                    if tmpIsEnd == 1:
+                    if tmpIsEnd == "1":
                         tmpZAr.append([i])
+        if debugChannelSort:
+            print("Finished Z Finding. tmpZAr",tmpZAr)
         tmpZFinalAr = []
         intermediaryZ = -1
         if len(tmpZAr) >= 3:
