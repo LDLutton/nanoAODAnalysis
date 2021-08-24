@@ -367,122 +367,113 @@ elif MGSM:
         fileAr.append("/scratch365/dlutton/NanoAODFiles/pphzzjjQCD0SMHLOOP0QEDE5NPE0ResMasAllVer100Ev_0p999cHW100GeVIMJetCut/"+fileName)
 elif ttHToBBBackground:
     saveName = "ttHToBBBackground"
-    h_LHEWeight      = TH1F("h_LHEWeight","h_LHEWeight",100,8.0e-05,8.5e-05) #Non-functional, just to keep the program from crashing
+    
     crossSection = 0.6*0.584
-    checkChannelSplits = False
+    
     isBackground = True
     for fileName in ttHToBBBackgroundAr:
         fileAr.append(fileName)
 elif ttZJetsBackground:
     saveName = "ttZJetsBackground"
-    h_LHEWeight      = TH1F("h_LHEWeight","h_LHEWeight",100,8.0e-05,8.5e-05) #Non-functional, just to keep the program from crashing
+    
     crossSection = 0.5407
-    checkChannelSplits = False
+    
     isBackground = True
-    for fileName in ttZJetsBackground:
+    for fileName in ttZJetsBackgroundAr:
         fileAr.append(fileName)
 elif DYBackground:
     saveName = "DYBackground"
-    h_LHEWeight      = TH1F("h_LHEWeight","h_LHEWeight",100,8.0e-05,8.5e-05) #Non-functional, just to keep the program from crashing
+    
     crossSection = 6077.22
-    checkChannelSplits = False
+    
     isBackground = True
-    for fileName in DYBackground:
+    for fileName in DYBackgroundAr:
         fileAr.append(fileName)
 elif QCDPT170to300Background:
     saveName = "QCDPT170to300Background"
-    h_LHEWeight      = TH1F("h_LHEWeight","h_LHEWeight",100,8.0e-05,8.5e-05) #Non-functional, just to keep the program from crashing
+    
     crossSection = 103300.0
-    checkChannelSplits = False
+    
     isBackground = True
-    for fileName in QCDPT170to300Background:
+    for fileName in QCDPT170to300BackgroundAr:
         fileAr.append(fileName)
 elif QCDPT300to470Background:
     saveName = "QCDPT300to470Background"
-    h_LHEWeight      = TH1F("h_LHEWeight","h_LHEWeight",100,8.0e-05,8.5e-05) #Non-functional, just to keep the program from crashing
+    
     crossSection = 6826.0
-    checkChannelSplits = False
+    
     isBackground = True
-    for fileName in QCDPT300to470Background:
+    for fileName in QCDPT300to470BackgroundAr:
         fileAr.append(fileName)
 elif QCDPT470to600Background:
     saveName = "QCDPT470to600Background"
-    h_LHEWeight      = TH1F("h_LHEWeight","h_LHEWeight",100,8.0e-05,8.5e-05) #Non-functional, just to keep the program from crashing
+    
     crossSection = 552.6
-    checkChannelSplits = False
+    
     isBackground = True
-    for fileName in QCDPT470to600Background:
+    for fileName in QCDPT470to600BackgroundAr:
         fileAr.append(fileName)
 elif QCDPT600to800Background:
     saveName = "QCDPT600to800Background"
-    h_LHEWeight      = TH1F("h_LHEWeight","h_LHEWeight",100,8.0e-05,8.5e-05) #Non-functional, just to keep the program from crashing
+    
     crossSection = 156.6
-    checkChannelSplits = False
+    
     isBackground = True
-    for fileName in QCDPT600to800Background:
+    for fileName in QCDPT600to800BackgroundAr:
         fileAr.append(fileName)
 elif QCDPT800to1000Background:
     saveName = "QCDPT800to1000Background"
-    h_LHEWeight      = TH1F("h_LHEWeight","h_LHEWeight",100,8.0e-05,8.5e-05) #Non-functional, just to keep the program from crashing
+    
     crossSection = 26.32
-    checkChannelSplits = False
+    
     isBackground = True
-    for fileName in QCDPT800to1000Background:
+    for fileName in QCDPT800to1000BackgroundAr:
         fileAr.append(fileName)
 elif QCDPT1000to1400Background:
     saveName = "QCDPT1000to1400Background"
-    h_LHEWeight      = TH1F("h_LHEWeight","h_LHEWeight",100,8.0e-05,8.5e-05) #Non-functional, just to keep the program from crashing
+    
     crossSection = 7.5
-    checkChannelSplits = False
+    
     isBackground = True
-    for fileName in QCDPT1000to1400Background:
+    for fileName in QCDPT1000to1400BackgroundAr:
         fileAr.append(fileName)
 elif QCDPT1400to1800Background:
     saveName = "QCDPT1400to1800Background"
-    h_LHEWeight      = TH1F("h_LHEWeight","h_LHEWeight",100,8.0e-05,8.5e-05) #Non-functional, just to keep the program from crashing
+    
     crossSection = 0.6479
-    checkChannelSplits = False
+    
     isBackground = True
-    for fileName in QCDPT1400to1800Background:
+    for fileName in QCDPT1400to1800BackgroundAr:
         fileAr.append(fileName)
 elif QCDPT1800to2400Background:
     saveName = "QCDPT1800to2400Background"
-    h_LHEWeight      = TH1F("h_LHEWeight","h_LHEWeight",100,8.0e-05,8.5e-05) #Non-functional, just to keep the program from crashing
+    
     crossSection = 0.08715
-    checkChannelSplits = False
+    
     isBackground = True
-    for fileName in QCDPT1800to2400Background:
+    for fileName in QCDPT1800to2400BackgroundAr:
         fileAr.append(fileName)
 elif QCDPT2400to3200Background:
     saveName = "QCDPT2400to3200Background"
-    h_LHEWeight      = TH1F("h_LHEWeight","h_LHEWeight",100,8.0e-05,8.5e-05) #Non-functional, just to keep the program from crashing
+    
     crossSection = 0.005242
-    checkChannelSplits = False
+    
     isBackground = True
-    for fileName in QCDPT2400to3200Background:
+    for fileName in QCDPT2400to3200BackgroundAr:
         fileAr.append(fileName)
 elif QCDPT3200toInfBackground:
     saveName = "QCDPT3200toInfBackground"
-    h_LHEWeight      = TH1F("h_LHEWeight","h_LHEWeight",100,8.0e-05,8.5e-05) #Non-functional, just to keep the program from crashing
+    
     crossSection = 0.0001349
-    checkChannelSplits = False
+    
     isBackground = True
-    for fileName in QCDPT3200toInfBackground:
+    for fileName in QCDPT3200toInfBackgroundAr:
         fileAr.append(fileName)
 
+if isBackground:
+    checkChannelSplits = False
+    h_LHEWeight      = TH1F("h_LHEWeight","h_LHEWeight",100,8.0e-05,8.5e-05) #Non-functional, just to keep the program from crashing
 
-ttZJetsBackground = False
-DYBackground = False
-QCDPT170to300Background = False
-QCDPT300to470Background = False
-QCDPT470to600Background = False
-QCDPT600to800Background = False
-QCDPT800to1000Background = False
-QCDPT1000to1400Background = False
-QCDPT1400to1800Background = False
-QCDPT1800to2400Background = False
-QCDPT2400to3200Background = False
-QCDPT3200toInfBackground = False
 
 if not isBackground:
     crossSectionAvg = 0
