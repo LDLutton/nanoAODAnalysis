@@ -70,8 +70,11 @@ def DrawPlot(plot,name,saveName,normalizeOrNot,COLZOrNot = False):
             plot.Draw("COLZ")
         c1.SaveAs((name+"{0}.png".format(saveName)))
         plot.Write(name)
-        plot.Scale(1.0 / plot.Integral())
-
+        intOfPlot = plot.Integral()
+        if intOfPlot != 0:
+            plot.Scale(1.0 / intOfPlot)
+        else:
+            print("intOfPlot == 0. Just remaking histogram for the 'normalized' one")
         if not COLZOrNot:
             plot.Draw("hist")
         else:
