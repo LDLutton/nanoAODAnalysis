@@ -11,16 +11,16 @@ from fileLists import MGSMAr
 from fileLists import ttHToBBBackgroundAr
 from fileLists import ttZJetsBackgroundAr
 from fileLists import DYBackgroundAr
-from fileLists import QCDPT170to300Ar
-from fileLists import QCDPT300to470Ar
-from fileLists import QCDPT470to600Ar
-from fileLists import QCDPT600to800Ar
-from fileLists import QCDPT800to1000Ar
-from fileLists import QCDPT1000to1400Ar
-from fileLists import QCDPT1400to1800Ar
-from fileLists import QCDPT1800to2400Ar
-from fileLists import QCDPT2400to3200Ar
-from fileLists import QCDPT3200toInfAr
+from fileLists import QCDPT170to300BackgroundAr
+from fileLists import QCDPT300to470BackgroundAr
+from fileLists import QCDPT470to600BackgroundAr
+from fileLists import QCDPT600to800BackgroundAr
+from fileLists import QCDPT800to1000BackgroundAr
+from fileLists import QCDPT1000to1400BackgroundAr
+from fileLists import QCDPT1400to1800BackgroundAr
+from fileLists import QCDPT1800to2400BackgroundAr
+from fileLists import QCDPT2400to3200BackgroundAr
+from fileLists import QCDPT3200toInfBackgroundAr
 
 import time as time
 
