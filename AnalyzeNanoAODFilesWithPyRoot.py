@@ -29,8 +29,8 @@ debug = False
 debugChannelSort = False
 #To break out of loops after NToEnd events
 endAfter = False
-NToStart = 900
-NToEnd = 1500
+NToStart = 0
+NToEnd = 2500
 
 #withDipoleRecoil = True
 
@@ -1997,17 +1997,18 @@ for k,fileName in enumerate(fileAr):
             h_Jet_mass.Fill(ev.Jet_mass[i])
             h_Jet_phi.Fill(ev.Jet_phi[i])
             h_Jet_pt.Fill(tmpJetPT)
-            #Getting jet DeltaR from first outgoing quark
-            tmpDeltaR = calcDeltaR(ev.Jet_phi[i],ev.Jet_eta[i],ev.GenPart_phi[5],ev.GenPart_eta[5])
-            #Checking if it's less than the current lowest deltaR
-            if tmpDeltaR < deltaRMinOne:
-                deltaRMinOne = tmpDeltaR
-                jOneInd = i
-            #Checking again with the second outgoing quark
-            tmpDeltaR = calcDeltaR(ev.Jet_phi[i],ev.Jet_eta[i],ev.GenPart_phi[6],ev.GenPart_eta[6])
-            if tmpDeltaR < deltaRMinTwo:
-                deltaRMinTwo = tmpDeltaR
-                jTwoInd = i
+            if not isBackground:
+                #Getting jet DeltaR from first outgoing quark
+                tmpDeltaR = calcDeltaR(ev.Jet_phi[i],ev.Jet_eta[i],ev.GenPart_phi[5],ev.GenPart_eta[5])
+                #Checking if it's less than the current lowest deltaR
+                if tmpDeltaR < deltaRMinOne:
+                    deltaRMinOne = tmpDeltaR
+                    jOneInd = i
+                #Checking again with the second outgoing quark
+                tmpDeltaR = calcDeltaR(ev.Jet_phi[i],ev.Jet_eta[i],ev.GenPart_phi[6],ev.GenPart_eta[6])
+                if tmpDeltaR < deltaRMinTwo:
+                    deltaRMinTwo = tmpDeltaR
+                    jTwoInd = i
             
             #Starting the matching based on cuts
             #Checking if the jet pt passes the pt cut
@@ -2110,29 +2111,30 @@ for k,fileName in enumerate(fileAr):
             h_InitialJetAltLJ_pt.Fill(ev.Jet_pt[LJOneInd])
             h_InitialJetAltLJ_pt.Fill(ev.Jet_pt[LJTwoInd])
             #print(evCount,i,deltaRMinOne,deltaRMinTwo,jOneInd,jTwoInd)
-
-        #Filling gen matching histos:
-        #Checking that we were actually looking at the outgoing quarks when gen matching
-        #Note: should change this to just check at the start and be more flexible with the quark position
-        #(i.e. check more than just [5] and [6])
-        if abs(ev.GenPart_pdgId[5])>10 or abs(ev.GenPart_pdgId[6])>10:
-            #Incrementing counter if not
-            noOutCount += 1
-        #Checking that the DeltaRs for both jets are small enough
-        elif deltaRMinOne > 0.4 or deltaRMinTwo > 0.4:
-            #Incrementing counter if not
-            noMatchCount +=1
-        #Checking that it didn't select the same jet for both parts of the pair 
-        elif jOneInd == jTwoInd:
-            #If so, then print out what happened (rare)
-            print("uhoh",str(jOneInd),str(jTwoInd),evCount,ev.GenPart_pdgId[5],ev.GenPart_pdgId[6],deltaRMinOne,deltaRMinTwo)
-        #If it passes all the checks above, fill the gen matching histograms    
-        else:
-            h_InitialJet_Eta.Fill(ev.Jet_eta[jOneInd])
-            h_InitialJet_Eta.Fill(ev.Jet_eta[jTwoInd])
-            h_InitialJet_EtaSep.Fill(abs(ev.Jet_eta[jOneInd]-ev.Jet_eta[jTwoInd]))
-            h_InitialJet_pt.Fill(ev.Jet_pt[jOneInd])
-            h_InitialJet_pt.Fill(ev.Jet_pt[jTwoInd])
+        
+        if isBackground:
+            #Filling gen matching histos:
+            #Checking that we were actually looking at the outgoing quarks when gen matching
+            #Note: should change this to just check at the start and be more flexible with the quark position
+            #(i.e. check more than just [5] and [6])
+            if abs(ev.GenPart_pdgId[5])>10 or abs(ev.GenPart_pdgId[6])>10:
+                #Incrementing counter if not
+                noOutCount += 1
+            #Checking that the DeltaRs for both jets are small enough
+            elif deltaRMinOne > 0.4 or deltaRMinTwo > 0.4:
+                #Incrementing counter if not
+                noMatchCount +=1
+            #Checking that it didn't select the same jet for both parts of the pair 
+            elif jOneInd == jTwoInd:
+                #If so, then print out what happened (rare)
+                print("uhoh",str(jOneInd),str(jTwoInd),evCount,ev.GenPart_pdgId[5],ev.GenPart_pdgId[6],deltaRMinOne,deltaRMinTwo)
+            #If it passes all the checks above, fill the gen matching histograms    
+            else:
+                h_InitialJet_Eta.Fill(ev.Jet_eta[jOneInd])
+                h_InitialJet_Eta.Fill(ev.Jet_eta[jTwoInd])
+                h_InitialJet_EtaSep.Fill(abs(ev.Jet_eta[jOneInd]-ev.Jet_eta[jTwoInd]))
+                h_InitialJet_pt.Fill(ev.Jet_pt[jOneInd])
+                h_InitialJet_pt.Fill(ev.Jet_pt[jTwoInd])
         #Increment event count
         evCount += 1
 
