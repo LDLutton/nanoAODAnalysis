@@ -807,7 +807,7 @@ ttHToBBBackgroundAr = ["root://cmsxrootd.fnal.gov///store/mc/RunIISummer19UL18Na
 "root://cmsxrootd.fnal.gov///store/mc/RunIISummer19UL18NanoAODv2/ttHiggs0PMtoBB_M125_TuneCP5_PSWeights_13TeV_JHUGenV7011_pythia8/NANOAODSIM/106X_upgrade2018_realistic_v15_L1v1-v1/280000/98A40531-5EEB-7E45-8F3B-F8B6F47EB7BD.root"]
 
 ttZJetsBackgroundAr = [
-"root://cmsxrootd.fnal.gov///store/mc/RunIIAutumn18NanoAODv7/ttZJets_TuneCP5_13TeV_madgraphMLM_pythia8/NANOAODSIM/Nano02Apr2020_102X_upgrade2018_realistic_v21_ext1-v1/60000/FBFE86BA-70EE-434F-A6D5-21D1CDF75255.root"
+"root://cmsxrootd.fnal.gov///store/mc/RunIIAutumn18NanoAODv7/ttZJets_TuneCP5_13TeV_madgraphMLM_pythia8/NANOAODSIM/Nano02Apr2020_102X_upgrade2018_realistic_v21_ext1-v1/60000/FBFE86BA-70EE-434F-A6D5-21D1CDF75255.root",
 "root://cmsxrootd.fnal.gov///store/mc/RunIIAutumn18NanoAODv7/ttZJets_TuneCP5_13TeV_madgraphMLM_pythia8/NANOAODSIM/Nano02Apr2020_102X_upgrade2018_realistic_v21_ext1-v1/60000/16176FE7-7C90-3544-81B7-2AC1CFF7C091.root",
 "root://cmsxrootd.fnal.gov///store/mc/RunIIAutumn18NanoAODv7/ttZJets_TuneCP5_13TeV_madgraphMLM_pythia8/NANOAODSIM/Nano02Apr2020_102X_upgrade2018_realistic_v21_ext1-v1/260000/25AD92FB-8FB1-C04B-ACC8-7E0534A17EDE.root",
 "root://cmsxrootd.fnal.gov///store/mc/RunIIAutumn18NanoAODv7/ttZJets_TuneCP5_13TeV_madgraphMLM_pythia8/NANOAODSIM/Nano02Apr2020_102X_upgrade2018_realistic_v21_ext1-v1/260000/AAA4E9A9-02BF-0245-9B2F-571A67C240DB.root",
@@ -881,8 +881,7 @@ ttZJetsBackgroundAr = [
 "root://cmsxrootd.fnal.gov///store/mc/RunIIAutumn18NanoAODv7/ttZJets_TuneCP5_13TeV_madgraphMLM_pythia8/NANOAODSIM/Nano02Apr2020_102X_upgrade2018_realistic_v21_ext1-v1/120000/BC64429A-D09A-B94E-AD58-2B873864D513.root",
 "root://cmsxrootd.fnal.gov///store/mc/RunIIAutumn18NanoAODv7/ttZJets_TuneCP5_13TeV_madgraphMLM_pythia8/NANOAODSIM/Nano02Apr2020_102X_upgrade2018_realistic_v21_ext1-v1/120000/05273AFE-24DE-A742-8A76-BEC71091A25F.root",
 "root://cmsxrootd.fnal.gov///store/mc/RunIIAutumn18NanoAODv7/ttZJets_TuneCP5_13TeV_madgraphMLM_pythia8/NANOAODSIM/Nano02Apr2020_102X_upgrade2018_realistic_v21_ext1-v1/120000/C535A5B2-FF31-BE45-8B4B-70906514ECF3.root",
-"root://cmsxrootd.fnal.gov///store/mc/RunIIAutumn18NanoAODv7/ttZJets_TuneCP5_13TeV_madgraphMLM_pythia8/NANOAODSIM/Nano02Apr2020_102X_upgrade2018_realistic_v21_ext1-v1/120000/D8E94B88-7F2C-3D40-BCC5-F40C5F29E14D.root"
-]
+"root://cmsxrootd.fnal.gov///store/mc/RunIIAutumn18NanoAODv7/ttZJets_TuneCP5_13TeV_madgraphMLM_pythia8/NANOAODSIM/Nano02Apr2020_102X_upgrade2018_realistic_v21_ext1-v1/120000/D8E94B88-7F2C-3D40-BCC5-F40C5F29E14D.root"]
 
 
 
@@ -956,8 +955,7 @@ DYBackgroundAr = ["root://cmsxrootd.fnal.gov///store/mc/RunIISummer19UL18NanoAOD
 "root://cmsxrootd.fnal.gov///store/mc/RunIISummer19UL18NanoAODv2/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/NANOAODSIM/106X_upgrade2018_realistic_v15_L1v1-v1/40000/7A4446FD-B8DA-F84D-96D7-D1514F773E61.root",
 "root://cmsxrootd.fnal.gov///store/mc/RunIISummer19UL18NanoAODv2/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/NANOAODSIM/106X_upgrade2018_realistic_v15_L1v1-v1/40000/0A7617D1-1AE6-EE4F-8B0D-BD49DA182445.root",
 "root://cmsxrootd.fnal.gov///store/mc/RunIISummer19UL18NanoAODv2/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/NANOAODSIM/106X_upgrade2018_realistic_v15_L1v1-v1/40000/12C64DFC-4B28-0A44-9159-0B0C5C868CCD.root",
-"root://cmsxrootd.fnal.gov///store/mc/RunIISummer19UL18NanoAODv2/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/NANOAODSIM/106X_upgrade2018_realistic_v15_L1v1-v1/40000/24A6902E-E0B5-2D46-9AFE-891A99616A38.root"
-]
+"root://cmsxrootd.fnal.gov///store/mc/RunIISummer19UL18NanoAODv2/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/NANOAODSIM/106X_upgrade2018_realistic_v15_L1v1-v1/40000/24A6902E-E0B5-2D46-9AFE-891A99616A38.root"]
 
 QCDPT170to300BackgroundAr = ["root://cmsxrootd.fnal.gov///store/mc/RunIISummer20UL18NanoAODv9/QCD_Pt_170to300_TuneCP5_13TeV_pythia8/NANOAODSIM/106X_upgrade2018_realistic_v16_L1v1-v1/70000/FE59C2E4-A498-924C-A646-02835E1BD1EC.root",
 "root://cmsxrootd.fnal.gov///store/mc/RunIISummer20UL18NanoAODv9/QCD_Pt_170to300_TuneCP5_13TeV_pythia8/NANOAODSIM/106X_upgrade2018_realistic_v16_L1v1-v1/70000/EFF8D63B-29D3-5843-B9B4-DC3D0955167E.root",
