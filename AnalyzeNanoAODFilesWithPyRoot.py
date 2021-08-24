@@ -2112,7 +2112,7 @@ for k,fileName in enumerate(fileAr):
             h_InitialJetAltLJ_pt.Fill(ev.Jet_pt[LJTwoInd])
             #print(evCount,i,deltaRMinOne,deltaRMinTwo,jOneInd,jTwoInd)
         
-        if isBackground:
+        if not isBackground:
             #Filling gen matching histos:
             #Checking that we were actually looking at the outgoing quarks when gen matching
             #Note: should change this to just check at the start and be more flexible with the quark position
