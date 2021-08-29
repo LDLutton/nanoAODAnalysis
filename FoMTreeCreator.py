@@ -617,17 +617,17 @@ Z1C2Mass = array('f',[0.])
 
 
 neC2Lep = np.array([0],dtype = np.uint32) #array('i',[0])
-eC2Charge = np.zeros((1,1),dtype=np.int8) #array('i',[0])
-eC2Eta = np.zeros((1,1),dtype=np.float32) #array('f',[0.])
-eC2Phi = np.zeros((1,1),dtype=np.float32) #array('f',[0.])
-eC2Pt = np.zeros((1,1),dtype=np.float32) #array('f',[0.])
-eC2Mass = np.zeros((1,1),dtype=np.float32) #array('f',[0.])
+eC2Charge = np.zeros((1,2),dtype=np.int32) #array('i',[0])
+eC2Eta = np.zeros((1,2),dtype=np.float32) #array('f',[0.])
+eC2Phi = np.zeros((1,2),dtype=np.float32) #array('f',[0.])
+eC2Pt = np.zeros((1,2),dtype=np.float32) #array('f',[0.])
+eC2Mass = np.zeros((1,2),dtype=np.float32) #array('f',[0.])
 nmC2Lep = np.array([0],dtype = np.uint32) #array('i',[0])
-mC2Charge = np.zeros((1,1),dtype=np.int8) #array('i',[0])
-mC2Eta = np.zeros((1,1),dtype=np.float32) #array('f',[0.])
-mC2Phi = np.zeros((1,1),dtype=np.float32) #array('f',[0.])
-mC2Pt = np.zeros((1,1),dtype=np.float32) #array('f',[0.])
-mC2Mass = np.zeros((1,1),dtype=np.float32) #array('f',[0.])
+mC2Charge = np.zeros((1,2),dtype=np.int32) #array('i',[0])
+mC2Eta = np.zeros((1,2),dtype=np.float32) #array('f',[0.])
+mC2Phi = np.zeros((1,2),dtype=np.float32) #array('f',[0.])
+mC2Pt = np.zeros((1,2),dtype=np.float32) #array('f',[0.])
+mC2Mass = np.zeros((1,2),dtype=np.float32) #array('f',[0.])
 
 cutTwoTree.Branch("nZ1C2Lep",nZ1C2Lep,"nZ1C2Lep/I")
 cutTwoTree.Branch("Z1C2Charge",Z1C2Charge,"Z1C2Charge[nZ1C2Lep]/I")
@@ -649,6 +649,7 @@ cutTwoTree.Branch("mC2Eta",mC2Eta,"mC2Eta[nmC2Lep][2]/F")
 cutTwoTree.Branch("mC2Phi",mC2Phi,"mC2Phi[nmC2Lep][2]/F")
 cutTwoTree.Branch("mC2Pt",mC2Pt,"mC2Pt[nmC2Lep][2]/F")
 cutTwoTree.Branch("mC2Mass",mC2Mass,"mC2Mass[nmC2Lep][2]/F")
+
 
 """
 cutTwoTree.Fill()
@@ -792,9 +793,9 @@ for k,fileName in enumerate(fileAr):
         #####ELECTRON LEAVES#####
         neLep[0] = tmpnElectron
         eHLT[0] = elecHLTPass
-        print("--------------------------------------------------")
-        print("evCount",evCount)
-        print("neLep",neLep,"tmpnElectron",tmpnElectron,"elecHLTPass",elecHLTPass)
+        #print("--------------------------------------------------")
+        #print("evCount",evCount)
+        #print("neLep",neLep,"tmpnElectron",tmpnElectron,"elecHLTPass",elecHLTPass)
         if tmpnElectron:
             eEta = array('f',[0.]*tmpnElectron)
             ePt = array('f',[0.]*tmpnElectron)
@@ -806,7 +807,7 @@ for k,fileName in enumerate(fileAr):
             eEta = 0
             ePt  = 0
         
-        print("eEta",eEta,"ePt",ePt)
+        #print("eEta",eEta,"ePt",ePt)
         
 
         #####MUON LEAVES#####
@@ -1048,7 +1049,7 @@ for k,fileName in enumerate(fileAr):
             #neC2Lep = np.array([tmpnElecZ2Cands],dtype = np.uint32)
             neC2Lep[0] = tmpnElecZ2Cands
             if tmpnElecZ2Cands:
-                eC2Charge = np.zeros((tmpnElecZ2Cands,2),dtype=np.int8)
+                eC2Charge = np.zeros((tmpnElecZ2Cands,2),dtype=np.int32)
                 eC2Eta    = np.zeros((tmpnElecZ2Cands,2),dtype=np.float32)
                 eC2Phi    = np.zeros((tmpnElecZ2Cands,2),dtype=np.float32)
                 eC2Pt     = np.zeros((tmpnElecZ2Cands,2),dtype=np.float32)
@@ -1086,7 +1087,7 @@ for k,fileName in enumerate(fileAr):
             #nmC2Lep = np.array([tmpnMuonZ2Cands],dtype = np.uint32)
             nmC2Lep[0] = tmpnMuonZ2Cands
             if tmpnMuonZ2Cands:
-                mC2Charge = np.zeros((tmpnMuonZ2Cands,2),dtype=np.int8)
+                mC2Charge = np.zeros((tmpnMuonZ2Cands,2),dtype=np.int32)
                 mC2Eta    = np.zeros((tmpnMuonZ2Cands,2),dtype=np.float32)
                 mC2Phi    = np.zeros((tmpnMuonZ2Cands,2),dtype=np.float32)
                 mC2Pt     = np.zeros((tmpnMuonZ2Cands,2),dtype=np.float32)
@@ -1437,10 +1438,10 @@ for k,fileName in enumerate(fileAr):
                 for i,tmpIsoOne in enumerate(tmpIsoAr[:-1]):
                     for tmpIsoTwo in tmpIsoAr[i+1:]:
                         if debug:
-                            print(i,j,"tmpIsoOne",tmpIsoOne,"tmpIsoTwo",tmpIsoTwo)
+                            print(i,"tmpIsoOne",tmpIsoOne,"tmpIsoTwo",tmpIsoTwo)
                         if tmpIsoOne + tmpIsoTwo > lepIsoCut:
                             if debug:
-                                print(i,j,"summed isos > 0.35. cuts not passed")
+                                print(i,"summed isos > 0.35. cuts not passed")
                             passesIsoCuts = False
                             break
                     if not passesIsoCuts:
@@ -1520,7 +1521,6 @@ for k,fileName in enumerate(fileAr):
                 """
 
                 #########################################
-                        
 
 
                         
