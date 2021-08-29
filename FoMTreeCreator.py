@@ -41,8 +41,8 @@ NToEnd = 2500
 
 #withDipoleRecoil = True
 
-testRun = True
-MGSM = False
+testRun = False
+MGSM = True
 MGEFT = False
 ttHToBBBackground = False
 ttZJetsBackground = False
@@ -800,7 +800,6 @@ for k,fileName in enumerate(fileAr):
             eEta = array('f',[0.]*tmpnElectron)
             ePt = array('f',[0.]*tmpnElectron)
             for i in range(tmpnElectron):
-                print("i",i,"ev.Electron_eta[i]",ev.Electron_eta[i],"ev.Electron_pt[i]",ev.Electron_pt[i])
                 eEta[i] = ev.Electron_eta[i]
                 ePt[i] = ev.Electron_pt[i]
         else:
