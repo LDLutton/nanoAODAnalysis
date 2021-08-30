@@ -833,18 +833,22 @@ for k,fileName in enumerate(fileAr):
         #####ELECTRON LEAVES#####
         neLep[0] = tmpnElectron
         eHLT[0] = elecHLTPass
+        
         #print("--------------------------------------------------")
         #print("evCount",evCount)
         #print("neLep",neLep,"tmpnElectron",tmpnElectron,"elecHLTPass",elecHLTPass)
         if tmpnElectron:
             eEta = array('f',[0.]*tmpnElectron)
             ePt = array('f',[0.]*tmpnElectron)
+            eCharge = array('i',[0.]*tmpnElectron)
             for i in range(tmpnElectron):
                 eEta[i] = ev.Electron_eta[i]
                 ePt[i] = ev.Electron_pt[i]
+                eCharge[i] = ev.Electron_charge[i]
         else:
             eEta = 0
             ePt  = 0
+            eCharge = 0
         
         #print("eEta",eEta,"ePt",ePt)
         
@@ -855,19 +859,24 @@ for k,fileName in enumerate(fileAr):
         if tmpnMuon:
             mEta = array('f',[0.]*tmpnMuon)
             mPt = array('f',[0.]*tmpnMuon)
+            mCharge = array('i',[0.]*tmpnMuon)
             for i in range(tmpnMuon):
                 mEta[i] = ev.Muon_eta[i]
                 mPt[i] = ev.Muon_pt[i]
+                mCharge[i] = ev.Muon_charge[i]
         else:
             mEta = 0
             mPt = 0
+            mCharge = 0
 
         #####ELECTRON/MUON HLT LEAF#####
 
         emHLT[0] = emHLTPass
 
+        cutZeroTree.SetBranchAddress("eCharge",eCharge)
         cutZeroTree.SetBranchAddress("eEta",eEta)
         cutZeroTree.SetBranchAddress("ePt",ePt)
+        cutZeroTree.SetBranchAddress("mCharge",mCharge)
         cutZeroTree.SetBranchAddress("mEta",mEta)
         cutZeroTree.SetBranchAddress("mPt",mPt)
         cutZeroTree.Fill()
