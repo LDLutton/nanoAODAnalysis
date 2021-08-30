@@ -840,7 +840,7 @@ for k,fileName in enumerate(fileAr):
         if tmpnElectron:
             eEta = array('f',[0.]*tmpnElectron)
             ePt = array('f',[0.]*tmpnElectron)
-            eCharge = array('i',[0.]*tmpnElectron)
+            eCharge = array('i',[0]*tmpnElectron)
             for i in range(tmpnElectron):
                 eEta[i] = ev.Electron_eta[i]
                 ePt[i] = ev.Electron_pt[i]
@@ -859,7 +859,7 @@ for k,fileName in enumerate(fileAr):
         if tmpnMuon:
             mEta = array('f',[0.]*tmpnMuon)
             mPt = array('f',[0.]*tmpnMuon)
-            mCharge = array('i',[0.]*tmpnMuon)
+            mCharge = array('i',[0]*tmpnMuon)
             for i in range(tmpnMuon):
                 mEta[i] = ev.Muon_eta[i]
                 mPt[i] = ev.Muon_pt[i]
