@@ -25,7 +25,9 @@ from fileLists import QCDPT2400to3200BackgroundAr
 from fileLists import QCDPT3200toInfBackgroundAr
 
 import time as time
+import sys
 
+print("arglist:",sys.argv)
 #To enable heavy printing for debug
 debug = False
 debugChannelSort = False
@@ -42,7 +44,7 @@ NToEnd = 2500
 #withDipoleRecoil = True
 
 testRun = False
-MGSM = True
+MGSM = False
 MGEFT = False
 ttHToBBBackground = False
 ttZJetsBackground = False
@@ -57,6 +59,39 @@ QCDPT1400to1800Background = False
 QCDPT1800to2400Background = False
 QCDPT2400to3200Background = False
 QCDPT3200toInfBackground = False
+if len(sys.argv) > 1:
+    tmpArgStr = sys.argv[1]
+    if tmpArgStr == "testRun":
+        testRun = True
+    elif tmpArgStr == "MGSM":
+        MGSM = True
+    elif tmpArgStr == "MGEFT":
+        MGEFT = True
+    elif tmpArgStr == "ttHToBBBackground":
+        ttHToBBBackground = True
+    elif tmpArgStr == "DYBackground":
+        DYBackground = True
+    elif tmpArgStr == "QCDPT170to300Background":
+        QCDPT170to300Background = True
+    elif tmpArgStr == "QCDPT300to470Background":
+        QCDPT300to470Background = True
+    elif tmpArgStr == "QCDPT470to600Background":
+        QCDPT470to600Background = True
+    elif tmpArgStr == "QCDPT600to800Background":
+        QCDPT600to800Background = True
+    elif tmpArgStr == "QCDPT800to1000Background":
+        QCDPT800to1000Background = True
+    elif tmpArgStr == "QCDPT1000to1400Background":
+        QCDPT1000to1400Background = True
+    elif tmpArgStr == "QCDPT1400to1800Background":
+        QCDPT1400to1800Background = True
+    elif tmpArgStr == "QCDPT1800to2400Background":
+        QCDPT1800to2400Background = True
+    elif tmpArgStr == "QCDPT2400to3200Background":
+        QCDPT2400to3200Background = True
+    elif tmpArgStr == "QCDPT3200toInfBackground":
+        QCDPT3200toInfBackground = True
+
 
 
 isBackground = False
@@ -493,7 +528,8 @@ elif QCDPT3200toInfBackground:
 elif testRun:
     saveName = "testRun"
     fileAr.append("./unweighted_eventspphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev10080Seed_0p999cHW100GeVIMJetCut_200.root")
-
+else:
+    print("ERROR. NO INPUT DATASET NAME GIVEN")
 
 
 
