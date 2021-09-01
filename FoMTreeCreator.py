@@ -70,7 +70,7 @@ if len(sys.argv) > 1:
     elif tmpArgStr == "ttHToBBBackground":
         ttHToBBBackground = True
     elif tmpArgStr == "ttZJetsBackground":
-        DYBackground = True
+        ttZJetsBackground = True
     elif tmpArgStr == "DYBackground":
         DYBackground = True
     elif tmpArgStr == "QCDPT170to300Background":
