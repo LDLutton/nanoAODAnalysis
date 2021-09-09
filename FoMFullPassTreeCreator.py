@@ -285,6 +285,7 @@ evNumTree.Branch("nEvPass",nEvPass,"nEvPass/I")
 neLep = array('i',[0])
 eCharge = array('i',[0])
 eEta = array('f',[0.])
+ePhi = array('f',[0.])
 ePt = array('f',[0.])
 eMass = array('f',[0.])
 eHLT = array('B',[0])
@@ -292,6 +293,7 @@ eHLT = array('B',[0])
 nmLep = array('i',[0])
 mCharge = array('i',[0])
 mEta = array('f',[0.])
+mPhi = array('f',[0.])
 mPt = array('f',[0.])
 mMass = array('f',[0.])
 mHLT = array('B',[0])
@@ -306,12 +308,14 @@ cutTree.Branch("neLep",neLep,"neLep/I")
 cutTree.Branch("eCharge",eCharge,"eCharge[neLep]/I")
 cutTree.Branch("eEta",eEta,"eEta[neLep]/F")
 cutTree.Branch("ePt",ePt,"ePt[neLep]/F")
+cutTree.Branch("ePhi",ePhi,"ePhi[neLep]/F")
 cutTree.Branch("eMass",eMass,"eMass[neLep]/F")
 cutTree.Branch("eHLT",eHLT,"eHLT/O")
 cutTree.Branch("nmLep",nmLep,"nmLep/I")
 cutTree.Branch("mCharge",mCharge,"mCharge[nmLep]/I")
 cutTree.Branch("mEta",mEta,"mEta[nmLep]/F")
 cutTree.Branch("mPt",mPt,"mPt[nmLep]/F")
+cutTree.Branch("mPhi",mPhi,"mPhi[nmLep]/F")
 cutTree.Branch("mMass",mMass,"mMass[nmLep]/F")
 cutTree.Branch("mHLT",mHLT,"mHLT/O")
 
@@ -408,6 +412,7 @@ for k,fileName in enumerate(fileAr):
                     neLep[0] = tmpnElectron
                     eEta = array('f',[0.]*tmpnElectron)
                     ePt = array('f',[0.]*tmpnElectron)
+                    ePhi = array('f',[0.]*tmpnElectron)
                     eMass = array('f',[0.]*tmpnElectron)
                     eCharge = array('i',[0]*tmpnElectron)
                     eIso = array('f',[0.]*tmpnElectron)
@@ -416,6 +421,7 @@ for k,fileName in enumerate(fileAr):
                         tmpPt = ev.Electron_pt[i]
                         tmpEta = ev.Electron_eta[i]
                         eEta[i] = tmpEta
+                        ePhi[i] = ev.Electron_phi[i]
                         eMass[i] = ev.Electron_mass[i]
                         ePt[i] = tmpPt
                         eCharge[i] = ev.Electron_charge[i]
@@ -433,6 +439,7 @@ for k,fileName in enumerate(fileAr):
                     neLep[0] = 0
                     eHLT[0] = False
                     eEta = 0
+                    ePhi = 0
                     ePt  = 0
                     eMass = 0
                     eCharge = 0
@@ -447,6 +454,7 @@ for k,fileName in enumerate(fileAr):
                     mHLT[0] = muonHLTPass
                     nmLep[0] = tmpnMuon
                     mEta = array('f',[0.]*tmpnMuon)
+                    mPhi = array('f',[0.]*tmpnMuon)
                     mPt = array('f',[0.]*tmpnMuon)
                     mMass = array('f',[0.]*tmpnMuon)
                     mCharge = array('i',[0]*tmpnMuon)
@@ -456,6 +464,7 @@ for k,fileName in enumerate(fileAr):
                         tmpPt = ev.Muon_pt[i]
                         tmpEta = ev.Muon_eta[i]
                         mEta[i] = tmpEta
+                        mPhi[i] = ev.Muon_phi[i]
                         mMass[i] = ev.Muon_mass[i]
                         mPt[i] = tmpPt
                         mCharge[i] = ev.Muon_charge[i]
@@ -465,6 +474,7 @@ for k,fileName in enumerate(fileAr):
                     nmLep[0] = 0
                     mHLT[0] = False
                     mEta = 0
+                    mPhi = 0
                     mPt  = 0
                     mMass = 0
                     mCharge = 0
@@ -475,12 +485,14 @@ for k,fileName in enumerate(fileAr):
                 cutTree.SetBranchAddress("eCharge",eCharge)
                 cutTree.SetBranchAddress("ePt",ePt)
                 cutTree.SetBranchAddress("eEta",eEta)
+                cutTree.SetBranchAddress("ePhi",ePhi)
                 cutTree.SetBranchAddress("eIso",eIso)
                 cutTree.SetBranchAddress("eSIP",eSIP)
                 cutTree.SetBranchAddress("eMass",eMass)
                 cutTree.SetBranchAddress("mCharge",mCharge)
                 cutTree.SetBranchAddress("mPt",mPt)
                 cutTree.SetBranchAddress("mEta",mEta)
+                cutTree.SetBranchAddress("mPhi",mPhi)
                 cutTree.SetBranchAddress("mIso",mIso)
                 cutTree.SetBranchAddress("mSIP",mSIP)
                 cutTree.SetBranchAddress("mMass",mMass)
@@ -499,6 +511,9 @@ evNumTree.Fill()
 
 
 print("Finished file loop.","time:",time.time()-startt)
+
+print("evRunOver:",evRunOver)
+print("evPassCount:",evPassCount)
 
 if not isBackground:
     print("Cross section average before division:",crossSectionAvg)
