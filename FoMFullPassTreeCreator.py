@@ -282,6 +282,8 @@ evNumTree.Branch("nEvPass",nEvPass,"nEvPass/I")
 #Electron/Muon eta, Pt, and the HLT triggers
 
 ########### FULL PASS TREE ############
+evInd = array('i',[0])
+
 neLep = array('i',[0])
 eCharge = array('i',[0])
 eEta = array('f',[0.])
@@ -304,6 +306,7 @@ emHLT = array('B',[0])
 
 cutTree = TTree('cutTree', 'cutTree')
 
+cutTree.Branch("evInd",evInd,"evInd/I")
 cutTree.Branch("neLep",neLep,"neLep/I")
 cutTree.Branch("eCharge",eCharge,"eCharge[neLep]/I")
 cutTree.Branch("eEta",eEta,"eEta[neLep]/F")
@@ -401,6 +404,7 @@ for k,fileName in enumerate(fileAr):
                 nMuonCandPairs = countPotentialMuonPairs(ev,tmpnMuon)
             if nElecCandPairs + nMuonCandPairs >= 2:
                 evPassCount += 1
+                evInd[0] =  evCount
 
                 
                 #First fill electrons if any pairs
@@ -482,6 +486,7 @@ for k,fileName in enumerate(fileAr):
                     mSIP = 0
                 
                 emHLTPass = ev.HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL or ev.HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ or ev.HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ or ev.HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ or ev.HLT_DiMu9_Ele9_CaloIdL_TrackIdL_DZ or ev.HLT_Mu8_DiEle12_CaloIdL_TrackIdL_DZ
+                emHLT[0] = emHLTPass
                 cutTree.SetBranchAddress("eCharge",eCharge)
                 cutTree.SetBranchAddress("ePt",ePt)
                 cutTree.SetBranchAddress("eEta",eEta)
