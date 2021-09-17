@@ -584,6 +584,7 @@ if ttZJetsBackground:
 if DYBackground:
     fileAr.append(TFile.Open("{0}FoMTreesFromDYBackground_InputTrimmed_FullPass.root".format(forCondorStr)))
     nameAr.append("DYBackground")
+    colorAr.append(5)
     isSignalAr.append(False)
     tmpXSAvg = 6077.22
     XSAr.append(tmpXSAvg)
@@ -614,6 +615,7 @@ if QCDPT300to470Background:
     fileAr.append(TFile.Open("{0}FoMTreesFromQCDPT300to470Background_InputTrimmed_FullPass.root".format(forCondorStr)))
     nameAr.append("QCDPT300to470Background")
     isSignalAr.append(False)
+    colorAr.append(8)
     tmpXSAvg = 6826.0
     XSAr.append(tmpXSAvg)
     #tmpCZTree = fileAr[-1].cutZeroTree
@@ -626,6 +628,7 @@ if QCDPT300to470Background:
 if QCDPT470to600Background:
     fileAr.append(TFile.Open("{0}FoMTreesFromQCDPT470to600Background_InputTrimmed_FullPass.root".format(forCondorStr)))
     nameAr.append("QCDPT470to600Background")
+    colorAr.append(9)
     isSignalAr.append(False)
     tmpXSAvg = 552.6
     XSAr.append(tmpXSAvg)
@@ -637,6 +640,7 @@ if QCDPT470to600Background:
 if QCDPT600to800Background:
     fileAr.append(TFile.Open("{0}FoMTreesFromQCDPT600to800Background_InputTrimmed_FullPass.root".format(forCondorStr)))
     nameAr.append("QCDPT600to800Background")
+    colorAr.append(10)
     isSignalAr.append(False)
     tmpXSAvg = 156.6
     XSAr.append(tmpXSAvg)
@@ -648,6 +652,7 @@ if QCDPT600to800Background:
 if QCDPT800to1000Background:
     fileAr.append(TFile.Open("{0}FoMTreesFromQCDPT800to1000Background_InputTrimmed_FullPass.root".format(forCondorStr)))
     nameAr.append("QCDPT800to1000Background")
+    colorAr.append(11)
     isSignalAr.append(False)
     tmpXSAvg = 26.32
     XSAr.append(tmpXSAvg)
@@ -659,6 +664,7 @@ if QCDPT800to1000Background:
 if QCDPT1000to1400Background:
     fileAr.append(TFile.Open("{0}FoMTreesFromQCDPT1000to1400Background_InputTrimmed_FullPass.root".format(forCondorStr)))
     nameAr.append("QCDPT1000to1400Background")
+    colorAr.append(12)
     isSignalAr.append(False)
     tmpXSAvg = 7.5
     XSAr.append(tmpXSAvg)
@@ -671,6 +677,7 @@ if QCDPT1400to1800Background:
     fileAr.append(TFile.Open("{0}FoMTreesFromQCDPT1400to1800Background_InputTrimmed_FullPass.root".format(forCondorStr)))
     nameAr.append("QCDPT1400to1800Background")
     isSignalAr.append(False)
+    colorAr.append(13)
     tmpXSAvg = 0.6479
     XSAr.append(tmpXSAvg)
     ENTree = fileAr[-1].evNumTree
@@ -682,6 +689,7 @@ if QCDPT1800to2400Background:
     fileAr.append(TFile.Open("{0}FoMTreesFromQCDPT1800to2400Background_InputTrimmed_FullPass.root".format(forCondorStr)))
     nameAr.append("QCDPT1800to2400Background")
     isSignalAr.append(False)
+    colorAr.append(14)
     tmpXSAvg = 0.08715
     XSAr.append(tmpXSAvg)
     ENTree = fileAr[-1].evNumTree
@@ -693,6 +701,7 @@ if QCDPT2400to3200Background:
     fileAr.append(TFile.Open("{0}FoMTreesFromQCDPT2400to3200Background_InputTrimmed_FullPass.root".format(forCondorStr)))
     nameAr.append("QCDPT2400to3200Background")
     isSignalAr.append(False)
+    colorAr.append(15)
     tmpXSAvg = 0.005242
     XSAr.append(tmpXSAvg)
     ENTree = fileAr[-1].evNumTree
@@ -704,6 +713,7 @@ if QCDPT3200toInfBackground:
     fileAr.append(TFile.Open("{0}FoMTreesFromQCDPT3200toInfBackground_InputTrimmed_FullPass.root".format(forCondorStr)))
     nameAr.append("QCDPT3200toInfBackground")
     isSignalAr.append(False)
+    colorAr.append(16)
     tmpXSAvg = 0.0001349
     XSAr.append(tmpXSAvg)
     ENTree = fileAr[-1].evNumTree
