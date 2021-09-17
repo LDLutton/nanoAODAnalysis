@@ -467,14 +467,34 @@ def doSIPCut(Z1LeadSIP,Z1TrailingSIP,Z2LeadSIP,Z2TrailingSIP,SIPCut):
     else:
         return True
 
-
+#Extra output at end and for each file
+extraOut = False
 
 debug = False
 debugMin = 1000
 debugMax = 1004
+forCondor = True
+if forCondor:
+    forCondorStr = "/scratch365/dlutton/HistosAndPNGs/"
+else:
+    forCondorStr = ""
 
-#Extra output at end and for each file
-extraOut = False
+MGSM = True
+MGEFT = True
+ttHToBBBackground = True
+ttZJetsBackground = True
+DYBackground = False
+QCDPT170to300Background = True
+QCDPT300to470Background = False
+QCDPT470to600Background = False
+QCDPT600to800Background = False
+QCDPT800to1000Background = False
+QCDPT1000to1400Background = False
+QCDPT1400to1800Background = False
+QCDPT1800to2400Background = False
+QCDPT2400to3200Background = False
+QCDPT3200toInfBackground = False
+
 
 XSAr = []
 totalEvents = []
@@ -485,192 +505,214 @@ colorAr = []
 
 
 
+if MGSM:
+    #fileAr.append(TFile.Open("{0}FoMTreesFrompphzzjjQCD0SMHLOOP0QEDE5NPE0ResMasAllVer100Ev_0p999cHW100GeVIMJetCut.root".format(forCondorStr)))
+    fileAr.append(TFile.Open("{0}FoMTreesFrompphzzjjQCD0SMHLOOP0QEDE5NPE0ResMasAllVer100Ev_0p999cHW100GeVIMJetCut_InputTrimmed_FullPass.root".format(forCondorStr)))
+    nameAr.append("SM")
+    colorAr.append(2)
+    isSignalAr.append(False)
 
-#fileAr.append(TFile.Open("FoMTreesFrompphzzjjQCD0SMHLOOP0QEDE5NPE0ResMasAllVer100Ev_0p999cHW100GeVIMJetCut.root"))
-fileAr.append(TFile.Open("FoMTreesFrompphzzjjQCD0SMHLOOP0QEDE5NPE0ResMasAllVer100Ev_0p999cHW100GeVIMJetCut_InputTrimmed_FullPass.root"))
-nameAr.append("SM")
-colorAr.append(2)
-isSignalAr.append(False)
+    SMXSTree = fileAr[-1].crossSectionTree
+    tmpXSAvg = 0
+    tmpXSCnt = 0
+    for SMXS in SMXSTree:
+        tmpXSAvg += SMXS.crossSectionVar
+        tmpXSCnt += 1
+    tmpXSAvg = tmpXSAvg / tmpXSCnt
+    XSAr.append(tmpXSAvg)
+    #SMCZTree = fileAr[-1].cutZeroTree
+    #totalEvents.append(SMCZTree.GetEntries())
+    ENTree = fileAr[-1].evNumTree
+    evNum = 0
+    for ev in ENTree:
+        evNum = ev.nEv
+    totalEvents.append(evNum)
+if MGEFT:
+    #fileAr.append(TFile.Open("{0}FoMTreesFrompphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev_0p999cHW100GeVIMJetCut.root".format(forCondorStr)))
+    fileAr.append(TFile.Open("{0}FoMTreesFrompphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev_0p999cHW100GeVIMJetCut_InputTrimmed_FullPass.root".format(forCondorStr)))
+    nameAr.append("EFT")
+    colorAr.append(6)
+    #nameAr.append("EFTC0p1")
+    isSignalAr.append(True)
+    EFTXSTree = fileAr[-1].crossSectionTree
+    tmpXSAvg = 0
+    tmpXSCnt = 0
+    for EFTXS in EFTXSTree:
+        tmpXSAvg += EFTXS.crossSectionVar
+        tmpXSCnt += 1
+    tmpXSAvg = tmpXSAvg / tmpXSCnt
+    #tmpXSAvg = tmpXSAvg*0.1 / tmpXSCnt
+    XSAr.append(tmpXSAvg)
+    #EFTCZTree = fileAr[-1].cutZeroTree
+    #totalEvents.append(EFTCZTree.GetEntries())
+    ENTree = fileAr[-1].evNumTree
+    evNum = 0
+    for ev in ENTree:
+        evNum = ev.nEv
+    totalEvents.append(evNum)
 
-SMXSTree = fileAr[-1].crossSectionTree
-tmpXSAvg = 0
-tmpXSCnt = 0
-for SMXS in SMXSTree:
-    tmpXSAvg += SMXS.crossSectionVar
-    tmpXSCnt += 1
-tmpXSAvg = tmpXSAvg / tmpXSCnt
-XSAr.append(tmpXSAvg)
-#SMCZTree = fileAr[-1].cutZeroTree
-#totalEvents.append(SMCZTree.GetEntries())
-ENTree = fileAr[-1].evNumTree
-evNum = 0
-for ev in ENTree:
-    evNum = ev.nEv
-totalEvents.append(evNum)
-
-#fileAr.append(TFile.Open("FoMTreesFrompphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev_0p999cHW100GeVIMJetCut.root"))
-fileAr.append(TFile.Open("FoMTreesFrompphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev_0p999cHW100GeVIMJetCut_InputTrimmed_FullPass.root"))
-nameAr.append("EFT")
-colorAr.append(6)
-#nameAr.append("EFTC0p1")
-isSignalAr.append(True)
-EFTXSTree = fileAr[-1].crossSectionTree
-tmpXSAvg = 0
-tmpXSCnt = 0
-for EFTXS in EFTXSTree:
-    tmpXSAvg += EFTXS.crossSectionVar
-    tmpXSCnt += 1
-tmpXSAvg = tmpXSAvg / tmpXSCnt
-#tmpXSAvg = tmpXSAvg*0.1 / tmpXSCnt
-XSAr.append(tmpXSAvg)
-#EFTCZTree = fileAr[-1].cutZeroTree
-#totalEvents.append(EFTCZTree.GetEntries())
-ENTree = fileAr[-1].evNumTree
-evNum = 0
-for ev in ENTree:
-    evNum = ev.nEv
-totalEvents.append(evNum)
-
-
-#fileAr.append(TFile.Open("FoMTreesFromttHToBBBackground.root"))
-fileAr.append(TFile.Open("FoMTreesFromttHToBBBackground_InputTrimmed_FullPass.root"))
-nameAr.append("ttHToBBBackground")
-colorAr.append(7)
-isSignalAr.append(False)
-tmpXSAvg = 0.6*0.584
-XSAr.append(tmpXSAvg)
-#tmpCZTree = fileAr[-1].cutZeroTree
-#totalEvents.append(tmpCZTree.GetEntries())
-ENTree = fileAr[-1].evNumTree
-evNum = 0
-for ev in ENTree:
-    evNum = ev.nEv
-totalEvents.append(evNum)
-
-fileAr.append(TFile.Open("FoMTreesFromttZJetsBackground_InputTrimmed_FullPass.root"))
-nameAr.append("ttZJetsBackground")
-colorAr.append(4)
-isSignalAr.append(False)
-tmpXSAvg = 0.5407
-XSAr.append(tmpXSAvg)
-#tmpCZTree = fileAr[-1].cutZeroTree
-#totalEvents.append(tmpCZTree.GetEntries())
-ENTree = fileAr[-1].evNumTree
-evNum = 0
-for ev in ENTree:
-    evNum = ev.nEv
-totalEvents.append(evNum)
-
-
-"""
-fileAr.append(TFile.Open("FoMTreesFromDYBackground_InputTrimmed_FullPass.root"))
-nameAr.append("DYBackground")
-isSignalAr.append(False)
-tmpXSAvg = 6077.22
-XSAr.append(tmpXSAvg)
-#tmpCZTree = fileAr[-1].cutZeroTree
-#totalEvents.append(tmpCZTree.GetEntries())
-ENTree = fileAr[-1].evNumTree
-evNum = 0
-for ev in ENTree:
-    evNum = ev.nEv
-totalEvents.append(evNum)
-
-"""
+if ttHToBBBackground:
+    #fileAr.append(TFile.Open("{0}FoMTreesFromttHToBBBackground.root".format(forCondorStr)))
+    fileAr.append(TFile.Open("{0}FoMTreesFromttHToBBBackground_InputTrimmed_FullPass.root".format(forCondorStr)))
+    nameAr.append("ttHToBBBackground")
+    colorAr.append(7)
+    isSignalAr.append(False)
+    tmpXSAvg = 0.6*0.584
+    XSAr.append(tmpXSAvg)
+    #tmpCZTree = fileAr[-1].cutZeroTree
+    #totalEvents.append(tmpCZTree.GetEntries())
+    ENTree = fileAr[-1].evNumTree
+    evNum = 0
+    for ev in ENTree:
+        evNum = ev.nEv
+    totalEvents.append(evNum)
+if ttZJetsBackground:
+    fileAr.append(TFile.Open("{0}FoMTreesFromttZJetsBackground_InputTrimmed_FullPass.root".format(forCondorStr)))
+    nameAr.append("ttZJetsBackground")
+    colorAr.append(4)
+    isSignalAr.append(False)
+    tmpXSAvg = 0.5407
+    XSAr.append(tmpXSAvg)
+    #tmpCZTree = fileAr[-1].cutZeroTree
+    #totalEvents.append(tmpCZTree.GetEntries())
+    ENTree = fileAr[-1].evNumTree
+    evNum = 0
+    for ev in ENTree:
+        evNum = ev.nEv
+    totalEvents.append(evNum)
 
 
-fileAr.append(TFile.Open("FoMTreesFromQCDPT170to300Background_InputTrimmed_FullPass.root"))
-nameAr.append("QCDPT170to300Background")
-isSignalAr.append(False)
-colorAr.append(1)
-tmpXSAvg = 103300.0
-XSAr.append(tmpXSAvg)
-#tmpCZTree = fileAr[-1].cutZeroTree
-#totalEvents.append(tmpCZTree.GetEntries())
-ENTree = fileAr[-1].evNumTree
-evNum = 0
-for ev in ENTree:
-    evNum = ev.nEv
-totalEvents.append(evNum)
+if DYBackground:
+    fileAr.append(TFile.Open("{0}FoMTreesFromDYBackground_InputTrimmed_FullPass.root".format(forCondorStr)))
+    nameAr.append("DYBackground")
+    isSignalAr.append(False)
+    tmpXSAvg = 6077.22
+    XSAr.append(tmpXSAvg)
+    #tmpCZTree = fileAr[-1].cutZeroTree
+    #totalEvents.append(tmpCZTree.GetEntries())
+    ENTree = fileAr[-1].evNumTree
+    evNum = 0
+    for ev in ENTree:
+        evNum = ev.nEv
+    totalEvents.append(evNum)
 
-"""
-fileAr.append(TFile.Open("FoMTreesFromQCDPT300to470Background_InputTrimmed_FullPass.root"))
-nameAr.append("QCDPT300to470Background")
-isSignalAr.append(False)
-tmpXSAvg = 6826.0
-XSAr.append(tmpXSAvg)
-#tmpCZTree = fileAr[-1].cutZeroTree
-#totalEvents.append(tmpCZTree.GetEntries())
-ENTree = fileAr[-1].evNumTree
-evNum = 0
-for ev in ENTree:
-    evNum = ev.nEv
-totalEvents.append(evNum)
 
-fileAr.append(TFile.Open("FoMTreesFromQCDPT470to600Background.root"))
-nameAr.append("QCDPT470to600Background")
-isSignalAr.append(False)
-tmpXSAvg = 552.6
-XSAr.append(tmpXSAvg)
-tmpCZTree = fileAr[-1].cutZeroTree
-totalEvents.append(tmpCZTree.GetEntries())
+if QCDPT170to300Background:
+    fileAr.append(TFile.Open("{0}FoMTreesFromQCDPT170to300Background_InputTrimmed_FullPass.root".format(forCondorStr)))
+    nameAr.append("QCDPT170to300Background")
+    isSignalAr.append(False)
+    colorAr.append(1)
+    tmpXSAvg = 103300.0
+    XSAr.append(tmpXSAvg)
+    #tmpCZTree = fileAr[-1].cutZeroTree
+    #totalEvents.append(tmpCZTree.GetEntries())
+    ENTree = fileAr[-1].evNumTree
+    evNum = 0
+    for ev in ENTree:
+        evNum = ev.nEv
+    totalEvents.append(evNum)
+if QCDPT300to470Background:
+    fileAr.append(TFile.Open("{0}FoMTreesFromQCDPT300to470Background_InputTrimmed_FullPass.root".format(forCondorStr)))
+    nameAr.append("QCDPT300to470Background")
+    isSignalAr.append(False)
+    tmpXSAvg = 6826.0
+    XSAr.append(tmpXSAvg)
+    #tmpCZTree = fileAr[-1].cutZeroTree
+    #totalEvents.append(tmpCZTree.GetEntries())
+    ENTree = fileAr[-1].evNumTree
+    evNum = 0
+    for ev in ENTree:
+        evNum = ev.nEv
+    totalEvents.append(evNum)
+if QCDPT470to600Background:
+    fileAr.append(TFile.Open("{0}FoMTreesFromQCDPT470to600Background_InputTrimmed_FullPass.root".format(forCondorStr)))
+    nameAr.append("QCDPT470to600Background")
+    isSignalAr.append(False)
+    tmpXSAvg = 552.6
+    XSAr.append(tmpXSAvg)
+    ENTree = fileAr[-1].evNumTree
+    evNum = 0
+    for ev in ENTree:
+        evNum = ev.nEv
+    totalEvents.append(evNum)
+if QCDPT600to800Background:
+    fileAr.append(TFile.Open("{0}FoMTreesFromQCDPT600to800Background_InputTrimmed_FullPass.root".format(forCondorStr)))
+    nameAr.append("QCDPT600to800Background")
+    isSignalAr.append(False)
+    tmpXSAvg = 156.6
+    XSAr.append(tmpXSAvg)
+    ENTree = fileAr[-1].evNumTree
+    evNum = 0
+    for ev in ENTree:
+        evNum = ev.nEv
+    totalEvents.append(evNum)
+if QCDPT800to1000Background:
+    fileAr.append(TFile.Open("{0}FoMTreesFromQCDPT800to1000Background_InputTrimmed_FullPass.root".format(forCondorStr)))
+    nameAr.append("QCDPT800to1000Background")
+    isSignalAr.append(False)
+    tmpXSAvg = 26.32
+    XSAr.append(tmpXSAvg)
+    ENTree = fileAr[-1].evNumTree
+    evNum = 0
+    for ev in ENTree:
+        evNum = ev.nEv
+    totalEvents.append(evNum)
+if QCDPT1000to1400Background:
+    fileAr.append(TFile.Open("{0}FoMTreesFromQCDPT1000to1400Background_InputTrimmed_FullPass.root".format(forCondorStr)))
+    nameAr.append("QCDPT1000to1400Background")
+    isSignalAr.append(False)
+    tmpXSAvg = 7.5
+    XSAr.append(tmpXSAvg)
+    ENTree = fileAr[-1].evNumTree
+    evNum = 0
+    for ev in ENTree:
+        evNum = ev.nEv
+    totalEvents.append(evNum)
+if QCDPT1400to1800Background:
+    fileAr.append(TFile.Open("{0}FoMTreesFromQCDPT1400to1800Background_InputTrimmed_FullPass.root".format(forCondorStr)))
+    nameAr.append("QCDPT1400to1800Background")
+    isSignalAr.append(False)
+    tmpXSAvg = 0.6479
+    XSAr.append(tmpXSAvg)
+    ENTree = fileAr[-1].evNumTree
+    evNum = 0
+    for ev in ENTree:
+        evNum = ev.nEv
+    totalEvents.append(evNum)
+if QCDPT1800to2400Background:
+    fileAr.append(TFile.Open("{0}FoMTreesFromQCDPT1800to2400Background_InputTrimmed_FullPass.root".format(forCondorStr)))
+    nameAr.append("QCDPT1800to2400Background")
+    isSignalAr.append(False)
+    tmpXSAvg = 0.08715
+    XSAr.append(tmpXSAvg)
+    ENTree = fileAr[-1].evNumTree
+    evNum = 0
+    for ev in ENTree:
+        evNum = ev.nEv
+    totalEvents.append(evNum)
+if QCDPT2400to3200Background:
+    fileAr.append(TFile.Open("{0}FoMTreesFromQCDPT2400to3200Background_InputTrimmed_FullPass.root".format(forCondorStr)))
+    nameAr.append("QCDPT2400to3200Background")
+    isSignalAr.append(False)
+    tmpXSAvg = 0.005242
+    XSAr.append(tmpXSAvg)
+    ENTree = fileAr[-1].evNumTree
+    evNum = 0
+    for ev in ENTree:
+        evNum = ev.nEv
+    totalEvents.append(evNum)
+if QCDPT3200toInfBackground:
+    fileAr.append(TFile.Open("{0}FoMTreesFromQCDPT3200toInfBackground_InputTrimmed_FullPass.root".format(forCondorStr)))
+    nameAr.append("QCDPT3200toInfBackground")
+    isSignalAr.append(False)
+    tmpXSAvg = 0.0001349
+    XSAr.append(tmpXSAvg)
+    ENTree = fileAr[-1].evNumTree
+    evNum = 0
+    for ev in ENTree:
+        evNum = ev.nEv
+    totalEvents.append(evNum)
 
-fileAr.append(TFile.Open("FoMTreesFromQCDPT600to800Background.root"))
-nameAr.append("QCDPT600to800Background")
-isSignalAr.append(False)
-tmpXSAvg = 156.6
-XSAr.append(tmpXSAvg)
-tmpCZTree = fileAr[-1].cutZeroTree
-totalEvents.append(tmpCZTree.GetEntries())
-
-fileAr.append(TFile.Open("FoMTreesFromQCDPT800to1000Background.root"))
-nameAr.append("QCDPT800to1000Background")
-isSignalAr.append(False)
-tmpXSAvg = 26.32
-XSAr.append(tmpXSAvg)
-tmpCZTree = fileAr[-1].cutZeroTree
-totalEvents.append(tmpCZTree.GetEntries())
-
-fileAr.append(TFile.Open("FoMTreesFromQCDPT1000to1400Background.root"))
-nameAr.append("QCDPT1000to1400Background")
-isSignalAr.append(False)
-tmpXSAvg = 7.5
-XSAr.append(tmpXSAvg)
-tmpCZTree = fileAr[-1].cutZeroTree
-totalEvents.append(tmpCZTree.GetEntries())
-
-fileAr.append(TFile.Open("FoMTreesFromQCDPT1400to1800Background.root"))
-nameAr.append("QCDPT1400to1800Background")
-isSignalAr.append(False)
-tmpXSAvg = 0.6479
-XSAr.append(tmpXSAvg)
-tmpCZTree = fileAr[-1].cutZeroTree
-totalEvents.append(tmpCZTree.GetEntries())
-
-fileAr.append(TFile.Open("FoMTreesFromQCDPT1800to2400Background.root"))
-nameAr.append("QCDPT1800to2400Background")
-isSignalAr.append(False)
-tmpXSAvg = 0.08715
-XSAr.append(tmpXSAvg)
-tmpCZTree = fileAr[-1].cutZeroTree
-totalEvents.append(tmpCZTree.GetEntries())
-
-fileAr.append(TFile.Open("FoMTreesFromQCDPT2400to3200Background.root"))
-nameAr.append("QCDPT2400to3200Background")
-isSignalAr.append(False)
-tmpXSAvg = 0.005242
-XSAr.append(tmpXSAvg)
-tmpCZTree = fileAr[-1].cutZeroTree
-totalEvents.append(tmpCZTree.GetEntries())
-
-fileAr.append(TFile.Open("FoMTreesFromQCDPT3200toInfBackground.root"))
-nameAr.append("QCDPT3200toInfBackground")
-isSignalAr.append(False)
-tmpXSAvg = 0.0001349
-XSAr.append(tmpXSAvg)
-tmpCZTree = fileAr[-1].cutZeroTree
-totalEvents.append(tmpCZTree.GetEntries())
-"""
 
 
 weightsAr = [tmpXS/tmpEvs for tmpXS,tmpEvs in zip(XSAr,totalEvents)]
