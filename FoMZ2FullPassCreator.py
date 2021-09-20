@@ -1334,7 +1334,7 @@ FOMZ2FourLepGraph.GetXaxis().SetRangeUser(Z2FourLepRange[0],Z2FourLepRange[1])
 FOMZ2FourLepGraph.Draw("APL same")
 FOMZ2FourLepCan.Update()
 #"FP" stands for "Full Pass"
-FOMZ2FourLepCan.SaveAs("lepCutZeroFOMGraph_FP_Z2FourLep_{0}_Vs_{1}_AMSFoM_WithComparZ2FourLepnHist_{2}.png".format(signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+FOMZ2FourLepCan.SaveAs("FOMGraph_FP_Z2FourLep_{0}_Vs_{1}_AMSFoM_WithComparZ2FourLepnHist_{2}.png".format(signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 
 
 

@@ -2088,7 +2088,7 @@ FOMePtGraph.GetXaxis().SetRangeUser(ePtRange[0],ePtRange[1])
 FOMePtGraph.Draw("APL same")
 FOMePtCan.Update()
 #"FP" stands for "Full Pass"
-FOMePtCan.SaveAs("lepCutZeroFOMGraph_FP_ePt_{0}_Vs_{1}_AMSFoM_WithComparePtnHist_{2}.png".format(signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+FOMePtCan.SaveAs("FOMGraph_FP_ePt_{0}_Vs_{1}_AMSFoM_WithComparePtnHist_{2}.png".format(signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 
 FOMeEtaCan = TCanvas("c1eEta","c1eEta",3600,2400)
 setUpLegend(legAr)
@@ -2131,7 +2131,7 @@ FOMeEtaGraph.GetXaxis().SetRangeUser(eEtaRange[0],eEtaRange[1])
 FOMeEtaGraph.Draw("APL same")
 FOMeEtaCan.Update()
 #"FP" stands for "Full Pass"
-FOMeEtaCan.SaveAs("lepCutZeroFOMGraph_FP_eEta_{0}_Vs_{1}_AMSFoM_WithCompareEtanHist_{2}.png".format(signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+FOMeEtaCan.SaveAs("FOMGraph_FP_eEta_{0}_Vs_{1}_AMSFoM_WithCompareEtanHist_{2}.png".format(signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 
 
 
@@ -2176,7 +2176,7 @@ FOMmPtGraph.GetXaxis().SetRangeUser(mPtRange[0],mPtRange[1])
 FOMmPtGraph.Draw("APL same")
 FOMmPtCan.Update()
 #"FP" stands for "Full Pass"
-FOMmPtCan.SaveAs("lepCutZeroFOMGraph_FP_mPt_{0}_Vs_{1}_AMSFoM_WithComparmPtnHist_{2}.png".format(signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+FOMmPtCan.SaveAs("FOMGraph_FP_mPt_{0}_Vs_{1}_AMSFoM_WithComparmPtnHist_{2}.png".format(signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 
 FOMmEtaCan = TCanvas("c1mEta","c1mEta",3600,2400)
 setUpLegend(legAr)

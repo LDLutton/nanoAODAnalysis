@@ -1971,7 +1971,7 @@ FOMZ1InvMassCutLowGraph.GetXaxis().SetRangeUser(Z1InvMassCutLowRange[0],Z1InvMas
 FOMZ1InvMassCutLowGraph.Draw("APL same")
 FOMZ1InvMassCutLowCan.Update()
 #"FP" stands for "Full Pass"
-FOMZ1InvMassCutLowCan.SaveAs("lepCutZeroFOMGraph_FP_Z1InvMassCutLow_{0}_Vs_{1}_AMSFoM_WithComparZ1InvMassCutLownHist_{2}.png".format(signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+FOMZ1InvMassCutLowCan.SaveAs("FOMGraph_FP_Z1InvMassCutLow_{0}_Vs_{1}_AMSFoM_WithComparZ1InvMassCutLownHist_{2}.png".format(signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 
 
 
@@ -2017,7 +2017,7 @@ FOMZ1InvMassCutHighGraph.GetXaxis().SetRangeUser(Z1InvMassCutHighRange[0],Z1InvM
 FOMZ1InvMassCutHighGraph.Draw("APL same")
 FOMZ1InvMassCutHighCan.Update()
 #"FP" stands for "Full Pass"
-FOMZ1InvMassCutHighCan.SaveAs("lepCutZeroFOMGraph_FP_Z1InvMassCutHigh_{0}_Vs_{1}_AMSFoM_WithComparZ1InvMassCutHighnHist_{2}.png".format(signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+FOMZ1InvMassCutHighCan.SaveAs("FOMGraph_FP_Z1InvMassCutHigh_{0}_Vs_{1}_AMSFoM_WithComparZ1InvMassCutHighnHist_{2}.png".format(signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 
 FOMZ1PtCutLowCan = TCanvas("c1Z1PtCutLow","c1Z1PtCutLow",3600,2400)
 setUpLegend(legAr)
@@ -2060,7 +2060,7 @@ FOMZ1PtCutLowGraph.GetXaxis().SetRangeUser(Z1PtCutLowRange[0],Z1PtCutLowRange[1]
 FOMZ1PtCutLowGraph.Draw("APL same")
 FOMZ1PtCutLowCan.Update()
 #"FP" stands for "Full Pass"
-FOMZ1PtCutLowCan.SaveAs("lepCutZeroFOMGraph_FP_Z1PtCutLow_{0}_Vs_{1}_AMSFoM_WithComparZ1PtCutLownHist_{2}.png".format(signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+FOMZ1PtCutLowCan.SaveAs("FOMGraph_FP_Z1PtCutLow_{0}_Vs_{1}_AMSFoM_WithComparZ1PtCutLownHist_{2}.png".format(signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 
 
 
