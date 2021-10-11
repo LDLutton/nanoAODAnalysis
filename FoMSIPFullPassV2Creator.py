@@ -5,20 +5,12 @@ from ROOT import TFile, TChain, gDirectory, TApplication, TMath, Math, TMinuit, 
 from ROOT import THStack, TH1D, TCanvas, TPad, TF1, TGraph, TGraphErrors, TLegend, TLine, TPaveText, TStyle
 from ROOT import TH2D, TH2F,gPad
 from math import sqrt,pi,log
+from functionsForFoMPlots import *
 import time as time
 
-today = datetime.datetime.today()
+#today = datetime.datetime.today()
 startt = time.time()
 """
-def doZ2Cut(ev,Z1LeadVec,Z1TrailingVec,Z1IsMuon,eZ2PairIndAr,mZ2PairIndAr,fourLepInvMassCut,optLepInvMassCut):
-    tmpLeadInd = -1
-    tmpTrailingInd = -1
-    tmpZ1Vec = Z1LeadVec + Z1TrailingVec
-    #Electrons first
-    for eZ2PairInd in eZ2PairIndAr:
-        tmpZ2VecOne = ev.
-"""
-
 def makeNiceTHStack(histo,xTitle,yTitle,noX=True):
 
   if noX:
@@ -37,7 +29,7 @@ def makeNiceTHStack(histo,xTitle,yTitle,noX=True):
   histo.GetYaxis().SetTitleFont(42)
   histo.GetYaxis().SetLabelFont(42)
   histo.GetYaxis().SetLabelSize(0.055)
-  
+
 
 def makeNiceHistos(histo,xTitle,yTitle,noX=True):
   if noX:
@@ -442,8 +434,7 @@ def doSIPCut(Z1LeadSIP,Z1TrailingSIP,Z2LeadSIP,Z2TrailingSIP,SIPCut):
         return True
 
 
-
-def getEdgesArForRebinHist(histToRebin):
+def getEdgesArForRebinHist(histToRebin,variableRebinVar):
     edgesAr = array('d')
     binSum = 0
     sumError = 0
@@ -452,7 +443,7 @@ def getEdgesArForRebinHist(histToRebin):
         binSum += histToRebin.GetBinContent(i)
         binError = histToRebin.GetBinError(i)
         sumError += sqrt((sumError*sumError)+(binError*binError))
-        if (binSum > 0 and binError/binSum < 0.3):
+        if (binSum > 0 and binError/binSum < variableRebinVar):
             edgesAr.append(histToRebin.GetBinLowEdge(i+1))
             binSum = 0
             sumError = 0
@@ -464,22 +455,22 @@ def getEdgesArForRebinHist(histToRebin):
     
     return lenEdgesAr,edgesAr
 
-def variableRebinHist(histToRebin,histName):
-    lenEdgesAr,edgesAr = getEdgesArForRebinHist(histToRebin)
+def variableRebinHist(histToRebin,histName,variableRebinVar,cutName):
+    lenEdgesAr,edgesAr = getEdgesArForRebinHist(histToRebin,variableRebinVar)
     if lenEdgesAr:
         print(lenEdgesAr)
         print(edgesAr)
         print("-----------")
-        return histToRebin.Rebin(lenEdgesAr,"SIPHist{0}Rebin".format(histName),edgesAr)
+        return histToRebin.Rebin(lenEdgesAr,"{0}Hist{1}Rebin".format(cutName,histName),edgesAr)
 
 
-def variableRebinBackgroundHists(tmpHist,backgroundHistAr,histNameAr,extraHistsAr = [],extraHistsNameAr=[]):
+def variableRebinBackgroundHists(tmpHist,backgroundHistAr,histNameAr,variableRebinVar,cutName,extraHistsAr = [],extraHistsNameAr=[]):
     for k in range(len(backgroundHistAr)):
         if not isSignalAr[k]:
             #Assumes each histogram starts with the same binning
             backgroundHistAr[k].Sumw2()
             tmpHist.Add(backgroundHistAr[k],weightsAr[k])
-    lenEdgesAr,edgesAr = getEdgesArForRebinHist(tmpHist)
+    lenEdgesAr,edgesAr = getEdgesArForRebinHist(tmpHist,variableRebinVar)
     if lenEdgesAr:
         print(lenEdgesAr)
         print(edgesAr)
@@ -487,13 +478,250 @@ def variableRebinBackgroundHists(tmpHist,backgroundHistAr,histNameAr,extraHistsA
         for k in range(len(backgroundHistAr)):
             if not isSignalAr[k]:
                 backgroundHistAr[k].Sumw2()
-                backgroundHistAr[k] = backgroundHistAr[k].Rebin(lenEdgesAr,"SIPHist{0}Rebin".format(histNameAr[k]),edgesAr)
+                backgroundHistAr[k] = backgroundHistAr[k].Rebin(lenEdgesAr,"{0}Hist{1}Rebin".format(cutName,histNameAr[k]),edgesAr)
         if extraHistsAr:
             for k in range(len(extraHistsAr)):
                 extraHistsAr[k].Sumw2()
-                extraHistsAr[k] = extraHistsAr[k].Rebin(lenEdgesAr,"SIPHist{0}Rebin".format(extraHistsNameAr[k]),edgesAr)
+                extraHistsAr[k] = extraHistsAr[k].Rebin(lenEdgesAr,"{0}Hist{1}Rebin".format(cutName,extraHistsNameAr[k]),edgesAr)
 
-            
+def FoMCalc(signalAr,backgroundAr,graphAr,xAr, cutAmnt,cutRange,cutStep):
+    for c in range(cutAmnt):
+        tmpSignal = signalAr[c]
+        tmpBackground = backgroundAr[c]
+        if tmpSignal > 0:
+            if tmpBackground == 0:
+                tmpFoM = tmpSignal/(sqrt(tmpSignal+tmpBackground))
+            else:
+                tmpFoM = sqrt(2*(((tmpSignal+tmpBackground)*log(1+(tmpSignal / tmpBackground)))-tmpSignal))
+        else:
+            tmpFoM = 0
+        graphAr.append(tmpFoM)
+        tmpX = cutRange[0] + (cutStep*c)
+        xAr.append(tmpX)
+
+
+def makeEvPassGraphs(nameAr,evPassCanAr,evPassGraphAr,evPassGraphsAr,xAr,cutName):
+    for k,nameA in enumerate(nameAr):
+        evPassCanAr.append(TCanvas("c1{0}{1}".format(cutName,nameA),"c1{0}{1}".format(cutName,nameA),3600,2400))
+        evPassGraphsAr.append(TGraph(len(evPassGraphAr[k]),xAr,evPassGraphAr[k]))
+        setUpGraphs(evPassGraphsAr[-1],3,22,"Number of Passing Events Vs {0} Cut for {1}".format(cutName,nameA),cutName,"Events Passing Cut")
+        evPassGraphsAr[-1].Draw("APL*")
+        evPassCanAr[-1].Draw()
+        #"FP" stands for "Full Pass"
+        evPassCanAr[-1].SaveAs("evPassCutGraph_FP_{0}{1}_V2_{1}.png".format(cutName,nameA,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+
+def setHistoElements(nameAr,colorAr,sumQCD,QCDSumHist,isQCDAr,histAr,isSignalAr,cutName,normalizeBackgroundsTogether,intAr):
+    backgroundIntSum = 0
+    QCDSumInt = 0
+    for j,colorA,nameA in zip(range(len(nameAr)),colorAr,nameAr):
+        if not sumQCD or not isQCDAr[j]:
+            histAr[j].SetLineColor(colorA)
+            histAr[j].SetLineWidth(2)
+            if not isSignalAr[j]:
+                histAr[j].SetFillColorAlpha(colorA,0.2)
+            if j == 0:
+                makeNiceHistos(histAr[j],"","Events",True)
+                histAr[j].SetTitle("Events Passing All Cuts Vs {0} Cut Value".format(cutName))
+            tmpHistInt = histAr[j].Integral()
+            if normalizeBackgroundsTogether:
+                backgroundIntSum += tmpHistInt*weightsAr[j]
+
+            intAr.append(tmpHistInt)
+        else:
+            intAr.append(1)
+    if sumQCD:
+        QCDSumHist.SetLineColor(9)
+        QCDSumHist.SetLineWidth(2)
+        QCDSumHist.SetFillColorAlpha(9,0.2)
+        QCDSumInt = QCDSumHist.Integral()
+    return backgroundIntSum, QCDSumInt
+
+def doVariableRebinning(histAr,isSignalAr,variableRebinVar,binAmnt,cutRange,sumQCD,nameAr,QCDSumHist,cutName):
+    #first do signal
+    for k in range(len(histAr)):
+        if isSignalAr[k]:
+            print(k)
+            histAr[k] = variableRebinHist(histAr[k],nameAr[k],variableRebinVar,cutName)
+            break
+    #Now background
+    tmpRebinHist = TH1D("rebinHist","rebinHist", binAmnt, cutRange[0], cutRange[1])
+    if sumQCD:
+        extraHistsAr = [QCDSumHist]
+        extraHistsNameAr = ["{0}HistQCDSum".format(cutName)]
+        variableRebinBackgroundHists(tmpRebinHist,histAr,nameAr,variableRebinVar,cutName,extraHistsAr,extraHistsNameAr)
+        QCDSumHist = extraHistsAr[0]
+    else:
+        variableRebinBackgroundHists(tmpRebinHist,histAr,nameAr,variableRebinVar,cutName)
+
+def normalizeHists(histAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,backgroundIntSum,isSignalAr,weightsAr,legAr,nameAr,intAr):
+    histMax = 0
+    for j in range(len(histAr)):
+        if not sumQCD or not isQCDAr[j]:
+            histAr[j].Sumw2()
+            if normalizeBackgroundsTogether and backgroundIntSum and not isSignalAr[j]:
+                
+                histAr[j].Scale(weightsAr[j] / backgroundIntSum)
+                tmpMax = histAr[j].GetMaximum()
+                if tmpMax > histMax:
+                    histMax = tmpMax
+                legAr[-1].AddEntry(histAr[j],nameAr[j],"l")
+            elif intAr[j]:
+                print(j)
+                print(intAr[j])
+                histAr[j].Scale(1.0 / intAr[j])
+                tmpMax = histAr[j].GetMaximum()
+                if not normalizeBackgroundsTogether:
+                    if tmpMax > histMax:
+                        histMax = tmpMax
+                legAr[-1].AddEntry(histAr[j],nameAr[j],"l")
+    return histMax
+
+def scaleQCDHist(QCDSumInt,QCDSumHist,histMax):
+    QCDSumHist.Sumw2()
+    QCDSumHist.Scale(1.0 / QCDSumInt)
+    tmpMax = QCDSumHist.GetMaximum()
+    if tmpMax > histMax:
+        histMax = tmpMax
+    legAr[-1].AddEntry(QCDSumHist,"QCDSum","l")
+    return histMax
+
+def addHistsToStack(histAr,isSignalAr,sumQCD,isQCDAr,histStack,QCDSumHist,normalizeBackgroundsTogether,backgroundIntSum):
+    maxInt = 0
+    for j in range(len(histAr)):
+        if not isSignalAr[j] and (not sumQCD or not isQCDAr[j]):
+            tmpMaxInt = histAr[j].Integral()
+            if tmpMaxInt > maxInt:
+                maxInt = tmpMaxInt
+            histAr[j].Sumw2()
+            histStack.Add(histAr[j])
+    if sumQCD:
+        histStack.Add(QCDSumHist)
+    if normalizeBackgroundsTogether:
+        tmpMaxBackground = histStack.GetMaximum()
+        tmpMaxSignal = histAr[1].GetMaximum()
+        tmpMaxRatio = tmpMaxBackground/tmpMaxSignal
+        #tmpSignalInt = histAr[1].Integral()
+        histAr[1].Sumw2()
+        histAr[1].Scale(tmpMaxRatio)
+        #histAr[1].Scale(backgroundIntSum / tmpSignalInt)
+    return maxInt
+
+def setUpInvHists(histAr,isSignalAr,sumQCD,isQCDAr,invHistsAr,nameAr,intAr,drawInvAr,QCDSumInt,QCDSumHist,cutName):
+    for j in range(len(histAr)):
+        if not isSignalAr[j] and (not sumQCD or not isQCDAr[j]):
+            invHistsAr.append(histAr[j].Clone("{0}Inv".format(nameAr[j])))
+            if intAr[j]:
+                drawInvAr.append(True)
+
+                tmpNBins = histAr[j].GetNbinsX()
+                tmpBinErrorAr = []
+                for i in range(tmpNBins):
+                    tmpBinErrorAr.append(histAr[j].GetBinError(i))
+                for k in range(j):
+                    if not isSignalAr[k] and (not sumQCD or not isQCDAr[k]):
+                        invHistsAr[-1].Add(histAr[k])
+                for i in range(tmpNBins):
+                    invHistsAr[-1].SetBinError(i,tmpBinErrorAr[i])
+            else:
+                drawInvAr.append(False)
+    if sumQCD:
+        if QCDSumInt:
+            drawInvAr.append(True)
+            invHistsAr.append(QCDSumHist.Clone("{0}HistQCDSumInv".format(cutName)))
+            tmpNBins = QCDSumHist.GetNbinsX()
+            tmpBinErrorAr = []
+            for i in range(tmpNBins):
+                tmpBinErrorAr.append(QCDSumHist.GetBinError(i))
+            for k in range(j):
+                if not isSignalAr[k] and not isQCDAr[k]:
+                    invHistsAr[-1].Add(histAr[k])
+            for i in range(tmpNBins):
+                invHistsAr[-1].SetBinError(i,tmpBinErrorAr[i])
+        else:
+            drawInvAr.append(False)
+
+def setUpStackedHistAndDrawFoMPlot(histMax,histAr,histStack,invHistsAr,drawInvAr,legAr,FoMCan,padAr,FoMgraph,cutRange,cutName,signalName,backgroundName):
+    #maxForRange = 1.1*histMax
+    #histAr[1].GetYaxis().SetRangeUser(0,maxForRange)
+
+    histStack.Draw("hist")
+    makeNiceTHStack(histStack,"","Events",True)
+    tmpMax = histStack.GetMaximum()
+    if tmpMax < histMax:
+        histStack.SetMaximum(histMax)
+    histStack.Draw("same hist")
+
+    for k in range(len(invHistsAr)):
+
+        if drawInvAr[k]:
+            print("passed")
+            invHistsAr[k].SetStats(0)
+            invHistsAr[k].Draw("same E1")
+
+    histAr[1].Draw("same hist E1")
+    legAr[-1].Draw()
+
+
+    FoMCan.cd()
+
+    setUpBottomPadsAr(padAr[-1])
+    
+    setUpGraphs(FoMgraph,3,22,"{0} FoM Plot".format(cutName),cutName,"SQRT(2*(((S+B)*log(1+(S/B)))-S))")
+    FoMgraph.GetXaxis().SetRangeUser(cutRange[0],cutRange[1])
+    FoMgraph.Draw("APL* same")
+    FoMCan.Update()
+    #"FP" stands for "Full Pass"
+    if normalizeBackgroundsTogether:
+        FoMCan.SaveAs("FoMGraph_FP_{0}_{1}_Vs_{2}_AMSFoM_WithComparisonHist_Stacked_NBT_V2_{3}.png".format(cutName,signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+    else:
+        FoMCan.SaveAs("FoMGraph_FP_{0}_{1}_Vs_{2}_AMSFoM_WithComparisonHist_Stacked_V2_{3}.png".format(cutName,signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+
+
+def setUpNonStackedHistAndFoMPlot(FoM2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,normalizeBackgroundsTogether,maxInt,histAr,legAr,FoMGraph,signalName,backgroundName):
+    setUpPadsAr(padAr,"{0}Pad".format("{0}2".format(cutName)))
+    padAr[-1][0].Draw()
+    padAr[-1][0].cd()
+    #Rescale signal hist
+    if sumQCD:
+        tmpMax = QCDSumHist.GetMaximum()
+        if tmpMax > histMax:
+            histMax = tmpMax
+    if normalizeBackgroundsTogether:
+        #tmpMaxSignal = histAr[1].GetMaximum()
+        #tmpMaxRatio = histMax/tmpMaxSignal
+
+        tmpSignalInt = histAr[1].Integral()
+        histAr[1].Sumw2()
+        #histAr[1].Scale(tmpMaxRatio)
+        histAr[1].Scale(maxInt/tmpSignalInt)
+    tmpMax = histAr[1].GetMaximum()
+    if tmpMax > histMax:
+        histMax = tmpMax
+
+    histAr[0].GetYaxis().SetRangeUser(0,histMax)
+    histAr[0].Draw("hist")
+
+    if sumQCD:
+        QCDSumHist.DrawCopy("same hist")
+    for j in range(1,len(histAr)):
+        if not sumQCD or not isQCDAr[j]:
+            histAr[j].DrawCopy("same hist")
+    
+  
+    legAr[-1].Draw()
+    FoM2Can.cd()
+
+    setUpBottomPadsAr(padAr[-1]) 
+    FoMGraph.Draw("APL same")
+    FoM2Can.Update()
+    #"FP" stands for "Full Pass"
+    if normalizeBackgroundsTogether:
+        FoM2Can.SaveAs("FoMGraph_FP_{0}_{1}_Vs_{2}_AMSFoM_WithComparisonHist_NBT_V2_{3}.png".format(cutName,signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+    else:
+        FoM2Can.SaveAs("FoMGraph_FP_{0}_{1}_Vs_{2}_AMSFoM_WithComparisonHist_V2_{3}.png".format(cutName,signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+"""
+
+
 
 
 debug = False
@@ -505,8 +733,11 @@ if forCondor:
 else:
     forCondorStr = ""
 skipEvPassGraphs = True
-variableRebin = True
+variableRebin = False
+variableRebinVar = 0.3
 normalizeBackgroundsTogether = True
+sumQCD = True
+isQCDAr = []
 
 MGSM = True
 MGEFT = True
@@ -524,9 +755,6 @@ QCDPT1800to2400Background = False
 QCDPT2400to3200Background = False
 QCDPT3200toInfBackground = False
 
-sumQCD = True
-isQCDAr = []
-
 XSAr = []
 totalEvents = []
 fileAr = []
@@ -535,6 +763,7 @@ isSignalAr = []
 colorAr = []
 
 saveNameAr = []
+
 
 if MGSM:
     #fileAr.append(TFile.Open("{0}FoMTreesFrompphzzjjQCD0SMHLOOP0QEDE5NPE0ResMasAllVer100Ev_0p999cHW100GeVIMJetCut.root".format(forCondorStr)))
@@ -788,7 +1017,8 @@ if QCDPT3200toInfBackground:
 
 weightsAr = [tmpXS/tmpEvs for tmpXS,tmpEvs in zip(XSAr,totalEvents)]
 
-
+cutAmnt = 50
+binAmnt = 50
 
 ePtCut = 7
 eEtaCut = 2.5
@@ -800,13 +1030,11 @@ invMassCutHigh=120
 ptLeadCut=20
 ptTrailingCut=10
 
-ZMass = 91.1876
+#ZMass = 91.1876
 fourLepInvMassCut = 100
 optLepInvMassCut = 12
-lepIsoCut = 0.35
 
-cutAmnt = 50
-binAmnt = 100
+lepIsoCut = 0.35
 
 SIPCut = 4
 SIPRange = [0,5]
@@ -815,13 +1043,12 @@ SIPStep = (SIPRange[1]-SIPRange[0])/cutAmnt
 SIPSignalAr = [0 for i in range(cutAmnt)] 
 SIPBackgroundAr = [0 for i in range(cutAmnt)] 
 
-
 SIPEvPassGraphAr = []
 for nameA in nameAr:
     SIPEvPassGraphAr.append(array('d'))
 
 histSIPAr = []
-
+"""
 def setUpGraphs(gGraph,markerStyle,lineColor,gTitle,xTitle,yTitle):
     #gGraph.SetMarkerStyle(markerStyle)
     gGraph.SetTitle(gTitle)
@@ -839,6 +1066,7 @@ def setUpGraphs(gGraph,markerStyle,lineColor,gTitle,xTitle,yTitle):
     gGraph.GetYaxis().SetTitleFont(42)
     gGraph.GetYaxis().SetTitleOffset(1.2)
     gGraph.GetXaxis().SetTitleOffset(0.9)
+"""
 
 
 #fileAr.append(TFile.Open("FoMTreesFrompphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev_0p999cHW100GeVIMJetCut_InputTrimmed_FullPass.root"))
@@ -945,11 +1173,11 @@ for k,fileA in enumerate(fileAr):
             #passesCandCutsCtr += 1
             elecPassesZ2CutsAr = []
             if enoughElecCands: #If enough elec cands, run Z1 cuts
-                Z1LeadItr,Z1TrailingItr,Z1LeadPt,Z1TrailingPt,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,Z1IsMuon,difFromZMassOne = doeZ1Cut(ev,elecCandIndAr,elecCandVecAr,elecCandChargeAr,elecPassesZ2CutsAr,Z1IsMuon,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,Z1LeadPt,Z1TrailingPt,Z1LeadItr,Z1TrailingItr,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,difFromZMassOne)
+                Z1LeadItr,Z1TrailingItr,Z1LeadPt,Z1TrailingPt,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,Z1IsMuon,difFromZMassOne = doeZ1Cut(ev,elecCandIndAr,elecCandVecAr,elecCandChargeAr,elecPassesZ2CutsAr,Z1IsMuon,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,Z1LeadPt,Z1TrailingPt,Z1LeadItr,Z1TrailingItr,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,difFromZMassOne,debug)
             muonPassesZ2CutsAr = []
             if enoughMuonCands: #If enough muon cands, run Z1 cuts
                 
-                Z1LeadItr,Z1TrailingItr,Z1LeadPt,Z1TrailingPt,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,Z1IsMuon,difFromZMassOne = domZ1Cut(ev,muonCandIndAr,muonCandVecAr,muonCandChargeAr,muonPassesZ2CutsAr,Z1IsMuon,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,Z1LeadPt,Z1TrailingPt,Z1LeadItr,Z1TrailingItr,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,difFromZMassOne)
+                Z1LeadItr,Z1TrailingItr,Z1LeadPt,Z1TrailingPt,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,Z1IsMuon,difFromZMassOne = domZ1Cut(ev,muonCandIndAr,muonCandVecAr,muonCandChargeAr,muonPassesZ2CutsAr,Z1IsMuon,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,Z1LeadPt,Z1TrailingPt,Z1LeadItr,Z1TrailingItr,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,difFromZMassOne,debug)
             if debug:
                 print("Z1LeadItr",Z1LeadItr,"Z1TrailingItr",Z1TrailingItr,"Z1LeadPt",Z1LeadPt,"Z1TrailingPt",Z1TrailingPt,"Z1LeadVec",Z1LeadVec,"Z1TrailingVec",Z1TrailingVec,"Z1LeadCharge",Z1LeadCharge,"Z1TrailingCharge",Z1TrailingCharge,"Z1IsMuon",Z1IsMuon,"difFromZMassOne",difFromZMassOne)
             if Z1LeadItr >= 0: #If Z1 found
@@ -1132,6 +1360,11 @@ for k,fileA in enumerate(fileAr):
 
 SIPGraphAr = array('d')
 SIPXAr = array('d')
+
+#Calculate FoM for each point
+
+FoMCalc(SIPSignalAr,SIPBackgroundAr,SIPGraphAr,SIPXAr,cutAmnt,SIPRange,SIPStep)
+"""
 for c in range(cutAmnt):
     #SIP
     tmpSignal = SIPSignalAr[c]
@@ -1146,11 +1379,19 @@ for c in range(cutAmnt):
     SIPGraphAr.append(tmpFoM)
     tmpX = SIPRange[0] + (SIPStep*c)
     SIPXAr.append(tmpX)
+"""
 
 evPassSIPCanAr = []
 evPassSIPGraphAr = []
 print("Done.","time:",time.time()-startt)
+
+#make evpass graphs
+
+cutName = "SIP"
+
 if not skipEvPassGraphs:
+    makeEvPassGraphs(nameAr,evPassSIPCanAr,SIPEvPassGraphAr,evPassSIPGraphAr,SIPXAr,cutName)
+    """
     for k,nameA in enumerate(nameAr):
         #print("-------------------")
         #print(len(SIPEvPassGraphAr[k]),SIPXAr,SIPEvPassGraphAr[k])
@@ -1161,6 +1402,7 @@ if not skipEvPassGraphs:
         evPassSIPCanAr[-1].Draw()
         #"FP" stands for "Full Pass"
         evPassSIPCanAr[-1].SaveAs("evPassCutGraph_FP_SIP{0}_V2_{1}.png".format(nameA,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+    """
 
 
 
@@ -1174,11 +1416,9 @@ backgroundName = ""
 for k,fileA in enumerate(fileAr):
     if not sumQCD or not isQCDAr[k]:
         if isSignalAr[k]:
-            #signalName += "_"+nameAr[k]
             signalName += "_"+saveNameAr[k]
 
         else:
-            #backgroundName += "_"+nameAr[k]
             backgroundName += "_"+saveNameAr[k]
 if sumQCD:
     
@@ -1196,23 +1436,42 @@ if sumQCD:
             for i in range(numBins):
                 tmpBinContentWeighted = histSIPAr[k].GetBinContent(i)*weightsAr[k]
             """
+else:
+    QCDSumHist = 0
 
+"""
+testCan = TCanvas()
+histSIPAr[1].Draw("hist E1")
+testCan.SaveAs("TestOfErrorsEFT.png")
+testCanTwo = TCanvas()
+histSIPAr[3].Draw("hist E1")
+testCanTwo.SaveAs("TestOfErrorsttZ.png")
+testCanThree = TCanvas()
+histSIPAr[0].Draw("hist E1")
+testCanThree.SaveAs("TestOfErrorsSM.png")
+"""
 
-
-
-
-FOMSIPCan = TCanvas("c1SIP","c1SIP",3600,2400)
+FoMSIPCan = TCanvas("c1SIP","c1SIP",3600,2400)
 setUpLegend(legAr)
 setUpPadsAr(padAr,"{0}Pad".format("SIP"))
 padAr[-1][0].Draw()
 padAr[-1][0].cd()
 #Make top plot
+
+
+#First set histogram elements (color, etc)
 intSIPAr = []
+
+
+
+backgroundIntSum,QCDSumInt = setHistoElements(nameAr,colorAr,sumQCD,QCDSumHist,isQCDAr,histSIPAr,isSignalAr,cutName,normalizeBackgroundsTogether,weightsAr,intSIPAr)
+
+"""
 backgroundIntSum = 0
 for j,colorA,nameA in zip(range(len(nameAr)),colorAr,nameAr):
     if not sumQCD or not isQCDAr[j]:
         histSIPAr[j].SetLineColor(colorA)
-        histSIPAr[j].SetLineWidth(3)
+        histSIPAr[j].SetLineWidth(2)
         if not isSignalAr[j]:
             #histSIPAr[j].SetFillColor(colorA)
             histSIPAr[j].SetFillColorAlpha(colorA,0.2)
@@ -1228,13 +1487,33 @@ for j,colorA,nameA in zip(range(len(nameAr)),colorAr,nameAr):
         intSIPAr.append(1)
 if sumQCD:
     QCDSumHist.SetLineColor(9)
-    QCDSumHist.SetLineWidth(3)
+    QCDSumHist.SetLineWidth(2)
     #QCDSumHist.SetFillColor(9)
     QCDSumHist.SetFillColorAlpha(9,0.2)
     QCDSumInt = QCDSumHist.Integral()
     #intSIPAr.append(QCDSumHist.Integral())
+"""
+"""
+testCanAes = TCanvas()
+histSIPAr[1].Draw("hist E1")
+testCanAes.SaveAs("TestOfErrorsAesEFT.png")
+testCanAesTwo = TCanvas()
+histSIPAr[3].Draw("hist E1")
+testCanAesTwo.SaveAs("TestOfErrorsAesttZ.png")
+testCanAesThree = TCanvas()
+histSIPAr[0].Draw("hist E1")
+testCanAesThree.SaveAs("TestOfErrorsAesSM.png")
+
+FoMSIPCan.cd()
+padAr[-1][0].cd()
+"""
+
+
 
 if variableRebin:
+    doVariableRebinning(histSIPAr,isSignalAr,variableRebinVar,binAmnt,SIPRange,sumQCD,nameAr,QCDSumHist,cutName,weightsAr)
+
+    """
     #first do signal
     #testCanPre = TCanvas()
     #histSIPAr[1].Draw("hist *")
@@ -1242,7 +1521,7 @@ if variableRebin:
     for k in range(len(histSIPAr)):
         if isSignalAr[k]:
             print(k)
-            histSIPAr[k] = variableRebinHist(histSIPAr[k],nameAr[k])
+            histSIPAr[k] = variableRebinHist(histSIPAr[k],nameAr[k],variableRebinVar)
             break
     #testCanPost = TCanvas()
     #histSIPAr[1].Draw("hist *")
@@ -1252,12 +1531,17 @@ if variableRebin:
     if sumQCD:
         extraHistsAr = [QCDSumHist]
         extraHistsNameAr = ["SIPHistQCDSum"]
-        variableRebinBackgroundHists(tmpRebinHist,histSIPAr,nameAr,extraHistsAr,extraHistsNameAr)
+        variableRebinBackgroundHists(tmpRebinHist,histSIPAr,nameAr,variableRebinVar,extraHistsAr,extraHistsNameAr)
         QCDSumHist = extraHistsAr[0]
     else:
-        variableRebinBackgroundHists(tmpRebinHist,histSIPAr,nameAr)
+        variableRebinBackgroundHists(tmpRebinHist,histSIPAr,nameAr,variableRebinVar)
+    """
 
-histMax = 0
+
+
+
+histMax = normalizeHists(histSIPAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,backgroundIntSum,isSignalAr,weightsAr,legAr,nameAr,intSIPAr)
+"""
 for j in range(len(histSIPAr)):
     if not sumQCD or not isQCDAr[j]:
         histSIPAr[j].Sumw2()
@@ -1277,21 +1561,52 @@ for j in range(len(histSIPAr)):
                 if tmpMax > histMax:
                     histMax = tmpMax
             legAr[-1].AddEntry(histSIPAr[j],nameAr[j],"l")
-        
+"""
+
+"""
+testCanScale = TCanvas()
+histSIPAr[1].Draw("hist E1")
+testCanScale.SaveAs("TestOfErrorsScaleEFT.png")
+testCanScaleTwo = TCanvas()
+histSIPAr[3].Draw("hist E1")
+testCanScaleTwo.SaveAs("TestOfErrorsScalettZ.png")
+testCanScaleThree = TCanvas()
+histSIPAr[0].Draw("hist E1")
+testCanScaleThree.SaveAs("TestOfErrorsScaleSM.png")
+
+
+FoMSIPCan.cd()
+padAr[-1][0].cd()
+"""
+
+
+
 if sumQCD:
     if QCDSumInt:
+        histMax = scaleQCDHist(QCDSumInt,QCDSumHist,histMax,legAr)
+
+"""
+if sumQCD:
+    if QCDSumInt:
+        QCDSumHist.Sumw2()
         QCDSumHist.Scale(1.0 / QCDSumInt)
         tmpMax = QCDSumHist.GetMaximum()
         if tmpMax > histMax:
             histMax = tmpMax
         legAr[-1].AddEntry(QCDSumHist,"QCDSum","l")
+"""
 
 
 
+histSIPStack = THStack("hist{0}Stack".format(cutName),"Events Passing All Cuts Vs {0} Cut Value".format(cutName))
 
-histSIPStack = THStack("histSIPStack","Events Passing All Cuts Vs SIP Cut Value")
+maxInt = addHistsToStack(histSIPAr,isSignalAr,sumQCD,isQCDAr,histSIPStack,QCDSumHist,normalizeBackgroundsTogether,backgroundIntSum)
+
+"""
 for j in range(len(histSIPAr)):
     if not isSignalAr[j] and (not sumQCD or not isQCDAr[j]):
+        #histSIPStack.GetHistogram.Sumw2()
+        histSIPAr[j].Sumw2()
         histSIPStack.Add(histSIPAr[j])
 if sumQCD:
     histSIPStack.Add(QCDSumHist)
@@ -1301,26 +1616,161 @@ if normalizeBackgroundsTogether:
     tmpMaxRatio = tmpMaxBackground/tmpMaxSignal
     histSIPAr[1].Sumw2()
     histSIPAr[1].Scale(tmpMaxRatio)
+"""
 
-histSIPStack.Draw("hist E")
+"""
+testCanStack = TCanvas()
+histSIPAr[1].Draw("hist E1")
+testCanStack.SaveAs("TestOfErrorsStackEFT.png")
+testCanStackTwo = TCanvas()
+histSIPAr[3].Draw("hist E1")
+testCanStackTwo.SaveAs("TestOfErrorsStackttZ.png")
+testCanStackThree = TCanvas()
+histSIPAr[0].Draw("hist E1")
+testCanStackThree.SaveAs("TestOfErrorsStackSM.png")
+
+testCanStackFour = TCanvas()
+histSIPStack.Draw("hist E1")
+testCanStackFour.SaveAs("TestOfErrorsStacked.png")
+
+
+FoMSIPCan.cd()
+padAr[-1][0].cd()
+"""
+
+
+#Loop over all hists that went into the THStack to get center and length of error bars for invisible hist
+
+invHistsAr = []
+drawInvAr = []
+
+setUpInvHists(histSIPAr,isSignalAr,sumQCD,isQCDAr,invHistsAr,nameAr,intSIPAr,drawInvAr,QCDSumInt,QCDSumHist,cutName)
+
+"""
+
+for j in range(len(histSIPAr)):
+    if not isSignalAr[j] and (not sumQCD or not isQCDAr[j]):
+        invHistsAr.append(histSIPAr[j].Clone("{0}Inv".format(nameAr[j])))
+        if intSIPAr[j]:
+            drawInvAr.append(True)
+
+            tmpNBins = histSIPAr[j].GetNbinsX()
+            #tmpBinAr = []
+            tmpBinErrorAr = []
+            for i in range(tmpNBins):
+                tmpBinErrorAr.append(histSIPAr[j].GetBinError(i))
+            for k in range(j):
+                if not isSignalAr[k] and (not sumQCD or not isQCDAr[k]):
+                    invHistsAr[-1].Add(histSIPAr[k])
+            for i in range(tmpNBins):
+                invHistsAr[-1].SetBinError(i,tmpBinErrorAr[i])
+        else:
+            drawInvAr.append(False)
+
+if sumQCD:
+    if QCDSumInt:
+        drawInvAr.append(True)
+        invHistsAr.append(QCDSumHist.Clone("SIPHistQCDSumInv"))
+        tmpNBins = QCDSumHist.GetNbinsX()
+        tmpBinErrorAr = []
+        for i in range(tmpNBins):
+            tmpBinErrorAr.append(QCDSumHist.GetBinError(i))
+        for k in range(j):
+            if not isSignalAr[k] and not isQCDAr[k]:
+                invHistsAr[-1].Add(histSIPAr[k])
+        for i in range(tmpNBins):
+            invHistsAr[-1].SetBinError(i,tmpBinErrorAr[i])
+    else:
+        drawInvAr.append(False)
+
+"""
+
+FoMSIPGraph = TGraph(len(SIPGraphAr),SIPXAr,SIPGraphAr)
+
+setUpStackedHistAndDrawFoMPlot(histMax,histSIPAr,histSIPStack,invHistsAr,drawInvAr,legAr,FoMSIPCan,padAr,FoMSIPGraph,SIPRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName)
+
+
+
+"""
+
+maxForRange = 1.1*histMax
+#print(histMax,maxForRange)
+histSIPAr[1].GetYaxis().SetRangeUser(0,maxForRange)
+
+histSIPStack.Draw("hist")
 makeNiceTHStack(histSIPStack,"","Events",True)
-histSIPStack.Draw("hist E")
+tmpMax = histSIPStack.GetMaximum()
+if tmpMax < histMax:
+    histSIPStack.SetMaximum(histMax)
+#histSIPStack.SetMaximum(maxForRange)
+histSIPStack.Draw("same hist")
 
-histSIPAr[1].GetYaxis().SetRangeUser(0,histMax)
-histSIPAr[1].Draw("same hist E")
+for k in range(len(invHistsAr)):
+    #if k > 1:
+    #    break
+    #invHistsAr[k].SetFillColorAlpha(0,0)
+    #invHistsAr[k].SetLineColor(0)
+    #print(k,intSIPAr[k])
+
+    if drawInvAr[k]:
+        print("passed")
+        invHistsAr[k].SetStats(0)
+        invHistsAr[k].Draw("same E1")
+
+histSIPAr[1].Draw("same hist E1")
 legAr[-1].Draw()
 
 
-FOMSIPCan.cd()
+FoMSIPCan.cd()
 
 setUpBottomPadsAr(padAr[-1])
-FOMSIPGraph = TGraph(len(SIPGraphAr),SIPXAr,SIPGraphAr)
-setUpGraphs(FOMSIPGraph,3,22,"SIP FoM Plot","SIP","S/SQRT(S+B)")
-FOMSIPGraph.GetXaxis().SetRangeUser(SIPRange[0],SIPRange[1])
-FOMSIPGraph.Draw("APL* same")
-FOMSIPCan.Update()
+FoMSIPGraph = TGraph(len(SIPGraphAr),SIPXAr,SIPGraphAr)
+setUpGraphs(FoMSIPGraph,3,22,"SIP FoM Plot","SIP","S/SQRT(S+B)")
+FoMSIPGraph.GetXaxis().SetRangeUser(SIPRange[0],SIPRange[1])
+FoMSIPGraph.Draw("APL* same")
+FoMSIPCan.Update()
 #"FP" stands for "Full Pass"
 if normalizeBackgroundsTogether:
-    FOMSIPCan.SaveAs("FOMGraph_FP_SIP_{0}_Vs_{1}_AMSFoM_WithComparisonHist_NBT_V2_{2}.png".format(signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+    FoMSIPCan.SaveAs("FoMGraph_FP_SIP_{0}_Vs_{1}_AMSFoM_WithComparisonHist_Stacked_NBT_V2_{2}.png".format(signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 else:
-    FOMSIPCan.SaveAs("FOMGraph_FP_SIP_{0}_Vs_{1}_AMSFoM_WithComparisonHist_V2_{2}.png".format(signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+    FoMSIPCan.SaveAs("FoMGraph_FP_SIP_{0}_Vs_{1}_AMSFoM_WithComparisonHist_Stacked_V2_{2}.png".format(signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+"""
+
+
+FoMSIP2Can = TCanvas("c2SIP","c2SIP",3600,2400)
+setUpNonStackedHistAndFoMPlot(FoMSIP2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histSIPAr,legAr,FoMSIPGraph,signalName,backgroundName)
+
+
+"""
+
+
+##Now making non-stacked graph
+FoMSIP2Can = TCanvas("c2SIP","c2SIP",3600,2400)
+#setUpLegend(legAr)
+setUpPadsAr(padAr,"{0}Pad".format("SIP2"))
+padAr[-1][0].Draw()
+padAr[-1][0].cd()
+
+histSIPAr[0].GetYaxis().SetRangeUser(0,histMax)
+histSIPAr[0].Draw("hist")
+
+for j in range(1,len(histSIPAr)):
+    histSIPAr[j].DrawCopy("same hist")
+legAr[-1].Draw()
+
+
+FoMSIP2Can.cd()
+
+setUpBottomPadsAr(padAr[-1])
+#FoMSIPGraph = TGraph(len(SIPGraphAr),SIPXAr,SIPGraphAr)
+#setUpGraphs(FoMSIPGraph,3,22,"SIP FoM Plot","SIP","S/SQRT(S+B)")
+#FoMSIPGraph.GetXaxis().SetRangeUser(SIPRange[0],SIPRange[1])
+FoMSIPGraph.Draw("APL same")
+FoMSIP2Can.Update()
+#"FP" stands for "Full Pass"
+if normalizeBackgroundsTogether:
+    FoMSIP2Can.SaveAs("FoMGraph_FP_SIP_{0}_Vs_{1}_AMSFoM_WithComparisonHist_NBT_V2_{2}.png".format(signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+else:
+    FoMSIP2Can.SaveAs("FoMGraph_FP_SIP_{0}_Vs_{1}_AMSFoM_WithComparisonHist_V2_{2}.png".format(signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+
+"""
