@@ -150,7 +150,8 @@ elif MGSM:
 elif ttHToBBBackground:
     saveName = "ttHToBBBackground"
     
-    crossSection = 0.6*0.584
+    #crossSection = 0.6*0.584
+    crossSection = 0.5071*0.582
     
     isBackground = True
     for fileName in ttHToBBBackgroundAr:
@@ -166,7 +167,8 @@ elif ttZJetsBackground:
 elif DYBackground:
     saveName = "DYBackground"
     
-    crossSection = 6077.22
+    #crossSection = 6077.22
+    crossSection = 5364
     
     isBackground = True
     for fileName in DYBackgroundAr:
