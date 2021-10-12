@@ -12,6 +12,9 @@ startt = time.time()
 
 
 
+
+#Extra output at end and for each file
+extraOut = False
 debug = False
 debugMin = 1000
 debugMax = 1004
@@ -50,8 +53,8 @@ nameAr = []
 isSignalAr = []
 colorAr = []
 
-saveNameAr = []
 
+saveNameAr = []
 
 if MGSM:
     #fileAr.append(TFile.Open("{0}FoMTreesFrompphzzjjQCD0SMHLOOP0QEDE5NPE0ResMasAllVer100Ev_0p999cHW100GeVIMJetCut.root".format(forCondorStr)))
@@ -322,28 +325,26 @@ fourLepInvMassCut = 100
 optLepInvMassCut = 12
 
 lepIsoCut = 0.35
+isoRange = [0,4]
+
+isoStep = (isoRange[1]-isoRange[0])/cutAmnt
+isoSignalAr = [0 for i in range(cutAmnt)] 
+isoBackgroundAr = [0 for i in range(cutAmnt)] 
 
 SIPCut = 4
-SIPRange = [0,6]
 
-SIPStep = (SIPRange[1]-SIPRange[0])/cutAmnt
-SIPSignalAr = [0 for i in range(cutAmnt)] 
-SIPBackgroundAr = [0 for i in range(cutAmnt)] 
-
-SIPEvPassGraphAr = []
+isoEvPassGraphAr = []
 for nameA in nameAr:
-    SIPEvPassGraphAr.append(array('d'))
+    isoEvPassGraphAr.append(array('d'))
 
-histSIPAr = []
-
-
+histIsoAr = []
 
 #MAIN LOOP
 for k,fileA in enumerate(fileAr):
     print("Entering file {0}".format(k))
     CTree = fileA.cutTree
-    tmpSIPCntAr = [0 for cutItr in range(cutAmnt)]
-    histSIPAr.append(TH1D("SIPHist{0}".format(nameAr[k]),"SIPHist{0}".format(nameAr[k]), binAmnt, SIPRange[0], SIPRange[1]))
+    tmpIsoCntAr = [0 for cutItr in range(cutAmnt)]
+    histIsoAr.append(TH1D("IsoHist{0}".format(nameAr[k]),"IsoHist{0}".format(nameAr[k]), binAmnt, isoRange[0], isoRange[1]))
     #LOOP OVER EVENTS IN FILE k
     for j,ev in enumerate(CTree):
         if debug:
@@ -559,79 +560,134 @@ for k,fileA in enumerate(fileAr):
                         if debug:
                             print("Z1LeadIso",Z1LeadIso,"Z1TrailingIso",Z1TrailingIso,"Z2LeadIso",Z2LeadIso,"Z2TrailingIso",Z2TrailingIso)
 
+                        #Fill with HIGHEST sum of two lepton isos
+                        """
+                        tmpIsoOne = 0
+                        tmpIsoTwo = 0
                         
-
-
-                        passIsoCut = doISOCut(Z1LeadIso,Z1TrailingIso,Z2LeadIso,Z2TrailingIso,lepIsoCut)
+                        if Z1LeadIso > Z1TrailingIso:
+                            if Z1LeadIso > Z2LeadIso:
+                                tmpIsoOne = Z1LeadIso
+                                if Z1TrailingIso > Z2LeadIso:
+                                    tmpIsoTwo = max(Z1TrailingIso,Z2TrailingIso)
+                                else:
+                                    tmpIsoTwo = max(Z2LeadIso,Z2TrailingIso)
+                            else:
+                                if Z1LeadIso > Z2TrailingIso:
+                                    Z2LeadIso = tmpIsoOne
+                                    Z1LeadIso = tmpIsoTwo
+                                else:
+                                    Z2LeadIso = tmpIsoOne
+                                    Z2TrailingIso = tmpIsoTwo
+                        else:
+                            if Z1LeadIso > Z2LeadIso:
+                                tmpIsoOne = Z1TrailingIso
+                                tmpIsoTwo = max(Z1LeadIso,Z2TrailingIso)
+                        """
                         
-                        if passIsoCut:
-                            if debug:
-                                print("passed iso cut yay")
-                            #passesIsoCutCtr += 1
-                            if not Z1IsMuon:
-                                Z1LeadSIP = ev.eSIP[elecCandIndAr[Z1LeadItr]]
-                                Z1TrailingSIP = ev.eSIP[elecCandIndAr[Z1TrailingItr]]
-                            else:
-                                Z1LeadSIP = ev.mSIP[muonCandIndAr[Z1LeadItr]]
-                                Z1TrailingSIP = ev.mSIP[muonCandIndAr[Z1TrailingItr]]
-                            if not Z2IsMuon:
-                                Z2LeadSIP = ev.eSIP[elecPassesZ2CutsFinalAr[tmpZ2Ind][0]]
-                                Z2TrailingSIP = ev.eSIP[elecPassesZ2CutsFinalAr[tmpZ2Ind][1]]
-                            else:
-                                Z2LeadSIP = ev.mSIP[muonPassesZ2CutsFinalAr[tmpZ2Ind][0]]
-                                Z2TrailingSIP = ev.mSIP[muonPassesZ2CutsFinalAr[tmpZ2Ind][1]]
-                            if debug:
-                                print("Z1LeadSIP",Z1LeadSIP,"Z1TrailingSIP",Z1TrailingSIP,"Z2LeadSIP",Z2LeadSIP,"Z2TrailingSIP",Z2TrailingSIP)
-                            #Fill with HIGHEST SIP
-                            tmpTopSIP = max(max(Z1LeadSIP,Z1TrailingSIP),max(Z2LeadSIP,Z2TrailingSIP))
-                            histSIPAr[-1].Fill(tmpTopSIP)
-                            
-                            #Loop here
-                            
-                            
+                        tmpIsoOne = max(Z1LeadIso,Z1TrailingIso)
+                        tmpIsoTwo = max(Z2LeadIso,Z2TrailingIso)
+                        tmpIsoOneFinal = max(tmpIsoOne,tmpIsoTwo)
+                        tmpIsoThree = min(Z1LeadIso,Z1TrailingIso)
+                        tmpIsoFour = min(Z2LeadIso,Z2TrailingIso)
+                        tmpIsoFive = max(tmpIsoThree,tmpIsoFour)
+                        tmpIsoSix = min(tmpIsoOne,tmpIsoTwo)
+                        tmpIsoTwoFinal = max(tmpIsoFive,tmpIsoSix)
 
-                            for SIPCutItr in range(cutAmnt):
-                                tmpSIPCut = SIPRange[0]+(SIPCutItr*SIPStep)
-                                passSIPCut = doSIPCut(Z1LeadSIP,Z1TrailingSIP,Z2LeadSIP,Z2TrailingSIP,tmpSIPCut)
+                        tmpIsoSum = tmpIsoOneFinal + tmpIsoTwoFinal
+                        histIsoAr[-1].Fill(tmpIsoSum)
+                        
+                        for IsoCutItr in range(cutAmnt):
+                            passIsoCut = False
+                            tmpIsoCut = isoRange[0]+(IsoCutItr*isoStep)
+                            if tmpIsoSum < tmpIsoCut:
+                                passIsoCut = True
+                            #passIsoCut = doIsoCut(Z1LeadIso,Z1TrailingIso,Z2LeadIso,Z2TrailingIso,tmpIsoCut)
+
+                            
+                            if passIsoCut:
+                                if debug:
+                                    print("passed iso cut yay")
+                                #passesIsoCutCtr += 1
+                                if not Z1IsMuon:
+                                    Z1LeadSIP = ev.eSIP[elecCandIndAr[Z1LeadItr]]
+                                    Z1TrailingSIP = ev.eSIP[elecCandIndAr[Z1TrailingItr]]
+                                else:
+                                    Z1LeadSIP = ev.mSIP[muonCandIndAr[Z1LeadItr]]
+                                    Z1TrailingSIP = ev.mSIP[muonCandIndAr[Z1TrailingItr]]
+                                if not Z2IsMuon:
+                                    Z2LeadSIP = ev.eSIP[elecPassesZ2CutsFinalAr[tmpZ2Ind][0]]
+                                    Z2TrailingSIP = ev.eSIP[elecPassesZ2CutsFinalAr[tmpZ2Ind][1]]
+                                else:
+                                    Z2LeadSIP = ev.mSIP[muonPassesZ2CutsFinalAr[tmpZ2Ind][0]]
+                                    Z2TrailingSIP = ev.mSIP[muonPassesZ2CutsFinalAr[tmpZ2Ind][1]]
+                                if debug:
+                                    print("Z1LeadSIP",Z1LeadSIP,"Z1TrailingSIP",Z1TrailingSIP,"Z2LeadSIP",Z2LeadSIP,"Z2TrailingSIP",Z2TrailingSIP)
+                                #Fill with HIGHEST SIP
+                                
+                                #histIsoAr[-1].Fill(Z1LeadSIP)
+                                #histIsoAr[-1].Fill(Z1TrailingSIP)
+                                #histIsoAr[-1].Fill(Z2LeadSIP)
+                                #histIsoAr[-1].Fill(Z2TrailingSIP)
+                                #Loop here
+                                
+                                
+                                """
+                                for SIPCutItr in range(cutAmnt):
+                                    tmpSIPCut = SIPRange[0]+(SIPCutItr*SIPStep)
+                                    passSIPCut = doSIPCut(Z1LeadSIP,Z1TrailingSIP,Z2LeadSIP,Z2TrailingSIP,tmpSIPCut)
+                                    if passSIPCut:
+                                        tmpSIPCntAr[SIPCutItr] += 1
+                                        #if isSignalAr[k]:
+                                        #    SIPSignalAr[SIPCutItr] += 1
+                                        #else:
+                                        #    SIPBackgroundAr[SIPCutItr] += 1
+                                """
+                                passSIPCut = doSIPCut(Z1LeadSIP,Z1TrailingSIP,Z2LeadSIP,Z2TrailingSIP,SIPCut)
                                 if passSIPCut:
-                                    tmpSIPCntAr[SIPCutItr] += 1
-                                    
-
-
+                                    if debug:
+                                        print("passed SIP cut yay")
+                                    tmpIsoCntAr[IsoCutItr] += 1
+                            
+                            
     for c in range(cutAmnt):
-        SIPEvPassGraphAr[k].append(tmpSIPCntAr[c])
+        isoEvPassGraphAr[k].append(tmpIsoCntAr[c])
         if isSignalAr[k]:
-            SIPSignalAr[c] += tmpSIPCntAr[c]*weightsAr[k]
+            isoSignalAr[c] += tmpIsoCntAr[c]*weightsAr[k]
         else:
-            SIPBackgroundAr[c] += tmpSIPCntAr[c]*weightsAr[k]
+            isoBackgroundAr[c] += tmpIsoCntAr[c]*weightsAr[k]
+    if extraOut:
+        print(nameAr[k])
+        print("isoSignalAr",isoSignalAr)
+        print("isoBackgroundAr",isoBackgroundAr)
 #print(passesCandCutsCtr)
 #print(passesZ1CutsCtr)
 #print(passesZ2CutsCtr)
 #print(passesIsoCutCtr)
 #print(passesAllCutsCtr)
 #print(allPassAr)
+if extraOut:
+    print(isoSignalAr)
+    print(isoBackgroundAr)
 
-#print(SIPSignalAr)
-#print(SIPBackgroundAr)
-
-SIPGraphAr = array('d')
-SIPXAr = array('d')
+isoGraphAr = array('d')
+isoXAr = array('d')
 
 #Calculate FoM for each point
 
-FoMCalc(SIPSignalAr,SIPBackgroundAr,SIPGraphAr,SIPXAr,cutAmnt,SIPRange,SIPStep)
+FoMCalc(isoSignalAr,isoBackgroundAr,isoGraphAr,isoXAr,cutAmnt,isoRange,isoStep)
 
-
-evPassSIPCanAr = []
-evPassSIPGraphAr = []
+evPassIsoCanAr = []
+evPassIsoGraphAr = []
 print("Done.","time:",time.time()-startt)
 
 #make evpass graphs
 
-cutName = "SIP"
+cutName = "Iso"
 
 if not skipEvPassGraphs:
-    makeEvPassGraphs(nameAr,evPassSIPCanAr,SIPEvPassGraphAr,evPassSIPGraphAr,SIPXAr,cutName)
+    makeEvPassGraphs(nameAr,evPassIsoCanAr,isoEvPassGraphAr,evPassIsoGraphAr,isoXAr,cutName)
+
 
 
 
@@ -645,49 +701,34 @@ for k,fileA in enumerate(fileAr):
     if not sumQCD or not isQCDAr[k]:
         if isSignalAr[k]:
             signalName += "_"+saveNameAr[k]
-
         else:
             backgroundName += "_"+saveNameAr[k]
 if sumQCD:
-    
     backgroundName += "_QCDSum"
-    QCDSumHist = TH1D("SIPHistQCDSum","SIPHistQCDSum", binAmnt, SIPRange[0], SIPRange[1])
-    for k in range(len(histSIPAr)):
+    QCDSumHist = TH1D("isoHistQCDSum","isoHistQCDSum", binAmnt, isoRange[0], isoRange[1])
+    for k in range(len(histIsoAr)):
 
         if isQCDAr[k]:
-            histSIPAr[k].Sumw2()
+            histIsoAr[k].Sumw2()
             QCDSumHist.Sumw2()
-            QCDSumHist.Add(histSIPAr[k],weightsAr[k])
+            QCDSumHist.Add(histIsoAr[k],weightsAr[k])
 else:
     QCDSumHist = 0
 
-
-
-FoMSIPCan = TCanvas("c1SIP","c1SIP",3600,2400)
+FoMIsoCan = TCanvas("c1Iso","c1Iso",3600,2400)
 setUpLegend(legAr)
-setUpPadsAr(padAr,"{0}Pad".format("SIP"))
+setUpPadsAr(padAr,"{0}Pad".format("Iso"))
 padAr[-1][0].Draw()
 padAr[-1][0].cd()
 #Make top plot
+intIsoAr = []
 
-
-#First set histogram elements (color, etc)
-intSIPAr = []
-
-
-
-backgroundIntSum,QCDSumInt = setHistoElements(nameAr,colorAr,sumQCD,QCDSumHist,isQCDAr,histSIPAr,isSignalAr,cutName,normalizeBackgroundsTogether,weightsAr,intSIPAr)
-
-
-
-
+backgroundIntSum,QCDSumInt = setHistoElements(nameAr,colorAr,sumQCD,QCDSumHist,isQCDAr,histIsoAr,isSignalAr,cutName,normalizeBackgroundsTogether,weightsAr,intIsoAr)
 if variableRebin:
-    doVariableRebinning(histSIPAr,isSignalAr,variableRebinVar,binAmnt,SIPRange,sumQCD,nameAr,QCDSumHist,cutName,weightsAr)
+    doVariableRebinning(histIsoAr,isSignalAr,variableRebinVar,binAmnt,isoRange,sumQCD,nameAr,QCDSumHist,cutName,weightsAr)
 
 
-
-
-histMax = normalizeHists(histSIPAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,backgroundIntSum,isSignalAr,weightsAr,legAr,nameAr,intSIPAr)
+histMax = normalizeHists(histIsoAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,backgroundIntSum,isSignalAr,weightsAr,legAr,nameAr,intIsoAr)
 
 
 
@@ -695,22 +736,22 @@ if sumQCD:
     if QCDSumInt:
         histMax = scaleQCDHist(QCDSumInt,QCDSumHist,histMax,legAr)
 
+histIsoStack = THStack("hist{0}Stack".format(cutName),"Events Passing All Cuts Vs {0} Cut Value".format(cutName))
 
-histSIPStack = THStack("hist{0}Stack".format(cutName),"Events Passing All Cuts Vs {0} Cut Value".format(cutName))
-
-maxInt = addHistsToStack(histSIPAr,isSignalAr,sumQCD,isQCDAr,histSIPStack,QCDSumHist,normalizeBackgroundsTogether,backgroundIntSum)
+maxInt = addHistsToStack(histIsoAr,isSignalAr,sumQCD,isQCDAr,histIsoStack,QCDSumHist,normalizeBackgroundsTogether,backgroundIntSum)
 
 #Loop over all hists that went into the THStack to get center and length of error bars for invisible hist
 
 invHistsAr = []
 drawInvAr = []
 
-setUpInvHists(histSIPAr,isSignalAr,sumQCD,isQCDAr,invHistsAr,nameAr,intSIPAr,drawInvAr,QCDSumInt,QCDSumHist,cutName)
+setUpInvHists(histIsoAr,isSignalAr,sumQCD,isQCDAr,invHistsAr,nameAr,intIsoAr,drawInvAr,QCDSumInt,QCDSumHist,cutName)
 
-FoMSIPGraph = TGraph(len(SIPGraphAr),SIPXAr,SIPGraphAr)
+FoMIsoGraph = TGraph(len(isoGraphAr),isoXAr,isoGraphAr)
 
-setUpStackedHistAndDrawFoMPlot(histMax,histSIPAr,histSIPStack,invHistsAr,drawInvAr,legAr,FoMSIPCan,padAr,FoMSIPGraph,SIPRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName)
+setUpStackedHistAndDrawFoMPlot(histMax,histIsoAr,histIsoStack,invHistsAr,drawInvAr,legAr,FoMIsoCan,padAr,FoMIsoGraph,isoRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName)
 
 
-FoMSIP2Can = TCanvas("c2SIP","c2SIP",3600,2400)
-setUpNonStackedHistAndFoMPlot(FoMSIP2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histSIPAr,legAr,FoMSIPGraph,signalName,backgroundName)
+FoMIso2Can = TCanvas("c2Iso","c2Iso",3600,2400)
+setUpNonStackedHistAndFoMPlot(FoMIso2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histIsoAr,legAr,FoMIsoGraph,signalName,backgroundName)
+
