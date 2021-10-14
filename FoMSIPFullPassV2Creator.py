@@ -29,8 +29,8 @@ isQCDAr = []
 
 MGSM = True
 MGEFT = True
-ttHToBBBackground = True
-ttZJetsBackground = True
+ttHToBBBackground = False
+ttZJetsBackground = False
 DYBackground = False
 QCDPT170to300Background = True
 QCDPT300to470Background = False

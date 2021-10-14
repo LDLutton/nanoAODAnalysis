@@ -681,3 +681,231 @@ def setUpGraphs(gGraph,markerStyle,lineColor,gTitle,xTitle,yTitle):
     gGraph.GetYaxis().SetTitleFont(42)
     gGraph.GetYaxis().SetTitleOffset(1.2)
     gGraph.GetXaxis().SetTitleOffset(0.9)
+
+def doFullPass(ev,neLep,nmLep,ePtCut,eEtaCut,mPtCut,mEtaCut,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,fourLepInvMassCut,optLepInvMassCut,lepIsoCut,SIPCut,debug=False):
+    evPass = False
+    enoughElecCands = False
+    negElecCands = 0
+    posElecCands = 0
+    totElecCands = 0
+    elecCandIndAr = []
+    elecCandVecAr = []
+    elecCandChargeAr = []
+    eHLT = 0
+    mHLT = 0
+    emHLT = 0
+    
+    if neLep:
+        eHLT = ev.eHLT
+        emHLT = ev.emHLT
+        if eHLT or emHLT:
+            doeCandCut(ev,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut)
+            for elecCandCharge in elecCandChargeAr:
+                if elecCandCharge == -1:
+                    negElecCands += 1
+                else:
+                    posElecCands += 1
+            totElecCands = min(negElecCands,posElecCands)
+            if totElecCands >= 1:
+                enoughElecCands = True
+
+
+    enoughMuonCands = False
+    negMuonCands = 0
+    posMuonCands = 0
+    totMuonCands = 0
+    muonCandIndAr = []
+    muonCandVecAr = []
+    muonCandChargeAr = []
+    if debug:
+        print("--------------------------------------------")
+        print("ev.evInd",ev.evInd,"neLep",neLep)
+        for tmpItr in range(neLep):
+            print("tmpItr",tmpItr,"ev.ePt[tmpItr]",ev.ePt[tmpItr],"ev.eEta[tmpItr]",ev.eEta[tmpItr],"ev.eCharge[tmpItr]",ev.eCharge[tmpItr])
+    if nmLep:
+        mHLT = ev.mHLT
+        emHLT = ev.emHLT
+        if mHLT or emHLT:
+            domCandCut(ev,nmLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut)
+            for muonCandCharge in muonCandChargeAr:
+                if muonCandCharge == -1:
+                    negMuonCands += 1
+                else:
+                    posMuonCands += 1
+            totMuonCands = min(negMuonCands,posMuonCands)
+            if totMuonCands >= 1:
+                enoughMuonCands = True
+    enoughLepCands = False
+    if totElecCands+totMuonCands >= 2:
+        enoughLepCands = True
+    if debug:
+        print("eHLT",eHLT,"negElecCands",negElecCands,"posElecCands",posElecCands,"totElecCands",totElecCands)
+        print("nmLep",nmLep,"mHLT",mHLT,"negMuonCands",negMuonCands,"posMuonCands",posMuonCands,"totMuonCands",totMuonCands)
+        print("emHLT",emHLT,"enoughLepCands",enoughLepCands)
+    difFromZMassOne = 1000
+    Z1LeadItr = -1
+    Z1TrailingItr = -1
+    Z1LeadPt = 0
+    Z1TrailingPt = 0
+    Z1IsMuon = False
+    Z1LeadVec = 0
+    Z1TrailingVec = 0
+    Z1LeadCharge = 0
+    Z1TrailingCharge = 0
+    if enoughLepCands: #Check there are enough lep cands after candidate cuts
+        #passesCandCutsCtr += 1
+        elecPassesZ2CutsAr = []
+        if enoughElecCands: #If enough elec cands, run Z1 cuts
+            Z1LeadItr,Z1TrailingItr,Z1LeadPt,Z1TrailingPt,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,Z1IsMuon,difFromZMassOne = doeZ1Cut(ev,elecCandIndAr,elecCandVecAr,elecCandChargeAr,elecPassesZ2CutsAr,Z1IsMuon,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,Z1LeadPt,Z1TrailingPt,Z1LeadItr,Z1TrailingItr,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,difFromZMassOne,debug)
+        muonPassesZ2CutsAr = []
+        if enoughMuonCands: #If enough muon cands, run Z1 cuts
+                
+            Z1LeadItr,Z1TrailingItr,Z1LeadPt,Z1TrailingPt,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,Z1IsMuon,difFromZMassOne = domZ1Cut(ev,muonCandIndAr,muonCandVecAr,muonCandChargeAr,muonPassesZ2CutsAr,Z1IsMuon,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,Z1LeadPt,Z1TrailingPt,Z1LeadItr,Z1TrailingItr,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,difFromZMassOne,debug)
+        if debug:
+            print("Z1LeadItr",Z1LeadItr,"Z1TrailingItr",Z1TrailingItr,"Z1LeadPt",Z1LeadPt,"Z1TrailingPt",Z1TrailingPt,"Z1LeadVec",Z1LeadVec,"Z1TrailingVec",Z1TrailingVec,"Z1LeadCharge",Z1LeadCharge,"Z1TrailingCharge",Z1TrailingCharge,"Z1IsMuon",Z1IsMuon,"difFromZMassOne",difFromZMassOne)
+        if Z1LeadItr >= 0: #If Z1 found
+            #passesZ1CutsCtr += 1
+            if debug:
+                print("passed Z1 cut. checking for enough Z2 now")
+            if not Z1IsMuon: #If Z1 is electron, then remove any instances of Z1 particles from electron Z2 candidate pairs
+                elecPassesZ2CutsFinalAr = []
+                eZ2VecPairAr = []
+                eZ2PtPairAr = []
+                eZ2ChargePairAr = []
+                for elecPassesZ2CutsPair in elecPassesZ2CutsAr: #Loop through elec Z2 cand pairs to fill all arrays
+                    if not Z1LeadItr in elecPassesZ2CutsPair and not Z1TrailingItr in elecPassesZ2CutsPair:
+                        elecPassesZ2CutsFinalAr.append(elecPassesZ2CutsPair)
+                        eZ2ChargePairAr.append([elecCandChargeAr[elecPassesZ2CutsPair[0]],elecCandChargeAr[elecPassesZ2CutsPair[1]]])
+                        tmpVecOne = elecCandVecAr[elecPassesZ2CutsPair[0]]
+                        tmpVecTwo = elecCandVecAr[elecPassesZ2CutsPair[1]]
+                        eZ2PtPairAr.append([tmpVecOne.Pt(),tmpVecTwo.Pt()])
+                        eZ2VecPairAr.append([tmpVecOne,tmpVecTwo])
+                        eZ2ChargePairAr.append([elecCandChargeAr[elecPassesZ2CutsPair[0]],elecCandChargeAr[elecPassesZ2CutsPair[1]]])
+
+                muonPassesZ2CutsFinalAr = muonPassesZ2CutsAr
+                mZ2VecPairAr = []
+                mZ2PtPairAr = []
+                mZ2ChargePairAr = []
+                for muonPassesZ2CutsPair in muonPassesZ2CutsAr: #Loop through muon Z2 cand pairs to fill vector, pt, and charge arrays
+                    mZ2ChargePairAr.append([muonCandChargeAr[muonPassesZ2CutsPair[0]],muonCandChargeAr[muonPassesZ2CutsPair[1]]])
+                    tmpVecOne = muonCandVecAr[muonPassesZ2CutsPair[0]]
+                    tmpVecTwo = muonCandVecAr[muonPassesZ2CutsPair[1]]
+                    mZ2PtPairAr.append([tmpVecOne.Pt(),tmpVecTwo.Pt()])
+                    mZ2VecPairAr.append([tmpVecOne,tmpVecTwo])
+                    mZ2ChargePairAr.append([muonCandChargeAr[muonPassesZ2CutsPair[0]],muonCandChargeAr[muonPassesZ2CutsPair[1]]])
+
+            else: #If Z1 is muon, then remove any instances of Z1 particles from muon Z2 candidate pairs
+                muonPassesZ2CutsFinalAr = []
+                mZ2VecPairAr = []
+                mZ2PtPairAr = []
+                mZ2ChargePairAr = []
+                for muonPassesZ2CutsPair in muonPassesZ2CutsAr: #Loop through muon Z2 cand pairs to fill all arrays
+                    if not Z1LeadItr in muonPassesZ2CutsPair and not Z1TrailingItr in muonPassesZ2CutsPair:
+                        muonPassesZ2CutsFinalAr.append(muonPassesZ2CutsPair)
+                        mZ2ChargePairAr.append([muonCandChargeAr[muonPassesZ2CutsPair[0]],muonCandChargeAr[muonPassesZ2CutsPair[1]]])
+                        tmpVecOne = muonCandVecAr[muonPassesZ2CutsPair[0]]
+                        tmpVecTwo = muonCandVecAr[muonPassesZ2CutsPair[1]]
+                        mZ2PtPairAr.append([tmpVecOne.Pt(),tmpVecTwo.Pt()])
+                        mZ2VecPairAr.append([tmpVecOne,tmpVecTwo])
+                        mZ2ChargePairAr.append([muonCandChargeAr[muonPassesZ2CutsPair[0]],muonCandChargeAr[muonPassesZ2CutsPair[1]]])
+
+                elecPassesZ2CutsFinalAr = elecPassesZ2CutsAr
+                eZ2VecPairAr = []
+                eZ2PtPairAr = []
+                eZ2ChargePairAr = []
+                for elecPassesZ2CutsPair in elecPassesZ2CutsAr: #Loop through elec Z2 cand pairs to fill vector, pt, and charge arrays
+                    eZ2ChargePairAr.append([elecCandChargeAr[elecPassesZ2CutsPair[0]],elecCandChargeAr[elecPassesZ2CutsPair[1]]])
+                    tmpVecOne = elecCandVecAr[elecPassesZ2CutsPair[0]]
+                    tmpVecTwo = elecCandVecAr[elecPassesZ2CutsPair[1]]
+                    eZ2PtPairAr.append([tmpVecOne.Pt(),tmpVecTwo.Pt()])
+                    eZ2VecPairAr.append([tmpVecOne,tmpVecTwo])
+                    eZ2ChargePairAr.append([elecCandChargeAr[elecPassesZ2CutsPair[0]],elecCandChargeAr[elecPassesZ2CutsPair[1]]])
+
+            if debug:
+                #for elecCandInd in elecCandIndAr:
+                print("elecCandIndAr",elecCandIndAr)
+                print("elecCandChargeAr",elecCandChargeAr)
+                print("elecCandVecAr",elecCandVecAr)
+                for elecCandVecItrOne,elecCandVecOne in enumerate(elecCandVecAr[:-1]):
+                    print("elecCandVecItrOne",elecCandVecItrOne,"elecCandVecOne",elecCandVecOne)
+                    for elecCandVecItrTwo,elecCandVecTwo in enumerate(elecCandVecAr[elecCandVecItrOne+1:]):
+                        print("elecCandVecItrTwo",elecCandVecItrOne+ 1+ elecCandVecItrTwo,"elecCandVecTwo",elecCandVecTwo)
+                        tmpVecSum = elecCandVecOne +elecCandVecTwo
+                        print(tmpVecSum)
+                        print(tmpVecSum.M())
+                print("elecPassesZ2CutsAr",elecPassesZ2CutsAr)
+                print("elecPassesZ2CutsFinalAr",elecPassesZ2CutsFinalAr)
+                print("muonCandIndAr",muonCandIndAr)
+                print("muonCandChargeAr",muonCandChargeAr)
+                print("muonCandVecAr",muonCandVecAr)
+                for muonCandVecItrOne,muonCandVecOne in enumerate(muonCandVecAr[:-1]):
+                    print("muonCandVecItrOne",muonCandVecItrOne,"muonCandVecOne",muonCandVecOne)
+                    for muonCandVecItrTwo,muonCandVecTwo in enumerate(muonCandVecAr[muonCandVecItrOne+1:]):
+                        print("muonCandVecItrTwo",muonCandVecItrOne+ 1+ muonCandVecItrTwo,"muonCandVecTwo",muonCandVecTwo)
+                        tmpVecSum = muonCandVecOne +muonCandVecTwo
+                        print(tmpVecSum)
+                        print(tmpVecSum.M())
+                print("muonPassesZ2CutsAr",muonPassesZ2CutsAr)
+                print("muonPassesZ2CutsFinalAr",muonPassesZ2CutsFinalAr)
+            if elecPassesZ2CutsFinalAr or muonPassesZ2CutsFinalAr:
+                if debug:
+                    print("passed to Z2 Cut")
+                tmpZ2Ind = -1
+                Z2IsMuon = False
+                tmpTopZ2LeadPt = 0
+                tmpTopZ2TrailingPt = 0
+                tmpZ1Vec = Z1LeadVec+Z1TrailingVec
+
+                
+                if elecPassesZ2CutsFinalAr:
+                    tmpZ2Ind,Z2IsMuon,tmpTopZ2LeadPt,tmpTopZ2TrailingPt = doeZ2Cut(ev,Z1LeadVec,Z1TrailingVec,tmpZ1Vec,Z1LeadCharge,Z1TrailingCharge,Z1IsMuon,eZ2VecPairAr,eZ2PtPairAr,eZ2ChargePairAr,tmpZ2Ind,Z2IsMuon,tmpTopZ2LeadPt,tmpTopZ2TrailingPt,fourLepInvMassCut,optLepInvMassCut)
+
+                if muonPassesZ2CutsFinalAr:
+                    tmpZ2Ind,Z2IsMuon,tmpTopZ2LeadPt,tmpTopZ2TrailingPt = domZ2Cut(ev,Z1LeadVec,Z1TrailingVec,tmpZ1Vec,Z1LeadCharge,Z1TrailingCharge,Z1IsMuon,mZ2VecPairAr,mZ2PtPairAr,mZ2ChargePairAr,tmpZ2Ind,Z2IsMuon,tmpTopZ2LeadPt,tmpTopZ2TrailingPt,fourLepInvMassCut,optLepInvMassCut)
+                if debug:
+                    print("tmpZ2Ind",tmpZ2Ind,"Z2IsMuon",Z2IsMuon,"tmpTopZ2LeadPt",tmpTopZ2LeadPt,"tmpTopZ2TrailingPt",tmpTopZ2TrailingPt) 
+                if tmpZ2Ind >= 0: #Passed Z2 Cut
+                    if debug:
+                        print("passed Z2 cut")
+                    if not Z1IsMuon:
+                        Z1LeadIso = ev.eIso[elecCandIndAr[Z1LeadItr]]
+                        Z1TrailingIso = ev.eIso[elecCandIndAr[Z1TrailingItr]]
+                    else:
+                        Z1LeadIso = ev.mIso[muonCandIndAr[Z1LeadItr]]
+                        Z1TrailingIso = ev.mIso[muonCandIndAr[Z1TrailingItr]]
+                    if not Z2IsMuon:
+                        Z2LeadIso = ev.eIso[elecPassesZ2CutsFinalAr[tmpZ2Ind][0]]
+                        Z2TrailingIso = ev.eIso[elecPassesZ2CutsFinalAr[tmpZ2Ind][1]]
+                    else:
+                        Z2LeadIso = ev.mIso[muonPassesZ2CutsFinalAr[tmpZ2Ind][0]]
+                        Z2TrailingIso = ev.mIso[muonPassesZ2CutsFinalAr[tmpZ2Ind][1]]
+                    if debug:
+                        print("Z1LeadIso",Z1LeadIso,"Z1TrailingIso",Z1TrailingIso,"Z2LeadIso",Z2LeadIso,"Z2TrailingIso",Z2TrailingIso)
+
+                    
+
+
+                    passIsoCut = doISOCut(Z1LeadIso,Z1TrailingIso,Z2LeadIso,Z2TrailingIso,lepIsoCut)
+                        
+                    if passIsoCut:
+                        if debug:
+                            print("passed iso cut yay")
+                        if not Z1IsMuon:
+                            Z1LeadSIP = ev.eSIP[elecCandIndAr[Z1LeadItr]]
+                            Z1TrailingSIP = ev.eSIP[elecCandIndAr[Z1TrailingItr]]
+                        else:
+                            Z1LeadSIP = ev.mSIP[muonCandIndAr[Z1LeadItr]]
+                            Z1TrailingSIP = ev.mSIP[muonCandIndAr[Z1TrailingItr]]
+                        if not Z2IsMuon:
+                            Z2LeadSIP = ev.eSIP[elecPassesZ2CutsFinalAr[tmpZ2Ind][0]]
+                            Z2TrailingSIP = ev.eSIP[elecPassesZ2CutsFinalAr[tmpZ2Ind][1]]
+                        else:
+                            Z2LeadSIP = ev.mSIP[muonPassesZ2CutsFinalAr[tmpZ2Ind][0]]
+                            Z2TrailingSIP = ev.mSIP[muonPassesZ2CutsFinalAr[tmpZ2Ind][1]]
+                        if debug:
+                            print("Z1LeadSIP",Z1LeadSIP,"Z1TrailingSIP",Z1TrailingSIP,"Z2LeadSIP",Z2LeadSIP,"Z2TrailingSIP",Z2TrailingSIP)
+                        passSIPCut = doSIPCut(Z1LeadSIP,Z1TrailingSIP,Z2LeadSIP,Z2TrailingSIP,SIPCut)
+                        if passSIPCut:
+                            evPass = True
+    return evPass
+        

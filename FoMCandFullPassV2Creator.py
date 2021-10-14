@@ -385,25 +385,6 @@ histeEtaAr = []
 histmPtAr = []
 histmEtaAr = []
 
-def setUpGraphs(gGraph,markerStyle,lineColor,gTitle,xTitle,yTitle):
-    #gGraph.SetMarkerStyle(markerStyle)
-    gGraph.SetTitle(gTitle)
-    
-    gGraph.GetXaxis().SetTitle(xTitle)
-    gGraph.GetXaxis().CenterTitle()
-    gGraph.GetYaxis().SetTitle(yTitle)
-    gGraph.GetYaxis().CenterTitle()
-    #gGraph.SetLineColor(lineColor)
-    gGraph.GetXaxis().SetLabelFont(42)
-    gGraph.GetXaxis().SetLabelSize(0.035)
-    gGraph.GetXaxis().SetTitleFont(42)
-    gGraph.GetYaxis().SetLabelFont(42)
-    gGraph.GetYaxis().SetLabelSize(0.035)
-    gGraph.GetYaxis().SetTitleFont(42)
-    gGraph.GetYaxis().SetTitleOffset(1.2)
-    gGraph.GetXaxis().SetTitleOffset(0.9)
-
-
 #fileAr.append(TFile.Open("FoMTreesFrompphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev_0p999cHW100GeVIMJetCut_InputTrimmed_FullPass.root"))
 #isSignalAr.append(True)
 #fileAr.append(TFile.Open("FoMTreesFrompphzzjjQCD0SMHLOOP0QEDE5NPE0ResMasAllVer100Ev_0p999cHW100GeVIMJetCut_InputTrimmed_FullPass.root"))
@@ -949,6 +930,12 @@ for k,fileA in enumerate(fileAr):
                                             if debug:
                                                 print("passed SIP cut yay")
                                             tmpeEtaCntAr[eEtaCutItr] += 1
+        else:
+            passAnyway = doFullPass(ev,neLep,nmLep,ePtCut,eEtaCut,mPtCut,mEtaCut,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,fourLepInvMassCut,optLepInvMassCut,lepIsoCut,SIPCut)
+            if passAnyway:
+                for eCutItr in range(cutAmnt):
+                    tmpePtCntAr[eCutItr] += 1
+                    tmpeEtaCntAr[eCutItr] += 1
         if nmLep:
             enoughElecCands = False
             negElecCands = 0
@@ -959,7 +946,7 @@ for k,fileA in enumerate(fileAr):
             elecCandChargeAr = []
 
             if neLep:
-                eHLT = ev.mHLT
+                eHLT = ev.eHLT
                 emHLT = ev.emHLT
                 if eHLT or emHLT:
                     doeCandCut(ev,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut)
@@ -974,14 +961,14 @@ for k,fileA in enumerate(fileAr):
             #Now fill histogram with mPt and mEta based on whether or not the remaining muons could make this event qualify if it doesn't yet
             tmpMuonPos = 0
             tmpMuonNeg = 0
-            if eHLT or emHLT:
-                for muonItr in range(neLep):
-                    if ev.eCharge[muonItr] == 1:
+            if mHLT or emHLT:
+                for muonItr in range(nmLep):
+                    if ev.mCharge[muonItr] == 1:
                         tmpMuonPos += 1
                     else:
                         tmpMuonNeg += 1
             tmpTotMuonCands = min(tmpMuonNeg,tmpMuonPos)
-            if tmpTotMuonCands + totMuonCands >= 2:
+            if tmpTotMuonCands + totElecCands >= 2:
                 #Fill histos if any muon pairs possible
                 if tmpTotMuonCands:
                     for muonItr in range(nmLep):
@@ -1233,7 +1220,7 @@ for k,fileA in enumerate(fileAr):
                     muonCandVecAr = []
                     muonCandChargeAr = []
                     
-                    if eHLT or emHLT:
+                    if mHLT or emHLT:
                         domCandCut(ev,nmLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,tmpmEtaCut)
                         for muonCandCharge in muonCandChargeAr:
                             if muonCandCharge == -1:
@@ -1452,6 +1439,12 @@ for k,fileA in enumerate(fileAr):
                                             if debug:
                                                 print("passed SIP cut yay")
                                             tmpmEtaCntAr[mEtaCutItr] += 1
+        else:
+            passAnyway = doFullPass(ev,neLep,nmLep,ePtCut,eEtaCut,mPtCut,mEtaCut,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,fourLepInvMassCut,optLepInvMassCut,lepIsoCut,SIPCut)
+            if passAnyway:
+                for mCutItr in range(cutAmnt):
+                    tmpmPtCntAr[mCutItr] += 1
+                    tmpmEtaCntAr[mCutItr] += 1
                 
                                 
                             
