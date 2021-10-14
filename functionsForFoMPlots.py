@@ -10,6 +10,22 @@ ZMass = 91.1876
 
 today = datetime.datetime.today()
 
+def find2ndToLast(a,b,c,d):
+    abMin = min(a,b)
+    cdMin = min(c,d)
+    abMax = max(a,b)
+    cdMax = max(c,d)
+    if abMin > cdMin:
+        if abMin > cdMax:
+            return cdMax
+        else:
+            return abMin
+    else:
+        if cdMin > abMax:
+            return abMax
+        else:
+            return cdMin
+
 def makeNiceTHStack(histo,xTitle,yTitle,noX=True):
 
   if noX:
@@ -239,168 +255,90 @@ def domZ1Cut(ev,muonCandIndAr,muonCandVecAr,muonCandChargeAr,muonPassesZ2CutsAr,
 
 def doeZ2Cut(ev,Z1LeadVec,Z1TrailingVec,tmpZ1Vec,Z1LeadCharge,Z1TrailingCharge,Z1IsMuon,eZ2VecPairAr,eZ2PtPairAr,eZ2ChargePairAr,tmpZ2Ind,Z2IsMuon,tmpTopZ2LeadPt,tmpTopZ2TrailingPt,fourLepInvMassCut,optLepInvMassCut):
     #Electrons first
+    tmpZ1Vec = Z1LeadVec+Z1TrailingVec
+    tmpZ1M = tmpZ1Vec.M()
     for Z2Itr,eZ2VecPair in enumerate(eZ2VecPairAr): #LOOP OVER ALL Z2 CANDIDATE PAIRS
         tmpZ2LeadPt = eZ2PtPairAr[Z2Itr][0] 
-        if tmpZ2LeadPt > tmpTopZ2LeadPt: #Check if passes lead Z2 pt cut
+        if (tmpZ2LeadPt > tmpTopZ2LeadPt) or (tmpZ2LeadPt == tmpTopZ2LeadPt and eZ2PtPairAr[Z2Itr][1] > tmpTopZ2TrailingPt): #Check if passes lead Z2 pt cut
             tmpZ4Vec = tmpZ1Vec+eZ2VecPair[0]+eZ2VecPair[1]
             if tmpZ4Vec.M() > fourLepInvMassCut: #Check if passes four lepton inv mass cut
                 if not Z1IsMuon: #If Z1 is electrons, then have to perform second 4e cuts
+                    tmpZ2Vec = eZ2VecPair[0] + eZ2VecPair[1]
+                    tmpZ2M = tmpZ2Vec.M()
                     if Z1LeadCharge != eZ2ChargePairAr[0]:
                         tmpLepPairVecOne = Z1LeadVec + eZ2VecPair[0]
-                        if tmpLepPairVecOne.M() > optLepInvMassCut:
-                            tmpZ2Ind = Z2Itr
-                            tmpTopZ2LeadPt = tmpZ2LeadPt
-                            tmpTopZ2TrailingPt = eZ2PtPairAr[Z2Itr][1]
-                            Z2IsMuon = False
-                        else:
-                            tmpLepPairVecTwo = Z1TrailingVec + eZ2VecPair[1]
-                            if tmpLepPairVecTwo.M() > optLepInvMassCut:
-                                tmpZ2Ind = Z2Itr
-                                tmpTopZ2LeadPt = tmpZ2LeadPt
-                                tmpTopZ2TrailingPt = eZ2PtPairAr[Z2Itr][1]
-                                Z2IsMuon = False
-                                
+                        tmpLepPairVecTwo = Z1TrailingVec + eZ2VecPair[1]
                     else:
                         tmpLepPairVecOne = Z1LeadVec + eZ2VecPair[1]
-                        if tmpLepPairVecOne.M() > optLepInvMassCut:
+                        tmpLepPairVecTwo = Z1TrailingVec + eZ2VecPair[0]
+
+                    tmpPassCtr = 0
+                    if tmpLepPairVecOne.M() > optLepInvMassCut:
+                        tmpPassCtr += 1
+                    if tmpZ1M > optLepInvMassCut:
+                        tmpPassCtr += 1
+                    if tmpZ2M > optLepInvMassCut:
+                        tmpPassCtr += 1
+                    if tmpPassCtr >= 3:
+                        tmpZ2Ind = Z2Itr
+                        tmpTopZ2LeadPt = tmpZ2LeadPt
+                        tmpTopZ2TrailingPt = eZ2PtPairAr[Z2Itr][1]
+                        Z2IsMuon = False
+                    elif tmpPassCtr == 2:
+                        if tmpLepPairVecTwo.M() > optLepInvMassCut:
                             tmpZ2Ind = Z2Itr
                             tmpTopZ2LeadPt = tmpZ2LeadPt
                             tmpTopZ2TrailingPt = eZ2PtPairAr[Z2Itr][1]
                             Z2IsMuon = False
-                        else:
-                            tmpLepPairVecTwo = Z1TrailingVec + eZ2VecPair[0]
-                            if tmpLepPairVecTwo.M() > optLepInvMassCut:
-                                tmpZ2Ind = Z2Itr
-                                tmpTopZ2LeadPt = tmpZ2LeadPt
-                                tmpTopZ2TrailingPt = eZ2PtPairAr[Z2Itr][1]
-                                Z2IsMuon = False
                 else:
                     tmpZ2Ind = Z2Itr
                     tmpTopZ2LeadPt = tmpZ2LeadPt
                     tmpTopZ2TrailingPt = eZ2PtPairAr[Z2Itr][1]
                     Z2IsMuon = False
-
-        elif tmpZ2LeadPt == tmpTopZ2LeadPt:
-            tmpZ2TrailingPt = eZ2PtPairAr[Z2Itr][1] 
-            if tmpZ2TrailingPt > tmpTopZ2TrailingPt:
-                tmpZ4Vec = tmpZ1Vec+eZ2VecPair[0]+eZ2VecPair[1]
-                if tmpZ4Vec.M() > fourLepInvMassCut:
-                    if not Z1IsMuon:
-                        if Z1LeadCharge != eZ2ChargePairAr[0]:
-                            tmpLepPairVecOne = Z1LeadVec + eZ2VecPair[0]
-                            if tmpLepPairVecOne.M() > optLepInvMassCut:
-                                tmpZ2Ind = Z2Itr
-                                tmpTopZ2LeadPt = tmpZ2LeadPt
-                                tmpTopZ2TrailingPt = tmpZ2TrailingPt
-                                Z2IsMuon = False
-                            else:
-                                tmpLepPairVecTwo = Z1TrailingVec + eZ2VecPair[1]
-                                if tmpLepPairVecTwo.M() > optLepInvMassCut:
-                                    tmpZ2Ind = Z2Itr
-                                    tmpTopZ2LeadPt = tmpZ2LeadPt
-                                    tmpTopZ2TrailingPt = tmpZ2TrailingPt
-                                    Z2IsMuon = False
-                        else:
-                            tmpLepPairVecOne = Z1LeadVec + eZ2VecPair[1]
-                            if tmpLepPairVecOne.M() > optLepInvMassCut:
-                                tmpZ2Ind = Z2Itr
-                                tmpTopZ2LeadPt = tmpZ2LeadPt
-                                tmpTopZ2TrailingPt = tmpZ2TrailingPt 
-                                Z2IsMuon = False
-                            else:
-                                tmpLepPairVecTwo = Z1TrailingVec + eZ2VecPair[0]
-                                if tmpLepPairVecTwo.M() > optLepInvMassCut:
-                                    tmpZ2Ind = Z2Itr
-                                    tmpTopZ2LeadPt = tmpZ2LeadPt
-                                    tmpTopZ2TrailingPt = tmpZ2TrailingPt 
-                                    Z2IsMuon = False
-                    else:
-                        tmpZ2Ind = Z2Itr
-                        tmpTopZ2LeadPt = tmpZ2LeadPt
-                        tmpTopZ2TrailingPt = tmpZ2TrailingPt
-                        Z2IsMuon = False
     return tmpZ2Ind,Z2IsMuon,tmpTopZ2LeadPt,tmpTopZ2TrailingPt
-    #Now Muons
+    
 def domZ2Cut(ev,Z1LeadVec,Z1TrailingVec,tmpZ1Vec,Z1LeadCharge,Z1TrailingCharge,Z1IsMuon,mZ2VecPairAr,mZ2PtPairAr,mZ2ChargePairAr,tmpZ2Ind,Z2IsMuon,tmpTopZ2LeadPt,tmpTopZ2TrailingPt,fourLepInvMassCut,optLepInvMassCut):
+    #Now Muons
+    tmpZ1Vec = Z1LeadVec+Z1TrailingVec
+    tmpZ1M = tmpZ1Vec.M()
     for Z2Itr,mZ2VecPair in enumerate(mZ2VecPairAr):
         tmpZ2LeadPt = mZ2PtPairAr[Z2Itr][0] 
-        if tmpZ2LeadPt > tmpTopZ2LeadPt:
+        if (tmpZ2LeadPt > tmpTopZ2LeadPt) or (tmpZ2LeadPt == tmpTopZ2LeadPt and mZ2PtPairAr[Z2Itr][1] > tmpTopZ2TrailingPt):
             tmpZ4Vec = tmpZ1Vec+mZ2VecPair[0]+mZ2VecPair[1]
             if tmpZ4Vec.M() > fourLepInvMassCut:
                 if Z1IsMuon:
+                    tmpZ2Vec = mZ2VecPair[0] + mZ2VecPair[1]
+                    tmpZ2M = tmpZ2Vec.M()
                     if Z1LeadCharge != mZ2ChargePairAr[0]:
                         tmpLepPairVecOne = Z1LeadVec + mZ2VecPair[0]
-                        if tmpLepPairVecOne.M() > optLepInvMassCut:
-                            tmpZ2Ind = Z2Itr
-                            tmpTopZ2LeadPt = tmpZ2LeadPt
-                            tmpTopZ2TrailingPt = mZ2PtPairAr[Z2Itr][1]
-                            Z2IsMuon = True
-                        else:
-                            tmpLepPairVecTwo = Z1TrailingVec + mZ2VecPair[1]
-                            if tmpLepPairVecTwo.M() > optLepInvMassCut:
-                                tmpZ2Ind = Z2Itr
-                                tmpTopZ2LeadPt = tmpZ2LeadPt
-                                tmpTopZ2TrailingPt = mZ2PtPairAr[Z2Itr][1]
-                                Z2IsMuon = True
+                        tmpLepPairVecTwo = Z1TrailingVec + mZ2VecPair[1]
                     else:
                         tmpLepPairVecOne = Z1LeadVec + mZ2VecPair[1]
-                        if tmpLepPairVecOne.M() > optLepInvMassCut:
+                        tmpLepPairVecTwo = Z1TrailingVec + mZ2VecPair[0]
+
+                    tmpPassCtr = 0
+                    if tmpLepPairVecOne.M() > optLepInvMassCut:
+                        tmpPassCtr += 1
+                    if tmpZ1M > optLepInvMassCut:
+                        tmpPassCtr += 1
+                    if tmpZ2M > optLepInvMassCut:
+                        tmpPassCtr += 1
+                    if tmpPassCtr >= 3:
+                        tmpZ2Ind = Z2Itr
+                        tmpTopZ2LeadPt = tmpZ2LeadPt
+                        tmpTopZ2TrailingPt = mZ2PtPairAr[Z2Itr][1]
+                        Z2IsMuon = True
+                    elif tmpPassCtr == 2:
+                        if tmpLepPairVecTwo.M() > optLepInvMassCut:
                             tmpZ2Ind = Z2Itr
                             tmpTopZ2LeadPt = tmpZ2LeadPt
                             tmpTopZ2TrailingPt = mZ2PtPairAr[Z2Itr][1]
                             Z2IsMuon = True
-                        else:
-                            tmpLepPairVecTwo = Z1TrailingVec + mZ2VecPair[0]
-                            if tmpLepPairVecTwo.M() > optLepInvMassCut:
-                                tmpZ2Ind = Z2Itr
-                                tmpTopZ2LeadPt = tmpZ2LeadPt
-                                tmpTopZ2TrailingPt = mZ2PtPairAr[Z2Itr][1]
-                                Z2IsMuon = True
                 else:
                     tmpZ2Ind = Z2Itr
                     tmpTopZ2LeadPt = tmpZ2LeadPt
                     tmpTopZ2TrailingPt = mZ2PtPairAr[Z2Itr][1]
                     Z2IsMuon = True
-
-        elif tmpZ2LeadPt == tmpTopZ2LeadPt:
-            tmpZ2TrailingPt = mZ2PtPairAr[Z2Itr][1] 
-            if tmpZ2TrailingPt > tmpTopZ2TrailingPt:
-                tmpZ4Vec = tmpZ1Vec+mZ2VecPair[0]+mZ2VecPair[1]
-                if tmpZ4Vec.M() > fourLepInvMassCut:
-                    if Z1IsMuon:
-                        if Z1LeadCharge != mZ2ChargePairAr[0]:
-                            tmpLepPairVecOne = Z1LeadVec + mZ2VecPair[0]
-                            if tmpLepPairVecOne.M() > optLepInvMassCut:
-                                tmpZ2Ind = Z2Itr
-                                tmpTopZ2LeadPt = tmpZ2LeadPt
-                                tmpTopZ2TrailingPt = tmpZ2TrailingPt
-                                Z2IsMuon = True
-                            else:
-                                tmpLepPairVecTwo = Z1TrailingVec + mZ2VecPair[1]
-                                if tmpLepPairVecTwo.M() > optLepInvMassCut:
-                                    tmpZ2Ind = Z2Itr
-                                    tmpTopZ2LeadPt = tmpZ2LeadPt
-                                    tmpTopZ2TrailingPt = tmpZ2TrailingPt
-                                    Z2IsMuon = True
-                        else:
-                            tmpLepPairVecOne = Z1LeadVec + mZ2VecPair[1]
-                            if tmpLepPairVecOne.M() > optLepInvMassCut:
-                                tmpZ2Ind = Z2Itr
-                                tmpTopZ2LeadPt = tmpZ2LeadPt
-                                tmpTopZ2TrailingPt = tmpZ2TrailingPt
-                                Z2IsMuon = True
-                            else:
-                                tmpLepPairVecTwo = Z1TrailingVec + mZ2VecPair[0]
-                                if tmpLepPairVecTwo.M() > optLepInvMassCut:
-                                    tmpZ2Ind = Z2Itr
-                                    tmpTopZ2LeadPt = tmpZ2LeadPt
-                                    tmpTopZ2TrailingPt = tmpZ2TrailingPt
-                                    Z2IsMuon = True
-                    else:
-                        tmpZ2Ind = Z2Itr
-                        tmpTopZ2LeadPt = tmpZ2LeadPt
-                        tmpTopZ2TrailingPt = tmpZ2TrailingPt
-                        Z2IsMuon = True
     return tmpZ2Ind,Z2IsMuon,tmpTopZ2LeadPt,tmpTopZ2TrailingPt
                         
 

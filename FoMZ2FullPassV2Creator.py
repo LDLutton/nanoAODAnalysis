@@ -571,6 +571,21 @@ for k,fileA in enumerate(fileAr):
                 if elecPassesZ2CutsFinalAr or muonPassesZ2CutsFinalAr:
                     if debug:
                         print("passed to Z2 Cut")
+                    #First fill histo with max of the possible four lep inv mass 
+                    tmpMax = 0
+                    tmpZ1Vec = Z1LeadVec+Z1TrailingVec
+                    for eZ2VecPair in eZ2VecPairAr:
+                        tmpFourLepVec = eZ2VecPair[0]+eZ2VecPair[1]+tmpZ1Vec
+                        tmpFourLepM = tmpFourLepVec.M()
+                        if tmpFourLepM > tmpMax:
+                            tmpMax = tmpFourLepM
+
+                    for mZ2VecPair in mZ2VecPairAr:
+                        tmpFourLepVec = mZ2VecPair[0]+mZ2VecPair[1]+tmpZ1Vec
+                        tmpFourLepM = tmpFourLepVec.M()
+                        if tmpFourLepM > tmpMax:
+                            tmpMax = tmpFourLepM
+                    histZ2FourLepAr[-1].Fill(tmpMax)
                     #Run loop here
                     for Z2FourLepCutItr in range(cutAmnt):
                         tmpZ2FourLepCut = Z2FourLepRange[0]+(Z2FourLepCutItr*Z2FourLepStep)
@@ -578,25 +593,9 @@ for k,fileA in enumerate(fileAr):
                         Z2IsMuon = False
                         tmpTopZ2LeadPt = 0
                         tmpTopZ2TrailingPt = 0
-                        tmpMax = 0
-                        tmpZ1Vec = Z1LeadVec+Z1TrailingVec
-                        for eZ2VecPair in eZ2VecPairAr:
-                            tmpFourLepVec = eZ2VecPair[0]+eZ2VecPair[1]+tmpZ1Vec
-                            tmpFourLepM = tmpFourLepVec.M()
-                            if tmpFourLepM > tmpMax:
-                                tmpMax = tmpFourLepM
-
-                        for mZ2VecPair in mZ2VecPairAr:
-                            tmpFourLepVec = mZ2VecPair[0]+mZ2VecPair[1]+tmpZ1Vec
-                            tmpFourLepM = tmpFourLepVec.M()
-                            if tmpFourLepM > tmpMax:
-                                tmpMax = tmpFourLepM
-                        histZ2FourLepAr[-1].Fill(tmpMax)
-
-
-
-
                         
+                        
+
                         if elecPassesZ2CutsFinalAr:
                             tmpZ2Ind,Z2IsMuon,tmpTopZ2LeadPt,tmpTopZ2TrailingPt = doeZ2Cut(ev,Z1LeadVec,Z1TrailingVec,tmpZ1Vec,Z1LeadCharge,Z1TrailingCharge,Z1IsMuon,eZ2VecPairAr,eZ2PtPairAr,eZ2ChargePairAr,tmpZ2Ind,Z2IsMuon,tmpTopZ2LeadPt,tmpTopZ2TrailingPt,tmpZ2FourLepCut,optLepInvMassCut)
                         if muonPassesZ2CutsFinalAr:
@@ -653,50 +652,55 @@ for k,fileA in enumerate(fileAr):
                     
 
                     #Opt loop
+                    #First fill histo with the max of the 3rd lowest inv mass combination of each Z1 Z2 pair
+
+                    tmpMax = 0
+                    tmpZ1Vec = Z1LeadVec+Z1TrailingVec
+                    tmpZ1M = tmpZ1Vec.M()
+                    if not Z1IsMuon:
+                        for eZ2VecPair,eZ2ChargePair in zip(eZ2VecPairAr,eZ2ChargePairAr):
+                            if eZ2ChargePair[0] == Z1LeadCharge:
+                                tmpOptLepVecOne = eZ2VecPair[0] + Z1TrailingVec
+                                tmpOptLepVecTwo = eZ2VecPair[1] + Z1LeadVec
+                            else:
+                                tmpOptLepVecOne = eZ2VecPair[1] + Z1TrailingVec
+                                tmpOptLepVecTwo = eZ2VecPair[0] + Z1LeadVec
+                            tmpZ2Vec = eZ2VecPair[0] + eZ2VecPair[1]
+                            tmpZ2M = tmpZ2Vec.M()
+                            tmpOptLepMOne = tmpOptLepVecOne.M()
+                            tmpOptLepMTwo = tmpOptLepVecTwo.M()
+                            tmpOptLepM = find2ndToLast(tmpZ1M,tmpZ2M,tmpOptLepMOne,tmpOptLepMTwo)
+
+                            if tmpOptLepM > tmpMax:
+                                tmpMax = tmpOptLepM
+                        if eZ2VecPairAr:
+                            histZ2OptLepAr[-1].Fill(tmpMax)
+                    else:
+                        for mZ2VecPair,mZ2ChargePair in zip(mZ2VecPairAr,mZ2ChargePairAr):
+                            if mZ2ChargePair[0] == Z1LeadCharge:
+                                tmpOptLepVecOne = mZ2VecPair[0] + Z1TrailingVec
+                                tmpOptLepVecTwo = mZ2VecPair[1] + Z1LeadVec
+                            else:
+                                tmpOptLepVecOne = mZ2VecPair[1] + Z1TrailingVec
+                                tmpOptLepVecTwo = mZ2VecPair[0] + Z1LeadVec
+                            tmpZ2Vec = mZ2VecPair[0] + mZ2VecPair[1]
+                            tmpZ2M = tmpZ2Vec.M()
+                            tmpOptLepMOne = tmpOptLepVecOne.M()
+                            tmpOptLepMTwo = tmpOptLepVecTwo.M()
+                            tmpOptLepM = find2ndToLast(tmpZ1M,tmpZ2M,tmpOptLepMOne,tmpOptLepMTwo)
+                            if tmpOptLepM > tmpMax:
+                                tmpMax = tmpOptLepM
+                            
+                        if mZ2VecPairAr:
+                            histZ2OptLepAr[-1].Fill(tmpMax)
+
+
                     for Z2OptLepCutItr in range(cutAmnt):
                         tmpZ2OptLepCut = Z2OptLepRange[0]+(Z2OptLepCutItr*Z2OptLepStep)
                         tmpZ2Ind = -1
                         Z2IsMuon = False
                         tmpTopZ2LeadPt = 0
                         tmpTopZ2TrailingPt = 0
-                        tmpMax = 0
-                        tmpZ1Vec = Z1LeadVec+Z1TrailingVec
-                        if not Z1IsMuon:
-                            for eZ2VecPair,eZ2ChargePair in zip(eZ2VecPairAr,eZ2ChargePairAr):
-                                if eZ2ChargePair[0] == Z1LeadCharge:
-                                    tmpOptLepVecOne = eZ2VecPair[0] + Z1TrailingVec
-                                    tmpOptLepVecTwo = eZ2VecPair[1] + Z1LeadVec
-                                else:
-                                    tmpOptLepVecOne = eZ2VecPair[1] + Z1TrailingVec
-                                    tmpOptLepVecTwo = eZ2VecPair[0] + Z1LeadVec
-                                tmpOptLepMOne = tmpOptLepVecOne.M()
-                                tmpOptLepMTwo = tmpOptLepVecTwo.M()
-                                tmpOptLepM = max(tmpOptLepMOne,tmpOptLepMTwo)
-                                if tmpOptLepM > tmpMax:
-                                    tmpMax = tmpOptLepM
-                            if eZ2VecPairAr:
-                                histZ2OptLepAr[-1].Fill(tmpMax)
-                        else:
-                            for mZ2VecPair,mZ2ChargePair in zip(mZ2VecPairAr,mZ2ChargePairAr):
-                                if mZ2ChargePair[0] == Z1LeadCharge:
-                                    tmpOptLepVecOne = mZ2VecPair[0] + Z1TrailingVec
-                                    tmpOptLepVecTwo = mZ2VecPair[1] + Z1LeadVec
-                                else:
-                                    tmpOptLepVecOne = mZ2VecPair[1] + Z1TrailingVec
-                                    tmpOptLepVecTwo = mZ2VecPair[0] + Z1LeadVec
-                                tmpOptLepMOne = tmpOptLepVecOne.M()
-                                tmpOptLepMTwo = tmpOptLepVecTwo.M()
-                                tmpOptLepM = max(tmpOptLepMOne,tmpOptLepMTwo)
-                                if tmpOptLepM > tmpMax:
-                                    tmpMax = tmpOptLepM
-                                
-                            if mZ2VecPairAr:
-                                histZ2OptLepAr[-1].Fill(tmpMax)
-
-                        
-
-
-                        
                         if elecPassesZ2CutsFinalAr:
                             tmpZ2Ind,Z2IsMuon,tmpTopZ2LeadPt,tmpTopZ2TrailingPt = doeZ2Cut(ev,Z1LeadVec,Z1TrailingVec,tmpZ1Vec,Z1LeadCharge,Z1TrailingCharge,Z1IsMuon,eZ2VecPairAr,eZ2PtPairAr,eZ2ChargePairAr,tmpZ2Ind,Z2IsMuon,tmpTopZ2LeadPt,tmpTopZ2TrailingPt,fourLepInvMassCut,tmpZ2OptLepCut)
 
