@@ -43,6 +43,26 @@ QCDPT1800to2400Background = False
 QCDPT2400to3200Background = False
 QCDPT3200toInfBackground = False
 
+#All True
+
+"""
+MGSM = True
+MGEFT = True
+ttHToBBBackground = True
+ttZJetsBackground = True
+DYBackground = True
+QCDPT170to300Background = True
+QCDPT300to470Background = True
+QCDPT470to600Background = True
+QCDPT600to800Background = True
+QCDPT800to1000Background = True
+QCDPT1000to1400Background = True
+QCDPT1400to1800Background = True
+QCDPT1800to2400Background = True
+QCDPT2400to3200Background = True
+QCDPT3200toInfBackground = True
+"""
+
 XSAr = []
 totalEvents = []
 fileAr = []
@@ -142,7 +162,7 @@ if DYBackground:
     fileAr.append(TFile.Open("{0}FoMTreesFromDYBackground_InputTrimmed_FullPass.root".format(forCondorStr)))
     nameAr.append("DYBackground")
     saveNameAr.append("DY")
-    colorAr.append(5)
+    colorAr.append(3)
     isSignalAr.append(False)
     tmpXSAvg = 6077.22
     XSAr.append(tmpXSAvg)
