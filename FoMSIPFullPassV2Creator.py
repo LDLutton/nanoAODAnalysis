@@ -162,7 +162,7 @@ if DYBackground:
     fileAr.append(TFile.Open("{0}FoMTreesFromDYBackground_InputTrimmed_FullPass.root".format(forCondorStr)))
     nameAr.append("DYBackground")
     saveNameAr.append("DY")
-    colorAr.append(3)
+    colorAr.append(8)
     isSignalAr.append(False)
     tmpXSAvg = 6077.22
     XSAr.append(tmpXSAvg)

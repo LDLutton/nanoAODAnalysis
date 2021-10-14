@@ -515,7 +515,7 @@ def setHistoElements(nameAr,colorAr,sumQCD,QCDSumHist,isQCDAr,histAr,isSignalAr,
     for j,colorA,nameA in zip(range(len(nameAr)),colorAr,nameAr):
         if not sumQCD or not isQCDAr[j]:
             histAr[j].SetLineColor(colorA)
-            histAr[j].SetLineWidth(2)
+            histAr[j].SetLineWidth(4)
             if not isSignalAr[j]:
                 histAr[j].SetFillColorAlpha(colorA,0.2)
             if j == 0:
