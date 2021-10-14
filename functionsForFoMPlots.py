@@ -530,7 +530,7 @@ def setHistoElements(nameAr,colorAr,sumQCD,QCDSumHist,isQCDAr,histAr,isSignalAr,
         else:
             intAr.append(1)
     if sumQCD:
-        QCDSumHist.SetLineColor(9)
+        QCDSumHist.SetLineColor(28)
         QCDSumHist.SetLineWidth(2)
         QCDSumHist.SetFillColorAlpha(28,0.2)
         QCDSumInt = QCDSumHist.Integral()
