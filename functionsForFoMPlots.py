@@ -583,7 +583,7 @@ def setUpInvHists(histAr,isSignalAr,sumQCD,isQCDAr,invHistsAr,nameAr,intAr,drawI
         else:
             drawInvAr.append(False)
 
-def setUpStackedHistAndDrawFoMPlot(histMax,histAr,histStack,invHistsAr,drawInvAr,legAr,FoMCan,padAr,FoMgraph,cutRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName):
+def setUpStackedHistAndDrawFoMPlot(histMax,histAr,histStack,invHistsAr,drawInvAr,legAr,FoMCan,padAr,FoMGraph,cutRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName,defaultCutPos):
     #maxForRange = 1.1*histMax
     #histAr[1].GetYaxis().SetRangeUser(0,maxForRange)
 
@@ -609,9 +609,18 @@ def setUpStackedHistAndDrawFoMPlot(histMax,histAr,histStack,invHistsAr,drawInvAr
 
     setUpBottomPadsAr(padAr[-1])
     
-    setUpGraphs(FoMgraph,3,22,"{0} FoM Plot".format(cutName),cutName,"SQRT(2*(((S+B)*log(1+(S/B)))-S))")
-    FoMgraph.GetXaxis().SetRangeUser(cutRange[0],cutRange[1])
-    FoMgraph.Draw("APL* same")
+    setUpGraphs(FoMGraph,3,22,"{0} FoM Plot".format(cutName),cutName,"SQRT(2*(((S+B)*log(1+(S/B)))-S))")
+    FoMGraph.GetXaxis().SetRangeUser(cutRange[0],cutRange[1])
+    FoMGraph.Draw("APL* same")
+    #FoMCan.Update()
+    #tmpFoMMin = FoMGraph.GetMinimum()
+    tmpFoMMin = 0
+    tmpFoMMax = FoMGraph.GetMaximum()
+    defaultCutLine = TLine(defaultCutPos,tmpFoMMin,defaultCutPos,histMax)
+    defaultCutLine.SetLineColor(2)
+    defaultCutLine.SetLineWidth(4)
+    defaultCutLine.SetLineStyle(9)
+    defaultCutLine.Draw()
     FoMCan.Update()
     #"FP" stands for "Full Pass"
     if normalizeBackgroundsTogether:
@@ -620,7 +629,7 @@ def setUpStackedHistAndDrawFoMPlot(histMax,histAr,histStack,invHistsAr,drawInvAr
         FoMCan.SaveAs("FoMGraph_FP_{0}_{1}_Vs_{2}_AMSFoM_WithComparisonHist_Stacked_V2_{3}.png".format(cutName,signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 
 
-def setUpNonStackedHistAndFoMPlot(FoM2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histAr,legAr,FoMGraph,signalName,backgroundName):
+def setUpNonStackedHistAndFoMPlot(FoM2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histAr,legAr,FoMGraph,signalName,backgroundName,defaultCutPos):
     setUpPadsAr(padAr,"{0}Pad".format("{0}2".format(cutName)))
     padAr[-1][0].Draw()
     padAr[-1][0].cd()
@@ -657,6 +666,15 @@ def setUpNonStackedHistAndFoMPlot(FoM2Can,cutName,padAr,sumQCD,QCDSumHist,histMa
 
     setUpBottomPadsAr(padAr[-1]) 
     FoMGraph.Draw("APL same")
+    #FoM2Can.Update()
+    #tmpFoMMin = FoMGraph.GetMinimum()
+    tmpFoMMin = 0
+    tmpFoMMax = FoMGraph.GetMaximum()
+    defaultCutLine = TLine(defaultCutPos,tmpFoMMin,defaultCutPos,histMax)
+    defaultCutLine.SetLineColor(2)
+    defaultCutLine.SetLineWidth(4)
+    defaultCutLine.SetLineStyle(9)
+    defaultCutLine.Draw()
     FoM2Can.Update()
     #"FP" stands for "Full Pass"
     if normalizeBackgroundsTogether:

@@ -1581,11 +1581,11 @@ FoMePtGraph = TGraph(len(ePtGraphAr),ePtXAr,ePtGraphAr)
 
 
 
-setUpStackedHistAndDrawFoMPlot(histMax,histePtAr,histePtStack,invHistsAr,drawInvAr,legAr,FoMePtCan,padAr,FoMePtGraph,ePtRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName)
+setUpStackedHistAndDrawFoMPlot(histMax,histePtAr,histePtStack,invHistsAr,drawInvAr,legAr,FoMePtCan,padAr,FoMePtGraph,ePtRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName,ePtCut)
 
 FoMePt2Can = TCanvas("c2ePt","c2ePt",3600,2400)
 
-setUpNonStackedHistAndFoMPlot(FoMePt2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histePtAr,legAr,FoMePtGraph,signalName,backgroundName)
+setUpNonStackedHistAndFoMPlot(FoMePt2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histePtAr,legAr,FoMePtGraph,signalName,backgroundName,ePtCut)
 
 
 eEtaGraphAr = array('d')
@@ -1672,11 +1672,11 @@ FoMeEtaGraph = TGraph(len(eEtaGraphAr),eEtaXAr,eEtaGraphAr)
 
 
 
-setUpStackedHistAndDrawFoMPlot(histMax,histeEtaAr,histeEtaStack,invHistsAr,drawInvAr,legAr,FoMeEtaCan,padAr,FoMeEtaGraph,eEtaRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName)
+setUpStackedHistAndDrawFoMPlot(histMax,histeEtaAr,histeEtaStack,invHistsAr,drawInvAr,legAr,FoMeEtaCan,padAr,FoMeEtaGraph,eEtaRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName,eEtaCut)
 
 FoMeEta2Can = TCanvas("c2eEta","c2eEta",3600,2400)
 
-setUpNonStackedHistAndFoMPlot(FoMeEta2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histeEtaAr,legAr,FoMeEtaGraph,signalName,backgroundName)
+setUpNonStackedHistAndFoMPlot(FoMeEta2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histeEtaAr,legAr,FoMeEtaGraph,signalName,backgroundName,eEtaCut)
 
 
 mPtGraphAr = array('d')
@@ -1763,11 +1763,11 @@ FoMmPtGraph = TGraph(len(mPtGraphAr),mPtXAr,mPtGraphAr)
 
 
 
-setUpStackedHistAndDrawFoMPlot(histMax,histmPtAr,histmPtStack,invHistsAr,drawInvAr,legAr,FoMmPtCan,padAr,FoMmPtGraph,mPtRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName)
+setUpStackedHistAndDrawFoMPlot(histMax,histmPtAr,histmPtStack,invHistsAr,drawInvAr,legAr,FoMmPtCan,padAr,FoMmPtGraph,mPtRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName,mPtCut)
 
 FoMmPt2Can = TCanvas("c2mPt","c2mPt",3600,2400)
 
-setUpNonStackedHistAndFoMPlot(FoMmPt2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histmPtAr,legAr,FoMmPtGraph,signalName,backgroundName)
+setUpNonStackedHistAndFoMPlot(FoMmPt2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histmPtAr,legAr,FoMmPtGraph,signalName,backgroundName,mPtCut)
 
 
 mEtaGraphAr = array('d')
@@ -1854,10 +1854,10 @@ FoMmEtaGraph = TGraph(len(mEtaGraphAr),mEtaXAr,mEtaGraphAr)
 
 
 
-setUpStackedHistAndDrawFoMPlot(histMax,histmEtaAr,histmEtaStack,invHistsAr,drawInvAr,legAr,FoMmEtaCan,padAr,FoMmEtaGraph,mEtaRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName)
+setUpStackedHistAndDrawFoMPlot(histMax,histmEtaAr,histmEtaStack,invHistsAr,drawInvAr,legAr,FoMmEtaCan,padAr,FoMmEtaGraph,mEtaRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName,mEtaCut)
 
 FoMmEta2Can = TCanvas("c2mEta","c2mEta",3600,2400)
 
-setUpNonStackedHistAndFoMPlot(FoMmEta2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histmEtaAr,legAr,FoMmEtaGraph,signalName,backgroundName)
+setUpNonStackedHistAndFoMPlot(FoMmEta2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histmEtaAr,legAr,FoMmEtaGraph,signalName,backgroundName,mEtaCut)
 
 

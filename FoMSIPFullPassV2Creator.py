@@ -729,8 +729,8 @@ setUpInvHists(histSIPAr,isSignalAr,sumQCD,isQCDAr,invHistsAr,nameAr,intSIPAr,dra
 
 FoMSIPGraph = TGraph(len(SIPGraphAr),SIPXAr,SIPGraphAr)
 
-setUpStackedHistAndDrawFoMPlot(histMax,histSIPAr,histSIPStack,invHistsAr,drawInvAr,legAr,FoMSIPCan,padAr,FoMSIPGraph,SIPRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName)
+setUpStackedHistAndDrawFoMPlot(histMax,histSIPAr,histSIPStack,invHistsAr,drawInvAr,legAr,FoMSIPCan,padAr,FoMSIPGraph,SIPRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName,SIPCut)
 
 
 FoMSIP2Can = TCanvas("c2SIP","c2SIP",3600,2400)
-setUpNonStackedHistAndFoMPlot(FoMSIP2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histSIPAr,legAr,FoMSIPGraph,signalName,backgroundName)
+setUpNonStackedHistAndFoMPlot(FoMSIP2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histSIPAr,legAr,FoMSIPGraph,signalName,backgroundName,SIPCut)

@@ -33,7 +33,7 @@ isQCDAr = []
 MGSM = True
 MGEFT = True
 ttHToBBBackground = True
-ttZJetsBackground = True
+ttZJetsBackground = False
 DYBackground = False
 QCDPT170to300Background = True
 QCDPT300to470Background = False
@@ -770,9 +770,9 @@ setUpInvHists(histIsoAr,isSignalAr,sumQCD,isQCDAr,invHistsAr,nameAr,intIsoAr,dra
 
 FoMIsoGraph = TGraph(len(isoGraphAr),isoXAr,isoGraphAr)
 
-setUpStackedHistAndDrawFoMPlot(histMax,histIsoAr,histIsoStack,invHistsAr,drawInvAr,legAr,FoMIsoCan,padAr,FoMIsoGraph,isoRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName)
+setUpStackedHistAndDrawFoMPlot(histMax,histIsoAr,histIsoStack,invHistsAr,drawInvAr,legAr,FoMIsoCan,padAr,FoMIsoGraph,isoRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName,lepIsoCut)
 
 
 FoMIso2Can = TCanvas("c2Iso","c2Iso",3600,2400)
-setUpNonStackedHistAndFoMPlot(FoMIso2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histIsoAr,legAr,FoMIsoGraph,signalName,backgroundName)
+setUpNonStackedHistAndFoMPlot(FoMIso2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histIsoAr,legAr,FoMIsoGraph,signalName,backgroundName,lepIsoCut)
 

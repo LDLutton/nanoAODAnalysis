@@ -873,11 +873,11 @@ FoMZ2FourLepGraph = TGraph(len(Z2FourLepGraphAr),Z2FourLepXAr,Z2FourLepGraphAr)
 
 
 
-setUpStackedHistAndDrawFoMPlot(histMax,histZ2FourLepAr,histZ2FourLepStack,invHistsAr,drawInvAr,legAr,FoMZ2FourLepCan,padAr,FoMZ2FourLepGraph,Z2FourLepRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName)
+setUpStackedHistAndDrawFoMPlot(histMax,histZ2FourLepAr,histZ2FourLepStack,invHistsAr,drawInvAr,legAr,FoMZ2FourLepCan,padAr,FoMZ2FourLepGraph,Z2FourLepRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName,fourLepInvMassCut)
 
 FoMZ2FourLep2Can = TCanvas("c2Z2FourLep","c2Z2FourLep",3600,2400)
 
-setUpNonStackedHistAndFoMPlot(FoMZ2FourLep2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histZ2FourLepAr,legAr,FoMZ2FourLepGraph,signalName,backgroundName)
+setUpNonStackedHistAndFoMPlot(FoMZ2FourLep2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histZ2FourLepAr,legAr,FoMZ2FourLepGraph,signalName,backgroundName,fourLepInvMassCut)
 
 
 ##############Z2 OPT LEP CUT LOW##############
@@ -967,8 +967,8 @@ FoMZ2OptLepGraph = TGraph(len(Z2OptLepGraphAr),Z2OptLepXAr,Z2OptLepGraphAr)
 
 
 
-setUpStackedHistAndDrawFoMPlot(histMax,histZ2OptLepAr,histZ2OptLepStack,invHistsAr,drawInvAr,legAr,FoMZ2OptLepCan,padAr,FoMZ2OptLepGraph,Z2OptLepRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName)
+setUpStackedHistAndDrawFoMPlot(histMax,histZ2OptLepAr,histZ2OptLepStack,invHistsAr,drawInvAr,legAr,FoMZ2OptLepCan,padAr,FoMZ2OptLepGraph,Z2OptLepRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName,optLepInvMassCut)
 
 FoMZ2OptLep2Can = TCanvas("c2Z2OptLep","c2Z2OptLep",3600,2400)
 
-setUpNonStackedHistAndFoMPlot(FoMZ2OptLep2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histZ2OptLepAr,legAr,FoMZ2OptLepGraph,signalName,backgroundName)
+setUpNonStackedHistAndFoMPlot(FoMZ2OptLep2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histZ2OptLepAr,legAr,FoMZ2OptLepGraph,signalName,backgroundName,optLepInvMassCut)

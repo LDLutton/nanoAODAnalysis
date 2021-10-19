@@ -1500,14 +1500,14 @@ FoMZ1InvMassCutLowGraph = TGraph(len(Z1InvMassCutLowGraphAr),Z1InvMassCutLowXAr,
 
 
 
-setUpStackedHistAndDrawFoMPlot(histMax,histZ1InvMassCutLowAr,histZ1InvMassCutLowStack,invHistsAr,drawInvAr,legAr,FoMZ1InvMassCutLowCan,padAr,FoMZ1InvMassCutLowGraph,Z1InvMassCutLowRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName)
+setUpStackedHistAndDrawFoMPlot(histMax,histZ1InvMassCutLowAr,histZ1InvMassCutLowStack,invHistsAr,drawInvAr,legAr,FoMZ1InvMassCutLowCan,padAr,FoMZ1InvMassCutLowGraph,Z1InvMassCutLowRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName,invMassCutLow)
 
 FoMZ1InvMassCutLow2Can = TCanvas("c2Z1InvMassCutLow","c2Z1InvMassCutLow",3600,2400)
 if debugV2GraphMaking:
     print("Making non-stacked hist and fom plot")
     print("FoMZ1InvMassCutLow2Can",FoMZ1InvMassCutLow2Can,"cutName",cutName,"padAr",padAr,"histMax",histMax,"QCDSumInt",QCDSumInt,"QCDSumHist",QCDSumHist)
 
-setUpNonStackedHistAndFoMPlot(FoMZ1InvMassCutLow2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histZ1InvMassCutLowAr,legAr,FoMZ1InvMassCutLowGraph,signalName,backgroundName)
+setUpNonStackedHistAndFoMPlot(FoMZ1InvMassCutLow2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histZ1InvMassCutLowAr,legAr,FoMZ1InvMassCutLowGraph,signalName,backgroundName,invMassCutLow)
 
 
 
@@ -1587,10 +1587,10 @@ setUpInvHists(histZ1InvMassCutHighAr,isSignalAr,sumQCD,isQCDAr,invHistsAr,nameAr
 
 FoMZ1InvMassCutHighGraph = TGraph(len(Z1InvMassCutHighGraphAr),Z1InvMassCutHighXAr,Z1InvMassCutHighGraphAr)
 
-setUpStackedHistAndDrawFoMPlot(histMax,histZ1InvMassCutHighAr,histZ1InvMassCutHighStack,invHistsAr,drawInvAr,legAr,FoMZ1InvMassCutHighCan,padAr,FoMZ1InvMassCutHighGraph,Z1InvMassCutHighRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName)
+setUpStackedHistAndDrawFoMPlot(histMax,histZ1InvMassCutHighAr,histZ1InvMassCutHighStack,invHistsAr,drawInvAr,legAr,FoMZ1InvMassCutHighCan,padAr,FoMZ1InvMassCutHighGraph,Z1InvMassCutHighRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName,invMassCutHigh)
 
 FoMZ1InvMassCutHigh2Can = TCanvas("c2Z1InvMassCutHigh","c2Z1InvMassCutHigh",3600,2400)
-setUpNonStackedHistAndFoMPlot(FoMZ1InvMassCutHigh2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histZ1InvMassCutHighAr,legAr,FoMZ1InvMassCutHighGraph,signalName,backgroundName)
+setUpNonStackedHistAndFoMPlot(FoMZ1InvMassCutHigh2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histZ1InvMassCutHighAr,legAr,FoMZ1InvMassCutHighGraph,signalName,backgroundName,invMassCutHigh)
 
 ##############PT CUT LOW##############
 
@@ -1665,10 +1665,10 @@ setUpInvHists(histZ1PtCutLowAr,isSignalAr,sumQCD,isQCDAr,invHistsAr,nameAr,intZ1
 
 FoMZ1PtCutLowGraph = TGraph(len(Z1PtCutLowGraphAr),Z1PtCutLowXAr,Z1PtCutLowGraphAr)
 
-setUpStackedHistAndDrawFoMPlot(histMax,histZ1PtCutLowAr,histZ1PtCutLowStack,invHistsAr,drawInvAr,legAr,FoMZ1PtCutLowCan,padAr,FoMZ1PtCutLowGraph,Z1PtCutLowRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName)
+setUpStackedHistAndDrawFoMPlot(histMax,histZ1PtCutLowAr,histZ1PtCutLowStack,invHistsAr,drawInvAr,legAr,FoMZ1PtCutLowCan,padAr,FoMZ1PtCutLowGraph,Z1PtCutLowRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName,ptTrailingCut)
 
 FoMZ1PtCutLow2Can = TCanvas("c2Z1PtCutLow","c2Z1PtCutLow",3600,2400)
-setUpNonStackedHistAndFoMPlot(FoMZ1PtCutLow2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histZ1PtCutLowAr,legAr,FoMZ1PtCutLowGraph,signalName,backgroundName)
+setUpNonStackedHistAndFoMPlot(FoMZ1PtCutLow2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histZ1PtCutLowAr,legAr,FoMZ1PtCutLowGraph,signalName,backgroundName,ptTrailingCut)
 
 ##############PT CUT HIGH##############
 
@@ -1746,8 +1746,8 @@ setUpInvHists(histZ1PtCutHighAr,isSignalAr,sumQCD,isQCDAr,invHistsAr,nameAr,intZ
 
 FoMZ1PtCutHighGraph = TGraph(len(Z1PtCutHighGraphAr),Z1PtCutHighXAr,Z1PtCutHighGraphAr)
 
-setUpStackedHistAndDrawFoMPlot(histMax,histZ1PtCutHighAr,histZ1PtCutHighStack,invHistsAr,drawInvAr,legAr,FoMZ1PtCutHighCan,padAr,FoMZ1PtCutHighGraph,Z1PtCutHighRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName)
+setUpStackedHistAndDrawFoMPlot(histMax,histZ1PtCutHighAr,histZ1PtCutHighStack,invHistsAr,drawInvAr,legAr,FoMZ1PtCutHighCan,padAr,FoMZ1PtCutHighGraph,Z1PtCutHighRange,normalizeBackgroundsTogether,cutName,signalName,backgroundName,ptLeadCut)
 
 FoMZ1PtCutHigh2Can = TCanvas("c2Z1PtCutHigh","c2Z1PtCutHigh",3600,2400)
-setUpNonStackedHistAndFoMPlot(FoMZ1PtCutHigh2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histZ1PtCutHighAr,legAr,FoMZ1PtCutHighGraph,signalName,backgroundName)
+setUpNonStackedHistAndFoMPlot(FoMZ1PtCutHigh2Can,cutName,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histZ1PtCutHighAr,legAr,FoMZ1PtCutHighGraph,signalName,backgroundName,ptLeadCut)
 
