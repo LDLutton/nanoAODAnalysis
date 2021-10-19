@@ -194,6 +194,12 @@ outFile = TFile("hJetFrom{0}MatchedToGen.root".format(saveName),"recreate")
 if isBackground:
     checkChannelSplits = False
 
+passhbbCtr = 0
+passChannelCtr = 0
+passVBFJets = 0
+passFatJets = 0
+passGenPart = 0
+
 
 if not isBackground:
     crossSectionAvg = 0
@@ -235,17 +241,54 @@ for k,fileName in enumerate(fileAr):
         #Increment event count
         evRunOver += 1
         evCount += 1
+        #First check that it passes the hbb tagging
+        hbbTag = ev.HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02 or ev.HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np2 or ev.HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np4
+        if not hbbTag:
+            continue
+        passhbbCtr += 1
 
+        #Now check that it can be sorted into either leptonic, semi-leptonic, or hadronic
+        #Leptonic
+        doubleElecHLT =  (ev.HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL or ev.HLT_DoubleEle25_CaloIdL_MW or ev.HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ or ev.HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL or  ev.HLT_DiEle27_WPTightCaloOnly_L1DoubleEG or 
+           ev.HLT_DoubleEle33_CaloIdL_MW or ev.HLT_DoubleEle25_CaloIdL_MW or ev.HLT_DoubleEle27_CaloIdL_MW or ev.HLT_DoublePhoton70)
+            
+        doubleMuonHLT =  (ev.HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8 or ev.HLT_TripleMu_10_5_5_DZ or ev.HLT_TripleMu_12_10_5 or ev.HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8 or ev.HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8 or 
+           ev.HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL_DZ_Mass3p8 or ev.HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL_DZ_Mass8)
+
+        muonEGHLT = (ev.HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL or ev.HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ or ev.HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ or ev.HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ or  # or ev.HLT_DiMu9_Ele9_CaloIdL_TrackIdL_DZ or ev.HLT_Mu8_DiEle12_CaloIdL_TrackIdL_DZ 
+           ev.HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL or ev.HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL)
+        
+        #Semi-leptonic
+        elecHLT = (ev.HLT_Ele32_WPTight_Gsf or ev.HLT_Ele115_CaloIdVT_GsfTrkIdT or ev.HLT_Ele27_WPTight_Gsf or ev.HLT_Ele28_WPTight_Gsf or 
+           ev.HLT_Ele35_WPTight_Gsf or ev.HLT_Ele38_WPTight_Gsf or ev.HLT_Ele40_WPTight_Gsf or ev.HLT_Ele32_WPTight_Gsf_L1DoubleEG or ev.HLT_Photon200)
+
+        muonHLT = ev.HLT_IsoMu24 or ev.HLT_IsoMu27 or ev.HLT_IsoMu30 or ev.HLT_Mu50
+
+        lepHLT = elecHLT or muonHLT
+        
+        #Hadronic
+        hadHLT =  (ev.HLT_PFHT1050 or ev.HLT_AK8PFJet500 or ev.HLT_AK8PFJet360_TrimMass30 or ev.HLT_AK8PFHT750_TrimMass50 or ev.HLT_AK8PFJet380_TrimMass30 or
+           ev.HLT_AK8PFJet400_TrimMass30 or ev.HLT_AK8PFJet420_TrimMass30 or
+           ev.HLT_AK8PFHT800_TrimMass50 or ev.HLT_AK8PFHT850_TrimMass50 or ev.HLT_AK8PFHT900_TrimMass50)
+
+        isLeptonic = doubleElecHLT or doubleMuonHLT or muonEGHLT
+        isSemiLeptonic = (elecHLT or muonHLT) and hadHLT
+        isHadronic = hadHLT
+
+        if not (isLeptonic or isSemiLeptonic or isHadronic):
+            continue
+
+        passChannelCtr += 1
 
         #First match jets
-        nJet = ev.nJet
+        nJet           = ev.nJet
         jetLeadPt      = 0
         jetTrailingPt  = 0
         jetLeadVec     = 0
         jetTrailingVec = 0
         jetPairInvMass = 0
         jetLeadPhi     = 0
-        jetTrailingPhi     = 0
+        jetTrailingPhi = 0
         for jetIndOne in range(nJet-1):
             jetPtOne = ev.Jet_pt[jetIndOne]
             jetIdOne = ev.Jet_jetId[jetIndOne]
@@ -289,6 +332,8 @@ for k,fileName in enumerate(fileAr):
                         jetTrailingPhi = jetPhiOne
         if jetLeadPt == 0:
             continue
+        
+        passVBFJets += 1
 
 
         #Now fat jets
@@ -330,6 +375,9 @@ for k,fileName in enumerate(fileAr):
         if hFatJet_pt_fromHTag == 0:
             continue
         
+        passFatJets += 1
+
+
         #Now gen matching
         nGenPart = ev.nGenPart
         hGenPartDR_fromPt = 999
@@ -352,6 +400,7 @@ for k,fileName in enumerate(fileAr):
                 hGenPartInd_fromHTag = genPartInd
                 hGenPartpdgId_fromHTag = ev.GenPart_pdgId[genPartInd]
         if (not hGenPartInd_fromPt == -1) and (not hGenPartInd_fromHTag == -1):
+            passGenPart += 1
             #Fill tree
             nJetL[0] = nJet
             jetLeadPtL[0] = jetLeadPt
@@ -385,6 +434,20 @@ for k,fileName in enumerate(fileAr):
             hGenPartInd_fromHTagL[0] = hGenPartInd_fromHTag
             hGenPartpdgId_fromHTagL[0] = hGenPartpdgId_fromHTag
 
+            #HLT stuff
+
+            hbbTagL[0] = hbbTag
+
+            doubleElecHLTL[0] = doubleElecHLT
+            doubleMuonHLTL[0] = doubleMuonHLT
+            muonEGHLTL[0] = muonEGHLT
+            elecHLTL[0] = elecHLT
+            muonHLTL[0] = muonHLT
+            hadHLTL[0] = hadHLT
+            isLeptonicL[0] = isLeptonic
+            isSemiLeptonicL[0] = isSemiLeptonic
+            isHadronicL[0] = isHadronic
+
             hJetTree.Fill()
             evPassCount += 1
 
@@ -400,6 +463,11 @@ nEvPass[0] = evPassCount
 evNumTree.Fill()
 
 print("evRunOver:",evRunOver)
+print("passes hbb cut:",passhbbCtr)
+print("passes channel cut:",passChannelCtr)
+print("passes VBF Jet cut:",passVBFJets)
+print("passes FatJet cut:",passFatJets)
+print("passes GenPart cut:",passGenPart)
 print("evPassCount:",evPassCount)
 
 if not isBackground:

@@ -75,6 +75,21 @@ hGenPartDR_fromHTagL = array('f',[0.])
 hGenPartInd_fromHTagL = array('f',[0.])
 hGenPartpdgId_fromHTagL = array('f',[0.])
 
+#Now HLT stuff
+hbbTagL = array('B',[0])
+
+doubleElecHLTL = array('B',[0])
+doubleMuonHLTL = array('B',[0])
+muonEGHLTL = array('B',[0])
+elecHLTL = array('B',[0])
+muonHLTL = array('B',[0])
+hadHLTL = array('B',[0])
+isLeptonicL = array('B',[0])
+isSemiLeptonicL = array('B',[0])
+isHadronicL = array('B',[0])
+
+#Now tree and branches
+
 hJetTree = TTree('hJetTree', 'hJetTree')
 
 #cutTree.Branch("evInd",evInd,"evInd/I")
@@ -108,6 +123,20 @@ hJetTree.Branch("hGenPartpdgId_fromPtL",hGenPartpdgId_fromPtL,"hGenPartpdgId_fro
 hJetTree.Branch("hGenPartDR_fromHTagL",hGenPartDR_fromHTagL,"hGenPartDR_fromHTagL/F")
 hJetTree.Branch("hGenPartInd_fromHTagL",hGenPartInd_fromHTagL,"hGenPartInd_fromHTagL/F")
 hJetTree.Branch("hGenPartpdgId_fromHTagL",hGenPartpdgId_fromHTagL,"hGenPartpdgId_fromHTagL/F")
+
+#Now HLT stuff
+
+hJetTree.Branch("hbbTagL",hbbTagL,"hbbTagL/O")
+
+hJetTree.Branch("doubleElecHLTL",doubleElecHLTL,"doubleElecHLTL/O")
+hJetTree.Branch("doubleMuonHLTL",doubleMuonHLTL,"doubleMuonHLTL/O")
+hJetTree.Branch("muonEGHLTL",muonEGHLTL,"muonEGHLTL/O")
+hJetTree.Branch("elecHLTL",elecHLTL,"elecHLTL/O")
+hJetTree.Branch("muonHLTL",muonHLTL,"muonHLTL/O")
+hJetTree.Branch("hadHLTL",hadHLTL,"hadHLTL/O")
+hJetTree.Branch("isLeptonicL",isLeptonicL,"isLeptonicL/O")
+hJetTree.Branch("isSemiLeptonicL",isSemiLeptonicL,"isSemiLeptonicL/O")
+hJetTree.Branch("isHadronicL",isHadronicL,"isHadronicL/O")
 
 #VBF jet pair selection
 #Defining jet matching cuts
