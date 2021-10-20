@@ -226,7 +226,7 @@ for k,fileName in enumerate(fileAr):
         for i,runEv in enumerate(runTree):
             #if i > 0:
             #    print("uhoh it has two",i,k,fileName)
-            crossSection = +=runEv.genEventSumw / runEv.genEventCount
+            crossSection +=runEv.genEventSumw / runEv.genEventCount
         crossSection = crossSection / (i+1)
         crossSectionAvg += crossSection
         crossSectionCtr += 1
