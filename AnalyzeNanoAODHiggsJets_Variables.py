@@ -12,6 +12,7 @@ NToEnd = 2500
 #withDipoleRecoil = True
 
 testRun = True
+LaraTest = False
 MGSM = False
 MGEFT = False
 ttHToBBBackground = False

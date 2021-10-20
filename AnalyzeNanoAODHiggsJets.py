@@ -185,6 +185,9 @@ elif QCDPT3200toInfBackground:
 elif testRun:
     saveName = "testRun"
     fileAr.append("./unweighted_eventspphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev10080Seed_0p999cHW100GeVIMJetCut_200.root")
+elif LaraTest:
+    saveName = "LaraTest"
+    fileAr.append("/scratch365/dlutton/NanoAODFiles/pp_hwpwmjj_EFT_VBF_chw_09999000_250k.root")
 else:
     print("ERROR. NO INPUT DATASET NAME GIVEN")
 
@@ -219,10 +222,12 @@ for k,fileName in enumerate(fileAr):
     #Getting the cross section
     #For background it's precalculated
     if not isBackground:
+        crossSection = 0
         for i,runEv in enumerate(runTree):
-            if i > 0:
-                print("uhoh it has two",i,k,fileName)
-            crossSection = runEv.genEventSumw / runEv.genEventCount
+            #if i > 0:
+            #    print("uhoh it has two",i,k,fileName)
+            crossSection = +=runEv.genEventSumw / runEv.genEventCount
+        crossSection = crossSection / (i+1)
         crossSectionAvg += crossSection
         crossSectionCtr += 1
     if k % 10 == 0:
@@ -349,6 +354,8 @@ for k,fileName in enumerate(fileAr):
         hFatJet_mass_fromHTag = 0
         hFatJet_HTag_fromHTag = 0
         for fatJetInd in range(nFatJet):
+            #if ev.FatJet_deepTag_H[fatJetInd] < hFatJetDeepTagCut:
+            #    continue
             tmpFatJet_pt = ev.FatJet_pt[fatJetInd]
             if tmpFatJet_pt > hFatJetPTCut:
                 tmpFatJet_jetId = ev.FatJet_jetId[fatJetInd]
