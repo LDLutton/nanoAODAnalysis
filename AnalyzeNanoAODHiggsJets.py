@@ -202,6 +202,21 @@ passChannelCtr = 0
 passVBFJets = 0
 passFatJets = 0
 passGenPart = 0
+debug = False
+
+#Currently doesn't take into account intermediary particles really. should update at some point
+#Can look at old AnalyzeNanoAODFilesWithPyRoot.py script to see how I dealt with this previously
+def getInitialMother(ev,genPartInd):
+    momFound = False
+    motherAr = []
+    tmpMomInd = ev.GenPart_genPartIdxMother[genPartInd]
+    while not momFound:
+        motherAr.append(ev.GenPart_pdgId[tmpMomInd])
+        tmpMomInd = ev.GenPart_genPartIdxMother[tmpMomInd]
+        if tmpMomInd == -1 or tmpMomInd == 0:
+            momFound = True
+    return motherAr[-1]
+
 
 
 if not isBackground:
@@ -214,6 +229,8 @@ print("Going into file loop.","time:",time.time()-startt)
 for k,fileName in enumerate(fileAr):
     if endAfter and evCount > NToEnd:
         break
+    if debug:
+        print("File:    ",fileName)
     #Open the file, get the Events tree
     tmpfile = TFile.Open(fileName)
     outFile.cd()
@@ -235,6 +252,9 @@ for k,fileName in enumerate(fileAr):
 
     #EvLoop
     for ev in mytree:
+        if debug:
+            print("-------------------------")
+            print(evCount+1," starting jets loop")
         if endAfter:
             if evCount < NToStart:
                 evCount += 1
@@ -287,6 +307,8 @@ for k,fileName in enumerate(fileAr):
 
         #First match jets
         nJet           = ev.nJet
+        leadJet_1 = 0
+        leadJet_2 = 0
         jetLeadPt      = 0
         jetTrailingPt  = 0
         jetLeadVec     = 0
@@ -328,6 +350,8 @@ for k,fileName in enumerate(fileAr):
                         jetTrailingPt = jetPtTwo
                         jetTrailingEta = jetEtaTwo
                         jetTrailingPhi = jetPhiTwo
+                        leadJet_1 = jetIndOne
+                        leadJet_2 = jetIndTwo
                     else:
                         jetLeadPt = jetPtTwo
                         jetLeadEta = jetEtaTwo
@@ -335,9 +359,19 @@ for k,fileName in enumerate(fileAr):
                         jetTrailingPt = jetPtOne
                         jetTrailingEta = jetEtaOne
                         jetTrailingPhi = jetPhiOne
+                        leadJet_1 = jetIndTwo
+                        leadJet_2 = jetIndOne
         if jetLeadPt == 0:
             continue
-        
+        if debug:
+            print(" found jet pairs")
+            print(evCount+1," selected jet pair")
+            print("Lead jet ind    ",leadJet_1)
+            print("Trailing jet ind    ",leadJet_2)
+            print("Lead jet phi    ",ev.Jet_phi[leadJet_1])
+            print("Trailing jet phi    ",ev.Jet_phi[leadJet_2])
+            print("Lead jet eta    ",ev.Jet_eta[leadJet_1])
+            print("Trailing jet eta    ",ev.Jet_eta[leadJet_2])
         passVBFJets += 1
 
 
@@ -353,9 +387,18 @@ for k,fileName in enumerate(fileAr):
         hFatJet_eta_fromHTag = 0
         hFatJet_mass_fromHTag = 0
         hFatJet_HTag_fromHTag = 0
+        if debug:
+            print("Entering Fat Jets Loop")
         for fatJetInd in range(nFatJet):
             #if ev.FatJet_deepTag_H[fatJetInd] < hFatJetDeepTagCut:
             #    continue
+            if debug:
+                print(fatJetInd," +++++++++++++++")
+                print("Fat jet phi    ", ev.FatJet_phi[fatJetInd])
+                print("Fat jet eta    ", ev.FatJet_eta[fatJetInd])
+                    
+                print("Fat jet pt    ", ev.FatJet_pt[fatJetInd])
+                print("Fat jet jetId    ", ev.FatJet_jetId[fatJetInd])
             tmpFatJet_pt = ev.FatJet_pt[fatJetInd]
             if tmpFatJet_pt > hFatJetPTCut:
                 tmpFatJet_jetId = ev.FatJet_jetId[fatJetInd]
@@ -364,7 +407,12 @@ for k,fileName in enumerate(fileAr):
                     tmpFatJet_phi = ev.FatJet_phi[fatJetInd]
                     tmpDROne = calcDeltaR(tmpFatJet_phi,tmpFatJet_eta,jetLeadPhi,jetLeadEta)
                     tmpDRTwo = calcDeltaR(tmpFatJet_phi,tmpFatJet_eta,jetTrailingPhi,jetTrailingEta)
+                    if debug:
+                        print("Fat jet dROne    ", tmpDROne)
+                        print("Fat jet dRTwo    ", tmpDRTwo)
                     if tmpDROne > hFatJetdRCut and tmpDRTwo > hFatJetdRCut:
+                        if debug:
+                            print("Passed fatjet cuts")
                         tmpFatJet_HTag = ev.FatJet_deepTag_H[fatJetInd]
                         if tmpFatJet_pt > hFatJet_pt_fromPt:
                             hFatJet_HTag_fromPt = tmpFatJet_HTag
@@ -381,7 +429,8 @@ for k,fileName in enumerate(fileAr):
                             hFatJet_mass_fromHTag = ev.FatJet_mass[fatJetInd]
         if hFatJet_pt_fromHTag == 0:
             continue
-        
+        if debug:
+            print(" found fat jet")
         passFatJets += 1
 
 
@@ -407,7 +456,12 @@ for k,fileName in enumerate(fileAr):
                 hGenPartInd_fromHTag = genPartInd
                 hGenPartpdgId_fromHTag = ev.GenPart_pdgId[genPartInd]
         if (not hGenPartInd_fromPt == -1) and (not hGenPartInd_fromHTag == -1):
+            if debug:
+                print(" found gen part")
             passGenPart += 1
+            #Get genPart first mom
+            hGenPartFirstMompdgId_fromPt = getInitialMother(ev,hGenPartInd_fromPt)
+            hGenPartFirstMompdgId_fromHTag = getInitialMother(ev,hGenPartInd_fromHTag)
             #Fill tree
             nJetL[0] = nJet
             jetLeadPtL[0] = jetLeadPt
@@ -437,9 +491,11 @@ for k,fileName in enumerate(fileAr):
             hGenPartDR_fromPtL[0] = hGenPartDR_fromPt
             hGenPartInd_fromPtL[0] = hGenPartInd_fromPt
             hGenPartpdgId_fromPtL[0] = hGenPartpdgId_fromPt
+            hGenPartFirstMompdgId_fromPtL[0] = hGenPartFirstMompdgId_fromPt
             hGenPartDR_fromHTagL[0] = hGenPartDR_fromHTag
             hGenPartInd_fromHTagL[0] = hGenPartInd_fromHTag
             hGenPartpdgId_fromHTagL[0] = hGenPartpdgId_fromHTag
+            hGenPartFirstMompdgId_fromHTagL[0] = hGenPartFirstMompdgId_fromHTag
 
             #HLT stuff
 

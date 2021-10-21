@@ -72,9 +72,11 @@ nGenPartL = array('i',[0])
 hGenPartDR_fromPtL = array('f',[0.])
 hGenPartInd_fromPtL = array('f',[0.])
 hGenPartpdgId_fromPtL = array('f',[0.])
+hGenPartFirstMompdgId_fromPtL = array('i',[0])
 hGenPartDR_fromHTagL = array('f',[0.])
 hGenPartInd_fromHTagL = array('f',[0.])
 hGenPartpdgId_fromHTagL = array('f',[0.])
+hGenPartFirstMompdgId_fromHTagL = array('i',[0])
 
 #Now HLT stuff
 hbbTagL = array('B',[0])
@@ -121,9 +123,11 @@ hJetTree.Branch("nGenPartL",nGenPartL,"nGenPartL/I")
 hJetTree.Branch("hGenPartDR_fromPtL",hGenPartDR_fromPtL,"hGenPartDR_fromPtL/F")
 hJetTree.Branch("hGenPartInd_fromPtL",hGenPartInd_fromPtL,"hGenPartInd_fromPtL/F")
 hJetTree.Branch("hGenPartpdgId_fromPtL",hGenPartpdgId_fromPtL,"hGenPartpdgId_fromPtL/F")
+hJetTree.Branch("hGenPartFirstMompdgId_fromPtL",hGenPartFirstMompdgId_fromPtL,"hGenPartFirstMompdgId_fromPtL/I")
 hJetTree.Branch("hGenPartDR_fromHTagL",hGenPartDR_fromHTagL,"hGenPartDR_fromHTagL/F")
 hJetTree.Branch("hGenPartInd_fromHTagL",hGenPartInd_fromHTagL,"hGenPartInd_fromHTagL/F")
 hJetTree.Branch("hGenPartpdgId_fromHTagL",hGenPartpdgId_fromHTagL,"hGenPartpdgId_fromHTagL/F")
+hJetTree.Branch("hGenPartFirstMompdgId_fromHTagL",hGenPartFirstMompdgId_fromHTagL,"hGenPartFirstMompdgId_fromHTagL/I")
 
 #Now HLT stuff
 
