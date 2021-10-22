@@ -130,7 +130,7 @@ if ttHToBBBackground:
     saveNameAr.append("ttHToBB")
     colorAr.append(7)
     isSignalAr.append(False)
-    tmpXSAvg = 0.6*0.584
+    tmpXSAvg = 0.5071*0.582
     XSAr.append(tmpXSAvg)
     #tmpCZTree = fileAr[-1].cutZeroTree
     #totalEvents.append(tmpCZTree.GetEntries())
@@ -164,7 +164,7 @@ if DYBackground:
     saveNameAr.append("DY")
     colorAr.append(8)
     isSignalAr.append(False)
-    tmpXSAvg = 6077.22
+    tmpXSAvg = 5364
     XSAr.append(tmpXSAvg)
     #tmpCZTree = fileAr[-1].cutZeroTree
     #totalEvents.append(tmpCZTree.GetEntries())
