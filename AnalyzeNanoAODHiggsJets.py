@@ -202,7 +202,7 @@ passChannelCtr = 0
 passVBFJets = 0
 passFatJets = 0
 passGenPart = 0
-debug = False
+passFJMatch = 0
 
 #Currently doesn't take into account intermediary particles really. should update at some point
 #Can look at old AnalyzeNanoAODFilesWithPyRoot.py script to see how I dealt with this previously
@@ -459,9 +459,56 @@ for k,fileName in enumerate(fileAr):
             if debug:
                 print(" found gen part")
             passGenPart += 1
+            
             #Get genPart first mom
             hGenPartFirstMompdgId_fromPt = getInitialMother(ev,hGenPartInd_fromPt)
             hGenPartFirstMompdgId_fromHTag = getInitialMother(ev,hGenPartInd_fromHTag)
+
+
+            #Now do higgs gen matching with fatjets
+            #First get h index
+            for LHEInd in range(ev.nLHEPart):
+                if ev.LHEPart_pdgId[LHEInd] == 25:
+                    hInd = LHEInd
+            #Now get FatJets close in dR
+            hLHE_phi = ev.LHEPart_phi[hInd]
+            hLHE_eta = ev.LHEPart_eta[hInd]
+            FJTopPt = 0
+            FJTopHTag = 0
+            FJTopdR = 999
+            FJLHEMatchedInd_fromPt = -1
+            FJLHEMatchedInd_fromHTag = -1
+            FJLHEMatchedInd_fromdR = -1
+            
+            for fatJetInd in range(nFatJet):
+                tmpFatJet_phi = ev.FatJet_phi[fatJetInd]
+                tmpFatJet_eta = ev.FatJet_eta[fatJetInd]
+                tmpdR = calcDeltaR(tmpFatJet_phi,tmpFatJet_eta,hLHE_phi,hLHE_eta)
+                if tmpdR < 0.4:
+                    tmpFJ_pt = ev.FatJet_pt[fatJetInd]
+                    tmpFJ_DTH = ev.FatJet_deepTag_H[fatJetInd] 
+                    if tmpFJ_pt > FJTopPt:
+                        FJTopPt = tmpFJ_pt
+                        FJLHEMatchedInd_fromPt = fatJetInd
+                    if tmpFJ_DTH > FJTopHTag:
+                        FJTopHTag = tmpFJ_DTH
+                        FJLHEMatchedInd_fromHTag = fatJetInd
+                    
+                    if tmpdR < FJTopdR:
+                        FJTopdR = tmpdR
+                        FJLHEMatchedInd_fromdR = fatJetInd
+                    
+            if FJLHEMatchedInd_fromPt == -1:
+                continue
+            passFJMatch += 1
+                    
+
+
+            
+
+
+
+
             #Fill tree
             nJetL[0] = nJet
             jetLeadPtL[0] = jetLeadPt
@@ -483,6 +530,41 @@ for k,fileName in enumerate(fileAr):
             hFatJet_eta_fromHTagL[0] = hFatJet_eta_fromHTag
             hFatJet_mass_fromHTagL[0] = hFatJet_mass_fromHTag
             hFatJet_HTag_fromHTagL[0] = hFatJet_HTag_fromHTag
+
+            #Now matched fat jets
+            hFatJet_Matched_HTag_fromPt = ev.FatJet_deepTag_H[FJLHEMatchedInd_fromPt]
+            hFatJet_Matched_pt_fromPt = ev.FatJet_pt[FJLHEMatchedInd_fromPt]
+            hFatJet_Matched_phi_fromPt = ev.FatJet_phi[FJLHEMatchedInd_fromPt]
+            hFatJet_Matched_eta_fromPt = ev.FatJet_eta[FJLHEMatchedInd_fromPt]
+            hFatJet_Matched_mass_fromPt = ev.FatJet_mass[FJLHEMatchedInd_fromPt]
+            hFatJet_Matched_HTag_fromHTag = ev.FatJet_deepTag_H[FJLHEMatchedInd_fromHTag]
+            hFatJet_Matched_pt_fromHTag = ev.FatJet_pt[FJLHEMatchedInd_fromHTag]
+            hFatJet_Matched_phi_fromHTag = ev.FatJet_phi[FJLHEMatchedInd_fromHTag]
+            hFatJet_Matched_eta_fromHTag = ev.FatJet_eta[FJLHEMatchedInd_fromHTag]
+            hFatJet_Matched_mass_fromHTag = ev.FatJet_mass[FJLHEMatchedInd_fromHTag]
+            hFatJet_Matched_HTag_fromdR = ev.FatJet_deepTag_H[FJLHEMatchedInd_fromdR]
+            hFatJet_Matched_pt_fromdR = ev.FatJet_pt[FJLHEMatchedInd_fromdR]
+            hFatJet_Matched_phi_fromdR = ev.FatJet_phi[FJLHEMatchedInd_fromdR]
+            hFatJet_Matched_eta_fromdR = ev.FatJet_eta[FJLHEMatchedInd_fromdR]
+            hFatJet_Matched_mass_fromdR = ev.FatJet_mass[FJLHEMatchedInd_fromdR]
+
+            hFatJet_Matched_HTag_fromPtL[0] = hFatJet_Matched_HTag_fromPt
+            hFatJet_Matched_pt_fromPtL[0] = hFatJet_Matched_pt_fromPt
+            hFatJet_Matched_phi_fromPtL[0] = hFatJet_Matched_phi_fromPt
+            hFatJet_Matched_eta_fromPtL[0] = hFatJet_Matched_eta_fromPt
+            hFatJet_Matched_mass_fromPtL[0] = hFatJet_Matched_mass_fromPt
+            hFatJet_Matched_pt_fromHTagL[0] = hFatJet_Matched_pt_fromHTag
+            hFatJet_Matched_phi_fromHTagL[0] = hFatJet_Matched_phi_fromHTag
+            hFatJet_Matched_eta_fromHTagL[0] = hFatJet_Matched_eta_fromHTag
+            hFatJet_Matched_mass_fromHTagL[0] = hFatJet_Matched_mass_fromHTag
+            hFatJet_Matched_HTag_fromHTagL[0] = hFatJet_Matched_HTag_fromHTag
+            hFatJet_Matched_pt_fromdRL[0] = hFatJet_Matched_pt_fromdR
+            hFatJet_Matched_phi_fromdRL[0] = hFatJet_Matched_phi_fromdR
+            hFatJet_Matched_eta_fromdRL[0] = hFatJet_Matched_eta_fromdR
+            hFatJet_Matched_mass_fromdRL[0] = hFatJet_Matched_mass_fromdR
+            hFatJet_Matched_HTag_fromdRL[0] = hFatJet_Matched_HTag_fromdR
+
+            
 
             #Now GenPart
             #print(nGenPart)
@@ -531,6 +613,7 @@ print("passes channel cut:",passChannelCtr)
 print("passes VBF Jet cut:",passVBFJets)
 print("passes FatJet cut:",passFatJets)
 print("passes GenPart cut:",passGenPart)
+print("passes Higgs Fat Jet Gen Matching:",passFJMatch)
 print("evPassCount:",evPassCount)
 
 if not isBackground:
