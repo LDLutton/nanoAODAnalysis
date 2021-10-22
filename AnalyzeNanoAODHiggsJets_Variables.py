@@ -55,11 +55,12 @@ jetLeadEtaL     = array('f',[0.])
 jetTrailingEtaL = array('f',[0.])
 #now fat jets
 nFatJetL = array('i',[0])
-hFatJet_HTag_fromPtL = array('f',[0.])
+
 hFatJet_pt_fromPtL = array('f',[0.])
 hFatJet_phi_fromPtL = array('f',[0.])
 hFatJet_eta_fromPtL = array('f',[0.])
 hFatJet_mass_fromPtL = array('f',[0.])
+hFatJet_HTag_fromPtL = array('f',[0.])
 hFatJet_pt_fromHTagL = array('f',[0.])
 hFatJet_phi_fromHTagL = array('f',[0.])
 hFatJet_eta_fromHTagL = array('f',[0.])
@@ -67,11 +68,12 @@ hFatJet_mass_fromHTagL = array('f',[0.])
 hFatJet_HTag_fromHTagL = array('f',[0.])
 
 #now matched fat jets
-hFatJet_Matched_HTag_fromPtL = array('f',[0.])
+
 hFatJet_Matched_pt_fromPtL = array('f',[0.])
 hFatJet_Matched_phi_fromPtL = array('f',[0.])
 hFatJet_Matched_eta_fromPtL = array('f',[0.])
 hFatJet_Matched_mass_fromPtL = array('f',[0.])
+hFatJet_Matched_HTag_fromPtL = array('f',[0.])
 hFatJet_Matched_pt_fromHTagL = array('f',[0.])
 hFatJet_Matched_phi_fromHTagL = array('f',[0.])
 hFatJet_Matched_eta_fromHTagL = array('f',[0.])
@@ -124,11 +126,12 @@ hJetTree.Branch("jetLeadEtaL",jetLeadEtaL,"jetLeadEtaL/F")
 hJetTree.Branch("jetTrailingEtaL",jetTrailingEtaL,"jetTrailingEtaL/F")
 #now fat jets
 hJetTree.Branch("nFatJetL",nFatJetL,"nFatJetL/I")
-hJetTree.Branch("hFatJet_HTag_fromPtL",hFatJet_HTag_fromPtL,"hFatJet_HTag_fromPtL/F")
+
 hJetTree.Branch("hFatJet_pt_fromPtL",hFatJet_pt_fromPtL,"hFatJet_pt_fromPtL/F")
 hJetTree.Branch("hFatJet_phi_fromPtL",hFatJet_phi_fromPtL,"hFatJet_phi_fromPtL/F")
 hJetTree.Branch("hFatJet_eta_fromPtL",hFatJet_eta_fromPtL,"hFatJet_eta_fromPtL/F")
 hJetTree.Branch("hFatJet_mass_fromPtL",hFatJet_mass_fromPtL,"hFatJet_mass_fromPtL/F")
+hJetTree.Branch("hFatJet_HTag_fromPtL",hFatJet_HTag_fromPtL,"hFatJet_HTag_fromPtL/F")
 hJetTree.Branch("hFatJet_pt_fromHTagL",hFatJet_pt_fromHTagL,"hFatJet_pt_fromHTagL/F")
 hJetTree.Branch("hFatJet_phi_fromHTagL",hFatJet_phi_fromHTagL,"hFatJet_phi_fromHTagL/F")
 hJetTree.Branch("hFatJet_eta_fromHTagL",hFatJet_eta_fromHTagL,"hFatJet_eta_fromHTagL/F")
@@ -137,11 +140,12 @@ hJetTree.Branch("hFatJet_HTag_fromHTagL",hFatJet_HTag_fromHTagL,"hFatJet_HTag_fr
 
 #Now matched fat jets
 
-hJetTree.Branch("hFatJet_Matched_HTag_fromPtL",hFatJet_Matched_HTag_fromPtL,"hFatJet_Matched_HTag_fromPtL/F")
+
 hJetTree.Branch("hFatJet_Matched_pt_fromPtL",hFatJet_Matched_pt_fromPtL,"hFatJet_Matched_pt_fromPtL/F")
 hJetTree.Branch("hFatJet_Matched_phi_fromPtL",hFatJet_Matched_phi_fromPtL,"hFatJet_Matched_phi_fromPtL/F")
 hJetTree.Branch("hFatJet_Matched_eta_fromPtL",hFatJet_Matched_eta_fromPtL,"hFatJet_Matched_eta_fromPtL/F")
 hJetTree.Branch("hFatJet_Matched_mass_fromPtL",hFatJet_Matched_mass_fromPtL,"hFatJet_Matched_mass_fromPtL/F")
+hJetTree.Branch("hFatJet_Matched_HTag_fromPtL",hFatJet_Matched_HTag_fromPtL,"hFatJet_Matched_HTag_fromPtL/F")
 hJetTree.Branch("hFatJet_Matched_pt_fromHTagL",hFatJet_Matched_pt_fromHTagL,"hFatJet_Matched_pt_fromHTagL/F")
 hJetTree.Branch("hFatJet_Matched_phi_fromHTagL",hFatJet_Matched_phi_fromHTagL,"hFatJet_Matched_phi_fromHTagL/F")
 hJetTree.Branch("hFatJet_Matched_eta_fromHTagL",hFatJet_Matched_eta_fromHTagL,"hFatJet_Matched_eta_fromHTagL/F")

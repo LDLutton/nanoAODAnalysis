@@ -520,11 +520,12 @@ for k,fileName in enumerate(fileAr):
             jetTrailingEtaL[0] = jetTrailingEta
             #now fat jets
             nFatJetL[0] = nFatJet
-            hFatJet_HTag_fromPtL[0] = hFatJet_HTag_fromPt
+            
             hFatJet_pt_fromPtL[0] = hFatJet_pt_fromPt
             hFatJet_phi_fromPtL[0] = hFatJet_phi_fromPt
             hFatJet_eta_fromPtL[0] = hFatJet_eta_fromPt
             hFatJet_mass_fromPtL[0] = hFatJet_mass_fromPt
+            hFatJet_HTag_fromPtL[0] = hFatJet_HTag_fromPt
             hFatJet_pt_fromHTagL[0] = hFatJet_pt_fromHTag
             hFatJet_phi_fromHTagL[0] = hFatJet_phi_fromHTag
             hFatJet_eta_fromHTagL[0] = hFatJet_eta_fromHTag
@@ -532,27 +533,31 @@ for k,fileName in enumerate(fileAr):
             hFatJet_HTag_fromHTagL[0] = hFatJet_HTag_fromHTag
 
             #Now matched fat jets
-            hFatJet_Matched_HTag_fromPt = ev.FatJet_deepTag_H[FJLHEMatchedInd_fromPt]
+            
             hFatJet_Matched_pt_fromPt = ev.FatJet_pt[FJLHEMatchedInd_fromPt]
             hFatJet_Matched_phi_fromPt = ev.FatJet_phi[FJLHEMatchedInd_fromPt]
             hFatJet_Matched_eta_fromPt = ev.FatJet_eta[FJLHEMatchedInd_fromPt]
             hFatJet_Matched_mass_fromPt = ev.FatJet_mass[FJLHEMatchedInd_fromPt]
-            hFatJet_Matched_HTag_fromHTag = ev.FatJet_deepTag_H[FJLHEMatchedInd_fromHTag]
+            hFatJet_Matched_HTag_fromPt = ev.FatJet_deepTag_H[FJLHEMatchedInd_fromPt]
+            
             hFatJet_Matched_pt_fromHTag = ev.FatJet_pt[FJLHEMatchedInd_fromHTag]
             hFatJet_Matched_phi_fromHTag = ev.FatJet_phi[FJLHEMatchedInd_fromHTag]
             hFatJet_Matched_eta_fromHTag = ev.FatJet_eta[FJLHEMatchedInd_fromHTag]
             hFatJet_Matched_mass_fromHTag = ev.FatJet_mass[FJLHEMatchedInd_fromHTag]
-            hFatJet_Matched_HTag_fromdR = ev.FatJet_deepTag_H[FJLHEMatchedInd_fromdR]
+            hFatJet_Matched_HTag_fromHTag = ev.FatJet_deepTag_H[FJLHEMatchedInd_fromHTag]
+            
             hFatJet_Matched_pt_fromdR = ev.FatJet_pt[FJLHEMatchedInd_fromdR]
             hFatJet_Matched_phi_fromdR = ev.FatJet_phi[FJLHEMatchedInd_fromdR]
             hFatJet_Matched_eta_fromdR = ev.FatJet_eta[FJLHEMatchedInd_fromdR]
             hFatJet_Matched_mass_fromdR = ev.FatJet_mass[FJLHEMatchedInd_fromdR]
+            hFatJet_Matched_HTag_fromdR = ev.FatJet_deepTag_H[FJLHEMatchedInd_fromdR]
 
-            hFatJet_Matched_HTag_fromPtL[0] = hFatJet_Matched_HTag_fromPt
+            
             hFatJet_Matched_pt_fromPtL[0] = hFatJet_Matched_pt_fromPt
             hFatJet_Matched_phi_fromPtL[0] = hFatJet_Matched_phi_fromPt
             hFatJet_Matched_eta_fromPtL[0] = hFatJet_Matched_eta_fromPt
             hFatJet_Matched_mass_fromPtL[0] = hFatJet_Matched_mass_fromPt
+            hFatJet_Matched_HTag_fromPtL[0] = hFatJet_Matched_HTag_fromPt
             hFatJet_Matched_pt_fromHTagL[0] = hFatJet_Matched_pt_fromHTag
             hFatJet_Matched_phi_fromHTagL[0] = hFatJet_Matched_phi_fromHTag
             hFatJet_Matched_eta_fromHTagL[0] = hFatJet_Matched_eta_fromHTag
