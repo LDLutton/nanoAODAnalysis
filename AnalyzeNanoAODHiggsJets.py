@@ -477,30 +477,47 @@ for k,fileName in enumerate(fileAr):
             FJTopHTag = 0
             FJTopdR = 999
             FJLHEMatchedInd_fromPt = -1
-            FJLHEMatchedInd_fromHTag = -1
-            FJLHEMatchedInd_fromdR = -1
-            
+            #FJLHEMatchedInd_fromHTag = -1
+            #FJLHEMatchedInd_fromdR = -1
+            if debug:
+                print("doing matched higgs jets now")
+
             for fatJetInd in range(nFatJet):
                 tmpFatJet_phi = ev.FatJet_phi[fatJetInd]
                 tmpFatJet_eta = ev.FatJet_eta[fatJetInd]
                 tmpdR = calcDeltaR(tmpFatJet_phi,tmpFatJet_eta,hLHE_phi,hLHE_eta)
+                if debug:
+                    print("fatJetInd",fatJetInd,"tmpFatJet_phi",tmpFatJet_phi,"tmpFatJet_eta",tmpFatJet_eta,"tmpdR",tmpdR)
                 if tmpdR < 0.4:
+                    
                     tmpFJ_pt = ev.FatJet_pt[fatJetInd]
-                    tmpFJ_DTH = ev.FatJet_deepTag_H[fatJetInd] 
+                    tmpFJ_DTH = ev.FatJet_deepTag_H[fatJetInd]
+                    if debug:
+                        print("Passed dR cut")
+                        print("tmpFJ_pt",tmpFJ_pt,"tmpFJ_DTH",tmpFJ_DTH) 
                     if tmpFJ_pt > FJTopPt:
                         FJTopPt = tmpFJ_pt
                         FJLHEMatchedInd_fromPt = fatJetInd
+                        if debug:
+                            print("Passed pt based selection"," fatJetInd",fatJetInd)
+                    """
                     if tmpFJ_DTH > FJTopHTag:
                         FJTopHTag = tmpFJ_DTH
                         FJLHEMatchedInd_fromHTag = fatJetInd
+                        if debug:
+                            print("Passed DTH based selection"," fatJetInd",fatJetInd)
                     
                     if tmpdR < FJTopdR:
                         FJTopdR = tmpdR
                         FJLHEMatchedInd_fromdR = fatJetInd
+                        if debug:
+                            print("Passed dR based selection"," fatJetInd",fatJetInd)
+                    """
                     
             if FJLHEMatchedInd_fromPt == -1:
                 continue
             passFJMatch += 1
+            #print(FJLHEMatchedInd_fromPt,FJLHEMatchedInd_fromHTag,FJLHEMatchedInd_fromdR)
                     
 
 
@@ -539,7 +556,7 @@ for k,fileName in enumerate(fileAr):
             hFatJet_Matched_eta_fromPt = ev.FatJet_eta[FJLHEMatchedInd_fromPt]
             hFatJet_Matched_mass_fromPt = ev.FatJet_mass[FJLHEMatchedInd_fromPt]
             hFatJet_Matched_HTag_fromPt = ev.FatJet_deepTag_H[FJLHEMatchedInd_fromPt]
-            
+            """
             hFatJet_Matched_pt_fromHTag = ev.FatJet_pt[FJLHEMatchedInd_fromHTag]
             hFatJet_Matched_phi_fromHTag = ev.FatJet_phi[FJLHEMatchedInd_fromHTag]
             hFatJet_Matched_eta_fromHTag = ev.FatJet_eta[FJLHEMatchedInd_fromHTag]
@@ -551,6 +568,7 @@ for k,fileName in enumerate(fileAr):
             hFatJet_Matched_eta_fromdR = ev.FatJet_eta[FJLHEMatchedInd_fromdR]
             hFatJet_Matched_mass_fromdR = ev.FatJet_mass[FJLHEMatchedInd_fromdR]
             hFatJet_Matched_HTag_fromdR = ev.FatJet_deepTag_H[FJLHEMatchedInd_fromdR]
+            """
 
             
             hFatJet_Matched_pt_fromPtL[0] = hFatJet_Matched_pt_fromPt
@@ -558,6 +576,7 @@ for k,fileName in enumerate(fileAr):
             hFatJet_Matched_eta_fromPtL[0] = hFatJet_Matched_eta_fromPt
             hFatJet_Matched_mass_fromPtL[0] = hFatJet_Matched_mass_fromPt
             hFatJet_Matched_HTag_fromPtL[0] = hFatJet_Matched_HTag_fromPt
+            """
             hFatJet_Matched_pt_fromHTagL[0] = hFatJet_Matched_pt_fromHTag
             hFatJet_Matched_phi_fromHTagL[0] = hFatJet_Matched_phi_fromHTag
             hFatJet_Matched_eta_fromHTagL[0] = hFatJet_Matched_eta_fromHTag
@@ -568,6 +587,7 @@ for k,fileName in enumerate(fileAr):
             hFatJet_Matched_eta_fromdRL[0] = hFatJet_Matched_eta_fromdR
             hFatJet_Matched_mass_fromdRL[0] = hFatJet_Matched_mass_fromdR
             hFatJet_Matched_HTag_fromdRL[0] = hFatJet_Matched_HTag_fromdR
+            """
 
             
 

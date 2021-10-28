@@ -2,7 +2,7 @@ from ROOT import TTree
 from array import array
 
 #To enable heavy printing for debug
-debug = False
+debug = True
 debugChannelSort = False
 #To break out of loops after NToEnd events
 endAfter = False
@@ -74,6 +74,7 @@ hFatJet_Matched_phi_fromPtL = array('f',[0.])
 hFatJet_Matched_eta_fromPtL = array('f',[0.])
 hFatJet_Matched_mass_fromPtL = array('f',[0.])
 hFatJet_Matched_HTag_fromPtL = array('f',[0.])
+"""
 hFatJet_Matched_pt_fromHTagL = array('f',[0.])
 hFatJet_Matched_phi_fromHTagL = array('f',[0.])
 hFatJet_Matched_eta_fromHTagL = array('f',[0.])
@@ -84,6 +85,7 @@ hFatJet_Matched_phi_fromdRL = array('f',[0.])
 hFatJet_Matched_eta_fromdRL = array('f',[0.])
 hFatJet_Matched_mass_fromdRL = array('f',[0.])
 hFatJet_Matched_HTag_fromdRL = array('f',[0.])
+"""
 
 #Now GenPart
 
@@ -146,6 +148,9 @@ hJetTree.Branch("hFatJet_Matched_phi_fromPtL",hFatJet_Matched_phi_fromPtL,"hFatJ
 hJetTree.Branch("hFatJet_Matched_eta_fromPtL",hFatJet_Matched_eta_fromPtL,"hFatJet_Matched_eta_fromPtL/F")
 hJetTree.Branch("hFatJet_Matched_mass_fromPtL",hFatJet_Matched_mass_fromPtL,"hFatJet_Matched_mass_fromPtL/F")
 hJetTree.Branch("hFatJet_Matched_HTag_fromPtL",hFatJet_Matched_HTag_fromPtL,"hFatJet_Matched_HTag_fromPtL/F")
+
+#Had these originally, but the dR cut pretty much makes it irrelevant since at 0.4 it seems like you only ever get one fatjet passing it
+"""
 hJetTree.Branch("hFatJet_Matched_pt_fromHTagL",hFatJet_Matched_pt_fromHTagL,"hFatJet_Matched_pt_fromHTagL/F")
 hJetTree.Branch("hFatJet_Matched_phi_fromHTagL",hFatJet_Matched_phi_fromHTagL,"hFatJet_Matched_phi_fromHTagL/F")
 hJetTree.Branch("hFatJet_Matched_eta_fromHTagL",hFatJet_Matched_eta_fromHTagL,"hFatJet_Matched_eta_fromHTagL/F")
@@ -156,6 +161,7 @@ hJetTree.Branch("hFatJet_Matched_phi_fromdRL",hFatJet_Matched_phi_fromdRL,"hFatJ
 hJetTree.Branch("hFatJet_Matched_eta_fromdRL",hFatJet_Matched_eta_fromdRL,"hFatJet_Matched_eta_fromdRL/F")
 hJetTree.Branch("hFatJet_Matched_mass_fromdRL",hFatJet_Matched_mass_fromdRL,"hFatJet_Matched_mass_fromdRL/F")
 hJetTree.Branch("hFatJet_Matched_HTag_fromdRL",hFatJet_Matched_HTag_fromdRL,"hFatJet_Matched_HTag_fromdRL/F")
+"""
 
 #now genpart
 hJetTree.Branch("nGenPartL",nGenPartL,"nGenPartL/I")
