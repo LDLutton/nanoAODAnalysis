@@ -762,17 +762,17 @@ for k,fileName in enumerate(fileAr):
                                         print("passed iso cut yay")
                                     #passesIsoCutCtr += 1
                                     if not Z1IsMuon:
-                                        Z1LeadSIP = ev.eSIP[elecCandIndAr[Z1LeadItr]]
-                                        Z1TrailingSIP = ev.eSIP[elecCandIndAr[Z1TrailingItr]]
+                                        Z1LeadSIP = ev.Electron_sip3d[elecCandIndAr[Z1LeadItr]]
+                                        Z1TrailingSIP = ev.Electron_sip3d[elecCandIndAr[Z1TrailingItr]]
                                     else:
-                                        Z1LeadSIP = ev.mSIP[muonCandIndAr[Z1LeadItr]]
-                                        Z1TrailingSIP = ev.mSIP[muonCandIndAr[Z1TrailingItr]]
+                                        Z1LeadSIP = ev.Muon_sip3d[muonCandIndAr[Z1LeadItr]]
+                                        Z1TrailingSIP = ev.Muon_sip3d[muonCandIndAr[Z1TrailingItr]]
                                     if not Z2IsMuon:
-                                        Z2LeadSIP = ev.eSIP[elecPassesZ2CutsFinalAr[tmpZ2Ind][0]]
-                                        Z2TrailingSIP = ev.eSIP[elecPassesZ2CutsFinalAr[tmpZ2Ind][1]]
+                                        Z2LeadSIP = ev.Electron_sip3d[elecPassesZ2CutsFinalAr[tmpZ2Ind][0]]
+                                        Z2TrailingSIP = ev.Electron_sip3d[elecPassesZ2CutsFinalAr[tmpZ2Ind][1]]
                                     else:
-                                        Z2LeadSIP = ev.mSIP[muonPassesZ2CutsFinalAr[tmpZ2Ind][0]]
-                                        Z2TrailingSIP = ev.mSIP[muonPassesZ2CutsFinalAr[tmpZ2Ind][1]]
+                                        Z2LeadSIP = ev.Muon_sip3d[muonPassesZ2CutsFinalAr[tmpZ2Ind][0]]
+                                        Z2TrailingSIP = ev.Muon_sip3d[muonPassesZ2CutsFinalAr[tmpZ2Ind][1]]
                                     if debug:
                                         print("Z1LeadSIP",Z1LeadSIP,"Z1TrailingSIP",Z1TrailingSIP,"Z2LeadSIP",Z2LeadSIP,"Z2TrailingSIP",Z2TrailingSIP)
                                     #Fill with HIGHEST SIP
