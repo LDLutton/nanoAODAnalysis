@@ -332,20 +332,22 @@ for k,fileName in enumerate(fileAr):
 
         passAnyChannelCtr += 1
         if isLeptonic:
-            passLepChannelCtr += 1
+            
             if isSemiLeptonic:
-                passSemiLepChannelCtr += 1
-                
                 if isHadronic:
                     passAllChannelCtr += 1
                 else:
                     passLepAndSemiLepChannelCtr += 1
             elif isHadronic:
                 passLepAndHadChannelCtr += 1
+            else:
+                passLepChannelCtr += 1
         elif isSemiLeptonic:
-            passSemiLepChannelCtr += 1
+            
             if isHadronic:
                 passSemiLepAndHadChannelCtr += 1
+            else:
+                passSemiLepChannelCtr += 1
         elif isHadronic:
             passHadChannelCtr += 1
 
