@@ -290,6 +290,9 @@ for k,fileName in enumerate(fileAr):
 
 
         passesCutsBool = False
+        passedAsLepBool = False
+        passedAsSemiLepBool = False
+        passedAsHadBool = False
         #First check that it passes the hbb tagging
         hbbTag = ev.HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02 or ev.HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np2 or ev.HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np4
         if not hbbTag:
@@ -783,6 +786,7 @@ for k,fileName in enumerate(fileAr):
                                             print("passed SIP cut yay")
                                         passLepCut += 1
                                         passesCutsBool = True
+                                        passedAsLepBool = True
             if (not passesCutsBool) and isSemiLeptonic:
                 tryingSemiLepCtr += 1
                 FJInd = -1
@@ -867,6 +871,7 @@ for k,fileName in enumerate(fileAr):
                         if Z1LeadItr >= 0: #If Z1 found
                             passSemiLepCut += 1
                             passesCutsBool = True
+                            passedAsSemiLepBool = True
 
 
             if (not passesCutsBool) and isHadronic:
@@ -874,6 +879,8 @@ for k,fileName in enumerate(fileAr):
                 LFJOneInd = -1
                 LFJTwoInd = -1
                 leadFatJetMaxPT = -1
+                secondFatJetMaxPT = -1
+                FJInvMass = -1
                 for i in range(nFatJet):
                     #Fat Jets with cut but no tagging
                     #Also Fat Jets with cuts and tagging
@@ -905,27 +912,35 @@ for k,fileName in enumerate(fileAr):
                                         if tmpFatJetPT > tmpFatJetPTTwo:
                                             tmpMaxPtLead = tmpFatJetPT
                                             tmpMaxPtSecond = tmpFatJetPTTwo
+                                            tmpFJLeadInd = i
+                                            tmpFJTrailingInd = j
                                         else:
                                             tmpMaxPtLead = tmpFatJetPTTwo
                                             tmpMaxPtSecond = tmpFatJetPT
+                                            tmpFJLeadInd = j
+                                            tmpFJTrailingInd = i
+
                                         #Selecting based on that jet's pt
                                         if tmpMaxPtLead > leadFatJetMaxPT:
                                             leadFatJetMaxPT = tmpMaxPtLead
                                             secondFatJetMaxPT = tmpMaxPtSecond
-                                            LFJOneInd = i
-                                            LFJTwoInd = j
+                                            LFJOneInd = tmpFJLeadInd
+                                            LFJTwoInd = tmpFJTrailingInd
+                                            FJInvMass = tmpFJInvMass
                                         #If that jet is already part of the current selected pair,
                                         #select based on the respective lower pt jets in the pairs
                                         elif tmpMaxPtLead == leadFatJetMaxPT:
                                             if tmpMaxPtSecond > secondFatJetMaxPT:
                                                 secondFatJetMaxPT = tmpMaxPtSecond
-                                                LFJOneInd = i
-                                                LFJTwoInd = j
+                                                LFJOneInd = tmpFJLeadInd
+                                                LFJTwoInd = tmpFJTrailingInd
+                                                FJInvMass = tmpFJInvMass
                 #Filling histograms based on max jet pt in pair, with secondary jet pt as a tiebreaker
                 #Checking that it didn't select the same jet for both parts of the pair 
                 if LFJOneInd != LFJTwoInd:
                     passHadCut += 1
                     passesCutsBool = True
+                    passedAsHadBool = True
                     """
                     h_InitialFatJetAltLJ_Eta.Fill(ev.FatJet_eta[LFJOneInd])
                     h_InitialFatJetAltLJ_Eta.Fill(ev.FatJet_eta[LFJTwoInd])
@@ -992,8 +1007,137 @@ for k,fileName in enumerate(fileAr):
                 isSemiLeptonicL[0] = isSemiLeptonic
                 isHadronicL[0] = isHadronic
 
-                hJetTree.Fill()
+                #Branches for distinguishing between channels
+                passedLepL[0] = passedAsLepBool 
+                passedSemiLepL[0] = passedAsSemiLepBool
+                passedHadL[0] = passedAsHadBool
+
+                FATree.Fill()
                 evPassCount += 1
+
+                if passedAsLepBool:
+                    #tmpZ1Vec = Z1LeadVec + Z1TrailingVec
+                    if not Z2IsMuon:
+                        tmpZ2LeadVec = eZ2VecPairAr[tmpZ2Ind][0]
+                        tmpZ2TrailingVec = eZ2VecPairAr[tmpZ2Ind][1]
+                        tmpZ2Vec = tmpZ2LeadVec+tmpZ2TrailingVec
+                        
+                    else:
+                        tmpZ2LeadVec = mZ2VecPairAr[tmpZ2Ind][0]
+                        tmpZ2TrailingVec = mZ2VecPairAr[tmpZ2Ind][1]
+                        tmpZ2Vec = tmpZ2LeadVec+tmpZ2TrailingVec
+
+
+                    lepZ1LeadPtL[0]      = Z1LeadPt
+                    lepZ1TrailingPtL[0]  = Z1TrailingPt
+                    lepZ1LeadPhiL[0]     = Z1LeadVec.Phi()
+                    lepZ1TrailingPhiL[0] = Z1TrailingVec.Phi()
+                    lepZ1PairInvMassL[0] = tmpZ1Vec.M()
+                    lepZ1LeadEtaL[0]     = Z1LeadVec.Eta()
+                    lepZ1TrailingEtaL[0] = Z1TrailingVec.Eta()
+                    lepZ1IsElectronL[0]  = not Z1IsMuon
+                    lepZ1IsMuonL[0]      = Z1IsMuon
+                    lepZ1LeadIsoL[0]     = Z1LeadIso
+                    lepZ1TrailingIsoL[0] = Z1TrailingIso
+                    lepZ1LeadSIPL[0]     = Z1LeadSIP
+                    lepZ1TrailingSIPL[0] = Z1TrailingSIP
+
+                    lepZ2LeadPtL[0]      = tmpTopZ2LeadPt
+                    lepZ2TrailingPtL[0]  = tmpTopZ2TrailingPt
+                    lepZ2LeadPhiL[0]     = tmpZ2LeadVec.Phi()
+                    lepZ2TrailingPhiL[0] = tmpZ2TrailingVec.Phi()
+                    lepZ2PairInvMassL[0] = tmpZ2Vec.M()
+                    lepZ2LeadEtaL[0]     = tmpZ2LeadVec.Eta()
+                    lepZ2TrailingEtaL[0] = tmpZ2TrailingVec.Eta()
+                    lepZ2IsElectronL[0]  = not Z2IsMuon
+                    lepZ2IsMuonL[0]      = Z2IsMuon
+                    lepZ2LeadIsoL[0]     = Z2LeadIso
+                    lepZ2TrailingIsoL[0] = Z2TrailingIso
+                    lepZ2LeadSIPL[0]     = Z2LeadSIP
+                    lepZ2TrailingSIPL[0] = Z2TrailingSIP
+                    LepTree.Fill()
+                
+                elif passedAsSemiLepBool:
+                    tmpZ1Vec = Z1LeadVec+Z1TrailingVec
+                    if not Z1IsMuon:
+                        if Z1LeadPt > 35:
+                            if abs(ev.Electron_eta[elecCandIndAr[Z1LeadItr]]) < 1.4:
+                                tmpAdd = max(0., ev.Electron_dr03EcalRecHitSumEt[elecCandIndAr[Z1LeadItr]] - 1.)
+                            else:
+                                tmpAdd = ev.Electron_dr03EcalRecHitSumEt[elecCandIndAr[Z1LeadItr]]
+                            tmpIso = ( ev.Electron_dr03TkSumPt[elecCandIndAr[Z1LeadItr]] + tmpAdd + ev.Electron_dr03HcalDepth1TowerSumEt[elecCandIndAr[Z1LeadItr]] ) / ev.Electron_pt[elecCandIndAr[Z1LeadItr]]
+                        else:
+                            tmpIso = ev.Electron_pfRelIso03_all[elecCandIndAr[Z1LeadItr]]
+                        Z1LeadIso = tmpIso
+                        
+                        
+                        if Z1TrailingPt > 35:
+                            if abs(ev.Electron_eta[elecCandIndAr[Z1TrailingItr]]) < 1.4:
+                                tmpAdd = max(0., ev.Electron_dr03EcalRecHitSumEt[elecCandIndAr[Z1TrailingItr]] - 1.)
+                            else:
+                                tmpAdd = ev.Electron_dr03EcalRecHitSumEt[elecCandIndAr[Z1TrailingItr]]
+                            tmpIso = ( ev.Electron_dr03TkSumPt[elecCandIndAr[Z1TrailingItr]] + tmpAdd + ev.Electron_dr03HcalDepth1TowerSumEt[elecCandIndAr[Z1LeadItr]] ) / ev.Electron_pt[elecCandIndAr[Z1LeadItr]]
+                        else:
+                            tmpIso = ev.Electron_pfRelIso03_all[elecCandIndAr[Z1TrailingItr]]
+                        Z1TrailingIso = tmpIso
+                    else:
+                        Z1LeadIso = ev.Muon_pfRelIso03_all[muonCandIndAr[Z1LeadItr]]
+                        Z1TrailingIso = ev.Muon_pfRelIso03_all[muonCandIndAr[Z1TrailingItr]]
+
+                    if not Z1IsMuon:
+                        Z1LeadSIP = ev.Electron_sip3d[elecCandIndAr[Z1LeadItr]]
+                        Z1TrailingSIP = ev.Electron_sip3d[elecCandIndAr[Z1TrailingItr]]
+                    else:
+                        Z1LeadSIP = ev.Muon_sip3d[muonCandIndAr[Z1LeadItr]]
+                        Z1TrailingSIP = ev.Muon_sip3d[muonCandIndAr[Z1TrailingItr]]
+
+                    
+                    lepLeadPtL[0]      = Z1LeadPt
+                    lepTrailingPtL[0]  = Z1TrailingPt
+                    lepLeadPhiL[0]     = Z1LeadVec.Phi()
+                    lepTrailingPhiL[0] = Z1TrailingVec.Phi()
+                    lepPairInvMassL[0] = tmpZ1Vec.M()
+                    lepLeadEtaL[0]     = Z1LeadVec.Eta()
+                    lepTrailingEtaL[0] = Z1TrailingVec.Eta()
+                    lepIsElectronL[0]  = not Z1IsMuon
+                    lepIsMuonL[0]      = Z1IsMuon
+                    lepLeadIsoL[0]     = Z1LeadIso
+                    lepTrailingIsoL[0] = Z1TrailingIso
+                    lepLeadSIPL[0]     = Z1LeadSIP
+                    lepTrailingSIPL[0] = Z1TrailingSIP
+
+                    FJPtL[0]      = ev.FatJet_pt[FJInd]
+                    FJPhiL[0]     = ev.FatJet_phi[FJInd]
+                    FJMassL[0]    = ev.FatJet_mass[FJInd]
+                    FJEtaL[0]     = ev.FatJet_eta[FJInd]
+
+                    SemiLepTree.Fill()
+
+
+                elif passedAsHadBool:
+                    
+                    FJLeadPtL[0]      = leadFatJetMaxPT
+                    FJTrailingPtL[0]  = secondFatJetMaxPT
+                    FJLeadPhiL[0]     = ev.FatJet_phi[LFJOneInd]
+                    FJTrailingPhiL[0] = ev.FatJet_phi[LFJTwoInd]
+                    FJLeadMassL[0]    = ev.FatJet_mass[LFJOneInd]
+                    FJTrailingMassL[0] = ev.FatJet_mass[LFJTwoInd]
+                    FJPairInvMassL[0] = FJInvMass
+                    FJLeadEtaL[0]     = ev.FatJet_eta[LFJOneInd]
+                    FJTrailingEtaL[0] = ev.FatJet_eta[LFJTwoInd]
+                    FJEtaSepL[0]      = abs(ev.FatJet_eta[LFJOneInd]-ev.FatJet_eta[LFJTwoInd])
+
+                    HadTree.Fill()
+
+
+
+
+
+
+
+                    
+
+                
 
 
 
@@ -1044,8 +1188,10 @@ if not isBackground:
 
 outFile.cd()
 evNumTree.Write("",TObject.kOverwrite)
-hJetTree.Write("",TObject.kOverwrite)
-
+FATree.Write("",TObject.kOverwrite)
+LepTree.Write("",TObject.kOverwrite)
+SemiLepTree.Write("",TObject.kOverwrite)
+HadTree.Write("",TObject.kOverwrite)
 
 
 
