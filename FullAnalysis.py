@@ -192,6 +192,7 @@ elif LaraTest:
 else:
     print("ERROR. NO INPUT DATASET NAME GIVEN")
 
+print("Doing {0}".format(saveName))
 #Setting up outfile for tree
 outFile = TFile("FullAnalysis{0}.root".format(saveName),"recreate")
 
