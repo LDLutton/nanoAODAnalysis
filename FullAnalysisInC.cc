@@ -708,14 +708,16 @@ void FullAnalysisInC(){
             Long64_t eventLoopMax = myRunsReader.GetEntries();
             UInt_t tmpRunsInt = 0;
             while (myRunsReader.Next()){
-                std::cout << *genEventSumw << "\n";
-                std::cout << *genEventCount << "\n";
+                if (debug){
+                    std::cout << *genEventSumw << "\n";
+                    std::cout << *genEventCount << "\n";
+                }
                 crossSection += *genEventSumw / *genEventCount;
-                std::cout << crossSection << "\n";
+                if (debug) std::cout << crossSection << "\n";
                 crossSection = crossSection / eventLoopMax;
-                std::cout << crossSection << "\n";
+                if (debug) std::cout << crossSection << "\n";
                 crossSectionAvg += crossSection;
-                std::cout << crossSectionAvg << "\n";
+                if (debug) std::cout << crossSectionAvg << "\n";
                 crossSectionCtr += 1;
             }
         }
@@ -1205,8 +1207,10 @@ void FullAnalysisInC(){
                                     
 
                                     if (!Z1IsMuon){
+                                        if (debug) std::cout << "In first if\n";
                                         tmpPt = Z1LeadPt;
                                         if (tmpPt > 35){
+                                            if (debug) std::cout << "lead pt > 35\n";
                                             if (abs(Electron_eta[elecCandIndAr[Z1LeadItr]]) < 1.4) tmpAdd = max(0., Electron_dr03EcalRecHitSumEt[elecCandIndAr[Z1LeadItr]] - 1.);
                                             else tmpAdd = Electron_dr03EcalRecHitSumEt[elecCandIndAr[Z1LeadItr]];
                                             tmpIso = ( Electron_dr03TkSumPt[elecCandIndAr[Z1LeadItr]] + tmpAdd + Electron_dr03HcalDepth1TowerSumEt[elecCandIndAr[Z1LeadItr]] ) / Electron_pt[elecCandIndAr[Z1LeadItr]];
@@ -1214,9 +1218,11 @@ void FullAnalysisInC(){
                                         else tmpIso = Electron_pfRelIso03_all[elecCandIndAr[Z1LeadItr]];
                                         
                                         Z1LeadIso = tmpIso;
+                                        if (debug) std::cout << "Got Z1 Lead Iso\n";
                                         
                                         tmpPt = Z1TrailingPt;
                                         if (tmpPt > 35){
+                                            if (debug) std::cout << "trailing pt > 35\n";
                                             if (abs(Electron_eta[elecCandIndAr[Z1TrailingItr]]) < 1.4) tmpAdd = max(0., Electron_dr03EcalRecHitSumEt[elecCandIndAr[Z1TrailingItr]] - 1.);
                                             else tmpAdd = Electron_dr03EcalRecHitSumEt[elecCandIndAr[Z1TrailingItr]];
                                             tmpIso = ( Electron_dr03TkSumPt[elecCandIndAr[Z1TrailingItr]] + tmpAdd + Electron_dr03HcalDepth1TowerSumEt[elecCandIndAr[Z1LeadItr]] ) / Electron_pt[elecCandIndAr[Z1LeadItr]];
@@ -1225,34 +1231,44 @@ void FullAnalysisInC(){
                                         Z1TrailingIso = tmpIso;
                                     }
                                     else{
+                                        if (debug) std::cout << "getting Z1 muon Isos\n";
                                         Z1LeadIso = Muon_pfRelIso03_all[muonCandIndAr[Z1LeadItr]];
                                         Z1TrailingIso = Muon_pfRelIso03_all[muonCandIndAr[Z1TrailingItr]];
                                         //Z1LeadIso = mIso[muonCandIndAr[Z1LeadItr]]
                                         //Z1TrailingIso = mIso[muonCandIndAr[Z1TrailingItr]]
                                     }
+                                    if (debug) std::cout << "Now Z2\n";
                                     if (!Z2IsMuon){
+                                        if (debug) std::cout << "In first Z2 if\n";
                                         //Z2LeadIso = eIso[elecPassesZ2CutsFinalAr[tmpZ2Ind][0]]
                                         //Z2TrailingIso = eIso[elecPassesZ2CutsFinalAr[tmpZ2Ind][1]]
 
                                         tmpPt = tmpTopZ2LeadPt;
                                         if (tmpPt > 35){
+                                            if (debug) std::cout << "Z2 lead pt > 35\n";
                                             if (abs(Electron_eta[elecPassesZ2CutsAr[tmpZ2Ind][0]]) < 1.4) tmpAdd = max(0., Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[tmpZ2Ind][0]] - 1.);
                                             else tmpAdd = Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[tmpZ2Ind][0]];
                                             tmpIso = ( Electron_dr03TkSumPt[elecPassesZ2CutsAr[tmpZ2Ind][0]] + tmpAdd + Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[tmpZ2Ind][0]] ) / Electron_pt[elecPassesZ2CutsAr[tmpZ2Ind][0]];
                                         }
                                         else tmpIso = Electron_pfRelIso03_all[elecPassesZ2CutsAr[tmpZ2Ind][0]];
                                         Z2LeadIso = tmpIso;
+                                        if (debug) std::cout << "Got Z2 Lead Iso\n";
+
+                                        
                                         tmpPt = tmpTopZ2TrailingPt;
                                         if (tmpPt > 35){
+                                            if (debug) std::cout << "Z2 trailing pt > 35\n";
                                             if (abs(Electron_eta[elecPassesZ2CutsAr[tmpZ2Ind][1]]) < 1.4) tmpAdd = max(0., Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[tmpZ2Ind][1]] - 1.);
                                             else tmpAdd = Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[tmpZ2Ind][1]];
                                             tmpIso = ( Electron_dr03TkSumPt[elecPassesZ2CutsAr[tmpZ2Ind][1]] + tmpAdd + Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[tmpZ2Ind][1]] ) / Electron_pt[elecPassesZ2CutsAr[tmpZ2Ind][1]];
                                         }
                                         else tmpIso = Electron_pfRelIso03_all[elecPassesZ2CutsAr[tmpZ2Ind][1]];
                                         Z2TrailingIso = tmpIso;
+                                        if (debug) std::cout << "Got Z2 trailing Iso\n";
                                     }
 
                                     else{
+                                        if (debug) std::cout << "getting Z2 muon Isos\n";
                                         Z2LeadIso = Muon_pfRelIso03_all[muonPassesZ2CutsFinalAr[tmpZ2Ind][0]];
                                         Z2TrailingIso = Muon_pfRelIso03_all[muonPassesZ2CutsFinalAr[tmpZ2Ind][1]];
                                         //Z2LeadIso = mIso[muonPassesZ2CutsFinalAr[tmpZ2Ind][0]]
