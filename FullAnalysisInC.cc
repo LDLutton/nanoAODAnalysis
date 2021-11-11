@@ -746,6 +746,14 @@ void FullAnalysisInC(){
             evRunOver += 1;
             evCount += 1;
 
+            tmpZ1Vec.clear();
+            
+            elecCandIndAr.clear();
+            muonCandIndAr.clear();
+
+            eZ2VecPairAr.clear();
+            mZ2VecPairAr.clear();
+
 
             bool passesCutsBool = false;
             bool passedAsLepBool = false;
@@ -1126,13 +1134,15 @@ void FullAnalysisInC(){
                                     cout << "elecCandChargeInd " << elecCandChargeInd << "elecCandChargeAr[elecCandChargeInd]" << elecCandChargeAr[elecCandChargeInd] << "\n";
                                 }
                                 std::cout << "elecCandVecAr loop\n";
-                                for (UInt_t elecCandVecItrOne=0; elecCandVecItrOne<elecCandVecAr.size()-1; elecCandVecItrOne++){
-                                    std::cout << "elecCandVecItrOne " << elecCandVecItrOne << " elecCandVecOne " << elecCandVecAr[elecCandVecItrOne] << "\n";
-                                    for (UInt_t elecCandVecItrTwo=elecCandVecItrOne+1; elecCandVecItrTwo<elecCandVecAr.size(); elecCandVecItrTwo++){
-                                        std::cout << "elecCandVecItrTwo " << elecCandVecItrTwo << " elecCandVecTwo " << elecCandVecAr[elecCandVecItrTwo] << "\n";
-                                        ROOT::Math::PtEtaPhiMVector tmpVecSum = elecCandVecAr[elecCandVecItrOne]+elecCandVecAr[elecCandVecItrTwo];
-                                        std::cout << tmpVecSum << "\n";
-                                        std::cout << tmpVecSum.M() << "\n";
+                                if (elecCandVecAr.size()){
+                                    for (UInt_t elecCandVecItrOne=0; elecCandVecItrOne<elecCandVecAr.size()-1; elecCandVecItrOne++){
+                                        std::cout << "elecCandVecItrOne " << elecCandVecItrOne << " elecCandVecOne " << elecCandVecAr[elecCandVecItrOne] << "\n";
+                                        for (UInt_t elecCandVecItrTwo=elecCandVecItrOne+1; elecCandVecItrTwo<elecCandVecAr.size(); elecCandVecItrTwo++){
+                                            std::cout << "elecCandVecItrTwo " << elecCandVecItrTwo << " elecCandVecTwo " << elecCandVecAr[elecCandVecItrTwo] << "\n";
+                                            ROOT::Math::PtEtaPhiMVector tmpVecSum = elecCandVecAr[elecCandVecItrOne]+elecCandVecAr[elecCandVecItrTwo];
+                                            std::cout << tmpVecSum << "\n";
+                                            std::cout << tmpVecSum.M() << "\n";
+                                        }
                                     }
                                 }
                                 
