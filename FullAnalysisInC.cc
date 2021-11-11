@@ -729,10 +729,7 @@ void FullAnalysisInC(){
 
         //EvLoop
         while (myEventsReader.Next()) {
-            if (debug){
-                std::cout << "-------------------------\n";
-                std::cout << evCount+1 << " starting jets loop\n";
-            }
+            
             if (endAfter){
                 if (evCount < NToStart){
                     evCount += 1;
@@ -741,6 +738,10 @@ void FullAnalysisInC(){
                 if (evCount > NToEnd) break;
             }
             if (evCount % 1000 == 0) std::cout << "Event: " << evCount << "\n";
+            if (debug){
+                std::cout << "-------------------------\n";
+                std::cout << evCount+1 << " starting jets loop\n";
+            }
             //Increment event count
             evRunOver += 1;
             evCount += 1;
