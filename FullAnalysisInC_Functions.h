@@ -247,14 +247,14 @@ void dolZ2Cut(ROOT::Math::PtEtaPhiMVector Z1LeadVec,ROOT::Math::PtEtaPhiMVector 
                         tmpZ2Ind = Z2Itr;
                         tmpTopZ2LeadPt = tmpZ2LeadPt;
                         tmpTopZ2TrailingPt = lZ2PtPairAr[Z2Itr][1];
-                        Z2IsMuon = false;
+                        Z2IsMuon = !forElec;
                     }
                     else if (tmpPassCtr == 2){
                         if (tmpLepPairVecTwo.M() > optLepInvMassCut){
                             tmpZ2Ind = Z2Itr;
                             tmpTopZ2LeadPt = tmpZ2LeadPt;
                             tmpTopZ2TrailingPt = lZ2PtPairAr[Z2Itr][1];
-                            Z2IsMuon = false;
+                            Z2IsMuon = !forElec;
                         }
                     }
                 }
@@ -262,7 +262,7 @@ void dolZ2Cut(ROOT::Math::PtEtaPhiMVector Z1LeadVec,ROOT::Math::PtEtaPhiMVector 
                     tmpZ2Ind = Z2Itr;
                     tmpTopZ2LeadPt = tmpZ2LeadPt;
                     tmpTopZ2TrailingPt = lZ2PtPairAr[Z2Itr][1];
-                    Z2IsMuon = false;
+                    Z2IsMuon = !forElec;
                 }
             }
         }

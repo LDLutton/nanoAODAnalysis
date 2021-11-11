@@ -1247,11 +1247,25 @@ void FullAnalysisInC(){
                                         tmpPt = tmpTopZ2LeadPt;
                                         if (tmpPt > 35){
                                             if (debug) std::cout << "Z2 lead pt > 35\n";
+                                            /*
+                                            if (debug) std::cout << "tmpZ2Ind " << tmpZ2Ind << "\n";
+                                            if (debug) std::cout << "elecPassesZ2CutsAr[tmpZ2Ind][0] " << elecPassesZ2CutsAr[tmpZ2Ind][0] << "\n";
+                                            if (debug) std::cout << "Electron_eta[elecPassesZ2CutsAr[tmpZ2Ind][0]] " << Electron_eta[elecPassesZ2CutsAr[tmpZ2Ind][0]] << "\n";
+                                            if (debug) std::cout << "abs(Electron_eta[elecPassesZ2CutsAr[tmpZ2Ind][0]]) " << abs(Electron_eta[elecPassesZ2CutsAr[tmpZ2Ind][0]]) << "\n";
+                                            if (debug) std::cout << "Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[tmpZ2Ind][0]] " << Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[tmpZ2Ind][0]] << "\n";
+                                            if (debug) std::cout << "Electron_dr03TkSumPt[elecPassesZ2CutsAr[tmpZ2Ind][0]] " << Electron_dr03TkSumPt[elecPassesZ2CutsAr[tmpZ2Ind][0]] << "\n";
+                                            if (debug) std::cout << "Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[tmpZ2Ind][0]] " << Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[tmpZ2Ind][0]] << "\n";
+                                            if (debug) std::cout << "Electron_pt[elecPassesZ2CutsAr[tmpZ2Ind][0]] " << Electron_pt[elecPassesZ2CutsAr[tmpZ2Ind][0]] << "\n";
+                                            */
+
+
+
                                             if (abs(Electron_eta[elecPassesZ2CutsAr[tmpZ2Ind][0]]) < 1.4) tmpAdd = max(0., Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[tmpZ2Ind][0]] - 1.);
                                             else tmpAdd = Electron_dr03EcalRecHitSumEt[elecPassesZ2CutsAr[tmpZ2Ind][0]];
                                             tmpIso = ( Electron_dr03TkSumPt[elecPassesZ2CutsAr[tmpZ2Ind][0]] + tmpAdd + Electron_dr03HcalDepth1TowerSumEt[elecPassesZ2CutsAr[tmpZ2Ind][0]] ) / Electron_pt[elecPassesZ2CutsAr[tmpZ2Ind][0]];
                                         }
                                         else tmpIso = Electron_pfRelIso03_all[elecPassesZ2CutsAr[tmpZ2Ind][0]];
+                                        if (debug) std::cout << "Got Z2 Lead Iso\n";
                                         Z2LeadIso = tmpIso;
                                         if (debug) std::cout << "Got Z2 Lead Iso\n";
 
