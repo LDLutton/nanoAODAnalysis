@@ -162,9 +162,10 @@ void dolZ1Cut(TTreeReaderArray<Float_t> &Lep_pt,std::vector<UInt_t> lepCandIndAr
                             tmpTopLeadCharge = tmpLeadCharge;
                             tmpTopTrailingCharge = tmpTrailingCharge;
                         }
+                    }
                     std::array<UInt_t,2> tmpItrList = {tmpLeadItr,tmpTrailingItr};
                     lepPassesZ2CutsAr.push_back(tmpItrList);
-                    }
+                    
                 }
             }
         }
