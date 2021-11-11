@@ -265,7 +265,8 @@ def doeZ2Cut(ev,Z1LeadVec,Z1TrailingVec,tmpZ1Vec,Z1LeadCharge,Z1TrailingCharge,Z
                 if not Z1IsMuon: #If Z1 is electrons, then have to perform second 4e cuts
                     tmpZ2Vec = eZ2VecPair[0] + eZ2VecPair[1]
                     tmpZ2M = tmpZ2Vec.M()
-                    if Z1LeadCharge != eZ2ChargePairAr[0]:
+                    #if Z1LeadCharge != eZ2ChargePairAr[0]:
+                    if Z1LeadCharge != eZ2ChargePairAr[Z2Itr][0]:
                         tmpLepPairVecOne = Z1LeadVec + eZ2VecPair[0]
                         tmpLepPairVecTwo = Z1TrailingVec + eZ2VecPair[1]
                     else:
@@ -309,7 +310,8 @@ def domZ2Cut(ev,Z1LeadVec,Z1TrailingVec,tmpZ1Vec,Z1LeadCharge,Z1TrailingCharge,Z
                 if Z1IsMuon:
                     tmpZ2Vec = mZ2VecPair[0] + mZ2VecPair[1]
                     tmpZ2M = tmpZ2Vec.M()
-                    if Z1LeadCharge != mZ2ChargePairAr[0]:
+                    #if Z1LeadCharge != mZ2ChargePairAr[0]:
+                    if Z1LeadCharge != mZ2ChargePairAr[Z2Itr][0]:
                         tmpLepPairVecOne = Z1LeadVec + mZ2VecPair[0]
                         tmpLepPairVecTwo = Z1TrailingVec + mZ2VecPair[1]
                     else:

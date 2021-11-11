@@ -608,7 +608,7 @@ for k,fileName in enumerate(fileAr):
                                     tmpVecTwo = elecCandVecAr[elecPassesZ2CutsPair[1]]
                                     eZ2PtPairAr.append([tmpVecOne.Pt(),tmpVecTwo.Pt()])
                                     eZ2VecPairAr.append([tmpVecOne,tmpVecTwo])
-                                    eZ2ChargePairAr.append([elecCandChargeAr[elecPassesZ2CutsPair[0]],elecCandChargeAr[elecPassesZ2CutsPair[1]]])
+                                    #eZ2ChargePairAr.append([elecCandChargeAr[elecPassesZ2CutsPair[0]],elecCandChargeAr[elecPassesZ2CutsPair[1]]])
 
                             muonPassesZ2CutsFinalAr = muonPassesZ2CutsAr
                             mZ2VecPairAr = []
@@ -620,7 +620,7 @@ for k,fileName in enumerate(fileAr):
                                 tmpVecTwo = muonCandVecAr[muonPassesZ2CutsPair[1]]
                                 mZ2PtPairAr.append([tmpVecOne.Pt(),tmpVecTwo.Pt()])
                                 mZ2VecPairAr.append([tmpVecOne,tmpVecTwo])
-                                mZ2ChargePairAr.append([muonCandChargeAr[muonPassesZ2CutsPair[0]],muonCandChargeAr[muonPassesZ2CutsPair[1]]])
+                                #mZ2ChargePairAr.append([muonCandChargeAr[muonPassesZ2CutsPair[0]],muonCandChargeAr[muonPassesZ2CutsPair[1]]])
 
                         else: #If Z1 is muon, then remove any instances of Z1 particles from muon Z2 candidate pairs
                             muonPassesZ2CutsFinalAr = []
