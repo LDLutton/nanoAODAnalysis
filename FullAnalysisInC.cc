@@ -746,7 +746,7 @@ void FullAnalysisInC(){
             evRunOver += 1;
             evCount += 1;
 
-            tmpZ1Vec.clear();
+            //tmpZ1Vec.clear();
             
             elecCandIndAr.clear();
             muonCandIndAr.clear();
@@ -1169,14 +1169,16 @@ void FullAnalysisInC(){
                                 for (UInt_t muonCandChargeInd=0; muonCandChargeInd<muonCandChargeAr.size();muonCandChargeInd++){
                                     std::cout << "muonCandChargeInd " << muonCandChargeInd << "muonCandChargeAr[muonCandChargeInd]" << muonCandChargeAr[muonCandChargeInd] << "\n";
                                 }
-                                //std::cout <<"muonCandVecAr " << muonCandVecAr << "\n";
-                                for (UInt_t muonCandVecItrOne=0; muonCandVecItrOne<muonCandVecAr.size()-1; muonCandVecItrOne++){
-                                    std::cout <<"muonCandVecItrOne " << muonCandVecItrOne << " muonCandVecOne " << muonCandVecAr[muonCandVecItrOne] << "\n";
-                                    for (UInt_t muonCandVecItrTwo=muonCandVecItrOne+1; muonCandVecItrTwo<muonCandVecAr.size(); muonCandVecItrTwo++){
-                                        std::cout <<"muonCandVecItrTwo " << muonCandVecItrTwo << " muonCandVecTwo " << muonCandVecAr[muonCandVecItrTwo] << "\n";
-                                        ROOT::Math::PtEtaPhiMVector tmpVecSum = muonCandVecAr[muonCandVecItrOne]+muonCandVecAr[muonCandVecItrTwo];
-                                        std::cout <<tmpVecSum << "\n";
-                                        std::cout <<tmpVecSum.M() << "\n";
+                                std::cout <<"muonCandVecAr loop\n";
+                                if (muonCandVecAr.size()) {
+                                    for (UInt_t muonCandVecItrOne=0; muonCandVecItrOne<muonCandVecAr.size()-1; muonCandVecItrOne++){
+                                        std::cout <<"muonCandVecItrOne " << muonCandVecItrOne << " muonCandVecOne " << muonCandVecAr[muonCandVecItrOne] << "\n";
+                                        for (UInt_t muonCandVecItrTwo=muonCandVecItrOne+1; muonCandVecItrTwo<muonCandVecAr.size(); muonCandVecItrTwo++){
+                                            std::cout <<"muonCandVecItrTwo " << muonCandVecItrTwo << " muonCandVecTwo " << muonCandVecAr[muonCandVecItrTwo] << "\n";
+                                            ROOT::Math::PtEtaPhiMVector tmpVecSum = muonCandVecAr[muonCandVecItrOne]+muonCandVecAr[muonCandVecItrTwo];
+                                            std::cout <<tmpVecSum << "\n";
+                                            std::cout <<tmpVecSum.M() << "\n";
+                                        }
                                     }
                                 }
                                 //std::cout <<"muonPassesZ2CutsAr " << muonPassesZ2CutsAr << "\n";
