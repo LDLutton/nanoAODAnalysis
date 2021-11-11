@@ -1051,7 +1051,7 @@ void FullAnalysisInC(){
                     if (nmLep){
                         if (debug) std::cout << "Doing muon cand cut\n";
 
-                        dolCandCut(Muon_eta,Muon_mass,Muon_charge,Muon_phi,Muon_pt,neLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut,debug);
+                        dolCandCut(Muon_eta,Muon_mass,Muon_charge,Muon_phi,Muon_pt,nmLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut,debug);
 
                         //domCandCut(Muon_eta,Muon_mass,Muon_charge,Muon_phi,Muon_pt,neLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut);
                         for (UInt_t muonCandChargeInd=0;muonCandChargeInd<muonCandChargeAr.size();muonCandChargeInd++){
@@ -1096,7 +1096,7 @@ void FullAnalysisInC(){
                             std::vector<std::array<Int_t,2>> eZ2ChargePairAr;
                             bool tmpIgnore;
                             if (!Z1IsMuon) tmpIgnore = true;
-                            else tmpIgnore = true;
+                            else tmpIgnore = false;
                             std::array<Int_t,2> indsToIgnore = {Z1LeadItr,Z1TrailingItr};
                             bool eZ2CandsBool = false;
                             bool mZ2CandsBool = false;

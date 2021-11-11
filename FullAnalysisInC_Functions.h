@@ -175,9 +175,13 @@ void dolZ1Cut(TTreeReaderArray<Float_t> &Lep_pt,std::vector<UInt_t> lepCandIndAr
 
 void fillZ2Ars(std::vector<std::array<UInt_t,2>> &lepPassesZ2CutsFinalAr,std::vector<std::array<ROOT::Math::PtEtaPhiMVector,2>> &lZ2VecPairAr,std::vector<std::array<double,2>> &lZ2PtPairAr,std::vector<std::array<Int_t,2>> &lZ2ChargePairAr,std::vector<std::array<UInt_t,2>> lepPassesZ2CutsAr,std::vector<Int_t> lepCandChargeAr,std::vector<ROOT::Math::PtEtaPhiMVector> lepCandVecAr,bool shouldIgnore,std::array<Int_t,2> indsToIgnore,bool &Z2CandsBool){
     
-    if (shouldIgnore) lepPassesZ2CutsFinalAr = lepPassesZ2CutsAr;
+    if (!shouldIgnore) lepPassesZ2CutsFinalAr = lepPassesZ2CutsAr;
+    //std::cout << "lepPassesZ2CutsAr.size() "<< lepPassesZ2CutsAr.size() << "\n";
     for (UInt_t lepPassesZ2CutsInd=0;lepPassesZ2CutsInd<lepPassesZ2CutsAr.size();lepPassesZ2CutsInd++){ //Loop through lep Z2 cand pairs to fill all arrays
         if (shouldIgnore){
+            //std::cout << "indsToIgnore[0] " <<indsToIgnore[0] << " indsToIgnore[1] " << indsToIgnore[1] << "\n";
+            //std::cout << "lepPassesZ2CutsInd " <<lepPassesZ2CutsInd << "\n";
+            //std::cout << "lepPassesZ2CutsAr[lepPassesZ2CutsInd] " <<lepPassesZ2CutsAr[lepPassesZ2CutsInd] << "\n";
             if (!(std::find(std::begin(lepPassesZ2CutsAr[lepPassesZ2CutsInd]), std::end(lepPassesZ2CutsAr[lepPassesZ2CutsInd]), indsToIgnore[0]) != std::end(lepPassesZ2CutsAr[lepPassesZ2CutsInd])) && !(std::find(std::begin(lepPassesZ2CutsAr[lepPassesZ2CutsInd]), std::end(lepPassesZ2CutsAr[lepPassesZ2CutsInd]), indsToIgnore[1]) != std::end(lepPassesZ2CutsAr[lepPassesZ2CutsInd]))){
                 lepPassesZ2CutsFinalAr.push_back(lepPassesZ2CutsAr[lepPassesZ2CutsInd]);
 
