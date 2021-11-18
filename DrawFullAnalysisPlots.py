@@ -470,7 +470,7 @@ for k,fileA in enumerate(fileAr):
             if savePathBool:
                 canAr[k][FAItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],FASaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
             else:
-                canAr[k][FAItr].SaveAs("{0}{1}.png".format(FASaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+                canAr[k][FAItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],FASaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 
 
 if sumQCD:
@@ -482,7 +482,7 @@ if sumQCD:
         if savePathBool:
             sumQCDCanAr[FAItr].SaveAs("./Graphs/General/QCDSum/{0}{1}.png".format(FASaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
         else:
-            sumQCDCanAr[FAItr].SaveAs("{0}{1}.png".format(FASaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+            sumQCDCanAr[FAItr].SaveAs("QCDSum{0}{1}.png".format(FASaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 
 for FAItr, FASaveName in enumerate(FASaveNameAr):
     if onlyDoSomeHists and FAItr >= histsToDo:
@@ -590,7 +590,7 @@ for k,fileA in enumerate(fileAr):
             if savePathBool:
                 canLepAr[k][LepItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],LepSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
             else:
-                canLepAr[k][LepItr].SaveAs("{0}{1}.png".format(LepSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+                canLepAr[k][LepItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],LepSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 
 
 if sumQCD:
@@ -602,7 +602,7 @@ if sumQCD:
         if savePathBool:
             sumQCDCanAr[LepItr].SaveAs("./Graphs/General/QCDSum/{0}{1}.png".format(LepSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
         else:
-            sumQCDCanAr[LepItr].SaveAs("{0}{1}.png".format(LepSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+            sumQCDCanAr[LepItr].SaveAs("QCDSum{0}{1}.png".format(LepSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 
 for LepItr, LepSaveName in enumerate(LepSaveNameAr):
     if onlyDoSomeHists and LepItr >= histsToDo:
@@ -711,7 +711,7 @@ for k,fileA in enumerate(fileAr):
             if savePathBool:
                 canSemiLepAr[k][SemiLepItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],SemiLepSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
             else:
-                canSemiLepAr[k][SemiLepItr].SaveAs("{0}{1}.png".format(SemiLepSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+                canSemiLepAr[k][SemiLepItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],SemiLepSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 
 
 if sumQCD:
@@ -723,7 +723,7 @@ if sumQCD:
         if savePathBool:
             sumQCDCanAr[SemiLepItr].SaveAs("./Graphs/General/QCDSum/{0}{1}.png".format(SemiLepSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
         else:
-            sumQCDCanAr[SemiLepItr].SaveAs("{0}{1}.png".format(SemiLepSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+            sumQCDCanAr[SemiLepItr].SaveAs("QCDSum{0}{1}.png".format(SemiLepSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 
 for SemiLepItr, SemiLepSaveName in enumerate(SemiLepSaveNameAr):
     if onlyDoSomeHists and SemiLepItr >= histsToDo:
@@ -830,7 +830,7 @@ for k,fileA in enumerate(fileAr):
             if savePathBool:
                 canHadAr[k][HadItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],HadSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
             else:
-                canHadAr[k][HadItr].SaveAs("{0}{1}.png".format(HadSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+                canHadAr[k][HadItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],HadSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 
 
 if sumQCD:
@@ -842,7 +842,7 @@ if sumQCD:
         if savePathBool:
             sumQCDCanAr[HadItr].SaveAs("./Graphs/General/QCDSum/{0}{1}.png".format(HadSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
         else:
-            sumQCDCanAr[HadItr].SaveAs("{0}{1}.png".format(HadSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+            sumQCDCanAr[HadItr].SaveAs("QCDSum{0}{1}.png".format(HadSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 
 for HadItr, HadSaveName in enumerate(HadSaveNameAr):
     if onlyDoSomeHists and HadItr >= histsToDo:
