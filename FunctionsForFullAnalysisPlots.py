@@ -577,9 +577,15 @@ def setUpStackedHistAndDrawFoMPlot(histMax,histAr,cloneHistAr,histStack,invHists
       """
       #"FP" stands for "Full Pass"
       if normalizeBackgroundsTogether:
-          compCan[histTypeItr].SaveAs("./Graphs/Comparison/ComparisonFor{0}_{1}_Vs_{2}_Stacked_NBT_{3}.png".format(histTypeSaveName,signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+          if savePathBool:
+            compCan[histTypeItr].SaveAs("./Graphs/Comparison/ComparisonFor{0}_{1}_Vs_{2}_Stacked_NBT_{3}.png".format(histTypeSaveName,signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+          else:
+            compCan[histTypeItr].SaveAs("ComparisonFor{0}_{1}_Vs_{2}_Stacked_NBT_{3}.png".format(histTypeSaveName,signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
       else:
-          compCan[histTypeItr].SaveAs("./Graphs/Comparison/ComparisonFor{0}_{1}_Vs_{2}_Stacked_{3}.png".format(histTypeSaveName,signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+          if savePathBool:
+            compCan[histTypeItr].SaveAs("./Graphs/Comparison/ComparisonFor{0}_{1}_Vs_{2}_Stacked_{3}.png".format(histTypeSaveName,signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+          else:
+            compCan[histTypeItr].SaveAs("ComparisonFor{0}_{1}_Vs_{2}_Stacked_{3}.png".format(histTypeSaveName,signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 
 
 
@@ -665,7 +671,14 @@ def setUpNonStackedHistAndFoMPlot(compCan,cloneHistAr,padAr,sumQCD,QCDSumHist,hi
     #"FP" stands for "Full Pass"
     """
     if normalizeBackgroundsTogether:
-      compCan[histTypeItr].SaveAs("./Graphs/Comparison/ComparisonFor{0}_{1}_Vs_{2}_NBT_{3}.png".format(histTypeSaveName,signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+      if savePathBool:
+        compCan[histTypeItr].SaveAs("./Graphs/Comparison/ComparisonFor{0}_{1}_Vs_{2}_NBT_{3}.png".format(histTypeSaveName,signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+      else:
+        compCan[histTypeItr].SaveAs("ComparisonFor{0}_{1}_Vs_{2}_NBT_{3}.png".format(histTypeSaveName,signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
     else:
-      compCan[histTypeItr].SaveAs("./Graphs/Comparison/ComparisonFor{0}_{1}_Vs_{2}_{3}.png".format(histTypeSaveName,signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+      if savePathBool:
+        compCan[histTypeItr].SaveAs("./Graphs/Comparison/ComparisonFor{0}_{1}_Vs_{2}_{3}.png".format(histTypeSaveName,signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+      else:
+        compCan[histTypeItr].SaveAs("ComparisonFor{0}_{1}_Vs_{2}_{3}.png".format(histTypeSaveName,signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 
+    
