@@ -8,8 +8,10 @@ today = datetime.datetime.today()
 forCondor = False
 if forCondor:
     forCondorStr = "/scratch365/dlutton/HistosAndPNGs/"
+    savePathBool = False
 else:
     forCondorStr = ""
+    savePathBool = True
 
 
 #For drawing and saving histograms
