@@ -513,7 +513,6 @@ void FullAnalysisInC(){
     SemiLepTree->Branch("lepLeadSIPL",&lepLeadSIPL,"lepLeadSIPL/F");
     SemiLepTree->Branch("lepTrailingSIPL",&lepTrailingSIPL,"lepTrailingSIPL/F");
     
-    SemiLepTree->Branch("lepIsMuonL",&lepIsMuonL,"lepIsMuonL/O");
 
     SemiLepTree->Branch("FJPtL",&FJPtL,"FJPtL/F");
     SemiLepTree->Branch("FJPhiL",&FJPhiL,"FJPhiL/F");

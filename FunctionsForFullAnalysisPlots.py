@@ -36,7 +36,6 @@ QCDPT1400to1800Background = True
 QCDPT1800to2400Background = True
 QCDPT2400to3200Background = True
 QCDPT3200toInfBackground = True
-SumQCD = False
 normalizeBackgroundsTogether = True
 
 onlyDoSomeHists = False
@@ -146,12 +145,12 @@ LepXTitleAr = ["Pt (GeV)","Pt (GeV)","Phi","Phi","Invariant Mass (GeV)","Eta","E
 "","",
 "Isolation","Isolation","SIP","SIP"]
 
-LepBinsAndRangeAr = [[50,0,2500],[50,0,2500],[50,-3.5,3.5],[50,-3.5,3.5],[120,60,120],[50,-4.5,4.5],[50,-4.5,4.5],
+LepBinsAndRangeAr = [[34,0,2500],[34,0,2500],[25,-3.5,3.5],[25,-3.5,3.5],[40,60,120],[25,-4.5,4.5],[25,-4.5,4.5],
 [2,0,2],[2,0,2],
-[40,0,0.4],[40,0,0.4],[40,0,4],[40,0,4],
-[50,0,2500],[50,0,2500],[50,-3.5,3.5],[50,-3.5,3.5],[120,60,120],[50,-4.5,4.5],[50,-4.5,4.5],
+[26,0,0.4],[26,0,0.4],[26,0,4],[26,0,4],
+[34,0,2500],[34,0,2500],[25,-3.5,3.5],[25,-3.5,3.5],[40,60,120],[25,-4.5,4.5],[25,-4.5,4.5],
 [2,0,2],[2,0,2],
-[40,0,0.4],[40,0,0.4],[40,0,4],[40,0,4]]
+[26,0,0.4],[26,0,0.4],[26,0,4],[26,0,4]]
 
 
 #Note in SemiLep tree there is an accidental branch "lepZ2IsElectron" which *should not* be in there. ignore
