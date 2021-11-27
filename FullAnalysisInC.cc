@@ -917,6 +917,7 @@ void FullAnalysisInC(){
 
             //If SM or EFT, get LHE information
             if (useLHETree) {
+                UInt_t lenLHEPart = *nLHEPart;
                 Int_t tmpZCtr = 0;
                 Int_t tmpHCtr = 0;
                 Int_t tmpJCtr = 0;
@@ -924,7 +925,7 @@ void FullAnalysisInC(){
                 Int_t tmpHInd = -1;
                 std::vector<UInt_t>tmpJAr;
                 tmpPDGId = 0;
-                for (LHEItr=0; LHEItr<lenLHEPart;LHEItr++){
+                for (UInt_t LHEItr=0; LHEItr<lenLHEPart;LHEItr++){
                     tmpPDGId = LHEPart_pdgId[LHEItr];
                     if (tmpPDGId == 23){
                         tmpZCtr += 1;
@@ -944,24 +945,24 @@ void FullAnalysisInC(){
                     else std::cout << "ERROR UNKNOWN PARTICLE " << tmpPDGId << " IN LHE\n";
                 }
                 if (tmpZCtr == 2 && tmpHCtr == 1 && tmpJCtr == 4 && tmpJAr.size() == 2){
-                    LHEFound = true;
-                    ZOne_pt_FromLHE = LHEPart_pt[tmpZAr[0]];
-                    ZOne_eta_FromLHE = LHEPart_eta[tmpZAr[0]];
+                    //LHEFound = true;
+                    ZOne_pt_FromLHERaw = LHEPart_pt[tmpZAr[0]];
+                    ZOne_eta_FromLHERaw = LHEPart_eta[tmpZAr[0]];
 
-                    ZTwo_pt_FromLHE = LHEPart_pt[tmpZAr[1]];
-                    ZTwo_eta_FromLHE = LHEPart_eta[tmpZAr[1]];
+                    ZTwo_pt_FromLHERaw = LHEPart_pt[tmpZAr[1]];
+                    ZTwo_eta_FromLHERaw = LHEPart_eta[tmpZAr[1]];
 
-                    H_pt_FromLHE = LHEPart_pt[tmpHInd];
-                    H_eta_FromLHE = LHEPart_eta[tmpHInd];
+                    H_pt_FromLHERaw = LHEPart_pt[tmpHInd];
+                    H_eta_FromLHERaw = LHEPart_eta[tmpHInd];
 
-                    JOne_pt_FromLHE = LHEPart_pt[tmpJAr[0]];
-                    JOne_eta_FromLHE = LHEPart_eta[tmpJAr[0]];
+                    JOne_pt_FromLHERaw = LHEPart_pt[tmpJAr[0]];
+                    JOne_eta_FromLHERaw = LHEPart_eta[tmpJAr[0]];
 
-                    JTwo_pt_FromLHE = LHEPart_pt[tmpJAr[1]];
-                    JTwo_eta_FromLHE = LHEPart_eta[tmpJAr[1]];
+                    JTwo_pt_FromLHERaw = LHEPart_pt[tmpJAr[1]];
+                    JTwo_eta_FromLHERaw = LHEPart_eta[tmpJAr[1]];
 
-                    JOne_invmass_FromLHE = LHEPart_mass[tmpJAr[0]];
-                    JTwo_invmass_FromLHE = LHEPart_mass[tmpJAr[1]];
+                    JOne_invmass_FromLHERaw = LHEPart_mass[tmpJAr[0]];
+                    JTwo_invmass_FromLHERaw = LHEPart_mass[tmpJAr[1]];
 
                     tmpJOnePhi_FromLHERaw = LHEPart_phi[tmpJAr[0]];
                     tmpJOneVec = ROOT::Math::PtEtaPhiMVector(JOne_pt_FromLHE, JOne_eta_FromLHE, tmpJOnePhi, JOne_invmass_FromLHE);
@@ -969,9 +970,9 @@ void FullAnalysisInC(){
                     tmpJTwoPhi_FromLHERaw = LHEPart_phi[tmpJAr[1]];
                     tmpJTwoVec = ROOT::Math::PtEtaPhiMVector(JTwo_pt_FromLHE, JTwo_eta_FromLHE, tmpJTwoPhi, JTwo_invmass_FromLHE);
                     tmpJPairVec = tmpJOneVec + tmpJTwoVec;
-                    JPair_invmass_FromLHE = tmpJPairVec.M();
+                    JPair_invmass_FromLHERaw = tmpJPairVec.M();
 
-                    J_etasep_FromLHE = abs(JOne_eta_FromLHE-JTwo_eta_FromLHE);
+                    J_etasep_FromLHERaw = abs(JOne_eta_FromLHE-JTwo_eta_FromLHE);
                     RawTree->Fill();
 
                 }
