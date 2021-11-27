@@ -976,6 +976,32 @@ void FullAnalysisInC(){
                     JPair_invmass_FromLHERaw = tmpJPairVec.M();
 
                     J_etasep_FromLHERaw = abs(JOne_eta_FromLHERaw-JTwo_eta_FromLHERaw);
+
+                    ZOne_pt_FromLHERawL = ZOne_pt_FromLHERaw;
+                    ZOne_eta_FromLHERawL = ZOne_eta_FromLHERaw;
+
+                    ZTwo_pt_FromLHERawL = ZTwo_pt_FromLHERaw;
+                    ZTwo_eta_FromLHERawL = ZTwo_eta_FromLHERaw;
+
+                    H_pt_FromLHERawL = H_pt_FromLHERaw;
+                    H_eta_FromLHERawL = H_eta_FromLHERaw;
+
+                    JOne_pt_FromLHERawL = JOne_pt_FromLHERaw;
+                    JOne_eta_FromLHERawL = JOne_eta_FromLHERaw;
+
+                    JTwo_pt_FromLHERawL = JTwo_pt_FromLHERaw;
+                    JTwo_eta_FromLHERawL = JTwo_eta_FromLHERaw;
+
+                    JOne_invmass_FromLHERawL = JOne_invmass_FromLHERaw;
+                    JTwo_invmass_FromLHERawL = JTwo_invmass_FromLHERaw;
+
+                    tmpJOnePhi_FromLHERawL = tmpJOnePhi_FromLHERaw;
+
+                    tmpJTwoPhi_FromLHERawL = tmpJTwoPhi_FromLHERaw;
+                    JPair_invmass_FromLHERawL = JPair_invmass_FromLHERaw;
+
+                    J_etasep_FromLHERawL = J_etasep_FromLHERaw;
+
                     RawTree->Fill();
 
                 }
