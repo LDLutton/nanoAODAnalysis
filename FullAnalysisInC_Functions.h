@@ -218,10 +218,10 @@ void fillZ2Ars(std::vector<std::array<UInt_t,2>> &lepPassesZ2CutsFinalAr,std::ve
 
 
 
-void dolZ2Cut(ROOT::Math::PtEtaPhiMVector Z1LeadVec,ROOT::Math::PtEtaPhiMVector Z1TrailingVec,ROOT::Math::PtEtaPhiMVector tmpZ1Vec,Int_t Z1LeadCharge,Int_t Z1TrailingCharge,bool Z1IsMuon,std::vector<std::array<ROOT::Math::PtEtaPhiMVector,2>> lZ2VecPairAr,std::vector<std::array<double,2>> lZ2PtPairAr,std::vector<std::array<Int_t,2>> lZ2ChargePairAr,Int_t &tmpZ2Ind,bool &Z2IsMuon,float &tmpTopZ2LeadPt,float &tmpTopZ2TrailingPt,float fourLepInvMassCut,float optLepInvMassCut, bool forElec){
+void dolZ2Cut(ROOT::Math::PtEtaPhiMVector Z1LeadVec,ROOT::Math::PtEtaPhiMVector Z1TrailingVec,ROOT::Math::PtEtaPhiMVector tmpZ1Vec,float tmpZ1M,Int_t Z1LeadCharge,Int_t Z1TrailingCharge,bool Z1IsMuon,std::vector<std::array<ROOT::Math::PtEtaPhiMVector,2>> lZ2VecPairAr,std::vector<std::array<double,2>> lZ2PtPairAr,std::vector<std::array<Int_t,2>> lZ2ChargePairAr,Int_t &tmpZ2Ind,bool &Z2IsMuon,float &tmpTopZ2LeadPt,float &tmpTopZ2TrailingPt,float fourLepInvMassCut,float optLepInvMassCut, bool forElec){
     
-    tmpZ1Vec = Z1LeadVec+Z1TrailingVec;
-    float tmpZ1M = tmpZ1Vec.M();
+    //tmpZ1Vec = Z1LeadVec+Z1TrailingVec;
+    //float tmpZ1M = tmpZ1Vec.M();
     for (UInt_t Z2Itr=0;Z2Itr<lZ2VecPairAr.size();Z2Itr++){ //LOOP OVER ALL Z2 CANDIDATE PAIRS
         float tmpZ2LeadPt = lZ2PtPairAr[Z2Itr][0];
         if ((tmpZ2LeadPt > tmpTopZ2LeadPt) || (tmpZ2LeadPt == tmpTopZ2LeadPt  && lZ2PtPairAr[Z2Itr][1] > tmpTopZ2TrailingPt)){ //Check if passes lead Z2 pt cut
@@ -292,3 +292,7 @@ bool doSIPCut(float Z1LeadSIP,float Z1TrailingSIP,float Z2LeadSIP,float Z2Traili
     else return true;
 }
 
+bool doSemiLepISOCut(float leadIso,float trailingIso,float lepIsoCut){
+    if (leadIso + trailingIso >= lepIsoCut) return false;
+    else return true;
+}

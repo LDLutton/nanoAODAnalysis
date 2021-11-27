@@ -52,6 +52,7 @@ void FullAnalysisInC(){
     std::string saveName;
     float crossSection;
     bool isBackground;
+    bool useLHETree = false;
 
     if (MGEFT){
         saveName = "EFT";
@@ -61,6 +62,7 @@ void FullAnalysisInC(){
             std::string tmpStrWithPath = "/scratch365/dlutton/NanoAODFiles/pphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5/"+MGEFTAr[i];
             fileAr.push_back(tmpStrWithPath);
         }
+        useLHETree = true;
     }
     else if (MGSM){
         saveName = "SM";
@@ -70,6 +72,7 @@ void FullAnalysisInC(){
             std::string tmpStrWithPath = "/scratch365/dlutton/NanoAODFiles/pphzzjjQCD0SMHLOOP0QEDE5NPE0/"+MGSMAr[i];
             fileAr.push_back(tmpStrWithPath);
         }
+        useLHETree = true;
     }
     else if (ttHToBBBackground){
         //saveName = "ttHToBB";
@@ -257,6 +260,64 @@ void FullAnalysisInC(){
     if (isBackground){
         checkChannelSplits = false;
     }
+
+
+    //This tree is for variables before the cuts
+    //Can only use this on EFT and SM, not background
+
+
+    float ZOne_pt_FromLHERawL;
+    float ZOne_eta_FromLHERawL;
+
+    float ZTwo_pt_FromLHERawL;
+    float ZTwo_eta_FromLHERawL;
+
+    float H_pt_FromLHERawL;
+    float H_eta_FromLHERawL;
+
+    float JOne_pt_FromLHERawL;
+    float JOne_eta_FromLHERawL;
+
+    float JTwo_pt_FromLHERawL;
+    float JTwo_eta_FromLHERawL;
+
+    float JOne_invmass_FromLHERawL;
+    float JTwo_invmass_FromLHERawL;
+
+    float tmpJOnePhi_FromLHERawL;
+    float tmpJTwoPhi_FromLHERawL;
+
+    float JPair_invmass_FromLHERawL;
+    float J_etasep_FromLHERawL;
+
+    TTree *RawTree = new TTree("RawTree", "RawTree");
+
+    RawTree->Branch("ZOne_pt_FromLHERawL",&ZOne_pt_FromLHERawL,"ZOne_pt_FromLHERawL/F");
+    RawTree->Branch("ZOne_eta_FromLHERawL",&ZOne_eta_FromLHERawL,"ZOne_eta_FromLHERawL/F");
+
+    RawTree->Branch("ZTwo_pt_FromLHERawL",&ZTwo_pt_FromLHERawL,"ZTwo_pt_FromLHERawL/F");
+    RawTree->Branch("ZTwo_eta_FromLHERawL",&ZTwo_eta_FromLHERawL,"ZTwo_eta_FromLHERawL/F");
+
+    RawTree->Branch("H_pt_FromLHERawL",&H_pt_FromLHERawL,"H_pt_FromLHERawL/F");
+    RawTree->Branch("H_eta_FromLHERawL",&H_eta_FromLHERawL,"H_eta_FromLHERawL/F");
+
+    RawTree->Branch("JOne_pt_FromLHERawL",&JOne_pt_FromLHERawL,"JOne_pt_FromLHERawL/F");
+    RawTree->Branch("JOne_eta_FromLHERawL",&JOne_eta_FromLHERawL,"JOne_eta_FromLHERawL/F");
+
+    RawTree->Branch("JTwo_pt_FromLHERawL",&JTwo_pt_FromLHERawL,"JTwo_pt_FromLHERawL/F");
+    RawTree->Branch("JTwo_eta_FromLHERawL",&JTwo_eta_FromLHERawL,"JTwo_eta_FromLHERawL/F");
+
+    RawTree->Branch("JOne_invmass_FromLHERawL",&JOne_invmass_FromLHERawL,"JOne_invmass_FromLHERawL/F");
+    RawTree->Branch("JTwo_invmass_FromLHERawL",&JTwo_invmass_FromLHERawL,"JTwo_invmass_FromLHERawL/F");
+
+    RawTree->Branch("tmpJOnePhi_FromLHERawL",&tmpJOnePhi_FromLHERawL,"tmpJOnePhi_FromLHERawL/F");
+    RawTree->Branch("tmpJTwoPhi_FromLHERawL",&tmpJTwoPhi_FromLHERawL,"tmpJTwoPhi_FromLHERawL/F");
+
+    RawTree->Branch("JPair_invmass_FromLHERawL",&JPair_invmass_FromLHERawL,"JPair_invmass_FromLHERawL/F");
+    RawTree->Branch("J_etasep_FromLHERawL",&J_etasep_FromLHERawL,"J_etasep_FromLHERawL/F");
+
+
+
 
     UInt_t passhbbCtr = 0;
     UInt_t passAnyChannelCtr = 0;
@@ -547,6 +608,64 @@ void FullAnalysisInC(){
     HadTree->Branch("FJEtaSepL",&FJEtaSepL,"FJEtaSepL/F");
 
 
+    //This tree is for variables before the cuts
+    //Can only use this on EFT and SM, not background
+
+
+    float ZOne_pt_FromLHESelectedL;
+    float ZOne_eta_FromLHESelectedL;
+
+    float ZTwo_pt_FromLHESelectedL;
+    float ZTwo_eta_FromLHESelectedL;
+
+    float H_pt_FromLHESelectedL;
+    float H_eta_FromLHESelectedL;
+
+    float JOne_pt_FromLHESelectedL;
+    float JOne_eta_FromLHESelectedL;
+
+    float JTwo_pt_FromLHESelectedL;
+    float JTwo_eta_FromLHESelectedL;
+
+    float JOne_invmass_FromLHESelectedL;
+    float JTwo_invmass_FromLHESelectedL;
+
+    float tmpJOnePhi_FromLHESelectedL;
+
+    float tmpJTwoPhi_FromLHESelectedL;
+    float JPair_invmass_FromLHESelectedL;
+
+    float J_etasep_FromLHESelectedL;
+
+    TTree *SelectedTree = new TTree("SelectedTree", "SelectedTree");
+
+    SelectedTree->Branch("ZOne_pt_FromLHESelectedL",&ZOne_pt_FromLHESelectedL,"ZOne_pt_FromLHESelectedL/F");
+    SelectedTree->Branch("ZOne_eta_FromLHESelectedL",&ZOne_eta_FromLHESelectedL,"ZOne_eta_FromLHESelectedL/F");
+
+    SelectedTree->Branch("ZTwo_pt_FromLHESelectedL",&ZTwo_pt_FromLHESelectedL,"ZTwo_pt_FromLHESelectedL/F");
+    SelectedTree->Branch("ZTwo_eta_FromLHESelectedL",&ZTwo_eta_FromLHESelectedL,"ZTwo_eta_FromLHESelectedL/F");
+
+    SelectedTree->Branch("H_pt_FromLHESelectedL",&H_pt_FromLHESelectedL,"H_pt_FromLHESelectedL/F");
+    SelectedTree->Branch("H_eta_FromLHESelectedL",&H_eta_FromLHESelectedL,"H_eta_FromLHESelectedL/F");
+
+    SelectedTree->Branch("JOne_pt_FromLHESelectedL",&JOne_pt_FromLHESelectedL,"JOne_pt_FromLHESelectedL/F");
+    SelectedTree->Branch("JOne_eta_FromLHESelectedL",&JOne_eta_FromLHESelectedL,"JOne_eta_FromLHESelectedL/F");
+
+    SelectedTree->Branch("JTwo_pt_FromLHESelectedL",&JTwo_pt_FromLHESelectedL,"JTwo_pt_FromLHESelectedL/F");
+    SelectedTree->Branch("JTwo_eta_FromLHESelectedL",&JTwo_eta_FromLHESelectedL,"JTwo_eta_FromLHESelectedL/F");
+
+    SelectedTree->Branch("JOne_invmass_FromLHESelectedL",&JOne_invmass_FromLHESelectedL,"JOne_invmass_FromLHESelectedL/F");
+    SelectedTree->Branch("JTwo_invmass_FromLHESelectedL",&JTwo_invmass_FromLHESelectedL,"JTwo_invmass_FromLHESelectedL/F");
+
+    SelectedTree->Branch("tmpJOnePhi_FromLHESelectedL",&tmpJOnePhi_FromLHESelectedL,"tmpJOnePhi_FromLHESelectedL/F");
+    SelectedTree->Branch("tmpJTwoPhi_FromLHESelectedL",&tmpJTwoPhi_FromLHESelectedL,"tmpJTwoPhi_FromLHESelectedL/F");
+
+    SelectedTree->Branch("JPair_invmass_FromLHESelectedL",&JPair_invmass_FromLHESelectedL,"JPair_invmass_FromLHESelectedL/F");
+    SelectedTree->Branch("J_etasep_FromLHESelectedL",&J_etasep_FromLHESelectedL,"J_etasep_FromLHESelectedL/F");
+
+
+
+
 
 
     
@@ -559,6 +678,15 @@ void FullAnalysisInC(){
         TFile* tmpfile = TFile::Open(fileAr[k].c_str());
         outFile->cd();
         TTreeReader myEventsReader("Events", tmpfile);
+        if (useLHETree){
+            TTreeReaderValue<UInt_t> nLHEPart(myEventsReader, "nLHEPart");
+            TTreeReaderValue<Float_t> LHEPart_pt(myEventsReader, "LHEPart_pt");
+            TTreeReaderValue<Float_t> LHEPart_eta(myEventsReader, "LHEPart_eta");
+            TTreeReaderValue<UInt_t> LHEPart_pdgId(myEventsReader, "LHEPart_pdgId");
+            
+
+        }
+
         TTreeReaderValue<Bool_t> HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02(myEventsReader, "HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02");
         TTreeReaderValue<Bool_t> HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np2(myEventsReader, "HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np2");
         TTreeReaderValue<Bool_t> HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np4(myEventsReader, "HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np4");
@@ -672,11 +800,38 @@ void FullAnalysisInC(){
         TTreeReaderValue<Long64_t> genEventCount(myRunsReader, "genEventCount");
         TTreeReaderValue<Double_t> genEventSumw(myRunsReader, "genEventSumw");
 
+        Int_t tmpPDGId;
+
+        float ZOne_pt_FromLHERaw;
+        float ZOne_eta_FromLHERaw;
+
+        float ZTwo_pt_FromLHERaw;
+        float ZTwo_eta_FromLHERaw;
+
+        float H_pt_FromLHERaw;
+        float H_eta_FromLHERaw;
+
+        float JOne_pt_FromLHERaw;
+        float JOne_eta_FromLHERaw;
+
+        float JTwo_pt_FromLHERaw;
+        float JTwo_eta_FromLHERaw;
+
+        float JOne_invmass_FromLHERaw;
+        float JTwo_invmass_FromLHERaw;
+
+        float tmpJOnePhi_FromLHERaw;
+        float tmpJTwoPhi_FromLHERaw;
+
+        float JPair_invmass_FromLHERaw;
+        float J_etasep_FromLHERaw;
+
         Int_t tmpZ2Ind = -1;
         bool Z2IsMuon = false;
         float tmpTopZ2LeadPt = 0;
         float tmpTopZ2TrailingPt = 0;
         ROOT::Math::PtEtaPhiMVector tmpZ1Vec;
+        float tmpZ1M;
 
         float Z1LeadIso;
         float Z1TrailingIso;
@@ -759,6 +914,71 @@ void FullAnalysisInC(){
             bool passedAsLepBool = false;
             bool passedAsSemiLepBool = false;
             bool passedAsHadBool = false;
+
+            //If SM or EFT, get LHE information
+            if (useLHETree) {
+                Int_t tmpZCtr = 0;
+                Int_t tmpHCtr = 0;
+                Int_t tmpJCtr = 0;
+                std::vector<UInt_t> tmpZAr;
+                Int_t tmpHInd = -1;
+                std::vector<UInt_t>tmpJAr;
+                tmpPDGId = 0;
+                for (LHEItr=0; LHEItr<lenLHEPart;LHEItr++){
+                    tmpPDGId = LHEPart_pdgId[LHEItr];
+                    if (tmpPDGId == 23){
+                        tmpZCtr += 1;
+                        if (tmpZCtr > 2) std::cout << "ERROR MORE THAN 2 Zs IN LHE\n";
+                        else tmpZAr.push_back(LHEItr);
+                    }
+                    else if (tmpPDGId == 25){
+                        tmpHCtr += 1;
+                        if (tmpHCtr > 1) std::cout << "ERROR MORE THAN 1 H IN LHE\n";
+                        else tmpHInd = LHEItr;
+                    }
+                    else if (tmpPDGId >= -8 && tmpPDGId <= 8){
+                        tmpJCtr += 1;
+                        if (tmpJCtr > 4) std::cout << "ERROR MORE THAN 4 Qs IN LHE\n";
+                        else if (tmpJCtr > 2) tmpJAr.push_back(LHEItr);
+                    }
+                    else std::cout << "ERROR UNKNOWN PARTICLE " << tmpPDGId << " IN LHE\n";
+                }
+                if (tmpZCtr == 2 && tmpHCtr == 1 && tmpJCtr == 4 && tmpJAr.size() == 2){
+                    LHEFound = true;
+                    ZOne_pt_FromLHE = LHEPart_pt[tmpZAr[0]];
+                    ZOne_eta_FromLHE = LHEPart_eta[tmpZAr[0]];
+
+                    ZTwo_pt_FromLHE = LHEPart_pt[tmpZAr[1]];
+                    ZTwo_eta_FromLHE = LHEPart_eta[tmpZAr[1]];
+
+                    H_pt_FromLHE = LHEPart_pt[tmpHInd];
+                    H_eta_FromLHE = LHEPart_eta[tmpHInd];
+
+                    JOne_pt_FromLHE = LHEPart_pt[tmpJAr[0]];
+                    JOne_eta_FromLHE = LHEPart_eta[tmpJAr[0]];
+
+                    JTwo_pt_FromLHE = LHEPart_pt[tmpJAr[1]];
+                    JTwo_eta_FromLHE = LHEPart_eta[tmpJAr[1]];
+
+                    JOne_invmass_FromLHE = LHEPart_mass[tmpJAr[0]];
+                    JTwo_invmass_FromLHE = LHEPart_mass[tmpJAr[1]];
+
+                    tmpJOnePhi_FromLHERaw = LHEPart_phi[tmpJAr[0]];
+                    tmpJOneVec = ROOT::Math::PtEtaPhiMVector(JOne_pt_FromLHE, JOne_eta_FromLHE, tmpJOnePhi, JOne_invmass_FromLHE);
+
+                    tmpJTwoPhi_FromLHERaw = LHEPart_phi[tmpJAr[1]];
+                    tmpJTwoVec = ROOT::Math::PtEtaPhiMVector(JTwo_pt_FromLHE, JTwo_eta_FromLHE, tmpJTwoPhi, JTwo_invmass_FromLHE);
+                    tmpJPairVec = tmpJOneVec + tmpJTwoVec;
+                    JPair_invmass_FromLHE = tmpJPairVec.M();
+
+                    J_etasep_FromLHE = abs(JOne_eta_FromLHE-JTwo_eta_FromLHE);
+                    RawTree->Fill();
+
+                }
+            }
+
+
+
             //First check that it passes the hbb tagging
             bool hbbTag = *HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02 || *HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np2 || *HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np4;
             if (!hbbTag) continue;
@@ -1206,10 +1426,11 @@ void FullAnalysisInC(){
                                 tmpTopZ2LeadPt = 0;
                                 tmpTopZ2TrailingPt = 0;
                                 tmpZ1Vec = Z1LeadVec+Z1TrailingVec;
+                                tmpZ1M = tmpZ1Vec.M();
 
                                 
-                                if (eZ2CandsBool) dolZ2Cut(Z1LeadVec,Z1TrailingVec,tmpZ1Vec,Z1LeadCharge,Z1TrailingCharge,Z1IsMuon,eZ2VecPairAr,eZ2PtPairAr,eZ2ChargePairAr,tmpZ2Ind,Z2IsMuon,tmpTopZ2LeadPt,tmpTopZ2TrailingPt,fourLepInvMassCut,optLepInvMassCut,true);
-                                if (mZ2CandsBool) dolZ2Cut(Z1LeadVec,Z1TrailingVec,tmpZ1Vec,Z1LeadCharge,Z1TrailingCharge,Z1IsMuon,mZ2VecPairAr,mZ2PtPairAr,mZ2ChargePairAr,tmpZ2Ind,Z2IsMuon,tmpTopZ2LeadPt,tmpTopZ2TrailingPt,fourLepInvMassCut,optLepInvMassCut,false);
+                                if (eZ2CandsBool) dolZ2Cut(Z1LeadVec,Z1TrailingVec,tmpZ1Vec,tmpZ1M,Z1LeadCharge,Z1TrailingCharge,Z1IsMuon,eZ2VecPairAr,eZ2PtPairAr,eZ2ChargePairAr,tmpZ2Ind,Z2IsMuon,tmpTopZ2LeadPt,tmpTopZ2TrailingPt,fourLepInvMassCut,optLepInvMassCut,true);
+                                if (mZ2CandsBool) dolZ2Cut(Z1LeadVec,Z1TrailingVec,tmpZ1Vec,tmpZ1M,Z1LeadCharge,Z1TrailingCharge,Z1IsMuon,mZ2VecPairAr,mZ2PtPairAr,mZ2ChargePairAr,tmpZ2Ind,Z2IsMuon,tmpTopZ2LeadPt,tmpTopZ2TrailingPt,fourLepInvMassCut,optLepInvMassCut,false);
                                 if (debug) std::cout << "tmpZ2Ind " << tmpZ2Ind << " Z2IsMuon " << Z2IsMuon << " tmpTopZ2LeadPt " << tmpTopZ2LeadPt << " tmpTopZ2TrailingPt " << tmpTopZ2TrailingPt << "\n";
                                 if (tmpZ2Ind >= 0){ //Passed Z2 Cut
                                     if (debug) std::cout << "passed Z2 cut\n";
@@ -1433,6 +1654,8 @@ void FullAnalysisInC(){
                             Z1IsMuon = false;
                             Z1LeadCharge = 0;
                             Z1TrailingCharge = 0;
+                            Z1LeadIso = 0;
+                            Z1TrailingIso = 0;
                             std::vector<std::array<UInt_t,2>> elecPassesZ2CutsAr;
                             if (enoughElecCands){ //If enough elec cands, run Z1 cuts
                             
@@ -1444,19 +1667,50 @@ void FullAnalysisInC(){
                             }
                             if (debug) std::cout <<"Z1LeadItr " << Z1LeadItr << " Z1TrailingItr " << Z1TrailingItr << " Z1LeadPt " << Z1LeadPt << " Z1TrailingPt " << Z1TrailingPt << " Z1LeadVec " << Z1LeadVec << " Z1TrailingVec " << Z1TrailingVec << " Z1LeadCharge " << Z1LeadCharge << " Z1TrailingCharge " << Z1TrailingCharge << " Z1IsMuon " << Z1IsMuon << " difFromZMassOne " << difFromZMassOne << "\n";
                             if (Z1LeadItr >= 0) { //If Z1 found
-                            if (debug) std::cout << "Passed as SemiLep\n";
-                                passSemiLepCut += 1;
-                                passesCutsBool = true;
-                                passedAsSemiLepBool = true;
-                                if (debug) {
-                                    std::cout << "Z1IsMuon " <<Z1IsMuon<< "\n";
-                                    std::cout << "elecCandIndAr size " << elecCandIndAr.size() << "\n";
+                                bool semiLepPassIso = false;
+                                if (!Z1IsMuon){
+                                    if (debug) std::cout << "D01 \n";
+                                    if (Z1LeadPt > 35){
+                                        if (debug) std::cout << "D02 \n";
+                                        if (abs(Electron_eta[elecCandIndAr[Z1LeadItr]]) < 1.4) tmpAdd = max(0., Electron_dr03EcalRecHitSumEt[elecCandIndAr[Z1LeadItr]] - 1.);
+                                        else tmpAdd = Electron_dr03EcalRecHitSumEt[elecCandIndAr[Z1LeadItr]];
+                                        tmpIso = ( Electron_dr03TkSumPt[elecCandIndAr[Z1LeadItr]] + tmpAdd + Electron_dr03HcalDepth1TowerSumEt[elecCandIndAr[Z1LeadItr]] ) / Electron_pt[elecCandIndAr[Z1LeadItr]];
+                                    }
+                                    else tmpIso = Electron_pfRelIso03_all[elecCandIndAr[Z1LeadItr]];
+                                    Z1LeadIso = tmpIso;
+                                
+                                    if (Z1TrailingPt > 35){
+                                        if (debug) std::cout << "D03 \n";
+                                        if (abs(Electron_eta[elecCandIndAr[Z1TrailingItr]]) < 1.4) tmpAdd = max(0., Electron_dr03EcalRecHitSumEt[elecCandIndAr[Z1TrailingItr]] - 1.);
+                                        else tmpAdd = Electron_dr03EcalRecHitSumEt[elecCandIndAr[Z1TrailingItr]];
+                                        tmpIso = ( Electron_dr03TkSumPt[elecCandIndAr[Z1TrailingItr]] + tmpAdd + Electron_dr03HcalDepth1TowerSumEt[elecCandIndAr[Z1LeadItr]] ) / Electron_pt[elecCandIndAr[Z1LeadItr]];
+                                    }
+                                    else tmpIso = Electron_pfRelIso03_all[elecCandIndAr[Z1TrailingItr]];
+                                    Z1TrailingIso = tmpIso;
+                                }
+                                else{
+                                    if (debug) std::cout << "D04 \n";
+                                    if (debug) std::cout << "Z1LeadItr " << Z1LeadItr << "\n";
+                                    if (debug) std::cout << "muonCandIndAr[Z1LeadItr]" << muonCandIndAr[Z1LeadItr] << "\n";
+                                    Z1LeadIso = Muon_pfRelIso03_all[muonCandIndAr[Z1LeadItr]];
+                                    Z1TrailingIso = Muon_pfRelIso03_all[muonCandIndAr[Z1TrailingItr]];
+                                }
+                                semiLepPassIso = doSemiLepISOCut(Z1LeadIso,Z1TrailingIso,lepIsoCut);
+                                if (semiLepPassIso) {
+                                    if (debug) std::cout << "Passed as SemiLep\n";
+                                    passSemiLepCut += 1;
+                                    passesCutsBool = true;
+                                    passedAsSemiLepBool = true;
+                                    if (debug) {
+                                        std::cout << "Z1IsMuon " <<Z1IsMuon<< "\n";
+                                        std::cout << "elecCandIndAr size " << elecCandIndAr.size() << "\n";
 
-                                    std::cout << "muonCandIndAr loop " << muonCandIndAr.size() << "\n";
-                                    
-                                    for (UInt_t muonCandIndInd=0; muonCandIndInd<muonCandIndAr.size();muonCandIndInd++){
-                                        std::cout << "muonCandIndInd " << muonCandIndInd << "muonCandIndAr[muonCandIndInd]" << muonCandIndAr[muonCandIndInd] << "\n";
+                                        std::cout << "muonCandIndAr loop " << muonCandIndAr.size() << "\n";
+                                        
+                                        for (UInt_t muonCandIndInd=0; muonCandIndInd<muonCandIndAr.size();muonCandIndInd++){
+                                            std::cout << "muonCandIndInd " << muonCandIndInd << "muonCandIndAr[muonCandIndInd]" << muonCandIndAr[muonCandIndInd] << "\n";
 
+                                        }
                                     }
                                 }
 
@@ -1617,6 +1871,38 @@ void FullAnalysisInC(){
                     passedHadL = passedAsHadBool;
 
                     FATree->Fill();
+
+                    if (useLHETree) {
+                        ZOne_pt_FromLHESelectedL = ZOne_pt_FromLHESelected;
+                        ZOne_eta_FromLHESelectedL = ZOne_eta_FromLHESelected;
+
+                        ZTwo_pt_FromLHESelectedL = ZTwo_pt_FromLHESelected;
+                        ZTwo_eta_FromLHESelectedL = ZTwo_eta_FromLHESelected;
+
+                        H_pt_FromLHESelectedL = H_pt_FromLHESelected;
+                        H_eta_FromLHESelectedL = H_eta_FromLHESelected;
+
+                        JOne_pt_FromLHESelectedL = JOne_pt_FromLHESelected;
+                        JOne_eta_FromLHESelectedL = JOne_eta_FromLHESelected;
+
+                        JTwo_pt_FromLHESelectedL = JTwo_pt_FromLHESelected;
+                        JTwo_eta_FromLHESelectedL = JTwo_eta_FromLHESelected;
+
+                        JOne_invmass_FromLHESelectedL = JOne_invmass_FromLHESelected;
+                        JTwo_invmass_FromLHESelectedL = JTwo_invmass_FromLHESelected;
+
+                        tmpJOnePhi_FromLHESelectedL = tmpJOnePhi_FromLHESelected;
+
+                        tmpJTwoPhi_FromLHESelectedL = tmpJTwoPhi_FromLHESelected;
+                        JPair_invmass_FromLHESelectedL = JPair_invmass_FromLHESelected;
+
+                        J_etasep_FromLHESelectedL = J_etasep_FromLHESelected;
+
+                        SelectedTree->Fill();
+                    }
+
+
+
                     if (debug) std::cout << "Filling channel branches \n";
                     evPassCount += 1;
                     ROOT::Math::PtEtaPhiMVector tmpZ2LeadVec;
@@ -1630,13 +1916,12 @@ void FullAnalysisInC(){
                         if (!Z2IsMuon){
                             tmpZ2LeadVec = eZ2VecPairAr[tmpZ2Ind][0];
                             tmpZ2TrailingVec = eZ2VecPairAr[tmpZ2Ind][1];
-                            tmpZ2Vec = tmpZ2LeadVec+tmpZ2TrailingVec;
                         }
                         else{
                             tmpZ2LeadVec = mZ2VecPairAr[tmpZ2Ind][0];
                             tmpZ2TrailingVec = mZ2VecPairAr[tmpZ2Ind][1];
-                            tmpZ2Vec = tmpZ2LeadVec+tmpZ2TrailingVec;
                         }
+                        tmpZ2Vec = tmpZ2LeadVec+tmpZ2TrailingVec;
                         if (debug) std::cout << "After ifs \n";
 
 
@@ -1645,7 +1930,7 @@ void FullAnalysisInC(){
                         lepZ1TrailingPtL  = Z1TrailingPt;
                         lepZ1LeadPhiL     = Z1LeadVec.Phi();
                         lepZ1TrailingPhiL = Z1TrailingVec.Phi();
-                        lepZ1PairInvMassL = tmpZ1Vec.M();
+                        lepZ1PairInvMassL = tmpZ1M;
                         lepZ1LeadEtaL     = Z1LeadVec.Eta();
                         lepZ1TrailingEtaL = Z1TrailingVec.Eta();
                         lepZ1IsElectronL  = !Z1IsMuon;
@@ -1824,8 +2109,11 @@ void FullAnalysisInC(){
     LepTree->Write("",TObject::kOverwrite);
     SemiLepTree->Write("",TObject::kOverwrite);
     HadTree->Write("",TObject::kOverwrite);
+    if (useLHETree) {
+        RawTree->Write("",TObject::kOverwrite);
+        SelectedTree->Write("",TObject::kOverwrite);
 
-
+    }
 
     outFile->Close();
 }
