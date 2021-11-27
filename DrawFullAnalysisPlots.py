@@ -420,6 +420,79 @@ for k,fileA in enumerate(fileAr):
             histHadAr[k][valItr].Fill(valA)
         evCtr += 1
 
+
+    evCtr = 0
+
+    RawTree = fileA.RawTree
+    histRawAr.append([])
+    canRawAr.append([])
+    
+    #Initialize all Raw hists
+    print("Initializing Raw hists")
+    for RawItr, RawSaveName in enumerate(RawSaveNameAr):
+        if onlyDoSomeHists and RawItr >= histsToDo:
+            break
+        canRawAr[-1].append(TCanvas("{0}CanRaw{1}".format(RawSaveName,datasetSaveNameAr[k]),"{0}CanRaw{1}".format(RawSaveName,datasetSaveNameAr[k]),3600,2400))
+        histRawAr[-1].append(TH1D("{0}HistRaw{1}".format(RawSaveName,datasetSaveNameAr[k]),"{0}HistRaw{1}".format(RawSaveName,datasetSaveNameAr[k]), RawBinsAndRangeAr[RawItr][0], RawBinsAndRangeAr[RawItr][1], RawBinsAndRangeAr[RawItr][2]))
+    print("Looping over events")
+    #LOOP OVER EVENTS IN FILE k
+    for j,ev in enumerate(RawTree):
+        if breakEvEarly and evCtr >= breakEvAt:
+            break
+        if evCtr % 1000 == 0:
+            print("ev:",evCtr)
+        
+        valAr = [ev.ZOne_pt_FromLHERawL,ev.ZOne_eta_FromLHERawL,ev.ZTwo_pt_FromLHERawL,ev.ZTwo_eta_FromLHERawL,
+        ev.H_pt_FromLHERawL,ev.H_eta_FromLHERawL,
+        ev.JOne_pt_FromLHERawL,ev.JOne_eta_FromLHERawL,ev.tmpJOnePhi_FromLHERawL,ev.JOne_invmass_FromLHERawL,
+        ev.JTwo_pt_FromLHERawL,ev.JTwo_eta_FromLHERawL,ev.tmpJTwoPhi_FromLHERawL,ev.JTwo_invmass_FromLHERawL,
+        ev.JPair_invmass_FromLHERawL,ev.J_etasep_FromLHERawL]
+
+        for valItr,valA in enumerate(valAr):
+            if onlyDoSomeHists and valItr >= histsToDo:
+                break
+            #if evCtr <20 and evCtr > 10 and valItr == 0:
+            #    print(valA)
+            histRawAr[k][valItr].Fill(valA)
+        evCtr += 1
+
+
+    
+    evCtr = 0
+
+    SelectedTree = fileA.SelectedTree
+    histSelectedAr.append([])
+    canSelectedAr.append([])
+    
+    #Initialize all Selected hists
+    print("Initializing Selected hists")
+    for SelectedItr, SelectedSaveName in enumerate(SelectedSaveNameAr):
+        if onlyDoSomeHists and SelectedItr >= histsToDo:
+            break
+        canSelectedAr[-1].append(TCanvas("{0}CanSelected{1}".format(SelectedSaveName,datasetSaveNameAr[k]),"{0}CanSelected{1}".format(SelectedSaveName,datasetSaveNameAr[k]),3600,2400))
+        histSelectedAr[-1].append(TH1D("{0}HistSelected{1}".format(SelectedSaveName,datasetSaveNameAr[k]),"{0}HistSelected{1}".format(SelectedSaveName,datasetSaveNameAr[k]), SelectedBinsAndRangeAr[SelectedItr][0], SelectedBinsAndRangeAr[SelectedItr][1], SelectedBinsAndRangeAr[SelectedItr][2]))
+    print("Looping over events")
+    #LOOP OVER EVENTS IN FILE k
+    for j,ev in enumerate(SelectedTree):
+        if breakEvEarly and evCtr >= breakEvAt:
+            break
+        if evCtr % 1000 == 0:
+            print("ev:",evCtr)
+        
+        valAr = [ev.ZOne_pt_FromLHESelectedL,ev.ZOne_eta_FromLHESelectedL,ev.ZTwo_pt_FromLHESelectedL,ev.ZTwo_eta_FromLHESelectedL,
+        ev.H_pt_FromLHESelectedL,ev.H_eta_FromLHESelectedL,
+        ev.JOne_pt_FromLHESelectedL,ev.JOne_eta_FromLHESelectedL,ev.tmpJOnePhi_FromLHESelectedL,ev.JOne_invmass_FromLHESelectedL,
+        ev.JTwo_pt_FromLHESelectedL,ev.JTwo_eta_FromLHESelectedL,ev.tmpJTwoPhi_FromLHESelectedL,ev.JTwo_invmass_FromLHESelectedL,
+        ev.JPair_invmass_FromLHESelectedL,ev.J_etasep_FromLHESelectedL]
+
+        for valItr,valA in enumerate(valAr):
+            if onlyDoSomeHists and valItr >= histsToDo:
+                break
+            #if evCtr <20 and evCtr > 10 and valItr == 0:
+            #    print(valA)
+            histSelectedAr[k][valItr].Fill(valA)
+        evCtr += 1
+
     
 
     
@@ -902,5 +975,242 @@ for HadItr, HadSaveName in enumerate(HadSaveNameAr):
 
 setUpNonStackedHistAndFoMPlot(comparisonUnstackedCanAr,cloneHistAr,padAr,sumQCD,QCDSumHistHadAr,histMaxAr,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxIntAr,histHadAr,legAr,signalName,backgroundName,HadSaveNameAr,HadTitleAr,HadXTitleAr,signalPos,onlyDoSomeHists,histsToDo)
 
+###############STARTING RAW LHEGRAPHS###############
+padAr = []
+legAr = []
+
+"""
+signalName = ""
+backgroundName = ""
+for k,fileA in enumerate(fileAr):
+    if not sumQCD or not isQCDAr[k]:
+        if isSignalAr[k]:
+            signalName += "_"+datasetSaveNameAr[k]
+        else:
+            backgroundName += "_"+datasetSaveNameAr[k]
+
+"""
+
+sumQCDCanAr = []
+#print(len(weightsAr),len(histRawAr),len(histRawAr[0]),len(RawSaveNameAr),len(QCDSumHistRawAr))
+if sumQCD:
+    backgroundName += "_QCDSum"
+    for RawItr, RawSaveName in enumerate(RawSaveNameAr):
+        if onlyDoSomeHists and RawItr >= histsToDo:
+            break
+        sumQCDCanAr.append(TCanvas("{0}CanRawQCDSum".format(RawSaveName),"{0}CanRawQCDSum".format(RawSaveName),3600,2400))
+        QCDSumHistRawAr.append(TH1D("{0}HistRawQCDSum".format(RawSaveName),"{0}HistRawQCDSum".format(RawSaveName), RawBinsAndRangeAr[RawItr][0], RawBinsAndRangeAr[RawItr][1], RawBinsAndRangeAr[RawItr][2]))
+    for k in range(len(histRawAr)):
+        if isQCDAr[k]:
+            for RawItr, RawSaveName in enumerate(RawSaveNameAr):
+                if onlyDoSomeHists and RawItr >= histsToDo:
+                    break
+                #print(k,RawItr)
+                histRawAr[k][RawItr].Sumw2()
+                QCDSumHistRawAr[RawItr].Sumw2()
+                QCDSumHistRawAr[RawItr].Add(histRawAr[k][RawItr],weightsAr[k])
+
+
+for k,fileA in enumerate(fileAr):
+    if not sumQCD or not isQCDAr[k]:
+        for RawItr, RawSaveName in enumerate(RawSaveNameAr):
+            if onlyDoSomeHists and RawItr >= histsToDo:
+                break
+            canRawAr[k][RawItr].cd()
+            histRawAr[k][RawItr].Draw("hist")
+            if savePathBool:
+                canRawAr[k][RawItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],RawSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+            else:
+                canRawAr[k][RawItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],RawSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+
+
+if sumQCD:
+    for RawItr, RawSaveName in enumerate(RawSaveNameAr):
+        if onlyDoSomeHists and RawItr >= histsToDo:
+            break
+        sumQCDCanAr[RawItr].cd()
+        QCDSumHistRawAr[RawItr].Draw("hist")
+        if savePathBool:
+            sumQCDCanAr[RawItr].SaveAs("./Graphs/General/QCDSum/{0}{1}.png".format(RawSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        else:
+            sumQCDCanAr[RawItr].SaveAs("QCDSum{0}{1}.png".format(RawSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+
+for RawItr, RawSaveName in enumerate(RawSaveNameAr):
+    if onlyDoSomeHists and RawItr >= histsToDo:
+        break
+    setUpLegend(legAr)
+    setUpPadsAr(padAr,"{0}Pad".format("RawSaveName"))
+    #padAr[-1][0].Draw()
+    #padAr[-1][0].cd()
+
+intComparisonAr = []
+
+
+
+backgroundIntSumAr,QCDSumIntAr = setHistoElements(colorAr,sumQCD,QCDSumHistRawAr,isQCDAr,histRawAr,isSignalAr,normalizeBackgroundsTogether,weightsAr,intComparisonAr,RawSaveNameAr,onlyDoSomeHists,histsToDo,signalPos)
+
+
+histMaxAr = normalizeHists(histRawAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,backgroundIntSumAr,isSignalAr,weightsAr,legAr,datasetSaveNameAr,intComparisonAr,RawSaveNameAr,onlyDoSomeHists,histsToDo)
+
+
+
+if sumQCD:
+    histMaxAr = scaleQCDHist(QCDSumIntAr,QCDSumHistRawAr,histMaxAr,legAr,onlyDoSomeHists,histsToDo,normalizeBackgroundsTogether,backgroundIntSumAr)
+
+
+
+comparisonCanAr = []
+comparisonHistStackAr = []
+for RawItr, RawSaveName in enumerate(RawSaveNameAr):
+    if onlyDoSomeHists and RawItr >= histsToDo:
+        break
+    comparisonCanAr.append(TCanvas("comparisonCan{0}".format(RawSaveName),"comparisonCan{0}".format(RawSaveName),3600,2400))
+    comparisonHistStackAr.append(THStack("hist{0}Stack".format(RawSaveName),RawTitleAr[RawItr]))
+
+
+maxIntAr = addHistsToStack(fileAr,histRawAr,isSignalAr,sumQCD,isQCDAr,comparisonHistStackAr,QCDSumHistRawAr,normalizeBackgroundsTogether,backgroundIntSumAr,RawSaveNameAr,signalPos,onlyDoSomeHists,histsToDo)
+
+#Loop over all hists that went into the THStack to get center and length of error bars for invisible hist
+
+invHistsAr = []
+drawInvAr = []
+cloneHistAr = []
+
+setUpInvHists(histRawAr,cloneHistAr,isSignalAr,sumQCD,isQCDAr,invHistsAr,RawSaveNameAr,intComparisonAr,drawInvAr,QCDSumIntAr,QCDSumHistRawAr,RawSaveNameAr,onlyDoSomeHists,histsToDo)
+
+
+setUpStackedHistAndDrawFoMPlot(histMaxAr,histRawAr,cloneHistAr,comparisonHistStackAr,invHistsAr,drawInvAr,legAr,comparisonCanAr,padAr,normalizeBackgroundsTogether,signalName,backgroundName,RawSaveNameAr,RawXTitleAr,signalPos,onlyDoSomeHists,histsToDo)
+
+comparisonUnstackedCanAr = []
+legUnstackedAr = []
+padUnstackedAr = []
+for RawItr, RawSaveName in enumerate(RawSaveNameAr):
+    if onlyDoSomeHists and RawItr >= histsToDo:
+        break
+    comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(RawSaveName),"comparisonUnstackedCan{0}".format(RawSaveName),3600,2400))
+    setUpLegend(legUnstackedAr)
+    setUpPadsAr(padUnstackedAr,"{0}Pad".format("RawUnstackedSaveName"))
+
+setUpNonStackedHistAndFoMPlot(comparisonUnstackedCanAr,cloneHistAr,padAr,sumQCD,QCDSumHistRawAr,histMaxAr,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxIntAr,histRawAr,legAr,signalName,backgroundName,RawSaveNameAr,RawTitleAr,RawXTitleAr,signalPos,onlyDoSomeHists,histsToDo)
+
+
+
+###############STARTING SELECTED LHE GRAPHS###############
+padAr = []
+legAr = []
+
+"""
+signalName = ""
+backgroundName = ""
+for k,fileA in enumerate(fileAr):
+    if not sumQCD or not isQCDAr[k]:
+        if isSignalAr[k]:
+            signalName += "_"+datasetSaveNameAr[k]
+        else:
+            backgroundName += "_"+datasetSaveNameAr[k]
+
+"""
+
+sumQCDCanAr = []
+#print(len(weightsAr),len(histSelectedAr),len(histSelectedAr[0]),len(SelectedSaveNameAr),len(QCDSumHistSelectedAr))
+if sumQCD:
+    backgroundName += "_QCDSum"
+    for SelectedItr, SelectedSaveName in enumerate(SelectedSaveNameAr):
+        if onlyDoSomeHists and SelectedItr >= histsToDo:
+            break
+        sumQCDCanAr.append(TCanvas("{0}CanSelectedQCDSum".format(SelectedSaveName),"{0}CanSelectedQCDSum".format(SelectedSaveName),3600,2400))
+        QCDSumHistSelectedAr.append(TH1D("{0}HistSelectedQCDSum".format(SelectedSaveName),"{0}HistSelectedQCDSum".format(SelectedSaveName), SelectedBinsAndRangeAr[SelectedItr][0], SelectedBinsAndRangeAr[SelectedItr][1], SelectedBinsAndRangeAr[SelectedItr][2]))
+    for k in range(len(histSelectedAr)):
+        if isQCDAr[k]:
+            for SelectedItr, SelectedSaveName in enumerate(SelectedSaveNameAr):
+                if onlyDoSomeHists and SelectedItr >= histsToDo:
+                    break
+                #print(k,SelectedItr)
+                histSelectedAr[k][SelectedItr].Sumw2()
+                QCDSumHistSelectedAr[SelectedItr].Sumw2()
+                QCDSumHistSelectedAr[SelectedItr].Add(histSelectedAr[k][SelectedItr],weightsAr[k])
+
+
+for k,fileA in enumerate(fileAr):
+    if not sumQCD or not isQCDAr[k]:
+        for SelectedItr, SelectedSaveName in enumerate(SelectedSaveNameAr):
+            if onlyDoSomeHists and SelectedItr >= histsToDo:
+                break
+            canSelectedAr[k][SelectedItr].cd()
+            histSelectedAr[k][SelectedItr].Draw("hist")
+            if savePathBool:
+                canSelectedAr[k][SelectedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],SelectedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+            else:
+                canSelectedAr[k][SelectedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],SelectedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+
+
+if sumQCD:
+    for SelectedItr, SelectedSaveName in enumerate(SelectedSaveNameAr):
+        if onlyDoSomeHists and SelectedItr >= histsToDo:
+            break
+        sumQCDCanAr[SelectedItr].cd()
+        QCDSumHistSelectedAr[SelectedItr].Draw("hist")
+        if savePathBool:
+            sumQCDCanAr[SelectedItr].SaveAs("./Graphs/General/QCDSum/{0}{1}.png".format(SelectedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        else:
+            sumQCDCanAr[SelectedItr].SaveAs("QCDSum{0}{1}.png".format(SelectedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+
+for SelectedItr, SelectedSaveName in enumerate(SelectedSaveNameAr):
+    if onlyDoSomeHists and SelectedItr >= histsToDo:
+        break
+    setUpLegend(legAr)
+    setUpPadsAr(padAr,"{0}Pad".format("SelectedSaveName"))
+    #padAr[-1][0].Draw()
+    #padAr[-1][0].cd()
+
+intComparisonAr = []
+
+
+
+backgroundIntSumAr,QCDSumIntAr = setHistoElements(colorAr,sumQCD,QCDSumHistSelectedAr,isQCDAr,histSelectedAr,isSignalAr,normalizeBackgroundsTogether,weightsAr,intComparisonAr,SelectedSaveNameAr,onlyDoSomeHists,histsToDo,signalPos)
+
+
+histMaxAr = normalizeHists(histSelectedAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,backgroundIntSumAr,isSignalAr,weightsAr,legAr,datasetSaveNameAr,intComparisonAr,SelectedSaveNameAr,onlyDoSomeHists,histsToDo)
+
+
+
+if sumQCD:
+    histMaxAr = scaleQCDHist(QCDSumIntAr,QCDSumHistSelectedAr,histMaxAr,legAr,onlyDoSomeHists,histsToDo,normalizeBackgroundsTogether,backgroundIntSumAr)
+
+
+
+comparisonCanAr = []
+comparisonHistStackAr = []
+for SelectedItr, SelectedSaveName in enumerate(SelectedSaveNameAr):
+    if onlyDoSomeHists and SelectedItr >= histsToDo:
+        break
+    comparisonCanAr.append(TCanvas("comparisonCan{0}".format(SelectedSaveName),"comparisonCan{0}".format(SelectedSaveName),3600,2400))
+    comparisonHistStackAr.append(THStack("hist{0}Stack".format(SelectedSaveName),SelectedTitleAr[SelectedItr]))
+
+
+maxIntAr = addHistsToStack(fileAr,histSelectedAr,isSignalAr,sumQCD,isQCDAr,comparisonHistStackAr,QCDSumHistSelectedAr,normalizeBackgroundsTogether,backgroundIntSumAr,SelectedSaveNameAr,signalPos,onlyDoSomeHists,histsToDo)
+
+#Loop over all hists that went into the THStack to get center and length of error bars for invisible hist
+
+invHistsAr = []
+drawInvAr = []
+cloneHistAr = []
+
+setUpInvHists(histSelectedAr,cloneHistAr,isSignalAr,sumQCD,isQCDAr,invHistsAr,SelectedSaveNameAr,intComparisonAr,drawInvAr,QCDSumIntAr,QCDSumHistSelectedAr,SelectedSaveNameAr,onlyDoSomeHists,histsToDo)
+
+
+setUpStackedHistAndDrawFoMPlot(histMaxAr,histSelectedAr,cloneHistAr,comparisonHistStackAr,invHistsAr,drawInvAr,legAr,comparisonCanAr,padAr,normalizeBackgroundsTogether,signalName,backgroundName,SelectedSaveNameAr,SelectedXTitleAr,signalPos,onlyDoSomeHists,histsToDo)
+
+comparisonUnstackedCanAr = []
+legUnstackedAr = []
+padUnstackedAr = []
+for SelectedItr, SelectedSaveName in enumerate(SelectedSaveNameAr):
+    if onlyDoSomeHists and SelectedItr >= histsToDo:
+        break
+    comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(SelectedSaveName),"comparisonUnstackedCan{0}".format(SelectedSaveName),3600,2400))
+    setUpLegend(legUnstackedAr)
+    setUpPadsAr(padUnstackedAr,"{0}Pad".format("SelectedUnstackedSaveName"))
+
+setUpNonStackedHistAndFoMPlot(comparisonUnstackedCanAr,cloneHistAr,padAr,sumQCD,QCDSumHistSelectedAr,histMaxAr,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxIntAr,histSelectedAr,legAr,signalName,backgroundName,SelectedSaveNameAr,SelectedTitleAr,SelectedXTitleAr,signalPos,onlyDoSomeHists,histsToDo)
 
 

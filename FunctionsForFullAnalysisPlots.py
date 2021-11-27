@@ -79,6 +79,69 @@ histHadAr = []
 QCDSumHistHadAr = []
 canHadAr = []
 
+histRawAr = []
+QCDSumHistRawAr = []
+canRawAr = []
+
+histSelectedAr = []
+QCDSumHistSelectedAr = []
+canSelectedAr = []
+
+
+RawSaveNameAr = ["Z1PtFromLHERaw","Z1EtaFromLHERaw","Z2PtFromLHERaw","Z2EtaFromLHERaw",
+"HPtFromLHERaw","HEtaFromLHERaw",
+"JetLeadPtFromLHERaw","JetLeadEtaFromLHERaw","JetLeadPhiFromLHERaw","JetLeadInvMassFromLHERaw",
+"JetTrailingPtFromLHERaw","JetTrailingEtaFromLHERaw","JetTrailingPhiFromLHERaw","JetTrailingInvMassFromLHERaw",
+"JPairInvMassFromLHERaw","JPairEtaSepFromLHERaw"
+]
+
+
+RawTitleAr = ["Z1 Lead Pt","Z1 Lead Eta","Z1 Trailing Pt","Z1 Trailing Eta",
+"H Pt","H Eta",
+"Jet Lead Pt","Jet Lead Eta","Jet Lead Phi","Jet Lead Invariant Mass",
+"Jet Trailing Pt","Jet Trailing Eta","Jet Trailing Phi","Jet Trailing Invariant Mass",
+"Jet Pair Invariant Mass", "Jet Pair Eta Separation"]
+
+RawXTitleAr = ["Pt (GeV)","Eta","Pt (GeV)","Eta",
+"H Pt (GeV)","H Eta",
+"Pt (GeV)","Eta","Phi","Invariant Mass (GeV)",
+"Pt (GeV)","Eta","Phi","Invariant Mass (GeV)",
+"Invariant Mass (GeV)", "Eta Separation"]
+
+RawBinsAndRangeAr = [[34,0.,2500.],[50,-4.5,4.5],[34,0.,2500.],[50,-4.5,4.5],
+[34,0.,2500.],[50,-4.5,4.5],
+[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[50,-0.03,0.03],
+[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[50,-0.03,0.03],
+[100,0,6000],[40,0,8]]
+
+
+SelectedSaveNameAr = ["Z1PtFromLHESelected","Z1EtaFromLHESelected","Z2PtFromLHESelected","Z2EtaFromLHESelected",
+"HPtFromLHESelected","HEtaFromLHESelected",
+"JetLeadPtFromLHESelected","JetLeadEtaFromLHESelected","JetLeadPhiFromLHESelected","JetLeadInvMassFromLHESelected",
+"JetTrailingPtFromLHESelected","JetTrailingEtaFromLHESelected","JetTrailingPhiFromLHESelected","JetTrailingInvMassFromLHESelected",
+"JPairInvMassFromLHESelected","JPairEtaSepFromLHESelected"
+]
+
+
+SelectedTitleAr = ["Z1 Lead Pt After Cuts","Z1 Lead Eta After Cuts","Z1 Trailing Pt After Cuts","Z1 Trailing Eta After Cuts",
+"H Pt After Cuts","H Eta After Cuts",
+"Jet Lead Pt After Cuts","Jet Lead Eta After Cuts","Jet Lead Phi After Cuts","Jet Lead Invariant Mass After Cuts",
+"Jet Trailing Pt After Cuts","Jet Trailing Eta After Cuts","Jet Trailing Phi After Cuts","Jet Trailing Invariant Mass After Cuts",
+"Jet Pair Invariant Mass After Cuts", "Jet Pair Eta Separation After Cuts"]
+
+SelectedXTitleAr = ["Pt (GeV)","Eta","Pt (GeV)","Eta",
+"H Pt (GeV)","H Eta",
+"Pt (GeV)","Eta","Phi","Invariant Mass (GeV)",
+"Pt (GeV)","Eta","Phi","Invariant Mass (GeV)",
+"Invariant Mass (GeV)", "Eta Separation"]
+
+SelectedBinsAndRangeAr = [[34,0.,2500.],[50,-4.5,4.5],[34,0.,2500.],[50,-4.5,4.5],
+[34,0.,2500.],[50,-4.5,4.5],
+[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[50,-0.03,0.03],
+[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[50,-0.03,0.03],
+[100,0,6000],[40,0,8]]
+
+
 
 FASaveNameAr = ["nJets","JetLeadPt","JetTrailingPt","JetLeadPhi","JetTrailingPhi","JetPairIM","JetLeadEta","JetTrailingEta",
 "nFJ","FJPt","FJPhi","FJEta","FJMass","FJDeepTagH",
