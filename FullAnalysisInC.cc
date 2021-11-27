@@ -949,28 +949,61 @@ void FullAnalysisInC(){
                 }
                 if (tmpZCtr == 2 && tmpHCtr == 1 && tmpJCtr == 4 && tmpJAr.size() == 2){
                     //LHEFound = true;
-                    ZOne_pt_FromLHERaw = LHEPart_pt[tmpZAr[0]];
-                    ZOne_eta_FromLHERaw = LHEPart_eta[tmpZAr[0]];
+                    float tmpLHEPartPtOne = LHEPart_pt[tmpZAr[0]];
+                    float tmpLHEPartPtTwo = LHEPart_pt[tmpZAr[1]];
+                    
+                    if (tmpLHEPartPtOne >= tmpLHEPartPtTwo){
+                        ZOne_pt_FromLHERaw = tmpLHEPartPtOne;
+                        ZOne_eta_FromLHERaw = LHEPart_eta[tmpZAr[0]];
 
-                    ZTwo_pt_FromLHERaw = LHEPart_pt[tmpZAr[1]];
-                    ZTwo_eta_FromLHERaw = LHEPart_eta[tmpZAr[1]];
+                        ZTwo_pt_FromLHERaw = tmpLHEPartPtTwo;
+                        ZTwo_eta_FromLHERaw = LHEPart_eta[tmpZAr[1]];
+                    }
+                    else{
+                        ZOne_pt_FromLHERaw = tmpLHEPartPtTwo;
+                        ZOne_eta_FromLHERaw = LHEPart_eta[tmpZAr[1]];
+
+                        ZTwo_pt_FromLHERaw = tmpLHEPartPtOne;
+                        ZTwo_eta_FromLHERaw = LHEPart_eta[tmpZAr[0]];
+                    }
+
+                    
 
                     H_pt_FromLHERaw = LHEPart_pt[tmpHInd];
                     H_eta_FromLHERaw = LHEPart_eta[tmpHInd];
 
-                    JOne_pt_FromLHERaw = LHEPart_pt[tmpJAr[0]];
-                    JOne_eta_FromLHERaw = LHEPart_eta[tmpJAr[0]];
+                    tmpLHEPartPtOne = LHEPart_pt[tmpJAr[0]];
+                    tmpLHEPartPtTwo = LHEPart_pt[tmpJAr[1]];
 
-                    JTwo_pt_FromLHERaw = LHEPart_pt[tmpJAr[1]];
-                    JTwo_eta_FromLHERaw = LHEPart_eta[tmpJAr[1]];
+                    if (tmpLHEPartPtOne >= tmpLHEPartPtTwo) {
+                        JOne_pt_FromLHERaw = tmpLHEPartPtOne;
+                        JOne_eta_FromLHERaw = LHEPart_eta[tmpJAr[0]];
 
-                    JOne_invmass_FromLHERaw = LHEPart_mass[tmpJAr[0]];
-                    JTwo_invmass_FromLHERaw = LHEPart_mass[tmpJAr[1]];
+                        JTwo_pt_FromLHERaw = tmpLHEPartPtTwo;
+                        JTwo_eta_FromLHERaw = LHEPart_eta[tmpJAr[1]];
 
-                    tmpJOnePhi_FromLHERaw = LHEPart_phi[tmpJAr[0]];
+                        JOne_invmass_FromLHERaw = LHEPart_mass[tmpJAr[0]];
+                        JTwo_invmass_FromLHERaw = LHEPart_mass[tmpJAr[1]];
+
+                        tmpJOnePhi_FromLHERaw = LHEPart_phi[tmpJAr[0]];
+                        tmpJTwoPhi_FromLHERaw = LHEPart_phi[tmpJAr[1]];
+                    }
+                    else{
+                        JOne_pt_FromLHERaw = tmpLHEPartPtTwo;
+                        JOne_eta_FromLHERaw = LHEPart_eta[tmpJAr[1]];
+
+                        JTwo_pt_FromLHERaw = tmpLHEPartPtOne;
+                        JTwo_eta_FromLHERaw = LHEPart_eta[tmpJAr[0]];
+
+                        JOne_invmass_FromLHERaw = LHEPart_mass[tmpJAr[1]];
+                        JTwo_invmass_FromLHERaw = LHEPart_mass[tmpJAr[0]];
+
+                        tmpJOnePhi_FromLHERaw = LHEPart_phi[tmpJAr[1]];
+                        tmpJTwoPhi_FromLHERaw = LHEPart_phi[tmpJAr[0]];
+
+                    }
+
                     ROOT::Math::PtEtaPhiMVector tmpJOneVec = ROOT::Math::PtEtaPhiMVector(JOne_pt_FromLHERaw, JOne_eta_FromLHERaw, tmpJOnePhi_FromLHERaw, JOne_invmass_FromLHERaw);
-
-                    tmpJTwoPhi_FromLHERaw = LHEPart_phi[tmpJAr[1]];
                     ROOT::Math::PtEtaPhiMVector tmpJTwoVec = ROOT::Math::PtEtaPhiMVector(JTwo_pt_FromLHERaw, JTwo_eta_FromLHERaw, tmpJTwoPhi_FromLHERaw, JTwo_invmass_FromLHERaw);
                     ROOT::Math::PtEtaPhiMVector tmpJPairVec = tmpJOneVec + tmpJTwoVec;
                     JPair_invmass_FromLHERaw = tmpJPairVec.M();
