@@ -23,19 +23,19 @@ isQCDAr = []
 testRun = False
 MGSM = True
 MGEFT = True
-ttHToBBBackground = True
-ttZJetsBackground = True
-DYBackground = True
-QCDPT170to300Background = True
-QCDPT300to470Background = True
-QCDPT470to600Background = True
-QCDPT600to800Background = True
-QCDPT800to1000Background = True
-QCDPT1000to1400Background = True
-QCDPT1400to1800Background = True
-QCDPT1800to2400Background = True
-QCDPT2400to3200Background = True
-QCDPT3200toInfBackground = True
+ttHToBBBackground = False
+ttZJetsBackground = False
+DYBackground = False
+QCDPT170to300Background = False
+QCDPT300to470Background = False
+QCDPT470to600Background = False
+QCDPT600to800Background = False
+QCDPT800to1000Background = False
+QCDPT1000to1400Background = False
+QCDPT1400to1800Background = False
+QCDPT1800to2400Background = False
+QCDPT2400to3200Background = False
+QCDPT3200toInfBackground = False
 normalizeBackgroundsTogether = True
 
 onlyDoSomeHists = False
@@ -43,6 +43,8 @@ histsToDo = 2
 
 breakEvEarly = False
 breakEvAt = 2500
+
+onlyLHETree = True
 
 drawXSPlots = False
 drawEvPlots = False
@@ -273,6 +275,26 @@ HadBinsAndRangeAr = [[50,0,2500],[50,0,2500],
 
 yTitle = "Events"
 
+
+def setUpLegend(legAr):
+  legAr.append(TLegend(.9,.6,.99,.92))
+  legAr[-1].SetTextSize(0.036)
+  legAr[-1].SetTextFont(42)
+
+
+def setUpPadsAr(padAr,padName):
+  padAr.append([])
+  padAr[-1].append(TPad(padName, padName,0.,0.40,1,1))
+  padAr[-1].append(TPad(padName+" ratio", padName+" ratio",0.,0.,1,0.45))
+  #padAr[-1].append(TPad(padName, padName,0.,0.70,1,1))
+  #padAr[-1].append(TPad(padName+" ratio", padName+" ratio",0.,0.,1,0.60))
+
+def setUpBottomPadsAr(padAr):
+  padAr[1].SetTopMargin(0)
+  padAr[1].SetBottomMargin(0.15)
+  padAr[1].Draw()
+  padAr[1].cd()
+
 def makeNiceHistos(histo,xTitle,yTitle,noX=True):
   if noX:
     #histo.GetXaxis().SetLabelOffset(999)
@@ -336,7 +358,132 @@ def makeNiceTHStack(histo,xTitle,yTitle,noX=True):
   histo.GetYaxis().SetLabelSize(0.055)
 
   
+def setHistoElementsForLHETrees(colorAr,histAr,isSignalAr,weightsAr,intAr,histTitleNameAr,onlyDoSomeHists,histsToDo,signalPos,useLHEAr):
+    for k,colorA in zip(range(len(colorAr)),colorAr):
+      if useLHEAr[k]:
+        intAr.append([])
+        for histTypeItr, histTitleName in enumerate(histTitleNameAr):
+          if onlyDoSomeHists and histTypeItr >= histsToDo:
+            break
+          
+          histAr[k][histTypeItr].SetLineColor(colorA)
+          histAr[k][histTypeItr].SetLineWidth(4)
+          if not isSignalAr[k]:
+            histAr[k][histTypeItr].SetFillColorAlpha(colorA,0.2)
+          if signalPos == 1:
+            if k == 0:
+              makeNiceHistos(histAr[k][histTypeItr],"","Events",True)
+              histAr[k][histTypeItr].SetTitle(histTitleName)
+            else:
+              if k == 1:
+                makeNiceHistos(histAr[k][histTypeItr],"","Events",True)
+                histAr[k][histTypeItr].SetTitle(histTitleName)
+            tmpHistInt = histAr[k][histTypeItr].Integral()
+            intAr[-1].append(tmpHistInt)
 
+def normalizeHistsForLHETrees(histAr,isSignalAr,weightsAr,legAr,nameAr,intAr,histTypeSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr):
+    histMaxAr = []
+    for histTypeItr in range(len(histTypeSaveNameAr)):
+      if onlyDoSomeHists and histTypeItr >= histsToDo:
+        break
+      histMaxAr.append(0)
+    for k in range(len(histAr)):
+      if useLHEAr[k]:
+        for histTypeItr in range(len(histTypeSaveNameAr)):
+          if onlyDoSomeHists and histTypeItr >= histsToDo:
+            break
+          histAr[k][histTypeItr].Sumw2()
+          histAr[k][histTypeItr].Scale(weightsAr[k])
+          tmpMax = histAr[k][histTypeItr].GetMaximum()
+          if tmpMax > histMaxAr[histTypeItr]:
+              histMaxAr[histTypeItr] = tmpMax
+          legAr[histTypeItr].AddEntry(histAr[k][histTypeItr],nameAr[k],"l")
+    return histMaxAr
+
+def setUpNonStackedHistAndFoMPlotForLHETrees(compCan,cloneHistAr,padAr,histMax,isSignalAr,histAr,legAr,signalName,backgroundName,histTypeSaveNameAr,histTypeTitleAr,histTypeXTitleAr,signalPos,onlyDoSomeHists,histsToDo,useLHEAr):
+  for k in range(len(histAr)):
+      if (not isSignalAr[k]) and useLHEAr[k]:
+        cloneHistAr.append([])
+        for histTypeItr in range(len(histTypeSaveNameAr)):
+            if onlyDoSomeHists and histTypeItr >= histsToDo:
+              break
+            cloneHistAr[-1].append(histAr[k][histTypeItr].Clone())
+
+
+  
+  for histTypeItr, histTypeSaveName in enumerate(histTypeSaveNameAr):
+    if onlyDoSomeHists and histTypeItr >= histsToDo:
+        break
+
+
+    compCan[histTypeItr].cd()
+    padAr[histTypeItr][0].Draw()
+    padAr[histTypeItr][0].cd()
+
+    tmpMaxSignal = histAr[signalPos][histTypeItr].GetMaximum()
+    if tmpMaxSignal:
+      tmpMaxRatio = histMax[histTypeItr]/tmpMaxSignal
+    else:
+      tmpMaxRatio = 1
+
+    #tmpSignalInt = histAr[1].Integral()
+    #histAr[signalPos][histTypeItr].Sumw2()
+    #histAr[signalPos][histTypeItr].Scale(tmpMaxRatio)
+    #histAr[1].Scale(maxInt/tmpSignalInt)
+    tmpMax = histAr[signalPos][histTypeItr].GetMaximum()
+    if tmpMax > histMax[histTypeItr]:
+        histMax[histTypeItr] = tmpMax
+    if signalPos == 1:
+      histAr[0][histTypeItr].GetYaxis().SetRangeUser(0,histMax[histTypeItr]*1.1)
+      histAr[0][histTypeItr].SetTitle(histTypeTitleAr[histTypeItr])
+      histAr[0][histTypeItr].Draw("hist E1")
+    else:
+      histAr[1][histTypeItr].GetYaxis().SetRangeUser(0,histMax[histTypeItr]*1.1)
+      histAr[1][histTypeItr].SetTitle(histTypeTitleAr[histTypeItr])
+      histAr[1][histTypeItr].Draw("hist E1")
+
+    for j in range(2,len(histAr)):
+      if useLHEAr[j]:
+        histAr[j][histTypeItr].DrawCopy("same hist E1")
+    histAr[signalPos][histTypeItr].DrawCopy("same hist E1")
+    
+  
+    legAr[histTypeItr].Draw()
+    compCan[histTypeItr].cd()
+
+    setUpBottomPadsAr(padAr[histTypeItr]) 
+
+    histAr[signalPos][histTypeItr].Sumw2()
+    for k in range(len(cloneHistAr)):
+        #cloneHistAr[k][histTypeItr].Sumw2()
+        #cloneHistAr[k][histTypeItr].Divide(histAr[signalPos][histTypeItr])
+        #makeNiceHistos(cloneHistAr[k][histTypeItr],histTypeXTitleAr[histTypeItr],"Ratio to Signal",False)
+        #cloneHistAr[k][histTypeItr].SetLineWidth(2)
+        cloneHistAr[k][histTypeItr].Sumw2()
+        cloneHistAr[k][histTypeItr].Divide(histAr[signalPos][histTypeItr])
+        makeNiceHistos(cloneHistAr[k][histTypeItr],histTypeXTitleAr[histTypeItr],"Ratio to Signal",False)
+        cloneHistAr[k][histTypeItr].SetLineWidth(2)
+        if k == 0:
+          cloneHistAr[k][histTypeItr].GetYaxis().SetRangeUser(0.,2.0)
+        cloneHistAr[k][histTypeItr].Draw("et same")
+
+
+    compCan[histTypeItr].Update()
+    compCan[histTypeItr].Draw()
+
+
+    if normalizeBackgroundsTogether:
+      if savePathBool:
+        compCan[histTypeItr].SaveAs("./Graphs/Comparison/ComparisonFor{0}_{1}_Vs_{2}_NBT_{3}.png".format(histTypeSaveName,signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+      else:
+        compCan[histTypeItr].SaveAs("ComparisonFor{0}_{1}_Vs_{2}_NBT_{3}.png".format(histTypeSaveName,signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+    else:
+      if savePathBool:
+        compCan[histTypeItr].SaveAs("./Graphs/Comparison/ComparisonFor{0}_{1}_Vs_{2}_{3}.png".format(histTypeSaveName,signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+      else:
+        compCan[histTypeItr].SaveAs("ComparisonFor{0}_{1}_Vs_{2}_{3}.png".format(histTypeSaveName,signalName,backgroundName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+
+    
 
 
 def setHistoElements(colorAr,sumQCD,QCDSumHist,isQCDAr,histAr,isSignalAr,normalizeBackgroundsTogether,weightsAr,intAr,histTitleNameAr,onlyDoSomeHists,histsToDo,signalPos):
@@ -387,6 +534,10 @@ def setHistoElements(colorAr,sumQCD,QCDSumHist,isQCDAr,histAr,isSignalAr,normali
           if normalizeBackgroundsTogether:
             backgroundIntSumAr[histTypeItr] += QCDSumIntAr[histTypeItr]
     return backgroundIntSumAr, QCDSumIntAr
+
+
+
+
 
 def addHistsToStack(fileAr,histAr,isSignalAr,sumQCD,isQCDAr,histStackAr,QCDSumHist,normalizeBackgroundsTogether,backgroundIntSum,histTypeSaveNameAr,signalPos,onlyDoSomeHists,histsToDo):
     maxIntAr = []
@@ -477,24 +628,7 @@ def scaleQCDHist(QCDSumInt,QCDSumHist,histMaxAr,legAr,onlyDoSomeHists,histsToDo,
 
 
 
-def setUpLegend(legAr):
-  legAr.append(TLegend(.9,.6,.99,.92))
-  legAr[-1].SetTextSize(0.036)
-  legAr[-1].SetTextFont(42)
 
-
-def setUpPadsAr(padAr,padName):
-  padAr.append([])
-  padAr[-1].append(TPad(padName, padName,0.,0.40,1,1))
-  padAr[-1].append(TPad(padName+" ratio", padName+" ratio",0.,0.,1,0.45))
-  #padAr[-1].append(TPad(padName, padName,0.,0.70,1,1))
-  #padAr[-1].append(TPad(padName+" ratio", padName+" ratio",0.,0.,1,0.60))
-
-def setUpBottomPadsAr(padAr):
-  padAr[1].SetTopMargin(0)
-  padAr[1].SetBottomMargin(0.15)
-  padAr[1].Draw()
-  padAr[1].cd()
 
 def setUpInvHists(histAr,cloneHistAr,isSignalAr,sumQCD,isQCDAr,invHistsAr,nameAr,intAr,drawInvAr,QCDSumInt,QCDSumHist,histTypeSaveNameAr,onlyDoSomeHists,histsToDo):
     for k in range(len(histAr)):
