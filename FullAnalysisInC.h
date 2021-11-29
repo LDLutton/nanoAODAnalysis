@@ -307,8 +307,10 @@ float eEtaCut = 2.5;
 
 float mPtCut = 5.;
 float mEtaCut = 2.4;
-float invMassCutLow=60.;
-float invMassCutHigh=120.;
+//float invMassCutLow=60.;
+//float invMassCutHigh=120.;
+float invMassCutLow=80.;
+float invMassCutHigh=100.;
 float ptLeadCut=20.;
 float ptTrailingCut=10.;
 

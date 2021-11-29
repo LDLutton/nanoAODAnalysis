@@ -1079,14 +1079,6 @@ void FullAnalysisInC(){
 
             if (!(isLeptonic || isSemiLeptonic || isHadronic)) continue;
 
-            //TEMPORARY DELETE THIS LATER
-            /*
-            if (isSemiLeptonic){
-                debug=true;
-            }
-            else debug=false;
-            */
-
             passAnyChannelCtr += 1;
             if (isLeptonic){
                 
@@ -1108,7 +1100,7 @@ void FullAnalysisInC(){
 
 
 
-            //First match jets
+            //Now match VBF jets
             UInt_t nJetLen        = *nJet;
             UInt_t leadJet_1      = 0;
             UInt_t leadJet_2      = 0;
@@ -1200,43 +1192,54 @@ void FullAnalysisInC(){
                 std::cout << "Entering Fat Jets Loop\n";
             }
             for (UInt_t fatJetInd=0;fatJetInd<*nFatJet;fatJetInd++){
-                if (debug){
+                float tmpFatJet_deepTag_H = FatJet_deepTag_H[fatJetInd];
+                if (debug) {
                     std::cout << fatJetInd << " +++++++++++++++\n";
-                    std::cout << "Fat jet phi    " <<  FatJet_phi[fatJetInd] << "\n";
-                    std::cout << "Fat jet eta    " <<  FatJet_eta[fatJetInd] << "\n";
-                        
-                    std::cout << "Fat jet pt    " <<  FatJet_pt[fatJetInd] << "\n";
-                    std::cout << "Fat jet jetId    " <<  FatJet_jetId[fatJetInd] << "\n";
+                    std::cout << "Fat jet DeepTag_H    " <<  tmpFatJet_deepTag_H << "\n";
                 }
-                float tmpFatJet_pt = FatJet_pt[fatJetInd];
-                if (tmpFatJet_pt > hFatJetPTCut){
-                    Int_t tmpFatJet_jetId = FatJet_jetId[fatJetInd];
-                    if (tmpFatJet_jetId == 6){
-                        float tmpFatJet_eta = FatJet_eta[fatJetInd];
-                        float tmpFatJet_phi = FatJet_phi[fatJetInd];
-                        float tmpDROne = calcDeltaR(tmpFatJet_phi,tmpFatJet_eta,jetLeadPhi,jetLeadEta);
-                        float tmpDRTwo = calcDeltaR(tmpFatJet_phi,tmpFatJet_eta,jetTrailingPhi,jetTrailingEta);
+                
+                
+                
+                if (tmpFatJet_deepTag_H > hFatJetDeepTagCut){
+                    float tmpFatJet_pt = FatJet_pt[fatJetInd];
+                    if (debug){
+                        std::cout << "Fat jet pt    " <<  tmpFatJet_pt << "\n";
+                    }
+                    
+                    if (tmpFatJet_pt > hFatJetPTCut){
+                        Int_t tmpFatJet_jetId = FatJet_jetId[fatJetInd];
                         if (debug){
-                            std::cout << "Fat jet dROne    " <<  tmpDROne << " \n";
-                            std::cout << "Fat jet dRTwo    " <<  tmpDRTwo << " \n";
+                            std::cout << "Fat jet jetId    " <<  tmpFatJet_jetId << "\n";
                         }
-                        if (tmpDROne > hFatJetdRCut && tmpDRTwo > hFatJetdRCut){
-                            if (debug) std::cout << "Passed fatjet cuts\n";
-                            float tmpFatJet_HTag = FatJet_deepTag_H[fatJetInd];
-                            if (tmpFatJet_pt > hFatJet_pt_fromPt){
-                                hFatJet_HTag_fromPt = tmpFatJet_HTag;
-                                hFatJet_pt_fromPt = tmpFatJet_pt;
-                                hFatJet_eta_fromPt = tmpFatJet_eta;
-                                hFatJet_phi_fromPt = tmpFatJet_phi;
-                                hFatJet_mass_fromPt = FatJet_mass[fatJetInd];
+                        if (tmpFatJet_jetId == 6){
+                            float tmpFatJet_phi = FatJet_phi[fatJetInd];
+                            float tmpFatJet_eta = FatJet_eta[fatJetInd];
+                            float tmpDROne = calcDeltaR(tmpFatJet_phi,tmpFatJet_eta,jetLeadPhi,jetLeadEta);
+                            float tmpDRTwo = calcDeltaR(tmpFatJet_phi,tmpFatJet_eta,jetTrailingPhi,jetTrailingEta);
+                            if (debug){
+                                std::cout << "Fat jet phi    " <<  tmpFatJet_phi << "\n";
+                                std::cout << "Fat jet eta    " <<  tmpFatJet_eta << "\n";
+                                std::cout << "Fat jet dROne    " <<  tmpDROne << " \n";
+                                std::cout << "Fat jet dRTwo    " <<  tmpDRTwo << " \n";
                             }
-                            
-                            if (tmpFatJet_HTag > hFatJet_HTag_fromHTag){
-                                hFatJet_HTag_fromHTag = tmpFatJet_HTag;
-                                hFatJet_pt_fromHTag = tmpFatJet_pt;
-                                hFatJet_eta_fromHTag = tmpFatJet_eta;
-                                hFatJet_phi_fromHTag = tmpFatJet_phi;
-                                hFatJet_mass_fromHTag = FatJet_mass[fatJetInd];
+                            if (tmpDROne > hFatJetdRCut && tmpDRTwo > hFatJetdRCut){
+                                if (debug) std::cout << "Passed fatjet cuts\n";
+                                float tmpFatJet_HTag = FatJet_deepTag_H[fatJetInd];
+                                if (tmpFatJet_pt > hFatJet_pt_fromPt){
+                                    hFatJet_HTag_fromPt = tmpFatJet_HTag;
+                                    hFatJet_pt_fromPt = tmpFatJet_pt;
+                                    hFatJet_eta_fromPt = tmpFatJet_eta;
+                                    hFatJet_phi_fromPt = tmpFatJet_phi;
+                                    hFatJet_mass_fromPt = FatJet_mass[fatJetInd];
+                                }
+                                
+                                if (tmpFatJet_HTag > hFatJet_HTag_fromHTag){
+                                    hFatJet_HTag_fromHTag = tmpFatJet_HTag;
+                                    hFatJet_pt_fromHTag = tmpFatJet_pt;
+                                    hFatJet_eta_fromHTag = tmpFatJet_eta;
+                                    hFatJet_phi_fromHTag = tmpFatJet_phi;
+                                    hFatJet_mass_fromHTag = FatJet_mass[fatJetInd];
+                                }
                             }
                         }
                     }
