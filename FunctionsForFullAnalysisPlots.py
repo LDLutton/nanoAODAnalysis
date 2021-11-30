@@ -593,7 +593,8 @@ def normalizeHists(histAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,background
             #print(isSignalAr)
             if normalizeBackgroundsTogether and backgroundIntSum[histTypeItr] and not isSignalAr[k]:
                 
-                histAr[k][histTypeItr].Scale(weightsAr[k] / backgroundIntSum[histTypeItr])
+                #histAr[k][histTypeItr].Scale(weightsAr[k] / backgroundIntSum[histTypeItr])
+                histAr[k][histTypeItr].Scale(weightsAr[k])
                 tmpMax = histAr[k][histTypeItr].GetMaximum()
                 if tmpMax > histMaxAr[histTypeItr]:
                     histMaxAr[histTypeItr] = tmpMax
@@ -616,9 +617,13 @@ def scaleQCDHist(QCDSumInt,QCDSumHist,histMaxAr,legAr,onlyDoSomeHists,histsToDo,
     if QCDSumInt[histTypeItr]:
       #print("QCDSumInt[histTypeItr]",QCDSumInt[histTypeItr])
       QCDSumHist[histTypeItr].Sumw2()
+      """
       if normalizeBackgroundsTogether:
         QCDSumHist[histTypeItr].Scale(1.0 / backgroundIntSum[histTypeItr])
       else:
+        QCDSumHist[histTypeItr].Scale(1.0 / QCDSumInt[histTypeItr])
+      """
+      if not normalizeBackgroundsTogether:
         QCDSumHist[histTypeItr].Scale(1.0 / QCDSumInt[histTypeItr])
       tmpMax = QCDSumHist[histTypeItr].GetMaximum()
       if tmpMax > histMaxAr[histTypeItr]:
