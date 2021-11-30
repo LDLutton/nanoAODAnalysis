@@ -656,7 +656,7 @@ if not onlyLHETree:
     sumQCDCanAr = []
     #print(len(weightsAr),len(histLepAr),len(histLepAr[0]),len(LepSaveNameAr),len(QCDSumHistLepAr))
     if sumQCD:
-        backgroundName += "_QCDSum"
+        #backgroundName += "_QCDSum"
         for LepItr, LepSaveName in enumerate(LepSaveNameAr):
             if onlyDoSomeHists and LepItr >= histsToDo:
                 break
@@ -777,7 +777,7 @@ if not onlyLHETree:
     sumQCDCanAr = []
     #print(len(weightsAr),len(histSemiLepAr),len(histSemiLepAr[0]),len(SemiLepSaveNameAr),len(QCDSumHistSemiLepAr))
     if sumQCD:
-        backgroundName += "_QCDSum"
+        #backgroundName += "_QCDSum"
         for SemiLepItr, SemiLepSaveName in enumerate(SemiLepSaveNameAr):
             if onlyDoSomeHists and SemiLepItr >= histsToDo:
                 break
@@ -896,7 +896,7 @@ if not onlyLHETree:
     sumQCDCanAr = []
     #print(len(weightsAr),len(histHadAr),len(histHadAr[0]),len(HadSaveNameAr),len(QCDSumHistHadAr))
     if sumQCD:
-        backgroundName += "_QCDSum"
+        #backgroundName += "_QCDSum"
         for HadItr, HadSaveName in enumerate(HadSaveNameAr):
             if onlyDoSomeHists and HadItr >= histsToDo:
                 break
@@ -1057,7 +1057,7 @@ setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,pa
 
 
 
-###############STARTING RAW LHE GRAPHS###############
+###############STARTING SELECTED LHE GRAPHS###############
 
 sumQCD = False
 normalizeBackgroundsTogether = False
