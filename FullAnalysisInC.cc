@@ -446,6 +446,12 @@ void FullAnalysisInC(){
     float lepZ2LeadSIPL;
     float lepZ2TrailingSIPL;
 
+    float lepChanHiggsFatJet_pt_fromHTagL;
+    float lepChanHiggsFatJet_phi_fromHTagL;
+    float lepChanHiggsFatJet_eta_fromHTagL;
+    float lepChanHiggsFatJet_mass_fromHTagL;
+    float lepChanHiggsFatJet_HTag_fromHTagL;
+
     //Leptonic tree;
     TTree *LepTree = new TTree("LepTree", "LepTree");
 
@@ -477,6 +483,12 @@ void FullAnalysisInC(){
     LepTree->Branch("lepZ2LeadSIPL",&lepZ2LeadSIPL,"lepZ2LeadSIPL/F");
     LepTree->Branch("lepZ2TrailingSIPL",&lepZ2TrailingSIPL,"lepZ2TrailingSIPL/F");
 
+    LepTree->Branch("lepChanHiggsFatJet_pt_fromHTagL",&lepChanHiggsFatJet_pt_fromHTagL,"lepChanHiggsFatJet_pt_fromHTagL/F");
+    LepTree->Branch("lepChanHiggsFatJet_phi_fromHTagL",&lepChanHiggsFatJet_phi_fromHTagL,"lepChanHiggsFatJet_phi_fromHTagL/F");
+    LepTree->Branch("lepChanHiggsFatJet_eta_fromHTagL",&lepChanHiggsFatJet_eta_fromHTagL,"lepChanHiggsFatJet_eta_fromHTagL/F");
+    LepTree->Branch("lepChanHiggsFatJet_mass_fromHTagL",&lepChanHiggsFatJet_mass_fromHTagL,"lepChanHiggsFatJet_mass_fromHTagL/F");
+    LepTree->Branch("lepChanHiggsFatJet_HTag_fromHTagL",&lepChanHiggsFatJet_HTag_fromHTagL,"lepChanHiggsFatJet_HTag_fromHTagL/F");
+
 
     //SemiLeptonic variables;
     float lepLeadPtL;
@@ -498,6 +510,12 @@ void FullAnalysisInC(){
     float FJPhiL;
     float FJMassL;
     float FJEtaL;
+
+    float semiLepChanHiggsFatJet_pt_fromHTagL;
+    float semiLepChanHiggsFatJet_phi_fromHTagL;
+    float semiLepChanHiggsFatJet_eta_fromHTagL;
+    float semiLepChanHiggsFatJet_mass_fromHTagL;
+    float semiLepChanHiggsFatJet_HTag_fromHTagL;
 
     //SemiLeptonic tree;
     TTree *SemiLepTree = new TTree("SemiLepTree", "SemiLepTree");
@@ -522,6 +540,12 @@ void FullAnalysisInC(){
     SemiLepTree->Branch("FJMassL",&FJMassL,"FJMassL/F");
     SemiLepTree->Branch("FJEtaL",&FJEtaL,"FJEtaL/F");
 
+    SemiLepTree->Branch("semiLepChanHiggsFatJet_pt_fromHTagL",&semiLepChanHiggsFatJet_pt_fromHTagL,"semiLepChanHiggsFatJet_pt_fromHTagL/F");
+    SemiLepTree->Branch("semiLepChanHiggsFatJet_phi_fromHTagL",&semiLepChanHiggsFatJet_phi_fromHTagL,"semiLepChanHiggsFatJet_phi_fromHTagL/F");
+    SemiLepTree->Branch("semiLepChanHiggsFatJet_eta_fromHTagL",&semiLepChanHiggsFatJet_eta_fromHTagL,"semiLepChanHiggsFatJet_eta_fromHTagL/F");
+    SemiLepTree->Branch("semiLepChanHiggsFatJet_mass_fromHTagL",&semiLepChanHiggsFatJet_mass_fromHTagL,"semiLepChanHiggsFatJet_mass_fromHTagL/F");
+    SemiLepTree->Branch("semiLepChanHiggsFatJet_HTag_fromHTagL",&semiLepChanHiggsFatJet_HTag_fromHTagL,"semiLepChanHiggsFatJet_HTag_fromHTagL/F");
+
 
     //Hadronic variables;
     float FJLeadPtL;
@@ -534,6 +558,12 @@ void FullAnalysisInC(){
     float FJLeadEtaL;
     float FJTrailingEtaL;
     float FJEtaSepL;
+
+    float hadChanHiggsFatJet_pt_fromHTagL;
+    float hadChanHiggsFatJet_phi_fromHTagL;
+    float hadChanHiggsFatJet_eta_fromHTagL;
+    float hadChanHiggsFatJet_mass_fromHTagL;
+    float hadChanHiggsFatJet_HTag_fromHTagL;
 
     //Hadronic tree;
     TTree *HadTree = new TTree("HadTree", "HadTree");
@@ -548,6 +578,12 @@ void FullAnalysisInC(){
     HadTree->Branch("FJLeadEtaL",&FJLeadEtaL,"FJLeadEtaL/F");
     HadTree->Branch("FJTrailingEtaL",&FJTrailingEtaL,"FJTrailingEtaL/F");
     HadTree->Branch("FJEtaSepL",&FJEtaSepL,"FJEtaSepL/F");
+
+    HadTree->Branch("hadChanHiggsFatJet_pt_fromHTagL",&hadChanHiggsFatJet_pt_fromHTagL,"hadChanHiggsFatJet_pt_fromHTagL/F");
+    HadTree->Branch("hadChanHiggsFatJet_phi_fromHTagL",&hadChanHiggsFatJet_phi_fromHTagL,"hadChanHiggsFatJet_phi_fromHTagL/F");
+    HadTree->Branch("hadChanHiggsFatJet_eta_fromHTagL",&hadChanHiggsFatJet_eta_fromHTagL,"hadChanHiggsFatJet_eta_fromHTagL/F");
+    HadTree->Branch("hadChanHiggsFatJet_mass_fromHTagL",&hadChanHiggsFatJet_mass_fromHTagL,"hadChanHiggsFatJet_mass_fromHTagL/F");
+    HadTree->Branch("hadChanHiggsFatJet_HTag_fromHTagL",&hadChanHiggsFatJet_HTag_fromHTagL,"hadChanHiggsFatJet_HTag_fromHTagL/F");
 
 
 
@@ -1722,6 +1758,14 @@ void FullAnalysisInC(){
                         lepZ2TrailingIsoL = Z2TrailingIso;
                         lepZ2LeadSIPL     = Z2LeadSIP;
                         lepZ2TrailingSIPL = Z2TrailingSIP;
+
+                        lepChanHiggsFatJet_pt_fromHTagL = hFatJet_pt_fromHTag;
+                        lepChanHiggsFatJet_phi_fromHTagL = hFatJet_phi_fromHTag;
+                        lepChanHiggsFatJet_eta_fromHTagL = hFatJet_eta_fromHTag;
+                        lepChanHiggsFatJet_mass_fromHTagL = hFatJet_mass_fromHTag;
+                        lepChanHiggsFatJet_HTag_fromHTagL = hFatJet_HTag_fromHTag;
+
+
                         if (debug) std::cout << "after Z2 \n";
                         LepTree->Fill();
                         
@@ -1795,6 +1839,16 @@ void FullAnalysisInC(){
                         FJPhiL     = FatJet_phi[FJInd];
                         FJMassL    = FatJet_mass[FJInd];
                         FJEtaL     = FatJet_eta[FJInd];
+
+
+                        semiLepChanHiggsFatJet_pt_fromHTagL = hFatJet_pt_fromHTag;
+                        semiLepChanHiggsFatJet_phi_fromHTagL = hFatJet_phi_fromHTag;
+                        semiLepChanHiggsFatJet_eta_fromHTagL = hFatJet_eta_fromHTag;
+                        semiLepChanHiggsFatJet_mass_fromHTagL = hFatJet_mass_fromHTag;
+                        semiLepChanHiggsFatJet_HTag_fromHTagL = hFatJet_HTag_fromHTag;
+
+
+
                         if (debug) std::cout << "now filling \n";
 
                         SemiLepTree->Fill();
@@ -1815,6 +1869,13 @@ void FullAnalysisInC(){
                         FJLeadEtaL     = FatJet_eta[LFJOneInd];
                         FJTrailingEtaL = FatJet_eta[LFJTwoInd];
                         FJEtaSepL      = abs(FatJet_eta[LFJOneInd]-FatJet_eta[LFJTwoInd]);
+
+
+                        hadChanHiggsFatJet_pt_fromHTagL = hFatJet_pt_fromHTag;
+                        hadChanHiggsFatJet_phi_fromHTagL = hFatJet_phi_fromHTag;
+                        hadChanHiggsFatJet_eta_fromHTagL = hFatJet_eta_fromHTag;
+                        hadChanHiggsFatJet_mass_fromHTagL = hFatJet_mass_fromHTag;
+                        hadChanHiggsFatJet_HTag_fromHTagL = hFatJet_HTag_fromHTag;
 
                         HadTree->Fill();
                     }
