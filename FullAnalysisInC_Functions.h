@@ -296,3 +296,270 @@ bool doSemiLepISOCut(float leadIso,float trailingIso,float lepIsoCut){
     if (leadIso + trailingIso >= lepIsoCut) return false;
     else return true;
 }
+
+
+void doVBFJetCut(UInt_t nJetLen,TTreeReaderArray<Float_t> &Jet_pt,TTreeReaderArray<Int_t> &Jet_jetId,TTreeReaderArray<Float_t> &Jet_eta,TTreeReaderArray<Float_t> &Jet_phi,TTreeReaderArray<Float_t> &Jet_mass,float jetPTCut,float jetEtaDifCut,float jetInvMassCut,float &jetPairInvMass,float &jetLeadPt,float &jetLeadEta,float &jetLeadPhi,float &jetTrailingPt,float &jetTrailingEta,float &jetTrailingPhi,UInt_t &leadJet_1,UInt_t &leadJet_2,bool debug){
+    for (UInt_t jetIndOne=0; jetIndOne<nJetLen-1;jetIndOne++){
+        float jetPtOne = Jet_pt[jetIndOne];
+        Int_t jetIdOne = Jet_jetId[jetIndOne];
+        if (debug) std::cout << "jetIndOne: " << jetIndOne << " Jet_pt[jetIndOne]: " << Jet_pt[jetIndOne] << " Jet_jetId[jetIndOne]: " << Jet_jetId[jetIndOne] << "\n";
+        if (jetPtOne < jetPTCut || !(jetIdOne == 6)) continue;
+        for (UInt_t jetIndTwo=jetIndOne+1; jetIndTwo<nJetLen; jetIndTwo++){
+            float jetPtTwo = Jet_pt[jetIndTwo];
+            Int_t jetIdTwo = Jet_jetId[jetIndTwo];
+            if (debug) std::cout << "jetIndTwo: " << jetIndTwo << " Jet_pt[jetIndTwo]: " << Jet_pt[jetIndTwo] << " Jet_jetId[jetIndTwo]: " << Jet_jetId[jetIndTwo] << "\n";
+            if (jetPtTwo < jetPTCut || !(jetIdTwo == 6)) continue;
+            float jetEtaOne = Jet_eta[jetIndOne];
+            float jetEtaTwo = Jet_eta[jetIndTwo];
+            if (abs(jetEtaOne - jetEtaTwo) < jetEtaDifCut) continue;
+            
+            float jetPhiOne = Jet_phi[jetIndOne];
+            float jetPhiTwo = Jet_phi[jetIndTwo];
+            float jetMassOne = Jet_mass[jetIndOne];
+            float jetMassTwo = Jet_mass[jetIndTwo];
+            ROOT::Math::PtEtaPhiMVector tmpVecOne = ROOT::Math::PtEtaPhiMVector(jetPtOne, jetEtaOne, jetPhiOne, jetMassOne);
+            ROOT::Math::PtEtaPhiMVector tmpVecTwo = ROOT::Math::PtEtaPhiMVector(jetPtTwo, jetEtaTwo, jetPhiTwo, jetMassTwo);
+            ROOT::Math::PtEtaPhiMVector tmpVecSum = tmpVecOne+tmpVecTwo;
+            float tmpJetPairInvMass = tmpVecSum.M();
+            if (tmpJetPairInvMass < jetInvMassCut) continue;
+            if (tmpJetPairInvMass > jetPairInvMass){
+                jetPairInvMass = tmpJetPairInvMass;
+                if (jetPtOne >= jetPtTwo) {
+                    jetLeadPt = jetPtOne;
+                    jetLeadEta = jetEtaOne;
+                    jetLeadPhi = jetPhiOne;
+                    jetTrailingPt = jetPtTwo;
+                    jetTrailingEta = jetEtaTwo;
+                    jetTrailingPhi = jetPhiTwo;
+                    leadJet_1 = jetIndOne;
+                    leadJet_2 = jetIndTwo;
+                }
+                else {
+                    jetLeadPt = jetPtTwo;
+                    jetLeadEta = jetEtaTwo;
+                    jetLeadPhi = jetPhiTwo;
+                    jetTrailingPt = jetPtOne;
+                    jetTrailingEta = jetEtaOne;
+                    jetTrailingPhi = jetPhiOne;
+                    leadJet_1 = jetIndTwo;
+                    leadJet_2 = jetIndOne;
+                }
+            }
+        }
+    }
+}
+
+void debugOutputForVBFJetCut(UInt_t evCount,UInt_t leadJet_1,UInt_t leadJet_2,TTreeReaderArray<Float_t> &Jet_phi,TTreeReaderArray<Float_t> &Jet_eta,bool debug){
+    if (debug){
+        std::cout << " found jet pairs\n";
+        std::cout << evCount+1 << " selected jet pair\n";
+        std::cout << "Lead jet ind    " << leadJet_1 << "\n";
+        std::cout << "Trailing jet ind    " << leadJet_2 << "\n";
+        std::cout << "Lead jet phi    " << Jet_phi[leadJet_1] << "\n";
+        std::cout << "Trailing jet phi    " << Jet_phi[leadJet_2] << "\n";
+        std::cout << "Lead jet eta    " << Jet_eta[leadJet_1] << "\n";
+        std::cout << "Trailing jet eta    " << Jet_eta[leadJet_2] << "\n";
+    }
+}
+
+void doHiggsFatJetCut(UInt_t nFatJetLen,float &hFatJet_HTag_fromPt,float &hFatJet_pt_fromPt,float &hFatJet_phi_fromPt,float &hFatJet_eta_fromPt,float &hFatJet_mass_fromPt,float &hFatJet_pt_fromHTag,float &hFatJet_phi_fromHTag,float &hFatJet_eta_fromHTag,float &hFatJet_mass_fromHTag,float &hFatJet_HTag_fromHTag,UInt_t &hFatJet_ind_fromHTag,TTreeReaderArray<Float_t> &FatJet_deepTag_H,float hFatJetDeepTagCut,TTreeReaderArray<Float_t> &FatJet_pt,float hFatJetPTCut,TTreeReaderArray<Int_t> &FatJet_jetId,TTreeReaderArray<Float_t> &FatJet_phi,TTreeReaderArray<Float_t> &FatJet_eta,float jetLeadPhi,float jetLeadEta,float jetTrailingPhi,float jetTrailingEta,float hFatJetdRCut,TTreeReaderArray<Float_t> &FatJet_mass){
+    for (UInt_t fatJetInd=0;fatJetInd<nFatJetLen;fatJetInd++){
+        float tmpFatJet_deepTag_H = FatJet_deepTag_H[fatJetInd];
+
+        if (debug) {
+            std::cout << fatJetInd << " +++++++++++++++\n";
+            std::cout << "Fat jet DeepTag_H    " <<  tmpFatJet_deepTag_H << "\n";
+        }
+        
+        if (tmpFatJet_deepTag_H > hFatJetDeepTagCut){
+            float tmpFatJet_pt = FatJet_pt[fatJetInd];
+
+            if (debug){
+                std::cout << "Fat jet pt    " <<  tmpFatJet_pt << "\n";
+            }
+            
+            if (tmpFatJet_pt > hFatJetPTCut){
+                Int_t tmpFatJet_jetId = FatJet_jetId[fatJetInd];
+
+                if (debug){
+                    std::cout << "Fat jet jetId    " <<  tmpFatJet_jetId << "\n";
+                }
+
+                if (tmpFatJet_jetId == 6){
+                    float tmpFatJet_phi = FatJet_phi[fatJetInd];
+                    float tmpFatJet_eta = FatJet_eta[fatJetInd];
+                    float tmpDROne = calcDeltaR(tmpFatJet_phi,tmpFatJet_eta,jetLeadPhi,jetLeadEta);
+                    float tmpDRTwo = calcDeltaR(tmpFatJet_phi,tmpFatJet_eta,jetTrailingPhi,jetTrailingEta);
+
+                    if (debug){
+                        std::cout << "Fat jet phi    " <<  tmpFatJet_phi << "\n";
+                        std::cout << "Fat jet eta    " <<  tmpFatJet_eta << "\n";
+                        std::cout << "Fat jet dROne    " <<  tmpDROne << " \n";
+                        std::cout << "Fat jet dRTwo    " <<  tmpDRTwo << " \n";
+                    }
+                    
+                    if (tmpDROne > hFatJetdRCut && tmpDRTwo > hFatJetdRCut){
+
+                        if (debug) std::cout << "Passed fatjet cuts\n";
+
+                        //float tmpFatJet_HTag = FatJet_deepTag_H[fatJetInd];
+                        if (tmpFatJet_pt > hFatJet_pt_fromPt){
+                            hFatJet_HTag_fromPt = tmpFatJet_deepTag_H;
+                            hFatJet_pt_fromPt = tmpFatJet_pt;
+                            hFatJet_eta_fromPt = tmpFatJet_eta;
+                            hFatJet_phi_fromPt = tmpFatJet_phi;
+                            hFatJet_mass_fromPt = FatJet_mass[fatJetInd];
+                        }
+                        
+                        if (tmpFatJet_deepTag_H > hFatJet_HTag_fromHTag){
+                            hFatJet_HTag_fromHTag = tmpFatJet_deepTag_H;
+                            hFatJet_pt_fromHTag = tmpFatJet_pt;
+                            hFatJet_eta_fromHTag = tmpFatJet_eta;
+                            hFatJet_phi_fromHTag = tmpFatJet_phi;
+                            hFatJet_mass_fromHTag = FatJet_mass[fatJetInd];
+                            hFatJet_ind_fromHTag = fatJetInd;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+void doSemiLepChanFatJetCut(float &semiLepFatJetPT,Int_t &FJInd,Int_t numFatJet,float jetLeadPhi,float jetLeadEta,float jetTrailingPhi,float jetTrailingEta,UInt_t hFatJet_ind_fromHTag,float fatJetPTCut,float hFatJetdRCut,TTreeReaderArray<Float_t> &FatJet_pt,TTreeReaderArray<Float_t> &FatJet_phi,TTreeReaderArray<Float_t> &FatJet_eta){
+    for (UInt_t i=0; i<numFatJet;i++){
+
+        //Skip selected higgs fatjet
+        if (i == hFatJet_ind_fromHTag) continue;
+
+        float tmpFatJetPT = FatJet_pt[i];
+        if (tmpFatJetPT > fatJetPTCut && tmpFatJetPT > semiLepFatJetPT){
+            float tmpFatJet_phi = FatJet_phi[i];
+            float tmpFatJet_eta = FatJet_eta[i];
+            
+            float tmpDROne = calcDeltaR(tmpFatJet_phi,tmpFatJet_eta,jetLeadPhi,jetLeadEta);
+            float tmpDRTwo = calcDeltaR(tmpFatJet_phi,tmpFatJet_eta,jetTrailingPhi,jetTrailingEta);
+            if (tmpDROne > hFatJetdRCut && tmpDRTwo > hFatJetdRCut){
+                FJInd = i;
+                semiLepFatJetPT = tmpFatJetPT;
+            }
+            
+        }
+    }
+
+}
+
+void doHadChanFatJetCut(Int_t &LFJOneInd,Int_t &LFJTwoInd,float &leadFatJetMaxPT,float &secondFatJetMaxPT,float &FJInvMass,float &tmpFatJetPT,float &tmpFatJetPTTwo,float &tmpEtaDif,Int_t numFatJet,UInt_t hFatJet_ind_fromHTag,float jetLeadPhi,float jetLeadEta,float jetTrailingPhi,float jetTrailingEta,float hFatJetdRCut,float fatJetPTCut,float jetEtaDifCut,float jetInvMassCut,TTreeReaderArray<Float_t> &FatJet_pt,TTreeReaderArray<Float_t> &FatJet_phi,TTreeReaderArray<Float_t> &FatJet_eta,TTreeReaderArray<Float_t> &FatJet_mass){
+    for (UInt_t i=0;i<numFatJet-1;i++){
+        if (debugHadronic) std::cout << "First FatJet " << i << "\n";
+
+        //Skip selected higgs fatjet
+        if (i == hFatJet_ind_fromHTag) continue;
+
+        float tmpFatJet_phi_One = FatJet_phi[i];
+        float tmpFatJet_eta_One = FatJet_eta[i];
+        float tmpDROne_One = calcDeltaR(tmpFatJet_phi_One,tmpFatJet_eta_One,jetLeadPhi,jetLeadEta);
+        float tmpDRTwo_One = calcDeltaR(tmpFatJet_phi_One,tmpFatJet_eta_One,jetTrailingPhi,jetTrailingEta);
+
+        if (debugHadronic) std::cout << "tmpDROne_One " << tmpDROne_One << "\n";
+        if (debugHadronic) std::cout << "tmpDRTwo_One " << tmpDRTwo_One << "\n";
+
+
+        if (tmpDROne_One > hFatJetdRCut && tmpDRTwo_One > hFatJetdRCut){
+
+            tmpFatJetPT = FatJet_pt[i];
+            if (debugHadronic) std::cout << "tmpFatJetPT " << tmpFatJetPT << "\n";
+
+            if (tmpFatJetPT > fatJetPTCut){
+                //Looping through all jets past the current one
+                for (UInt_t j=i+1;j<numFatJet;j++){
+                    if (debugHadronic) std::cout << "Second FatJet " << j << "\n";
+
+                    //Skip selected higgs fatjet
+                    if (j == hFatJet_ind_fromHTag) continue;
+
+                    float tmpFatJet_phi_Two = FatJet_phi[j];
+                    float tmpFatJet_eta_Two = FatJet_eta[j];
+                    float tmpDROne_Two = calcDeltaR(tmpFatJet_phi_Two,tmpFatJet_eta_Two,jetLeadPhi,jetLeadEta);
+                    float tmpDRTwo_Two = calcDeltaR(tmpFatJet_phi_Two,tmpFatJet_eta_Two,jetTrailingPhi,jetTrailingEta);
+
+                    if (debugHadronic) std::cout << "tmpDROne_Two " << tmpDROne_Two << "\n";
+                    if (debugHadronic) std::cout << "tmpDRTwo_Two " << tmpDRTwo_Two << "\n";
+
+
+                    if (tmpDROne_Two > hFatJetdRCut && tmpDRTwo_Two > hFatJetdRCut){
+
+                        //Getting PT of the second jet
+                        tmpFatJetPTTwo = FatJet_pt[j];
+
+                        if (debugHadronic) std::cout << "tmpFatJetPTTwo " << tmpFatJetPTTwo << "\n";
+
+                        //Checking if it passes the pt cut
+                        if (tmpFatJetPTTwo > fatJetPTCut){
+                            //Getting the eta dif between the two jets
+                            tmpEtaDif = abs(FatJet_eta[i]-FatJet_eta[j]);
+
+                            if (debugHadronic) std::cout << "tmpEtaDif " << tmpEtaDif << "\n";
+
+                            //Checking if the eta dif passes the eta dif cut
+                            if (tmpEtaDif > jetEtaDifCut){
+                                //Getting four vectors for the two jets, using pt, eta, phi, and mass
+                                ROOT::Math::PtEtaPhiMVector tmpVecOne = ROOT::Math::PtEtaPhiMVector(tmpFatJetPT, tmpFatJet_eta_One, tmpFatJet_phi_One, FatJet_mass[i]);
+                                ROOT::Math::PtEtaPhiMVector tmpVecTwo = ROOT::Math::PtEtaPhiMVector(tmpFatJetPTTwo, tmpFatJet_eta_Two, tmpFatJet_phi_Two, FatJet_mass[j]);
+                                //Adding four vectors together and getting their invariant mass
+                                ROOT::Math::PtEtaPhiMVector tmpDiJetVec = tmpVecOne+tmpVecTwo;
+                                float tmpFJInvMass = tmpDiJetVec.M();
+                                if (debugHadronic) std::cout << "tmpFJInvMass " << tmpFJInvMass << "\n";
+
+                                //Checking if their InvMass passes the InvMass cut
+                                if (tmpFJInvMass > jetInvMassCut){
+                                    if (debugHadronic) std::cout << "Passed all cuts!!!!!!!!!!!!!!\n";
+                                    
+                                    //Selecting on top jet pt first
+                                    float tmpMaxPtLead = 0;
+                                    float tmpMaxPtSecond = 0;
+                                    UInt_t tmpFJLeadInd=0;
+                                    UInt_t tmpFJTrailingInd=0;
+                                    //Sorting which jet has the larger pt
+                                    if (tmpFatJetPT > tmpFatJetPTTwo){
+                                        tmpMaxPtLead = tmpFatJetPT;
+                                        tmpMaxPtSecond = tmpFatJetPTTwo;
+                                        tmpFJLeadInd = i;
+                                        tmpFJTrailingInd = j;
+                                    }
+                                    else{
+                                        tmpMaxPtLead = tmpFatJetPTTwo;
+                                        tmpMaxPtSecond = tmpFatJetPT;
+                                        tmpFJLeadInd = j;
+                                        tmpFJTrailingInd = i;
+                                    }
+
+                                    //Selecting based on that jet's pt
+                                    if (tmpMaxPtLead > leadFatJetMaxPT){
+                                        leadFatJetMaxPT = tmpMaxPtLead;
+                                        secondFatJetMaxPT = tmpMaxPtSecond;
+                                        LFJOneInd = tmpFJLeadInd;
+                                        LFJTwoInd = tmpFJTrailingInd;
+                                        FJInvMass = tmpFJInvMass;
+                                    }
+                                    //If that jet is already part of the current selected pair,
+                                    //select based on the respective lower pt jets in the pairs
+                                    else if (tmpMaxPtLead == leadFatJetMaxPT){
+                                        if (tmpMaxPtSecond > secondFatJetMaxPT){
+                                            secondFatJetMaxPT = tmpMaxPtSecond;
+                                            LFJOneInd = tmpFJLeadInd;
+                                            LFJTwoInd = tmpFJTrailingInd;
+                                            FJInvMass = tmpFJInvMass;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

@@ -1153,6 +1153,8 @@ void FullAnalysisInCWithLHE(){
             float jetLeadEta     = 0;
             float jetTrailingEta = 0;
             if (debug) std::cout << "Entering jet loop. Len: " << nJetLen << "\n";
+            doVBFJetCut(nJetLen,Jet_pt,Jet_jetId,Jet_eta,Jet_phi,Jet_mass,jetPTCut,jetEtaDifCut,jetInvMassCut,jetPairInvMass,jetLeadPt,jetLeadEta,jetLeadPhi,jetTrailingPt,jetTrailingEta,jetTrailingPhi,leadJet_1,leadJet_2,debug);
+            /*
             for (UInt_t jetIndOne=0; jetIndOne<nJetLen-1;jetIndOne++){
                 float jetPtOne = Jet_pt[jetIndOne];
                 float jetIdOne = Jet_jetId[jetIndOne];
@@ -1201,7 +1203,10 @@ void FullAnalysisInCWithLHE(){
                     }
                 }
             }
+            */
             if (jetLeadPt == 0) continue;
+            debugOutputForVBFJetCut(evCount,leadJet_1,leadJet_2,Jet_phi,Jet_eta,debug);
+            /*
             if (debug){
                 std::cout << " found jet pairs\n";
                 std::cout << evCount+1 << " selected jet pair\n";
@@ -1212,6 +1217,7 @@ void FullAnalysisInCWithLHE(){
                 std::cout << "Lead jet eta    " << Jet_eta[leadJet_1] << "\n";
                 std::cout << "Trailing jet eta    " << Jet_eta[leadJet_2] << "\n";
             }
+            */
             passVBFJets += 1;
 
 
@@ -1227,9 +1233,13 @@ void FullAnalysisInCWithLHE(){
             float hFatJet_eta_fromHTag = 0.;
             float hFatJet_mass_fromHTag = 0.;
             float hFatJet_HTag_fromHTag = 0.;
+            UInt_t hFatJet_ind_fromHTag = 0;
             if (debug){
                 std::cout << "Entering Fat Jets Loop\n";
             }
+
+            doHiggsFatJetCut(nFatJetLen,hFatJet_HTag_fromPt,hFatJet_pt_fromPt,hFatJet_phi_fromPt,hFatJet_eta_fromPt,hFatJet_mass_fromPt,hFatJet_pt_fromHTag,hFatJet_phi_fromHTag,hFatJet_eta_fromHTag,hFatJet_mass_fromHTag,hFatJet_HTag_fromHTag,hFatJet_ind_fromHTag,FatJet_deepTag_H,hFatJetDeepTagCut,FatJet_pt,hFatJetPTCut,FatJet_jetId,FatJet_phi,FatJet_eta,jetLeadPhi,jetLeadEta,jetTrailingPhi,jetTrailingEta,hFatJetdRCut,FatJet_mass);
+            /*
             for (UInt_t fatJetInd=0;fatJetInd<*nFatJet;fatJetInd++){
                 float tmpFatJet_deepTag_H = FatJet_deepTag_H[fatJetInd];
                 if (debug) {
@@ -1284,6 +1294,7 @@ void FullAnalysisInCWithLHE(){
                     }
                 }
             }
+            */
             if (hFatJet_pt_fromHTag == 0) continue;
             if (debug) std::cout << " found fat jet\n";
             passFatJets += 1;
@@ -1674,17 +1685,21 @@ void FullAnalysisInCWithLHE(){
                     }
 
                 }
-                float tmpFatJetPT;
                 Int_t FJInd;
                 if (debug) std::cout << "passesCutsBool " << passesCutsBool << " isSemiLeptonic " << isSemiLeptonic << "\n";
                 if ((!passesCutsBool) && isSemiLeptonic){
                     if (debug) std::cout << "trying SemiLeptonic\n";
                     tryingSemiLepCtr += 1;
+                    float semiLepFatJetPT = 0;
                     FJInd = -1;
+                    UInt_t numFatJet = *nFatJet;
+                    doSemiLepChanFatJetCut(semiLepFatJetPT,FJInd,numFatJet,jetLeadPhi,jetLeadEta,jetTrailingPhi,jetTrailingEta,hFatJet_ind_fromHTag,fatJetPTCut,hFatJetdRCut,FatJet_pt,FatJet_phi,FatJet_eta);
+                    /*
                     for (UInt_t i=0; i<*nFatJet;i++){
                         tmpFatJetPT = FatJet_pt[i];
                         if (tmpFatJetPT > fatJetPTCut) FJInd = i;
                     }
+                    */
                     if (FJInd != -1){
                         if (debug) cout << "passed FJ check\n";
 
@@ -1835,20 +1850,38 @@ void FullAnalysisInCWithLHE(){
                     float tmpFatJetPT;
                     float tmpFatJetPTTwo;
                     float tmpEtaDif;
+                    if (debugHadronic) std::cout << "---------------- Event " << evCount - 1 << " ----------------\n";
+                    //if (debugHadronic) std::cout << "hFatJet_ind_fromHTag " << hFatJet_ind_fromHTag << "\n";
+                    if (debugHadronic) std::cout << "hFatJetdRCut " << hFatJetdRCut << "\n";
+                    if (debugHadronic) std::cout << "fatJetPTCut " << fatJetPTCut << "\n";
+                    if (debugHadronic) std::cout << "jetEtaDifCut " << jetEtaDifCut << "\n";
+                    if (debugHadronic) std::cout << "jetInvMassCut " << jetInvMassCut << "\n";
+
+                    if (debugHadronic) std::cout << "--------- Entering FJ loop for Hadronic Channel ---------\n";
+
+                    UInt_t numFatJet = *nFatJet;
+                    doHadChanFatJetCut(LFJOneInd,LFJTwoInd,leadFatJetMaxPT,secondFatJetMaxPT,FJInvMass,tmpFatJetPT,tmpFatJetPTTwo,tmpEtaDif,numFatJet,hFatJet_ind_fromHTag,jetLeadPhi,jetLeadEta,jetTrailingPhi,jetTrailingEta,hFatJetdRCut,fatJetPTCut,jetEtaDifCut,jetInvMassCut,FatJet_pt,FatJet_phi,FatJet_eta,FatJet_mass);
+
+                    /*
 
                     for (UInt_t i=0;i<*nFatJet-1;i++){
-                        //Fat Jets with cut but no tagging
-                        //Also Fat Jets with cuts and tagging
+                        
+                        if (debugHadronic) std::cout << "First FatJet " << i << "\n";
+
                         tmpFatJetPT = FatJet_pt[i];
+                        if (debugHadronic) std::cout << "tmpFatJetPT " << tmpFatJetPT << "\n";
                         if (tmpFatJetPT > fatJetPTCut){
                             //Looping through all jets past the current one
                             for (UInt_t j=i+1;j<*nFatJet;j++){
+                                if (debugHadronic) std::cout << "Second FatJet " << j << "\n";
                                 //Getting PT of the second jet
                                 tmpFatJetPTTwo = FatJet_pt[j];
+                                if (debugHadronic) std::cout << "tmpFatJetPTTwo " << tmpFatJetPTTwo << "\n";
                                 //Checking if it passes the pt cut
                                 if (tmpFatJetPTTwo > fatJetPTCut){
                                     //Getting the eta dif between the two jets
                                     tmpEtaDif = abs(FatJet_eta[i]-FatJet_eta[j]);
+                                    if (debugHadronic) std::cout << "tmpEtaDif " << tmpEtaDif << "\n";
                                     //Checking if the eta dif passes the eta dif cut
                                     if (tmpEtaDif > jetEtaDifCut){
                                         //Getting four vectors for the two jets, using pt, eta, phi, and mass
@@ -1857,8 +1890,10 @@ void FullAnalysisInCWithLHE(){
                                         //Adding four vectors together and getting their invariant mass
                                         ROOT::Math::PtEtaPhiMVector tmpDiJetVec = tmpVecOne+tmpVecTwo;
                                         float tmpFJInvMass = tmpDiJetVec.M();
+                                        if (debugHadronic) std::cout << "tmpFJInvMass " << tmpFJInvMass << "\n";
                                         //Checking if their InvMass passes the InvMass cut
                                         if (tmpFJInvMass > jetInvMassCut){
+                                            if (debugHadronic) std::cout << "Passed all cuts!!!!!!!!!!!!!!\n";
                                             
                                             //Selecting on top jet pt first
                                             float tmpMaxPtLead = 0;
@@ -1903,6 +1938,7 @@ void FullAnalysisInCWithLHE(){
                             }
                         }
                     }
+                    */
                     //Filling histograms based on max jet pt in pair, with secondary jet pt as a tiebreaker
                     //Checking that it didn't select the same jet for both parts of the pair 
                     if (LFJOneInd != LFJTwoInd){
