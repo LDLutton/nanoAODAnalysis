@@ -269,12 +269,24 @@ void FullAnalysisInCWithLHE(){
 
     float ZOne_pt_FromLHERawL;
     float ZOne_eta_FromLHERawL;
+    float ZOne_phi_FromLHERawL;
+    float ZOne_mass_FromLHERawL;
+    
 
     float ZTwo_pt_FromLHERawL;
     float ZTwo_eta_FromLHERawL;
+    float ZTwo_phi_FromLHERawL;
+    float ZTwo_mass_FromLHERawL;
+
+    float ZPair_InvMass_FromLHERawL;
+    float ZPair_EtaSep_FromLHERawL;
 
     float H_pt_FromLHERawL;
     float H_eta_FromLHERawL;
+    float H_phi_FromLHERawL;
+    float H_mass_FromLHERawL;
+
+    float ZPairPlusH_InvMass_FromLHERawL;
 
     float JOne_pt_FromLHERawL;
     float JOne_eta_FromLHERawL;
@@ -295,12 +307,23 @@ void FullAnalysisInCWithLHE(){
 
     RawTree->Branch("ZOne_pt_FromLHERawL",&ZOne_pt_FromLHERawL,"ZOne_pt_FromLHERawL/F");
     RawTree->Branch("ZOne_eta_FromLHERawL",&ZOne_eta_FromLHERawL,"ZOne_eta_FromLHERawL/F");
+    RawTree->Branch("ZOne_phi_FromLHERawL",&ZOne_phi_FromLHERawL,"ZOne_phi_FromLHERawL/F");
+    RawTree->Branch("ZOne_mass_FromLHERawL",&ZOne_mass_FromLHERawL,"ZOne_mass_FromLHERawL/F");
 
     RawTree->Branch("ZTwo_pt_FromLHERawL",&ZTwo_pt_FromLHERawL,"ZTwo_pt_FromLHERawL/F");
     RawTree->Branch("ZTwo_eta_FromLHERawL",&ZTwo_eta_FromLHERawL,"ZTwo_eta_FromLHERawL/F");
+    RawTree->Branch("ZTwo_phi_FromLHERawL",&ZTwo_phi_FromLHERawL,"ZTwo_phi_FromLHERawL/F");
+    RawTree->Branch("ZTwo_mass_FromLHERawL",&ZTwo_mass_FromLHERawL,"ZTwo_mass_FromLHERawL/F");
+
+    RawTree->Branch("ZPair_InvMass_FromLHERawL",&ZPair_InvMass_FromLHERawL,"ZPair_InvMass_FromLHERawL/F");
+    RawTree->Branch("ZPair_EtaSep_FromLHERawL",&ZPair_EtaSep_FromLHERawL,"ZPair_EtaSep_FromLHERawL/F");
 
     RawTree->Branch("H_pt_FromLHERawL",&H_pt_FromLHERawL,"H_pt_FromLHERawL/F");
     RawTree->Branch("H_eta_FromLHERawL",&H_eta_FromLHERawL,"H_eta_FromLHERawL/F");
+    RawTree->Branch("H_phi_FromLHERawL",&H_phi_FromLHERawL,"H_phi_FromLHERawL/F");
+    RawTree->Branch("H_mass_FromLHERawL",&H_mass_FromLHERawL,"H_mass_FromLHERawL/F");
+
+    RawTree->Branch("ZPairPlusH_InvMass_FromLHERawL",&ZPairPlusH_InvMass_FromLHERawL,"ZPairPlusH_InvMass_FromLHERawL/F");
 
     RawTree->Branch("JOne_pt_FromLHERawL",&JOne_pt_FromLHERawL,"JOne_pt_FromLHERawL/F");
     RawTree->Branch("JOne_eta_FromLHERawL",&JOne_eta_FromLHERawL,"JOne_eta_FromLHERawL/F");
@@ -654,12 +677,24 @@ void FullAnalysisInCWithLHE(){
 
     float ZOne_pt_FromLHESelectedL;
     float ZOne_eta_FromLHESelectedL;
+    float ZOne_phi_FromLHESelectedL;
+    float ZOne_mass_FromLHESelectedL;
+    
 
     float ZTwo_pt_FromLHESelectedL;
     float ZTwo_eta_FromLHESelectedL;
+    float ZTwo_phi_FromLHESelectedL;
+    float ZTwo_mass_FromLHESelectedL;
+
+    float ZPair_InvMass_FromLHESelectedL;
+    float ZPair_EtaSep_FromLHESelectedL;
 
     float H_pt_FromLHESelectedL;
     float H_eta_FromLHESelectedL;
+    float H_phi_FromLHESelectedL;
+    float H_mass_FromLHESelectedL;
+
+    float ZPairPlusH_InvMass_FromLHESelectedL;
 
     float JOne_pt_FromLHESelectedL;
     float JOne_eta_FromLHESelectedL;
@@ -681,12 +716,21 @@ void FullAnalysisInCWithLHE(){
 
     SelectedTree->Branch("ZOne_pt_FromLHESelectedL",&ZOne_pt_FromLHESelectedL,"ZOne_pt_FromLHESelectedL/F");
     SelectedTree->Branch("ZOne_eta_FromLHESelectedL",&ZOne_eta_FromLHESelectedL,"ZOne_eta_FromLHESelectedL/F");
+    SelectedTree->Branch("ZOne_phi_FromLHESelectedL",&ZOne_phi_FromLHESelectedL,"ZOne_phi_FromLHESelectedL/F");
+    SelectedTree->Branch("ZOne_mass_FromLHESelectedL",&ZOne_mass_FromLHESelectedL,"ZOne_mass_FromLHESelectedL/F");
 
     SelectedTree->Branch("ZTwo_pt_FromLHESelectedL",&ZTwo_pt_FromLHESelectedL,"ZTwo_pt_FromLHESelectedL/F");
     SelectedTree->Branch("ZTwo_eta_FromLHESelectedL",&ZTwo_eta_FromLHESelectedL,"ZTwo_eta_FromLHESelectedL/F");
+    SelectedTree->Branch("ZTwo_phi_FromLHESelectedL",&ZTwo_phi_FromLHESelectedL,"ZTwo_phi_FromLHESelectedL/F");
+    SelectedTree->Branch("ZTwo_mass_FromLHESelectedL",&ZTwo_mass_FromLHESelectedL,"ZTwo_mass_FromLHESelectedL/F");
+
+    SelectedTree->Branch("ZPair_InvMass_FromLHESelectedL",&ZPair_InvMass_FromLHESelectedL,"ZPair_InvMass_FromLHESelectedL/F");
+    SelectedTree->Branch("ZPair_EtaSep_FromLHESelectedL",&ZPair_EtaSep_FromLHESelectedL,"ZPair_EtaSep_FromLHESelectedL/F");
 
     SelectedTree->Branch("H_pt_FromLHESelectedL",&H_pt_FromLHESelectedL,"H_pt_FromLHESelectedL/F");
     SelectedTree->Branch("H_eta_FromLHESelectedL",&H_eta_FromLHESelectedL,"H_eta_FromLHESelectedL/F");
+
+    SelectedTree->Branch("ZPairPlusH_InvMass_FromLHESelectedL",&ZPairPlusH_InvMass_FromLHESelectedL,"ZPairPlusH_InvMass_FromLHESelectedL/F");
 
     SelectedTree->Branch("JOne_pt_FromLHESelectedL",&JOne_pt_FromLHESelectedL,"JOne_pt_FromLHESelectedL/F");
     SelectedTree->Branch("JOne_eta_FromLHESelectedL",&JOne_eta_FromLHESelectedL,"JOne_eta_FromLHESelectedL/F");
@@ -843,12 +887,24 @@ void FullAnalysisInCWithLHE(){
 
         float ZOne_pt_FromLHERaw;
         float ZOne_eta_FromLHERaw;
+        float ZOne_phi_FromLHERaw;
+        float ZOne_mass_FromLHERaw;
+        
 
         float ZTwo_pt_FromLHERaw;
         float ZTwo_eta_FromLHERaw;
+        float ZTwo_phi_FromLHERaw;
+        float ZTwo_mass_FromLHERaw;
+
+        float ZPair_InvMass_FromLHERaw;
+        float ZPair_EtaSep_FromLHERaw;
 
         float H_pt_FromLHERaw;
         float H_eta_FromLHERaw;
+        float H_phi_FromLHERaw;
+        float H_mass_FromLHERaw;
+
+        float ZPairPlusH_InvMass_FromLHERaw;
 
         float JOne_pt_FromLHERaw;
         float JOne_eta_FromLHERaw;
@@ -994,22 +1050,46 @@ void FullAnalysisInCWithLHE(){
                     if (tmpLHEPartPtOne >= tmpLHEPartPtTwo){
                         ZOne_pt_FromLHERaw = tmpLHEPartPtOne;
                         ZOne_eta_FromLHERaw = LHEPart_eta[tmpZAr[0]];
+                        ZOne_phi_FromLHERaw = LHEPart_phi[tmpZAr[0]];
+                        ZOne_mass_FromLHERaw = LHEPart_mass[tmpZAr[0]];
 
                         ZTwo_pt_FromLHERaw = tmpLHEPartPtTwo;
                         ZTwo_eta_FromLHERaw = LHEPart_eta[tmpZAr[1]];
+                        ZTwo_phi_FromLHERaw = LHEPart_phi[tmpZAr[1]];
+                        ZTwo_mass_FromLHERaw = LHEPart_mass[tmpZAr[1]];
+                        
                     }
                     else{
                         ZOne_pt_FromLHERaw = tmpLHEPartPtTwo;
                         ZOne_eta_FromLHERaw = LHEPart_eta[tmpZAr[1]];
+                        ZOne_phi_FromLHERaw = LHEPart_phi[tmpZAr[1]];
+                        ZOne_mass_FromLHERaw = LHEPart_mass[tmpZAr[1]];
 
                         ZTwo_pt_FromLHERaw = tmpLHEPartPtOne;
                         ZTwo_eta_FromLHERaw = LHEPart_eta[tmpZAr[0]];
+                        ZTwo_phi_FromLHERaw = LHEPart_phi[tmpZAr[0]];
+                        ZTwo_mass_FromLHERaw = LHEPart_mass[tmpZAr[0]];
                     }
+
+                    ROOT::Math::PtEtaPhiMVector tmpZOneVec  = ROOT::Math::PtEtaPhiMVector(ZOne_pt_FromLHERaw, ZOne_eta_FromLHERaw, ZOne_phi_FromLHERaw, ZOne_mass_FromLHERaw);
+                    ROOT::Math::PtEtaPhiMVector tmpZTwoVec  = ROOT::Math::PtEtaPhiMVector(ZTwo_pt_FromLHERaw, ZTwo_eta_FromLHERaw, ZTwo_phi_FromLHERaw, ZTwo_mass_FromLHERaw);
+                    ROOT::Math::PtEtaPhiMVector tmpZPairVec = tmpZOneVec+tmpZTwoVec;
+                    ZPair_InvMass_FromLHERaw = tmpZPairVec.M();
+                    ZPair_EtaSep_FromLHERaw = abs(ZOne_eta_FromLHERaw-ZTwo_eta_FromLHERaw);
+                    
 
                     
 
                     H_pt_FromLHERaw = LHEPart_pt[tmpHInd];
                     H_eta_FromLHERaw = LHEPart_eta[tmpHInd];
+                    H_phi_FromLHERaw = LHEPart_phi[tmpHInd];
+                    H_mass_FromLHERaw = LHEPart_mass[tmpHInd];
+
+                    ROOT::Math::PtEtaPhiMVector tmpHVec  = ROOT::Math::PtEtaPhiMVector(H_pt_FromLHERaw,H_eta_FromLHERaw,H_phi_FromLHERaw,H_mass_FromLHERaw);
+
+                    ROOT::Math::PtEtaPhiMVector tmpZPairPlusHVec = tmpZPairVec+tmpHVec;
+
+                    ZPairPlusH_InvMass_FromLHERaw = tmpZPairPlusHVec.M();
 
                     tmpLHEPartPtOne = LHEPart_pt[tmpJAr[0]];
                     tmpLHEPartPtTwo = LHEPart_pt[tmpJAr[1]];
@@ -1051,12 +1131,23 @@ void FullAnalysisInCWithLHE(){
 
                     ZOne_pt_FromLHERawL = ZOne_pt_FromLHERaw;
                     ZOne_eta_FromLHERawL = ZOne_eta_FromLHERaw;
+                    ZOne_phi_FromLHERawL = ZOne_phi_FromLHERaw;
+                    ZOne_mass_FromLHERawL = ZOne_mass_FromLHERaw;
 
                     ZTwo_pt_FromLHERawL = ZTwo_pt_FromLHERaw;
                     ZTwo_eta_FromLHERawL = ZTwo_eta_FromLHERaw;
+                    ZTwo_phi_FromLHERawL = ZTwo_phi_FromLHERaw;
+                    ZTwo_mass_FromLHERawL = ZTwo_mass_FromLHERaw;
+
+                    ZPair_InvMass_FromLHERawL = ZPair_InvMass_FromLHERaw;
+                    ZPair_EtaSep_FromLHERawL = ZPair_EtaSep_FromLHERaw;
 
                     H_pt_FromLHERawL = H_pt_FromLHERaw;
                     H_eta_FromLHERawL = H_eta_FromLHERaw;
+                    H_phi_FromLHERawL = H_phi_FromLHERaw;
+                    H_mass_FromLHERawL = H_mass_FromLHERaw;
+
+                    ZPairPlusH_InvMass_FromLHERawL = ZPairPlusH_InvMass_FromLHERaw;
 
                     JOne_pt_FromLHERawL = JOne_pt_FromLHERaw;
                     JOne_eta_FromLHERawL = JOne_eta_FromLHERaw;
@@ -2018,12 +2109,23 @@ void FullAnalysisInCWithLHE(){
                         
                         ZOne_pt_FromLHESelectedL = ZOne_pt_FromLHERaw;
                         ZOne_eta_FromLHESelectedL = ZOne_eta_FromLHERaw;
+                        ZOne_phi_FromLHESelectedL = ZOne_phi_FromLHERaw;
+                        ZOne_mass_FromLHESelectedL = ZOne_mass_FromLHERaw;
 
                         ZTwo_pt_FromLHESelectedL = ZTwo_pt_FromLHERaw;
                         ZTwo_eta_FromLHESelectedL = ZTwo_eta_FromLHERaw;
+                        ZTwo_phi_FromLHESelectedL = ZTwo_phi_FromLHERaw;
+                        ZTwo_mass_FromLHESelectedL = ZTwo_mass_FromLHERaw;
+
+                        ZPair_InvMass_FromLHESelectedL = ZPair_InvMass_FromLHERaw;
+                        ZPair_EtaSep_FromLHESelectedL = ZPair_EtaSep_FromLHERaw;
 
                         H_pt_FromLHESelectedL = H_pt_FromLHERaw;
                         H_eta_FromLHESelectedL = H_eta_FromLHERaw;
+                        H_phi_FromLHESelectedL = H_phi_FromLHERaw;
+                        H_mass_FromLHESelectedL = H_mass_FromLHERaw;
+
+                        ZPairPlusH_InvMass_FromLHESelectedL = ZPairPlusH_InvMass_FromLHERaw;
 
                         JOne_pt_FromLHESelectedL = JOne_pt_FromLHERaw;
                         JOne_eta_FromLHESelectedL = JOne_eta_FromLHERaw;
