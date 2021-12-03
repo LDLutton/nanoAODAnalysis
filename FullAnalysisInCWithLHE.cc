@@ -729,6 +729,8 @@ void FullAnalysisInCWithLHE(){
 
     SelectedTree->Branch("H_pt_FromLHESelectedL",&H_pt_FromLHESelectedL,"H_pt_FromLHESelectedL/F");
     SelectedTree->Branch("H_eta_FromLHESelectedL",&H_eta_FromLHESelectedL,"H_eta_FromLHESelectedL/F");
+    SelectedTree->Branch("H_phi_FromLHESelectedL",&H_phi_FromLHESelectedL,"H_phi_FromLHESelectedL/F");
+    SelectedTree->Branch("H_mass_FromLHESelectedL",&H_mass_FromLHESelectedL,"H_mass_FromLHESelectedL/F");
 
     SelectedTree->Branch("ZPairPlusH_InvMass_FromLHESelectedL",&ZPairPlusH_InvMass_FromLHESelectedL,"ZPairPlusH_InvMass_FromLHESelectedL/F");
 
