@@ -1479,9 +1479,7 @@ void FullAnalysisInCWithLHE(){
                         }
                         if (finalZAr.size()){
                             for (UInt_t tmpZItr=0;tmpZItr<finalZAr.size();tmpZItr++){
-                                for (UInt_t tmpZItrTwo=0;tmpZItrTwo<finalZAr[tmpZItr].size();tmpZItrTwo++){
-                                    std::cout << "finalZAr[tmpZItr][tmpZItrTwo] " << finalZAr[tmpZItr][tmpZItrTwo] << "\n";
-                                }
+                                std::cout << "finalZAr[tmpZItr] " << finalZAr[tmpZItr] << "\n";
                             }
                         }
                     }
