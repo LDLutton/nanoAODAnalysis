@@ -2,6 +2,7 @@
 
 bool debug = false;
 bool debugHadronic = false;
+bool debugGenPart = false;
 bool endAfter = false;
 int NToStart = 0;
 int NToEnd = 2500;

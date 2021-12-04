@@ -53,6 +53,8 @@ void FullAnalysisInCWithLHE(){
     float crossSection;
     bool isBackground;
     bool useLHETree = false;
+    bool useFJGenMatchTree = false;
+    bool useJGenMatchTree = false;
 
     if (MGEFT){
         saveName = "EFT";
@@ -63,6 +65,8 @@ void FullAnalysisInCWithLHE(){
             fileAr.push_back(tmpStrWithPath);
         }
         useLHETree = true;
+        useFJGenMatchTree = true;
+        useJGenMatchTree = true;
     }
     else if (MGSM){
         saveName = "SM";
@@ -73,6 +77,8 @@ void FullAnalysisInCWithLHE(){
             fileAr.push_back(tmpStrWithPath);
         }
         useLHETree = true;
+        useFJGenMatchTree = true;
+        useJGenMatchTree = true;
     }
     else if (ttHToBBBackground){
         //saveName = "ttHToBB";
@@ -243,6 +249,8 @@ void FullAnalysisInCWithLHE(){
         saveName = "testRun";
         fileAr.push_back("./unweighted_eventspphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev10080Seed_0p999cHW100GeVIMJetCut_200.root");
         useLHETree = true;
+        useFJGenMatchTree = true;
+        useJGenMatchTree = true;
     }
     else if (LaraTest){
         saveName = "LaraTest";
@@ -261,6 +269,98 @@ void FullAnalysisInCWithLHE(){
     if (isBackground){
         checkChannelSplits = false;
     }
+
+    UInt_t HFJSameJetCtr = 0;
+
+    float HFJ_pt_FromGenMatchL;
+    float HFJ_eta_FromGenMatchL;
+    float HFJ_phi_FromGenMatchL;
+    float HFJ_mass_FromGenMatchL;
+
+
+    TTree *HFJGenTree = new TTree("HFJGenTree", "HFJGenTree");
+
+    HFJGenTree->Branch("HFJ_pt_FromGenMatchL",&HFJ_pt_FromGenMatchL,"HFJ_pt_FromGenMatchL/F");
+    HFJGenTree->Branch("HFJ_eta_FromGenMatchL",&HFJ_eta_FromGenMatchL,"HFJ_eta_FromGenMatchL/F");
+    HFJGenTree->Branch("HFJ_phi_FromGenMatchL",&HFJ_phi_FromGenMatchL,"HFJ_phi_FromGenMatchL/F");
+    HFJGenTree->Branch("HFJ_mass_FromGenMatchL",&HFJ_mass_FromGenMatchL,"HFJ_mass_FromGenMatchL/F");
+
+
+    UInt_t ZFJSameJetCtr = 0;
+
+    float ZFJLead_pt_FromGenMatchL;
+    float ZFJLead_eta_FromGenMatchL;
+    float ZFJLead_phi_FromGenMatchL;
+    float ZFJLead_mass_FromGenMatchL;
+    
+
+    float ZFJTrailing_pt_FromGenMatchL;
+    float ZFJTrailing_eta_FromGenMatchL;
+    float ZFJTrailing_phi_FromGenMatchL;
+    float ZFJTrailing_mass_FromGenMatchL;
+
+    float ZFJPair_InvMass_FromGenMatchL;
+    float ZFJPair_EtaSep_FromGenMatchL;
+
+    TTree *ZFJGenTree = new TTree("ZFJGenTree", "ZFJGenTree");
+
+    ZFJGenTree->Branch("ZFJLead_pt_FromGenMatchL",&ZFJLead_pt_FromGenMatchL,"ZFJLead_pt_FromGenMatchL/F");
+    ZFJGenTree->Branch("ZFJLead_eta_FromGenMatchL",&ZFJLead_eta_FromGenMatchL,"ZFJLead_eta_FromGenMatchL/F");
+    ZFJGenTree->Branch("ZFJLead_phi_FromGenMatchL",&ZFJLead_phi_FromGenMatchL,"ZFJLead_phi_FromGenMatchL/F");
+    ZFJGenTree->Branch("ZFJLead_mass_FromGenMatchL",&ZFJLead_mass_FromGenMatchL,"ZFJLead_mass_FromGenMatchL/F");
+
+    ZFJGenTree->Branch("ZFJTrailing_pt_FromGenMatchL",&ZFJTrailing_pt_FromGenMatchL,"ZFJTrailing_pt_FromGenMatchL/F");
+    ZFJGenTree->Branch("ZFJTrailing_eta_FromGenMatchL",&ZFJTrailing_eta_FromGenMatchL,"ZFJTrailing_eta_FromGenMatchL/F");
+    ZFJGenTree->Branch("ZFJTrailing_phi_FromGenMatchL",&ZFJTrailing_phi_FromGenMatchL,"ZFJTrailing_phi_FromGenMatchL/F");
+    ZFJGenTree->Branch("ZFJTrailing_mass_FromGenMatchL",&ZFJTrailing_mass_FromGenMatchL,"ZFJTrailing_mass_FromGenMatchL/F");
+
+    ZFJGenTree->Branch("ZFJPair_InvMass_FromGenMatchL",&ZFJPair_InvMass_FromGenMatchL,"ZFJPair_InvMass_FromGenMatchL/F");
+    ZFJGenTree->Branch("ZFJPair_EtaSep_FromGenMatchL",&ZFJPair_EtaSep_FromGenMatchL,"ZFJPair_EtaSep_FromGenMatchL/F");
+
+    float ZHFJ_ZPairPlusHInvMass_FromGenMatchL;
+    TTree *ZHFJGenTree = new TTree("ZHFJGenTree", "ZHFJGenTree");
+    ZHFJGenTree->Branch("ZHFJ_ZPairPlusHInvMass_FromGenMatchL",&ZHFJ_ZPairPlusHInvMass_FromGenMatchL,"ZHFJ_ZPairPlusHInvMass_FromGenMatchL/F");
+
+    float ZHJ_ZPairPlusHInvMass_FromGenMatchL;
+    TTree *ZHJGenTree = new TTree("ZHJGenTree", "ZHJGenTree");
+    ZHJGenTree->Branch("ZHJ_ZPairPlusHInvMass_FromGenMatchL",&ZHJ_ZPairPlusHInvMass_FromGenMatchL,"ZHJ_ZPairPlusHInvMass_FromGenMatchL/F");
+
+
+
+
+
+    UInt_t ZJSameJetCtr = 0;
+
+
+    float ZJLead_pt_FromGenMatchL;
+    float ZJLead_eta_FromGenMatchL;
+    float ZJLead_phi_FromGenMatchL;
+    float ZJLead_mass_FromGenMatchL;
+    
+
+    float ZJTrailing_pt_FromGenMatchL;
+    float ZJTrailing_eta_FromGenMatchL;
+    float ZJTrailing_phi_FromGenMatchL;
+    float ZJTrailing_mass_FromGenMatchL;
+
+    float ZJPair_InvMass_FromGenMatchL;
+    float ZJPair_EtaSep_FromGenMatchL;
+
+    TTree *ZJGenTree = new TTree("ZJGenTree", "ZJGenTree");
+
+    ZJGenTree->Branch("ZJLead_pt_FromGenMatchL",&ZJLead_pt_FromGenMatchL,"ZJLead_pt_FromGenMatchL/F");
+    ZJGenTree->Branch("ZJLead_eta_FromGenMatchL",&ZJLead_eta_FromGenMatchL,"ZJLead_eta_FromGenMatchL/F");
+    ZJGenTree->Branch("ZJLead_phi_FromGenMatchL",&ZJLead_phi_FromGenMatchL,"ZJLead_phi_FromGenMatchL/F");
+    ZJGenTree->Branch("ZJLead_mass_FromGenMatchL",&ZJLead_mass_FromGenMatchL,"ZJLead_mass_FromGenMatchL/F");
+
+    ZJGenTree->Branch("ZJTrailing_pt_FromGenMatchL",&ZJTrailing_pt_FromGenMatchL,"ZJTrailing_pt_FromGenMatchL/F");
+    ZJGenTree->Branch("ZJTrailing_eta_FromGenMatchL",&ZJTrailing_eta_FromGenMatchL,"ZJTrailing_eta_FromGenMatchL/F");
+    ZJGenTree->Branch("ZJTrailing_phi_FromGenMatchL",&ZJTrailing_phi_FromGenMatchL,"ZJTrailing_phi_FromGenMatchL/F");
+    ZJGenTree->Branch("ZJTrailing_mass_FromGenMatchL",&ZJTrailing_mass_FromGenMatchL,"ZJTrailing_mass_FromGenMatchL/F");
+
+    ZJGenTree->Branch("ZJPair_InvMass_FromGenMatchL",&ZJPair_InvMass_FromGenMatchL,"ZJPair_InvMass_FromGenMatchL/F");
+    ZJGenTree->Branch("ZJPair_EtaSep_FromGenMatchL",&ZJPair_EtaSep_FromGenMatchL,"ZJPair_EtaSep_FromGenMatchL/F");
+
 
 
     //This tree is for variables before the cuts
@@ -290,9 +390,11 @@ void FullAnalysisInCWithLHE(){
 
     float JOne_pt_FromLHERawL;
     float JOne_eta_FromLHERawL;
+    float JOne_pdgId_FromLHERawL;
 
     float JTwo_pt_FromLHERawL;
     float JTwo_eta_FromLHERawL;
+    float JTwo_pdgId_FromLHERawL;
 
     float JOne_invmass_FromLHERawL;
     float JTwo_invmass_FromLHERawL;
@@ -327,9 +429,11 @@ void FullAnalysisInCWithLHE(){
 
     RawTree->Branch("JOne_pt_FromLHERawL",&JOne_pt_FromLHERawL,"JOne_pt_FromLHERawL/F");
     RawTree->Branch("JOne_eta_FromLHERawL",&JOne_eta_FromLHERawL,"JOne_eta_FromLHERawL/F");
+    RawTree->Branch("JOne_pdgId_FromLHERawL",&JOne_pdgId_FromLHERawL,"JOne_pdgId_FromLHERawL/F");
 
     RawTree->Branch("JTwo_pt_FromLHERawL",&JTwo_pt_FromLHERawL,"JTwo_pt_FromLHERawL/F");
     RawTree->Branch("JTwo_eta_FromLHERawL",&JTwo_eta_FromLHERawL,"JTwo_eta_FromLHERawL/F");
+    RawTree->Branch("JTwo_pdgId_FromLHERawL",&JTwo_pdgId_FromLHERawL,"JTwo_pdgId_FromLHERawL/F");
 
     RawTree->Branch("JOne_invmass_FromLHERawL",&JOne_invmass_FromLHERawL,"JOne_invmass_FromLHERawL/F");
     RawTree->Branch("JTwo_invmass_FromLHERawL",&JTwo_invmass_FromLHERawL,"JTwo_invmass_FromLHERawL/F");
@@ -698,9 +802,11 @@ void FullAnalysisInCWithLHE(){
 
     float JOne_pt_FromLHESelectedL;
     float JOne_eta_FromLHESelectedL;
+    float JOne_pdgId_FromLHESelectedL;
 
     float JTwo_pt_FromLHESelectedL;
     float JTwo_eta_FromLHESelectedL;
+    float JTwo_pdgId_FromLHESelectedL;
 
     float JOne_invmass_FromLHESelectedL;
     float JTwo_invmass_FromLHESelectedL;
@@ -736,9 +842,11 @@ void FullAnalysisInCWithLHE(){
 
     SelectedTree->Branch("JOne_pt_FromLHESelectedL",&JOne_pt_FromLHESelectedL,"JOne_pt_FromLHESelectedL/F");
     SelectedTree->Branch("JOne_eta_FromLHESelectedL",&JOne_eta_FromLHESelectedL,"JOne_eta_FromLHESelectedL/F");
+    SelectedTree->Branch("JOne_pdgId_FromLHESelectedL",&JOne_pdgId_FromLHESelectedL,"JOne_pdgId_FromLHESelectedL/F");
 
     SelectedTree->Branch("JTwo_pt_FromLHESelectedL",&JTwo_pt_FromLHESelectedL,"JTwo_pt_FromLHESelectedL/F");
     SelectedTree->Branch("JTwo_eta_FromLHESelectedL",&JTwo_eta_FromLHESelectedL,"JTwo_eta_FromLHESelectedL/F");
+    SelectedTree->Branch("JTwo_pdgId_FromLHESelectedL",&JTwo_pdgId_FromLHESelectedL,"JTwo_pdgId_FromLHESelectedL/F");
 
     SelectedTree->Branch("JOne_invmass_FromLHESelectedL",&JOne_invmass_FromLHESelectedL,"JOne_invmass_FromLHESelectedL/F");
     SelectedTree->Branch("JTwo_invmass_FromLHESelectedL",&JTwo_invmass_FromLHESelectedL,"JTwo_invmass_FromLHESelectedL/F");
@@ -910,9 +1018,11 @@ void FullAnalysisInCWithLHE(){
 
         float JOne_pt_FromLHERaw;
         float JOne_eta_FromLHERaw;
+        float JOne_pdgId_FromLHERaw;
 
         float JTwo_pt_FromLHERaw;
         float JTwo_eta_FromLHERaw;
+        float JTwo_pdgId_FromLHERaw;
 
         float JOne_invmass_FromLHERaw;
         float JTwo_invmass_FromLHERaw;
@@ -1099,9 +1209,11 @@ void FullAnalysisInCWithLHE(){
                     if (tmpLHEPartPtOne >= tmpLHEPartPtTwo) {
                         JOne_pt_FromLHERaw = tmpLHEPartPtOne;
                         JOne_eta_FromLHERaw = LHEPart_eta[tmpJAr[0]];
+                        JOne_pdgId_FromLHERaw = LHEPart_pdgId[tmpJAr[0]];
 
                         JTwo_pt_FromLHERaw = tmpLHEPartPtTwo;
                         JTwo_eta_FromLHERaw = LHEPart_eta[tmpJAr[1]];
+                        JTwo_pdgId_FromLHERaw = LHEPart_pdgId[tmpJAr[1]];
 
                         JOne_invmass_FromLHERaw = LHEPart_mass[tmpJAr[0]];
                         JTwo_invmass_FromLHERaw = LHEPart_mass[tmpJAr[1]];
@@ -1112,9 +1224,11 @@ void FullAnalysisInCWithLHE(){
                     else{
                         JOne_pt_FromLHERaw = tmpLHEPartPtTwo;
                         JOne_eta_FromLHERaw = LHEPart_eta[tmpJAr[1]];
+                        JOne_pdgId_FromLHERaw = LHEPart_pdgId[tmpJAr[1]];
 
                         JTwo_pt_FromLHERaw = tmpLHEPartPtOne;
                         JTwo_eta_FromLHERaw = LHEPart_eta[tmpJAr[0]];
+                        JTwo_pdgId_FromLHERaw = LHEPart_pdgId[tmpJAr[0]];
 
                         JOne_invmass_FromLHERaw = LHEPart_mass[tmpJAr[1]];
                         JTwo_invmass_FromLHERaw = LHEPart_mass[tmpJAr[0]];
@@ -1153,9 +1267,11 @@ void FullAnalysisInCWithLHE(){
 
                     JOne_pt_FromLHERawL = JOne_pt_FromLHERaw;
                     JOne_eta_FromLHERawL = JOne_eta_FromLHERaw;
+                    JOne_pdgId_FromLHERawL = JOne_pdgId_FromLHERaw;
 
                     JTwo_pt_FromLHERawL = JTwo_pt_FromLHERaw;
                     JTwo_eta_FromLHERawL = JTwo_eta_FromLHERaw;
+                    JTwo_pdgId_FromLHERawL = JTwo_pdgId_FromLHERaw;
 
                     JOne_invmass_FromLHERawL = JOne_invmass_FromLHERaw;
                     JTwo_invmass_FromLHERawL = JTwo_invmass_FromLHERaw;
@@ -1169,6 +1285,446 @@ void FullAnalysisInCWithLHE(){
 
                     RawTree->Fill();
 
+                }
+                if (useFJGenMatchTree || useJGenMatchTree) {
+                    std::vector<std::vector<Int_t>> tmpHFJAr;
+                    std::vector<std::vector<Int_t>> tmpZFJAr;
+                    //std::vector<Int_t> tmpZFJAr;
+                    for (UInt_t i=0;i<*nGenPart;i++){
+                        Int_t tmpPDGId = GenPart_pdgId[i];
+                        Int_t tmpMotherID = GenPart_genPartIdxMother[i];
+                        if (debugGenPart) std::cout << "i " << i << " GenPart_pdgId[i] " << tmpPDGId << "\n";
+
+                        if (tmpHFJAr.size()){
+                            for (UInt_t tmpHItr=0;tmpHItr<tmpHFJAr.size();tmpHItr++){
+                                if (debugGenPart) std::cout << "tmpHItr " << tmpHItr << " tmpMotherID " << tmpMotherID << "\n";
+                                if (tmpMotherID == tmpHFJAr[tmpHItr][0]){
+                                    if (tmpPDGId == 25) std::cout <<"ERROR, ERROR, DAUGHTER PARTICLE IS H\n";
+                                    else tmpHFJAr[tmpHItr].push_back(tmpPDGId);
+                                }
+                            }
+                        }
+
+                        if (GenPart_pdgId[i] == 25){
+                            //std::bitset<sizeof(Int_t)> tmpStatusBitSet;
+                            //bool tmpStatusBin = tmpStatusBitSet(GenPart_statusFlags[i]).test(13);
+                            bool tmpStatusBin = GenPart_statusFlags[i] & (1 << 13);
+                            //tmpStatusBin = bin(GenPart_statusFlags[i]);
+                            if (debugGenPart) std::cout <<"GenPart_statusFlags[i] " << GenPart_statusFlags[i] << " tmpStatusBin " << tmpStatusBin << "\n";
+                            
+                            //tmpIsEnd = tmpStatusBin[-14];
+                            std::vector<Int_t> tmpHFJVec;
+                            tmpHFJVec.push_back(i);
+                            if (tmpStatusBin) tmpHFJAr.push_back(tmpHFJVec);
+                        }
+                        
+                        if (tmpZFJAr.size()){
+                            for (UInt_t tmpZItr=0;tmpZItr<tmpZFJAr.size();tmpZItr++){
+                                if (debugGenPart) std::cout << "tmpZItr " << tmpZItr << " tmpMotherID " << tmpMotherID << "\n";
+                                if (tmpMotherID == tmpZFJAr[tmpZItr][0]){
+                                    if (tmpPDGId == 23) std::cout <<"ERROR, ERROR, DAUGHTER PARTICLE IS Z\n";
+                                    else tmpZFJAr[tmpZItr].push_back(tmpPDGId);
+                                }
+                            }
+                        }
+                        
+                        if (GenPart_pdgId[i] == 23){
+                            //std::bitset<sizeof(Int_t)> tmpStatusBitSet;
+                            //bool tmpStatusBin = tmpStatusBitSet(GenPart_statusFlags[i]).test(13);
+                            bool tmpStatusBin = GenPart_statusFlags[i] & (1 << 13);
+                            //tmpStatusBin = bin(GenPart_statusFlags[i]);
+                            if (debugGenPart) std::cout <<"GenPart_statusFlags[i] " << GenPart_statusFlags[i] << " tmpStatusBin " << tmpStatusBin << "\n";
+                            
+                            //tmpIsEnd = tmpStatusBin[-14];
+                            std::vector<Int_t> tmpZFJVec;
+                            tmpZFJVec.push_back(i);
+                            if (tmpStatusBin) tmpZFJAr.push_back(tmpZFJVec);
+                        }
+                    }
+                    if (debugGenPart) {
+                        std::cout <<"Finished H,Z Finding. tmpHFJAr:\n";
+                        if (tmpHFJAr.size()){
+                            for (UInt_t tmpHItr=0;tmpHItr<tmpHFJAr.size();tmpHItr++){
+                                for (UInt_t tmpHItrTwo=0;tmpHItrTwo<tmpHFJAr[tmpHItr].size();tmpHItrTwo++){
+                                    std::cout << tmpHFJAr[tmpHItr][tmpHItrTwo] << ", ";
+                                }
+                                std::cout << "\n";
+                            }
+                        }
+                        std::cout <<"tmpZFJAr:\n";
+                        if (tmpZFJAr.size()){
+                            for (UInt_t tmpZItr=0;tmpZItr<tmpZFJAr.size();tmpZItr++){
+                                for (UInt_t tmpZItrTwo=0;tmpZItrTwo<tmpZFJAr[tmpZItr].size();tmpZItrTwo++){
+                                    std::cout << tmpZFJAr[tmpZItr][tmpZItrTwo] << ", ";
+                                }
+                                std::cout << "\n";
+                            }
+                        }
+                    }
+
+                    std::vector<Int_t> tmpHFinalAr;
+                    Int_t intermediaryH = -1;
+                    if (tmpHFJAr.size() >= 2){
+                        for (UInt_t tmpHItr;tmpHItr<tmpHFJAr.size();tmpHItr++){
+                            if (std::count(tmpHFJAr[tmpHItr].begin(), tmpHFJAr[tmpHItr].end(), JOne_pdgId_FromLHERaw)){
+                                if (std::count(tmpHFJAr[tmpHItr].begin(), tmpHFJAr[tmpHItr].end(), JTwo_pdgId_FromLHERaw)){
+                                    if (tmpHFJAr[tmpHItr].size() == 3){
+                                        intermediaryH = tmpHItr;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    std::vector<Int_t> finalHAr;
+                    if (tmpHFJAr.size()){
+                        for (UInt_t tmpHItr=0;tmpHItr<tmpHFJAr.size();tmpHItr++){
+                            if (tmpHItr != intermediaryH) finalHAr.push_back(tmpHFJAr[tmpHItr][0]);
+                        }
+                    }
+                    std::vector<Int_t> tmpHDecAr;
+                    UInt_t hJetInd;
+                    bool hJetFound = false;
+                    float HFJ_pt_FromGenMatch;
+                    float HFJ_eta_FromGenMatch;
+                    float HFJ_phi_FromGenMatch;
+                    float HFJ_mass_FromGenMatch;
+                    if (finalHAr.size() != 1) std::cout <<"ERROR ERROR, MORE OR LESS THAN ONE H,evCount,JOne_pdgId_FromLHERaw,JTwo_pdgId_FromLHERaw " << evCount<< " " <<JOne_pdgId_FromLHERaw<< " " <<JTwo_pdgId_FromLHERaw << "\n";
+                    else{
+
+                        float mindROne = 1000;
+
+                        if (useFJGenMatchTree){
+                            if (debugGenPart) {
+                                std::cout <<"entering FJ H gen matching loop\n";
+                            }
+                            /*
+                            if (evCount-1 == 29){
+                                std::cout << "ev29\n";
+                                std::cout << "*nFatJet " << *nFatJet <<" finalHAr[0] " << finalHAr[0] << " GenPart_phi[finalHAr[0]] " << GenPart_phi[finalHAr[0]] << " GenPart_eta[finalHAr[0]] " << GenPart_eta[finalHAr[0]] << "\n";
+                            }
+                            */
+
+                            for (UInt_t fatJetInd=0;fatJetInd<*nFatJet;fatJetInd++){
+                                float tmpMindROne = calcDeltaR(FatJet_phi[fatJetInd],FatJet_eta[fatJetInd],GenPart_phi[finalHAr[0]],GenPart_eta[finalHAr[0]]);
+                                /*
+                                if (evCount-1 == 29){
+                                    std::cout << "fatJetInd " << fatJetInd << " tmpMindROne " << tmpMindROne << " FatJet_phi[fatJetInd] "<<FatJet_phi[fatJetInd] << " FatJet_eta[fatJetInd] " << FatJet_eta[fatJetInd] << "\n";
+                                }
+                                */
+                                if (tmpMindROne < mindROne){
+                                    mindROne = tmpMindROne;
+                                    hJetInd = fatJetInd;
+                                }
+                            }
+                            
+
+                            if (mindROne != 1000){
+                                hJetFound = true;
+                                HFJ_pt_FromGenMatch = FatJet_pt[hJetInd];
+                                HFJ_eta_FromGenMatch = FatJet_eta[hJetInd];
+                                HFJ_phi_FromGenMatch = FatJet_phi[hJetInd];
+                                HFJ_mass_FromGenMatch = FatJet_mass[hJetInd];
+
+                                HFJ_pt_FromGenMatchL = HFJ_pt_FromGenMatch;
+                                HFJ_eta_FromGenMatchL = HFJ_eta_FromGenMatch;
+                                HFJ_phi_FromGenMatchL = HFJ_phi_FromGenMatch;
+                                HFJ_mass_FromGenMatchL = HFJ_mass_FromGenMatch;
+                                
+
+                                HFJGenTree->Fill();
+                            }
+                            else {
+                                std::cout <<"H Gen Match failed\n";
+                                std::cout << "evCount " << evCount-1 << " mindROne " << mindROne << "\n";
+                                std::cout << "*nFatJet " << *nFatJet << "\n";
+
+                            }
+                        }
+                    }
+
+
+
+                    std::vector<Int_t> tmpZFinalAr;
+                    Int_t intermediaryZ = -1;
+                    if (tmpZFJAr.size() >= 3){
+                        for (UInt_t tmpZItr;tmpZItr<tmpZFJAr.size();tmpZItr++){
+                            if (std::count(tmpZFJAr[tmpZItr].begin(), tmpZFJAr[tmpZItr].end(), JOne_pdgId_FromLHERaw)){
+                                if (std::count(tmpZFJAr[tmpZItr].begin(), tmpZFJAr[tmpZItr].end(), JTwo_pdgId_FromLHERaw)){
+                                    if (tmpZFJAr[tmpZItr].size() == 3){
+                                        intermediaryZ = tmpZItr;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    std::vector<Int_t> finalZAr;
+                    if (tmpZFJAr.size()){
+                        for (UInt_t tmpZItr=0;tmpZItr<tmpZFJAr.size();tmpZItr++){
+                            if (tmpZItr != intermediaryZ) finalZAr.push_back(tmpZFJAr[tmpZItr][0]);
+                        }
+                    }
+                    std::vector<Int_t> tmpZDecAr;
+                    if (finalZAr.size() != 2) std::cout <<"ERROR ERROR, MORE OR LESS THAN TWO Zs,evCount,JOne_pdgId_FromLHERaw,JTwo_pdgId_FromLHERaw " << evCount<< " " <<JOne_pdgId_FromLHERaw<< " " <<JTwo_pdgId_FromLHERaw << "\n";
+                    else{
+
+                        UInt_t zJetIndOne;
+                        UInt_t zJetIndOneSecondPlace;
+                        UInt_t zJetIndTwo;
+                        float mindROne = 1000;
+                        float mindROneSecondPlace = 1000;
+
+                        float mindRTwo = 1000;
+                        bool useSecondPlace = false;
+
+
+                        if (useFJGenMatchTree){
+                            if (debugGenPart) {
+                                std::cout <<"entering FJ Z gen matching loop\n";
+                            }
+
+                            for (UInt_t fatJetInd=0;fatJetInd<*nFatJet;fatJetInd++){
+                                if (hJetFound && fatJetInd == hJetInd) continue;
+                                float tmpMindROne = calcDeltaR(FatJet_phi[fatJetInd],FatJet_eta[fatJetInd],GenPart_phi[finalZAr[0]],GenPart_eta[finalZAr[0]]);
+                                /*
+                                if (evCount -1 == 0){
+                                    std::cout << "tmpMindROne " << tmpMindROne << "\n";
+                                }
+                                */
+                                if (tmpMindROne < mindROne){
+                                    mindROneSecondPlace = mindROne;
+                                    mindROne = tmpMindROne;
+                                    zJetIndOneSecondPlace = zJetIndOne;
+                                    zJetIndOne = fatJetInd;
+                                    /*
+                                    if (evCount -1 == 0){
+                                        std::cout << "mindROneSecondPlace " << mindROneSecondPlace << "mindROne " << mindROne << "zJetIndOneSecondPlace " << zJetIndOneSecondPlace << "zJetIndOne " << zJetIndOne << "useSecondPlace " << useSecondPlace << "\n";
+                                    }
+                                    */
+                                }
+                            }
+                            /*
+                            if (evCount -1 == 0){
+                                std::cout << "secondloop\n";
+                            }
+                            */
+                            for (UInt_t fatJetInd=0;fatJetInd<*nFatJet;fatJetInd++){
+                                float tmpMindRTwo = calcDeltaR(FatJet_phi[fatJetInd],FatJet_eta[fatJetInd],GenPart_phi[finalZAr[1]],GenPart_eta[finalZAr[1]]);
+                                /*
+                                if (evCount -1 == 0){
+                                    std::cout << "tmpMindRTwo " << tmpMindRTwo << "\n";
+                                }
+                                */
+                                if (tmpMindRTwo < mindRTwo){
+                                    /*
+                                    if (evCount -1 == 0){
+                                        std::cout << "fatJetInd " << fatJetInd << "\n";
+                                    }
+                                    */
+                                    if (fatJetInd == zJetIndOne) {
+                                        /*
+                                        if (evCount -1 == 0){
+                                            std::cout << "mindROne " << mindROne << "\n";
+                                        }
+                                        */
+                                        if (tmpMindRTwo < mindROne){
+                                            useSecondPlace = true;
+                                            mindRTwo = tmpMindRTwo;
+                                            zJetIndTwo = fatJetInd;
+                                            /*
+                                            if (evCount -1 == 0){
+                                                std::cout << "mindRTwo " << mindRTwo << "zJetIndTwo " << zJetIndTwo << "useSecondPlace " << useSecondPlace << "\n";
+                                            }
+                                            */
+                                        }
+                                        else useSecondPlace = false;
+                                    }
+                                    else {
+                                        useSecondPlace = false;
+                                        mindRTwo = tmpMindRTwo;
+                                        zJetIndTwo = fatJetInd;
+                                        /*
+                                        if (evCount -1 == 0){
+                                            std::cout << "mindRTwo " << mindRTwo << "zJetIndTwo " << zJetIndTwo << "useSecondPlace " << useSecondPlace << "\n";
+                                        }
+                                        */
+
+                                    }
+                                }
+                            }
+
+                            if (useSecondPlace) {
+                                zJetIndOne = zJetIndOneSecondPlace;
+                                mindROne = mindROneSecondPlace;
+                                ZFJSameJetCtr += 1;
+                                std::cout << "evCount " << evCount -1 << " zJetIndOne " << zJetIndOne << " zJetIndTwo " << zJetIndTwo << " mindROne " << mindROne << " mindRTwo " << mindRTwo << "\n";
+                            }
+
+
+                            if (mindROne != 1000 && mindRTwo != 1000 ){
+                                UInt_t tmpLeadInd;
+                                UInt_t tmpTrailingInd;
+                                if (FatJet_pt[zJetIndOne] > FatJet_pt[zJetIndTwo]){
+                                    tmpLeadInd = zJetIndOne;
+                                    tmpTrailingInd = zJetIndTwo;
+                                }
+                                else {
+                                    tmpLeadInd = zJetIndTwo;
+                                    tmpTrailingInd = zJetIndOne;
+                                }
+                                float ZFJLead_pt_FromGenMatch = FatJet_pt[tmpLeadInd];
+                                float ZFJLead_eta_FromGenMatch = FatJet_eta[tmpLeadInd];
+                                float ZFJLead_phi_FromGenMatch = FatJet_phi[tmpLeadInd];
+                                float ZFJLead_mass_FromGenMatch = FatJet_mass[tmpLeadInd];
+
+                                float ZFJTrailing_pt_FromGenMatch = FatJet_pt[tmpTrailingInd];
+                                float ZFJTrailing_eta_FromGenMatch = FatJet_eta[tmpTrailingInd];
+                                float ZFJTrailing_phi_FromGenMatch = FatJet_phi[tmpTrailingInd];
+                                float ZFJTrailing_mass_FromGenMatch = FatJet_mass[tmpTrailingInd];
+
+                                ZFJLead_pt_FromGenMatchL = ZFJLead_pt_FromGenMatch;
+                                ZFJLead_eta_FromGenMatchL = ZFJLead_eta_FromGenMatch;
+                                ZFJLead_phi_FromGenMatchL = ZFJLead_phi_FromGenMatch;
+                                ZFJLead_mass_FromGenMatchL = ZFJLead_mass_FromGenMatch;
+                                
+
+                                ZFJTrailing_pt_FromGenMatchL = ZFJTrailing_pt_FromGenMatch;
+                                ZFJTrailing_eta_FromGenMatchL = ZFJTrailing_eta_FromGenMatch;
+                                ZFJTrailing_phi_FromGenMatchL = ZFJTrailing_phi_FromGenMatch;
+                                ZFJTrailing_mass_FromGenMatchL = ZFJTrailing_mass_FromGenMatch;
+
+                                ROOT::Math::PtEtaPhiMVector tmpZFJLeadVec  = ROOT::Math::PtEtaPhiMVector(ZFJLead_pt_FromGenMatch,ZFJLead_eta_FromGenMatch,ZFJLead_phi_FromGenMatch,ZFJLead_mass_FromGenMatch);
+
+                                ROOT::Math::PtEtaPhiMVector tmpZFJTrailingVec  = ROOT::Math::PtEtaPhiMVector(ZFJTrailing_pt_FromGenMatch,ZFJTrailing_eta_FromGenMatch,ZFJTrailing_phi_FromGenMatch,ZFJTrailing_mass_FromGenMatch);
+
+                                ROOT::Math::PtEtaPhiMVector tmpZFJPairVec = tmpZFJLeadVec+tmpZFJTrailingVec;
+
+                                float ZFJPair_InvMass_FromGenMatch = tmpZFJPairVec.M();;
+                                float ZFJPair_EtaSep_FromGenMatch = abs(ZFJLead_eta_FromGenMatch-ZFJTrailing_eta_FromGenMatch);
+
+                                ZFJPair_InvMass_FromGenMatchL = ZFJPair_InvMass_FromGenMatch;
+                                ZFJPair_EtaSep_FromGenMatchL = ZFJPair_EtaSep_FromGenMatch;
+                                ZFJGenTree->Fill();
+                                if (hJetFound){
+                                    ROOT::Math::PtEtaPhiMVector tmpHFJVec  = ROOT::Math::PtEtaPhiMVector(HFJ_pt_FromGenMatch,HFJ_eta_FromGenMatch,HFJ_phi_FromGenMatch,HFJ_mass_FromGenMatch);
+
+                                    ROOT::Math::PtEtaPhiMVector tmpHZFJVec = tmpHFJVec+tmpZFJPairVec;
+                                    
+                                    ZHFJ_ZPairPlusHInvMass_FromGenMatchL = tmpHZFJVec.M();
+                                    ZHFJGenTree->Fill();
+                                }
+                            }
+                        }
+                        if (useJGenMatchTree){
+                            if (debugGenPart) {
+                                std::cout <<"entering J Z gen matching loop\n";
+                            }
+
+                            if (useFJGenMatchTree) {
+                                mindROne = 1000;
+                                mindRTwo = 1000;
+                                mindROneSecondPlace = 1000;
+                                useSecondPlace = false;
+                            }
+
+                            for (UInt_t jetInd=0;jetInd<*nJet;jetInd++){
+                                float tmpMindROne = calcDeltaR(Jet_phi[jetInd],Jet_eta[jetInd],GenPart_phi[finalZAr[0]],GenPart_eta[finalZAr[0]]);
+                                
+                                if (tmpMindROne < mindROne){
+                                    mindROneSecondPlace = mindROne;
+                                    mindROne = tmpMindROne;
+                                    zJetIndOneSecondPlace = zJetIndOne;
+                                    zJetIndOne = jetInd;
+                                }
+                            }
+                            for (UInt_t jetInd=0;jetInd<*nJet;jetInd++){
+                                float tmpMindRTwo = calcDeltaR(Jet_phi[jetInd],Jet_eta[jetInd],GenPart_phi[finalZAr[1]],GenPart_eta[finalZAr[1]]);
+                                if (tmpMindRTwo < mindRTwo){
+                                    if (jetInd == zJetIndOne) {
+                                        if (tmpMindRTwo < mindROne){
+                                            useSecondPlace = true;
+                                            mindRTwo = tmpMindRTwo;
+                                            zJetIndTwo = jetInd;
+                                        }
+                                        else useSecondPlace = false;
+                                    }
+                                    else {
+                                        useSecondPlace = false;
+                                        mindRTwo = tmpMindRTwo;
+                                        zJetIndTwo = jetInd;
+                                    }
+                                }
+                            }
+
+                            if (useSecondPlace) {
+                                zJetIndOne = zJetIndOneSecondPlace;
+                                mindROne = mindROneSecondPlace;
+                                ZJSameJetCtr += 1;
+                            }
+
+
+                            
+
+
+                            if (mindROne != 1000 && mindRTwo != 1000 ){
+                                UInt_t tmpLeadInd;
+                                UInt_t tmpTrailingInd;
+                                if (Jet_pt[zJetIndOne] > Jet_pt[zJetIndTwo]){
+                                    tmpLeadInd = zJetIndOne;
+                                    tmpTrailingInd = zJetIndTwo;
+                                }
+                                else {
+                                    tmpLeadInd = zJetIndTwo;
+                                    tmpTrailingInd = zJetIndOne;
+                                }
+                                float ZJLead_pt_FromGenMatch = Jet_pt[tmpLeadInd];
+                                float ZJLead_eta_FromGenMatch = Jet_eta[tmpLeadInd];
+                                float ZJLead_phi_FromGenMatch = Jet_phi[tmpLeadInd];
+                                float ZJLead_mass_FromGenMatch = Jet_mass[tmpLeadInd];
+
+                                float ZJTrailing_pt_FromGenMatch = Jet_pt[tmpTrailingInd];
+                                float ZJTrailing_eta_FromGenMatch = Jet_eta[tmpTrailingInd];
+                                float ZJTrailing_phi_FromGenMatch = Jet_phi[tmpTrailingInd];
+                                float ZJTrailing_mass_FromGenMatch = Jet_mass[tmpTrailingInd];
+
+                                ZJLead_pt_FromGenMatchL = ZJLead_pt_FromGenMatch;
+                                ZJLead_eta_FromGenMatchL = ZJLead_eta_FromGenMatch;
+                                ZJLead_phi_FromGenMatchL = ZJLead_phi_FromGenMatch;
+                                ZJLead_mass_FromGenMatchL = ZJLead_mass_FromGenMatch;
+                                
+
+                                ZJTrailing_pt_FromGenMatchL = ZJTrailing_pt_FromGenMatch;
+                                ZJTrailing_eta_FromGenMatchL = ZJTrailing_eta_FromGenMatch;
+                                ZJTrailing_phi_FromGenMatchL = ZJTrailing_phi_FromGenMatch;
+                                ZJTrailing_mass_FromGenMatchL = ZJTrailing_mass_FromGenMatch;
+
+                                ROOT::Math::PtEtaPhiMVector tmpZJLeadVec  = ROOT::Math::PtEtaPhiMVector(ZJLead_pt_FromGenMatch,ZJLead_eta_FromGenMatch,ZJLead_phi_FromGenMatch,ZJLead_mass_FromGenMatch);
+
+                                ROOT::Math::PtEtaPhiMVector tmpZJTrailingVec  = ROOT::Math::PtEtaPhiMVector(ZJTrailing_pt_FromGenMatch,ZJTrailing_eta_FromGenMatch,ZJTrailing_phi_FromGenMatch,ZJTrailing_mass_FromGenMatch);
+
+                                ROOT::Math::PtEtaPhiMVector tmpZJPairVec = tmpZJLeadVec+tmpZJTrailingVec;
+
+                                float ZJPair_InvMass_FromGenMatch = tmpZJPairVec.M();;
+                                float ZJPair_EtaSep_FromGenMatch = abs(ZJLead_eta_FromGenMatch-ZJTrailing_eta_FromGenMatch);
+
+                                ZJPair_InvMass_FromGenMatchL = ZJPair_InvMass_FromGenMatch;
+                                ZJPair_EtaSep_FromGenMatchL = ZJPair_EtaSep_FromGenMatch;
+                                ZJGenTree->Fill();
+
+                                if (hJetFound){
+                                    ROOT::Math::PtEtaPhiMVector tmpHFJVec  = ROOT::Math::PtEtaPhiMVector(HFJ_pt_FromGenMatch,HFJ_eta_FromGenMatch,HFJ_phi_FromGenMatch,HFJ_mass_FromGenMatch);
+
+                                    ROOT::Math::PtEtaPhiMVector tmpHZJVec = tmpHFJVec+tmpZJPairVec;
+                                    
+                                    ZHJ_ZPairPlusHInvMass_FromGenMatchL = tmpHZJVec.M();
+                                    ZHJGenTree->Fill();
+                                }
+                            }
+                        }
+                            
+                            
+                    }
                 }
             }
             
@@ -2131,9 +2687,12 @@ void FullAnalysisInCWithLHE(){
 
                         JOne_pt_FromLHESelectedL = JOne_pt_FromLHERaw;
                         JOne_eta_FromLHESelectedL = JOne_eta_FromLHERaw;
+                        JOne_pdgId_FromLHESelectedL = JOne_pdgId_FromLHERaw;
+                        
 
                         JTwo_pt_FromLHESelectedL = JTwo_pt_FromLHERaw;
                         JTwo_eta_FromLHESelectedL = JTwo_eta_FromLHERaw;
+                        JTwo_pdgId_FromLHESelectedL = JTwo_pdgId_FromLHERaw;
 
                         JOne_invmass_FromLHESelectedL = JOne_invmass_FromLHERaw;
                         JTwo_invmass_FromLHESelectedL = JTwo_invmass_FromLHERaw;
@@ -2364,6 +2923,9 @@ void FullAnalysisInCWithLHE(){
     std::cout << "passes all cuts: " << passesCutsCtr << " -------------------\n";
     std::cout << "evPassCount: " << evPassCount << "\n";
 
+    std::cout << "ZFJSameJetCtr " << ZFJSameJetCtr << "\n";
+    std::cout << "ZJSameJetCtr " << ZJSameJetCtr << "\n";
+
     if (!isBackground){
         std::cout << "Cross section average before division: " << crossSectionAvg << "\n";
         std::cout << "Cross section counter: " << crossSectionCtr << "\n";
@@ -2387,6 +2949,16 @@ void FullAnalysisInCWithLHE(){
     if (useLHETree) {
         RawTree->Write("",TObject::kOverwrite);
         SelectedTree->Write("",TObject::kOverwrite);
+        if (useFJGenMatchTree) {
+            ZFJGenTree->Write("",TObject::kOverwrite);
+            HFJGenTree->Write("",TObject::kOverwrite);
+            ZHFJGenTree->Write("",TObject::kOverwrite);
+            
+        }
+        if (useJGenMatchTree) {
+            ZJGenTree->Write("",TObject::kOverwrite);
+            ZHJGenTree->Write("",TObject::kOverwrite);
+        }
 
     }
 
