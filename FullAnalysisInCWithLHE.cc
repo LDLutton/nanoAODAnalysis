@@ -1389,7 +1389,9 @@ void FullAnalysisInCWithLHE(){
                     float HFJ_eta_FromGenMatch;
                     float HFJ_phi_FromGenMatch;
                     float HFJ_mass_FromGenMatch;
-                    if (finalHAr.size() != 1) std::cout <<"ERROR ERROR, MORE OR LESS THAN ONE H,evCount,JOne_pdgId_FromLHERaw,JTwo_pdgId_FromLHERaw " << evCount<< " " <<JOne_pdgId_FromLHERaw<< " " <<JTwo_pdgId_FromLHERaw << "\n";
+                    if (finalHAr.size() != 1) {
+                        std::cout <<"ERROR ERROR, MORE OR LESS THAN ONE H,evCount,JOne_pdgId_FromLHERaw,JTwo_pdgId_FromLHERaw " << evCount<< " " <<JOne_pdgId_FromLHERaw<< " " <<JTwo_pdgId_FromLHERaw << "\n";
+                    }
                     else{
 
                         float mindROne = 1000;
@@ -1466,7 +1468,23 @@ void FullAnalysisInCWithLHE(){
                         }
                     }
                     std::vector<Int_t> tmpZDecAr;
-                    if (finalZAr.size() != 2) std::cout <<"ERROR ERROR, MORE OR LESS THAN TWO Zs,evCount,JOne_pdgId_FromLHERaw,JTwo_pdgId_FromLHERaw " << evCount<< " " <<JOne_pdgId_FromLHERaw<< " " <<JTwo_pdgId_FromLHERaw << "\n";
+                    if (finalZAr.size() != 2){
+                        std::cout <<"ERROR ERROR, MORE OR LESS THAN TWO Zs,evCount,finalZAr.size(),JOne_pdgId_FromLHERaw,JTwo_pdgId_FromLHERaw " << evCount<< " " << finalZAr.size() << " " <<JOne_pdgId_FromLHERaw<< " " <<JTwo_pdgId_FromLHERaw << "\n";
+                        if (tmpZFJAr.size()){
+                            for (UInt_t tmpZItr=0;tmpZItr<tmpZFJAr.size();tmpZItr++){
+                                for (UInt_t tmpZItrTwo=0;tmpZItrTwo<tmpZFJAr[tmpZItr].size();tmpZItrTwo++){
+                                    std::cout << "tmpZFJAr[tmpZItr][tmpZItrTwo] " << tmpZFJAr[tmpZItr][tmpZItrTwo] << "\n";
+                                }
+                            }
+                        }
+                        if (finalZAr.size()){
+                            for (UInt_t tmpZItr=0;tmpZItr<finalZAr.size();tmpZItr++){
+                                for (UInt_t tmpZItrTwo=0;tmpZItrTwo<finalZAr[tmpZItr].size();tmpZItrTwo++){
+                                    std::cout << "finalZAr[tmpZItr][tmpZItrTwo] " << finalZAr[tmpZItr][tmpZItrTwo] << "\n";
+                                }
+                            }
+                        }
+                    }
                     else{
 
                         UInt_t zJetIndOne;
