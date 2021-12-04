@@ -1365,7 +1365,7 @@ void FullAnalysisInCWithLHE(){
                     std::vector<Int_t> tmpHFinalAr;
                     Int_t intermediaryH = -1;
                     if (tmpHFJAr.size() >= 2){
-                        for (UInt_t tmpHItr;tmpHItr<tmpHFJAr.size();tmpHItr++){
+                        for (UInt_t tmpHItr=0;tmpHItr<tmpHFJAr.size();tmpHItr++){
                             if (std::count(tmpHFJAr[tmpHItr].begin(), tmpHFJAr[tmpHItr].end(), JOne_pdgId_FromLHERaw)){
                                 if (std::count(tmpHFJAr[tmpHItr].begin(), tmpHFJAr[tmpHItr].end(), JTwo_pdgId_FromLHERaw)){
                                     if (tmpHFJAr[tmpHItr].size() == 3){
@@ -1449,11 +1449,21 @@ void FullAnalysisInCWithLHE(){
 
                     std::vector<Int_t> tmpZFinalAr;
                     Int_t intermediaryZ = -1;
+                    /*
+                    if (evCount -1 == 407){
+                        std::cout << "tmpZFJAr.size() " << tmpZFJAr.size() <<" JOne_pdgId_FromLHERaw " << JOne_pdgId_FromLHERaw << " JTwo_pdgId_FromLHERaw " << JTwo_pdgId_FromLHERaw << "\n";
+                    }
+                    */
                     if (tmpZFJAr.size() >= 3){
-                        for (UInt_t tmpZItr;tmpZItr<tmpZFJAr.size();tmpZItr++){
+                        if (evCount -1 == 407) std::cout << "yes\n";
+                        for (UInt_t tmpZItr=0;tmpZItr<tmpZFJAr.size();tmpZItr++){
+                            //if (evCount -1 == 407) std::cout << "yes\n";
                             if (std::count(tmpZFJAr[tmpZItr].begin(), tmpZFJAr[tmpZItr].end(), JOne_pdgId_FromLHERaw)){
+                                //if (evCount -1 == 407) std::cout << "yes\n";
                                 if (std::count(tmpZFJAr[tmpZItr].begin(), tmpZFJAr[tmpZItr].end(), JTwo_pdgId_FromLHERaw)){
+                                    //if (evCount -1 == 407) std::cout << "yes\n";
                                     if (tmpZFJAr[tmpZItr].size() == 3){
+                                        //if (evCount -1 == 407) std::cout << "yes\n";
                                         intermediaryZ = tmpZItr;
                                         break;
                                     }
@@ -1469,11 +1479,11 @@ void FullAnalysisInCWithLHE(){
                     }
                     std::vector<Int_t> tmpZDecAr;
                     if (finalZAr.size() != 2){
-                        std::cout <<"ERROR ERROR, MORE OR LESS THAN TWO Zs,evCount,finalZAr.size(),JOne_pdgId_FromLHERaw,JTwo_pdgId_FromLHERaw " << evCount<< " " << finalZAr.size() << " " <<JOne_pdgId_FromLHERaw<< " " <<JTwo_pdgId_FromLHERaw << "\n";
+                        std::cout <<"ERROR ERROR, MORE OR LESS THAN TWO Zs,evCount,finalZAr.size(),intermediaryZ,JOne_pdgId_FromLHERaw,JTwo_pdgId_FromLHERaw " << evCount-1<< " " << finalZAr.size() << " " << intermediaryZ << " "<<JOne_pdgId_FromLHERaw<< " " <<JTwo_pdgId_FromLHERaw << "\n";
                         if (tmpZFJAr.size()){
                             for (UInt_t tmpZItr=0;tmpZItr<tmpZFJAr.size();tmpZItr++){
                                 for (UInt_t tmpZItrTwo=0;tmpZItrTwo<tmpZFJAr[tmpZItr].size();tmpZItrTwo++){
-                                    std::cout << "tmpZFJAr[tmpZItr][tmpZItrTwo] " << tmpZFJAr[tmpZItr][tmpZItrTwo] << "\n";
+                                    std::cout <<"tmpZItr " << tmpZItr << " tmpZItrTwo " << tmpZItrTwo << " tmpZFJAr[tmpZItr][tmpZItrTwo] " << tmpZFJAr[tmpZItr][tmpZItrTwo] << "\n";
                                 }
                             }
                         }
@@ -2054,7 +2064,7 @@ void FullAnalysisInCWithLHE(){
                     if (debug){
                         std::cout << "--------------------------------------------\n";
                         std::cout << "neLep " << neLep << "\n";
-                        for (UInt_t tmpItr; tmpItr < neLep; tmpItr++){
+                        for (UInt_t tmpItr=0; tmpItr < neLep; tmpItr++){
                             std::cout <<"tmpItr " << tmpItr << " Electron_pt[tmpItr] " << Electron_pt[tmpItr] << " Electron_eta[tmpItr] " << Electron_eta[tmpItr] << " Electron_charge[tmpItr] " << Electron_charge[tmpItr] << "\n";
                         }
                     }
@@ -2401,7 +2411,7 @@ void FullAnalysisInCWithLHE(){
                         if (debug){
                             std::cout << "--------------------------------------------\n";
                             std::cout << "neLep " << neLep << "\n";
-                            for (UInt_t tmpItr; tmpItr < neLep; tmpItr++){
+                            for (UInt_t tmpItr=0; tmpItr < neLep; tmpItr++){
                                 std::cout <<"tmpItr " << tmpItr << " Electron_pt[tmpItr] " << Electron_pt[tmpItr] << " Electron_eta[tmpItr] " << Electron_eta[tmpItr] << " Electron_charge[tmpItr] " << Electron_charge[tmpItr] << "\n";
                             }
                         }
