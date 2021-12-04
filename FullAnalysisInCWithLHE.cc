@@ -1434,7 +1434,7 @@ void FullAnalysisInCWithLHE(){
 
                                 HFJGenTree->Fill();
                             }
-                            else {
+                            else if (debugGenPart) {
                                 std::cout <<"H Gen Match failed\n";
                                 std::cout << "evCount " << evCount-1 << " mindROne " << mindROne << "\n";
                                 std::cout << "*nFatJet " << *nFatJet << "\n";
@@ -1558,7 +1558,7 @@ void FullAnalysisInCWithLHE(){
                                 zJetIndOne = zJetIndOneSecondPlace;
                                 mindROne = mindROneSecondPlace;
                                 ZFJSameJetCtr += 1;
-                                std::cout << "evCount " << evCount -1 << " zJetIndOne " << zJetIndOne << " zJetIndTwo " << zJetIndTwo << " mindROne " << mindROne << " mindRTwo " << mindRTwo << "\n";
+                                if (debugGenPart) std::cout << "evCount " << evCount -1 << " zJetIndOne " << zJetIndOne << " zJetIndTwo " << zJetIndTwo << " mindROne " << mindROne << " mindRTwo " << mindRTwo << "\n";
                             }
 
 
