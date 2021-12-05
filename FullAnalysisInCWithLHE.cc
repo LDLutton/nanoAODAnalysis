@@ -390,17 +390,19 @@ void FullAnalysisInCWithLHE(){
 
     float JOne_pt_FromLHERawL;
     float JOne_eta_FromLHERawL;
+    float JOne_phi_FromLHERawL;
     float JOne_pdgId_FromLHERawL;
 
     float JTwo_pt_FromLHERawL;
     float JTwo_eta_FromLHERawL;
+    float JTwo_phi_FromLHERawL;
     float JTwo_pdgId_FromLHERawL;
 
     float JOne_invmass_FromLHERawL;
     float JTwo_invmass_FromLHERawL;
 
-    float tmpJOnePhi_FromLHERawL;
-    float tmpJTwoPhi_FromLHERawL;
+    
+    
 
     float JPair_invmass_FromLHERawL;
     float J_etasep_FromLHERawL;
@@ -429,17 +431,17 @@ void FullAnalysisInCWithLHE(){
 
     RawTree->Branch("JOne_pt_FromLHERawL",&JOne_pt_FromLHERawL,"JOne_pt_FromLHERawL/F");
     RawTree->Branch("JOne_eta_FromLHERawL",&JOne_eta_FromLHERawL,"JOne_eta_FromLHERawL/F");
+    RawTree->Branch("JOne_phi_FromLHERawL",&JOne_phi_FromLHERawL,"JOne_phi_FromLHERawL/F");
+    RawTree->Branch("JOne_invmass_FromLHERawL",&JOne_invmass_FromLHERawL,"JOne_invmass_FromLHERawL/F");
     RawTree->Branch("JOne_pdgId_FromLHERawL",&JOne_pdgId_FromLHERawL,"JOne_pdgId_FromLHERawL/F");
 
     RawTree->Branch("JTwo_pt_FromLHERawL",&JTwo_pt_FromLHERawL,"JTwo_pt_FromLHERawL/F");
     RawTree->Branch("JTwo_eta_FromLHERawL",&JTwo_eta_FromLHERawL,"JTwo_eta_FromLHERawL/F");
+    RawTree->Branch("JTwo_phi_FromLHERawL",&JTwo_phi_FromLHERawL,"JTwo_phi_FromLHERawL/F");
+    RawTree->Branch("JTwo_invmass_FromLHERawL",&JTwo_invmass_FromLHERawL,"JTwo_invmass_FromLHERawL/F");
     RawTree->Branch("JTwo_pdgId_FromLHERawL",&JTwo_pdgId_FromLHERawL,"JTwo_pdgId_FromLHERawL/F");
 
-    RawTree->Branch("JOne_invmass_FromLHERawL",&JOne_invmass_FromLHERawL,"JOne_invmass_FromLHERawL/F");
-    RawTree->Branch("JTwo_invmass_FromLHERawL",&JTwo_invmass_FromLHERawL,"JTwo_invmass_FromLHERawL/F");
-
-    RawTree->Branch("tmpJOnePhi_FromLHERawL",&tmpJOnePhi_FromLHERawL,"tmpJOnePhi_FromLHERawL/F");
-    RawTree->Branch("tmpJTwoPhi_FromLHERawL",&tmpJTwoPhi_FromLHERawL,"tmpJTwoPhi_FromLHERawL/F");
+    
 
     RawTree->Branch("JPair_invmass_FromLHERawL",&JPair_invmass_FromLHERawL,"JPair_invmass_FromLHERawL/F");
     RawTree->Branch("J_etasep_FromLHERawL",&J_etasep_FromLHERawL,"J_etasep_FromLHERawL/F");
@@ -802,18 +804,16 @@ void FullAnalysisInCWithLHE(){
 
     float JOne_pt_FromLHESelectedL;
     float JOne_eta_FromLHESelectedL;
+    float JOne_phi_FromLHESelectedL;
+    float JOne_invmass_FromLHESelectedL;
     float JOne_pdgId_FromLHESelectedL;
 
     float JTwo_pt_FromLHESelectedL;
     float JTwo_eta_FromLHESelectedL;
-    float JTwo_pdgId_FromLHESelectedL;
-
-    float JOne_invmass_FromLHESelectedL;
+    float JTwo_phi_FromLHESelectedL;
     float JTwo_invmass_FromLHESelectedL;
-
-    float tmpJOnePhi_FromLHESelectedL;
-
-    float tmpJTwoPhi_FromLHESelectedL;
+    float JTwo_pdgId_FromLHESelectedL;
+    
     float JPair_invmass_FromLHESelectedL;
 
     float J_etasep_FromLHESelectedL;
@@ -842,17 +842,16 @@ void FullAnalysisInCWithLHE(){
 
     SelectedTree->Branch("JOne_pt_FromLHESelectedL",&JOne_pt_FromLHESelectedL,"JOne_pt_FromLHESelectedL/F");
     SelectedTree->Branch("JOne_eta_FromLHESelectedL",&JOne_eta_FromLHESelectedL,"JOne_eta_FromLHESelectedL/F");
+    SelectedTree->Branch("JOne_phi_FromLHESelectedL",&JOne_phi_FromLHESelectedL,"JOne_phi_FromLHESelectedL/F");
+    SelectedTree->Branch("JOne_invmass_FromLHESelectedL",&JOne_invmass_FromLHESelectedL,"JOne_invmass_FromLHESelectedL/F");
     SelectedTree->Branch("JOne_pdgId_FromLHESelectedL",&JOne_pdgId_FromLHESelectedL,"JOne_pdgId_FromLHESelectedL/F");
 
     SelectedTree->Branch("JTwo_pt_FromLHESelectedL",&JTwo_pt_FromLHESelectedL,"JTwo_pt_FromLHESelectedL/F");
     SelectedTree->Branch("JTwo_eta_FromLHESelectedL",&JTwo_eta_FromLHESelectedL,"JTwo_eta_FromLHESelectedL/F");
+    SelectedTree->Branch("JTwo_phi_FromLHESelectedL",&JTwo_phi_FromLHESelectedL,"JTwo_phi_FromLHESelectedL/F");
+    SelectedTree->Branch("JTwo_invmass_FromLHESelectedL",&JTwo_invmass_FromLHESelectedL,"JTwo_invmass_FromLHESelectedL/F");
     SelectedTree->Branch("JTwo_pdgId_FromLHESelectedL",&JTwo_pdgId_FromLHESelectedL,"JTwo_pdgId_FromLHESelectedL/F");
 
-    SelectedTree->Branch("JOne_invmass_FromLHESelectedL",&JOne_invmass_FromLHESelectedL,"JOne_invmass_FromLHESelectedL/F");
-    SelectedTree->Branch("JTwo_invmass_FromLHESelectedL",&JTwo_invmass_FromLHESelectedL,"JTwo_invmass_FromLHESelectedL/F");
-
-    SelectedTree->Branch("tmpJOnePhi_FromLHESelectedL",&tmpJOnePhi_FromLHESelectedL,"tmpJOnePhi_FromLHESelectedL/F");
-    SelectedTree->Branch("tmpJTwoPhi_FromLHESelectedL",&tmpJTwoPhi_FromLHESelectedL,"tmpJTwoPhi_FromLHESelectedL/F");
 
     SelectedTree->Branch("JPair_invmass_FromLHESelectedL",&JPair_invmass_FromLHESelectedL,"JPair_invmass_FromLHESelectedL/F");
     SelectedTree->Branch("J_etasep_FromLHESelectedL",&J_etasep_FromLHESelectedL,"J_etasep_FromLHESelectedL/F");
@@ -1027,8 +1026,8 @@ void FullAnalysisInCWithLHE(){
         float JOne_invmass_FromLHERaw;
         float JTwo_invmass_FromLHERaw;
 
-        float tmpJOnePhi_FromLHERaw;
-        float tmpJTwoPhi_FromLHERaw;
+        float JOne_phi_FromLHERaw;
+        float JTwo_phi_FromLHERaw;
 
         float JPair_invmass_FromLHERaw;
         float J_etasep_FromLHERaw;
@@ -1218,8 +1217,8 @@ void FullAnalysisInCWithLHE(){
                         JOne_invmass_FromLHERaw = LHEPart_mass[tmpJAr[0]];
                         JTwo_invmass_FromLHERaw = LHEPart_mass[tmpJAr[1]];
 
-                        tmpJOnePhi_FromLHERaw = LHEPart_phi[tmpJAr[0]];
-                        tmpJTwoPhi_FromLHERaw = LHEPart_phi[tmpJAr[1]];
+                        JOne_phi_FromLHERaw = LHEPart_phi[tmpJAr[0]];
+                        JTwo_phi_FromLHERaw = LHEPart_phi[tmpJAr[1]];
                     }
                     else{
                         JOne_pt_FromLHERaw = tmpLHEPartPtTwo;
@@ -1233,13 +1232,13 @@ void FullAnalysisInCWithLHE(){
                         JOne_invmass_FromLHERaw = LHEPart_mass[tmpJAr[1]];
                         JTwo_invmass_FromLHERaw = LHEPart_mass[tmpJAr[0]];
 
-                        tmpJOnePhi_FromLHERaw = LHEPart_phi[tmpJAr[1]];
-                        tmpJTwoPhi_FromLHERaw = LHEPart_phi[tmpJAr[0]];
+                        JOne_phi_FromLHERaw = LHEPart_phi[tmpJAr[1]];
+                        JTwo_phi_FromLHERaw = LHEPart_phi[tmpJAr[0]];
 
                     }
 
-                    ROOT::Math::PtEtaPhiMVector tmpJOneVec = ROOT::Math::PtEtaPhiMVector(JOne_pt_FromLHERaw, JOne_eta_FromLHERaw, tmpJOnePhi_FromLHERaw, JOne_invmass_FromLHERaw);
-                    ROOT::Math::PtEtaPhiMVector tmpJTwoVec = ROOT::Math::PtEtaPhiMVector(JTwo_pt_FromLHERaw, JTwo_eta_FromLHERaw, tmpJTwoPhi_FromLHERaw, JTwo_invmass_FromLHERaw);
+                    ROOT::Math::PtEtaPhiMVector tmpJOneVec = ROOT::Math::PtEtaPhiMVector(JOne_pt_FromLHERaw, JOne_eta_FromLHERaw, JOne_phi_FromLHERaw, JOne_invmass_FromLHERaw);
+                    ROOT::Math::PtEtaPhiMVector tmpJTwoVec = ROOT::Math::PtEtaPhiMVector(JTwo_pt_FromLHERaw, JTwo_eta_FromLHERaw, JTwo_phi_FromLHERaw, JTwo_invmass_FromLHERaw);
                     ROOT::Math::PtEtaPhiMVector tmpJPairVec = tmpJOneVec + tmpJTwoVec;
                     JPair_invmass_FromLHERaw = tmpJPairVec.M();
 
@@ -1276,9 +1275,9 @@ void FullAnalysisInCWithLHE(){
                     JOne_invmass_FromLHERawL = JOne_invmass_FromLHERaw;
                     JTwo_invmass_FromLHERawL = JTwo_invmass_FromLHERaw;
 
-                    tmpJOnePhi_FromLHERawL = tmpJOnePhi_FromLHERaw;
+                    JOne_phi_FromLHERawL = JOne_phi_FromLHERaw;
 
-                    tmpJTwoPhi_FromLHERawL = tmpJTwoPhi_FromLHERaw;
+                    JTwo_phi_FromLHERawL = JTwo_phi_FromLHERaw;
                     JPair_invmass_FromLHERawL = JPair_invmass_FromLHERaw;
 
                     J_etasep_FromLHERawL = J_etasep_FromLHERaw;
@@ -1455,7 +1454,7 @@ void FullAnalysisInCWithLHE(){
                     }
                     */
                     if (tmpZFJAr.size() >= 3){
-                        if (evCount -1 == 407) std::cout << "yes\n";
+                        //if (evCount -1 == 407) std::cout << "yes\n";
                         for (UInt_t tmpZItr=0;tmpZItr<tmpZFJAr.size();tmpZItr++){
                             //if (evCount -1 == 407) std::cout << "yes\n";
                             if (std::count(tmpZFJAr[tmpZItr].begin(), tmpZFJAr[tmpZItr].end(), JOne_pdgId_FromLHERaw)){
@@ -2723,9 +2722,9 @@ void FullAnalysisInCWithLHE(){
                         JOne_invmass_FromLHESelectedL = JOne_invmass_FromLHERaw;
                         JTwo_invmass_FromLHESelectedL = JTwo_invmass_FromLHERaw;
 
-                        tmpJOnePhi_FromLHESelectedL = tmpJOnePhi_FromLHERaw;
+                        JOne_phi_FromLHESelectedL = JOne_phi_FromLHERaw;
 
-                        tmpJTwoPhi_FromLHESelectedL = tmpJTwoPhi_FromLHERaw;
+                        JTwo_phi_FromLHESelectedL = JTwo_phi_FromLHERaw;
                         JPair_invmass_FromLHESelectedL = JPair_invmass_FromLHERaw;
 
                         J_etasep_FromLHESelectedL = J_etasep_FromLHERaw;
