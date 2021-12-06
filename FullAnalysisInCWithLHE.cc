@@ -276,6 +276,8 @@ void FullAnalysisInCWithLHE(){
     float HFJ_eta_FromGenMatchL;
     float HFJ_phi_FromGenMatchL;
     float HFJ_mass_FromGenMatchL;
+    float HFJ_dRFromFJ_FromGenMatchL;
+
 
 
     TTree *HFJGenTree = new TTree("HFJGenTree", "HFJGenTree");
@@ -284,6 +286,7 @@ void FullAnalysisInCWithLHE(){
     HFJGenTree->Branch("HFJ_eta_FromGenMatchL",&HFJ_eta_FromGenMatchL,"HFJ_eta_FromGenMatchL/F");
     HFJGenTree->Branch("HFJ_phi_FromGenMatchL",&HFJ_phi_FromGenMatchL,"HFJ_phi_FromGenMatchL/F");
     HFJGenTree->Branch("HFJ_mass_FromGenMatchL",&HFJ_mass_FromGenMatchL,"HFJ_mass_FromGenMatchL/F");
+    HFJGenTree->Branch("HFJ_dRFromFJ_FromGenMatchL",&HFJ_dRFromFJ_FromGenMatchL,"HFJ_dRFromFJ_FromGenMatchL/F");
 
 
     UInt_t ZFJSameJetCtr = 0;
@@ -292,12 +295,14 @@ void FullAnalysisInCWithLHE(){
     float ZFJLead_eta_FromGenMatchL;
     float ZFJLead_phi_FromGenMatchL;
     float ZFJLead_mass_FromGenMatchL;
+    float ZFJLead_dRFromFJ_FromGenMatchL;
     
 
     float ZFJTrailing_pt_FromGenMatchL;
     float ZFJTrailing_eta_FromGenMatchL;
     float ZFJTrailing_phi_FromGenMatchL;
     float ZFJTrailing_mass_FromGenMatchL;
+    float ZFJTrailing_dRFromFJ_FromGenMatchL;
 
     float ZFJPair_InvMass_FromGenMatchL;
     float ZFJPair_EtaSep_FromGenMatchL;
@@ -308,11 +313,13 @@ void FullAnalysisInCWithLHE(){
     ZFJGenTree->Branch("ZFJLead_eta_FromGenMatchL",&ZFJLead_eta_FromGenMatchL,"ZFJLead_eta_FromGenMatchL/F");
     ZFJGenTree->Branch("ZFJLead_phi_FromGenMatchL",&ZFJLead_phi_FromGenMatchL,"ZFJLead_phi_FromGenMatchL/F");
     ZFJGenTree->Branch("ZFJLead_mass_FromGenMatchL",&ZFJLead_mass_FromGenMatchL,"ZFJLead_mass_FromGenMatchL/F");
+    ZFJGenTree->Branch("ZFJLead_dRFromFJ_FromGenMatchL",&ZFJLead_dRFromFJ_FromGenMatchL,"ZFJLead_dRFromFJ_FromGenMatchL/F");
 
     ZFJGenTree->Branch("ZFJTrailing_pt_FromGenMatchL",&ZFJTrailing_pt_FromGenMatchL,"ZFJTrailing_pt_FromGenMatchL/F");
     ZFJGenTree->Branch("ZFJTrailing_eta_FromGenMatchL",&ZFJTrailing_eta_FromGenMatchL,"ZFJTrailing_eta_FromGenMatchL/F");
     ZFJGenTree->Branch("ZFJTrailing_phi_FromGenMatchL",&ZFJTrailing_phi_FromGenMatchL,"ZFJTrailing_phi_FromGenMatchL/F");
     ZFJGenTree->Branch("ZFJTrailing_mass_FromGenMatchL",&ZFJTrailing_mass_FromGenMatchL,"ZFJTrailing_mass_FromGenMatchL/F");
+    ZFJGenTree->Branch("ZFJTrailing_dRFromFJ_FromGenMatchL",&ZFJTrailing_dRFromFJ_FromGenMatchL,"ZFJTrailing_dRFromFJ_FromGenMatchL/F");
 
     ZFJGenTree->Branch("ZFJPair_InvMass_FromGenMatchL",&ZFJPair_InvMass_FromGenMatchL,"ZFJPair_InvMass_FromGenMatchL/F");
     ZFJGenTree->Branch("ZFJPair_EtaSep_FromGenMatchL",&ZFJPair_EtaSep_FromGenMatchL,"ZFJPair_EtaSep_FromGenMatchL/F");
@@ -336,12 +343,14 @@ void FullAnalysisInCWithLHE(){
     float ZJLead_eta_FromGenMatchL;
     float ZJLead_phi_FromGenMatchL;
     float ZJLead_mass_FromGenMatchL;
+    float ZJLead_dRFromJ_FromGenMatchL;
     
 
     float ZJTrailing_pt_FromGenMatchL;
     float ZJTrailing_eta_FromGenMatchL;
     float ZJTrailing_phi_FromGenMatchL;
     float ZJTrailing_mass_FromGenMatchL;
+    float ZJTrailing_dRFromJ_FromGenMatchL;
 
     float ZJPair_InvMass_FromGenMatchL;
     float ZJPair_EtaSep_FromGenMatchL;
@@ -352,11 +361,13 @@ void FullAnalysisInCWithLHE(){
     ZJGenTree->Branch("ZJLead_eta_FromGenMatchL",&ZJLead_eta_FromGenMatchL,"ZJLead_eta_FromGenMatchL/F");
     ZJGenTree->Branch("ZJLead_phi_FromGenMatchL",&ZJLead_phi_FromGenMatchL,"ZJLead_phi_FromGenMatchL/F");
     ZJGenTree->Branch("ZJLead_mass_FromGenMatchL",&ZJLead_mass_FromGenMatchL,"ZJLead_mass_FromGenMatchL/F");
+    ZJGenTree->Branch("ZJLead_dRFromJ_FromGenMatchL",&ZJLead_dRFromJ_FromGenMatchL,"ZJLead_dRFromJ_FromGenMatchL/F");
 
     ZJGenTree->Branch("ZJTrailing_pt_FromGenMatchL",&ZJTrailing_pt_FromGenMatchL,"ZJTrailing_pt_FromGenMatchL/F");
     ZJGenTree->Branch("ZJTrailing_eta_FromGenMatchL",&ZJTrailing_eta_FromGenMatchL,"ZJTrailing_eta_FromGenMatchL/F");
     ZJGenTree->Branch("ZJTrailing_phi_FromGenMatchL",&ZJTrailing_phi_FromGenMatchL,"ZJTrailing_phi_FromGenMatchL/F");
     ZJGenTree->Branch("ZJTrailing_mass_FromGenMatchL",&ZJTrailing_mass_FromGenMatchL,"ZJTrailing_mass_FromGenMatchL/F");
+    ZJGenTree->Branch("ZJTrailing_dRFromJ_FromGenMatchL",&ZJTrailing_dRFromJ_FromGenMatchL,"ZJTrailing_dRFromJ_FromGenMatchL/F");
 
     ZJGenTree->Branch("ZJPair_InvMass_FromGenMatchL",&ZJPair_InvMass_FromGenMatchL,"ZJPair_InvMass_FromGenMatchL/F");
     ZJGenTree->Branch("ZJPair_EtaSep_FromGenMatchL",&ZJPair_EtaSep_FromGenMatchL,"ZJPair_EtaSep_FromGenMatchL/F");
@@ -395,27 +406,33 @@ void FullAnalysisInCWithLHE(){
 
     float ZPairPlusH_InvMass_FromGenRawL;
 
-    TTree *RawGenTree = new TTree("RawGenTree", "RawGenTree");
+    TTree *GenRawTree = new TTree("GenRawTree", "GenRawTree");
 
-    RawGenTree->Branch("ZOne_pt_FromGenRawL",&ZOne_pt_FromGenRawL,"ZOne_pt_FromGenRawL/F");
-    RawGenTree->Branch("ZOne_eta_FromGenRawL",&ZOne_eta_FromGenRawL,"ZOne_eta_FromGenRawL/F");
-    RawGenTree->Branch("ZOne_phi_FromGenRawL",&ZOne_phi_FromGenRawL,"ZOne_phi_FromGenRawL/F");
-    RawGenTree->Branch("ZOne_mass_FromGenRawL",&ZOne_mass_FromGenRawL,"ZOne_mass_FromGenRawL/F");
+    GenRawTree->Branch("ZOne_pt_FromGenRawL",&ZOne_pt_FromGenRawL,"ZOne_pt_FromGenRawL/F");
+    GenRawTree->Branch("ZOne_eta_FromGenRawL",&ZOne_eta_FromGenRawL,"ZOne_eta_FromGenRawL/F");
+    GenRawTree->Branch("ZOne_phi_FromGenRawL",&ZOne_phi_FromGenRawL,"ZOne_phi_FromGenRawL/F");
+    GenRawTree->Branch("ZOne_mass_FromGenRawL",&ZOne_mass_FromGenRawL,"ZOne_mass_FromGenRawL/F");
+    GenRawTree->Branch("ZOne_pdgId_FromGenRawL",&ZOne_pdgId_FromGenRawL,"ZOne_pdgId_FromGenRawL/F");
+    GenRawTree->Branch("ZOne_genPartIdxMother_FromGenRawL",&ZOne_genPartIdxMother_FromGenRawL,"ZOne_genPartIdxMother_FromGenRawL/F");
 
-    RawGenTree->Branch("ZTwo_pt_FromGenRawL",&ZTwo_pt_FromGenRawL,"ZTwo_pt_FromGenRawL/F");
-    RawGenTree->Branch("ZTwo_eta_FromGenRawL",&ZTwo_eta_FromGenRawL,"ZTwo_eta_FromGenRawL/F");
-    RawGenTree->Branch("ZTwo_phi_FromGenRawL",&ZTwo_phi_FromGenRawL,"ZTwo_phi_FromGenRawL/F");
-    RawGenTree->Branch("ZTwo_mass_FromGenRawL",&ZTwo_mass_FromGenRawL,"ZTwo_mass_FromGenRawL/F");
+    GenRawTree->Branch("ZTwo_pt_FromGenRawL",&ZTwo_pt_FromGenRawL,"ZTwo_pt_FromGenRawL/F");
+    GenRawTree->Branch("ZTwo_eta_FromGenRawL",&ZTwo_eta_FromGenRawL,"ZTwo_eta_FromGenRawL/F");
+    GenRawTree->Branch("ZTwo_phi_FromGenRawL",&ZTwo_phi_FromGenRawL,"ZTwo_phi_FromGenRawL/F");
+    GenRawTree->Branch("ZTwo_mass_FromGenRawL",&ZTwo_mass_FromGenRawL,"ZTwo_mass_FromGenRawL/F");
+    GenRawTree->Branch("ZTwo_pdgId_FromGenRawL",&ZTwo_pdgId_FromGenRawL,"ZTwo_pdgId_FromGenRawL/F");
+    GenRawTree->Branch("ZTwo_genPartIdxMother_FromGenRawL",&ZTwo_genPartIdxMother_FromGenRawL,"ZTwo_genPartIdxMother_FromGenRawL/F");
 
-    RawGenTree->Branch("ZPair_InvMass_FromGenRawL",&ZPair_InvMass_FromGenRawL,"ZPair_InvMass_FromGenRawL/F");
-    RawGenTree->Branch("ZPair_EtaSep_FromGenRawL",&ZPair_EtaSep_FromGenRawL,"ZPair_EtaSep_FromGenRawL/F");
+    GenRawTree->Branch("ZPair_InvMass_FromGenRawL",&ZPair_InvMass_FromGenRawL,"ZPair_InvMass_FromGenRawL/F");
+    GenRawTree->Branch("ZPair_EtaSep_FromGenRawL",&ZPair_EtaSep_FromGenRawL,"ZPair_EtaSep_FromGenRawL/F");
 
-    RawGenTree->Branch("H_pt_FromGenRawL",&H_pt_FromGenRawL,"H_pt_FromGenRawL/F");
-    RawGenTree->Branch("H_eta_FromGenRawL",&H_eta_FromGenRawL,"H_eta_FromGenRawL/F");
-    RawGenTree->Branch("H_phi_FromGenRawL",&H_phi_FromGenRawL,"H_phi_FromGenRawL/F");
-    RawGenTree->Branch("H_mass_FromGenRawL",&H_mass_FromGenRawL,"H_mass_FromGenRawL/F");
+    GenRawTree->Branch("H_pt_FromGenRawL",&H_pt_FromGenRawL,"H_pt_FromGenRawL/F");
+    GenRawTree->Branch("H_eta_FromGenRawL",&H_eta_FromGenRawL,"H_eta_FromGenRawL/F");
+    GenRawTree->Branch("H_phi_FromGenRawL",&H_phi_FromGenRawL,"H_phi_FromGenRawL/F");
+    GenRawTree->Branch("H_mass_FromGenRawL",&H_mass_FromGenRawL,"H_mass_FromGenRawL/F");
+    GenRawTree->Branch("H_pdgId_FromGenRawL",&H_pdgId_FromGenRawL,"H_pdgId_FromGenRawL/F");
+    GenRawTree->Branch("H_genPartIdxMother_FromGenRawL",&H_genPartIdxMother_FromGenRawL,"H_genPartIdxMother_FromGenRawL/F");
 
-    RawGenTree->Branch("ZPairPlusH_InvMass_FromGenRawL",&ZPairPlusH_InvMass_FromGenRawL,"ZPairPlusH_InvMass_FromGenRawL/F");
+    GenRawTree->Branch("ZPairPlusH_InvMass_FromGenRawL",&ZPairPlusH_InvMass_FromGenRawL,"ZPairPlusH_InvMass_FromGenRawL/F");
 
 
 
@@ -1453,6 +1470,7 @@ void FullAnalysisInCWithLHE(){
                     float HFJ_eta_FromGenMatch;
                     float HFJ_phi_FromGenMatch;
                     float HFJ_mass_FromGenMatch;
+                    float HFJ_dRFromFJ_FromGenMatch;
                     
                     if (finalHAr.size() != 1) {
                         std::cout <<"ERROR ERROR, MORE OR LESS THAN ONE H,evCount,JOne_pdgId_FromLHERaw,JTwo_pdgId_FromLHERaw " << evCount<< " " <<JOne_pdgId_FromLHERaw<< " " <<JTwo_pdgId_FromLHERaw << "\n";
@@ -1502,11 +1520,14 @@ void FullAnalysisInCWithLHE(){
                                 HFJ_eta_FromGenMatch = FatJet_eta[hJetInd];
                                 HFJ_phi_FromGenMatch = FatJet_phi[hJetInd];
                                 HFJ_mass_FromGenMatch = FatJet_mass[hJetInd];
+                                HFJ_dRFromFJ_FromGenMatch = mindROne;
+
 
                                 HFJ_pt_FromGenMatchL = HFJ_pt_FromGenMatch;
                                 HFJ_eta_FromGenMatchL = HFJ_eta_FromGenMatch;
                                 HFJ_phi_FromGenMatchL = HFJ_phi_FromGenMatch;
                                 HFJ_mass_FromGenMatchL = HFJ_mass_FromGenMatch;
+                                HFJ_dRFromFJ_FromGenMatchL = HFJ_dRFromFJ_FromGenMatch;
                                 
 
                                 HFJGenTree->Fill();
@@ -1634,6 +1655,9 @@ void FullAnalysisInCWithLHE(){
                         if (useFJGenMatchTree){
                             if (debugGenPart) {
                                 std::cout <<"entering FJ Z gen matching loop\n";
+                                std::cout << "*nFatJet " << *nFatJet <<  " hJetFound " << hJetFound;
+                                if (hJetFound) std::cout <<" hJetInd " << hJetInd << "\n";
+                                else std::cout << "\n";
                             }
 
                             for (UInt_t fatJetInd=0;fatJetInd<*nFatJet;fatJetInd++){
@@ -1651,7 +1675,7 @@ void FullAnalysisInCWithLHE(){
                                     zJetIndOne = fatJetInd;
                                     /*
                                     if (evCount -1 == 0){
-                                        std::cout << "mindROneSecondPlace " << mindROneSecondPlace << "mindROne " << mindROne << "zJetIndOneSecondPlace " << zJetIndOneSecondPlace << "zJetIndOne " << zJetIndOne << "useSecondPlace " << useSecondPlace << "\n";
+                                        std::cout << "mindROneSecondPlace " << mindROneSecondPlace << " mindROne " << mindROne << " zJetIndOneSecondPlace " << zJetIndOneSecondPlace << " zJetIndOne " << zJetIndOne << " useSecondPlace " << useSecondPlace << "\n";
                                     }
                                     */
                                 }
@@ -1662,6 +1686,7 @@ void FullAnalysisInCWithLHE(){
                             }
                             */
                             for (UInt_t fatJetInd=0;fatJetInd<*nFatJet;fatJetInd++){
+                                if (hJetFound && fatJetInd == hJetInd) continue;
                                 float tmpMindRTwo = calcDeltaR(FatJet_phi[fatJetInd],FatJet_eta[fatJetInd],GenPart_phi[finalZAr[1]],GenPart_eta[finalZAr[1]]);
                                 /*
                                 if (evCount -1 == 0){
@@ -1729,22 +1754,27 @@ void FullAnalysisInCWithLHE(){
                                 float ZFJLead_eta_FromGenMatch = FatJet_eta[tmpLeadInd];
                                 float ZFJLead_phi_FromGenMatch = FatJet_phi[tmpLeadInd];
                                 float ZFJLead_mass_FromGenMatch = FatJet_mass[tmpLeadInd];
+                                float ZFJLead_dRFromFJ_FromGenMatch = mindROne;
 
                                 float ZFJTrailing_pt_FromGenMatch = FatJet_pt[tmpTrailingInd];
                                 float ZFJTrailing_eta_FromGenMatch = FatJet_eta[tmpTrailingInd];
                                 float ZFJTrailing_phi_FromGenMatch = FatJet_phi[tmpTrailingInd];
                                 float ZFJTrailing_mass_FromGenMatch = FatJet_mass[tmpTrailingInd];
+                                float ZFJTrailing_dRFromFJ_FromGenMatch = mindRTwo;
 
                                 ZFJLead_pt_FromGenMatchL = ZFJLead_pt_FromGenMatch;
                                 ZFJLead_eta_FromGenMatchL = ZFJLead_eta_FromGenMatch;
                                 ZFJLead_phi_FromGenMatchL = ZFJLead_phi_FromGenMatch;
                                 ZFJLead_mass_FromGenMatchL = ZFJLead_mass_FromGenMatch;
+                                ZFJLead_dRFromFJ_FromGenMatchL = ZFJLead_dRFromFJ_FromGenMatch;
                                 
 
                                 ZFJTrailing_pt_FromGenMatchL = ZFJTrailing_pt_FromGenMatch;
                                 ZFJTrailing_eta_FromGenMatchL = ZFJTrailing_eta_FromGenMatch;
                                 ZFJTrailing_phi_FromGenMatchL = ZFJTrailing_phi_FromGenMatch;
                                 ZFJTrailing_mass_FromGenMatchL = ZFJTrailing_mass_FromGenMatch;
+                                ZFJTrailing_dRFromFJ_FromGenMatchL = ZFJTrailing_dRFromFJ_FromGenMatch;
+
 
                                 ROOT::Math::PtEtaPhiMVector tmpZFJLeadVec  = ROOT::Math::PtEtaPhiMVector(ZFJLead_pt_FromGenMatch,ZFJLead_eta_FromGenMatch,ZFJLead_phi_FromGenMatch,ZFJLead_mass_FromGenMatch);
 
@@ -1834,22 +1864,26 @@ void FullAnalysisInCWithLHE(){
                                 float ZJLead_eta_FromGenMatch = Jet_eta[tmpLeadInd];
                                 float ZJLead_phi_FromGenMatch = Jet_phi[tmpLeadInd];
                                 float ZJLead_mass_FromGenMatch = Jet_mass[tmpLeadInd];
+                                float ZJLead_dRFromJ_FromGenMatch = mindROne;
 
                                 float ZJTrailing_pt_FromGenMatch = Jet_pt[tmpTrailingInd];
                                 float ZJTrailing_eta_FromGenMatch = Jet_eta[tmpTrailingInd];
                                 float ZJTrailing_phi_FromGenMatch = Jet_phi[tmpTrailingInd];
                                 float ZJTrailing_mass_FromGenMatch = Jet_mass[tmpTrailingInd];
+                                float ZJTrailing_dRFromJ_FromGenMatch = mindRTwo;
 
                                 ZJLead_pt_FromGenMatchL = ZJLead_pt_FromGenMatch;
                                 ZJLead_eta_FromGenMatchL = ZJLead_eta_FromGenMatch;
                                 ZJLead_phi_FromGenMatchL = ZJLead_phi_FromGenMatch;
                                 ZJLead_mass_FromGenMatchL = ZJLead_mass_FromGenMatch;
+                                ZJLead_dRFromJ_FromGenMatchL = ZJLead_dRFromJ_FromGenMatch;
                                 
 
                                 ZJTrailing_pt_FromGenMatchL = ZJTrailing_pt_FromGenMatch;
                                 ZJTrailing_eta_FromGenMatchL = ZJTrailing_eta_FromGenMatch;
                                 ZJTrailing_phi_FromGenMatchL = ZJTrailing_phi_FromGenMatch;
                                 ZJTrailing_mass_FromGenMatchL = ZJTrailing_mass_FromGenMatch;
+                                ZJTrailing_dRFromJ_FromGenMatchL = ZJTrailing_dRFromJ_FromGenMatch;
 
                                 ROOT::Math::PtEtaPhiMVector tmpZJLeadVec  = ROOT::Math::PtEtaPhiMVector(ZJLead_pt_FromGenMatch,ZJLead_eta_FromGenMatch,ZJLead_phi_FromGenMatch,ZJLead_mass_FromGenMatch);
 
@@ -1914,7 +1948,7 @@ void FullAnalysisInCWithLHE(){
 
                             ZPairPlusH_InvMass_FromGenRawL = ZPairPlusH_InvMass_FromGenRaw;
 
-                            RawGenTree->Fill();
+                            GenRawTree->Fill();
                             
 
                         }
@@ -3156,7 +3190,7 @@ void FullAnalysisInCWithLHE(){
             ZHJGenTree->Write("",TObject::kOverwrite);
         }
         if (useJGenMatchTree || useFJGenMatchTree) {
-            RawGenTree->Write("",TObject::kOverwrite);
+            GenRawTree->Write("",TObject::kOverwrite);
         }
 
     }
