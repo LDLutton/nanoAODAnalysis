@@ -363,6 +363,62 @@ void FullAnalysisInCWithLHE(){
 
 
 
+
+
+    //This tree is for gen variables before the cuts
+    //Can only use this on EFT and SM, not background
+
+
+    float ZOne_pt_FromGenRawL;
+    float ZOne_eta_FromGenRawL;
+    float ZOne_phi_FromGenRawL;
+    float ZOne_mass_FromGenRawL;
+    float ZOne_pdgId_FromGenRawL;
+    float ZOne_genPartIdxMother_FromGenRawL;
+
+    float ZTwo_pt_FromGenRawL;
+    float ZTwo_eta_FromGenRawL;
+    float ZTwo_phi_FromGenRawL;
+    float ZTwo_mass_FromGenRawL;
+    float ZTwo_pdgId_FromGenRawL;
+    float ZTwo_genPartIdxMother_FromGenRawL;
+
+    float ZPair_InvMass_FromGenRawL;
+    float ZPair_EtaSep_FromGenRawL;
+
+    float H_pt_FromGenRawL;
+    float H_eta_FromGenRawL;
+    float H_phi_FromGenRawL;
+    float H_mass_FromGenRawL;
+    float H_pdgId_FromGenRawL;
+    float H_genPartIdxMother_FromGenRawL;
+
+    float ZPairPlusH_InvMass_FromGenRawL;
+
+    TTree *RawGenTree = new TTree("RawGenTree", "RawGenTree");
+
+    RawGenTree->Branch("ZOne_pt_FromGenRawL",&ZOne_pt_FromGenRawL,"ZOne_pt_FromGenRawL/F");
+    RawGenTree->Branch("ZOne_eta_FromGenRawL",&ZOne_eta_FromGenRawL,"ZOne_eta_FromGenRawL/F");
+    RawGenTree->Branch("ZOne_phi_FromGenRawL",&ZOne_phi_FromGenRawL,"ZOne_phi_FromGenRawL/F");
+    RawGenTree->Branch("ZOne_mass_FromGenRawL",&ZOne_mass_FromGenRawL,"ZOne_mass_FromGenRawL/F");
+
+    RawGenTree->Branch("ZTwo_pt_FromGenRawL",&ZTwo_pt_FromGenRawL,"ZTwo_pt_FromGenRawL/F");
+    RawGenTree->Branch("ZTwo_eta_FromGenRawL",&ZTwo_eta_FromGenRawL,"ZTwo_eta_FromGenRawL/F");
+    RawGenTree->Branch("ZTwo_phi_FromGenRawL",&ZTwo_phi_FromGenRawL,"ZTwo_phi_FromGenRawL/F");
+    RawGenTree->Branch("ZTwo_mass_FromGenRawL",&ZTwo_mass_FromGenRawL,"ZTwo_mass_FromGenRawL/F");
+
+    RawGenTree->Branch("ZPair_InvMass_FromGenRawL",&ZPair_InvMass_FromGenRawL,"ZPair_InvMass_FromGenRawL/F");
+    RawGenTree->Branch("ZPair_EtaSep_FromGenRawL",&ZPair_EtaSep_FromGenRawL,"ZPair_EtaSep_FromGenRawL/F");
+
+    RawGenTree->Branch("H_pt_FromGenRawL",&H_pt_FromGenRawL,"H_pt_FromGenRawL/F");
+    RawGenTree->Branch("H_eta_FromGenRawL",&H_eta_FromGenRawL,"H_eta_FromGenRawL/F");
+    RawGenTree->Branch("H_phi_FromGenRawL",&H_phi_FromGenRawL,"H_phi_FromGenRawL/F");
+    RawGenTree->Branch("H_mass_FromGenRawL",&H_mass_FromGenRawL,"H_mass_FromGenRawL/F");
+
+    RawGenTree->Branch("ZPairPlusH_InvMass_FromGenRawL",&ZPairPlusH_InvMass_FromGenRawL,"ZPairPlusH_InvMass_FromGenRawL/F");
+
+
+
     //This tree is for variables before the cuts
     //Can only use this on EFT and SM, not background
 
@@ -1381,6 +1437,15 @@ void FullAnalysisInCWithLHE(){
                             if (tmpHItr != intermediaryH) finalHAr.push_back(tmpHFJAr[tmpHItr][0]);
                         }
                     }
+
+                    bool hGenFound = false;
+                    float H_pt_FromGenRaw;
+                    float H_eta_FromGenRaw;
+                    float H_phi_FromGenRaw;
+                    float H_mass_FromGenRaw;
+                    float H_pdgId_FromGenRaw;
+                    float H_genPartIdxMother_FromGenRaw;
+
                     std::vector<Int_t> tmpHDecAr;
                     UInt_t hJetInd;
                     bool hJetFound = false;
@@ -1388,10 +1453,21 @@ void FullAnalysisInCWithLHE(){
                     float HFJ_eta_FromGenMatch;
                     float HFJ_phi_FromGenMatch;
                     float HFJ_mass_FromGenMatch;
+                    
                     if (finalHAr.size() != 1) {
                         std::cout <<"ERROR ERROR, MORE OR LESS THAN ONE H,evCount,JOne_pdgId_FromLHERaw,JTwo_pdgId_FromLHERaw " << evCount<< " " <<JOne_pdgId_FromLHERaw<< " " <<JTwo_pdgId_FromLHERaw << "\n";
                     }
                     else{
+                        Int_t tmpHInd = finalHAr[0];
+                        hGenFound = true;
+                        H_pt_FromGenRaw = GenPart_pt[tmpHInd];
+                        H_eta_FromGenRaw = GenPart_eta[tmpHInd];
+                        H_phi_FromGenRaw = GenPart_phi[tmpHInd];
+                        H_mass_FromGenRaw = GenPart_mass[tmpHInd];
+                        H_pdgId_FromGenRaw = GenPart_pdgId[tmpHInd];
+                        H_genPartIdxMother_FromGenRaw = GenPart_genPartIdxMother[tmpHInd];
+
+
 
                         float mindROne = 1000;
 
@@ -1407,7 +1483,7 @@ void FullAnalysisInCWithLHE(){
                             */
 
                             for (UInt_t fatJetInd=0;fatJetInd<*nFatJet;fatJetInd++){
-                                float tmpMindROne = calcDeltaR(FatJet_phi[fatJetInd],FatJet_eta[fatJetInd],GenPart_phi[finalHAr[0]],GenPart_eta[finalHAr[0]]);
+                                float tmpMindROne = calcDeltaR(FatJet_phi[fatJetInd],FatJet_eta[fatJetInd],GenPart_phi[tmpHInd],GenPart_eta[tmpHInd]);
                                 /*
                                 if (evCount-1 == 29){
                                     std::cout << "fatJetInd " << fatJetInd << " tmpMindROne " << tmpMindROne << " FatJet_phi[fatJetInd] "<<FatJet_phi[fatJetInd] << " FatJet_eta[fatJetInd] " << FatJet_eta[fatJetInd] << "\n";
@@ -1476,6 +1552,30 @@ void FullAnalysisInCWithLHE(){
                             if (tmpZItr != intermediaryZ) finalZAr.push_back(tmpZFJAr[tmpZItr][0]);
                         }
                     }
+
+                    bool zGenFound = false;
+                    float ZOne_pt_FromGenRaw;
+                    float ZOne_eta_FromGenRaw;
+                    float ZOne_phi_FromGenRaw;
+                    float ZOne_mass_FromGenRaw;
+                    float ZOne_pdgId_FromGenRaw;
+                    float ZOne_genPartIdxMother_FromGenRaw;
+                    float ZTwo_pt_FromGenRaw;
+                    float ZTwo_eta_FromGenRaw;
+                    float ZTwo_phi_FromGenRaw;
+                    float ZTwo_mass_FromGenRaw;
+                    float ZTwo_pdgId_FromGenRaw;
+                    float ZTwo_genPartIdxMother_FromGenRaw;
+
+                    float ZPair_InvMass_FromGenRaw;
+                    float ZPair_EtaSep_FromGenRaw;
+                    ROOT::Math::PtEtaPhiMVector ZGenLeadVec;
+
+                    ROOT::Math::PtEtaPhiMVector ZGenTrailingVec;
+
+                    ROOT::Math::PtEtaPhiMVector ZGenPairVec;
+
+
                     std::vector<Int_t> tmpZDecAr;
                     if (finalZAr.size() != 2){
                         std::cout <<"ERROR ERROR, MORE OR LESS THAN TWO Zs,evCount,finalZAr.size(),intermediaryZ,JOne_pdgId_FromLHERaw,JTwo_pdgId_FromLHERaw " << evCount-1<< " " << finalZAr.size() << " " << intermediaryZ << " "<<JOne_pdgId_FromLHERaw<< " " <<JTwo_pdgId_FromLHERaw << "\n";
@@ -1493,6 +1593,33 @@ void FullAnalysisInCWithLHE(){
                         }
                     }
                     else{
+
+
+                        Int_t tmpZOneInd = finalZAr[0];
+                        zGenFound = true;
+                        ZOne_pt_FromGenRaw = GenPart_pt[tmpZOneInd];
+                        ZOne_eta_FromGenRaw = GenPart_eta[tmpZOneInd];
+                        ZOne_phi_FromGenRaw = GenPart_phi[tmpZOneInd];
+                        ZOne_mass_FromGenRaw = GenPart_mass[tmpZOneInd];
+                        ZOne_pdgId_FromGenRaw = GenPart_pdgId[tmpZOneInd];
+                        ZOne_genPartIdxMother_FromGenRaw = GenPart_genPartIdxMother[tmpZOneInd];
+
+                        Int_t tmpZTwoInd = finalZAr[1];
+                        ZTwo_pt_FromGenRaw = GenPart_pt[tmpZTwoInd];
+                        ZTwo_eta_FromGenRaw = GenPart_eta[tmpZTwoInd];
+                        ZTwo_phi_FromGenRaw = GenPart_phi[tmpZTwoInd];
+                        ZTwo_mass_FromGenRaw = GenPart_mass[tmpZTwoInd];
+                        ZTwo_pdgId_FromGenRaw = GenPart_pdgId[tmpZTwoInd];
+                        ZTwo_genPartIdxMother_FromGenRaw = GenPart_genPartIdxMother[tmpZTwoInd];
+
+                        ZGenLeadVec  = ROOT::Math::PtEtaPhiMVector(ZOne_pt_FromGenRaw,ZOne_eta_FromGenRaw,ZOne_phi_FromGenRaw,ZOne_mass_FromGenRaw);
+
+                        ZGenTrailingVec  = ROOT::Math::PtEtaPhiMVector(ZTwo_pt_FromGenRaw,ZTwo_eta_FromGenRaw,ZTwo_phi_FromGenRaw,ZTwo_mass_FromGenRaw);
+
+                        ZGenPairVec = ZGenLeadVec+ZGenTrailingVec;
+
+                        ZPair_InvMass_FromGenRaw = ZGenPairVec.M();
+                        ZPair_EtaSep_FromGenRaw = abs(ZOne_eta_FromGenRaw-ZTwo_eta_FromGenRaw);
 
                         UInt_t zJetIndOne;
                         UInt_t zJetIndOneSecondPlace;
@@ -1746,6 +1873,50 @@ void FullAnalysisInCWithLHE(){
                                     ZHJGenTree->Fill();
                                 }
                             }
+                        }
+
+                        if (hGenFound && zGenFound){
+
+                            ROOT::Math::PtEtaPhiMVector tmpHGenVec  = ROOT::Math::PtEtaPhiMVector(H_pt_FromGenRaw,H_eta_FromGenRaw,H_phi_FromGenRaw,H_mass_FromGenRaw);
+
+
+
+                            ROOT::Math::PtEtaPhiMVector tmpZPairPlusHVec = ZGenPairVec+tmpHGenVec;
+
+                            float ZPairPlusH_InvMass_FromGenRaw = tmpZPairPlusHVec.M();
+
+
+
+
+                            H_pt_FromGenRawL = H_pt_FromGenRaw;
+                            H_eta_FromGenRawL = H_eta_FromGenRaw;
+                            H_phi_FromGenRawL = H_phi_FromGenRaw;
+                            H_mass_FromGenRawL = H_mass_FromGenRaw;
+                            H_pdgId_FromGenRawL = H_pdgId_FromGenRaw;
+                            H_genPartIdxMother_FromGenRawL = H_genPartIdxMother_FromGenRaw;
+
+                            ZOne_pt_FromGenRawL = ZOne_pt_FromGenRaw;
+                            ZOne_eta_FromGenRawL = ZOne_eta_FromGenRaw;
+                            ZOne_phi_FromGenRawL = ZOne_phi_FromGenRaw;
+                            ZOne_mass_FromGenRawL = ZOne_mass_FromGenRaw;
+                            ZOne_pdgId_FromGenRawL = ZOne_pdgId_FromGenRaw;
+                            ZOne_genPartIdxMother_FromGenRawL = ZOne_genPartIdxMother_FromGenRaw;
+
+                            ZTwo_pt_FromGenRawL = ZTwo_pt_FromGenRaw;
+                            ZTwo_eta_FromGenRawL = ZTwo_eta_FromGenRaw;
+                            ZTwo_phi_FromGenRawL = ZTwo_phi_FromGenRaw;
+                            ZTwo_mass_FromGenRawL = ZTwo_mass_FromGenRaw;
+                            ZTwo_pdgId_FromGenRawL = ZTwo_pdgId_FromGenRaw;
+                            ZTwo_genPartIdxMother_FromGenRawL = ZTwo_genPartIdxMother_FromGenRaw;
+
+                            ZPair_InvMass_FromGenRawL = ZPair_InvMass_FromGenRaw;
+                            ZPair_EtaSep_FromGenRawL = ZPair_EtaSep_FromGenRaw;
+
+                            ZPairPlusH_InvMass_FromGenRawL = ZPairPlusH_InvMass_FromGenRaw;
+
+                            RawGenTree->Fill();
+                            
+
                         }
                             
                             
@@ -2983,6 +3154,9 @@ void FullAnalysisInCWithLHE(){
         if (useJGenMatchTree) {
             ZJGenTree->Write("",TObject::kOverwrite);
             ZHJGenTree->Write("",TObject::kOverwrite);
+        }
+        if (useJGenMatchTree || useFJGenMatchTree) {
+            RawGenTree->Write("",TObject::kOverwrite);
         }
 
     }
