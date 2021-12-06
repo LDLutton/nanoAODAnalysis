@@ -1514,7 +1514,7 @@ void FullAnalysisInCWithLHE(){
                             }
                             
 
-                            if (mindROne != 1000){
+                            if (mindROne < genMatchdRCut){ //(mindROne != 1000){
                                 hJetFound = true;
                                 HFJ_pt_FromGenMatch = FatJet_pt[hJetInd];
                                 HFJ_eta_FromGenMatch = FatJet_eta[hJetInd];
@@ -1739,7 +1739,7 @@ void FullAnalysisInCWithLHE(){
                             }
 
 
-                            if (mindROne != 1000 && mindRTwo != 1000 ){
+                            if (mindROne < genMatchdRCut && mindRTwo < genMatchdRCut ){
                                 UInt_t tmpLeadInd;
                                 UInt_t tmpTrailingInd;
                                 if (FatJet_pt[zJetIndOne] > FatJet_pt[zJetIndTwo]){
@@ -1849,7 +1849,7 @@ void FullAnalysisInCWithLHE(){
                             
 
 
-                            if (mindROne != 1000 && mindRTwo != 1000 ){
+                            if (mindROne < genMatchdRCut && mindRTwo < genMatchdRCut ){
                                 UInt_t tmpLeadInd;
                                 UInt_t tmpTrailingInd;
                                 if (Jet_pt[zJetIndOne] > Jet_pt[zJetIndTwo]){

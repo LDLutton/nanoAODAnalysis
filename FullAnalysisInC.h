@@ -290,6 +290,10 @@ HadTree->Branch("FJEtaSepL",&FJEtaSepL,"FJEtaSepL/F");
 
 */
 
+//Gen Jet matching dR cut
+float genMatchdRCut = 0.4;
+
+
 //VBF jet pair selection;
 //Defining jet matching cuts;
 
