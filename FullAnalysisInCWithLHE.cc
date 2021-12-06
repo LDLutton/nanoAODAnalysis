@@ -1619,6 +1619,8 @@ void FullAnalysisInCWithLHE(){
 
                     RawTree->Fill();
 
+                    /*
+
                     if (hbbTag && hadHLT) {
 
                         ZOne_pt_FromTaggedLHERawL = ZOne_pt_FromLHERaw;
@@ -1662,9 +1664,11 @@ void FullAnalysisInCWithLHE(){
                         RawTaggedTree->Fill();
 
                     }
+                    */
 
                 }
                 if (useFJGenMatchTree || useJGenMatchTree) {
+                    bool ZIsHadronic = false;
                     std::vector<std::vector<Int_t>> tmpHFJAr;
                     std::vector<std::vector<Int_t>> tmpZFJAr;
                     //std::vector<Int_t> tmpZFJAr;
@@ -1837,6 +1841,7 @@ void FullAnalysisInCWithLHE(){
                                 
 
                                 HFJGenTree->Fill();
+                                /*
 
                                 if (hbbTag && hadHLT) {
 
@@ -1850,6 +1855,7 @@ void FullAnalysisInCWithLHE(){
                                     HFJGenTaggedTree->Fill();
 
                                 }
+                                */
 
 
                             }
@@ -1864,7 +1870,6 @@ void FullAnalysisInCWithLHE(){
 
 
 
-                    std::vector<Int_t> tmpZFinalAr;
                     Int_t intermediaryZ = -1;
                     /*
                     if (evCount -1 == 407){
@@ -1889,9 +1894,27 @@ void FullAnalysisInCWithLHE(){
                         }
                     }
                     std::vector<Int_t> finalZAr;
+                    std::vector<std::vector<Int_t>> finalZDecAr;
+                    bool ZDecFound = false;
                     if (tmpZFJAr.size()){
                         for (UInt_t tmpZItr=0;tmpZItr<tmpZFJAr.size();tmpZItr++){
-                            if (tmpZItr != intermediaryZ) finalZAr.push_back(tmpZFJAr[tmpZItr][0]);
+                            if (tmpZItr != intermediaryZ){
+                                finalZAr.push_back(tmpZFJAr[tmpZItr][0]);
+                                if (tmpZFJAr[tmpZItr].size() != 3) {
+                                    std::cout << "ERROR ERROR tmpZFJAr INTERNAL VEC SIZE NOT == 3. INSTEAD SIZE == " << tmpZFJAr[tmpZItr].size() << "\n";
+                                    for (UInt_t tmpZDecItr=0;tmpZDecItr<tmpZFJAr[tmpZItr].size();tmpZDecItr++){
+                                        std::cout << tmpZFJAr[tmpZItr][tmpZDecItr] << " ";
+                                    }
+                                    std::cout << "\n";
+                                }
+                                else {
+                                    ZDecFound = true;
+                                    std::vector<Int_t> tmpZDecVec;
+                                    tmpZDecVec.push_back(tmpZFJAr[tmpZItr][1]);
+                                    tmpZDecVec.push_back(tmpZFJAr[tmpZItr][2]);
+                                    finalZDecAr.push_back(tmpZDecVec);
+                                }
+                            }
                         }
                     }
 
@@ -1918,7 +1941,6 @@ void FullAnalysisInCWithLHE(){
                     ROOT::Math::PtEtaPhiMVector ZGenPairVec;
 
 
-                    std::vector<Int_t> tmpZDecAr;
                     if (finalZAr.size() != 2){
                         std::cout <<"ERROR ERROR, MORE OR LESS THAN TWO Zs,evCount,finalZAr.size(),intermediaryZ,JOne_pdgId_FromLHERaw,JTwo_pdgId_FromLHERaw " << evCount-1<< " " << finalZAr.size() << " " << intermediaryZ << " "<<JOne_pdgId_FromLHERaw<< " " <<JTwo_pdgId_FromLHERaw << "\n";
                         if (tmpZFJAr.size()){
@@ -1935,6 +1957,12 @@ void FullAnalysisInCWithLHE(){
                         }
                     }
                     else{
+                        
+                        //std::cout << evCount-1 << " " << finalZAr[0] << " " << finalZAr[1] << "\n";
+                        if (ZDecFound) {
+                            if (debugGenPart) std::cout << "finalZDecAr[0][0] " << finalZDecAr[0][0] << " finalZDecAr[0][1] " << finalZDecAr[0][1] << " finalZDecAr[1][0] " << finalZDecAr[1][0] << " finalZDecAr[1][1] " << finalZDecAr[1][1] << "\n";
+                            ZIsHadronic = (finalZDecAr[0][0]>-9 && finalZDecAr[0][0]<9 && finalZDecAr[0][1]>-9 && finalZDecAr[0][1]<9 && finalZDecAr[1][0]>-9 && finalZDecAr[1][0]<9 && finalZDecAr[1][1]>-9 && finalZDecAr[1][1]<9);
+                        }
 
 
                         Int_t tmpZOneInd = finalZAr[0];
@@ -2056,6 +2084,7 @@ void FullAnalysisInCWithLHE(){
                                 zJetIndOne = zJetIndOneSecondPlace;
                                 mindROne = mindROneSecondPlace;
                                 ZFJSameJetCtr += 1;
+                                if (ZIsHadronic) ZFJSameJetTaggedCtr += 1;
                                 if (debugGenPart) std::cout << "evCount " << evCount -1 << " zJetIndOne " << zJetIndOne << " zJetIndTwo " << zJetIndTwo << " mindROne " << mindROne << " mindRTwo " << mindRTwo << "\n";
                             }
 
@@ -2110,7 +2139,7 @@ void FullAnalysisInCWithLHE(){
                                 ZFJPair_EtaSep_FromGenMatchL = ZFJPair_EtaSep_FromGenMatch;
                                 ZFJGenTree->Fill();
 
-                                if (hbbTag && hadHLT) {
+                                if (ZIsHadronic) {
 
                                     ZFJLead_pt_FromTaggedGenMatchL = ZFJLead_pt_FromGenMatch;
                                     ZFJLead_eta_FromTaggedGenMatchL = ZFJLead_eta_FromGenMatch;
@@ -2141,7 +2170,7 @@ void FullAnalysisInCWithLHE(){
                                     ZHFJ_ZPairPlusHInvMass_FromGenMatchL = tmpHZFJVec.M();
                                     ZHFJGenTree->Fill();
 
-                                    if (hbbTag && hadHLT) {
+                                    if (ZIsHadronic) {
 
                                         ZHFJ_ZPairPlusHInvMass_FromTaggedGenMatchL = tmpHZFJVec.M();
                                         ZHFJGenTaggedTree->Fill();
@@ -2198,6 +2227,7 @@ void FullAnalysisInCWithLHE(){
                                 zJetIndOne = zJetIndOneSecondPlace;
                                 mindROne = mindROneSecondPlace;
                                 ZJSameJetCtr += 1;
+                                if (ZIsHadronic) ZJSameJetTaggedCtr += 1;
                             }
 
 
@@ -2253,7 +2283,7 @@ void FullAnalysisInCWithLHE(){
                                 ZJPair_EtaSep_FromGenMatchL = ZJPair_EtaSep_FromGenMatch;
                                 ZJGenTree->Fill();
 
-                                if (hbbTag && hadHLT) {
+                                if (ZIsHadronic) {
 
                                     ZJLead_pt_FromTaggedGenMatchL = ZJLead_pt_FromGenMatch;
                                     ZJLead_eta_FromTaggedGenMatchL = ZJLead_eta_FromGenMatch;
@@ -2285,7 +2315,7 @@ void FullAnalysisInCWithLHE(){
                                     ZHJ_ZPairPlusHInvMass_FromGenMatchL = tmpHZJVec.M();
                                     ZHJGenTree->Fill();
 
-                                    if (hbbTag && hadHLT) {
+                                    if (ZIsHadronic) {
 
                                         ZHJ_ZPairPlusHInvMass_FromTaggedGenMatchL = tmpHZJVec.M();
                                         ZHJGenTaggedTree->Fill();
@@ -2336,7 +2366,7 @@ void FullAnalysisInCWithLHE(){
 
                             GenRawTree->Fill();
 
-                            if (hbbTag && hadHLT) {
+                            if (ZIsHadronic) {
 
                                 H_pt_FromTaggedGenRawL = H_pt_FromGenRaw;
                                 H_eta_FromTaggedGenRawL = H_eta_FromGenRaw;
@@ -2370,7 +2400,64 @@ void FullAnalysisInCWithLHE(){
                             
 
                         }
-                            
+                        //std::cout << evCount-1 << " " << ZIsHadronic << "\n";
+                        if (ZIsHadronic) {
+
+                            ZOne_pt_FromTaggedLHERawL = ZOne_pt_FromLHERaw;
+                            ZOne_eta_FromTaggedLHERawL = ZOne_eta_FromLHERaw;
+                            ZOne_phi_FromTaggedLHERawL = ZOne_phi_FromLHERaw;
+                            ZOne_mass_FromTaggedLHERawL = ZOne_mass_FromLHERaw;
+
+                            ZTwo_pt_FromTaggedLHERawL = ZTwo_pt_FromLHERaw;
+                            ZTwo_eta_FromTaggedLHERawL = ZTwo_eta_FromLHERaw;
+                            ZTwo_phi_FromTaggedLHERawL = ZTwo_phi_FromLHERaw;
+                            ZTwo_mass_FromTaggedLHERawL = ZTwo_mass_FromLHERaw;
+
+                            ZPair_InvMass_FromTaggedLHERawL = ZPair_InvMass_FromLHERaw;
+                            ZPair_EtaSep_FromTaggedLHERawL = ZPair_EtaSep_FromLHERaw;
+
+                            H_pt_FromTaggedLHERawL = H_pt_FromLHERaw;
+                            H_eta_FromTaggedLHERawL = H_eta_FromLHERaw;
+                            H_phi_FromTaggedLHERawL = H_phi_FromLHERaw;
+                            H_mass_FromTaggedLHERawL = H_mass_FromLHERaw;
+
+                            ZPairPlusH_InvMass_FromTaggedLHERawL = ZPairPlusH_InvMass_FromLHERaw;
+
+                            JOne_pt_FromTaggedLHERawL = JOne_pt_FromLHERaw;
+                            JOne_eta_FromTaggedLHERawL = JOne_eta_FromLHERaw;
+                            JOne_pdgId_FromTaggedLHERawL = JOne_pdgId_FromLHERaw;
+
+                            JTwo_pt_FromTaggedLHERawL = JTwo_pt_FromLHERaw;
+                            JTwo_eta_FromTaggedLHERawL = JTwo_eta_FromLHERaw;
+                            JTwo_pdgId_FromTaggedLHERawL = JTwo_pdgId_FromLHERaw;
+
+                            JOne_invmass_FromTaggedLHERawL = JOne_invmass_FromLHERaw;
+                            JTwo_invmass_FromTaggedLHERawL = JTwo_invmass_FromLHERaw;
+
+                            JOne_phi_FromTaggedLHERawL = JOne_phi_FromLHERaw;
+
+                            JTwo_phi_FromTaggedLHERawL = JTwo_phi_FromLHERaw;
+                            JPair_invmass_FromTaggedLHERawL = JPair_invmass_FromLHERaw;
+
+                            J_etasep_FromTaggedLHERawL = J_etasep_FromLHERaw;
+
+                            RawTaggedTree->Fill();
+
+                            if (hGenFound) {
+
+                                HFJ_pt_FromTaggedGenMatchL = HFJ_pt_FromGenMatch;
+                                HFJ_eta_FromTaggedGenMatchL = HFJ_eta_FromGenMatch;
+                                HFJ_phi_FromTaggedGenMatchL = HFJ_phi_FromGenMatch;
+                                HFJ_mass_FromTaggedGenMatchL = HFJ_mass_FromGenMatch;
+                                HFJ_dRFromFJ_FromTaggedGenMatchL = HFJ_dRFromFJ_FromGenMatch;
+                                    
+                                HFJGenTaggedTree->Fill();
+                            }
+
+
+
+
+                        }
                             
                     }
                 }
@@ -3570,8 +3657,8 @@ void FullAnalysisInCWithLHE(){
     std::cout << "ZFJSameJetCtr " << ZFJSameJetCtr << "\n";
     std::cout << "ZJSameJetCtr " << ZJSameJetCtr << "\n";
 
-    std::cout << "ZFJSameJetTaggedCtr " << ZFJSameJetCtr << "\n";
-    std::cout << "ZJSameJetTaggedCtr " << ZJSameJetCtr << "\n";
+    std::cout << "ZFJSameJetTaggedCtr " << ZFJSameJetTaggedCtr << "\n";
+    std::cout << "ZJSameJetTaggedCtr " << ZJSameJetTaggedCtr << "\n";
 
     if (!isBackground){
         std::cout << "Cross section average before division: " << crossSectionAvg << "\n";
