@@ -7,6 +7,8 @@ bool endAfter = false;
 int NToStart = 0;
 int NToEnd = 2500;
 
+bool useTighterCut = false;
+
 bool testRun = true;
 bool LaraTest = false;
 bool MGSM = false;
@@ -27,6 +29,7 @@ bool QCDPT3200toInfBackground = false;
 bool QCDSum = false;
 
 bool isBackground = false;
+
 /*
 //Tree for holding the number of events run over;
 //and the number of events that passed the cut;
@@ -290,8 +293,6 @@ HadTree->Branch("FJEtaSepL",&FJEtaSepL,"FJEtaSepL/F");
 
 */
 
-//Gen Jet matching dR cut
-float genMatchdRCut = 0.4;
 
 
 //VBF jet pair selection;

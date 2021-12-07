@@ -49,6 +49,21 @@ void FullAnalysisInCWithLHE(){
 
     std::vector<std::string> fileAr;
 
+    //Gen Jet matching dR cut
+
+    float genMatchdRCut;
+    std::string cutName;
+
+    if (useTighterCut) {
+        genMatchdRCut = 0.1;
+        cutName = "TighterCut";
+    }
+    else {
+        genMatchdRCut = 0.4;
+        cutName = "";
+    }
+
+
     std::string saveName;
     float crossSection;
     bool isBackground;
@@ -262,7 +277,7 @@ void FullAnalysisInCWithLHE(){
 
     std::cout << "Doing " << saveName << "\n";
     //Setting up outfile for tree
-    std::string outFileStr = "FullAnalysis"+saveName+".root";
+    std::string outFileStr = "FullAnalysis"+saveName+cutName+".root";
     std::cout << "OutFile: " << outFileStr << "\n";
     TFile *outFile = new TFile(outFileStr.c_str(),"RECREATE");
     bool checkChannelSplits;
@@ -277,6 +292,9 @@ void FullAnalysisInCWithLHE(){
     float HFJ_mass_FromGenMatchL;
     float HFJ_dRFromFJ_FromGenMatchL;
 
+    UInt_t nHFJDecay_FromGenMatchL;
+    std::vector<Int_t> HFJ_decaypdgId_FromGenMatchL;
+
 
 
     TTree *HFJGenTree = new TTree("HFJGenTree", "HFJGenTree");
@@ -286,6 +304,11 @@ void FullAnalysisInCWithLHE(){
     HFJGenTree->Branch("HFJ_phi_FromGenMatchL",&HFJ_phi_FromGenMatchL,"HFJ_phi_FromGenMatchL/F");
     HFJGenTree->Branch("HFJ_mass_FromGenMatchL",&HFJ_mass_FromGenMatchL,"HFJ_mass_FromGenMatchL/F");
     HFJGenTree->Branch("HFJ_dRFromFJ_FromGenMatchL",&HFJ_dRFromFJ_FromGenMatchL,"HFJ_dRFromFJ_FromGenMatchL/F");
+    
+    HFJGenTree->Branch("nHFJDecay_FromGenMatchL",&nHFJDecay_FromGenMatchL,"nHFJDecay_FromGenMatchL/i");
+    //HFJGenTree->Branch("HFJ_decaypdgId_FromGenMatchL",&HFJ_decaypdgId_FromGenMatchL,"HFJ_decaypdgId_FromGenMatchL[nHFJDecay_FromGenMatchL]/I");
+    
+    HFJGenTree->Branch("HFJ_decaypdgId_FromGenMatchL",&HFJ_decaypdgId_FromGenMatchL);
 
 
     UInt_t ZFJSameJetCtr = 0;
@@ -295,6 +318,9 @@ void FullAnalysisInCWithLHE(){
     float ZFJLead_phi_FromGenMatchL;
     float ZFJLead_mass_FromGenMatchL;
     float ZFJLead_dRFromFJ_FromGenMatchL;
+
+    UInt_t nZFJLeadDecay_FromGenMatchL;
+    std::vector<Int_t> ZFJLead_decaypdgId_FromGenMatchL;
     
 
     float ZFJTrailing_pt_FromGenMatchL;
@@ -302,6 +328,9 @@ void FullAnalysisInCWithLHE(){
     float ZFJTrailing_phi_FromGenMatchL;
     float ZFJTrailing_mass_FromGenMatchL;
     float ZFJTrailing_dRFromFJ_FromGenMatchL;
+
+    UInt_t nZFJTrailingDecay_FromGenMatchL;
+    std::vector<Int_t> ZFJTrailing_decaypdgId_FromGenMatchL;
 
     float ZFJPair_InvMass_FromGenMatchL;
     float ZFJPair_EtaSep_FromGenMatchL;
@@ -314,11 +343,21 @@ void FullAnalysisInCWithLHE(){
     ZFJGenTree->Branch("ZFJLead_mass_FromGenMatchL",&ZFJLead_mass_FromGenMatchL,"ZFJLead_mass_FromGenMatchL/F");
     ZFJGenTree->Branch("ZFJLead_dRFromFJ_FromGenMatchL",&ZFJLead_dRFromFJ_FromGenMatchL,"ZFJLead_dRFromFJ_FromGenMatchL/F");
 
+    ZFJGenTree->Branch("nZFJLeadDecay_FromGenMatchL",&nZFJLeadDecay_FromGenMatchL,"nZFJLeadDecay_FromGenMatchL/i");
+    //ZFJGenTree->Branch("ZFJLead_decaypdgId_FromGenMatchL",&ZFJLead_decaypdgId_FromGenMatchL,"ZFJLead_decaypdgId_FromGenMatchL[nZFJLeadDecay_FromGenMatchL]/I");
+    ZFJGenTree->Branch("ZFJLead_decaypdgId_FromGenMatchL",&ZFJLead_decaypdgId_FromGenMatchL);
+
+
     ZFJGenTree->Branch("ZFJTrailing_pt_FromGenMatchL",&ZFJTrailing_pt_FromGenMatchL,"ZFJTrailing_pt_FromGenMatchL/F");
     ZFJGenTree->Branch("ZFJTrailing_eta_FromGenMatchL",&ZFJTrailing_eta_FromGenMatchL,"ZFJTrailing_eta_FromGenMatchL/F");
     ZFJGenTree->Branch("ZFJTrailing_phi_FromGenMatchL",&ZFJTrailing_phi_FromGenMatchL,"ZFJTrailing_phi_FromGenMatchL/F");
     ZFJGenTree->Branch("ZFJTrailing_mass_FromGenMatchL",&ZFJTrailing_mass_FromGenMatchL,"ZFJTrailing_mass_FromGenMatchL/F");
     ZFJGenTree->Branch("ZFJTrailing_dRFromFJ_FromGenMatchL",&ZFJTrailing_dRFromFJ_FromGenMatchL,"ZFJTrailing_dRFromFJ_FromGenMatchL/F");
+
+    ZFJGenTree->Branch("nZFJTrailingDecay_FromGenMatchL",&nZFJTrailingDecay_FromGenMatchL,"nZFJTrailingDecay_FromGenMatchL/i");
+    //ZFJGenTree->Branch("ZFJTrailing_decaypdgId_FromGenMatchL",&ZFJTrailing_decaypdgId_FromGenMatchL,"ZFJTrailing_decaypdgId_FromGenMatchL[nZFJTrailingDecay_FromGenMatchL]/I");
+    ZFJGenTree->Branch("ZFJTrailing_decaypdgId_FromGenMatchL",&ZFJTrailing_decaypdgId_FromGenMatchL);
+
 
     ZFJGenTree->Branch("ZFJPair_InvMass_FromGenMatchL",&ZFJPair_InvMass_FromGenMatchL,"ZFJPair_InvMass_FromGenMatchL/F");
     ZFJGenTree->Branch("ZFJPair_EtaSep_FromGenMatchL",&ZFJPair_EtaSep_FromGenMatchL,"ZFJPair_EtaSep_FromGenMatchL/F");
@@ -343,6 +382,9 @@ void FullAnalysisInCWithLHE(){
     float ZJLead_phi_FromGenMatchL;
     float ZJLead_mass_FromGenMatchL;
     float ZJLead_dRFromJ_FromGenMatchL;
+
+    UInt_t nZJLeadDecay_FromGenMatchL;
+    std::vector<Int_t> ZJLead_decaypdgId_FromGenMatchL;
     
 
     float ZJTrailing_pt_FromGenMatchL;
@@ -350,6 +392,9 @@ void FullAnalysisInCWithLHE(){
     float ZJTrailing_phi_FromGenMatchL;
     float ZJTrailing_mass_FromGenMatchL;
     float ZJTrailing_dRFromJ_FromGenMatchL;
+
+    UInt_t nZJTrailingDecay_FromGenMatchL;
+    std::vector<Int_t> ZJTrailing_decaypdgId_FromGenMatchL;
 
     float ZJPair_InvMass_FromGenMatchL;
     float ZJPair_EtaSep_FromGenMatchL;
@@ -362,11 +407,19 @@ void FullAnalysisInCWithLHE(){
     ZJGenTree->Branch("ZJLead_mass_FromGenMatchL",&ZJLead_mass_FromGenMatchL,"ZJLead_mass_FromGenMatchL/F");
     ZJGenTree->Branch("ZJLead_dRFromJ_FromGenMatchL",&ZJLead_dRFromJ_FromGenMatchL,"ZJLead_dRFromJ_FromGenMatchL/F");
 
+    ZJGenTree->Branch("nZJLeadDecay_FromGenMatchL",&nZJLeadDecay_FromGenMatchL,"nZJLeadDecay_FromGenMatchL/i");
+    //ZJGenTree->Branch("ZJLead_decaypdgId_FromGenMatchL",&ZJLead_decaypdgId_FromGenMatchL,"ZJLead_decaypdgId_FromGenMatchL[nZJLeadDecay_FromGenMatchL]/I");
+    ZJGenTree->Branch("ZJLead_decaypdgId_FromGenMatchL",&ZJLead_decaypdgId_FromGenMatchL);
+
     ZJGenTree->Branch("ZJTrailing_pt_FromGenMatchL",&ZJTrailing_pt_FromGenMatchL,"ZJTrailing_pt_FromGenMatchL/F");
     ZJGenTree->Branch("ZJTrailing_eta_FromGenMatchL",&ZJTrailing_eta_FromGenMatchL,"ZJTrailing_eta_FromGenMatchL/F");
     ZJGenTree->Branch("ZJTrailing_phi_FromGenMatchL",&ZJTrailing_phi_FromGenMatchL,"ZJTrailing_phi_FromGenMatchL/F");
     ZJGenTree->Branch("ZJTrailing_mass_FromGenMatchL",&ZJTrailing_mass_FromGenMatchL,"ZJTrailing_mass_FromGenMatchL/F");
     ZJGenTree->Branch("ZJTrailing_dRFromJ_FromGenMatchL",&ZJTrailing_dRFromJ_FromGenMatchL,"ZJTrailing_dRFromJ_FromGenMatchL/F");
+
+    ZJGenTree->Branch("nZJTrailingDecay_FromGenMatchL",&nZJTrailingDecay_FromGenMatchL,"nZJTrailingDecay_FromGenMatchL/i");
+    ZJGenTree->Branch("ZJTrailing_decaypdgId_FromGenMatchL",&ZJTrailing_decaypdgId_FromGenMatchL);
+
 
     ZJGenTree->Branch("ZJPair_InvMass_FromGenMatchL",&ZJPair_InvMass_FromGenMatchL,"ZJPair_InvMass_FromGenMatchL/F");
     ZJGenTree->Branch("ZJPair_EtaSep_FromGenMatchL",&ZJPair_EtaSep_FromGenMatchL,"ZJPair_EtaSep_FromGenMatchL/F");
@@ -386,12 +439,18 @@ void FullAnalysisInCWithLHE(){
     float ZOne_pdgId_FromGenRawL;
     float ZOne_genPartIdxMother_FromGenRawL;
 
+    UInt_t nZOneDecay_FromGenRawL;
+    std::vector<Int_t> ZOne_decaypdgId_FromGenRawL;
+
     float ZTwo_pt_FromGenRawL;
     float ZTwo_eta_FromGenRawL;
     float ZTwo_phi_FromGenRawL;
     float ZTwo_mass_FromGenRawL;
     float ZTwo_pdgId_FromGenRawL;
     float ZTwo_genPartIdxMother_FromGenRawL;
+
+    UInt_t nZTwoDecay_FromGenRawL;
+    std::vector<Int_t> ZTwo_decaypdgId_FromGenRawL;
 
     float ZPair_InvMass_FromGenRawL;
     float ZPair_EtaSep_FromGenRawL;
@@ -402,6 +461,9 @@ void FullAnalysisInCWithLHE(){
     float H_mass_FromGenRawL;
     float H_pdgId_FromGenRawL;
     float H_genPartIdxMother_FromGenRawL;
+
+    UInt_t nHDecay_FromGenRawL;
+    std::vector<Int_t> H_decaypdgId_FromGenRawL;
 
     float ZPairPlusH_InvMass_FromGenRawL;
 
@@ -414,12 +476,18 @@ void FullAnalysisInCWithLHE(){
     GenRawTree->Branch("ZOne_pdgId_FromGenRawL",&ZOne_pdgId_FromGenRawL,"ZOne_pdgId_FromGenRawL/F");
     GenRawTree->Branch("ZOne_genPartIdxMother_FromGenRawL",&ZOne_genPartIdxMother_FromGenRawL,"ZOne_genPartIdxMother_FromGenRawL/F");
 
+    GenRawTree->Branch("nZOneDecay_FromGenRawL",&nZOneDecay_FromGenRawL,"nZOneDecay_FromGenRawL/i");
+    GenRawTree->Branch("ZOne_decaypdgId_FromGenRawL",&ZOne_decaypdgId_FromGenRawL);
+
     GenRawTree->Branch("ZTwo_pt_FromGenRawL",&ZTwo_pt_FromGenRawL,"ZTwo_pt_FromGenRawL/F");
     GenRawTree->Branch("ZTwo_eta_FromGenRawL",&ZTwo_eta_FromGenRawL,"ZTwo_eta_FromGenRawL/F");
     GenRawTree->Branch("ZTwo_phi_FromGenRawL",&ZTwo_phi_FromGenRawL,"ZTwo_phi_FromGenRawL/F");
     GenRawTree->Branch("ZTwo_mass_FromGenRawL",&ZTwo_mass_FromGenRawL,"ZTwo_mass_FromGenRawL/F");
     GenRawTree->Branch("ZTwo_pdgId_FromGenRawL",&ZTwo_pdgId_FromGenRawL,"ZTwo_pdgId_FromGenRawL/F");
     GenRawTree->Branch("ZTwo_genPartIdxMother_FromGenRawL",&ZTwo_genPartIdxMother_FromGenRawL,"ZTwo_genPartIdxMother_FromGenRawL/F");
+
+    GenRawTree->Branch("nZTwoDecay_FromGenRawL",&nZTwoDecay_FromGenRawL,"nZTwoDecay_FromGenRawL/i");
+    GenRawTree->Branch("ZTwo_decaypdgId_FromGenRawL",&ZTwo_decaypdgId_FromGenRawL);
 
     GenRawTree->Branch("ZPair_InvMass_FromGenRawL",&ZPair_InvMass_FromGenRawL,"ZPair_InvMass_FromGenRawL/F");
     GenRawTree->Branch("ZPair_EtaSep_FromGenRawL",&ZPair_EtaSep_FromGenRawL,"ZPair_EtaSep_FromGenRawL/F");
@@ -430,6 +498,9 @@ void FullAnalysisInCWithLHE(){
     GenRawTree->Branch("H_mass_FromGenRawL",&H_mass_FromGenRawL,"H_mass_FromGenRawL/F");
     GenRawTree->Branch("H_pdgId_FromGenRawL",&H_pdgId_FromGenRawL,"H_pdgId_FromGenRawL/F");
     GenRawTree->Branch("H_genPartIdxMother_FromGenRawL",&H_genPartIdxMother_FromGenRawL,"H_genPartIdxMother_FromGenRawL/F");
+
+    GenRawTree->Branch("nHDecay_FromGenRawL",&nHDecay_FromGenRawL,"nHDecay_FromGenRawL/i");
+    GenRawTree->Branch("H_decaypdgId_FromGenRawL",&H_decaypdgId_FromGenRawL);
 
     GenRawTree->Branch("ZPairPlusH_InvMass_FromGenRawL",&ZPairPlusH_InvMass_FromGenRawL,"ZPairPlusH_InvMass_FromGenRawL/F");
 
@@ -443,6 +514,7 @@ void FullAnalysisInCWithLHE(){
     float ZOne_eta_FromLHERawL;
     float ZOne_phi_FromLHERawL;
     float ZOne_mass_FromLHERawL;
+
     
 
     float ZTwo_pt_FromLHERawL;
@@ -528,6 +600,9 @@ void FullAnalysisInCWithLHE(){
     float HFJ_mass_FromTaggedGenMatchL;
     float HFJ_dRFromFJ_FromTaggedGenMatchL;
 
+    UInt_t nHFJDecay_FromTaggedGenMatchL;
+    std::vector<Int_t> HFJ_decaypdgId_FromTaggedGenMatchL;
+
 
 
     TTree *HFJGenTaggedTree = new TTree("HFJGenTaggedTree", "HFJGenTaggedTree");
@@ -538,6 +613,9 @@ void FullAnalysisInCWithLHE(){
     HFJGenTaggedTree->Branch("HFJ_mass_FromTaggedGenMatchL",&HFJ_mass_FromTaggedGenMatchL,"HFJ_mass_FromTaggedGenMatchL/F");
     HFJGenTaggedTree->Branch("HFJ_dRFromFJ_FromTaggedGenMatchL",&HFJ_dRFromFJ_FromTaggedGenMatchL,"HFJ_dRFromFJ_FromTaggedGenMatchL/F");
 
+    HFJGenTaggedTree->Branch("nHFJDecay_FromTaggedGenMatchL",&nHFJDecay_FromTaggedGenMatchL,"nHFJDecay_FromTaggedGenMatchL/i");
+    HFJGenTaggedTree->Branch("HFJ_decaypdgId_FromTaggedGenMatchL",&HFJ_decaypdgId_FromTaggedGenMatchL);
+
 
     UInt_t ZFJSameJetTaggedCtr = 0;
 
@@ -546,6 +624,9 @@ void FullAnalysisInCWithLHE(){
     float ZFJLead_phi_FromTaggedGenMatchL;
     float ZFJLead_mass_FromTaggedGenMatchL;
     float ZFJLead_dRFromFJ_FromTaggedGenMatchL;
+
+    UInt_t nZFJLeadDecay_FromTaggedGenMatchL;
+    std::vector<Int_t> ZFJLead_decaypdgId_FromTaggedGenMatchL;
     
 
     float ZFJTrailing_pt_FromTaggedGenMatchL;
@@ -553,6 +634,9 @@ void FullAnalysisInCWithLHE(){
     float ZFJTrailing_phi_FromTaggedGenMatchL;
     float ZFJTrailing_mass_FromTaggedGenMatchL;
     float ZFJTrailing_dRFromFJ_FromTaggedGenMatchL;
+
+    UInt_t nZFJTrailingDecay_FromTaggedGenMatchL;
+    std::vector<Int_t> ZFJTrailing_decaypdgId_FromTaggedGenMatchL;
 
     float ZFJPair_InvMass_FromTaggedGenMatchL;
     float ZFJPair_EtaSep_FromTaggedGenMatchL;
@@ -565,11 +649,17 @@ void FullAnalysisInCWithLHE(){
     ZFJGenTaggedTree->Branch("ZFJLead_mass_FromTaggedGenMatchL",&ZFJLead_mass_FromTaggedGenMatchL,"ZFJLead_mass_FromTaggedGenMatchL/F");
     ZFJGenTaggedTree->Branch("ZFJLead_dRFromFJ_FromTaggedGenMatchL",&ZFJLead_dRFromFJ_FromTaggedGenMatchL,"ZFJLead_dRFromFJ_FromTaggedGenMatchL/F");
 
+    ZFJGenTaggedTree->Branch("nZFJLeadDecay_FromTaggedGenMatchL",&nZFJLeadDecay_FromTaggedGenMatchL,"nZFJLeadDecay_FromTaggedGenMatchL/i");
+    ZFJGenTaggedTree->Branch("ZFJLead_decaypdgId_FromTaggedGenMatchL",&ZFJLead_decaypdgId_FromTaggedGenMatchL);
+
     ZFJGenTaggedTree->Branch("ZFJTrailing_pt_FromTaggedGenMatchL",&ZFJTrailing_pt_FromTaggedGenMatchL,"ZFJTrailing_pt_FromTaggedGenMatchL/F");
     ZFJGenTaggedTree->Branch("ZFJTrailing_eta_FromTaggedGenMatchL",&ZFJTrailing_eta_FromTaggedGenMatchL,"ZFJTrailing_eta_FromTaggedGenMatchL/F");
     ZFJGenTaggedTree->Branch("ZFJTrailing_phi_FromTaggedGenMatchL",&ZFJTrailing_phi_FromTaggedGenMatchL,"ZFJTrailing_phi_FromTaggedGenMatchL/F");
     ZFJGenTaggedTree->Branch("ZFJTrailing_mass_FromTaggedGenMatchL",&ZFJTrailing_mass_FromTaggedGenMatchL,"ZFJTrailing_mass_FromTaggedGenMatchL/F");
     ZFJGenTaggedTree->Branch("ZFJTrailing_dRFromFJ_FromTaggedGenMatchL",&ZFJTrailing_dRFromFJ_FromTaggedGenMatchL,"ZFJTrailing_dRFromFJ_FromTaggedGenMatchL/F");
+
+    ZFJGenTaggedTree->Branch("nZFJTrailingDecay_FromTaggedGenMatchL",&nZFJTrailingDecay_FromTaggedGenMatchL,"nZFJTrailingDecay_FromTaggedGenMatchL/i");
+    ZFJGenTaggedTree->Branch("ZFJTrailing_decaypdgId_FromTaggedGenMatchL",&ZFJTrailing_decaypdgId_FromTaggedGenMatchL);
 
     ZFJGenTaggedTree->Branch("ZFJPair_InvMass_FromTaggedGenMatchL",&ZFJPair_InvMass_FromTaggedGenMatchL,"ZFJPair_InvMass_FromTaggedGenMatchL/F");
     ZFJGenTaggedTree->Branch("ZFJPair_EtaSep_FromTaggedGenMatchL",&ZFJPair_EtaSep_FromTaggedGenMatchL,"ZFJPair_EtaSep_FromTaggedGenMatchL/F");
@@ -594,6 +684,9 @@ void FullAnalysisInCWithLHE(){
     float ZJLead_phi_FromTaggedGenMatchL;
     float ZJLead_mass_FromTaggedGenMatchL;
     float ZJLead_dRFromJ_FromTaggedGenMatchL;
+
+    UInt_t nZJLeadDecay_FromTaggedGenMatchL;
+    std::vector<Int_t> ZJLead_decaypdgId_FromTaggedGenMatchL;
     
 
     float ZJTrailing_pt_FromTaggedGenMatchL;
@@ -601,6 +694,9 @@ void FullAnalysisInCWithLHE(){
     float ZJTrailing_phi_FromTaggedGenMatchL;
     float ZJTrailing_mass_FromTaggedGenMatchL;
     float ZJTrailing_dRFromJ_FromTaggedGenMatchL;
+
+    UInt_t nZJTrailingDecay_FromTaggedGenMatchL;
+    std::vector<Int_t> ZJTrailing_decaypdgId_FromTaggedGenMatchL;
 
     float ZJPair_InvMass_FromTaggedGenMatchL;
     float ZJPair_EtaSep_FromTaggedGenMatchL;
@@ -613,11 +709,17 @@ void FullAnalysisInCWithLHE(){
     ZJGenTaggedTree->Branch("ZJLead_mass_FromTaggedGenMatchL",&ZJLead_mass_FromTaggedGenMatchL,"ZJLead_mass_FromTaggedGenMatchL/F");
     ZJGenTaggedTree->Branch("ZJLead_dRFromJ_FromTaggedGenMatchL",&ZJLead_dRFromJ_FromTaggedGenMatchL,"ZJLead_dRFromJ_FromTaggedGenMatchL/F");
 
+    ZJGenTaggedTree->Branch("nZJLeadDecay_FromTaggedGenMatchL",&nZJLeadDecay_FromTaggedGenMatchL,"nZJLeadDecay_FromTaggedGenMatchL/i");
+    ZJGenTaggedTree->Branch("ZJLead_decaypdgId_FromTaggedGenMatchL",&ZJLead_decaypdgId_FromTaggedGenMatchL);
+
     ZJGenTaggedTree->Branch("ZJTrailing_pt_FromTaggedGenMatchL",&ZJTrailing_pt_FromTaggedGenMatchL,"ZJTrailing_pt_FromTaggedGenMatchL/F");
     ZJGenTaggedTree->Branch("ZJTrailing_eta_FromTaggedGenMatchL",&ZJTrailing_eta_FromTaggedGenMatchL,"ZJTrailing_eta_FromTaggedGenMatchL/F");
     ZJGenTaggedTree->Branch("ZJTrailing_phi_FromTaggedGenMatchL",&ZJTrailing_phi_FromTaggedGenMatchL,"ZJTrailing_phi_FromTaggedGenMatchL/F");
     ZJGenTaggedTree->Branch("ZJTrailing_mass_FromTaggedGenMatchL",&ZJTrailing_mass_FromTaggedGenMatchL,"ZJTrailing_mass_FromTaggedGenMatchL/F");
     ZJGenTaggedTree->Branch("ZJTrailing_dRFromJ_FromTaggedGenMatchL",&ZJTrailing_dRFromJ_FromTaggedGenMatchL,"ZJTrailing_dRFromJ_FromTaggedGenMatchL/F");
+
+    ZJGenTaggedTree->Branch("nZJTrailingDecay_FromTaggedGenMatchL",&nZJTrailingDecay_FromTaggedGenMatchL,"nZJTrailingDecay_FromTaggedGenMatchL/i");
+    ZJGenTaggedTree->Branch("ZJTrailing_decaypdgId_FromTaggedGenMatchL",&ZJTrailing_decaypdgId_FromTaggedGenMatchL);
 
     ZJGenTaggedTree->Branch("ZJPair_InvMass_FromTaggedGenMatchL",&ZJPair_InvMass_FromTaggedGenMatchL,"ZJPair_InvMass_FromTaggedGenMatchL/F");
     ZJGenTaggedTree->Branch("ZJPair_EtaSep_FromTaggedGenMatchL",&ZJPair_EtaSep_FromTaggedGenMatchL,"ZJPair_EtaSep_FromTaggedGenMatchL/F");
@@ -637,12 +739,18 @@ void FullAnalysisInCWithLHE(){
     float ZOne_pdgId_FromTaggedGenRawL;
     float ZOne_genPartIdxMother_FromTaggedGenRawL;
 
+    UInt_t nZOneDecay_FromTaggedGenRawL;
+    std::vector<Int_t> ZOne_decaypdgId_FromTaggedGenRawL;
+
     float ZTwo_pt_FromTaggedGenRawL;
     float ZTwo_eta_FromTaggedGenRawL;
     float ZTwo_phi_FromTaggedGenRawL;
     float ZTwo_mass_FromTaggedGenRawL;
     float ZTwo_pdgId_FromTaggedGenRawL;
     float ZTwo_genPartIdxMother_FromTaggedGenRawL;
+
+    UInt_t nZTwoDecay_FromTaggedGenRawL;
+    std::vector<Int_t> ZTwo_decaypdgId_FromTaggedGenRawL;
 
     float ZPair_InvMass_FromTaggedGenRawL;
     float ZPair_EtaSep_FromTaggedGenRawL;
@@ -653,6 +761,9 @@ void FullAnalysisInCWithLHE(){
     float H_mass_FromTaggedGenRawL;
     float H_pdgId_FromTaggedGenRawL;
     float H_genPartIdxMother_FromTaggedGenRawL;
+
+    UInt_t nHDecay_FromTaggedGenRawL;
+    std::vector<Int_t> H_decaypdgId_FromTaggedGenRawL;
 
     float ZPairPlusH_InvMass_FromTaggedGenRawL;
 
@@ -665,12 +776,18 @@ void FullAnalysisInCWithLHE(){
     GenRawTaggedTree->Branch("ZOne_pdgId_FromTaggedGenRawL",&ZOne_pdgId_FromTaggedGenRawL,"ZOne_pdgId_FromTaggedGenRawL/F");
     GenRawTaggedTree->Branch("ZOne_genPartIdxMother_FromTaggedGenRawL",&ZOne_genPartIdxMother_FromTaggedGenRawL,"ZOne_genPartIdxMother_FromTaggedGenRawL/F");
 
+    GenRawTaggedTree->Branch("nZOneDecay_FromTaggedGenRawL",&nZOneDecay_FromTaggedGenRawL,"nZOneDecay_FromTaggedGenRawL/i");
+    GenRawTaggedTree->Branch("ZOne_decaypdgId_FromTaggedGenRawL",&ZOne_decaypdgId_FromTaggedGenRawL);
+
     GenRawTaggedTree->Branch("ZTwo_pt_FromTaggedGenRawL",&ZTwo_pt_FromTaggedGenRawL,"ZTwo_pt_FromTaggedGenRawL/F");
     GenRawTaggedTree->Branch("ZTwo_eta_FromTaggedGenRawL",&ZTwo_eta_FromTaggedGenRawL,"ZTwo_eta_FromTaggedGenRawL/F");
     GenRawTaggedTree->Branch("ZTwo_phi_FromTaggedGenRawL",&ZTwo_phi_FromTaggedGenRawL,"ZTwo_phi_FromTaggedGenRawL/F");
     GenRawTaggedTree->Branch("ZTwo_mass_FromTaggedGenRawL",&ZTwo_mass_FromTaggedGenRawL,"ZTwo_mass_FromTaggedGenRawL/F");
     GenRawTaggedTree->Branch("ZTwo_pdgId_FromTaggedGenRawL",&ZTwo_pdgId_FromTaggedGenRawL,"ZTwo_pdgId_FromTaggedGenRawL/F");
     GenRawTaggedTree->Branch("ZTwo_genPartIdxMother_FromTaggedGenRawL",&ZTwo_genPartIdxMother_FromTaggedGenRawL,"ZTwo_genPartIdxMother_FromTaggedGenRawL/F");
+
+    GenRawTaggedTree->Branch("nZTwoDecay_FromTaggedGenRawL",&nZTwoDecay_FromTaggedGenRawL,"nZTwoDecay_FromTaggedGenRawL/i");
+    GenRawTaggedTree->Branch("ZTwo_decaypdgId_FromTaggedGenRawL",&ZTwo_decaypdgId_FromTaggedGenRawL);
 
     GenRawTaggedTree->Branch("ZPair_InvMass_FromTaggedGenRawL",&ZPair_InvMass_FromTaggedGenRawL,"ZPair_InvMass_FromTaggedGenRawL/F");
     GenRawTaggedTree->Branch("ZPair_EtaSep_FromTaggedGenRawL",&ZPair_EtaSep_FromTaggedGenRawL,"ZPair_EtaSep_FromTaggedGenRawL/F");
@@ -681,6 +798,9 @@ void FullAnalysisInCWithLHE(){
     GenRawTaggedTree->Branch("H_mass_FromTaggedGenRawL",&H_mass_FromTaggedGenRawL,"H_mass_FromTaggedGenRawL/F");
     GenRawTaggedTree->Branch("H_pdgId_FromTaggedGenRawL",&H_pdgId_FromTaggedGenRawL,"H_pdgId_FromTaggedGenRawL/F");
     GenRawTaggedTree->Branch("H_genPartIdxMother_FromTaggedGenRawL",&H_genPartIdxMother_FromTaggedGenRawL,"H_genPartIdxMother_FromTaggedGenRawL/F");
+
+    GenRawTaggedTree->Branch("nHDecay_FromTaggedGenRawL",&nHDecay_FromTaggedGenRawL,"nHDecay_FromTaggedGenRawL/i");
+    GenRawTaggedTree->Branch("H_decaypdgId_FromTaggedGenRawL",&H_decaypdgId_FromTaggedGenRawL);
 
     GenRawTaggedTree->Branch("ZPairPlusH_InvMass_FromTaggedGenRawL",&ZPairPlusH_InvMass_FromTaggedGenRawL,"ZPairPlusH_InvMass_FromTaggedGenRawL/F");
 
@@ -694,7 +814,6 @@ void FullAnalysisInCWithLHE(){
     float ZOne_eta_FromTaggedLHERawL;
     float ZOne_phi_FromTaggedLHERawL;
     float ZOne_mass_FromTaggedLHERawL;
-    
 
     float ZTwo_pt_FromTaggedLHERawL;
     float ZTwo_eta_FromTaggedLHERawL;
@@ -750,6 +869,7 @@ void FullAnalysisInCWithLHE(){
     RawTaggedTree->Branch("H_phi_FromTaggedLHERawL",&H_phi_FromTaggedLHERawL,"H_phi_FromTaggedLHERawL/F");
     RawTaggedTree->Branch("H_mass_FromTaggedLHERawL",&H_mass_FromTaggedLHERawL,"H_mass_FromTaggedLHERawL/F");
 
+
     RawTaggedTree->Branch("ZPairPlusH_InvMass_FromTaggedLHERawL",&ZPairPlusH_InvMass_FromTaggedLHERawL,"ZPairPlusH_InvMass_FromTaggedLHERawL/F");
 
     RawTaggedTree->Branch("JOne_pt_FromTaggedLHERawL",&JOne_pt_FromTaggedLHERawL,"JOne_pt_FromTaggedLHERawL/F");
@@ -769,8 +889,316 @@ void FullAnalysisInCWithLHE(){
     RawTaggedTree->Branch("JPair_invmass_FromTaggedLHERawL",&JPair_invmass_FromTaggedLHERawL,"JPair_invmass_FromTaggedLHERawL/F");
     RawTaggedTree->Branch("J_etasep_FromTaggedLHERawL",&J_etasep_FromTaggedLHERawL,"J_etasep_FromTaggedLHERawL/F");
 
+    /*
+    // Trees for tighter cutting on dR/////////////////////////////
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+    float HFJ_pt_FromGenMatchTighterCutL;
+    float HFJ_eta_FromGenMatchTighterCutL;
+    float HFJ_phi_FromGenMatchTighterCutL;
+    float HFJ_mass_FromGenMatchTighterCutL;
+    float HFJ_dRFromFJ_FromGenMatchTighterCutL;
+
+    UInt_t nHFJDecay_FromGenMatchTighterCutL;
+    std::vector<Int_t> HFJ_decaypdgId_FromGenMatchTighterCutL;
+
+
+
+    TTree *HFJGenTighterCutTree = new TTree("HFJGenTighterCutTree", "HFJGenTighterCutTree");
+
+    HFJGenTighterCutTree->Branch("HFJ_pt_FromGenMatchTighterCutL",&HFJ_pt_FromGenMatchTighterCutL,"HFJ_pt_FromGenMatchTighterCutL/F");
+    HFJGenTighterCutTree->Branch("HFJ_eta_FromGenMatchTighterCutL",&HFJ_eta_FromGenMatchTighterCutL,"HFJ_eta_FromGenMatchTighterCutL/F");
+    HFJGenTighterCutTree->Branch("HFJ_phi_FromGenMatchTighterCutL",&HFJ_phi_FromGenMatchTighterCutL,"HFJ_phi_FromGenMatchTighterCutL/F");
+    HFJGenTighterCutTree->Branch("HFJ_mass_FromGenMatchTighterCutL",&HFJ_mass_FromGenMatchTighterCutL,"HFJ_mass_FromGenMatchTighterCutL/F");
+    HFJGenTighterCutTree->Branch("HFJ_dRFromFJ_FromGenMatchTighterCutL",&HFJ_dRFromFJ_FromGenMatchTighterCutL,"HFJ_dRFromFJ_FromGenMatchTighterCutL/F");
+    
+    HFJGenTighterCutTree->Branch("nHFJDecay_FromGenMatchTighterCutL",&nHFJDecay_FromGenMatchTighterCutL,"nHFJDecay_FromGenMatchTighterCutL/i");
+    //HFJGenTighterCutTree->Branch("HFJ_decaypdgId_FromGenMatchTighterCutL",&HFJ_decaypdgId_FromGenMatchTighterCutL,"HFJ_decaypdgId_FromGenMatchL[nHFJDecay_FromGenMatchL]/I");
+    
+    HFJGenTighterCutTree->Branch("HFJ_decaypdgId_FromGenMatchTighterCutL",&HFJ_decaypdgId_FromGenMatchL);
+
+
+    UInt_t ZFJSameJetTighterCutCtr = 0;
+
+    float ZFJLead_pt_FromGenMatchTighterCutL;
+    float ZFJLead_eta_FromGenMatchTighterCutL;
+    float ZFJLead_phi_FromGenMatchTighterCutL;
+    float ZFJLead_mass_FromGenMatchTighterCutL;
+    float ZFJLead_dRFromFJ_FromGenMatchTighterCutL;
+
+    UInt_t nZFJLeadDecay_FromGenMatchTighterCutL;
+    std::vector<Int_t> ZFJLead_decaypdgId_FromGenMatchTighterCutL;
+    
+
+    float ZFJTrailing_pt_FromGenMatchTighterCutL;
+    float ZFJTrailing_eta_FromGenMatchTighterCutL;
+    float ZFJTrailing_phi_FromGenMatchTighterCutL;
+    float ZFJTrailing_mass_FromGenMatchTighterCutL;
+    float ZFJTrailing_dRFromFJ_FromGenMatchTighterCutL;
+
+    UInt_t nZFJTrailingDecay_FromGenMatchTighterCutL;
+    std::vector<Int_t> ZFJTrailing_decaypdgId_FromGenMatchTighterCutL;
+
+    float ZFJPair_InvMass_FromGenMatchTighterCutL;
+    float ZFJPair_EtaSep_FromGenMatchTighterCutL;
+
+    TTree *ZFJGenTighterCutTree = new TTree("ZFJGenTighterCutTree", "ZFJGenTighterCutTree");
+
+    ZFJGenTighterCutTree->Branch("ZFJLead_pt_FromGenMatchTighterCutL",&ZFJLead_pt_FromGenMatchTighterCutL,"ZFJLead_pt_FromGenMatchTighterCutL/F");
+    ZFJGenTighterCutTree->Branch("ZFJLead_eta_FromGenMatchTighterCutL",&ZFJLead_eta_FromGenMatchTighterCutL,"ZFJLead_eta_FromGenMatchTighterCutL/F");
+    ZFJGenTighterCutTree->Branch("ZFJLead_phi_FromGenMatchTighterCutL",&ZFJLead_phi_FromGenMatchTighterCutL,"ZFJLead_phi_FromGenMatchTighterCutL/F");
+    ZFJGenTighterCutTree->Branch("ZFJLead_mass_FromGenMatchTighterCutL",&ZFJLead_mass_FromGenMatchTighterCutL,"ZFJLead_mass_FromGenMatchTighterCutL/F");
+    ZFJGenTighterCutTree->Branch("ZFJLead_dRFromFJ_FromGenMatchTighterCutL",&ZFJLead_dRFromFJ_FromGenMatchTighterCutL,"ZFJLead_dRFromFJ_FromGenMatchTighterCutL/F");
+
+    ZFJGenTighterCutTree->Branch("nZFJLeadDecay_FromGenMatchTighterCutL",&nZFJLeadDecay_FromGenMatchTighterCutL,"nZFJLeadDecay_FromGenMatchTighterCutL/i");
+    //ZFJGenTighterCutTree->Branch("ZFJLead_decaypdgId_FromGenMatchTighterCutL",&ZFJLead_decaypdgId_FromGenMatchTighterCutL,"ZFJLead_decaypdgId_FromGenMatchL[nZFJLeadDecay_FromGenMatchL]/I");
+    ZFJGenTighterCutTree->Branch("ZFJLead_decaypdgId_FromGenMatchTighterCutL",&ZFJLead_decaypdgId_FromGenMatchL);
+
+
+    ZFJGenTighterCutTree->Branch("ZFJTrailing_pt_FromGenMatchTighterCutL",&ZFJTrailing_pt_FromGenMatchTighterCutL,"ZFJTrailing_pt_FromGenMatchTighterCutL/F");
+    ZFJGenTighterCutTree->Branch("ZFJTrailing_eta_FromGenMatchTighterCutL",&ZFJTrailing_eta_FromGenMatchTighterCutL,"ZFJTrailing_eta_FromGenMatchTighterCutL/F");
+    ZFJGenTighterCutTree->Branch("ZFJTrailing_phi_FromGenMatchTighterCutL",&ZFJTrailing_phi_FromGenMatchTighterCutL,"ZFJTrailing_phi_FromGenMatchTighterCutL/F");
+    ZFJGenTighterCutTree->Branch("ZFJTrailing_mass_FromGenMatchTighterCutL",&ZFJTrailing_mass_FromGenMatchTighterCutL,"ZFJTrailing_mass_FromGenMatchTighterCutL/F");
+    ZFJGenTighterCutTree->Branch("ZFJTrailing_dRFromFJ_FromGenMatchTighterCutL",&ZFJTrailing_dRFromFJ_FromGenMatchTighterCutL,"ZFJTrailing_dRFromFJ_FromGenMatchTighterCutL/F");
+
+    ZFJGenTighterCutTree->Branch("nZFJTrailingDecay_FromGenMatchTighterCutL",&nZFJTrailingDecay_FromGenMatchTighterCutL,"nZFJTrailingDecay_FromGenMatchTighterCutL/i");
+    //ZFJGenTighterCutTree->Branch("ZFJTrailing_decaypdgId_FromGenMatchTighterCutL",&ZFJTrailing_decaypdgId_FromGenMatchTighterCutL,"ZFJTrailing_decaypdgId_FromGenMatchL[nZFJTrailingDecay_FromGenMatchL]/I");
+    ZFJGenTighterCutTree->Branch("ZFJTrailing_decaypdgId_FromGenMatchTighterCutL",&ZFJTrailing_decaypdgId_FromGenMatchL);
+
+
+    ZFJGenTighterCutTree->Branch("ZFJPair_InvMass_FromGenMatchTighterCutL",&ZFJPair_InvMass_FromGenMatchTighterCutL,"ZFJPair_InvMass_FromGenMatchTighterCutL/F");
+    ZFJGenTighterCutTree->Branch("ZFJPair_EtaSep_FromGenMatchTighterCutL",&ZFJPair_EtaSep_FromGenMatchTighterCutL,"ZFJPair_EtaSep_FromGenMatchTighterCutL/F");
+
+    float ZHFJ_ZPairPlusHInvMass_FromGenMatchTighterCutL;
+    TTree *ZHFJGenTighterCutTree = new TTree("ZHFJGenTighterCutTree", "ZHFJGenTighterCutTree");
+    ZHFJGenTighterCutTree->Branch("ZHFJ_ZPairPlusHInvMass_FromGenMatchTighterCutL",&ZHFJ_ZPairPlusHInvMass_FromGenMatchTighterCutL,"ZHFJ_ZPairPlusHInvMass_FromGenMatchTighterCutL/F");
+
+    float ZHJ_ZPairPlusHInvMass_FromGenMatchTighterCutL;
+    TTree *ZHJGenTighterCutTree = new TTree("ZHJGenTighterCutTree", "ZHJGenTighterCutTree");
+    ZHJGenTighterCutTree->Branch("ZHJ_ZPairPlusHInvMass_FromGenMatchTighterCutL",&ZHJ_ZPairPlusHInvMass_FromGenMatchTighterCutL,"ZHJ_ZPairPlusHInvMass_FromGenMatchTighterCutL/F");
+
+
+
+
+
+    UInt_t ZJSameJetTighterCutCtr = 0;
+
+
+    float ZJLead_pt_FromGenMatchTighterCutL;
+    float ZJLead_eta_FromGenMatchTighterCutL;
+    float ZJLead_phi_FromGenMatchTighterCutL;
+    float ZJLead_mass_FromGenMatchTighterCutL;
+    float ZJLead_dRFromJ_FromGenMatchTighterCutL;
+
+    UInt_t nZJLeadDecay_FromGenMatchTighterCutL;
+    std::vector<Int_t> ZJLead_decaypdgId_FromGenMatchTighterCutL;
+    
+
+    float ZJTrailing_pt_FromGenMatchTighterCutL;
+    float ZJTrailing_eta_FromGenMatchTighterCutL;
+    float ZJTrailing_phi_FromGenMatchTighterCutL;
+    float ZJTrailing_mass_FromGenMatchTighterCutL;
+    float ZJTrailing_dRFromJ_FromGenMatchTighterCutL;
+
+    UInt_t nZJTrailingDecay_FromGenMatchTighterCutL;
+    std::vector<Int_t> ZJTrailing_decaypdgId_FromGenMatchTighterCutL;
+
+    float ZJPair_InvMass_FromGenMatchTighterCutL;
+    float ZJPair_EtaSep_FromGenMatchTighterCutL;
+
+    TTree *ZJGenTighterCutTree = new TTree("ZJGenTighterCutTree", "ZJGenTighterCutTree");
+
+    ZJGenTighterCutTree->Branch("ZJLead_pt_FromGenMatchTighterCutL",&ZJLead_pt_FromGenMatchTighterCutL,"ZJLead_pt_FromGenMatchTighterCutL/F");
+    ZJGenTighterCutTree->Branch("ZJLead_eta_FromGenMatchTighterCutL",&ZJLead_eta_FromGenMatchTighterCutL,"ZJLead_eta_FromGenMatchTighterCutL/F");
+    ZJGenTighterCutTree->Branch("ZJLead_phi_FromGenMatchTighterCutL",&ZJLead_phi_FromGenMatchTighterCutL,"ZJLead_phi_FromGenMatchTighterCutL/F");
+    ZJGenTighterCutTree->Branch("ZJLead_mass_FromGenMatchTighterCutL",&ZJLead_mass_FromGenMatchTighterCutL,"ZJLead_mass_FromGenMatchTighterCutL/F");
+    ZJGenTighterCutTree->Branch("ZJLead_dRFromJ_FromGenMatchTighterCutL",&ZJLead_dRFromJ_FromGenMatchTighterCutL,"ZJLead_dRFromJ_FromGenMatchTighterCutL/F");
+
+    ZJGenTighterCutTree->Branch("nZJLeadDecay_FromGenMatchTighterCutL",&nZJLeadDecay_FromGenMatchTighterCutL,"nZJLeadDecay_FromGenMatchTighterCutL/i");
+    //ZJGenTighterCutTree->Branch("ZJLead_decaypdgId_FromGenMatchTighterCutL",&ZJLead_decaypdgId_FromGenMatchTighterCutL,"ZJLead_decaypdgId_FromGenMatchL[nZJLeadDecay_FromGenMatchL]/I");
+    ZJGenTighterCutTree->Branch("ZJLead_decaypdgId_FromGenMatchTighterCutL",&ZJLead_decaypdgId_FromGenMatchL);
+
+    ZJGenTighterCutTree->Branch("ZJTrailing_pt_FromGenMatchTighterCutL",&ZJTrailing_pt_FromGenMatchTighterCutL,"ZJTrailing_pt_FromGenMatchTighterCutL/F");
+    ZJGenTighterCutTree->Branch("ZJTrailing_eta_FromGenMatchTighterCutL",&ZJTrailing_eta_FromGenMatchTighterCutL,"ZJTrailing_eta_FromGenMatchTighterCutL/F");
+    ZJGenTighterCutTree->Branch("ZJTrailing_phi_FromGenMatchTighterCutL",&ZJTrailing_phi_FromGenMatchTighterCutL,"ZJTrailing_phi_FromGenMatchTighterCutL/F");
+    ZJGenTighterCutTree->Branch("ZJTrailing_mass_FromGenMatchTighterCutL",&ZJTrailing_mass_FromGenMatchTighterCutL,"ZJTrailing_mass_FromGenMatchTighterCutL/F");
+    ZJGenTighterCutTree->Branch("ZJTrailing_dRFromJ_FromGenMatchTighterCutL",&ZJTrailing_dRFromJ_FromGenMatchTighterCutL,"ZJTrailing_dRFromJ_FromGenMatchTighterCutL/F");
+
+    ZJGenTighterCutTree->Branch("nZJTrailingDecay_FromGenMatchTighterCutL",&nZJTrailingDecay_FromGenMatchTighterCutL,"nZJTrailingDecay_FromGenMatchTighterCutL/i");
+    ZJGenTighterCutTree->Branch("ZJTrailing_decaypdgId_FromGenMatchTighterCutL",&ZJTrailing_decaypdgId_FromGenMatchL);
+
+
+    ZJGenTighterCutTree->Branch("ZJPair_InvMass_FromGenMatchTighterCutL",&ZJPair_InvMass_FromGenMatchTighterCutL,"ZJPair_InvMass_FromGenMatchTighterCutL/F");
+    ZJGenTighterCutTree->Branch("ZJPair_EtaSep_FromGenMatchTighterCutL",&ZJPair_EtaSep_FromGenMatchTighterCutL,"ZJPair_EtaSep_FromGenMatchTighterCutL/F");
+
+
+
+
+
+    float HFJ_pt_FromTaggedGenMatchTighterCutL;
+    float HFJ_eta_FromTaggedGenMatchTighterCutL;
+    float HFJ_phi_FromTaggedGenMatchTighterCutL;
+    float HFJ_mass_FromTaggedGenMatchTighterCutL;
+    float HFJ_dRFromFJ_FromTaggedGenMatchTighterCutL;
+
+    UInt_t nHFJDecay_FromTaggedGenMatchTighterCutL;
+    std::vector<Int_t> HFJ_decaypdgId_FromTaggedGenMatchTighterCutL;
+
+
+
+    TTree *HFJGenTaggedTighterCutTree = new TTree("HFJGenTaggedTighterCutTree", "HFJGenTaggedTighterCutTree");
+
+    HFJGenTaggedTighterCutTree->Branch("HFJ_pt_FromTaggedGenMatchTighterCutL",&HFJ_pt_FromTaggedGenMatchTighterCutL,"HFJ_pt_FromTaggedGenMatchTighterCutL/F");
+    HFJGenTaggedTighterCutTree->Branch("HFJ_eta_FromTaggedGenMatchTighterCutL",&HFJ_eta_FromTaggedGenMatchTighterCutL,"HFJ_eta_FromTaggedGenMatchTighterCutL/F");
+    HFJGenTaggedTighterCutTree->Branch("HFJ_phi_FromTaggedGenMatchTighterCutL",&HFJ_phi_FromTaggedGenMatchTighterCutL,"HFJ_phi_FromTaggedGenMatchTighterCutL/F");
+    HFJGenTaggedTighterCutTree->Branch("HFJ_mass_FromTaggedGenMatchTighterCutL",&HFJ_mass_FromTaggedGenMatchTighterCutL,"HFJ_mass_FromTaggedGenMatchTighterCutL/F");
+    HFJGenTaggedTighterCutTree->Branch("HFJ_dRFromFJ_FromTaggedGenMatchTighterCutL",&HFJ_dRFromFJ_FromTaggedGenMatchTighterCutL,"HFJ_dRFromFJ_FromTaggedGenMatchTighterCutL/F");
+
+    HFJGenTaggedTighterCutTree->Branch("nHFJDecay_FromTaggedGenMatchTighterCutL",&nHFJDecay_FromTaggedGenMatchTighterCutL,"nHFJDecay_FromTaggedGenMatchTighterCutL/i");
+    HFJGenTaggedTighterCutTree->Branch("HFJ_decaypdgId_FromTaggedGenMatchTighterCutL",&HFJ_decaypdgId_FromTaggedGenMatchL);
+
+
+    UInt_t ZFJSameJetTaggedTighterCutCtr = 0;
+
+    float ZFJLead_pt_FromTaggedGenMatchTighterCutL;
+    float ZFJLead_eta_FromTaggedGenMatchTighterCutL;
+    float ZFJLead_phi_FromTaggedGenMatchTighterCutL;
+    float ZFJLead_mass_FromTaggedGenMatchTighterCutL;
+    float ZFJLead_dRFromFJ_FromTaggedGenMatchTighterCutL;
+
+    UInt_t nZFJLeadDecay_FromTaggedGenMatchTighterCutL;
+    std::vector<Int_t> ZFJLead_decaypdgId_FromTaggedGenMatchTighterCutL;
+    
+
+    float ZFJTrailing_pt_FromTaggedGenMatchTighterCutL;
+    float ZFJTrailing_eta_FromTaggedGenMatchTighterCutL;
+    float ZFJTrailing_phi_FromTaggedGenMatchTighterCutL;
+    float ZFJTrailing_mass_FromTaggedGenMatchTighterCutL;
+    float ZFJTrailing_dRFromFJ_FromTaggedGenMatchTighterCutL;
+
+    UInt_t nZFJTrailingDecay_FromTaggedGenMatchTighterCutL;
+    std::vector<Int_t> ZFJTrailing_decaypdgId_FromTaggedGenMatchTighterCutL;
+
+    float ZFJPair_InvMass_FromTaggedGenMatchTighterCutL;
+    float ZFJPair_EtaSep_FromTaggedGenMatchTighterCutL;
+
+    TTree *ZFJGenTaggedTighterCutTree = new TTree("ZFJGenTaggedTighterCutTree", "ZFJGenTaggedTighterCutTree");
+
+    ZFJGenTaggedTighterCutTree->Branch("ZFJLead_pt_FromTaggedGenMatchTighterCutL",&ZFJLead_pt_FromTaggedGenMatchTighterCutL,"ZFJLead_pt_FromTaggedGenMatchTighterCutL/F");
+    ZFJGenTaggedTighterCutTree->Branch("ZFJLead_eta_FromTaggedGenMatchTighterCutL",&ZFJLead_eta_FromTaggedGenMatchTighterCutL,"ZFJLead_eta_FromTaggedGenMatchTighterCutL/F");
+    ZFJGenTaggedTighterCutTree->Branch("ZFJLead_phi_FromTaggedGenMatchTighterCutL",&ZFJLead_phi_FromTaggedGenMatchTighterCutL,"ZFJLead_phi_FromTaggedGenMatchTighterCutL/F");
+    ZFJGenTaggedTighterCutTree->Branch("ZFJLead_mass_FromTaggedGenMatchTighterCutL",&ZFJLead_mass_FromTaggedGenMatchTighterCutL,"ZFJLead_mass_FromTaggedGenMatchTighterCutL/F");
+    ZFJGenTaggedTighterCutTree->Branch("ZFJLead_dRFromFJ_FromTaggedGenMatchTighterCutL",&ZFJLead_dRFromFJ_FromTaggedGenMatchTighterCutL,"ZFJLead_dRFromFJ_FromTaggedGenMatchTighterCutL/F");
+
+    ZFJGenTaggedTighterCutTree->Branch("nZFJLeadDecay_FromTaggedGenMatchTighterCutL",&nZFJLeadDecay_FromTaggedGenMatchTighterCutL,"nZFJLeadDecay_FromTaggedGenMatchTighterCutL/i");
+    ZFJGenTaggedTighterCutTree->Branch("ZFJLead_decaypdgId_FromTaggedGenMatchTighterCutL",&ZFJLead_decaypdgId_FromTaggedGenMatchL);
+
+    ZFJGenTaggedTighterCutTree->Branch("ZFJTrailing_pt_FromTaggedGenMatchTighterCutL",&ZFJTrailing_pt_FromTaggedGenMatchTighterCutL,"ZFJTrailing_pt_FromTaggedGenMatchTighterCutL/F");
+    ZFJGenTaggedTighterCutTree->Branch("ZFJTrailing_eta_FromTaggedGenMatchTighterCutL",&ZFJTrailing_eta_FromTaggedGenMatchTighterCutL,"ZFJTrailing_eta_FromTaggedGenMatchTighterCutL/F");
+    ZFJGenTaggedTighterCutTree->Branch("ZFJTrailing_phi_FromTaggedGenMatchTighterCutL",&ZFJTrailing_phi_FromTaggedGenMatchTighterCutL,"ZFJTrailing_phi_FromTaggedGenMatchTighterCutL/F");
+    ZFJGenTaggedTighterCutTree->Branch("ZFJTrailing_mass_FromTaggedGenMatchTighterCutL",&ZFJTrailing_mass_FromTaggedGenMatchTighterCutL,"ZFJTrailing_mass_FromTaggedGenMatchTighterCutL/F");
+    ZFJGenTaggedTighterCutTree->Branch("ZFJTrailing_dRFromFJ_FromTaggedGenMatchTighterCutL",&ZFJTrailing_dRFromFJ_FromTaggedGenMatchTighterCutL,"ZFJTrailing_dRFromFJ_FromTaggedGenMatchTighterCutL/F");
+
+    ZFJGenTaggedTighterCutTree->Branch("nZFJTrailingDecay_FromTaggedGenMatchTighterCutL",&nZFJTrailingDecay_FromTaggedGenMatchTighterCutL,"nZFJTrailingDecay_FromTaggedGenMatchTighterCutL/i");
+    ZFJGenTaggedTighterCutTree->Branch("ZFJTrailing_decaypdgId_FromTaggedGenMatchTighterCutL",&ZFJTrailing_decaypdgId_FromTaggedGenMatchL);
+
+    ZFJGenTaggedTighterCutTree->Branch("ZFJPair_InvMass_FromTaggedGenMatchTighterCutL",&ZFJPair_InvMass_FromTaggedGenMatchTighterCutL,"ZFJPair_InvMass_FromTaggedGenMatchTighterCutL/F");
+    ZFJGenTaggedTighterCutTree->Branch("ZFJPair_EtaSep_FromTaggedGenMatchTighterCutL",&ZFJPair_EtaSep_FromTaggedGenMatchTighterCutL,"ZFJPair_EtaSep_FromTaggedGenMatchTighterCutL/F");
+
+    float ZHFJ_ZPairPlusHInvMass_FromTaggedGenMatchTighterCutL;
+    TTree *ZHFJGenTaggedTighterCutTree = new TTree("ZHFJGenTaggedTighterCutTree", "ZHFJGenTaggedTighterCutTree");
+    ZHFJGenTaggedTighterCutTree->Branch("ZHFJ_ZPairPlusHInvMass_FromTaggedGenMatchTighterCutL",&ZHFJ_ZPairPlusHInvMass_FromTaggedGenMatchTighterCutL,"ZHFJ_ZPairPlusHInvMass_FromTaggedGenMatchTighterCutL/F");
+
+    float ZHJ_ZPairPlusHInvMass_FromTaggedGenMatchTighterCutL;
+    TTree *ZHJGenTaggedTighterCutTree = new TTree("ZHJGenTaggedTighterCutTree", "ZHJGenTaggedTighterCutTree");
+    ZHJGenTaggedTighterCutTree->Branch("ZHJ_ZPairPlusHInvMass_FromTaggedGenMatchTighterCutL",&ZHJ_ZPairPlusHInvMass_FromTaggedGenMatchTighterCutL,"ZHJ_ZPairPlusHInvMass_FromTaggedGenMatchTighterCutL/F");
+
+
+
+
+
+    UInt_t ZJSameJetTaggedTighterCutCtr = 0;
+
+
+    float ZJLead_pt_FromTaggedGenMatchTighterCutL;
+    float ZJLead_eta_FromTaggedGenMatchTighterCutL;
+    float ZJLead_phi_FromTaggedGenMatchTighterCutL;
+    float ZJLead_mass_FromTaggedGenMatchTighterCutL;
+    float ZJLead_dRFromJ_FromTaggedGenMatchTighterCutL;
+
+    UInt_t nZJLeadDecay_FromTaggedGenMatchTighterCutL;
+    std::vector<Int_t> ZJLead_decaypdgId_FromTaggedGenMatchTighterCutL;
+    
+
+    float ZJTrailing_pt_FromTaggedGenMatchTighterCutL;
+    float ZJTrailing_eta_FromTaggedGenMatchTighterCutL;
+    float ZJTrailing_phi_FromTaggedGenMatchTighterCutL;
+    float ZJTrailing_mass_FromTaggedGenMatchTighterCutL;
+    float ZJTrailing_dRFromJ_FromTaggedGenMatchTighterCutL;
+
+    UInt_t nZJTrailingDecay_FromTaggedGenMatchTighterCutL;
+    std::vector<Int_t> ZJTrailing_decaypdgId_FromTaggedGenMatchTighterCutL;
+
+    float ZJPair_InvMass_FromTaggedGenMatchTighterCutL;
+    float ZJPair_EtaSep_FromTaggedGenMatchTighterCutL;
+
+    TTree *ZJGenTaggedTighterCutTree = new TTree("ZJGenTaggedTighterCutTree", "ZJGenTaggedTighterCutTree");
+
+    ZJGenTaggedTighterCutTree->Branch("ZJLead_pt_FromTaggedGenMatchTighterCutL",&ZJLead_pt_FromTaggedGenMatchTighterCutL,"ZJLead_pt_FromTaggedGenMatchTighterCutL/F");
+    ZJGenTaggedTighterCutTree->Branch("ZJLead_eta_FromTaggedGenMatchTighterCutL",&ZJLead_eta_FromTaggedGenMatchTighterCutL,"ZJLead_eta_FromTaggedGenMatchTighterCutL/F");
+    ZJGenTaggedTighterCutTree->Branch("ZJLead_phi_FromTaggedGenMatchTighterCutL",&ZJLead_phi_FromTaggedGenMatchTighterCutL,"ZJLead_phi_FromTaggedGenMatchTighterCutL/F");
+    ZJGenTaggedTighterCutTree->Branch("ZJLead_mass_FromTaggedGenMatchTighterCutL",&ZJLead_mass_FromTaggedGenMatchTighterCutL,"ZJLead_mass_FromTaggedGenMatchTighterCutL/F");
+    ZJGenTaggedTighterCutTree->Branch("ZJLead_dRFromJ_FromTaggedGenMatchTighterCutL",&ZJLead_dRFromJ_FromTaggedGenMatchTighterCutL,"ZJLead_dRFromJ_FromTaggedGenMatchTighterCutL/F");
+
+    ZJGenTaggedTighterCutTree->Branch("nZJLeadDecay_FromTaggedGenMatchTighterCutL",&nZJLeadDecay_FromTaggedGenMatchTighterCutL,"nZJLeadDecay_FromTaggedGenMatchTighterCutL/i");
+    ZJGenTaggedTighterCutTree->Branch("ZJLead_decaypdgId_FromTaggedGenMatchTighterCutL",&ZJLead_decaypdgId_FromTaggedGenMatchL);
+
+    ZJGenTaggedTighterCutTree->Branch("ZJTrailing_pt_FromTaggedGenMatchTighterCutL",&ZJTrailing_pt_FromTaggedGenMatchTighterCutL,"ZJTrailing_pt_FromTaggedGenMatchTighterCutL/F");
+    ZJGenTaggedTighterCutTree->Branch("ZJTrailing_eta_FromTaggedGenMatchTighterCutL",&ZJTrailing_eta_FromTaggedGenMatchTighterCutL,"ZJTrailing_eta_FromTaggedGenMatchTighterCutL/F");
+    ZJGenTaggedTighterCutTree->Branch("ZJTrailing_phi_FromTaggedGenMatchTighterCutL",&ZJTrailing_phi_FromTaggedGenMatchTighterCutL,"ZJTrailing_phi_FromTaggedGenMatchTighterCutL/F");
+    ZJGenTaggedTighterCutTree->Branch("ZJTrailing_mass_FromTaggedGenMatchTighterCutL",&ZJTrailing_mass_FromTaggedGenMatchTighterCutL,"ZJTrailing_mass_FromTaggedGenMatchTighterCutL/F");
+    ZJGenTaggedTighterCutTree->Branch("ZJTrailing_dRFromJ_FromTaggedGenMatchTighterCutL",&ZJTrailing_dRFromJ_FromTaggedGenMatchTighterCutL,"ZJTrailing_dRFromJ_FromTaggedGenMatchTighterCutL/F");
+
+    ZJGenTaggedTighterCutTree->Branch("nZJTrailingDecay_FromTaggedGenMatchTighterCutL",&nZJTrailingDecay_FromTaggedGenMatchTighterCutL,"nZJTrailingDecay_FromTaggedGenMatchTighterCutL/i");
+    ZJGenTaggedTighterCutTree->Branch("ZJTrailing_decaypdgId_FromTaggedGenMatchTighterCutL",&ZJTrailing_decaypdgId_FromTaggedGenMatchL);
+
+    ZJGenTaggedTighterCutTree->Branch("ZJPair_InvMass_FromTaggedGenMatchTighterCutL",&ZJPair_InvMass_FromTaggedGenMatchTighterCutL,"ZJPair_InvMass_FromTaggedGenMatchTighterCutL/F");
+    ZJGenTaggedTighterCutTree->Branch("ZJPair_EtaSep_FromTaggedGenMatchTighterCutL",&ZJPair_EtaSep_FromTaggedGenMatchTighterCutL,"ZJPair_EtaSep_FromTaggedGenMatchTighterCutL/F");
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //////////////////////////////////////////
+    */
 
 
 
@@ -1442,6 +1870,8 @@ void FullAnalysisInCWithLHE(){
             eZ2VecPairAr.clear();
             mZ2VecPairAr.clear();
 
+            //HFJ_decaypdgId_FromGenMatchL.clear();
+
 
             bool passesCutsBool = false;
             bool passedAsLepBool = false;
@@ -1759,11 +2189,27 @@ void FullAnalysisInCWithLHE(){
                         }
                     }
                     std::vector<Int_t> finalHAr;
+                    //bool HDecFound = false;
+
+                    UInt_t nHFJDecay_FromGenMatch;
+                    std::vector<Int_t> HFJ_decaypdgId_FromGenMatch;
+
                     if (tmpHFJAr.size()){
                         for (UInt_t tmpHItr=0;tmpHItr<tmpHFJAr.size();tmpHItr++){
-                            if (tmpHItr != intermediaryH) finalHAr.push_back(tmpHFJAr[tmpHItr][0]);
+                            if (tmpHItr != intermediaryH) {
+                                finalHAr.push_back(tmpHFJAr[tmpHItr][0]);
+                                //Looping through array for decay branches
+                                for (UInt_t tmpHDecItr=1;tmpHDecItr<tmpHFJAr[tmpHItr].size();tmpHDecItr++){
+                                    HFJ_decaypdgId_FromGenMatch.push_back(tmpHFJAr[tmpHItr][tmpHDecItr]);
+                                }
+                            }
                         }
                     }
+
+                    if (debugGenPart) std::cout << "HFJ_decaypdgId_FromGenMatch.size() " << HFJ_decaypdgId_FromGenMatch.size() << "\n";
+
+                    nHFJDecay_FromGenMatch = HFJ_decaypdgId_FromGenMatch.size();
+
 
                     bool hGenFound = false;
                     float H_pt_FromGenRaw;
@@ -1773,14 +2219,16 @@ void FullAnalysisInCWithLHE(){
                     float H_pdgId_FromGenRaw;
                     float H_genPartIdxMother_FromGenRaw;
 
-                    std::vector<Int_t> tmpHDecAr;
                     UInt_t hJetInd;
                     bool hJetFound = false;
+                    //bool hJetFoundTighterCut = false;
                     float HFJ_pt_FromGenMatch;
                     float HFJ_eta_FromGenMatch;
                     float HFJ_phi_FromGenMatch;
                     float HFJ_mass_FromGenMatch;
                     float HFJ_dRFromFJ_FromGenMatch;
+
+                    
                     
                     if (finalHAr.size() != 1) {
                         std::cout <<"ERROR ERROR, MORE OR LESS THAN ONE H,evCount,JOne_pdgId_FromLHERaw,JTwo_pdgId_FromLHERaw " << evCount<< " " <<JOne_pdgId_FromLHERaw<< " " <<JTwo_pdgId_FromLHERaw << "\n";
@@ -1806,7 +2254,7 @@ void FullAnalysisInCWithLHE(){
                             /*
                             if (evCount-1 == 29){
                                 std::cout << "ev29\n";
-                                std::cout << "*nFatJet " << *nFatJet <<" finalHAr[0] " << finalHAr[0] << " GenPart_phi[finalHAr[0]] " << GenPart_phi[finalHAr[0]] << " GenPart_eta[finalHAr[0]] " << GenPart_eta[finalHAr[0]] << "\n";
+                                std::co1ut << "*nFatJet " << *nFatJet <<" finalHAr[0] " << finalHAr[0] << " GenPart_phi[finalHAr[0]] " << GenPart_phi[finalHAr[0]] << " GenPart_eta[finalHAr[0]] " << GenPart_eta[finalHAr[0]] << "\n";
                             }
                             */
 
@@ -1832,15 +2280,27 @@ void FullAnalysisInCWithLHE(){
                                 HFJ_mass_FromGenMatch = FatJet_mass[hJetInd];
                                 HFJ_dRFromFJ_FromGenMatch = mindROne;
 
+                                
+                                nHFJDecay_FromGenMatchL = nHFJDecay_FromGenMatch;
+                                
+                                for (UInt_t tmpHDecItr=0;tmpHDecItr<HFJ_decaypdgId_FromGenMatch.size();tmpHDecItr++){
+                                    HFJ_decaypdgId_FromGenMatchL.push_back(HFJ_decaypdgId_FromGenMatch[tmpHDecItr]);
+                                }
+                                //HFJ_decaypdgId_FromGenMatchL = HFJ_decaypdgId_FromGenMatch;
+
 
                                 HFJ_pt_FromGenMatchL = HFJ_pt_FromGenMatch;
                                 HFJ_eta_FromGenMatchL = HFJ_eta_FromGenMatch;
                                 HFJ_phi_FromGenMatchL = HFJ_phi_FromGenMatch;
                                 HFJ_mass_FromGenMatchL = HFJ_mass_FromGenMatch;
                                 HFJ_dRFromFJ_FromGenMatchL = HFJ_dRFromFJ_FromGenMatch;
-                                
-
+                                //for (UInt_t tmptmpItr=0;tmptmpItr<HFJ_decaypdgId_FromGenMatchL.size();tmptmpItr++){
+                                //    std::cout << HFJ_decaypdgId_FromGenMatchL[tmptmpItr] << " ";
+                                //}
+                                //std::cout << "\n";
+                                //HFJGenTree->SetBranchAddress("HFJ_decaypdgId_FromGenMatchL",&HFJ_decaypdgId_FromGenMatchL);
                                 HFJGenTree->Fill();
+                                HFJ_decaypdgId_FromGenMatchL.clear();
                                 /*
 
                                 if (hbbTag && hadHLT) {
@@ -1853,6 +2313,27 @@ void FullAnalysisInCWithLHE(){
                                 
 
                                     HFJGenTaggedTree->Fill();
+
+                                }
+                                */
+                               /*
+                                if (mindROne < genMatchdRTighterCut){
+                                    hJetFoundTighterCut = true;
+                                    
+                                    nHFJDecay_FromGenMatchTighterCutL = nHFJDecay_FromGenMatch;
+                                    
+                                    for (UInt_t tmpHDecItr=0;tmpHDecItr<HFJ_decaypdgId_FromGenMatch.size();tmpHDecItr++){
+                                        HFJ_decaypdgId_FromGenMatchTighterCutL.push_back(HFJ_decaypdgId_FromGenMatch[tmpHDecItr]);
+                                    }
+
+
+                                    HFJ_pt_FromGenMatchTighterCutL = HFJ_pt_FromGenMatch;
+                                    HFJ_eta_FromGenMatchTighterCutL = HFJ_eta_FromGenMatch;
+                                    HFJ_phi_FromGenMatchTighterCutL = HFJ_phi_FromGenMatch;
+                                    HFJ_mass_FromGenMatchTighterCutL = HFJ_mass_FromGenMatch;
+                                    HFJ_dRFromFJ_FromGenMatchTighterCutL = HFJ_dRFromFJ_FromGenMatch;
+                                    HFJGenTighterCutTree->Fill();
+                                    HFJ_decaypdgId_FromGenMatchTighterCutL.clear();
 
                                 }
                                 */
@@ -1896,10 +2377,33 @@ void FullAnalysisInCWithLHE(){
                     std::vector<Int_t> finalZAr;
                     std::vector<std::vector<Int_t>> finalZDecAr;
                     bool ZDecFound = false;
+
+                    UInt_t nZFJLeadDecay_FromGenMatch;
+                    std::vector<Int_t> ZFJLead_decaypdgId_FromGenMatch;
+                    UInt_t nZFJTrailingDecay_FromGenMatch;
+                    std::vector<Int_t> ZFJTrailing_decaypdgId_FromGenMatch;
+                    bool tmpGotFirst = false;
+
                     if (tmpZFJAr.size()){
                         for (UInt_t tmpZItr=0;tmpZItr<tmpZFJAr.size();tmpZItr++){
                             if (tmpZItr != intermediaryZ){
                                 finalZAr.push_back(tmpZFJAr[tmpZItr][0]);
+                                //Looping through array for decay branches
+                                if (tmpGotFirst) {
+                                    for (UInt_t tmpZDecItr=1;tmpZDecItr<tmpZFJAr[tmpZItr].size();tmpZDecItr++){
+                                        ZFJTrailing_decaypdgId_FromGenMatch.push_back(tmpZFJAr[tmpZItr][tmpZDecItr]);
+                                    }
+                                        
+
+                                }
+                                else{
+                                    tmpGotFirst = true;
+                                    for (UInt_t tmpZDecItr=1;tmpZDecItr<tmpZFJAr[tmpZItr].size();tmpZDecItr++){
+                                        ZFJLead_decaypdgId_FromGenMatch.push_back(tmpZFJAr[tmpZItr][tmpZDecItr]);
+                                    }
+
+                                }
+                                
                                 if (tmpZFJAr[tmpZItr].size() != 3) {
                                     std::cout << "ERROR ERROR tmpZFJAr INTERNAL VEC SIZE NOT == 3. INSTEAD SIZE == " << tmpZFJAr[tmpZItr].size() << "\n";
                                     for (UInt_t tmpZDecItr=0;tmpZDecItr<tmpZFJAr[tmpZItr].size();tmpZDecItr++){
@@ -1917,6 +2421,9 @@ void FullAnalysisInCWithLHE(){
                             }
                         }
                     }
+
+                    nZFJLeadDecay_FromGenMatch = ZFJLead_decaypdgId_FromGenMatch.size();
+                    nZFJTrailingDecay_FromGenMatch = ZFJTrailing_decaypdgId_FromGenMatch.size();
 
                     bool zGenFound = false;
                     float ZOne_pt_FromGenRaw;
@@ -1962,6 +2469,7 @@ void FullAnalysisInCWithLHE(){
                         if (ZDecFound) {
                             if (debugGenPart) std::cout << "finalZDecAr[0][0] " << finalZDecAr[0][0] << " finalZDecAr[0][1] " << finalZDecAr[0][1] << " finalZDecAr[1][0] " << finalZDecAr[1][0] << " finalZDecAr[1][1] " << finalZDecAr[1][1] << "\n";
                             ZIsHadronic = (finalZDecAr[0][0]>-9 && finalZDecAr[0][0]<9 && finalZDecAr[0][1]>-9 && finalZDecAr[0][1]<9 && finalZDecAr[1][0]>-9 && finalZDecAr[1][0]<9 && finalZDecAr[1][1]>-9 && finalZDecAr[1][1]<9);
+                            if (debugGenPart) std::cout << "ZIsHadronic " << ZIsHadronic << "\n";
                         }
 
 
@@ -2000,6 +2508,19 @@ void FullAnalysisInCWithLHE(){
                         float mindRTwo = 1000;
                         bool useSecondPlace = false;
 
+                        /*
+
+                        UInt_t zJetIndOneTighterCut;
+                        UInt_t zJetIndOneSecondPlaceTighterCut;
+                        UInt_t zJetIndTwoTighterCut;
+                        float mindROneTighterCut = 1000;
+                        float mindROneSecondPlaceTighterCut = 1000;
+
+                        float mindRTwoTighterCut = 1000;
+                        bool useSecondPlaceTighterCut = false;
+
+                        */
+
 
                         if (useFJGenMatchTree){
                             if (debugGenPart) {
@@ -2010,24 +2531,38 @@ void FullAnalysisInCWithLHE(){
                             }
 
                             for (UInt_t fatJetInd=0;fatJetInd<*nFatJet;fatJetInd++){
-                                if (hJetFound && fatJetInd == hJetInd) continue;
-                                float tmpMindROne = calcDeltaR(FatJet_phi[fatJetInd],FatJet_eta[fatJetInd],GenPart_phi[finalZAr[0]],GenPart_eta[finalZAr[0]]);
-                                /*
-                                if (evCount -1 == 0){
-                                    std::cout << "tmpMindROne " << tmpMindROne << "\n";
-                                }
-                                */
-                                if (tmpMindROne < mindROne){
-                                    mindROneSecondPlace = mindROne;
-                                    mindROne = tmpMindROne;
-                                    zJetIndOneSecondPlace = zJetIndOne;
-                                    zJetIndOne = fatJetInd;
+                                if (!(hJetFound && fatJetInd == hJetInd)) {
+                                    float tmpMindROne = calcDeltaR(FatJet_phi[fatJetInd],FatJet_eta[fatJetInd],GenPart_phi[finalZAr[0]],GenPart_eta[finalZAr[0]]);
+                                    
                                     /*
                                     if (evCount -1 == 0){
-                                        std::cout << "mindROneSecondPlace " << mindROneSecondPlace << " mindROne " << mindROne << " zJetIndOneSecondPlace " << zJetIndOneSecondPlace << " zJetIndOne " << zJetIndOne << " useSecondPlace " << useSecondPlace << "\n";
+                                        std::cout << "tmpMindROne " << tmpMindROne << "\n";
                                     }
                                     */
+                                    if (tmpMindROne < mindROne){
+                                        mindROneSecondPlace = mindROne;
+                                        mindROne = tmpMindROne;
+                                        zJetIndOneSecondPlace = zJetIndOne;
+                                        zJetIndOne = fatJetInd;
+                                        /*
+                                        if (evCount -1 == 0){
+                                            std::cout << "mindROneSecondPlace " << mindROneSecondPlace << " mindROne " << mindROne << " zJetIndOneSecondPlace " << zJetIndOneSecondPlace << " zJetIndOne " << zJetIndOne << " useSecondPlace " << useSecondPlace << "\n";
+                                        }
+                                        */
+                                    }
                                 }
+                                /*
+                                if (!(hJetFoundTighterCut && fatJetInd == hJetInd)) {
+                                    float tmpMindROneTighterCut = calcDeltaR(FatJet_phi[fatJetInd],FatJet_eta[fatJetInd],GenPart_phi[finalZAr[0]],GenPart_eta[finalZAr[0]]);
+                                    
+                                    if (tmpMindROneTighterCut < mindROneTighterCut){
+                                        mindROneSecondPlaceTighterCut = mindROneTighterCut;
+                                        mindROneTighterCut = tmpMindROneTighterCut;
+                                        zJetIndOneSecondPlaceTighterCut = zJetIndOneTighterCut;
+                                        zJetIndOneTighterCut = fatJetInd;
+                                    }
+                                }
+                                */
                             }
                             /*
                             if (evCount -1 == 0){
@@ -2035,27 +2570,39 @@ void FullAnalysisInCWithLHE(){
                             }
                             */
                             for (UInt_t fatJetInd=0;fatJetInd<*nFatJet;fatJetInd++){
-                                if (hJetFound && fatJetInd == hJetInd) continue;
-                                float tmpMindRTwo = calcDeltaR(FatJet_phi[fatJetInd],FatJet_eta[fatJetInd],GenPart_phi[finalZAr[1]],GenPart_eta[finalZAr[1]]);
-                                /*
-                                if (evCount -1 == 0){
-                                    std::cout << "tmpMindRTwo " << tmpMindRTwo << "\n";
-                                }
-                                */
-                                if (tmpMindRTwo < mindRTwo){
+                                if (!(hJetFound && fatJetInd == hJetInd)) {
+                                    float tmpMindRTwo = calcDeltaR(FatJet_phi[fatJetInd],FatJet_eta[fatJetInd],GenPart_phi[finalZAr[1]],GenPart_eta[finalZAr[1]]);
                                     /*
                                     if (evCount -1 == 0){
-                                        std::cout << "fatJetInd " << fatJetInd << "\n";
+                                        std::cout << "tmpMindRTwo " << tmpMindRTwo << "\n";
                                     }
                                     */
-                                    if (fatJetInd == zJetIndOne) {
+                                    if (tmpMindRTwo < mindRTwo){
                                         /*
                                         if (evCount -1 == 0){
-                                            std::cout << "mindROne " << mindROne << "\n";
+                                            std::cout << "fatJetInd " << fatJetInd << "\n";
                                         }
                                         */
-                                        if (tmpMindRTwo < mindROne){
-                                            useSecondPlace = true;
+                                        if (fatJetInd == zJetIndOne) {
+                                            /*
+                                            if (evCount -1 == 0){
+                                                std::cout << "mindROne " << mindROne << "\n";
+                                            }
+                                            */
+                                            if (tmpMindRTwo < mindROne){
+                                                useSecondPlace = true;
+                                                mindRTwo = tmpMindRTwo;
+                                                zJetIndTwo = fatJetInd;
+                                                /*
+                                                if (evCount -1 == 0){
+                                                    std::cout << "mindRTwo " << mindRTwo << "zJetIndTwo " << zJetIndTwo << "useSecondPlace " << useSecondPlace << "\n";
+                                                }
+                                                */
+                                            }
+                                            else useSecondPlace = false;
+                                        }
+                                        else {
+                                            useSecondPlace = false;
                                             mindRTwo = tmpMindRTwo;
                                             zJetIndTwo = fatJetInd;
                                             /*
@@ -2063,21 +2610,31 @@ void FullAnalysisInCWithLHE(){
                                                 std::cout << "mindRTwo " << mindRTwo << "zJetIndTwo " << zJetIndTwo << "useSecondPlace " << useSecondPlace << "\n";
                                             }
                                             */
-                                        }
-                                        else useSecondPlace = false;
-                                    }
-                                    else {
-                                        useSecondPlace = false;
-                                        mindRTwo = tmpMindRTwo;
-                                        zJetIndTwo = fatJetInd;
-                                        /*
-                                        if (evCount -1 == 0){
-                                            std::cout << "mindRTwo " << mindRTwo << "zJetIndTwo " << zJetIndTwo << "useSecondPlace " << useSecondPlace << "\n";
-                                        }
-                                        */
 
+                                        }
                                     }
                                 }
+                                /*
+                                if (!(hJetFoundTighterCut && fatJetInd == hJetInd)) {
+                                    float tmpMindRTwoTighterCut = calcDeltaR(FatJet_phi[fatJetInd],FatJet_eta[fatJetInd],GenPart_phi[finalZAr[1]],GenPart_eta[finalZAr[1]]);
+                                    if (tmpMindRTwoTighterCut < mindRTwoTighterCut){
+                                        if (fatJetInd == zJetIndOneTighterCut) {
+                                            if (tmpMindRTwoTighterCut < mindROneTighterCut){
+                                                useSecondPlaceTighterCut = true;
+                                                mindRTwoTighterCut = tmpMindRTwoTighterCut;
+                                                zJetIndTwoTighterCut = fatJetInd;
+                                            }
+                                            else useSecondPlaceTighterCut = false;
+                                        }
+                                        else {
+                                            useSecondPlaceTighterCut = false;
+                                            mindRTwoTighterCut = tmpMindRTwoTighterCut;
+                                            zJetIndTwoTighterCut = fatJetInd;
+
+                                        }
+                                    }
+                                }
+                                */
                             }
 
                             if (useSecondPlace) {
@@ -2087,6 +2644,17 @@ void FullAnalysisInCWithLHE(){
                                 if (ZIsHadronic) ZFJSameJetTaggedCtr += 1;
                                 if (debugGenPart) std::cout << "evCount " << evCount -1 << " zJetIndOne " << zJetIndOne << " zJetIndTwo " << zJetIndTwo << " mindROne " << mindROne << " mindRTwo " << mindRTwo << "\n";
                             }
+
+                            /*
+
+                            if (useSecondPlaceTighterCut) {
+                                zJetIndOneTighterCut = zJetIndOneSecondPlaceTighterCut;
+                                mindROneTighterCut = mindROneSecondPlaceTighterCut;
+                                ZFJSameJetTighterCutCtr += 1;
+                                if (ZIsHadronic) ZFJSameJetTaggedTighterCutCtr += 1;
+                                if (debugGenPart) std::cout << "evCount " << evCount -1 << " zJetIndOneTighterCut " << zJetIndOneTighterCut << " zJetIndTwoTighterCut " << zJetIndTwoTighterCut << " mindROneTighterCut " << mindROneTighterCut << " mindRTwoTighterCut " << mindRTwoTighterCut << "\n";
+                            }
+                            */
 
 
                             if (mindROne < genMatchdRCut && mindRTwo < genMatchdRCut ){
@@ -2117,6 +2685,12 @@ void FullAnalysisInCWithLHE(){
                                 ZFJLead_phi_FromGenMatchL = ZFJLead_phi_FromGenMatch;
                                 ZFJLead_mass_FromGenMatchL = ZFJLead_mass_FromGenMatch;
                                 ZFJLead_dRFromFJ_FromGenMatchL = ZFJLead_dRFromFJ_FromGenMatch;
+
+                                nZFJLeadDecay_FromGenMatchL = nZFJLeadDecay_FromGenMatch;
+                                //ZFJLead_decaypdgId_FromGenMatchL = ZFJLead_decaypdgId_FromGenMatch;
+                                for (UInt_t tmpZDecItr=0;tmpZDecItr<ZFJLead_decaypdgId_FromGenMatch.size();tmpZDecItr++){
+                                    ZFJLead_decaypdgId_FromGenMatchL.push_back(ZFJLead_decaypdgId_FromGenMatch[tmpZDecItr]);
+                                }
                                 
 
                                 ZFJTrailing_pt_FromGenMatchL = ZFJTrailing_pt_FromGenMatch;
@@ -2124,6 +2698,15 @@ void FullAnalysisInCWithLHE(){
                                 ZFJTrailing_phi_FromGenMatchL = ZFJTrailing_phi_FromGenMatch;
                                 ZFJTrailing_mass_FromGenMatchL = ZFJTrailing_mass_FromGenMatch;
                                 ZFJTrailing_dRFromFJ_FromGenMatchL = ZFJTrailing_dRFromFJ_FromGenMatch;
+
+                                nZFJTrailingDecay_FromGenMatchL = nZFJTrailingDecay_FromGenMatch;
+                                //ZFJTrailing_decaypdgId_FromGenMatchL = ZFJTrailing_decaypdgId_FromGenMatch;
+
+                                for (UInt_t tmpZDecItr=0;tmpZDecItr<ZFJTrailing_decaypdgId_FromGenMatch.size();tmpZDecItr++){
+                                    ZFJTrailing_decaypdgId_FromGenMatchL.push_back(ZFJTrailing_decaypdgId_FromGenMatch[tmpZDecItr]);
+                                }
+
+                                
 
 
                                 ROOT::Math::PtEtaPhiMVector tmpZFJLeadVec  = ROOT::Math::PtEtaPhiMVector(ZFJLead_pt_FromGenMatch,ZFJLead_eta_FromGenMatch,ZFJLead_phi_FromGenMatch,ZFJLead_mass_FromGenMatch);
@@ -2139,6 +2722,9 @@ void FullAnalysisInCWithLHE(){
                                 ZFJPair_EtaSep_FromGenMatchL = ZFJPair_EtaSep_FromGenMatch;
                                 ZFJGenTree->Fill();
 
+                                ZFJLead_decaypdgId_FromGenMatchL.clear();
+                                ZFJTrailing_decaypdgId_FromGenMatchL.clear();
+
                                 if (ZIsHadronic) {
 
                                     ZFJLead_pt_FromTaggedGenMatchL = ZFJLead_pt_FromGenMatch;
@@ -2146,6 +2732,13 @@ void FullAnalysisInCWithLHE(){
                                     ZFJLead_phi_FromTaggedGenMatchL = ZFJLead_phi_FromGenMatch;
                                     ZFJLead_mass_FromTaggedGenMatchL = ZFJLead_mass_FromGenMatch;
                                     ZFJLead_dRFromFJ_FromTaggedGenMatchL = ZFJLead_dRFromFJ_FromGenMatch;
+
+                                    nZFJLeadDecay_FromTaggedGenMatchL = nZFJLeadDecay_FromGenMatch;
+                                    //ZFJLead_decaypdgId_FromTaggedGenMatchL = ZFJLead_decaypdgId_FromGenMatch;
+
+                                    for (UInt_t tmpZDecItr=0;tmpZDecItr<ZFJLead_decaypdgId_FromGenMatch.size();tmpZDecItr++){
+                                        ZFJLead_decaypdgId_FromTaggedGenMatchL.push_back(ZFJLead_decaypdgId_FromGenMatch[tmpZDecItr]);
+                                    }
                                     
 
                                     ZFJTrailing_pt_FromTaggedGenMatchL = ZFJTrailing_pt_FromGenMatch;
@@ -2154,10 +2747,20 @@ void FullAnalysisInCWithLHE(){
                                     ZFJTrailing_mass_FromTaggedGenMatchL = ZFJTrailing_mass_FromGenMatch;
                                     ZFJTrailing_dRFromFJ_FromTaggedGenMatchL = ZFJTrailing_dRFromFJ_FromGenMatch;
 
+
+                                    nZFJTrailingDecay_FromTaggedGenMatchL = nZFJTrailingDecay_FromGenMatch;
+                                    //ZFJTrailing_decaypdgId_FromTaggedGenMatchL = ZFJTrailing_decaypdgId_FromGenMatch;
+
+                                    for (UInt_t tmpZDecItr=0;tmpZDecItr<ZFJTrailing_decaypdgId_FromGenMatch.size();tmpZDecItr++){
+                                        ZFJTrailing_decaypdgId_FromTaggedGenMatchL.push_back(ZFJTrailing_decaypdgId_FromGenMatch[tmpZDecItr]);
+                                    }
+
                                     ZFJPair_InvMass_FromTaggedGenMatchL = ZFJPair_InvMass_FromGenMatch;
                                     ZFJPair_EtaSep_FromTaggedGenMatchL = ZFJPair_EtaSep_FromGenMatch;
                                     ZFJGenTaggedTree->Fill();
 
+                                    ZFJLead_decaypdgId_FromTaggedGenMatchL.clear();
+                                    ZFJTrailing_decaypdgId_FromTaggedGenMatchL.clear();
                                 }
 
 
@@ -2181,6 +2784,139 @@ void FullAnalysisInCWithLHE(){
 
                                 }
                             }
+
+                            
+                        }
+
+                        if (mindROne < genMatchdRCut && mindRTwo < genMatchdRCut ){
+                                UInt_t tmpLeadInd;
+                                UInt_t tmpTrailingInd;
+                                if (FatJet_pt[zJetIndOne] > FatJet_pt[zJetIndTwo]){
+                                    tmpLeadInd = zJetIndOne;
+                                    tmpTrailingInd = zJetIndTwo;
+                                }
+                                else {
+                                    tmpLeadInd = zJetIndTwo;
+                                    tmpTrailingInd = zJetIndOne;
+                                }
+                                float ZFJLead_pt_FromGenMatch = FatJet_pt[tmpLeadInd];
+                                float ZFJLead_eta_FromGenMatch = FatJet_eta[tmpLeadInd];
+                                float ZFJLead_phi_FromGenMatch = FatJet_phi[tmpLeadInd];
+                                float ZFJLead_mass_FromGenMatch = FatJet_mass[tmpLeadInd];
+                                float ZFJLead_dRFromFJ_FromGenMatch = mindROne;
+
+                                float ZFJTrailing_pt_FromGenMatch = FatJet_pt[tmpTrailingInd];
+                                float ZFJTrailing_eta_FromGenMatch = FatJet_eta[tmpTrailingInd];
+                                float ZFJTrailing_phi_FromGenMatch = FatJet_phi[tmpTrailingInd];
+                                float ZFJTrailing_mass_FromGenMatch = FatJet_mass[tmpTrailingInd];
+                                float ZFJTrailing_dRFromFJ_FromGenMatch = mindRTwo;
+
+                                ZFJLead_pt_FromGenMatchL = ZFJLead_pt_FromGenMatch;
+                                ZFJLead_eta_FromGenMatchL = ZFJLead_eta_FromGenMatch;
+                                ZFJLead_phi_FromGenMatchL = ZFJLead_phi_FromGenMatch;
+                                ZFJLead_mass_FromGenMatchL = ZFJLead_mass_FromGenMatch;
+                                ZFJLead_dRFromFJ_FromGenMatchL = ZFJLead_dRFromFJ_FromGenMatch;
+
+                                nZFJLeadDecay_FromGenMatchL = nZFJLeadDecay_FromGenMatch;
+                                //ZFJLead_decaypdgId_FromGenMatchL = ZFJLead_decaypdgId_FromGenMatch;
+                                for (UInt_t tmpZDecItr=0;tmpZDecItr<ZFJLead_decaypdgId_FromGenMatch.size();tmpZDecItr++){
+                                    ZFJLead_decaypdgId_FromGenMatchL.push_back(ZFJLead_decaypdgId_FromGenMatch[tmpZDecItr]);
+                                }
+                                
+
+                                ZFJTrailing_pt_FromGenMatchL = ZFJTrailing_pt_FromGenMatch;
+                                ZFJTrailing_eta_FromGenMatchL = ZFJTrailing_eta_FromGenMatch;
+                                ZFJTrailing_phi_FromGenMatchL = ZFJTrailing_phi_FromGenMatch;
+                                ZFJTrailing_mass_FromGenMatchL = ZFJTrailing_mass_FromGenMatch;
+                                ZFJTrailing_dRFromFJ_FromGenMatchL = ZFJTrailing_dRFromFJ_FromGenMatch;
+
+                                nZFJTrailingDecay_FromGenMatchL = nZFJTrailingDecay_FromGenMatch;
+                                //ZFJTrailing_decaypdgId_FromGenMatchL = ZFJTrailing_decaypdgId_FromGenMatch;
+
+                                for (UInt_t tmpZDecItr=0;tmpZDecItr<ZFJTrailing_decaypdgId_FromGenMatch.size();tmpZDecItr++){
+                                    ZFJTrailing_decaypdgId_FromGenMatchL.push_back(ZFJTrailing_decaypdgId_FromGenMatch[tmpZDecItr]);
+                                }
+
+                                
+
+
+                                ROOT::Math::PtEtaPhiMVector tmpZFJLeadVec  = ROOT::Math::PtEtaPhiMVector(ZFJLead_pt_FromGenMatch,ZFJLead_eta_FromGenMatch,ZFJLead_phi_FromGenMatch,ZFJLead_mass_FromGenMatch);
+
+                                ROOT::Math::PtEtaPhiMVector tmpZFJTrailingVec  = ROOT::Math::PtEtaPhiMVector(ZFJTrailing_pt_FromGenMatch,ZFJTrailing_eta_FromGenMatch,ZFJTrailing_phi_FromGenMatch,ZFJTrailing_mass_FromGenMatch);
+
+                                ROOT::Math::PtEtaPhiMVector tmpZFJPairVec = tmpZFJLeadVec+tmpZFJTrailingVec;
+
+                                float ZFJPair_InvMass_FromGenMatch = tmpZFJPairVec.M();
+                                float ZFJPair_EtaSep_FromGenMatch = abs(ZFJLead_eta_FromGenMatch-ZFJTrailing_eta_FromGenMatch);
+
+                                ZFJPair_InvMass_FromGenMatchL = ZFJPair_InvMass_FromGenMatch;
+                                ZFJPair_EtaSep_FromGenMatchL = ZFJPair_EtaSep_FromGenMatch;
+                                ZFJGenTree->Fill();
+
+                                ZFJLead_decaypdgId_FromGenMatchL.clear();
+                                ZFJTrailing_decaypdgId_FromGenMatchL.clear();
+
+                                if (ZIsHadronic) {
+
+                                    ZFJLead_pt_FromTaggedGenMatchL = ZFJLead_pt_FromGenMatch;
+                                    ZFJLead_eta_FromTaggedGenMatchL = ZFJLead_eta_FromGenMatch;
+                                    ZFJLead_phi_FromTaggedGenMatchL = ZFJLead_phi_FromGenMatch;
+                                    ZFJLead_mass_FromTaggedGenMatchL = ZFJLead_mass_FromGenMatch;
+                                    ZFJLead_dRFromFJ_FromTaggedGenMatchL = ZFJLead_dRFromFJ_FromGenMatch;
+
+                                    nZFJLeadDecay_FromTaggedGenMatchL = nZFJLeadDecay_FromGenMatch;
+                                    //ZFJLead_decaypdgId_FromTaggedGenMatchL = ZFJLead_decaypdgId_FromGenMatch;
+
+                                    for (UInt_t tmpZDecItr=0;tmpZDecItr<ZFJLead_decaypdgId_FromGenMatch.size();tmpZDecItr++){
+                                        ZFJLead_decaypdgId_FromTaggedGenMatchL.push_back(ZFJLead_decaypdgId_FromGenMatch[tmpZDecItr]);
+                                    }
+                                    
+
+                                    ZFJTrailing_pt_FromTaggedGenMatchL = ZFJTrailing_pt_FromGenMatch;
+                                    ZFJTrailing_eta_FromTaggedGenMatchL = ZFJTrailing_eta_FromGenMatch;
+                                    ZFJTrailing_phi_FromTaggedGenMatchL = ZFJTrailing_phi_FromGenMatch;
+                                    ZFJTrailing_mass_FromTaggedGenMatchL = ZFJTrailing_mass_FromGenMatch;
+                                    ZFJTrailing_dRFromFJ_FromTaggedGenMatchL = ZFJTrailing_dRFromFJ_FromGenMatch;
+
+
+                                    nZFJTrailingDecay_FromTaggedGenMatchL = nZFJTrailingDecay_FromGenMatch;
+                                    //ZFJTrailing_decaypdgId_FromTaggedGenMatchL = ZFJTrailing_decaypdgId_FromGenMatch;
+
+                                    for (UInt_t tmpZDecItr=0;tmpZDecItr<ZFJTrailing_decaypdgId_FromGenMatch.size();tmpZDecItr++){
+                                        ZFJTrailing_decaypdgId_FromTaggedGenMatchL.push_back(ZFJTrailing_decaypdgId_FromGenMatch[tmpZDecItr]);
+                                    }
+
+                                    ZFJPair_InvMass_FromTaggedGenMatchL = ZFJPair_InvMass_FromGenMatch;
+                                    ZFJPair_EtaSep_FromTaggedGenMatchL = ZFJPair_EtaSep_FromGenMatch;
+                                    ZFJGenTaggedTree->Fill();
+
+                                    ZFJLead_decaypdgId_FromTaggedGenMatchL.clear();
+                                    ZFJTrailing_decaypdgId_FromTaggedGenMatchL.clear();
+                                }
+
+
+
+                                if (hJetFound){
+                                    ROOT::Math::PtEtaPhiMVector tmpHFJVec  = ROOT::Math::PtEtaPhiMVector(HFJ_pt_FromGenMatch,HFJ_eta_FromGenMatch,HFJ_phi_FromGenMatch,HFJ_mass_FromGenMatch);
+
+                                    ROOT::Math::PtEtaPhiMVector tmpHZFJVec = tmpHFJVec+tmpZFJPairVec;
+                                    
+                                    ZHFJ_ZPairPlusHInvMass_FromGenMatchL = tmpHZFJVec.M();
+                                    ZHFJGenTree->Fill();
+
+                                    if (ZIsHadronic) {
+
+                                        ZHFJ_ZPairPlusHInvMass_FromTaggedGenMatchL = tmpHZFJVec.M();
+                                        ZHFJGenTaggedTree->Fill();
+
+                                    }
+
+
+
+                                }
+                            
+
+                            
                         }
                         if (useJGenMatchTree){
                             if (debugGenPart) {
@@ -2262,6 +2998,14 @@ void FullAnalysisInCWithLHE(){
                                 ZJLead_phi_FromGenMatchL = ZJLead_phi_FromGenMatch;
                                 ZJLead_mass_FromGenMatchL = ZJLead_mass_FromGenMatch;
                                 ZJLead_dRFromJ_FromGenMatchL = ZJLead_dRFromJ_FromGenMatch;
+
+                                nZJLeadDecay_FromGenMatchL = nZFJLeadDecay_FromGenMatch;
+                                //ZJLead_decaypdgId_FromGenMatchL = ZFJLead_decaypdgId_FromGenMatch;
+
+                                for (UInt_t tmpZDecItr=0;tmpZDecItr<ZFJLead_decaypdgId_FromGenMatch.size();tmpZDecItr++){
+                                    ZJLead_decaypdgId_FromGenMatchL.push_back(ZFJLead_decaypdgId_FromGenMatch[tmpZDecItr]);
+                                }
+                                
                                 
 
                                 ZJTrailing_pt_FromGenMatchL = ZJTrailing_pt_FromGenMatch;
@@ -2269,6 +3013,13 @@ void FullAnalysisInCWithLHE(){
                                 ZJTrailing_phi_FromGenMatchL = ZJTrailing_phi_FromGenMatch;
                                 ZJTrailing_mass_FromGenMatchL = ZJTrailing_mass_FromGenMatch;
                                 ZJTrailing_dRFromJ_FromGenMatchL = ZJTrailing_dRFromJ_FromGenMatch;
+
+                                nZJTrailingDecay_FromGenMatchL = nZFJTrailingDecay_FromGenMatch;
+                                //ZJTrailing_decaypdgId_FromGenMatchL = ZFJTrailing_decaypdgId_FromGenMatch;
+
+                                for (UInt_t tmpZDecItr=0;tmpZDecItr<ZFJLead_decaypdgId_FromGenMatch.size();tmpZDecItr++){
+                                    ZJTrailing_decaypdgId_FromGenMatchL.push_back(ZFJLead_decaypdgId_FromGenMatch[tmpZDecItr]);
+                                }
 
                                 ROOT::Math::PtEtaPhiMVector tmpZJLeadVec  = ROOT::Math::PtEtaPhiMVector(ZJLead_pt_FromGenMatch,ZJLead_eta_FromGenMatch,ZJLead_phi_FromGenMatch,ZJLead_mass_FromGenMatch);
 
@@ -2283,6 +3034,9 @@ void FullAnalysisInCWithLHE(){
                                 ZJPair_EtaSep_FromGenMatchL = ZJPair_EtaSep_FromGenMatch;
                                 ZJGenTree->Fill();
 
+                                ZJLead_decaypdgId_FromGenMatchL.clear();
+                                ZJTrailing_decaypdgId_FromGenMatchL.clear();
+
                                 if (ZIsHadronic) {
 
                                     ZJLead_pt_FromTaggedGenMatchL = ZJLead_pt_FromGenMatch;
@@ -2290,6 +3044,13 @@ void FullAnalysisInCWithLHE(){
                                     ZJLead_phi_FromTaggedGenMatchL = ZJLead_phi_FromGenMatch;
                                     ZJLead_mass_FromTaggedGenMatchL = ZJLead_mass_FromGenMatch;
                                     ZJLead_dRFromJ_FromTaggedGenMatchL = ZJLead_dRFromJ_FromGenMatch;
+
+                                    nZJLeadDecay_FromTaggedGenMatchL = nZFJLeadDecay_FromGenMatch;
+                                    //ZJLead_decaypdgId_FromTaggedGenMatchL = ZFJLead_decaypdgId_FromGenMatch;
+
+                                    for (UInt_t tmpZDecItr=0;tmpZDecItr<ZFJLead_decaypdgId_FromGenMatch.size();tmpZDecItr++){
+                                        ZJLead_decaypdgId_FromTaggedGenMatchL.push_back(ZFJLead_decaypdgId_FromGenMatch[tmpZDecItr]);
+                                    }
                                     
 
                                     ZJTrailing_pt_FromTaggedGenMatchL = ZJTrailing_pt_FromGenMatch;
@@ -2298,9 +3059,19 @@ void FullAnalysisInCWithLHE(){
                                     ZJTrailing_mass_FromTaggedGenMatchL = ZJTrailing_mass_FromGenMatch;
                                     ZJTrailing_dRFromJ_FromTaggedGenMatchL = ZJTrailing_dRFromJ_FromGenMatch;
 
+                                    nZJTrailingDecay_FromTaggedGenMatchL = nZFJTrailingDecay_FromGenMatch;
+                                    //ZJTrailing_decaypdgId_FromTaggedGenMatchL = ZFJTrailing_decaypdgId_FromGenMatch;
+
+                                    for (UInt_t tmpZDecItr=0;tmpZDecItr<ZFJTrailing_decaypdgId_FromGenMatch.size();tmpZDecItr++){
+                                        ZJTrailing_decaypdgId_FromTaggedGenMatchL.push_back(ZFJTrailing_decaypdgId_FromGenMatch[tmpZDecItr]);
+                                    }
+
                                     ZJPair_InvMass_FromTaggedGenMatchL = ZJPair_InvMass_FromGenMatch;
                                     ZJPair_EtaSep_FromTaggedGenMatchL = ZJPair_EtaSep_FromGenMatch;
                                     ZJGenTaggedTree->Fill();
+
+                                    ZJLead_decaypdgId_FromTaggedGenMatchL.clear();
+                                    ZJTrailing_decaypdgId_FromTaggedGenMatchL.clear();
 
 
                                 }
@@ -2345,12 +3116,26 @@ void FullAnalysisInCWithLHE(){
                             H_pdgId_FromGenRawL = H_pdgId_FromGenRaw;
                             H_genPartIdxMother_FromGenRawL = H_genPartIdxMother_FromGenRaw;
 
+                            nHDecay_FromGenRawL = nHFJDecay_FromGenMatch;
+                            //H_decaypdgId_FromGenRawL = HFJ_decaypdgId_FromGenMatch;
+
+                            for (UInt_t tmpHDecItr=0;tmpHDecItr<HFJ_decaypdgId_FromGenMatch.size();tmpHDecItr++){
+                                H_decaypdgId_FromGenRawL.push_back(HFJ_decaypdgId_FromGenMatch[tmpHDecItr]);
+                            }
+
                             ZOne_pt_FromGenRawL = ZOne_pt_FromGenRaw;
                             ZOne_eta_FromGenRawL = ZOne_eta_FromGenRaw;
                             ZOne_phi_FromGenRawL = ZOne_phi_FromGenRaw;
                             ZOne_mass_FromGenRawL = ZOne_mass_FromGenRaw;
                             ZOne_pdgId_FromGenRawL = ZOne_pdgId_FromGenRaw;
                             ZOne_genPartIdxMother_FromGenRawL = ZOne_genPartIdxMother_FromGenRaw;
+
+                            nZOneDecay_FromGenRawL = nZFJLeadDecay_FromGenMatch;
+                            //ZOne_decaypdgId_FromGenRawL = ZFJLead_decaypdgId_FromGenMatch;
+
+                            for (UInt_t tmpZDecItr=0;tmpZDecItr<ZFJLead_decaypdgId_FromGenMatch.size();tmpZDecItr++){
+                                ZOne_decaypdgId_FromGenRawL.push_back(ZFJLead_decaypdgId_FromGenMatch[tmpZDecItr]);
+                            }
 
                             ZTwo_pt_FromGenRawL = ZTwo_pt_FromGenRaw;
                             ZTwo_eta_FromGenRawL = ZTwo_eta_FromGenRaw;
@@ -2359,12 +3144,24 @@ void FullAnalysisInCWithLHE(){
                             ZTwo_pdgId_FromGenRawL = ZTwo_pdgId_FromGenRaw;
                             ZTwo_genPartIdxMother_FromGenRawL = ZTwo_genPartIdxMother_FromGenRaw;
 
+                            nZTwoDecay_FromGenRawL = nZFJTrailingDecay_FromGenMatch;
+                            //ZTwo_decaypdgId_FromGenRawL = ZFJTrailing_decaypdgId_FromGenMatch;
+
+                            for (UInt_t tmpZDecItr=0;tmpZDecItr<ZFJTrailing_decaypdgId_FromGenMatch.size();tmpZDecItr++){
+                                ZTwo_decaypdgId_FromGenRawL.push_back(ZFJTrailing_decaypdgId_FromGenMatch[tmpZDecItr]);
+                            }
+
                             ZPair_InvMass_FromGenRawL = ZPair_InvMass_FromGenRaw;
                             ZPair_EtaSep_FromGenRawL = ZPair_EtaSep_FromGenRaw;
 
                             ZPairPlusH_InvMass_FromGenRawL = ZPairPlusH_InvMass_FromGenRaw;
 
                             GenRawTree->Fill();
+
+                            H_decaypdgId_FromGenRawL.clear();
+                            ZOne_decaypdgId_FromGenRawL.clear();
+                            ZTwo_decaypdgId_FromGenRawL.clear();
+
 
                             if (ZIsHadronic) {
 
@@ -2375,6 +3172,10 @@ void FullAnalysisInCWithLHE(){
                                 H_pdgId_FromTaggedGenRawL = H_pdgId_FromGenRaw;
                                 H_genPartIdxMother_FromTaggedGenRawL = H_genPartIdxMother_FromGenRaw;
 
+                                nHDecay_FromTaggedGenRawL = nHFJDecay_FromGenMatch;
+                                H_decaypdgId_FromTaggedGenRawL = HFJ_decaypdgId_FromGenMatch;
+
+
                                 ZOne_pt_FromTaggedGenRawL = ZOne_pt_FromGenRaw;
                                 ZOne_eta_FromTaggedGenRawL = ZOne_eta_FromGenRaw;
                                 ZOne_phi_FromTaggedGenRawL = ZOne_phi_FromGenRaw;
@@ -2382,12 +3183,18 @@ void FullAnalysisInCWithLHE(){
                                 ZOne_pdgId_FromTaggedGenRawL = ZOne_pdgId_FromGenRaw;
                                 ZOne_genPartIdxMother_FromTaggedGenRawL = ZOne_genPartIdxMother_FromGenRaw;
 
+                                nZOneDecay_FromTaggedGenRawL = nZFJLeadDecay_FromGenMatch;
+                                ZOne_decaypdgId_FromTaggedGenRawL = ZFJLead_decaypdgId_FromGenMatch;
+
                                 ZTwo_pt_FromTaggedGenRawL = ZTwo_pt_FromGenRaw;
                                 ZTwo_eta_FromTaggedGenRawL = ZTwo_eta_FromGenRaw;
                                 ZTwo_phi_FromTaggedGenRawL = ZTwo_phi_FromGenRaw;
                                 ZTwo_mass_FromTaggedGenRawL = ZTwo_mass_FromGenRaw;
                                 ZTwo_pdgId_FromTaggedGenRawL = ZTwo_pdgId_FromGenRaw;
                                 ZTwo_genPartIdxMother_FromTaggedGenRawL = ZTwo_genPartIdxMother_FromGenRaw;
+
+                                nZTwoDecay_FromTaggedGenRawL = nZFJTrailingDecay_FromGenMatch;
+                                ZTwo_decaypdgId_FromTaggedGenRawL = ZFJTrailing_decaypdgId_FromGenMatch;
 
                                 ZPair_InvMass_FromTaggedGenRawL = ZPair_InvMass_FromGenRaw;
                                 ZPair_EtaSep_FromTaggedGenRawL = ZPair_EtaSep_FromGenRaw;
@@ -2443,13 +3250,16 @@ void FullAnalysisInCWithLHE(){
 
                             RawTaggedTree->Fill();
 
-                            if (hGenFound) {
+                            if (hGenFound && hJetFound) {
 
                                 HFJ_pt_FromTaggedGenMatchL = HFJ_pt_FromGenMatch;
                                 HFJ_eta_FromTaggedGenMatchL = HFJ_eta_FromGenMatch;
                                 HFJ_phi_FromTaggedGenMatchL = HFJ_phi_FromGenMatch;
                                 HFJ_mass_FromTaggedGenMatchL = HFJ_mass_FromGenMatch;
                                 HFJ_dRFromFJ_FromTaggedGenMatchL = HFJ_dRFromFJ_FromGenMatch;
+
+                                nHFJDecay_FromTaggedGenMatchL = nHFJDecay_FromGenMatch;
+                                HFJ_decaypdgId_FromTaggedGenMatchL = HFJ_decaypdgId_FromGenMatch;
                                     
                                 HFJGenTaggedTree->Fill();
                             }
