@@ -2228,20 +2228,22 @@ void FullAnalysisInCWithLHE(){
                     float HFJ_mass_FromGenMatch;
                     float HFJ_dRFromFJ_FromGenMatch;
 
+                    Int_t hInd = -1;
+
                     
                     
                     if (finalHAr.size() != 1) {
                         std::cout <<"ERROR ERROR, MORE OR LESS THAN ONE H,evCount,JOne_pdgId_FromLHERaw,JTwo_pdgId_FromLHERaw " << evCount<< " " <<JOne_pdgId_FromLHERaw<< " " <<JTwo_pdgId_FromLHERaw << "\n";
                     }
                     else{
-                        Int_t tmpHInd = finalHAr[0];
+                        hInd = finalHAr[0];
                         hGenFound = true;
-                        H_pt_FromGenRaw = GenPart_pt[tmpHInd];
-                        H_eta_FromGenRaw = GenPart_eta[tmpHInd];
-                        H_phi_FromGenRaw = GenPart_phi[tmpHInd];
-                        H_mass_FromGenRaw = GenPart_mass[tmpHInd];
-                        H_pdgId_FromGenRaw = GenPart_pdgId[tmpHInd];
-                        H_genPartIdxMother_FromGenRaw = GenPart_genPartIdxMother[tmpHInd];
+                        H_pt_FromGenRaw = GenPart_pt[hInd];
+                        H_eta_FromGenRaw = GenPart_eta[hInd];
+                        H_phi_FromGenRaw = GenPart_phi[hInd];
+                        H_mass_FromGenRaw = GenPart_mass[hInd];
+                        H_pdgId_FromGenRaw = GenPart_pdgId[hInd];
+                        H_genPartIdxMother_FromGenRaw = GenPart_genPartIdxMother[hInd];
 
 
 
@@ -2259,7 +2261,7 @@ void FullAnalysisInCWithLHE(){
                             */
 
                             for (UInt_t fatJetInd=0;fatJetInd<*nFatJet;fatJetInd++){
-                                float tmpMindROne = calcDeltaR(FatJet_phi[fatJetInd],FatJet_eta[fatJetInd],GenPart_phi[tmpHInd],GenPart_eta[tmpHInd]);
+                                float tmpMindROne = calcDeltaR(FatJet_phi[fatJetInd],FatJet_eta[fatJetInd],GenPart_phi[hInd],GenPart_eta[hInd]);
                                 /*
                                 if (evCount-1 == 29){
                                     std::cout << "fatJetInd " << fatJetInd << " tmpMindROne " << tmpMindROne << " FatJet_phi[fatJetInd] "<<FatJet_phi[fatJetInd] << " FatJet_eta[fatJetInd] " << FatJet_eta[fatJetInd] << "\n";
@@ -2788,6 +2790,9 @@ void FullAnalysisInCWithLHE(){
                             
                         }
 
+                        /*
+                        
+
                         if (mindROne < genMatchdRCut && mindRTwo < genMatchdRCut ){
                                 UInt_t tmpLeadInd;
                                 UInt_t tmpTrailingInd;
@@ -2918,6 +2923,7 @@ void FullAnalysisInCWithLHE(){
 
                             
                         }
+                        */
                         if (useJGenMatchTree){
                             if (debugGenPart) {
                                 std::cout <<"entering J Z gen matching loop\n";
@@ -2930,7 +2936,24 @@ void FullAnalysisInCWithLHE(){
                                 useSecondPlace = false;
                             }
 
+                            float tmpHEta;
+                            float tmpHPhi;
+
+                            if (hJetFound) {
+                                tmpHEta = FatJet_eta[hJetInd];
+                                tmpHPhi = FatJet_phi[hJetInd];
+                            }
+
+
+
                             for (UInt_t jetInd=0;jetInd<*nJet;jetInd++){
+                                if (hJetFound) {
+                                    float tmpHdR = calcDeltaR(Jet_phi[jetInd],Jet_eta[jetInd],tmpHPhi,tmpHEta);
+                                    if (tmpHdR < genMatchdRCut) {
+                                        continue;
+                                    }
+
+                                }
                                 float tmpMindROne = calcDeltaR(Jet_phi[jetInd],Jet_eta[jetInd],GenPart_phi[finalZAr[0]],GenPart_eta[finalZAr[0]]);
                                 
                                 if (tmpMindROne < mindROne){
@@ -2941,6 +2964,13 @@ void FullAnalysisInCWithLHE(){
                                 }
                             }
                             for (UInt_t jetInd=0;jetInd<*nJet;jetInd++){
+                                if (hJetFound) {
+                                    float tmpHdR = calcDeltaR(Jet_phi[jetInd],Jet_eta[jetInd],tmpHPhi,tmpHEta);
+                                    if (tmpHdR < genMatchdRCut) {
+                                        continue;
+                                    }
+
+                                }
                                 float tmpMindRTwo = calcDeltaR(Jet_phi[jetInd],Jet_eta[jetInd],GenPart_phi[finalZAr[1]],GenPart_eta[finalZAr[1]]);
                                 if (tmpMindRTwo < mindRTwo){
                                     if (jetInd == zJetIndOne) {
