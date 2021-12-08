@@ -2475,22 +2475,44 @@ void FullAnalysisInCWithLHE(){
                         }
 
 
-                        Int_t tmpZOneInd = finalZAr[0];
                         zGenFound = true;
-                        ZOne_pt_FromGenRaw = GenPart_pt[tmpZOneInd];
-                        ZOne_eta_FromGenRaw = GenPart_eta[tmpZOneInd];
-                        ZOne_phi_FromGenRaw = GenPart_phi[tmpZOneInd];
-                        ZOne_mass_FromGenRaw = GenPart_mass[tmpZOneInd];
-                        ZOne_pdgId_FromGenRaw = GenPart_pdgId[tmpZOneInd];
-                        ZOne_genPartIdxMother_FromGenRaw = GenPart_genPartIdxMother[tmpZOneInd];
-
+                        Int_t tmpZOneInd = finalZAr[0];
                         Int_t tmpZTwoInd = finalZAr[1];
-                        ZTwo_pt_FromGenRaw = GenPart_pt[tmpZTwoInd];
-                        ZTwo_eta_FromGenRaw = GenPart_eta[tmpZTwoInd];
-                        ZTwo_phi_FromGenRaw = GenPart_phi[tmpZTwoInd];
-                        ZTwo_mass_FromGenRaw = GenPart_mass[tmpZTwoInd];
-                        ZTwo_pdgId_FromGenRaw = GenPart_pdgId[tmpZTwoInd];
-                        ZTwo_genPartIdxMother_FromGenRaw = GenPart_genPartIdxMother[tmpZTwoInd];
+                        float tmpZptOne = GenPart_pt[tmpZOneInd];
+                        float tmpZptTwo = GenPart_pt[tmpZTwoInd];
+                        
+                        
+                        if (tmpZptOne > tmpZptTwo) {
+                            ZOne_pt_FromGenRaw = tmpZptOne;
+                            ZOne_eta_FromGenRaw = GenPart_eta[tmpZOneInd];
+                            ZOne_phi_FromGenRaw = GenPart_phi[tmpZOneInd];
+                            ZOne_mass_FromGenRaw = GenPart_mass[tmpZOneInd];
+                            ZOne_pdgId_FromGenRaw = GenPart_pdgId[tmpZOneInd];
+                            ZOne_genPartIdxMother_FromGenRaw = GenPart_genPartIdxMother[tmpZOneInd];
+
+                            ZTwo_pt_FromGenRaw = tmpZptTwo;
+                            ZTwo_eta_FromGenRaw = GenPart_eta[tmpZTwoInd];
+                            ZTwo_phi_FromGenRaw = GenPart_phi[tmpZTwoInd];
+                            ZTwo_mass_FromGenRaw = GenPart_mass[tmpZTwoInd];
+                            ZTwo_pdgId_FromGenRaw = GenPart_pdgId[tmpZTwoInd];
+                            ZTwo_genPartIdxMother_FromGenRaw = GenPart_genPartIdxMother[tmpZTwoInd];
+                        }
+                        else{
+                            ZOne_pt_FromGenRaw = tmpZptTwo;
+                            ZOne_eta_FromGenRaw = GenPart_eta[tmpZTwoInd];
+                            ZOne_phi_FromGenRaw = GenPart_phi[tmpZTwoInd];
+                            ZOne_mass_FromGenRaw = GenPart_mass[tmpZTwoInd];
+                            ZOne_pdgId_FromGenRaw = GenPart_pdgId[tmpZTwoInd];
+                            ZOne_genPartIdxMother_FromGenRaw = GenPart_genPartIdxMother[tmpZTwoInd];
+
+                            ZTwo_pt_FromGenRaw = tmpZptOne;
+                            ZTwo_eta_FromGenRaw = GenPart_eta[tmpZOneInd];
+                            ZTwo_phi_FromGenRaw = GenPart_phi[tmpZOneInd];
+                            ZTwo_mass_FromGenRaw = GenPart_mass[tmpZOneInd];
+                            ZTwo_pdgId_FromGenRaw = GenPart_pdgId[tmpZOneInd];
+                            ZTwo_genPartIdxMother_FromGenRaw = GenPart_genPartIdxMother[tmpZOneInd];
+
+                        }
 
                         ZGenLeadVec  = ROOT::Math::PtEtaPhiMVector(ZOne_pt_FromGenRaw,ZOne_eta_FromGenRaw,ZOne_phi_FromGenRaw,ZOne_mass_FromGenRaw);
 
