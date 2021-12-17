@@ -877,6 +877,8 @@ def setUpNonStackedHistAndFoMPlotForLHETrees(compCan,cloneHistAr,padAr,histMax,i
         cloneHistAr[k][histTypeItr].SetLineWidth(2)
         if k == 0 and not useLogYForRatioPlot:
           cloneHistAr[k][histTypeItr].GetYaxis().SetRangeUser(0.,2.0)
+        elif useLogYForRatioPlot:
+          cloneHistAr[k][histTypeItr].GetYaxis().SetRangeUser(0.01,1000000.0)
         cloneHistAr[k][histTypeItr].Draw("et same")
 
 
@@ -1201,6 +1203,8 @@ def setUpStackedHistAndDrawFoMPlot(histMax,histMin,histAr,cloneHistAr,histStack,
           #else:
           #  cloneHistAr[k][histTypeItr].GetYaxis().SetRangeUser(0.,2.0)
           cloneHistAr[k][histTypeItr].GetYaxis().SetRangeUser(0.,2.0)
+        elif useLogYForRatioPlot:
+          cloneHistAr[k][histTypeItr].GetYaxis().SetRangeUser(0.01,1000000.0)
         cloneHistAr[k][histTypeItr].Draw("et same")
 
 
