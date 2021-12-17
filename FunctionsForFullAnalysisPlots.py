@@ -995,10 +995,12 @@ def addHistsToStack(fileAr,histAr,isSignalAr,sumQCD,isQCDAr,histStackAr,QCDSumHi
 
 def normalizeHists(histAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,backgroundIntSum,isSignalAr,weightsAr,legAr,nameAr,intAr,histTypeSaveNameAr,onlyDoSomeHists,histsToDo,signalPos):
     histMaxAr = []
+    histMinAr = []
     for histTypeItr in range(len(histTypeSaveNameAr)):
       if onlyDoSomeHists and histTypeItr >= histsToDo:
         break
       histMaxAr.append(0)
+      histMinAr.append(9999)
     for k in range(len(histAr)):
       for histTypeItr in range(len(histTypeSaveNameAr)):
         if onlyDoSomeHists and histTypeItr >= histsToDo:
@@ -1015,6 +1017,9 @@ def normalizeHists(histAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,background
                 tmpMax = histAr[k][histTypeItr].GetMaximum()
                 if tmpMax > histMaxAr[histTypeItr]:
                     histMaxAr[histTypeItr] = tmpMax
+                if tmpMax > 0 and tmpMax < histMinAr[histTypeItr]:
+                    histMinAr[histTypeItr] = tmpMax
+
                 legAr[histTypeItr].AddEntry(histAr[k][histTypeItr],nameAr[k],"l")
             elif intAr[k][histTypeItr]:
                 #print(k,histTypeItr)
@@ -1028,17 +1033,21 @@ def normalizeHists(histAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,background
                   tmpMax = histAr[k][histTypeItr].GetMaximum()
                   print(tmpMax)
                   if tmpMax > histMaxAr[histTypeItr]:
-                      histMaxAr[histTypeItr] = tmpMax
+                    histMaxAr[histTypeItr] = tmpMax
+                  if tmpMax > 0 and tmpMax < histMinAr[histTypeItr]:
+                    histMinAr[histTypeItr] = tmpMax
                 print("-----------------")
 
                 tmpMax = histAr[k][histTypeItr].GetMaximum()
                 if not normalizeBackgroundsTogether:
                   if tmpMax > histMaxAr[histTypeItr]:
-                      histMaxAr[histTypeItr] = tmpMax
+                    histMaxAr[histTypeItr] = tmpMax
+                  if tmpMax > 0 and tmpMax < histMinAr[histTypeItr]:
+                    histMinAr[histTypeItr] = tmpMax
                 legAr[histTypeItr].AddEntry(histAr[k][histTypeItr],nameAr[k],"l")
-    return histMaxAr
+    return histMaxAr,histMinAr
 
-def scaleQCDHist(QCDSumInt,QCDSumHist,histMaxAr,legAr,onlyDoSomeHists,histsToDo,normalizeBackgroundsTogether,backgroundIntSum):
+def scaleQCDHist(QCDSumInt,QCDSumHist,histMaxAr,histMinAr,legAr,onlyDoSomeHists,histsToDo,normalizeBackgroundsTogether,backgroundIntSum):
   for histTypeItr in range(len(histMaxAr)):
     if onlyDoSomeHists and histTypeItr >= histsToDo:
       break
@@ -1055,9 +1064,11 @@ def scaleQCDHist(QCDSumInt,QCDSumHist,histMaxAr,legAr,onlyDoSomeHists,histsToDo,
         QCDSumHist[histTypeItr].Scale(1.0 / QCDSumInt[histTypeItr])
       tmpMax = QCDSumHist[histTypeItr].GetMaximum()
       if tmpMax > histMaxAr[histTypeItr]:
-          histMaxAr[histTypeItr] = tmpMax
+        histMaxAr[histTypeItr] = tmpMax
+      if tmpMax > 0 and tmpMax < histMinAr[histTypeItr]:
+        histMinAr[histTypeItr] = tmpMax
       legAr[histTypeItr].AddEntry(QCDSumHist[histTypeItr],"QCDSum","l")
-  return histMaxAr
+  return histMaxAr,histMinAr
 
 
 
@@ -1119,7 +1130,7 @@ def setUpInvHists(histAr,cloneHistAr,isSignalAr,sumQCD,isQCDAr,invHistsAr,nameAr
             drawInvAr[-1].append(False)
 
 
-def setUpStackedHistAndDrawFoMPlot(histMax,histAr,cloneHistAr,histStack,invHistsAr,drawInvAr,legAr,compCan,padAr,normalizeBackgroundsTogether,signalName,backgroundName,histTypeSaveNameAr,histTypeXTitleAr,signalPos,onlyDoSomeHists,histsToDo):
+def setUpStackedHistAndDrawFoMPlot(histMax,histMin,histAr,cloneHistAr,histStack,invHistsAr,drawInvAr,legAr,compCan,padAr,normalizeBackgroundsTogether,signalName,backgroundName,histTypeSaveNameAr,histTypeXTitleAr,signalPos,onlyDoSomeHists,histsToDo):
     #maxForRange = 1.1*histMax
     #histAr[1].GetYaxis().SetRangeUser(0,maxForRange)
     for histTypeItr, histTypeSaveName in enumerate(histTypeSaveNameAr):
@@ -1137,6 +1148,8 @@ def setUpStackedHistAndDrawFoMPlot(histMax,histAr,cloneHistAr,histStack,invHists
       tmpMax = histStack[histTypeItr].GetMaximum()
       if tmpMax < histMax[histTypeItr]:
           histStack[histTypeItr].SetMaximum(histMax[histTypeItr])
+      if tmpMax > 0 and tmpMax > histMin[histTypeItr]:
+          histStack[histTypeItr].SetMinimum(histMin[histTypeItr])
       histStack[histTypeItr].Draw("same hist")
 
       for k in range(len(invHistsAr)):
@@ -1228,7 +1241,7 @@ def setUpStackedHistAndDrawFoMPlot(histMax,histAr,cloneHistAr,histStack,invHists
 
 
 
-def setUpNonStackedHistAndFoMPlot(compCan,cloneHistAr,padAr,sumQCD,QCDSumHist,histMax,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histAr,legAr,signalName,backgroundName,histTypeSaveNameAr,histTypeTitleAr,histTypeXTitleAr,signalPos,onlyDoSomeHists,histsToDo):
+def setUpNonStackedHistAndFoMPlot(compCan,cloneHistAr,padAr,sumQCD,QCDSumHist,histMax,histMin,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxInt,histAr,legAr,signalName,backgroundName,histTypeSaveNameAr,histTypeTitleAr,histTypeXTitleAr,signalPos,onlyDoSomeHists,histsToDo):
   for histTypeItr, histTypeSaveName in enumerate(histTypeSaveNameAr):
     if onlyDoSomeHists and histTypeItr >= histsToDo:
         break
@@ -1247,6 +1260,8 @@ def setUpNonStackedHistAndFoMPlot(compCan,cloneHistAr,padAr,sumQCD,QCDSumHist,hi
         tmpMax = QCDSumHist[histTypeItr].GetMaximum()
         if tmpMax > histMax[histTypeItr]:
             histMax[histTypeItr] = tmpMax
+        if tmpMax > 0 and tmpMax < histMin[histTypeItr]:
+            histMin[histTypeItr] = tmpMax
     if normalizeBackgroundsTogether:
         tmpMaxSignal = histAr[signalPos][histTypeItr].GetMaximum()
         if tmpMaxSignal:
@@ -1262,12 +1277,20 @@ def setUpNonStackedHistAndFoMPlot(compCan,cloneHistAr,padAr,sumQCD,QCDSumHist,hi
     tmpMax = histAr[signalPos][histTypeItr].GetMaximum()
     if tmpMax > histMax[histTypeItr]:
         histMax[histTypeItr] = tmpMax
+    if tmpMax > 0 and tmpMax < histMin[histTypeItr]:
+        histMin[histTypeItr] = tmpMax
     if signalPos == 1:
-      histAr[0][histTypeItr].GetYaxis().SetRangeUser(0,histMax[histTypeItr]*1.1)
+      if not useLogY:
+        histAr[0][histTypeItr].GetYaxis().SetRangeUser(0,histMax[histTypeItr]*1.1)
+      else:
+        histAr[0][histTypeItr].GetYaxis().SetRangeUser(histMin[histTypeItr]*0.5,histMax[histTypeItr]*1.1)
       histAr[0][histTypeItr].SetTitle(histTypeTitleAr[histTypeItr])
       histAr[0][histTypeItr].Draw("hist E1")
     else:
-      histAr[1][histTypeItr].GetYaxis().SetRangeUser(0,histMax[histTypeItr]*1.1)
+      if not useLogY:
+        histAr[1][histTypeItr].GetYaxis().SetRangeUser(0,histMax[histTypeItr]*1.1)
+      else:
+        histAr[1][histTypeItr].GetYaxis().SetRangeUser(histMin[histTypeItr]*0.5,histMax[histTypeItr]*1.1)
       histAr[1][histTypeItr].SetTitle(histTypeTitleAr[histTypeItr])
       histAr[1][histTypeItr].Draw("hist E1")
 

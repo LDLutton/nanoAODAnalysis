@@ -1117,12 +1117,12 @@ if not onlyLHETree:
     backgroundIntSumAr,QCDSumIntAr = setHistoElements(colorAr,sumQCD,QCDSumHistAr,isQCDAr,histAr,isSignalAr,normalizeBackgroundsTogether,weightsAr,intComparisonAr,FASaveNameAr,onlyDoSomeHists,histsToDo,signalPos)
 
 
-    histMaxAr = normalizeHists(histAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,backgroundIntSumAr,isSignalAr,weightsAr,legAr,datasetSaveNameAr,intComparisonAr,FASaveNameAr,onlyDoSomeHists,histsToDo,signalPos)
+    histMaxAr,histMinAr = normalizeHists(histAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,backgroundIntSumAr,isSignalAr,weightsAr,legAr,datasetSaveNameAr,intComparisonAr,FASaveNameAr,onlyDoSomeHists,histsToDo,signalPos)
 
 
 
     if sumQCD:
-        histMaxAr = scaleQCDHist(QCDSumIntAr,QCDSumHistAr,histMaxAr,legAr,onlyDoSomeHists,histsToDo,normalizeBackgroundsTogether,backgroundIntSumAr)
+        histMaxAr,histMinAr = scaleQCDHist(QCDSumIntAr,QCDSumHistAr,histMaxAr,histMinAr,legAr,onlyDoSomeHists,histsToDo,normalizeBackgroundsTogether,backgroundIntSumAr)
 
 
 
@@ -1146,7 +1146,7 @@ if not onlyLHETree:
     setUpInvHists(histAr,cloneHistAr,isSignalAr,sumQCD,isQCDAr,invHistsAr,FASaveNameAr,intComparisonAr,drawInvAr,QCDSumIntAr,QCDSumHistAr,FASaveNameAr,onlyDoSomeHists,histsToDo)
 
 
-    setUpStackedHistAndDrawFoMPlot(histMaxAr,histAr,cloneHistAr,comparisonHistStackAr,invHistsAr,drawInvAr,legAr,comparisonCanAr,padAr,normalizeBackgroundsTogether,signalName,backgroundName,FASaveNameAr,FAXTitleAr,signalPos,onlyDoSomeHists,histsToDo)
+    setUpStackedHistAndDrawFoMPlot(histMaxAr,histMinAr,histAr,cloneHistAr,comparisonHistStackAr,invHistsAr,drawInvAr,legAr,comparisonCanAr,padAr,normalizeBackgroundsTogether,signalName,backgroundName,FASaveNameAr,FAXTitleAr,signalPos,onlyDoSomeHists,histsToDo)
 
     if makeUnstacked:
         comparisonUnstackedCanAr = []
@@ -1159,7 +1159,7 @@ if not onlyLHETree:
             setUpLegend(legUnstackedAr)
             setUpPadsAr(padUnstackedAr,"{0}Pad".format("FAUnstackedSaveName"))
 
-        setUpNonStackedHistAndFoMPlot(comparisonUnstackedCanAr,cloneHistAr,padAr,sumQCD,QCDSumHistAr,histMaxAr,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxIntAr,histAr,legAr,signalName,backgroundName,FASaveNameAr,FATitleAr,FAXTitleAr,signalPos,onlyDoSomeHists,histsToDo)
+        setUpNonStackedHistAndFoMPlot(comparisonUnstackedCanAr,cloneHistAr,padAr,sumQCD,QCDSumHistAr,histMaxAr,histMinAr,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxIntAr,histAr,legAr,signalName,backgroundName,FASaveNameAr,FATitleAr,FAXTitleAr,signalPos,onlyDoSomeHists,histsToDo)
 
 
 
@@ -1240,12 +1240,12 @@ if not onlyLHETree:
     backgroundIntSumAr,QCDSumIntAr = setHistoElements(colorAr,sumQCD,QCDSumHistLepAr,isQCDAr,histLepAr,isSignalAr,normalizeBackgroundsTogether,weightsAr,intComparisonAr,LepSaveNameAr,onlyDoSomeHists,histsToDo,signalPos)
 
 
-    histMaxAr = normalizeHists(histLepAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,backgroundIntSumAr,isSignalAr,weightsAr,legAr,datasetSaveNameAr,intComparisonAr,LepSaveNameAr,onlyDoSomeHists,histsToDo,signalPos)
+    histMaxAr,histMinAr = normalizeHists(histLepAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,backgroundIntSumAr,isSignalAr,weightsAr,legAr,datasetSaveNameAr,intComparisonAr,LepSaveNameAr,onlyDoSomeHists,histsToDo,signalPos)
 
 
 
     if sumQCD:
-        histMaxAr = scaleQCDHist(QCDSumIntAr,QCDSumHistLepAr,histMaxAr,legAr,onlyDoSomeHists,histsToDo,normalizeBackgroundsTogether,backgroundIntSumAr)
+        histMaxAr,histMinAr = scaleQCDHist(QCDSumIntAr,QCDSumHistLepAr,histMaxAr,histMinAr,legAr,onlyDoSomeHists,histsToDo,normalizeBackgroundsTogether,backgroundIntSumAr)
 
 
 
@@ -1269,7 +1269,7 @@ if not onlyLHETree:
     setUpInvHists(histLepAr,cloneHistAr,isSignalAr,sumQCD,isQCDAr,invHistsAr,LepSaveNameAr,intComparisonAr,drawInvAr,QCDSumIntAr,QCDSumHistLepAr,LepSaveNameAr,onlyDoSomeHists,histsToDo)
 
 
-    setUpStackedHistAndDrawFoMPlot(histMaxAr,histLepAr,cloneHistAr,comparisonHistStackAr,invHistsAr,drawInvAr,legAr,comparisonCanAr,padAr,normalizeBackgroundsTogether,signalName,backgroundName,LepSaveNameAr,LepXTitleAr,signalPos,onlyDoSomeHists,histsToDo)
+    setUpStackedHistAndDrawFoMPlot(histMaxAr,histMinAr,histLepAr,cloneHistAr,comparisonHistStackAr,invHistsAr,drawInvAr,legAr,comparisonCanAr,padAr,normalizeBackgroundsTogether,signalName,backgroundName,LepSaveNameAr,LepXTitleAr,signalPos,onlyDoSomeHists,histsToDo)
     
     if makeUnstacked:
         comparisonUnstackedCanAr = []
@@ -1364,12 +1364,12 @@ if not onlyLHETree:
     backgroundIntSumAr,QCDSumIntAr = setHistoElements(colorAr,sumQCD,QCDSumHistSemiLepAr,isQCDAr,histSemiLepAr,isSignalAr,normalizeBackgroundsTogether,weightsAr,intComparisonAr,SemiLepSaveNameAr,onlyDoSomeHists,histsToDo,signalPos)
 
 
-    histMaxAr = normalizeHists(histSemiLepAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,backgroundIntSumAr,isSignalAr,weightsAr,legAr,datasetSaveNameAr,intComparisonAr,SemiLepSaveNameAr,onlyDoSomeHists,histsToDo,signalPos)
+    histMaxAr,histMinAr = normalizeHists(histSemiLepAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,backgroundIntSumAr,isSignalAr,weightsAr,legAr,datasetSaveNameAr,intComparisonAr,SemiLepSaveNameAr,onlyDoSomeHists,histsToDo,signalPos)
 
 
 
     if sumQCD:
-        histMaxAr = scaleQCDHist(QCDSumIntAr,QCDSumHistSemiLepAr,histMaxAr,legAr,onlyDoSomeHists,histsToDo,normalizeBackgroundsTogether,backgroundIntSumAr)
+        histMaxAr,histMinAr = scaleQCDHist(QCDSumIntAr,QCDSumHistSemiLepAr,histMaxAr,histMinAr,legAr,onlyDoSomeHists,histsToDo,normalizeBackgroundsTogether,backgroundIntSumAr)
 
 
 
@@ -1393,7 +1393,7 @@ if not onlyLHETree:
     setUpInvHists(histSemiLepAr,cloneHistAr,isSignalAr,sumQCD,isQCDAr,invHistsAr,SemiLepSaveNameAr,intComparisonAr,drawInvAr,QCDSumIntAr,QCDSumHistSemiLepAr,SemiLepSaveNameAr,onlyDoSomeHists,histsToDo)
 
 
-    setUpStackedHistAndDrawFoMPlot(histMaxAr,histSemiLepAr,cloneHistAr,comparisonHistStackAr,invHistsAr,drawInvAr,legAr,comparisonCanAr,padAr,normalizeBackgroundsTogether,signalName,backgroundName,SemiLepSaveNameAr,SemiLepXTitleAr,signalPos,onlyDoSomeHists,histsToDo)
+    setUpStackedHistAndDrawFoMPlot(histMaxAr,histMinAr,histSemiLepAr,cloneHistAr,comparisonHistStackAr,invHistsAr,drawInvAr,legAr,comparisonCanAr,padAr,normalizeBackgroundsTogether,signalName,backgroundName,SemiLepSaveNameAr,SemiLepXTitleAr,signalPos,onlyDoSomeHists,histsToDo)
     
     if makeUnstacked:
         comparisonUnstackedCanAr = []
@@ -1406,7 +1406,7 @@ if not onlyLHETree:
             setUpLegend(legUnstackedAr)
             setUpPadsAr(padUnstackedAr,"{0}Pad".format("SemiLepUnstackedSaveName"))
 
-        setUpNonStackedHistAndFoMPlot(comparisonUnstackedCanAr,cloneHistAr,padAr,sumQCD,QCDSumHistSemiLepAr,histMaxAr,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxIntAr,histSemiLepAr,legAr,signalName,backgroundName,SemiLepSaveNameAr,SemiLepTitleAr,SemiLepXTitleAr,signalPos,onlyDoSomeHists,histsToDo)
+        setUpNonStackedHistAndFoMPlot(comparisonUnstackedCanAr,cloneHistAr,padAr,sumQCD,QCDSumHistSemiLepAr,histMaxAr,histMinAr,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxIntAr,histSemiLepAr,legAr,signalName,backgroundName,SemiLepSaveNameAr,SemiLepTitleAr,SemiLepXTitleAr,signalPos,onlyDoSomeHists,histsToDo)
 
 
     ###############STARTING HAD GRAPHS###############
@@ -1486,12 +1486,12 @@ if not onlyLHETree:
     backgroundIntSumAr,QCDSumIntAr = setHistoElements(colorAr,sumQCD,QCDSumHistHadAr,isQCDAr,histHadAr,isSignalAr,normalizeBackgroundsTogether,weightsAr,intComparisonAr,HadSaveNameAr,onlyDoSomeHists,histsToDo,signalPos)
 
 
-    histMaxAr = normalizeHists(histHadAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,backgroundIntSumAr,isSignalAr,weightsAr,legAr,datasetSaveNameAr,intComparisonAr,HadSaveNameAr,onlyDoSomeHists,histsToDo,signalPos)
+    histMaxAr,histMinAr = normalizeHists(histHadAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,backgroundIntSumAr,isSignalAr,weightsAr,legAr,datasetSaveNameAr,intComparisonAr,HadSaveNameAr,onlyDoSomeHists,histsToDo,signalPos)
 
 
 
     if sumQCD:
-        histMaxAr = scaleQCDHist(QCDSumIntAr,QCDSumHistHadAr,histMaxAr,legAr,onlyDoSomeHists,histsToDo,normalizeBackgroundsTogether,backgroundIntSumAr)
+        histMaxAr,histMinAr = scaleQCDHist(QCDSumIntAr,QCDSumHistHadAr,histMaxAr,histMinAr,legAr,onlyDoSomeHists,histsToDo,normalizeBackgroundsTogether,backgroundIntSumAr)
 
 
 
@@ -1515,7 +1515,7 @@ if not onlyLHETree:
     setUpInvHists(histHadAr,cloneHistAr,isSignalAr,sumQCD,isQCDAr,invHistsAr,HadSaveNameAr,intComparisonAr,drawInvAr,QCDSumIntAr,QCDSumHistHadAr,HadSaveNameAr,onlyDoSomeHists,histsToDo)
 
 
-    setUpStackedHistAndDrawFoMPlot(histMaxAr,histHadAr,cloneHistAr,comparisonHistStackAr,invHistsAr,drawInvAr,legAr,comparisonCanAr,padAr,normalizeBackgroundsTogether,signalName,backgroundName,HadSaveNameAr,HadXTitleAr,signalPos,onlyDoSomeHists,histsToDo)
+    setUpStackedHistAndDrawFoMPlot(histMaxAr,histMinAr,histHadAr,cloneHistAr,comparisonHistStackAr,invHistsAr,drawInvAr,legAr,comparisonCanAr,padAr,normalizeBackgroundsTogether,signalName,backgroundName,HadSaveNameAr,HadXTitleAr,signalPos,onlyDoSomeHists,histsToDo)
 
     if makeUnstacked:
         comparisonUnstackedCanAr = []
@@ -1528,7 +1528,7 @@ if not onlyLHETree:
             setUpLegend(legUnstackedAr)
             setUpPadsAr(padUnstackedAr,"{0}Pad".format("HadUnstackedSaveName"))
 
-        setUpNonStackedHistAndFoMPlot(comparisonUnstackedCanAr,cloneHistAr,padAr,sumQCD,QCDSumHistHadAr,histMaxAr,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxIntAr,histHadAr,legAr,signalName,backgroundName,HadSaveNameAr,HadTitleAr,HadXTitleAr,signalPos,onlyDoSomeHists,histsToDo)
+        setUpNonStackedHistAndFoMPlot(comparisonUnstackedCanAr,cloneHistAr,padAr,sumQCD,QCDSumHistHadAr,histMaxAr,histMinAr,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxIntAr,histHadAr,legAr,signalName,backgroundName,HadSaveNameAr,HadTitleAr,HadXTitleAr,signalPos,onlyDoSomeHists,histsToDo)
 
 
 if useLHETree and not onlyTaggedTrees:
