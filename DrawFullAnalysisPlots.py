@@ -1117,7 +1117,7 @@ if not onlyLHETree:
     backgroundIntSumAr,QCDSumIntAr = setHistoElements(colorAr,sumQCD,QCDSumHistAr,isQCDAr,histAr,isSignalAr,normalizeBackgroundsTogether,weightsAr,intComparisonAr,FASaveNameAr,onlyDoSomeHists,histsToDo,signalPos)
 
 
-    histMaxAr = normalizeHists(histAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,backgroundIntSumAr,isSignalAr,weightsAr,legAr,datasetSaveNameAr,intComparisonAr,FASaveNameAr,onlyDoSomeHists,histsToDo)
+    histMaxAr = normalizeHists(histAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,backgroundIntSumAr,isSignalAr,weightsAr,legAr,datasetSaveNameAr,intComparisonAr,FASaveNameAr,onlyDoSomeHists,histsToDo,signalPos)
 
 
 
@@ -1135,7 +1135,7 @@ if not onlyLHETree:
         comparisonHistStackAr.append(THStack("hist{0}Stack".format(FASaveName),FATitleAr[FAItr]))
 
 
-    maxIntAr = addHistsToStack(fileAr,histAr,isSignalAr,sumQCD,isQCDAr,comparisonHistStackAr,QCDSumHistAr,normalizeBackgroundsTogether,backgroundIntSumAr,FASaveNameAr,signalPos,onlyDoSomeHists,histsToDo)
+    maxIntAr = addHistsToStack(fileAr,histAr,isSignalAr,sumQCD,isQCDAr,comparisonHistStackAr,QCDSumHistAr,normalizeBackgroundsTogether,backgroundIntSumAr,FASaveNameAr,signalPos,onlyDoSomeHists,histsToDo,weightsAr)
 
     #Loop over all hists that went into the THStack to get center and length of error bars for invisible hist
 
@@ -1240,7 +1240,7 @@ if not onlyLHETree:
     backgroundIntSumAr,QCDSumIntAr = setHistoElements(colorAr,sumQCD,QCDSumHistLepAr,isQCDAr,histLepAr,isSignalAr,normalizeBackgroundsTogether,weightsAr,intComparisonAr,LepSaveNameAr,onlyDoSomeHists,histsToDo,signalPos)
 
 
-    histMaxAr = normalizeHists(histLepAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,backgroundIntSumAr,isSignalAr,weightsAr,legAr,datasetSaveNameAr,intComparisonAr,LepSaveNameAr,onlyDoSomeHists,histsToDo)
+    histMaxAr = normalizeHists(histLepAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,backgroundIntSumAr,isSignalAr,weightsAr,legAr,datasetSaveNameAr,intComparisonAr,LepSaveNameAr,onlyDoSomeHists,histsToDo,signalPos)
 
 
 
@@ -1258,7 +1258,7 @@ if not onlyLHETree:
         comparisonHistStackAr.append(THStack("hist{0}Stack".format(LepSaveName),LepTitleAr[LepItr]))
 
 
-    maxIntAr = addHistsToStack(fileAr,histLepAr,isSignalAr,sumQCD,isQCDAr,comparisonHistStackAr,QCDSumHistLepAr,normalizeBackgroundsTogether,backgroundIntSumAr,LepSaveNameAr,signalPos,onlyDoSomeHists,histsToDo)
+    maxIntAr = addHistsToStack(fileAr,histLepAr,isSignalAr,sumQCD,isQCDAr,comparisonHistStackAr,QCDSumHistLepAr,normalizeBackgroundsTogether,backgroundIntSumAr,LepSaveNameAr,signalPos,onlyDoSomeHists,histsToDo,weightsAr)
 
     #Loop over all hists that went into the THStack to get center and length of error bars for invisible hist
 
@@ -1364,7 +1364,7 @@ if not onlyLHETree:
     backgroundIntSumAr,QCDSumIntAr = setHistoElements(colorAr,sumQCD,QCDSumHistSemiLepAr,isQCDAr,histSemiLepAr,isSignalAr,normalizeBackgroundsTogether,weightsAr,intComparisonAr,SemiLepSaveNameAr,onlyDoSomeHists,histsToDo,signalPos)
 
 
-    histMaxAr = normalizeHists(histSemiLepAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,backgroundIntSumAr,isSignalAr,weightsAr,legAr,datasetSaveNameAr,intComparisonAr,SemiLepSaveNameAr,onlyDoSomeHists,histsToDo)
+    histMaxAr = normalizeHists(histSemiLepAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,backgroundIntSumAr,isSignalAr,weightsAr,legAr,datasetSaveNameAr,intComparisonAr,SemiLepSaveNameAr,onlyDoSomeHists,histsToDo,signalPos)
 
 
 
@@ -1382,7 +1382,7 @@ if not onlyLHETree:
         comparisonHistStackAr.append(THStack("hist{0}Stack".format(SemiLepSaveName),SemiLepTitleAr[SemiLepItr]))
 
 
-    maxIntAr = addHistsToStack(fileAr,histSemiLepAr,isSignalAr,sumQCD,isQCDAr,comparisonHistStackAr,QCDSumHistSemiLepAr,normalizeBackgroundsTogether,backgroundIntSumAr,SemiLepSaveNameAr,signalPos,onlyDoSomeHists,histsToDo)
+    maxIntAr = addHistsToStack(fileAr,histSemiLepAr,isSignalAr,sumQCD,isQCDAr,comparisonHistStackAr,QCDSumHistSemiLepAr,normalizeBackgroundsTogether,backgroundIntSumAr,SemiLepSaveNameAr,signalPos,onlyDoSomeHists,histsToDo,weightsAr)
 
     #Loop over all hists that went into the THStack to get center and length of error bars for invisible hist
 
@@ -1486,7 +1486,7 @@ if not onlyLHETree:
     backgroundIntSumAr,QCDSumIntAr = setHistoElements(colorAr,sumQCD,QCDSumHistHadAr,isQCDAr,histHadAr,isSignalAr,normalizeBackgroundsTogether,weightsAr,intComparisonAr,HadSaveNameAr,onlyDoSomeHists,histsToDo,signalPos)
 
 
-    histMaxAr = normalizeHists(histHadAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,backgroundIntSumAr,isSignalAr,weightsAr,legAr,datasetSaveNameAr,intComparisonAr,HadSaveNameAr,onlyDoSomeHists,histsToDo)
+    histMaxAr = normalizeHists(histHadAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,backgroundIntSumAr,isSignalAr,weightsAr,legAr,datasetSaveNameAr,intComparisonAr,HadSaveNameAr,onlyDoSomeHists,histsToDo,signalPos)
 
 
 
@@ -1504,7 +1504,7 @@ if not onlyLHETree:
         comparisonHistStackAr.append(THStack("hist{0}Stack".format(HadSaveName),HadTitleAr[HadItr]))
 
 
-    maxIntAr = addHistsToStack(fileAr,histHadAr,isSignalAr,sumQCD,isQCDAr,comparisonHistStackAr,QCDSumHistHadAr,normalizeBackgroundsTogether,backgroundIntSumAr,HadSaveNameAr,signalPos,onlyDoSomeHists,histsToDo)
+    maxIntAr = addHistsToStack(fileAr,histHadAr,isSignalAr,sumQCD,isQCDAr,comparisonHistStackAr,QCDSumHistHadAr,normalizeBackgroundsTogether,backgroundIntSumAr,HadSaveNameAr,signalPos,onlyDoSomeHists,histsToDo,weightsAr)
 
     #Loop over all hists that went into the THStack to get center and length of error bars for invisible hist
 

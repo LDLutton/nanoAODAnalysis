@@ -64,6 +64,8 @@ makeZHJ = False
 makeZFJ = False
 makeZJ = False
 
+scaleSignalToBackground = False
+
 useLogY = True
 useLogYForRatioPlot = True
 
@@ -84,7 +86,7 @@ XSxTitleAr = ["Cross Section"]
 XShTitleAr = ["Cross Section"]
 XSBinsAndRangeAr = [[50,-1,1]]
 
-evNxTitleAr = ["Events","Events"]
+evNxTitleAr = ["Events","Weighted Events/Bin (pb)"]
 evNhTitleAr = ["Total Events","Events Passing Higgs Jet Cuts"]
 evNBinsAndRangeAr = [[4,132877,132881],[4,55628,55632]]
 
@@ -782,11 +784,11 @@ def setHistoElementsForLHETrees(colorAr,histAr,isSignalAr,weightsAr,intAr,histTi
             histAr[k][histTypeItr].SetFillColorAlpha(colorA,0.2)
           if signalPos == 1:
             if k == 0:
-              makeNiceHistos(histAr[k][histTypeItr],"","Events",True)
+              makeNiceHistos(histAr[k][histTypeItr],"","Weighted Events/Bin (pb)",True)
               histAr[k][histTypeItr].SetTitle(histTitleName)
             else:
               if k == 1:
-                makeNiceHistos(histAr[k][histTypeItr],"","Events",True)
+                makeNiceHistos(histAr[k][histTypeItr],"","Weighted Events/Bin (pb)",True)
                 histAr[k][histTypeItr].SetTitle(histTitleName)
             tmpHistInt = histAr[k][histTypeItr].Integral()
             intAr[-1].append(tmpHistInt)
@@ -916,11 +918,11 @@ def setHistoElements(colorAr,sumQCD,QCDSumHist,isQCDAr,histAr,isSignalAr,normali
                 histAr[k][histTypeItr].SetFillColorAlpha(colorA,0.2)
             if signalPos == 1:
               if k == 0:
-                  makeNiceHistos(histAr[k][histTypeItr],"","Events",True)
+                  makeNiceHistos(histAr[k][histTypeItr],"","Weighted Events/Bin (pb)",True)
                   histAr[k][histTypeItr].SetTitle(histTitleName)
             else:
               if k == 1:
-                  makeNiceHistos(histAr[k][histTypeItr],"","Events",True)
+                  makeNiceHistos(histAr[k][histTypeItr],"","Weighted Events/Bin (pb)",True)
                   histAr[k][histTypeItr].SetTitle(histTitleName)
             tmpHistInt = histAr[k][histTypeItr].Integral()
             if normalizeBackgroundsTogether:
@@ -949,7 +951,7 @@ def setHistoElements(colorAr,sumQCD,QCDSumHist,isQCDAr,histAr,isSignalAr,normali
 
 
 
-def addHistsToStack(fileAr,histAr,isSignalAr,sumQCD,isQCDAr,histStackAr,QCDSumHist,normalizeBackgroundsTogether,backgroundIntSum,histTypeSaveNameAr,signalPos,onlyDoSomeHists,histsToDo):
+def addHistsToStack(fileAr,histAr,isSignalAr,sumQCD,isQCDAr,histStackAr,QCDSumHist,normalizeBackgroundsTogether,backgroundIntSum,histTypeSaveNameAr,signalPos,onlyDoSomeHists,histsToDo,weightsAr):
     maxIntAr = []
     for histTypeItr in range(len(histTypeSaveNameAr)):
       if onlyDoSomeHists and histTypeItr >= histsToDo:
@@ -968,25 +970,30 @@ def addHistsToStack(fileAr,histAr,isSignalAr,sumQCD,isQCDAr,histStackAr,QCDSumHi
       if sumQCD:
           histStackAr[histTypeItr].Add(QCDSumHist[histTypeItr])
       if normalizeBackgroundsTogether:
-          tmpMaxBackground = histStackAr[histTypeItr].GetMaximum()
-          tmpMaxSignal = histAr[signalPos][histTypeItr].GetMaximum()
-          if tmpMaxSignal:
-            tmpMaxRatio = tmpMaxBackground/tmpMaxSignal
-          else:
-            tmpMaxRatio = 1
-          #print("------------")
-          #print(tmpMaxBackground,tmpMaxSignal,tmpMaxRatio)
-          #print(histAr[signalPos][histTypeItr].GetMaximum())
-          #tmpSignalInt = histAr[1].Integral()
-          histAr[signalPos][histTypeItr].Sumw2()
-          histAr[signalPos][histTypeItr].Scale(tmpMaxRatio)
-          #print(histAr[signalPos][histTypeItr].GetMaximum())
-          #print("------------")
-          #histAr[1].Scale(backgroundIntSum / tmpSignalInt)
+          if scaleSignalToBackground:
+            tmpMaxBackground = histStackAr[histTypeItr].GetMaximum()
+            tmpMaxSignal = histAr[signalPos][histTypeItr].GetMaximum()
+            if tmpMaxSignal:
+              tmpMaxRatio = tmpMaxBackground/tmpMaxSignal
+            else:
+              tmpMaxRatio = 1
+            #print("------------")
+            #print(tmpMaxBackground,tmpMaxSignal,tmpMaxRatio)
+            #print(histAr[signalPos][histTypeItr].GetMaximum())
+            #tmpSignalInt = histAr[1].Integral()
+            histAr[signalPos][histTypeItr].Sumw2()
+            histAr[signalPos][histTypeItr].Scale(tmpMaxRatio)
+            #print(histAr[signalPos][histTypeItr].GetMaximum())
+            #print("------------")
+            #histAr[1].Scale(backgroundIntSum / tmpSignalInt)
+          #else:
+          #  histAr[signalPos][histTypeItr].Sumw2()
+          #  histAr[signalPos][histTypeItr].Scale(weightsAr[signalPos])
+
       maxIntAr.append(maxInt)
     return maxIntAr
 
-def normalizeHists(histAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,backgroundIntSum,isSignalAr,weightsAr,legAr,nameAr,intAr,histTypeSaveNameAr,onlyDoSomeHists,histsToDo):
+def normalizeHists(histAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,backgroundIntSum,isSignalAr,weightsAr,legAr,nameAr,intAr,histTypeSaveNameAr,onlyDoSomeHists,histsToDo,signalPos):
     histMaxAr = []
     for histTypeItr in range(len(histTypeSaveNameAr)):
       if onlyDoSomeHists and histTypeItr >= histsToDo:
@@ -1012,11 +1019,22 @@ def normalizeHists(histAr,sumQCD,isQCDAr,normalizeBackgroundsTogether,background
             elif intAr[k][histTypeItr]:
                 #print(k,histTypeItr)
                 #print(intAr[k][histTypeItr])
-                histAr[k][histTypeItr].Scale(1.0 / intAr[k][histTypeItr])
+                print(k,isSignalAr[k])
+                if scaleSignalToBackground or not isSignalAr[k]:
+                  histAr[k][histTypeItr].Scale(1.0 / intAr[k][histTypeItr])
+                elif normalizeBackgroundsTogether and not scaleSignalToBackground:
+                  histAr[signalPos][histTypeItr].Sumw2()
+                  histAr[signalPos][histTypeItr].Scale(weightsAr[signalPos])
+                  tmpMax = histAr[k][histTypeItr].GetMaximum()
+                  print(tmpMax)
+                  if tmpMax > histMaxAr[histTypeItr]:
+                      histMaxAr[histTypeItr] = tmpMax
+                print("-----------------")
+
                 tmpMax = histAr[k][histTypeItr].GetMaximum()
                 if not normalizeBackgroundsTogether:
-                    if tmpMax > histMaxAr[histTypeItr]:
-                        histMaxAr[histTypeItr] = tmpMax
+                  if tmpMax > histMaxAr[histTypeItr]:
+                      histMaxAr[histTypeItr] = tmpMax
                 legAr[histTypeItr].AddEntry(histAr[k][histTypeItr],nameAr[k],"l")
     return histMaxAr
 
@@ -1115,7 +1133,7 @@ def setUpStackedHistAndDrawFoMPlot(histMax,histAr,cloneHistAr,histStack,invHists
       padAr[histTypeItr][0].Draw()
       padAr[histTypeItr][0].cd()
       histStack[histTypeItr].Draw("hist")
-      makeNiceTHStack(histStack[histTypeItr],"","Events",True)
+      makeNiceTHStack(histStack[histTypeItr],"","Weighted Events/Bin (pb)",True)
       tmpMax = histStack[histTypeItr].GetMaximum()
       if tmpMax < histMax[histTypeItr]:
           histStack[histTypeItr].SetMaximum(histMax[histTypeItr])
@@ -1237,9 +1255,10 @@ def setUpNonStackedHistAndFoMPlot(compCan,cloneHistAr,padAr,sumQCD,QCDSumHist,hi
           tmpMaxRatio = 1
 
         #tmpSignalInt = histAr[1].Integral()
-        histAr[signalPos][histTypeItr].Sumw2()
-        histAr[signalPos][histTypeItr].Scale(tmpMaxRatio)
-        #histAr[1].Scale(maxInt/tmpSignalInt)
+        if scaleSignalToBackground:
+          histAr[signalPos][histTypeItr].Sumw2()
+          histAr[signalPos][histTypeItr].Scale(tmpMaxRatio)
+          #histAr[1].Scale(maxInt/tmpSignalInt)
     tmpMax = histAr[signalPos][histTypeItr].GetMaximum()
     if tmpMax > histMax[histTypeItr]:
         histMax[histTypeItr] = tmpMax
