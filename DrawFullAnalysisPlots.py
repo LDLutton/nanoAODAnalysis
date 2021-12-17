@@ -1282,7 +1282,7 @@ if not onlyLHETree:
             setUpLegend(legUnstackedAr)
             setUpPadsAr(padUnstackedAr,"{0}Pad".format("LepUnstackedSaveName"))
 
-        setUpNonStackedHistAndFoMPlot(comparisonUnstackedCanAr,cloneHistAr,padAr,sumQCD,QCDSumHistLepAr,histMaxAr,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxIntAr,histLepAr,legAr,signalName,backgroundName,LepSaveNameAr,LepTitleAr,LepXTitleAr,signalPos,onlyDoSomeHists,histsToDo)
+        setUpNonStackedHistAndFoMPlot(comparisonUnstackedCanAr,cloneHistAr,padAr,sumQCD,QCDSumHistLepAr,histMaxAr,histMinAr,isSignalAr,isQCDAr,normalizeBackgroundsTogether,maxIntAr,histLepAr,legAr,signalName,backgroundName,LepSaveNameAr,LepTitleAr,LepXTitleAr,signalPos,onlyDoSomeHists,histsToDo)
 
 
 
