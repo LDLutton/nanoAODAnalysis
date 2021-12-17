@@ -41,7 +41,7 @@ makeUnstacked = False
 
 comparisonPlotsOnly = True
 
-useTightdRCut = True
+useTightdRCut = False
 tightCutStr = ""
 if useTightdRCut:
   tightCutStr = "WithTighterdRCut"
@@ -65,6 +65,7 @@ makeZFJ = False
 makeZJ = False
 
 useLogY = True
+useLogYForRatioPlot = True
 
 
 drawXSPlots = False
@@ -696,9 +697,11 @@ def setUpPadsAr(padAr,padName):
   #padAr[-1].append(TPad(padName, padName,0.,0.70,1,1))
   #padAr[-1].append(TPad(padName+" ratio", padName+" ratio",0.,0.,1,0.60))
 
-def setUpBottomPadsAr(padAr):
+def setUpBottomPadsAr(padAr,logYForRatioPlot):
   padAr[1].SetTopMargin(0)
   padAr[1].SetBottomMargin(0.15)
+  if logYForRatioPlot:
+    padAr[1].SetLogy()
   padAr[1].Draw()
   padAr[1].cd()
 
@@ -858,7 +861,7 @@ def setUpNonStackedHistAndFoMPlotForLHETrees(compCan,cloneHistAr,padAr,histMax,i
     legAr[histTypeItr].Draw()
     compCan[histTypeItr].cd()
 
-    setUpBottomPadsAr(padAr[histTypeItr]) 
+    setUpBottomPadsAr(padAr[histTypeItr],useLogYForRatioPlot) 
 
     histAr[signalPos][histTypeItr].Sumw2()
     for k in range(len(cloneHistAr)):
@@ -870,7 +873,7 @@ def setUpNonStackedHistAndFoMPlotForLHETrees(compCan,cloneHistAr,padAr,histMax,i
         cloneHistAr[k][histTypeItr].Divide(histAr[signalPos][histTypeItr])
         makeNiceHistos(cloneHistAr[k][histTypeItr],histTypeXTitleAr[histTypeItr],"Ratio to Signal",False)
         cloneHistAr[k][histTypeItr].SetLineWidth(2)
-        if k == 0:
+        if k == 0 and not useLogYForRatioPlot:
           cloneHistAr[k][histTypeItr].GetYaxis().SetRangeUser(0.,2.0)
         cloneHistAr[k][histTypeItr].Draw("et same")
 
@@ -1138,7 +1141,7 @@ def setUpStackedHistAndDrawFoMPlot(histMax,histAr,cloneHistAr,histStack,invHists
 
       compCan[histTypeItr].cd()
 
-      setUpBottomPadsAr(padAr[histTypeItr])
+      setUpBottomPadsAr(padAr[histTypeItr],useLogYForRatioPlot)
 
       histAr[signalPos][histTypeItr].Sumw2()
       #print(len(cloneHistAr))
@@ -1161,11 +1164,12 @@ def setUpStackedHistAndDrawFoMPlot(histMax,histAr,cloneHistAr,histStack,invHists
         cloneHistAr[k][histTypeItr].Divide(histAr[signalPos][histTypeItr])
         makeNiceHistos(cloneHistAr[k][histTypeItr],histTypeXTitleAr[histTypeItr],"Ratio to Signal",False)
         cloneHistAr[k][histTypeItr].SetLineWidth(2)
-        if k == 0:
-          if useLogY:
-            cloneHistAr[k][histTypeItr].GetYaxis().SetRangeUser(0.001,2.0)
-          else:
-            cloneHistAr[k][histTypeItr].GetYaxis().SetRangeUser(0.,2.0)
+        if k == 0 and not useLogYForRatioPlot:
+          #if useLogY:
+          #  cloneHistAr[k][histTypeItr].GetYaxis().SetRangeUser(0.001,2.0)
+          #else:
+          #  cloneHistAr[k][histTypeItr].GetYaxis().SetRangeUser(0.,2.0)
+          cloneHistAr[k][histTypeItr].GetYaxis().SetRangeUser(0.,2.0)
         cloneHistAr[k][histTypeItr].Draw("et same")
 
 
@@ -1259,7 +1263,7 @@ def setUpNonStackedHistAndFoMPlot(compCan,cloneHistAr,padAr,sumQCD,QCDSumHist,hi
     legAr[histTypeItr].Draw()
     compCan[histTypeItr].cd()
 
-    setUpBottomPadsAr(padAr[histTypeItr]) 
+    setUpBottomPadsAr(padAr[histTypeItr],useLogYForRatioPlot) 
 
     histAr[signalPos][histTypeItr].Sumw2()
     for k in range(len(cloneHistAr)):
