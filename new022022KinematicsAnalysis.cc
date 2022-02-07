@@ -100,7 +100,7 @@ void new022022KinematicsAnalysis(){
         isBackground = false;
         int arrSize = sizeof(MGOHBoxAr)/sizeof(MGOHBoxAr[0]);
         for (int i=0; i<arrSize; i++){
-            std::string tmpStrWithPath = "/scratch365/dlutton/NanoAODFiles/pphzzjj_OHBox_QCD0SMHLOOP0NPLE1NPcHE1_100Ev_0p4cH_100GeVIMJetCut/"+MGOHBoxAr[i];
+            std::string tmpStrWithPath = "/scratch365/dlutton/NanoAODFiles/pphzzjj_OHBox_QCD0SMHLOOP0NPLE1NPcHBoxE1_100Ev_0p5cHBox_100GeVIMJetCut/"+MGOHBoxAr[i];
             fileAr.push_back(tmpStrWithPath);
         }
         useLHETree = true;
@@ -112,7 +112,7 @@ void new022022KinematicsAnalysis(){
         isBackground = false;
         int arrSize = sizeof(MGOHBoxEtaDifCutAr)/sizeof(MGOHBoxEtaDifCutAr[0]);
         for (int i=0; i<arrSize; i++){
-            std::string tmpStrWithPath = "/scratch365/dlutton/NanoAODFiles/pphzzjj_OHBox_QCD0SMHLOOP0NPLE1NPcHE1_100Ev_0p4cH_100GeVIMJetCut_2EtaDifCut/"+MGOHBoxEtaDifCutAr[i];
+            std::string tmpStrWithPath = "/scratch365/dlutton/NanoAODFiles/pphzzjj_OHBox_QCD0SMHLOOP0NPLE1NPcHBoxE1_100Ev_0p5cHBox_100GeVIMJetCut_2EtaDifCut/"+MGOHBoxEtaDifCutAr[i];
             fileAr.push_back(tmpStrWithPath);
         }
         useLHETree = true;
@@ -124,7 +124,7 @@ void new022022KinematicsAnalysis(){
         isBackground = false;
         int arrSize = sizeof(MGOHDDAr)/sizeof(MGOHDDAr[0]);
         for (int i=0; i<arrSize; i++){
-            std::string tmpStrWithPath = "/scratch365/dlutton/NanoAODFiles/pphzzjj_OHDD_QCD0SMHLOOP0NPLE1NPcHE1_100Ev_0p4cH_100GeVIMJetCut/"+MGOHDDAr[i];
+            std::string tmpStrWithPath = "/scratch365/dlutton/NanoAODFiles/pphzzjj_OHDD_QCD0SMHLOOP0NPLE1NPcHDDE1_0p6cHDD_100GeVIMJetCut/"+MGOHDDAr[i];
             fileAr.push_back(tmpStrWithPath);
         }
         useLHETree = true;
@@ -136,7 +136,7 @@ void new022022KinematicsAnalysis(){
         isBackground = false;
         int arrSize = sizeof(MGOHDDEtaDifCutAr)/sizeof(MGOHDDEtaDifCutAr[0]);
         for (int i=0; i<arrSize; i++){
-            std::string tmpStrWithPath = "/scratch365/dlutton/NanoAODFiles/pphzzjj_OHDD_QCD0SMHLOOP0NPLE1NPcHE1_100Ev_0p4cH_100GeVIMJetCut_2EtaDifCut/"+MGOHDDEtaDifCutAr[i];
+            std::string tmpStrWithPath = "/scratch365/dlutton/NanoAODFiles/pphzzjj_OHDD_QCD0SMHLOOP0NPLE1NPcHDDE1_0p6cHDD_100GeVIMJetCut_2EtaDifCut/"+MGOHDDEtaDifCutAr[i];
             fileAr.push_back(tmpStrWithPath);
         }
         useLHETree = true;
