@@ -596,6 +596,10 @@ def setHistoElementsForLHETrees(colorAr,histAr,weightsAr,intAr,histTitleNameAr,o
           histAr[k][histTypeItr].SetLineColor(colorA)
           histAr[k][histTypeItr].SetLineWidth(4)
           histAr[k][histTypeItr].SetFillColorAlpha(colorA,0.2)
+          makeNiceHistos(histAr[k][histTypeItr],"","Weighted Events/Bin (pb)",True)
+          histAr[k][histTypeItr].SetTitle(histTitleName)
+          tmpHistInt = histAr[k][histTypeItr].Integral()
+          intAr[-1].append(tmpHistInt)
 
 def normalizeHistsForLHETrees(histAr,weightsAr,legAr,nameAr,intAr,histTypeSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr):
     histMaxAr = []

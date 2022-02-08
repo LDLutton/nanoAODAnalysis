@@ -43,9 +43,9 @@ if testRun:
 
 if MGOHW:
     if useTightdRCut:
-        fileAr.append(TFile.Open("{0}FullAnalysisEFTTighterCut.root".format(forCondorStr)))
+        fileAr.append(TFile.Open("{0}KinematicsAnalysisOHWTighterCut.root".format(forCondorStr)))
     else:
-        fileAr.append(TFile.Open("{0}FullAnalysisEFT.root".format(forCondorStr)))
+        fileAr.append(TFile.Open("{0}KinematicsAnalysisOHW.root".format(forCondorStr)))
     colorAr.append(2)
     datasetSaveNameAr.append("OHW")
     
@@ -57,6 +57,31 @@ if MGOHW:
     tmpXSCnt = 0
     for OHWXS in OHWXSTree:
         tmpXSAvg += OHWXS.crossSectionVar
+        tmpXSCnt += 1
+    tmpXSAvg = tmpXSAvg / tmpXSCnt
+    XSAr.append(tmpXSAvg)
+    ENTree = fileAr[-1].evNumTree
+    evNum = 0
+    for ev in ENTree:
+        evNum = ev.nEv
+    totalEvents.append(evNum)
+
+if MGSM:
+    if useTightdRCut:
+        fileAr.append(TFile.Open("{0}KinematicsAnalysisSMTighterCut.root".format(forCondorStr)))
+    else:
+        fileAr.append(TFile.Open("{0}KinematicsAnalysisSM.root".format(forCondorStr)))
+    colorAr.append(2)
+    datasetSaveNameAr.append("SM")
+    
+    
+    useLHEAr.append(True)
+
+    SMXSTree = fileAr[-1].crossSectionTree
+    tmpXSAvg = 0
+    tmpXSCnt = 0
+    for SMXS in SMXSTree:
+        tmpXSAvg += SMXS.crossSectionVar
         tmpXSCnt += 1
     tmpXSAvg = tmpXSAvg / tmpXSCnt
     XSAr.append(tmpXSAvg)
@@ -896,10 +921,10 @@ if not onlyLHETree:
 
 
 
-    backgroundIntSumAr = setHistoElements(colorAr,histAr,normalizeDataTogether,weightsAr,intComparisonAr,FASaveNameAr,onlyDoSomeHists,histsToDo)
+    dataIntSumAr = setHistoElements(colorAr,histAr,normalizeDataTogether,weightsAr,intComparisonAr,FASaveNameAr,onlyDoSomeHists,histsToDo)
 
 
-    histMaxAr,histMinAr = normalizeHists(histAr,normalizeDataTogether,backgroundIntSumAr,weightsAr,legAr,datasetSaveNameAr,intComparisonAr,FASaveNameAr,onlyDoSomeHists,histsToDo)
+    histMaxAr,histMinAr = normalizeHists(histAr,normalizeDataTogether,dataIntSumAr,weightsAr,legAr,datasetSaveNameAr,intComparisonAr,FASaveNameAr,onlyDoSomeHists,histsToDo)
 
 
 
