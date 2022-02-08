@@ -16,6 +16,8 @@ bool MGOHBox = false;
 bool MGOHBoxEtaDifCut = false;
 bool MGOHDD = false;
 bool MGOHDDEtaDifCut = false;
+bool MGOHW = false;
+bool MGSM = false;
 
 
 

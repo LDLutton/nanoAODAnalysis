@@ -143,6 +143,30 @@ void new022022KinematicsAnalysis(){
         useFJGenMatchTree = true;
         useJGenMatchTree = true;
     }
+    else if (MGOHW){
+        saveName = "OHW";
+        isBackground = false;
+        int arrSize = sizeof(MGOHWAr)/sizeof(MGOHWAr[0]);
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = "/scratch365/dlutton/NanoAODFiles/pphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5/"+MGOHWAr[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        useJGenMatchTree = true;
+    }
+    else if (MGSM){
+        saveName = "SM";
+        isBackground = false;
+        int arrSize = sizeof(MGSMAr)/sizeof(MGSMAr[0]);
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = "/scratch365/dlutton/NanoAODFiles/pphzzjjQCD0SMHLOOP0QEDE5NPE0/"+MGSMAr[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        useJGenMatchTree = true;
+    }
     else if (testRun){
         saveName = "testRun";
         fileAr.push_back("./unweighted_eventspphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev10080Seed_0p999cHW100GeVIMJetCut_200.root");
