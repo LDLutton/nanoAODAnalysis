@@ -71,7 +71,7 @@ if MGOSix:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOSixTighterCut.root".format(forCondorStr)))
     else:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOSix.root".format(forCondorStr)))
-    colorAr.append(2)
+    colorAr.append(6)
     datasetSaveNameAr.append("OSix")
     
     
@@ -95,7 +95,7 @@ if MGOSixEtaDifCut:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOSix_EtaDifCutTighterCut.root".format(forCondorStr)))
     else:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOSix_EtaDifCut.root".format(forCondorStr)))
-    colorAr.append(2)
+    colorAr.append(7)
     datasetSaveNameAr.append("OSixEtaDifCut")
     
     
@@ -119,7 +119,7 @@ if MGOHBox:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOHBoxTighterCut.root".format(forCondorStr)))
     else:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOHBox.root".format(forCondorStr)))
-    colorAr.append(2)
+    colorAr.append(4)
     datasetSaveNameAr.append("OHBox")
     
     
@@ -143,7 +143,7 @@ if MGOHBoxEtaDifCut:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOHBox_EtaDifCutTighterCut.root".format(forCondorStr)))
     else:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOHBox_EtaDifCut.root".format(forCondorStr)))
-    colorAr.append(2)
+    colorAr.append(8)
     datasetSaveNameAr.append("OHBoxEtaDifCut")
     
     
@@ -167,7 +167,7 @@ if MGOHDD:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOHDDTighterCut.root".format(forCondorStr)))
     else:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOHDD.root".format(forCondorStr)))
-    colorAr.append(2)
+    colorAr.append(1)
     datasetSaveNameAr.append("OHDD")
     
     
@@ -191,7 +191,7 @@ if MGOHDDEtaDifCut:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOHDD_EtaDifCutTighterCut.root".format(forCondorStr)))
     else:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOHDD_EtaDifCut.root".format(forCondorStr)))
-    colorAr.append(2)
+    colorAr.append(9)
     datasetSaveNameAr.append("OHDDEtaDifCut")
     
     
