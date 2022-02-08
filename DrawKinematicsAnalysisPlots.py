@@ -297,7 +297,8 @@ for k,fileA in enumerate(fileAr):
                     #print(type(valA))
                     #print(len(histHFJGenAr),len(histHFJGenAr[k]))
                     #print("-----")
-                    if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                    #if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                    if "vector" in str(type(valA)):
                         for valEl in valA:
                             #print(valEl)
                             histHFJGenAr[k][valItr].Fill(valEl)
@@ -338,7 +339,8 @@ for k,fileA in enumerate(fileAr):
                         break
                     #if evCtr <20 and evCtr > 10 and valItr == 0:
                     #    print(valA)
-                    if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                    #if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                    if "vector" in str(type(valA)):
                         for valEl in valA:
                             histZFJGenAr[k][valItr].Fill(valEl)
                     else:
@@ -443,7 +445,8 @@ for k,fileA in enumerate(fileAr):
                         break
                     #if evCtr <20 and evCtr > 10 and valItr == 0:
                     #    print(valA)
-                    if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                    #if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                    if "vector" in str(type(valA)):
                         for valEl in valA:
                             histZJGenAr[k][valItr].Fill(valEl)
                     else:
@@ -486,7 +489,8 @@ for k,fileA in enumerate(fileAr):
                         break
                     #if evCtr <20 and evCtr > 10 and valItr == 0:
                     #    print(valA)
-                    if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                    #if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                    if "vector" in str(type(valA)):
                         for valEl in valA:
                             histGenRawAr[k][valItr].Fill(valEl)
                     else:
@@ -607,7 +611,8 @@ for k,fileA in enumerate(fileAr):
                         break
                     #if evCtr <20 and evCtr > 10 and valItr == 0:
                     #    print(valA)
-                    if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                    #if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                    if "vector" in str(type(valA)):
                         for valEl in valA:
                             #print(valEl)
                             histHFJGenTaggedAr[k][valItr].Fill(valEl)
@@ -649,7 +654,8 @@ for k,fileA in enumerate(fileAr):
                         break
                     #if evCtr <20 and evCtr > 10 and valItr == 0:
                     #    print(valA)
-                    if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                    #if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                    if "vector" in str(type(valA)):
                         for valEl in valA:
                             histZFJGenTaggedAr[k][valItr].Fill(valEl)
                     else:
@@ -756,7 +762,8 @@ for k,fileA in enumerate(fileAr):
                         break
                     #if evCtr <20 and evCtr > 10 and valItr == 0:
                     #    print(valA)
-                    if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                    #if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                    if "vector" in str(type(valA)):
                         for valEl in valA:
                             histZJGenTaggedAr[k][valItr].Fill(valEl)
                     else:
@@ -800,7 +807,8 @@ for k,fileA in enumerate(fileAr):
                         break
                     #if evCtr <20 and evCtr > 10 and valItr == 0:
                     #    print(valA)
-                    if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                    #if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                    if "vector" in str(type(valA)):
                         for valEl in valA:
                             histGenRawTaggedAr[k][valItr].Fill(valEl)
                     else:
