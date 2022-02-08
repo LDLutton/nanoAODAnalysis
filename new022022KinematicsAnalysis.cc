@@ -2995,6 +2995,7 @@ void new022022KinematicsAnalysis(){
                 ROOT::Math::PtEtaPhiMVector Z1TrailingVec;
                 Int_t Z1LeadCharge = 0;
                 Int_t Z1TrailingCharge = 0;
+                passesCutsBool = true;
 
                 if (passesCutsBool){
                     if (debug) std::cout << "Passed cuts. Now filling trees\n";

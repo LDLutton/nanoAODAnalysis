@@ -21,15 +21,15 @@ else:
 testRun = False
 MGOHW = True
 
-MGOSix = False
-MGOSixEtaDifCut = False
-MGOHBox = False
+MGOSix = True
+MGOSixEtaDifCut = True
+MGOHBox = True
 MGOHBoxEtaDifCut = False
 MGOHDD = False
 MGOHDDEtaDifCut = False
 
 normalizeDataTogether = True
-makeUnstacked = False
+makeUnstacked = True
 
 comparisonPlotsOnly = True
 
@@ -44,17 +44,17 @@ breakEvEarly = False
 breakEvAt = 2500
 
 onlyLHETree = False
-useLHETree = False
+useLHETree = True
 onlyTaggedTrees = False
-useTaggedTrees = False
+useTaggedTrees = True
 
-makeRaw = False
-makeGenRaw = False
-makeHFJ = False
-makeZHFJ = False
-makeZHJ = False
-makeZFJ = False
-makeZJ = False
+makeRaw = True
+makeGenRaw = True
+makeHFJ = True
+makeZHFJ = True
+makeZHJ = True
+makeZFJ = True
+makeZJ = True
 
 scaleSignalToBackground = False
 
@@ -62,8 +62,8 @@ useLogY = True
 useLogYForRatioPlot = True
 
 
-drawXSPlots = False
-drawEvPlots = False
+drawXSPlots = True
+drawEvPlots = True
 #ignoreHist = True
 #ignoreHistInd = 13
 
@@ -668,14 +668,14 @@ def setUpNonStackedHistAndFoMPlotForLHETrees(compCan,cloneHistAr,padAr,histMax,h
 
     if normalizeDataTogether:
       if savePathBool:
-        compCan[histTypeItr].SaveAs("./Graphs/Comparison/ComparisonFor{0}_{1}_NBT_{3}.png".format(histTypeSaveName,dataName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        compCan[histTypeItr].SaveAs("./Graphs/Comparison/ComparisonFor{0}_{1}_NBT_{2}.png".format(histTypeSaveName,dataName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
       else:
-        compCan[histTypeItr].SaveAs("ComparisonFor{0}_{1}_NBT_{3}.png".format(histTypeSaveName,dataName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        compCan[histTypeItr].SaveAs("ComparisonFor{0}_{1}_NBT_{2}.png".format(histTypeSaveName,dataName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
     else:
       if savePathBool:
-        compCan[histTypeItr].SaveAs("./Graphs/Comparison/ComparisonFor{0}_{1}_{3}.png".format(histTypeSaveName,dataName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        compCan[histTypeItr].SaveAs("./Graphs/Comparison/ComparisonFor{0}_{1}_{2}.png".format(histTypeSaveName,dataName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
       else:
-        compCan[histTypeItr].SaveAs("ComparisonFor{0}_{1}_{3}.png".format(histTypeSaveName,dataName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        compCan[histTypeItr].SaveAs("ComparisonFor{0}_{1}_{2}.png".format(histTypeSaveName,dataName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 
     
 
@@ -841,13 +841,13 @@ def setUpNonStackedHistAndFoMPlot(compCan,cloneHistAr,padAr,histMax,histMin,norm
     """
     if normalizeDataTogether:
       if savePathBool:
-        compCan[histTypeItr].SaveAs("./Graphs/Comparison/ComparisonFor{0}_{1}_NBT_{3}.png".format(histTypeSaveName,dataName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        compCan[histTypeItr].SaveAs("./Graphs/Comparison/ComparisonFor{0}_{1}_NBT_{2}.png".format(histTypeSaveName,dataName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
       else:
-        compCan[histTypeItr].SaveAs("ComparisonFor{0}_{1}_NBT_{3}.png".format(histTypeSaveName,dataName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        compCan[histTypeItr].SaveAs("ComparisonFor{0}_{1}_NBT_{2}.png".format(histTypeSaveName,dataName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
     else:
       if savePathBool:
-        compCan[histTypeItr].SaveAs("./Graphs/Comparison/ComparisonFor{0}_{1}_{3}.png".format(histTypeSaveName,dataName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        compCan[histTypeItr].SaveAs("./Graphs/Comparison/ComparisonFor{0}_{1}_{2}.png".format(histTypeSaveName,dataName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
       else:
-        compCan[histTypeItr].SaveAs("ComparisonFor{0}_{1}_{3}.png".format(histTypeSaveName,dataName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        compCan[histTypeItr].SaveAs("ComparisonFor{0}_{1}_{2}.png".format(histTypeSaveName,dataName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 
     
