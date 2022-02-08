@@ -20,15 +20,16 @@ else:
 
 testRun = False
 MGOHW = True
+MGSM = True
 
 MGOSix = True
 MGOSixEtaDifCut = True
 MGOHBox = True
-MGOHBoxEtaDifCut = False
-MGOHDD = False
-MGOHDDEtaDifCut = False
+MGOHBoxEtaDifCut = True
+MGOHDD = True
+MGOHDDEtaDifCut = True
 
-normalizeDataTogether = True
+normalizeDataTogether = False
 makeUnstacked = True
 
 comparisonPlotsOnly = True
@@ -62,8 +63,8 @@ useLogY = True
 useLogYForRatioPlot = True
 
 
-drawXSPlots = True
-drawEvPlots = True
+drawXSPlots = False
+drawEvPlots = False
 #ignoreHist = True
 #ignoreHistInd = 13
 
