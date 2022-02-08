@@ -932,7 +932,7 @@ if not onlyLHETree:
             setUpLegend(legUnstackedAr)
             setUpPadsAr(padUnstackedAr,"{0}Pad".format("FAUnstackedSaveName"))
 
-        setUpNonStackedHistAndFoMPlot(comparisonUnstackedCanAr,cloneHistAr,padAr,histMaxAr,histMinAr,normalizeDataTogether,histAr,legAr,dataName,FASaveNameAr,FATitleAr,FAXTitleAr,onlyDoSomeHists,histsToDo)
+        setUpNonStackedHistAndFoMPlot(comparisonUnstackedCanAr,cloneHistAr,padAr,histMaxAr,histMinAr,normalizeDataTogether,histAr,legAr,dataName,FASaveNameAr,FATitleAr,FAXTitleAr,onlyDoSomeHists,histsToDo,datasetSaveNameAr)
 
 
 
@@ -995,7 +995,7 @@ if useLHETree and not onlyTaggedTrees:
             break
         comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(GenRawSaveName),"comparisonUnstackedCan{0}".format(GenRawSaveName),3600,2400))
 
-    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histGenRawAr,legUnstackedAr,dataName,GenRawSaveNameAr,GenRawTitleAr,GenRawXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histGenRawAr,legUnstackedAr,dataName,GenRawSaveNameAr,GenRawTitleAr,GenRawXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
 
 
 
@@ -1054,7 +1054,7 @@ if useLHETree and not onlyTaggedTrees:
             break
         comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(RawSaveName),"comparisonUnstackedCan{0}".format(RawSaveName),3600,2400))
 
-    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histRawAr,legUnstackedAr,dataName,RawSaveNameAr,RawTitleAr,RawXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histRawAr,legUnstackedAr,dataName,RawSaveNameAr,RawTitleAr,RawXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
 
 
 
@@ -1115,7 +1115,7 @@ if useLHETree and not onlyTaggedTrees:
             break
         comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(SelectedSaveName),"comparisonUnstackedCan{0}".format(SelectedSaveName),3600,2400))
 
-    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histSelectedAr,legUnstackedAr,dataName,SelectedSaveNameAr,SelectedTitleAr,SelectedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histSelectedAr,legUnstackedAr,dataName,SelectedSaveNameAr,SelectedTitleAr,SelectedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
 
 
 
@@ -1177,7 +1177,7 @@ if useLHETree and not onlyTaggedTrees:
             break
         comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(HFJGenSaveName),"comparisonUnstackedCan{0}".format(HFJGenSaveName),3600,2400))
 
-    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histHFJGenAr,legUnstackedAr,dataName,HFJGenSaveNameAr,HFJGenTitleAr,HFJGenXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histHFJGenAr,legUnstackedAr,dataName,HFJGenSaveNameAr,HFJGenTitleAr,HFJGenXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
 
 
     ###############STARTING ZFJGen GEN MATCHING GRAPHS###############
@@ -1237,7 +1237,7 @@ if useLHETree and not onlyTaggedTrees:
             break
         comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(ZFJGenSaveName),"comparisonUnstackedCan{0}".format(ZFJGenSaveName),3600,2400))
 
-    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZFJGenAr,legUnstackedAr,dataName,ZFJGenSaveNameAr,ZFJGenTitleAr,ZFJGenXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZFJGenAr,legUnstackedAr,dataName,ZFJGenSaveNameAr,ZFJGenTitleAr,ZFJGenXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
 
     ###############STARTING ZHFJGen GEN MATCHING GRAPHS###############
 
@@ -1296,7 +1296,7 @@ if useLHETree and not onlyTaggedTrees:
             break
         comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(ZHFJGenSaveName),"comparisonUnstackedCan{0}".format(ZHFJGenSaveName),3600,2400))
 
-    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZHFJGenAr,legUnstackedAr,dataName,ZHFJGenSaveNameAr,ZHFJGenTitleAr,ZHFJGenXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZHFJGenAr,legUnstackedAr,dataName,ZHFJGenSaveNameAr,ZHFJGenTitleAr,ZHFJGenXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
 
 
     ###############STARTING ZHJGen GEN MATCHING GRAPHS###############
@@ -1356,7 +1356,7 @@ if useLHETree and not onlyTaggedTrees:
             break
         comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(ZHJGenSaveName),"comparisonUnstackedCan{0}".format(ZHJGenSaveName),3600,2400))
 
-    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZHJGenAr,legUnstackedAr,dataName,ZHJGenSaveNameAr,ZHJGenTitleAr,ZHJGenXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZHJGenAr,legUnstackedAr,dataName,ZHJGenSaveNameAr,ZHJGenTitleAr,ZHJGenXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
 
 
     ###############STARTING ZJGen GEN MATCHING GRAPHS###############
@@ -1416,7 +1416,7 @@ if useLHETree and not onlyTaggedTrees:
             break
         comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(ZJGenSaveName),"comparisonUnstackedCan{0}".format(ZJGenSaveName),3600,2400))
 
-    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZJGenAr,legUnstackedAr,dataName,ZJGenSaveNameAr,ZJGenTitleAr,ZJGenXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZJGenAr,legUnstackedAr,dataName,ZJGenSaveNameAr,ZJGenTitleAr,ZJGenXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
 
 
 
@@ -1481,7 +1481,7 @@ if useTaggedTrees and makeGenRaw:
             break
         comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(GenRawTaggedSaveName),"comparisonUnstackedCan{0}".format(GenRawTaggedSaveName),3600,2400))
 
-    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histGenRawTaggedAr,legUnstackedAr,dataName,GenRawTaggedSaveNameAr,GenRawTaggedTitleAr,GenRawTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histGenRawTaggedAr,legUnstackedAr,dataName,GenRawTaggedSaveNameAr,GenRawTaggedTitleAr,GenRawTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
 
 
 if useTaggedTrees and makeRaw:
@@ -1542,7 +1542,7 @@ if useTaggedTrees and makeRaw:
             break
         comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(RawTaggedSaveName),"comparisonUnstackedCan{0}".format(RawTaggedSaveName),3600,2400))
 
-    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histRawTaggedAr,legUnstackedAr,dataName,RawTaggedSaveNameAr,RawTaggedTitleAr,RawTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histRawTaggedAr,legUnstackedAr,dataName,RawTaggedSaveNameAr,RawTaggedTitleAr,RawTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
 
 
 if useTaggedTrees and makeHFJ:
@@ -1603,7 +1603,7 @@ if useTaggedTrees and makeHFJ:
             break
         comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(HFJGenTaggedSaveName),"comparisonUnstackedCan{0}".format(HFJGenTaggedSaveName),3600,2400))
 
-    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histHFJGenTaggedAr,legUnstackedAr,dataName,HFJGenTaggedSaveNameAr,HFJGenTaggedTitleAr,HFJGenTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histHFJGenTaggedAr,legUnstackedAr,dataName,HFJGenTaggedSaveNameAr,HFJGenTaggedTitleAr,HFJGenTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
 
 if useTaggedTrees and makeZFJ:
     ###############STARTING ZFJGenTagged GEN MATCHING GRAPHS###############
@@ -1663,7 +1663,7 @@ if useTaggedTrees and makeZFJ:
             break
         comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(ZFJGenTaggedSaveName),"comparisonUnstackedCan{0}".format(ZFJGenTaggedSaveName),3600,2400))
 
-    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZFJGenTaggedAr,legUnstackedAr,dataName,ZFJGenTaggedSaveNameAr,ZFJGenTaggedTitleAr,ZFJGenTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZFJGenTaggedAr,legUnstackedAr,dataName,ZFJGenTaggedSaveNameAr,ZFJGenTaggedTitleAr,ZFJGenTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
 
 if useTaggedTrees and makeZHFJ:
     ###############STARTING ZHFJGenTagged GEN MATCHING GRAPHS###############
@@ -1723,7 +1723,7 @@ if useTaggedTrees and makeZHFJ:
             break
         comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(ZHFJGenTaggedSaveName),"comparisonUnstackedCan{0}".format(ZHFJGenTaggedSaveName),3600,2400))
 
-    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZHFJGenTaggedAr,legUnstackedAr,dataName,ZHFJGenTaggedSaveNameAr,ZHFJGenTaggedTitleAr,ZHFJGenTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZHFJGenTaggedAr,legUnstackedAr,dataName,ZHFJGenTaggedSaveNameAr,ZHFJGenTaggedTitleAr,ZHFJGenTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
 
 if useTaggedTrees and makeZHJ:
     ###############STARTING ZHJGenTagged GEN MATCHING GRAPHS###############
@@ -1783,7 +1783,7 @@ if useTaggedTrees and makeZHJ:
             break
         comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(ZHJGenTaggedSaveName),"comparisonUnstackedCan{0}".format(ZHJGenTaggedSaveName),3600,2400))
 
-    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZHJGenTaggedAr,legUnstackedAr,dataName,ZHJGenTaggedSaveNameAr,ZHJGenTaggedTitleAr,ZHJGenTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZHJGenTaggedAr,legUnstackedAr,dataName,ZHJGenTaggedSaveNameAr,ZHJGenTaggedTitleAr,ZHJGenTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
 
 
 if useTaggedTrees and makeZJ:
@@ -1844,6 +1844,6 @@ if useTaggedTrees and makeZJ:
             break
         comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(ZJGenTaggedSaveName),"comparisonUnstackedCan{0}".format(ZJGenTaggedSaveName),3600,2400))
 
-    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZJGenTaggedAr,legUnstackedAr,dataName,ZJGenTaggedSaveNameAr,ZJGenTaggedTitleAr,ZJGenTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZJGenTaggedAr,legUnstackedAr,dataName,ZJGenTaggedSaveNameAr,ZJGenTaggedTitleAr,ZJGenTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
 
 

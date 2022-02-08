@@ -7,7 +7,7 @@ today = datetime.datetime.today()
 
 forCondor = False
 if forCondor:
-    forCondorStr = "/scratch365/dlutton/HistosAndPNGs/"
+    forCondorStr = "/scratch365/dlutton/HistosAndPNGs/KinematicsAnalysis/"
     savePathBool = False
 else:
     forCondorStr = ""
@@ -608,22 +608,28 @@ def normalizeHistsForLHETrees(histAr,weightsAr,legAr,nameAr,intAr,histTypeSaveNa
         for histTypeItr in range(len(histTypeSaveNameAr)):
           if onlyDoSomeHists and histTypeItr >= histsToDo:
             break
+          
           histAr[k][histTypeItr].Sumw2()
-          histAr[k][histTypeItr].Scale(weightsAr[k])
+          if normalizeDataTogether:
+            histAr[k][histTypeItr].Scale(weightsAr[k])
+          elif intAr[k][histTypeItr]:
+              histAr[k][histTypeItr].Scale(1.0 / intAr[k][histTypeItr])
+              
           tmpMax = histAr[k][histTypeItr].GetMaximum()
           if tmpMax > histMaxAr[histTypeItr]:
               histMaxAr[histTypeItr] = tmpMax
           legAr[histTypeItr].AddEntry(histAr[k][histTypeItr],nameAr[k],"l")
     return histMaxAr
 
-def setUpNonStackedHistAndFoMPlotForLHETrees(compCan,cloneHistAr,padAr,histMax,histAr,legAr,dataName,histTypeSaveNameAr,histTypeTitleAr,histTypeXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr):
+def setUpNonStackedHistAndFoMPlotForLHETrees(compCan,cloneHistAr,padAr,histMax,histAr,legAr,dataName,histTypeSaveNameAr,histTypeTitleAr,histTypeXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr):
   for k in range(len(histAr)):
-      if useLHEAr[k]:
-        cloneHistAr.append([])
-        for histTypeItr in range(len(histTypeSaveNameAr)):
-            if onlyDoSomeHists and histTypeItr >= histsToDo:
-              break
-            cloneHistAr[-1].append(histAr[k][histTypeItr].Clone())
+      if k != 0:
+        if useLHEAr[k]:
+            cloneHistAr.append([])
+            for histTypeItr in range(len(histTypeSaveNameAr)):
+                if onlyDoSomeHists and histTypeItr >= histsToDo:
+                    break
+                cloneHistAr[-1].append(histAr[k][histTypeItr].Clone())
 
 
   
@@ -653,7 +659,7 @@ def setUpNonStackedHistAndFoMPlotForLHETrees(compCan,cloneHistAr,padAr,histMax,h
     for k in range(len(cloneHistAr)):
         cloneHistAr[k][histTypeItr].Sumw2()
         cloneHistAr[k][histTypeItr].Divide(histAr[0][histTypeItr])
-        makeNiceHistos(cloneHistAr[k][histTypeItr],histTypeXTitleAr[histTypeItr],"Ratio to cHW",False)
+        makeNiceHistos(cloneHistAr[k][histTypeItr],histTypeXTitleAr[histTypeItr],"Ratio to {0}".format(datasetSaveNameAr[0]),False)
         cloneHistAr[k][histTypeItr].SetLineWidth(2)
         if k == 0 and not useLogYForRatioPlot:
           cloneHistAr[k][histTypeItr].GetYaxis().SetRangeUser(0.,2.0)
@@ -736,8 +742,7 @@ def normalizeHists(histAr,normalizeDataTogether,dataIntSum,weightsAr,legAr,nameA
         elif intAr[k][histTypeItr]:
             #print(k,histTypeItr)
             #print(intAr[k][histTypeItr])
-            if scaleSignalToBackground:
-              histAr[k][histTypeItr].Scale(1.0 / intAr[k][histTypeItr])
+            histAr[k][histTypeItr].Scale(1.0 / intAr[k][histTypeItr])
             print("-----------------")
 
             tmpMax = histAr[k][histTypeItr].GetMaximum()
@@ -752,31 +757,31 @@ def normalizeHists(histAr,normalizeDataTogether,dataIntSum,weightsAr,legAr,nameA
 
 def setUpInvHists(histAr,cloneHistAr,invHistsAr,nameAr,intAr,drawInvAr,histTypeSaveNameAr,onlyDoSomeHists,histsToDo):
     for k in range(len(histAr)):
-      
-      cloneHistAr.append([])
-      invHistsAr.append([])
-      drawInvAr.append([])
-      for histTypeItr in range(len(histTypeSaveNameAr)):
-        if onlyDoSomeHists and histTypeItr >= histsToDo:
-          break
-        cloneHistAr[-1].append(histAr[k][histTypeItr].Clone())
-        invHistsAr[-1].append(histAr[k][histTypeItr].Clone("{0}Inv".format(nameAr[k])))
-        if intAr[k][histTypeItr]:
-            drawInvAr[-1].append(True)
+      if k != 0:
+        cloneHistAr.append([])
+        invHistsAr.append([])
+        drawInvAr.append([])
+        for histTypeItr in range(len(histTypeSaveNameAr)):
+            if onlyDoSomeHists and histTypeItr >= histsToDo:
+                break
+            cloneHistAr[-1].append(histAr[k][histTypeItr].Clone())
+            invHistsAr[-1].append(histAr[k][histTypeItr].Clone("{0}Inv".format(nameAr[k])))
+            if intAr[k][histTypeItr]:
+                drawInvAr[-1].append(True)
 
-            tmpNBins = histAr[k][histTypeItr].GetNbinsX()
-            tmpBinErrorAr = []
-            for i in range(tmpNBins):
-                tmpBinErrorAr.append(histAr[k][histTypeItr].GetBinError(i))
-            for j in range(k):
-                invHistsAr[-1][histTypeItr].Add(histAr[j][histTypeItr])
-            for i in range(tmpNBins):
-                invHistsAr[-1][histTypeItr].SetBinError(i,tmpBinErrorAr[i])
-        else:
-            drawInvAr[-1].append(False)
+                tmpNBins = histAr[k][histTypeItr].GetNbinsX()
+                tmpBinErrorAr = []
+                for i in range(tmpNBins):
+                    tmpBinErrorAr.append(histAr[k][histTypeItr].GetBinError(i))
+                for j in range(k):
+                    invHistsAr[-1][histTypeItr].Add(histAr[j][histTypeItr])
+                for i in range(tmpNBins):
+                    invHistsAr[-1][histTypeItr].SetBinError(i,tmpBinErrorAr[i])
+            else:
+                drawInvAr[-1].append(False)
 
 
-def setUpNonStackedHistAndFoMPlot(compCan,cloneHistAr,padAr,histMax,histMin,normalizeDataTogether,histAr,legAr,dataName,histTypeSaveNameAr,histTypeTitleAr,histTypeXTitleAr,onlyDoSomeHists,histsToDo):
+def setUpNonStackedHistAndFoMPlot(compCan,cloneHistAr,padAr,histMax,histMin,normalizeDataTogether,histAr,legAr,dataName,histTypeSaveNameAr,histTypeTitleAr,histTypeXTitleAr,onlyDoSomeHists,histsToDo,datasetSaveNameAr):
   for histTypeItr, histTypeSaveName in enumerate(histTypeSaveNameAr):
     if onlyDoSomeHists and histTypeItr >= histsToDo:
         break
@@ -811,10 +816,10 @@ def setUpNonStackedHistAndFoMPlot(compCan,cloneHistAr,padAr,histMax,histMin,norm
 
     histAr[0][histTypeItr].Sumw2()
     for k in range(len(cloneHistAr)):
-        #cloneHistAr[k][histTypeItr].Sumw2()
-        #cloneHistAr[k][histTypeItr].Divide(histAr[signalPos][histTypeItr])
-        #makeNiceHistos(cloneHistAr[k][histTypeItr],histTypeXTitleAr[histTypeItr],"Ratio to Signal",False)
-        #cloneHistAr[k][histTypeItr].SetLineWidth(2)
+        cloneHistAr[k][histTypeItr].Sumw2()
+        cloneHistAr[k][histTypeItr].Divide(histAr[0][histTypeItr])
+        makeNiceHistos(cloneHistAr[k][histTypeItr],histTypeXTitleAr[histTypeItr],"Ratio to {0}".format(datasetSaveNameAr[0]),False)
+        cloneHistAr[k][histTypeItr].SetLineWidth(2)
         cloneHistAr[k][histTypeItr].Draw("et same")
 
     if useLogY:
