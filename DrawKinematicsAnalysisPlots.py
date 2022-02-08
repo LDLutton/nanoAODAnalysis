@@ -46,7 +46,7 @@ if MGOHW:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOHWTighterCut.root".format(forCondorStr)))
     else:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOHW.root".format(forCondorStr)))
-    colorAr.append(2)
+    colorAr.append(6)
     datasetSaveNameAr.append("OHW")
     
     
@@ -71,7 +71,7 @@ if MGSM:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisSMTighterCut.root".format(forCondorStr)))
     else:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisSM.root".format(forCondorStr)))
-    colorAr.append(2)
+    colorAr.append(7)
     datasetSaveNameAr.append("SM")
     
     
@@ -96,7 +96,7 @@ if MGOSix:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOSixTighterCut.root".format(forCondorStr)))
     else:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOSix.root".format(forCondorStr)))
-    colorAr.append(6)
+    colorAr.append(4)
     datasetSaveNameAr.append("OSix")
     
     
@@ -120,7 +120,7 @@ if MGOSixEtaDifCut:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOSix_EtaDifCutTighterCut.root".format(forCondorStr)))
     else:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOSix_EtaDifCut.root".format(forCondorStr)))
-    colorAr.append(7)
+    colorAr.append(9)
     datasetSaveNameAr.append("OSixEtaDifCut")
     
     
@@ -144,7 +144,7 @@ if MGOHBox:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOHBoxTighterCut.root".format(forCondorStr)))
     else:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOHBox.root".format(forCondorStr)))
-    colorAr.append(4)
+    colorAr.append(2)
     datasetSaveNameAr.append("OHBox")
     
     
@@ -168,7 +168,7 @@ if MGOHBoxEtaDifCut:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOHBox_EtaDifCutTighterCut.root".format(forCondorStr)))
     else:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOHBox_EtaDifCut.root".format(forCondorStr)))
-    colorAr.append(8)
+    colorAr.append(46)
     datasetSaveNameAr.append("OHBoxEtaDifCut")
     
     
@@ -192,7 +192,7 @@ if MGOHDD:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOHDDTighterCut.root".format(forCondorStr)))
     else:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOHDD.root".format(forCondorStr)))
-    colorAr.append(1)
+    colorAr.append(3)
     datasetSaveNameAr.append("OHDD")
     
     
@@ -216,7 +216,7 @@ if MGOHDDEtaDifCut:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOHDD_EtaDifCutTighterCut.root".format(forCondorStr)))
     else:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOHDD_EtaDifCut.root".format(forCondorStr)))
-    colorAr.append(9)
+    colorAr.append(8)
     datasetSaveNameAr.append("OHDDEtaDifCut")
     
     
@@ -921,7 +921,7 @@ if not onlyLHETree:
 
 
 
-    dataIntSumAr = setHistoElements(colorAr,histAr,normalizeDataTogether,weightsAr,intComparisonAr,FASaveNameAr,onlyDoSomeHists,histsToDo)
+    dataIntSumAr = setHistoElements(colorAr,histAr,normalizeDataTogether,weightsAr,intComparisonAr,FASaveNameAr,onlyDoSomeHists,histsToDo,useFillColorInPlots)
 
 
     histMaxAr,histMinAr = normalizeHists(histAr,normalizeDataTogether,dataIntSumAr,weightsAr,legAr,datasetSaveNameAr,intComparisonAr,FASaveNameAr,onlyDoSomeHists,histsToDo)
@@ -1000,7 +1000,7 @@ if useLHETree and not onlyTaggedTrees:
 
 
 
-    setHistoElementsForLHETrees(colorAr,histGenRawAr,weightsAr,intComparisonAr,GenRawSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setHistoElementsForLHETrees(colorAr,histGenRawAr,weightsAr,intComparisonAr,GenRawSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
 
     histMaxAr = normalizeHistsForLHETrees(histGenRawAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,GenRawSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
 
@@ -1059,7 +1059,7 @@ if useLHETree and not onlyTaggedTrees:
 
 
 
-    setHistoElementsForLHETrees(colorAr,histRawAr,weightsAr,intComparisonAr,RawSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setHistoElementsForLHETrees(colorAr,histRawAr,weightsAr,intComparisonAr,RawSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
 
     histMaxAr = normalizeHistsForLHETrees(histRawAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,RawSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
 
@@ -1120,7 +1120,7 @@ if useLHETree and not onlyTaggedTrees:
 
 
 
-    setHistoElementsForLHETrees(colorAr,histSelectedAr,weightsAr,intComparisonAr,SelectedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setHistoElementsForLHETrees(colorAr,histSelectedAr,weightsAr,intComparisonAr,SelectedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
 
     histMaxAr = normalizeHistsForLHETrees(histSelectedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,SelectedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
 
@@ -1182,7 +1182,7 @@ if useLHETree and not onlyTaggedTrees:
 
 
 
-    setHistoElementsForLHETrees(colorAr,histHFJGenAr,weightsAr,intComparisonAr,HFJGenSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setHistoElementsForLHETrees(colorAr,histHFJGenAr,weightsAr,intComparisonAr,HFJGenSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
 
     histMaxAr = normalizeHistsForLHETrees(histHFJGenAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,HFJGenSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
 
@@ -1242,7 +1242,7 @@ if useLHETree and not onlyTaggedTrees:
 
 
 
-    setHistoElementsForLHETrees(colorAr,histZFJGenAr,weightsAr,intComparisonAr,ZFJGenSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setHistoElementsForLHETrees(colorAr,histZFJGenAr,weightsAr,intComparisonAr,ZFJGenSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
 
     histMaxAr = normalizeHistsForLHETrees(histZFJGenAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,ZFJGenSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
 
@@ -1301,7 +1301,7 @@ if useLHETree and not onlyTaggedTrees:
 
 
 
-    setHistoElementsForLHETrees(colorAr,histZHFJGenAr,weightsAr,intComparisonAr,ZHFJGenSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setHistoElementsForLHETrees(colorAr,histZHFJGenAr,weightsAr,intComparisonAr,ZHFJGenSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
 
     histMaxAr = normalizeHistsForLHETrees(histZHFJGenAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,ZHFJGenSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
 
@@ -1361,7 +1361,7 @@ if useLHETree and not onlyTaggedTrees:
 
 
 
-    setHistoElementsForLHETrees(colorAr,histZHJGenAr,weightsAr,intComparisonAr,ZHJGenSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setHistoElementsForLHETrees(colorAr,histZHJGenAr,weightsAr,intComparisonAr,ZHJGenSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
 
     histMaxAr = normalizeHistsForLHETrees(histZHJGenAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,ZHJGenSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
 
@@ -1421,7 +1421,7 @@ if useLHETree and not onlyTaggedTrees:
 
 
 
-    setHistoElementsForLHETrees(colorAr,histZJGenAr,weightsAr,intComparisonAr,ZJGenSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setHistoElementsForLHETrees(colorAr,histZJGenAr,weightsAr,intComparisonAr,ZJGenSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
 
     histMaxAr = normalizeHistsForLHETrees(histZJGenAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,ZJGenSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
 
@@ -1486,7 +1486,7 @@ if useTaggedTrees and makeGenRaw:
 
 
 
-    setHistoElementsForLHETrees(colorAr,histGenRawTaggedAr,weightsAr,intComparisonAr,GenRawTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setHistoElementsForLHETrees(colorAr,histGenRawTaggedAr,weightsAr,intComparisonAr,GenRawTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
 
     histMaxAr = normalizeHistsForLHETrees(histGenRawTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,GenRawTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
 
@@ -1547,7 +1547,7 @@ if useTaggedTrees and makeRaw:
 
 
 
-    setHistoElementsForLHETrees(colorAr,histRawTaggedAr,weightsAr,intComparisonAr,RawTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setHistoElementsForLHETrees(colorAr,histRawTaggedAr,weightsAr,intComparisonAr,RawTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
 
     histMaxAr = normalizeHistsForLHETrees(histRawTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,RawTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
 
@@ -1608,7 +1608,7 @@ if useTaggedTrees and makeHFJ:
 
 
 
-    setHistoElementsForLHETrees(colorAr,histHFJGenTaggedAr,weightsAr,intComparisonAr,HFJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setHistoElementsForLHETrees(colorAr,histHFJGenTaggedAr,weightsAr,intComparisonAr,HFJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
 
     histMaxAr = normalizeHistsForLHETrees(histHFJGenTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,HFJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
 
@@ -1668,7 +1668,7 @@ if useTaggedTrees and makeZFJ:
 
 
 
-    setHistoElementsForLHETrees(colorAr,histZFJGenTaggedAr,weightsAr,intComparisonAr,ZFJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setHistoElementsForLHETrees(colorAr,histZFJGenTaggedAr,weightsAr,intComparisonAr,ZFJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
 
     histMaxAr = normalizeHistsForLHETrees(histZFJGenTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,ZFJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
 
@@ -1728,7 +1728,7 @@ if useTaggedTrees and makeZHFJ:
 
 
 
-    setHistoElementsForLHETrees(colorAr,histZHFJGenTaggedAr,weightsAr,intComparisonAr,ZHFJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setHistoElementsForLHETrees(colorAr,histZHFJGenTaggedAr,weightsAr,intComparisonAr,ZHFJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
 
     histMaxAr = normalizeHistsForLHETrees(histZHFJGenTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,ZHFJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
 
@@ -1788,7 +1788,7 @@ if useTaggedTrees and makeZHJ:
 
 
 
-    setHistoElementsForLHETrees(colorAr,histZHJGenTaggedAr,weightsAr,intComparisonAr,ZHJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setHistoElementsForLHETrees(colorAr,histZHJGenTaggedAr,weightsAr,intComparisonAr,ZHJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
 
     histMaxAr = normalizeHistsForLHETrees(histZHJGenTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,ZHJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
 
@@ -1849,7 +1849,7 @@ if useTaggedTrees and makeZJ:
 
 
 
-    setHistoElementsForLHETrees(colorAr,histZJGenTaggedAr,weightsAr,intComparisonAr,ZJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+    setHistoElementsForLHETrees(colorAr,histZJGenTaggedAr,weightsAr,intComparisonAr,ZJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
 
     histMaxAr = normalizeHistsForLHETrees(histZJGenTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,ZJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
 

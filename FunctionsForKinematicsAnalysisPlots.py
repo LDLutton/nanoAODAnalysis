@@ -34,6 +34,8 @@ makeUnstacked = True
 
 comparisonPlotsOnly = True
 
+useFillColorInPlots = False
+
 useTightdRCut = False
 tightCutStr = ""
 if useTightdRCut:
@@ -586,7 +588,7 @@ def makeNiceHistos(histo,xTitle,yTitle,noX=True):
   histo.SetStats(0)
 
   
-def setHistoElementsForLHETrees(colorAr,histAr,weightsAr,intAr,histTitleNameAr,onlyDoSomeHists,histsToDo,useLHEAr):
+def setHistoElementsForLHETrees(colorAr,histAr,weightsAr,intAr,histTitleNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots):
     for k,colorA in zip(range(len(colorAr)),colorAr):
       if useLHEAr[k]:
         intAr.append([])
@@ -596,7 +598,8 @@ def setHistoElementsForLHETrees(colorAr,histAr,weightsAr,intAr,histTitleNameAr,o
           
           histAr[k][histTypeItr].SetLineColor(colorA)
           histAr[k][histTypeItr].SetLineWidth(4)
-          histAr[k][histTypeItr].SetFillColorAlpha(colorA,0.2)
+          if useFillColorInPlots:
+            histAr[k][histTypeItr].SetFillColorAlpha(colorA,0.2)
           makeNiceHistos(histAr[k][histTypeItr],"","Weighted Events/Bin (pb)",True)
           histAr[k][histTypeItr].SetTitle(histTitleName)
           tmpHistInt = histAr[k][histTypeItr].Integral()
@@ -669,7 +672,7 @@ def setUpNonStackedHistAndFoMPlotForLHETrees(compCan,cloneHistAr,padAr,histMax,h
         if k == 0 and not useLogYForRatioPlot:
           cloneHistAr[k][histTypeItr].GetYaxis().SetRangeUser(0.,2.0)
         elif useLogYForRatioPlot:
-          cloneHistAr[k][histTypeItr].GetYaxis().SetRangeUser(0.01,1000000.0)
+          cloneHistAr[k][histTypeItr].GetYaxis().SetRangeUser(0.01,50.0)
         cloneHistAr[k][histTypeItr].Draw("et same")
 
 
@@ -691,7 +694,7 @@ def setUpNonStackedHistAndFoMPlotForLHETrees(compCan,cloneHistAr,padAr,histMax,h
     
 
 
-def setHistoElements(colorAr,histAr,normalizeDataTogether,weightsAr,intAr,histTitleNameAr,onlyDoSomeHists,histsToDo):
+def setHistoElements(colorAr,histAr,normalizeDataTogether,weightsAr,intAr,histTitleNameAr,onlyDoSomeHists,histsToDo,useFillColorInPlots):
     dataIntSumAr = []
     for histTypeItr, histTitleName in enumerate(histTitleNameAr):
       if onlyDoSomeHists and histTypeItr >= histsToDo:
@@ -704,8 +707,8 @@ def setHistoElements(colorAr,histAr,normalizeDataTogether,weightsAr,intAr,histTi
           break
         histAr[k][histTypeItr].SetLineColor(colorA)
         histAr[k][histTypeItr].SetLineWidth(4)
-
-        histAr[k][histTypeItr].SetFillColorAlpha(colorA,0.2)
+        if useFillColorInPlots:
+            histAr[k][histTypeItr].SetFillColorAlpha(colorA,0.2)
         makeNiceHistos(histAr[k][histTypeItr],"","Weighted Events/Bin (pb)",True)
         histAr[k][histTypeItr].SetTitle(histTitleName)
         tmpHistInt = histAr[k][histTypeItr].Integral()
