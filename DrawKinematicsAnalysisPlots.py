@@ -41,6 +41,31 @@ if testRun:
         evNum = ev.nEv
     totalEvents.append(evNum)
 
+if MGC2VEtaDifCut:
+    if useTightdRCut:
+        fileAr.append(TFile.Open("{0}KinematicsAnalysisC2VEtaDifCutTighterCut.root".format(forCondorStr)))
+    else:
+        fileAr.append(TFile.Open("{0}KinematicsAnalysisC2VEtaDifCut.root".format(forCondorStr)))
+    colorAr.append(9)
+    datasetSaveNameAr.append("C2VEtaDifCut")
+    
+    
+    useLHEAr.append(True)
+
+    C2VEtaDifCutXSTree = fileAr[-1].crossSectionTree
+    tmpXSAvg = 0
+    tmpXSCnt = 0
+    for C2VEtaDifCutXS in C2VEtaDifCutXSTree:
+        tmpXSAvg += C2VEtaDifCutXS.crossSectionVar
+        tmpXSCnt += 1
+    tmpXSAvg = tmpXSAvg / tmpXSCnt
+    XSAr.append(tmpXSAvg)
+    ENTree = fileAr[-1].evNumTree
+    evNum = 0
+    for ev in ENTree:
+        evNum = ev.nEv
+    totalEvents.append(evNum)
+
 if MGOHW:
     if useTightdRCut:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisOHWTighterCut.root".format(forCondorStr)))

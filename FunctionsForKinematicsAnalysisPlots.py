@@ -22,6 +22,8 @@ testRun = False
 MGOHW = True
 MGSM = True
 
+MGC2VEtaDifCut = True
+
 MGOSix = True
 MGOSixEtaDifCut = True
 MGOHBox = True
