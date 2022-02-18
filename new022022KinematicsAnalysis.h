@@ -10,6 +10,7 @@ int NToEnd = 2500;
 bool useTighterCut = false;
 
 bool testRun = true;
+bool MGC2VEtaDifCut = false;
 bool MGOSix = false;
 bool MGOSixEtaDifCut = false;
 bool MGOHBox = false;

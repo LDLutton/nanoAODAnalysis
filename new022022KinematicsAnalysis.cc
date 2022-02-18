@@ -71,7 +71,19 @@ void new022022KinematicsAnalysis(){
     bool useFJGenMatchTree = false;
     bool useJGenMatchTree = false;
 
-    if (MGOSix){
+    if (MGC2VEtaDifCut){
+        saveName = "C2VEtaDifCut";
+        isBackground = false;
+        int arrSize = sizeof(MGC2VEtaDifCutAr)/sizeof(MGC2VEtaDifCutAr[0]);
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = "/scratch365/dlutton/NanoAODFiles/pphzzjj_C2V_QCD0SMHLOOP0NPLE1C2VE1KappaFramework_100Ev_3p0c2V_100GeVIMJetCut_2EtaDifCut/"+MGC2VEtaDifCutAr[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        useJGenMatchTree = true;
+    }
+    else if (MGOSix){
         saveName = "OSix";
         isBackground = false;
         int arrSize = sizeof(MGOSixAr)/sizeof(MGOSixAr[0]);
