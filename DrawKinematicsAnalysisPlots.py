@@ -630,7 +630,7 @@ for k,fileA in enumerate(fileAr):
 
 
         #####################
-        if use TaggedTrees:
+        if useTaggedTrees:
             if makeHFJ:
                 
                 evCtr = 0
