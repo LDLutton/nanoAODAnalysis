@@ -138,6 +138,48 @@ canZHJGenTaggedAr = []
 histZJGenTaggedAr = []
 canZJGenTaggedAr = []
 
+histGenRawSemiLepTaggedAr = []
+canGenRawSemiLepTaggedAr = []
+
+histRawSemiLepTaggedAr = []
+canRawSemiLepTaggedAr = []
+
+histHFJGenSemiLepTaggedAr = []
+canHFJGenSemiLepTaggedAr = []
+
+histZFJGenSemiLepTaggedAr = []
+canZFJGenSemiLepTaggedAr = []
+
+histZHFJGenSemiLepTaggedAr = []
+canZHFJGenSemiLepTaggedAr = []
+
+histZHJGenSemiLepTaggedAr = []
+canZHJGenSemiLepTaggedAr = []
+
+histZJGenSemiLepTaggedAr = []
+canZJGenSemiLepTaggedAr = []
+
+histGenRawLepTaggedAr = []
+canGenRawLepTaggedAr = []
+
+histRawLepTaggedAr = []
+canRawLepTaggedAr = []
+
+histHFJGenLepTaggedAr = []
+canHFJGenLepTaggedAr = []
+
+histZFJGenLepTaggedAr = []
+canZFJGenLepTaggedAr = []
+
+histZHFJGenLepTaggedAr = []
+canZHFJGenLepTaggedAr = []
+
+histZHJGenLepTaggedAr = []
+canZHJGenLepTaggedAr = []
+
+histZJGenLepTaggedAr = []
+canZJGenLepTaggedAr = []
+
 
 #Higgs gen matching with FatJets tree
 
@@ -456,6 +498,335 @@ RawTaggedXTitleAr = ["Pt (GeV)","Eta","Phi","Mass (GeV)",
 "Invariant Mass (GeV)", "Eta Separation"]
 
 RawTaggedBinsAndRangeAr = [[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,200],
+[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,200],
+[100,0,6000],[40,0,8],
+[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,200],[100,0,6000],
+[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[50,-0.03,0.03],[10,-5,5],
+[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[50,-0.03,0.03],[10,-5,5],
+[100,0,6000],[40,0,8]]
+
+
+
+############
+
+
+#Higgs gen matching with FatJets tree
+
+HFJGenSemiLepTaggedSaveNameAr = ["HPtFromHFJGenSemiLepTagged","HEtaFromHFJGenSemiLepTagged","HPhiFromHFJGenSemiLepTagged","HMassFromHFJGenSemiLepTagged","HdRFromFJFromHFJGenSemiLepTagged",
+"HnDecayFromHFJGenSemiLepTagged","HDecaypdgIdFromHFJGenSemiLepTagged"]
+HFJGenSemiLepTaggedSaveNameAr = [genSaveName+tightCutStr for genSaveName in HFJGenSemiLepTaggedSaveNameAr]
+
+HFJGenSemiLepTaggedTitleAr = ["H Pt for Hadronic Events","H Eta for Hadronic Events","H Phi for Hadronic Events","H Mass for Hadronic Events","Gen Higgs dR from Matched Fat Jet for Hadronic Events",
+"Number of Decay Products from Higgs for Hadronic Events","Higgs Decay Particle PDG Id for Hadronic Events"]
+
+HFJGenSemiLepTaggedXTitleAr = ["Pt (GeV)","Eta","Phi","Mass (GeV)","dR",
+"N","pdgId"]
+
+HFJGenSemiLepTaggedBinsAndRangeAr = [[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,400],[50,0,0.4],
+[5,0,5],[12,-6,6]]
+
+#Z gen matching with FatJets tree
+
+ZFJGenSemiLepTaggedSaveNameAr = ["ZLeadPtFromZFJGenSemiLepTagged","ZLeadEtaFromZFJGenSemiLepTagged","ZLeadPhiFromZFJGenSemiLepTagged","ZLeadMassFromZFJGenSemiLepTagged","ZLeaddRFromFJFromZFJGenSemiLepTagged",
+"ZLeadnDecayFromZFJGenSemiLepTagged","ZLeadDecaypdgIdFromZFJGenSemiLepTagged",
+"ZTrailingPtFromZFJGenSemiLepTagged","ZTrailingEtaFromZFJGenSemiLepTagged","ZTrailingPhiFromZFJGenSemiLepTagged","ZTrailingMassFromZFJGenSemiLepTagged","ZTrailingdRFromFJFromZFJGenSemiLepTagged",
+"ZTrailingnDecayFromZFJGenSemiLepTagged","ZTrailingDecaypdgIdFromZFJGenSemiLepTagged",
+"ZPairInvMassFromZFJGenSemiLepTagged","ZPairEtaSepFromZFJGenSemiLepTagged"]
+
+ZFJGenSemiLepTaggedSaveNameAr = [genSaveName+tightCutStr for genSaveName in ZFJGenSemiLepTaggedSaveNameAr]
+
+ZFJGenSemiLepTaggedTitleAr = ["Lead Z Pt for Hadronic Events","Lead Z Eta for Hadronic Events","Lead Z Phi for Hadronic Events","Lead Z Mass for Hadronic Events","GenSemiLepTagged Lead Z dR from Matched Fat Jet for Hadronic Events",
+"Number of Decay Products from Lead Z for Hadronic Events","Lead Z Decay Particle PDG Id for Hadronic Events",
+"Trailing Z Pt for Hadronic Events","Trailing Z Eta for Hadronic Events","Trailing Z Phi for Hadronic Events","Trailing Z Mass for Hadronic Events","GenSemiLepTagged Trailing Z dR from Matched Fat Jet for Hadronic Events",
+"Number of Decay Products from Trailing Z for Hadronic Events","Trailing Z Decay Particle PDG Id for Hadronic Events",
+"Z Pair Invariant Mass for Hadronic Events","Z Pair Eta Separation for Hadronic Events"]
+
+ZFJGenSemiLepTaggedXTitleAr = ["Pt (GeV)","Eta","Phi","Mass (GeV)","dR",
+"N","pdgId",
+"Pt (GeV)","Eta","Phi","Mass (GeV)","dR",
+"N","pdgId",
+"Invariant Mass (GeV)","Eta Separation"]
+
+ZFJGenSemiLepTaggedBinsAndRangeAr = [[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,400],[50,0,0.4],
+[4,0,4],[36,-18,18],
+[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,400],[50,0,0.4],
+[4,0,4],[36,-18,18],
+[100,0,6000],[40,0,8]]
+
+#Higgs and Z gen matching with FatJets tree
+
+ZHFJGenSemiLepTaggedSaveNameAr = ["ZPairPlusHInvMassFromZHFJGenSemiLepTagged"]
+ZHFJGenSemiLepTaggedSaveNameAr = [genSaveName+tightCutStr for genSaveName in ZHFJGenSemiLepTaggedSaveNameAr]
+
+ZHFJGenSemiLepTaggedTitleAr = ["Invariant Mass of Z Pair With Higgs for Hadronic Events"]
+ZHFJGenSemiLepTaggedXTitleAr = ["Invariant Mass (GeV)"]
+ZHFJGenSemiLepTaggedBinsAndRangeAr = [[100,0,6000]]
+
+#Higgs and Z gen matching with jets tree
+
+ZHJGenSemiLepTaggedSaveNameAr = ["ZPairPlusHInvMassFromZHJGenSemiLepTagged"]
+ZHJGenSemiLepTaggedSaveNameAr = [genSaveName+tightCutStr for genSaveName in ZHJGenSemiLepTaggedSaveNameAr]
+ZHJGenSemiLepTaggedTitleAr = ["Invariant Mass of Z Pair With Higgs for Hadronic Events"]
+ZHJGenSemiLepTaggedXTitleAr = ["Invariant Mass (GeV)"]
+ZHJGenSemiLepTaggedBinsAndRangeAr = [[100,0,6000]]
+
+#Z gen matching with jets tree
+
+ZJGenSemiLepTaggedSaveNameAr = ["ZLeadPtFromZJGenSemiLepTagged","ZLeadEtaFromZJGenSemiLepTagged","ZLeadPhiFromZJGenSemiLepTagged","ZLeadMassFromZJGenSemiLepTagged","ZLeaddRFromJFromZJGenSemiLepTagged",
+"ZLeadnDecayFromZJGenSemiLepTagged","ZLeadDecaypdgIdFromZJGenSemiLepTagged",
+"ZTrailingPtFromZJGenSemiLepTagged","ZTrailingEtaFromZJGenSemiLepTagged","ZTrailingPhiFromZJGenSemiLepTagged","ZTrailingMassFromZJGenSemiLepTagged","ZTrailingdRFromJFromZJGenSemiLepTagged",
+"ZTrailingnDecayFromZJGenSemiLepTagged","ZTrailingDecaypdgIdFromZJGenSemiLepTagged",
+"ZPairInvMassFromZJGenSemiLepTagged","ZPairEtaSepFromZJGenSemiLepTagged"]
+
+ZJGenSemiLepTaggedSaveNameAr = [genSaveName+tightCutStr for genSaveName in ZJGenSemiLepTaggedSaveNameAr]
+
+ZJGenSemiLepTaggedTitleAr = ["Lead Z Pt for Hadronic Events","Lead Z Eta for Hadronic Events","Lead Z Phi for Hadronic Events","Lead Z Mass for Hadronic Events","GenSemiLepTagged Lead Z dR from Matched Jet for Hadronic Events",
+"Number of Decay Products from Lead Z for Hadronic Events","Lead Z Decay Particle PDG Id for Hadronic Events",
+"Trailing Z Pt for Hadronic Events","Trailing Z Eta for Hadronic Events","Trailing Z Phi for Hadronic Events","Trailing Z Mass for Hadronic Events","GenSemiLepTagged Trailing Z dR from Matched Jet for Hadronic Events",
+"Number of Decay Products from Trailing Z for Hadronic Events","Trailing Z Decay Particle PDG Id for Hadronic Events",
+"Z Pair Invariant Mass for Hadronic Events","Z Pair Eta Separation for Hadronic Events"]
+
+ZJGenSemiLepTaggedXTitleAr = ["Pt (GeV)","Eta","Phi","Mass (GeV)","dR",
+"N","pdgId",
+"Pt (GeV)","Eta","Phi","Mass (GeV)","dR",
+"N","pdgId",
+"Invariant Mass (GeV)","Eta Separation"]
+
+ZJGenSemiLepTaggedBinsAndRangeAr = [[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,400],[50,0,0.4],
+[4,0,4],[36,-18,18],
+[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,400],[50,0,0.4],
+[4,0,4],[36,-18,18],
+[100,0,6000],[40,0,8]]
+
+
+GenRawSemiLepTaggedSaveNameAr = ["Z1PtFromGenRawSemiLepTagged","Z1EtaFromGenRawSemiLepTagged","Z1PhiFromGenRawSemiLepTagged","Z1MassFromGenRawSemiLepTagged","Z1pdgIdFromGenRawSemiLepTagged","Z1genPartIdxMotherFromGenRawSemiLepTagged",
+"Z1nDecayFromGenRawSemiLepTagged","Z1DecaypdgIdFromGenRawSemiLepTagged",
+"Z2PtFromGenRawSemiLepTagged","Z2EtaFromGenRawSemiLepTagged","Z2PhiFromGenRawSemiLepTagged","Z2MassFromGenRawSemiLepTagged","Z2pdgIdFromGenRawSemiLepTagged","Z2genPartIdxMotherFromGenRawSemiLepTagged",
+"Z2nDecayFromGenRawSemiLepTagged","Z2DecaypdgIdFromGenRawSemiLepTagged",
+"ZPairInvMassFromGenRawSemiLepTagged","ZPairEtaSepFromGenRawSemiLepTagged",
+"HPtFromGenRawSemiLepTagged","HEtaFromGenRawSemiLepTagged","HPhiFromGenRawSemiLepTagged","HMassFromGenRawSemiLepTagged","HpdgIdFromGenRawSemiLepTagged","HgenPartIdxMotherFromGenRawSemiLepTagged",
+"HnDecayFromGenRawSemiLepTagged","HDecaypdgIdFromGenRawSemiLepTagged",
+"ZPairPlusHInvMassFromGenRawSemiLepTagged"]
+
+
+GenRawSemiLepTaggedTitleAr = ["Lead Z Pt for Hadronic Events","Lead Z Eta for Hadronic Events","Lead Z Phi for Hadronic Events","Lead Z Mass for Hadronic Events","Lead Z pdgId for Hadronic Events","Lead Z GenSemiLepTagged Part Mother Ind for Hadronic Events",
+"Number of Decay Products from Lead Z for Hadronic Events","Lead Z Decay Particle PDG Id for Hadronic Events",
+"Trailing Z Pt for Hadronic Events","Trailing Z Eta for Hadronic Events","Trailing Z Phi for Hadronic Events","Trailing Z Mass for Hadronic Events","Trailing Z pdgId for Hadronic Events","Trailing Z GenSemiLepTagged Part Mother Ind for Hadronic Events",
+"Number of Decay Products from Trailing Z for Hadronic Events","Trailing Z Decay Particle PDG Id for Hadronic Events",
+"Z Pair Invariant Mass for Hadronic Events","Z Pair Eta Separation for Hadronic Events",
+"H Pt for Hadronic Events","H Eta for Hadronic Events","H Phi for Hadronic Events","H Mass for Hadronic Events","H pdgId for Hadronic Events","H GenSemiLepTagged Part Mother Ind for Hadronic Events",
+"Number of Decay Products from Higgs for Hadronic Events","Higgs Decay Particle PDG Id for Hadronic Events",
+"Z Pair Plus H Invariant Mass for Hadronic Events"]
+
+GenRawSemiLepTaggedXTitleAr = ["Pt (GeV)","Eta","Phi","Mass (GeV)","pdgId","GenSemiLepTagged Part Mother Ind",
+"N","pdgId",
+"Pt (GeV)","Eta","Phi","Mass (GeV)","pdgId","GenSemiLepTagged Part Mother Ind",
+"N","pdgId",
+"Mass (GeV)","Eta Separation",
+"Pt (GeV)","Eta","Phi","Mass (GeV)","pdgId","GenSemiLepTagged Part Mother Ind",
+"N","pdgId",
+"Mass (GeV)"]
+
+GenRawSemiLepTaggedBinsAndRangeAr = [[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,200],[60,-30,30],[110,0,110],
+[4,0,4],[36,-18,18],
+[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,200],[60,-30,30],[110,0,110],
+[4,0,4],[36,-18,18],
+[100,0,6000],[40,0,8],
+[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,200],[60,-30,30],[110,0,110],
+[5,0,5],[12,-6,6],
+[100,0,6000]]
+
+
+
+RawSemiLepTaggedSaveNameAr = ["Z1PtFromLHERawSemiLepTagged","Z1EtaFromLHERawSemiLepTagged","Z1PhiFromLHERawSemiLepTagged","Z1MassFromLHERawSemiLepTagged",
+"Z2PtFromLHERawSemiLepTagged","Z2EtaFromLHERawSemiLepTagged","Z2PhiFromLHERawSemiLepTagged","Z2MassFromLHERawSemiLepTagged",
+"ZPairInvMassFromLHERawSemiLepTagged","ZPairEtaSepFromLHERawSemiLepTagged",
+"HPtFromLHERawSemiLepTagged","HEtaFromLHERawSemiLepTagged","HPhiFromLHERawSemiLepTagged","HMassFromLHERawSemiLepTagged","ZPairPlusHInvMassFromLHERawSemiLepTagged",
+"JetLeadPtFromLHERawSemiLepTagged","JetLeadEtaFromLHERawSemiLepTagged","JetLeadPhiFromLHERawSemiLepTagged","JetLeadInvMassFromLHERawSemiLepTagged","JetLeadpdgIdFromLHERawSemiLepTagged",
+"JetTrailingPtFromLHERawSemiLepTagged","JetTrailingEtaFromLHERawSemiLepTagged","JetTrailingPhiFromLHERawSemiLepTagged","JetTrailingInvMassFromLHERawSemiLepTagged","JetTrailingpdgIdFromLHERawSemiLepTagged",
+"JPairInvMassFromLHERawSemiLepTagged","JPairEtaSepFromLHERawSemiLepTagged"]
+
+
+RawSemiLepTaggedTitleAr = ["Lead Z Pt for Hadronic Events","Lead Z Eta for Hadronic Events","Lead Z Phi for Hadronic Events","Lead Z Mass for Hadronic Events",
+"Trailing Z Pt for Hadronic Events","Trailing Z Eta for Hadronic Events","Trailing Z Phi for Hadronic Events","Trailing Z Mass for Hadronic Events",
+"Z Pair Invariant Mass for Hadronic Events","Z Pair Eta Separation for Hadronic Events",
+"H Pt for Hadronic Events","H Eta for Hadronic Events","H Phi for Hadronic Events","H Mass for Hadronic Events","Z Pair Plus H Invariant Mass for Hadronic Events",
+"Jet Lead Pt for Hadronic Events","Jet Lead Eta for Hadronic Events","Jet Lead Phi for Hadronic Events","Jet Lead Invariant Mass for Hadronic Events","Jet Lead pdgId for Hadronic Events",
+"Jet Trailing Pt for Hadronic Events","Jet Trailing Eta for Hadronic Events","Jet Trailing Phi for Hadronic Events","Jet Trailing Invariant Mass for Hadronic Events","Jet Trailing pdgId for Hadronic Events",
+"Jet Pair Invariant Mass for Hadronic Events", "Jet Pair Eta Separation for Hadronic Events"]
+
+RawSemiLepTaggedXTitleAr = ["Pt (GeV)","Eta","Phi","Mass (GeV)",
+"Pt (GeV)","Eta","Phi","Mass (GeV)",
+"Mass (GeV)","Eta Separation",
+"Pt (GeV)","Eta","Phi","Mass (GeV)","Mass (GeV)", 
+"Pt (GeV)","Eta","Phi","Invariant Mass (GeV)","pdg Id",
+"Pt (GeV)","Eta","Phi","Invariant Mass (GeV)","pdg Id",
+"Invariant Mass (GeV)", "Eta Separation"]
+
+RawSemiLepTaggedBinsAndRangeAr = [[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,200],
+[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,200],
+[100,0,6000],[40,0,8],
+[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,200],[100,0,6000],
+[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[50,-0.03,0.03],[10,-5,5],
+[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[50,-0.03,0.03],[10,-5,5],
+[100,0,6000],[40,0,8]]
+
+
+
+#Higgs gen matching with FatJets tree
+
+HFJGenLepTaggedSaveNameAr = ["HPtFromHFJGenLepTagged","HEtaFromHFJGenLepTagged","HPhiFromHFJGenLepTagged","HMassFromHFJGenLepTagged","HdRFromFJFromHFJGenLepTagged",
+"HnDecayFromHFJGenLepTagged","HDecaypdgIdFromHFJGenLepTagged"]
+HFJGenLepTaggedSaveNameAr = [genSaveName+tightCutStr for genSaveName in HFJGenLepTaggedSaveNameAr]
+
+HFJGenLepTaggedTitleAr = ["H Pt for Hadronic Events","H Eta for Hadronic Events","H Phi for Hadronic Events","H Mass for Hadronic Events","Gen Higgs dR from Matched Fat Jet for Hadronic Events",
+"Number of Decay Products from Higgs for Hadronic Events","Higgs Decay Particle PDG Id for Hadronic Events"]
+
+HFJGenLepTaggedXTitleAr = ["Pt (GeV)","Eta","Phi","Mass (GeV)","dR",
+"N","pdgId"]
+
+HFJGenLepTaggedBinsAndRangeAr = [[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,400],[50,0,0.4],
+[5,0,5],[12,-6,6]]
+
+#Z gen matching with FatJets tree
+
+ZFJGenLepTaggedSaveNameAr = ["ZLeadPtFromZFJGenLepTagged","ZLeadEtaFromZFJGenLepTagged","ZLeadPhiFromZFJGenLepTagged","ZLeadMassFromZFJGenLepTagged","ZLeaddRFromFJFromZFJGenLepTagged",
+"ZLeadnDecayFromZFJGenLepTagged","ZLeadDecaypdgIdFromZFJGenLepTagged",
+"ZTrailingPtFromZFJGenLepTagged","ZTrailingEtaFromZFJGenLepTagged","ZTrailingPhiFromZFJGenLepTagged","ZTrailingMassFromZFJGenLepTagged","ZTrailingdRFromFJFromZFJGenLepTagged",
+"ZTrailingnDecayFromZFJGenLepTagged","ZTrailingDecaypdgIdFromZFJGenLepTagged",
+"ZPairInvMassFromZFJGenLepTagged","ZPairEtaSepFromZFJGenLepTagged"]
+
+ZFJGenLepTaggedSaveNameAr = [genSaveName+tightCutStr for genSaveName in ZFJGenLepTaggedSaveNameAr]
+
+ZFJGenLepTaggedTitleAr = ["Lead Z Pt for Hadronic Events","Lead Z Eta for Hadronic Events","Lead Z Phi for Hadronic Events","Lead Z Mass for Hadronic Events","GenLepTagged Lead Z dR from Matched Fat Jet for Hadronic Events",
+"Number of Decay Products from Lead Z for Hadronic Events","Lead Z Decay Particle PDG Id for Hadronic Events",
+"Trailing Z Pt for Hadronic Events","Trailing Z Eta for Hadronic Events","Trailing Z Phi for Hadronic Events","Trailing Z Mass for Hadronic Events","GenLepTagged Trailing Z dR from Matched Fat Jet for Hadronic Events",
+"Number of Decay Products from Trailing Z for Hadronic Events","Trailing Z Decay Particle PDG Id for Hadronic Events",
+"Z Pair Invariant Mass for Hadronic Events","Z Pair Eta Separation for Hadronic Events"]
+
+ZFJGenLepTaggedXTitleAr = ["Pt (GeV)","Eta","Phi","Mass (GeV)","dR",
+"N","pdgId",
+"Pt (GeV)","Eta","Phi","Mass (GeV)","dR",
+"N","pdgId",
+"Invariant Mass (GeV)","Eta Separation"]
+
+ZFJGenLepTaggedBinsAndRangeAr = [[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,400],[50,0,0.4],
+[4,0,4],[36,-18,18],
+[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,400],[50,0,0.4],
+[4,0,4],[36,-18,18],
+[100,0,6000],[40,0,8]]
+
+#Higgs and Z gen matching with FatJets tree
+
+ZHFJGenLepTaggedSaveNameAr = ["ZPairPlusHInvMassFromZHFJGenLepTagged"]
+ZHFJGenLepTaggedSaveNameAr = [genSaveName+tightCutStr for genSaveName in ZHFJGenLepTaggedSaveNameAr]
+
+ZHFJGenLepTaggedTitleAr = ["Invariant Mass of Z Pair With Higgs for Hadronic Events"]
+ZHFJGenLepTaggedXTitleAr = ["Invariant Mass (GeV)"]
+ZHFJGenLepTaggedBinsAndRangeAr = [[100,0,6000]]
+
+#Higgs and Z gen matching with jets tree
+
+ZHJGenLepTaggedSaveNameAr = ["ZPairPlusHInvMassFromZHJGenLepTagged"]
+ZHJGenLepTaggedSaveNameAr = [genSaveName+tightCutStr for genSaveName in ZHJGenLepTaggedSaveNameAr]
+ZHJGenLepTaggedTitleAr = ["Invariant Mass of Z Pair With Higgs for Hadronic Events"]
+ZHJGenLepTaggedXTitleAr = ["Invariant Mass (GeV)"]
+ZHJGenLepTaggedBinsAndRangeAr = [[100,0,6000]]
+
+#Z gen matching with jets tree
+
+ZJGenLepTaggedSaveNameAr = ["ZLeadPtFromZJGenLepTagged","ZLeadEtaFromZJGenLepTagged","ZLeadPhiFromZJGenLepTagged","ZLeadMassFromZJGenLepTagged","ZLeaddRFromJFromZJGenLepTagged",
+"ZLeadnDecayFromZJGenLepTagged","ZLeadDecaypdgIdFromZJGenLepTagged",
+"ZTrailingPtFromZJGenLepTagged","ZTrailingEtaFromZJGenLepTagged","ZTrailingPhiFromZJGenLepTagged","ZTrailingMassFromZJGenLepTagged","ZTrailingdRFromJFromZJGenLepTagged",
+"ZTrailingnDecayFromZJGenLepTagged","ZTrailingDecaypdgIdFromZJGenLepTagged",
+"ZPairInvMassFromZJGenLepTagged","ZPairEtaSepFromZJGenLepTagged"]
+
+ZJGenLepTaggedSaveNameAr = [genSaveName+tightCutStr for genSaveName in ZJGenLepTaggedSaveNameAr]
+
+ZJGenLepTaggedTitleAr = ["Lead Z Pt for Hadronic Events","Lead Z Eta for Hadronic Events","Lead Z Phi for Hadronic Events","Lead Z Mass for Hadronic Events","GenLepTagged Lead Z dR from Matched Jet for Hadronic Events",
+"Number of Decay Products from Lead Z for Hadronic Events","Lead Z Decay Particle PDG Id for Hadronic Events",
+"Trailing Z Pt for Hadronic Events","Trailing Z Eta for Hadronic Events","Trailing Z Phi for Hadronic Events","Trailing Z Mass for Hadronic Events","GenLepTagged Trailing Z dR from Matched Jet for Hadronic Events",
+"Number of Decay Products from Trailing Z for Hadronic Events","Trailing Z Decay Particle PDG Id for Hadronic Events",
+"Z Pair Invariant Mass for Hadronic Events","Z Pair Eta Separation for Hadronic Events"]
+
+ZJGenLepTaggedXTitleAr = ["Pt (GeV)","Eta","Phi","Mass (GeV)","dR",
+"N","pdgId",
+"Pt (GeV)","Eta","Phi","Mass (GeV)","dR",
+"N","pdgId",
+"Invariant Mass (GeV)","Eta Separation"]
+
+ZJGenLepTaggedBinsAndRangeAr = [[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,400],[50,0,0.4],
+[4,0,4],[36,-18,18],
+[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,400],[50,0,0.4],
+[4,0,4],[36,-18,18],
+[100,0,6000],[40,0,8]]
+
+
+GenRawLepTaggedSaveNameAr = ["Z1PtFromGenRawLepTagged","Z1EtaFromGenRawLepTagged","Z1PhiFromGenRawLepTagged","Z1MassFromGenRawLepTagged","Z1pdgIdFromGenRawLepTagged","Z1genPartIdxMotherFromGenRawLepTagged",
+"Z1nDecayFromGenRawLepTagged","Z1DecaypdgIdFromGenRawLepTagged",
+"Z2PtFromGenRawLepTagged","Z2EtaFromGenRawLepTagged","Z2PhiFromGenRawLepTagged","Z2MassFromGenRawLepTagged","Z2pdgIdFromGenRawLepTagged","Z2genPartIdxMotherFromGenRawLepTagged",
+"Z2nDecayFromGenRawLepTagged","Z2DecaypdgIdFromGenRawLepTagged",
+"ZPairInvMassFromGenRawLepTagged","ZPairEtaSepFromGenRawLepTagged",
+"HPtFromGenRawLepTagged","HEtaFromGenRawLepTagged","HPhiFromGenRawLepTagged","HMassFromGenRawLepTagged","HpdgIdFromGenRawLepTagged","HgenPartIdxMotherFromGenRawLepTagged",
+"HnDecayFromGenRawLepTagged","HDecaypdgIdFromGenRawLepTagged",
+"ZPairPlusHInvMassFromGenRawLepTagged"]
+
+
+GenRawLepTaggedTitleAr = ["Lead Z Pt for Hadronic Events","Lead Z Eta for Hadronic Events","Lead Z Phi for Hadronic Events","Lead Z Mass for Hadronic Events","Lead Z pdgId for Hadronic Events","Lead Z GenLepTagged Part Mother Ind for Hadronic Events",
+"Number of Decay Products from Lead Z for Hadronic Events","Lead Z Decay Particle PDG Id for Hadronic Events",
+"Trailing Z Pt for Hadronic Events","Trailing Z Eta for Hadronic Events","Trailing Z Phi for Hadronic Events","Trailing Z Mass for Hadronic Events","Trailing Z pdgId for Hadronic Events","Trailing Z GenLepTagged Part Mother Ind for Hadronic Events",
+"Number of Decay Products from Trailing Z for Hadronic Events","Trailing Z Decay Particle PDG Id for Hadronic Events",
+"Z Pair Invariant Mass for Hadronic Events","Z Pair Eta Separation for Hadronic Events",
+"H Pt for Hadronic Events","H Eta for Hadronic Events","H Phi for Hadronic Events","H Mass for Hadronic Events","H pdgId for Hadronic Events","H GenLepTagged Part Mother Ind for Hadronic Events",
+"Number of Decay Products from Higgs for Hadronic Events","Higgs Decay Particle PDG Id for Hadronic Events",
+"Z Pair Plus H Invariant Mass for Hadronic Events"]
+
+GenRawLepTaggedXTitleAr = ["Pt (GeV)","Eta","Phi","Mass (GeV)","pdgId","GenLepTagged Part Mother Ind",
+"N","pdgId",
+"Pt (GeV)","Eta","Phi","Mass (GeV)","pdgId","GenLepTagged Part Mother Ind",
+"N","pdgId",
+"Mass (GeV)","Eta Separation",
+"Pt (GeV)","Eta","Phi","Mass (GeV)","pdgId","GenLepTagged Part Mother Ind",
+"N","pdgId",
+"Mass (GeV)"]
+
+GenRawLepTaggedBinsAndRangeAr = [[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,200],[60,-30,30],[110,0,110],
+[4,0,4],[36,-18,18],
+[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,200],[60,-30,30],[110,0,110],
+[4,0,4],[36,-18,18],
+[100,0,6000],[40,0,8],
+[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,200],[60,-30,30],[110,0,110],
+[5,0,5],[12,-6,6],
+[100,0,6000]]
+
+
+
+RawLepTaggedSaveNameAr = ["Z1PtFromLHERawLepTagged","Z1EtaFromLHERawLepTagged","Z1PhiFromLHERawLepTagged","Z1MassFromLHERawLepTagged",
+"Z2PtFromLHERawLepTagged","Z2EtaFromLHERawLepTagged","Z2PhiFromLHERawLepTagged","Z2MassFromLHERawLepTagged",
+"ZPairInvMassFromLHERawLepTagged","ZPairEtaSepFromLHERawLepTagged",
+"HPtFromLHERawLepTagged","HEtaFromLHERawLepTagged","HPhiFromLHERawLepTagged","HMassFromLHERawLepTagged","ZPairPlusHInvMassFromLHERawLepTagged",
+"JetLeadPtFromLHERawLepTagged","JetLeadEtaFromLHERawLepTagged","JetLeadPhiFromLHERawLepTagged","JetLeadInvMassFromLHERawLepTagged","JetLeadpdgIdFromLHERawLepTagged",
+"JetTrailingPtFromLHERawLepTagged","JetTrailingEtaFromLHERawLepTagged","JetTrailingPhiFromLHERawLepTagged","JetTrailingInvMassFromLHERawLepTagged","JetTrailingpdgIdFromLHERawLepTagged",
+"JPairInvMassFromLHERawLepTagged","JPairEtaSepFromLHERawLepTagged"]
+
+
+RawLepTaggedTitleAr = ["Lead Z Pt for Hadronic Events","Lead Z Eta for Hadronic Events","Lead Z Phi for Hadronic Events","Lead Z Mass for Hadronic Events",
+"Trailing Z Pt for Hadronic Events","Trailing Z Eta for Hadronic Events","Trailing Z Phi for Hadronic Events","Trailing Z Mass for Hadronic Events",
+"Z Pair Invariant Mass for Hadronic Events","Z Pair Eta Separation for Hadronic Events",
+"H Pt for Hadronic Events","H Eta for Hadronic Events","H Phi for Hadronic Events","H Mass for Hadronic Events","Z Pair Plus H Invariant Mass for Hadronic Events",
+"Jet Lead Pt for Hadronic Events","Jet Lead Eta for Hadronic Events","Jet Lead Phi for Hadronic Events","Jet Lead Invariant Mass for Hadronic Events","Jet Lead pdgId for Hadronic Events",
+"Jet Trailing Pt for Hadronic Events","Jet Trailing Eta for Hadronic Events","Jet Trailing Phi for Hadronic Events","Jet Trailing Invariant Mass for Hadronic Events","Jet Trailing pdgId for Hadronic Events",
+"Jet Pair Invariant Mass for Hadronic Events", "Jet Pair Eta Separation for Hadronic Events"]
+
+RawLepTaggedXTitleAr = ["Pt (GeV)","Eta","Phi","Mass (GeV)",
+"Pt (GeV)","Eta","Phi","Mass (GeV)",
+"Mass (GeV)","Eta Separation",
+"Pt (GeV)","Eta","Phi","Mass (GeV)","Mass (GeV)", 
+"Pt (GeV)","Eta","Phi","Invariant Mass (GeV)","pdg Id",
+"Pt (GeV)","Eta","Phi","Invariant Mass (GeV)","pdg Id",
+"Invariant Mass (GeV)", "Eta Separation"]
+
+RawLepTaggedBinsAndRangeAr = [[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,200],
 [34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,200],
 [100,0,6000],[40,0,8],
 [34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,200],[100,0,6000],

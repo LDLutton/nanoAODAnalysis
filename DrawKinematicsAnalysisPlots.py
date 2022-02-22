@@ -630,282 +630,837 @@ for k,fileA in enumerate(fileAr):
 
 
         #####################
-        if useTaggedTrees and makeHFJ:
-            
-            evCtr = 0
-
-            HFJGenTaggedTree = fileA.HFJGenTaggedTree
-            histHFJGenTaggedAr.append([])
-            canHFJGenTaggedAr.append([])
-            
-            #Initialize all HFJGenTagged hists
-            print("Initializing HFJGenTagged hists")
-            for HFJGenTaggedItr, HFJGenTaggedSaveName in enumerate(HFJGenTaggedSaveNameAr):
-                if onlyDoSomeHists and HFJGenTaggedItr >= histsToDo:
-                    break
-                canHFJGenTaggedAr[-1].append(TCanvas("{0}CanHFJGenTagged{1}".format(HFJGenTaggedSaveName,datasetSaveNameAr[k]),"{0}CanHFJGenTagged{1}".format(HFJGenTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
-                histHFJGenTaggedAr[-1].append(TH1D("{0}HistHFJGenTagged{1}".format(HFJGenTaggedSaveName,datasetSaveNameAr[k]),"{0}HistHFJGenTagged{1}".format(HFJGenTaggedSaveName,datasetSaveNameAr[k]), HFJGenTaggedBinsAndRangeAr[HFJGenTaggedItr][0], HFJGenTaggedBinsAndRangeAr[HFJGenTaggedItr][1], HFJGenTaggedBinsAndRangeAr[HFJGenTaggedItr][2]))
-            print("Looping over events")
-            #LOOP OVER EVENTS IN FILE k
-            for j,ev in enumerate(HFJGenTaggedTree):
-                if breakEvEarly and evCtr >= breakEvAt:
-                    break
-                if evCtr % 1000 == 0:
-                    print("ev:",evCtr)
+        if use TaggedTrees:
+            if makeHFJ:
                 
-                valAr = [ev.HFJ_pt_FromTaggedGenMatchL,ev.HFJ_eta_FromTaggedGenMatchL,ev.HFJ_phi_FromTaggedGenMatchL,ev.HFJ_mass_FromTaggedGenMatchL,ev.HFJ_dRFromFJ_FromTaggedGenMatchL,
-                ev.nHFJDecay_FromTaggedGenMatchL,ev.HFJ_decaypdgId_FromTaggedGenMatchL]
+                evCtr = 0
 
-                for valItr,valA in enumerate(valAr):
-                    if onlyDoSomeHists and valItr >= histsToDo:
-                        break
-                    #if evCtr <20 and evCtr > 10 and valItr == 0:
-                    #    print(valA)
-                    #if str(type(valA)) == "<class 'ROOT.vector<int>'>":
-                    if "vector" in str(type(valA)):
-                        for valEl in valA:
-                            #print(valEl)
-                            histHFJGenTaggedAr[k][valItr].Fill(valEl)
-                    else:
-                        histHFJGenTaggedAr[k][valItr].Fill(valA)
-                evCtr += 1
-
-            evCtr = 0
-
-        if makeZFJ:
-
-            ZFJGenTaggedTree = fileA.ZFJGenTaggedTree
-            histZFJGenTaggedAr.append([])
-            canZFJGenTaggedAr.append([])
-            
-            #Initialize all ZFJGenTagged hists
-            print("Initializing ZFJGenTagged hists")
-            for ZFJGenTaggedItr, ZFJGenTaggedSaveName in enumerate(ZFJGenTaggedSaveNameAr):
-                if onlyDoSomeHists and ZFJGenTaggedItr >= histsToDo:
-                    break
-                canZFJGenTaggedAr[-1].append(TCanvas("{0}CanZFJGenTagged{1}".format(ZFJGenTaggedSaveName,datasetSaveNameAr[k]),"{0}CanZFJGenTagged{1}".format(ZFJGenTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
-                histZFJGenTaggedAr[-1].append(TH1D("{0}HistZFJGenTagged{1}".format(ZFJGenTaggedSaveName,datasetSaveNameAr[k]),"{0}HistZFJGenTagged{1}".format(ZFJGenTaggedSaveName,datasetSaveNameAr[k]), ZFJGenTaggedBinsAndRangeAr[ZFJGenTaggedItr][0], ZFJGenTaggedBinsAndRangeAr[ZFJGenTaggedItr][1], ZFJGenTaggedBinsAndRangeAr[ZFJGenTaggedItr][2]))
-            print("Looping over events")
-            #LOOP OVER EVENTS IN FILE k
-            for j,ev in enumerate(ZFJGenTaggedTree):
-                if breakEvEarly and evCtr >= breakEvAt:
-                    break
-                if evCtr % 1000 == 0:
-                    print("ev:",evCtr)
+                HFJGenTaggedTree = fileA.HFJGenTaggedTree
+                histHFJGenTaggedAr.append([])
+                canHFJGenTaggedAr.append([])
                 
-                valAr = [ev.ZFJLead_pt_FromTaggedGenMatchL,ev.ZFJLead_eta_FromTaggedGenMatchL,ev.ZFJLead_phi_FromTaggedGenMatchL,ev.ZFJLead_mass_FromTaggedGenMatchL,ev.ZFJLead_dRFromFJ_FromTaggedGenMatchL,
-                ev.nZFJLeadDecay_FromTaggedGenMatchL,ev.ZFJLead_decaypdgId_FromTaggedGenMatchL,
-                ev.ZFJTrailing_pt_FromTaggedGenMatchL,ev.ZFJTrailing_eta_FromTaggedGenMatchL,ev.ZFJTrailing_phi_FromTaggedGenMatchL,ev.ZFJTrailing_mass_FromTaggedGenMatchL,ev.ZFJTrailing_dRFromFJ_FromTaggedGenMatchL,
-                ev.nZFJTrailingDecay_FromTaggedGenMatchL,ev.ZFJTrailing_decaypdgId_FromTaggedGenMatchL,
-                ev.ZFJPair_InvMass_FromTaggedGenMatchL,ev.ZFJPair_EtaSep_FromTaggedGenMatchL]
-
-                for valItr,valA in enumerate(valAr):
-                    if onlyDoSomeHists and valItr >= histsToDo:
+                #Initialize all HFJGenTagged hists
+                print("Initializing HFJGenTagged hists")
+                for HFJGenTaggedItr, HFJGenTaggedSaveName in enumerate(HFJGenTaggedSaveNameAr):
+                    if onlyDoSomeHists and HFJGenTaggedItr >= histsToDo:
                         break
-                    #if evCtr <20 and evCtr > 10 and valItr == 0:
-                    #    print(valA)
-                    #if str(type(valA)) == "<class 'ROOT.vector<int>'>":
-                    if "vector" in str(type(valA)):
-                        for valEl in valA:
-                            histZFJGenTaggedAr[k][valItr].Fill(valEl)
-                    else:
-                        histZFJGenTaggedAr[k][valItr].Fill(valA)
-                evCtr += 1
+                    canHFJGenTaggedAr[-1].append(TCanvas("{0}CanHFJGenTagged{1}".format(HFJGenTaggedSaveName,datasetSaveNameAr[k]),"{0}CanHFJGenTagged{1}".format(HFJGenTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
+                    histHFJGenTaggedAr[-1].append(TH1D("{0}HistHFJGenTagged{1}".format(HFJGenTaggedSaveName,datasetSaveNameAr[k]),"{0}HistHFJGenTagged{1}".format(HFJGenTaggedSaveName,datasetSaveNameAr[k]), HFJGenTaggedBinsAndRangeAr[HFJGenTaggedItr][0], HFJGenTaggedBinsAndRangeAr[HFJGenTaggedItr][1], HFJGenTaggedBinsAndRangeAr[HFJGenTaggedItr][2]))
+                print("Looping over events")
+                #LOOP OVER EVENTS IN FILE k
+                for j,ev in enumerate(HFJGenTaggedTree):
+                    if breakEvEarly and evCtr >= breakEvAt:
+                        break
+                    if evCtr % 1000 == 0:
+                        print("ev:",evCtr)
+                    
+                    valAr = [ev.HFJ_pt_FromTaggedGenMatchL,ev.HFJ_eta_FromTaggedGenMatchL,ev.HFJ_phi_FromTaggedGenMatchL,ev.HFJ_mass_FromTaggedGenMatchL,ev.HFJ_dRFromFJ_FromTaggedGenMatchL,
+                    ev.nHFJDecay_FromTaggedGenMatchL,ev.HFJ_decaypdgId_FromTaggedGenMatchL]
 
-        if useTaggedTrees and makeZHFJ:
+                    for valItr,valA in enumerate(valAr):
+                        if onlyDoSomeHists and valItr >= histsToDo:
+                            break
+                        #if evCtr <20 and evCtr > 10 and valItr == 0:
+                        #    print(valA)
+                        #if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                        if "vector" in str(type(valA)):
+                            for valEl in valA:
+                                #print(valEl)
+                                histHFJGenTaggedAr[k][valItr].Fill(valEl)
+                        else:
+                            histHFJGenTaggedAr[k][valItr].Fill(valA)
+                    evCtr += 1
 
+                evCtr = 0
 
-            evCtr = 0
+            if makeZFJ:
 
-            ZHFJGenTaggedTree = fileA.ZHFJGenTaggedTree
-            histZHFJGenTaggedAr.append([])
-            canZHFJGenTaggedAr.append([])
-            
-            #Initialize all ZHFJGenTagged hists
-            print("Initializing ZHFJGenTagged hists")
-            for ZHFJGenTaggedItr, ZHFJGenTaggedSaveName in enumerate(ZHFJGenTaggedSaveNameAr):
-                if onlyDoSomeHists and ZHFJGenTaggedItr >= histsToDo:
-                    break
-                canZHFJGenTaggedAr[-1].append(TCanvas("{0}CanZHFJGenTagged{1}".format(ZHFJGenTaggedSaveName,datasetSaveNameAr[k]),"{0}CanZHFJGenTagged{1}".format(ZHFJGenTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
-                histZHFJGenTaggedAr[-1].append(TH1D("{0}HistZHFJGenTagged{1}".format(ZHFJGenTaggedSaveName,datasetSaveNameAr[k]),"{0}HistZHFJGenTagged{1}".format(ZHFJGenTaggedSaveName,datasetSaveNameAr[k]), ZHFJGenTaggedBinsAndRangeAr[ZHFJGenTaggedItr][0], ZHFJGenTaggedBinsAndRangeAr[ZHFJGenTaggedItr][1], ZHFJGenTaggedBinsAndRangeAr[ZHFJGenTaggedItr][2]))
-            print("Looping over events")
-            #LOOP OVER EVENTS IN FILE k
-            for j,ev in enumerate(ZHFJGenTaggedTree):
-                if breakEvEarly and evCtr >= breakEvAt:
-                    break
-                if evCtr % 1000 == 0:
-                    print("ev:",evCtr)
+                ZFJGenTaggedTree = fileA.ZFJGenTaggedTree
+                histZFJGenTaggedAr.append([])
+                canZFJGenTaggedAr.append([])
                 
-                valAr = [ev.ZHFJ_ZPairPlusHInvMass_FromTaggedGenMatchL]
-
-                for valItr,valA in enumerate(valAr):
-                    if onlyDoSomeHists and valItr >= histsToDo:
+                #Initialize all ZFJGenTagged hists
+                print("Initializing ZFJGenTagged hists")
+                for ZFJGenTaggedItr, ZFJGenTaggedSaveName in enumerate(ZFJGenTaggedSaveNameAr):
+                    if onlyDoSomeHists and ZFJGenTaggedItr >= histsToDo:
                         break
-                    #if evCtr <20 and evCtr > 10 and valItr == 0:
-                    #    print(valA)
-                    histZHFJGenTaggedAr[k][valItr].Fill(valA)
-                evCtr += 1
+                    canZFJGenTaggedAr[-1].append(TCanvas("{0}CanZFJGenTagged{1}".format(ZFJGenTaggedSaveName,datasetSaveNameAr[k]),"{0}CanZFJGenTagged{1}".format(ZFJGenTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
+                    histZFJGenTaggedAr[-1].append(TH1D("{0}HistZFJGenTagged{1}".format(ZFJGenTaggedSaveName,datasetSaveNameAr[k]),"{0}HistZFJGenTagged{1}".format(ZFJGenTaggedSaveName,datasetSaveNameAr[k]), ZFJGenTaggedBinsAndRangeAr[ZFJGenTaggedItr][0], ZFJGenTaggedBinsAndRangeAr[ZFJGenTaggedItr][1], ZFJGenTaggedBinsAndRangeAr[ZFJGenTaggedItr][2]))
+                print("Looping over events")
+                #LOOP OVER EVENTS IN FILE k
+                for j,ev in enumerate(ZFJGenTaggedTree):
+                    if breakEvEarly and evCtr >= breakEvAt:
+                        break
+                    if evCtr % 1000 == 0:
+                        print("ev:",evCtr)
+                    
+                    valAr = [ev.ZFJLead_pt_FromTaggedGenMatchL,ev.ZFJLead_eta_FromTaggedGenMatchL,ev.ZFJLead_phi_FromTaggedGenMatchL,ev.ZFJLead_mass_FromTaggedGenMatchL,ev.ZFJLead_dRFromFJ_FromTaggedGenMatchL,
+                    ev.nZFJLeadDecay_FromTaggedGenMatchL,ev.ZFJLead_decaypdgId_FromTaggedGenMatchL,
+                    ev.ZFJTrailing_pt_FromTaggedGenMatchL,ev.ZFJTrailing_eta_FromTaggedGenMatchL,ev.ZFJTrailing_phi_FromTaggedGenMatchL,ev.ZFJTrailing_mass_FromTaggedGenMatchL,ev.ZFJTrailing_dRFromFJ_FromTaggedGenMatchL,
+                    ev.nZFJTrailingDecay_FromTaggedGenMatchL,ev.ZFJTrailing_decaypdgId_FromTaggedGenMatchL,
+                    ev.ZFJPair_InvMass_FromTaggedGenMatchL,ev.ZFJPair_EtaSep_FromTaggedGenMatchL]
 
-        if useTaggedTrees and makeZHJ:
-            evCtr = 0
+                    for valItr,valA in enumerate(valAr):
+                        if onlyDoSomeHists and valItr >= histsToDo:
+                            break
+                        #if evCtr <20 and evCtr > 10 and valItr == 0:
+                        #    print(valA)
+                        #if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                        if "vector" in str(type(valA)):
+                            for valEl in valA:
+                                histZFJGenTaggedAr[k][valItr].Fill(valEl)
+                        else:
+                            histZFJGenTaggedAr[k][valItr].Fill(valA)
+                    evCtr += 1
 
-            ZHJGenTaggedTree = fileA.ZHJGenTaggedTree
-            histZHJGenTaggedAr.append([])
-            canZHJGenTaggedAr.append([])
-            
-            #Initialize all ZHJGenTagged hists
-            print("Initializing ZHJGenTagged hists")
-            for ZHJGenTaggedItr, ZHJGenTaggedSaveName in enumerate(ZHJGenTaggedSaveNameAr):
-                if onlyDoSomeHists and ZHJGenTaggedItr >= histsToDo:
-                    break
-                canZHJGenTaggedAr[-1].append(TCanvas("{0}CanZHJGenTagged{1}".format(ZHJGenTaggedSaveName,datasetSaveNameAr[k]),"{0}CanZHJGenTagged{1}".format(ZHJGenTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
-                histZHJGenTaggedAr[-1].append(TH1D("{0}HistZHJGenTagged{1}".format(ZHJGenTaggedSaveName,datasetSaveNameAr[k]),"{0}HistZHJGenTagged{1}".format(ZHJGenTaggedSaveName,datasetSaveNameAr[k]), ZHJGenTaggedBinsAndRangeAr[ZHJGenTaggedItr][0], ZHJGenTaggedBinsAndRangeAr[ZHJGenTaggedItr][1], ZHJGenTaggedBinsAndRangeAr[ZHJGenTaggedItr][2]))
-            print("Looping over events")
-            #LOOP OVER EVENTS IN FILE k
-            for j,ev in enumerate(ZHJGenTaggedTree):
-                if breakEvEarly and evCtr >= breakEvAt:
-                    break
-                if evCtr % 1000 == 0:
-                    print("ev:",evCtr)
+            if makeZHFJ:
+
+
+                evCtr = 0
+
+                ZHFJGenTaggedTree = fileA.ZHFJGenTaggedTree
+                histZHFJGenTaggedAr.append([])
+                canZHFJGenTaggedAr.append([])
                 
-                valAr = [ev.ZHJ_ZPairPlusHInvMass_FromTaggedGenMatchL]
-
-                for valItr,valA in enumerate(valAr):
-                    if onlyDoSomeHists and valItr >= histsToDo:
+                #Initialize all ZHFJGenTagged hists
+                print("Initializing ZHFJGenTagged hists")
+                for ZHFJGenTaggedItr, ZHFJGenTaggedSaveName in enumerate(ZHFJGenTaggedSaveNameAr):
+                    if onlyDoSomeHists and ZHFJGenTaggedItr >= histsToDo:
                         break
-                    #if evCtr <20 and evCtr > 10 and valItr == 0:
-                    #    print(valA)
-                    histZHJGenTaggedAr[k][valItr].Fill(valA)
-                evCtr += 1
+                    canZHFJGenTaggedAr[-1].append(TCanvas("{0}CanZHFJGenTagged{1}".format(ZHFJGenTaggedSaveName,datasetSaveNameAr[k]),"{0}CanZHFJGenTagged{1}".format(ZHFJGenTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
+                    histZHFJGenTaggedAr[-1].append(TH1D("{0}HistZHFJGenTagged{1}".format(ZHFJGenTaggedSaveName,datasetSaveNameAr[k]),"{0}HistZHFJGenTagged{1}".format(ZHFJGenTaggedSaveName,datasetSaveNameAr[k]), ZHFJGenTaggedBinsAndRangeAr[ZHFJGenTaggedItr][0], ZHFJGenTaggedBinsAndRangeAr[ZHFJGenTaggedItr][1], ZHFJGenTaggedBinsAndRangeAr[ZHFJGenTaggedItr][2]))
+                print("Looping over events")
+                #LOOP OVER EVENTS IN FILE k
+                for j,ev in enumerate(ZHFJGenTaggedTree):
+                    if breakEvEarly and evCtr >= breakEvAt:
+                        break
+                    if evCtr % 1000 == 0:
+                        print("ev:",evCtr)
+                    
+                    valAr = [ev.ZHFJ_ZPairPlusHInvMass_FromTaggedGenMatchL]
 
+                    for valItr,valA in enumerate(valAr):
+                        if onlyDoSomeHists and valItr >= histsToDo:
+                            break
+                        #if evCtr <20 and evCtr > 10 and valItr == 0:
+                        #    print(valA)
+                        histZHFJGenTaggedAr[k][valItr].Fill(valA)
+                    evCtr += 1
 
-        if useTaggedTrees and makeZJ:
-            evCtr = 0
+            if makeZHJ:
+                evCtr = 0
 
-            ZJGenTaggedTree = fileA.ZJGenTaggedTree
-            histZJGenTaggedAr.append([])
-            canZJGenTaggedAr.append([])
-            
-            #Initialize all ZJGenTagged hists
-            print("Initializing ZJGenTagged hists")
-            for ZJGenTaggedItr, ZJGenTaggedSaveName in enumerate(ZJGenTaggedSaveNameAr):
-                if onlyDoSomeHists and ZJGenTaggedItr >= histsToDo:
-                    break
-                canZJGenTaggedAr[-1].append(TCanvas("{0}CanZJGenTagged{1}".format(ZJGenTaggedSaveName,datasetSaveNameAr[k]),"{0}CanZJGenTagged{1}".format(ZJGenTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
-                histZJGenTaggedAr[-1].append(TH1D("{0}HistZJGenTagged{1}".format(ZJGenTaggedSaveName,datasetSaveNameAr[k]),"{0}HistZJGenTagged{1}".format(ZJGenTaggedSaveName,datasetSaveNameAr[k]), ZJGenTaggedBinsAndRangeAr[ZJGenTaggedItr][0], ZJGenTaggedBinsAndRangeAr[ZJGenTaggedItr][1], ZJGenTaggedBinsAndRangeAr[ZJGenTaggedItr][2]))
-            print("Looping over events")
-            #LOOP OVER EVENTS IN FILE k
-            for j,ev in enumerate(ZJGenTaggedTree):
-                if breakEvEarly and evCtr >= breakEvAt:
-                    break
-                if evCtr % 1000 == 0:
-                    print("ev:",evCtr)
+                ZHJGenTaggedTree = fileA.ZHJGenTaggedTree
+                histZHJGenTaggedAr.append([])
+                canZHJGenTaggedAr.append([])
                 
-                valAr = [ev.ZJLead_pt_FromTaggedGenMatchL,ev.ZJLead_eta_FromTaggedGenMatchL,ev.ZJLead_phi_FromTaggedGenMatchL,ev.ZJLead_mass_FromTaggedGenMatchL,ev.ZJLead_dRFromJ_FromTaggedGenMatchL,
-                ev.nZJLeadDecay_FromTaggedGenMatchL,ev.ZJLead_decaypdgId_FromTaggedGenMatchL,
-                ev.ZJTrailing_pt_FromTaggedGenMatchL,ev.ZJTrailing_eta_FromTaggedGenMatchL,ev.ZJTrailing_phi_FromTaggedGenMatchL,ev.ZJTrailing_mass_FromTaggedGenMatchL,ev.ZJTrailing_dRFromJ_FromTaggedGenMatchL,
-                ev.nZJTrailingDecay_FromTaggedGenMatchL,ev.ZJTrailing_decaypdgId_FromTaggedGenMatchL,
-                ev.ZJPair_InvMass_FromTaggedGenMatchL,ev.ZJPair_EtaSep_FromTaggedGenMatchL]
-
-                for valItr,valA in enumerate(valAr):
-                    if onlyDoSomeHists and valItr >= histsToDo:
+                #Initialize all ZHJGenTagged hists
+                print("Initializing ZHJGenTagged hists")
+                for ZHJGenTaggedItr, ZHJGenTaggedSaveName in enumerate(ZHJGenTaggedSaveNameAr):
+                    if onlyDoSomeHists and ZHJGenTaggedItr >= histsToDo:
                         break
-                    #if evCtr <20 and evCtr > 10 and valItr == 0:
-                    #    print(valA)
-                    #if str(type(valA)) == "<class 'ROOT.vector<int>'>":
-                    if "vector" in str(type(valA)):
-                        for valEl in valA:
-                            histZJGenTaggedAr[k][valItr].Fill(valEl)
-                    else:
-                        histZJGenTaggedAr[k][valItr].Fill(valA)
-                evCtr += 1
+                    canZHJGenTaggedAr[-1].append(TCanvas("{0}CanZHJGenTagged{1}".format(ZHJGenTaggedSaveName,datasetSaveNameAr[k]),"{0}CanZHJGenTagged{1}".format(ZHJGenTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
+                    histZHJGenTaggedAr[-1].append(TH1D("{0}HistZHJGenTagged{1}".format(ZHJGenTaggedSaveName,datasetSaveNameAr[k]),"{0}HistZHJGenTagged{1}".format(ZHJGenTaggedSaveName,datasetSaveNameAr[k]), ZHJGenTaggedBinsAndRangeAr[ZHJGenTaggedItr][0], ZHJGenTaggedBinsAndRangeAr[ZHJGenTaggedItr][1], ZHJGenTaggedBinsAndRangeAr[ZHJGenTaggedItr][2]))
+                print("Looping over events")
+                #LOOP OVER EVENTS IN FILE k
+                for j,ev in enumerate(ZHJGenTaggedTree):
+                    if breakEvEarly and evCtr >= breakEvAt:
+                        break
+                    if evCtr % 1000 == 0:
+                        print("ev:",evCtr)
+                    
+                    valAr = [ev.ZHJ_ZPairPlusHInvMass_FromTaggedGenMatchL]
+
+                    for valItr,valA in enumerate(valAr):
+                        if onlyDoSomeHists and valItr >= histsToDo:
+                            break
+                        #if evCtr <20 and evCtr > 10 and valItr == 0:
+                        #    print(valA)
+                        histZHJGenTaggedAr[k][valItr].Fill(valA)
+                    evCtr += 1
 
 
-            
-        if useTaggedTrees and makeGenRaw:
-            evCtr = 0
-            GenRawTaggedTree = fileA.GenRawTaggedTree
-            histGenRawTaggedAr.append([])
-            canGenRawTaggedAr.append([])
-            
-            #Initialize all GenRawTagged hists
-            print("Initializing GenRawTagged hists")
-            for GenRawTaggedItr, GenRawTaggedSaveName in enumerate(GenRawTaggedSaveNameAr):
-                if onlyDoSomeHists and GenRawTaggedItr >= histsToDo:
-                    break
-                canGenRawTaggedAr[-1].append(TCanvas("{0}CanGenRawTagged{1}".format(GenRawTaggedSaveName,datasetSaveNameAr[k]),"{0}CanGenRawTagged{1}".format(GenRawTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
-                histGenRawTaggedAr[-1].append(TH1D("{0}HistGenRawTagged{1}".format(GenRawTaggedSaveName,datasetSaveNameAr[k]),"{0}HistGenRawTagged{1}".format(GenRawTaggedSaveName,datasetSaveNameAr[k]), GenRawTaggedBinsAndRangeAr[GenRawTaggedItr][0], GenRawTaggedBinsAndRangeAr[GenRawTaggedItr][1], GenRawTaggedBinsAndRangeAr[GenRawTaggedItr][2]))
-            print("Looping over events")
-            #LOOP OVER EVENTS IN FILE k
-            for j,ev in enumerate(GenRawTaggedTree):
-                if breakEvEarly and evCtr >= breakEvAt:
-                    break
-                if evCtr % 1000 == 0:
-                    print("ev:",evCtr)
+            if makeZJ:
+                evCtr = 0
+
+                ZJGenTaggedTree = fileA.ZJGenTaggedTree
+                histZJGenTaggedAr.append([])
+                canZJGenTaggedAr.append([])
                 
-                valAr = [ev.ZOne_pt_FromTaggedGenRawL,ev.ZOne_eta_FromTaggedGenRawL,ev.ZOne_phi_FromTaggedGenRawL,ev.ZOne_mass_FromTaggedGenRawL,ev.ZOne_pdgId_FromTaggedGenRawL,ev.ZOne_genPartIdxMother_FromTaggedGenRawL,
-                ev.nZOneDecay_FromTaggedGenRawL,ev.ZOne_decaypdgId_FromTaggedGenRawL,
-                ev.ZTwo_pt_FromTaggedGenRawL,ev.ZTwo_eta_FromTaggedGenRawL,ev.ZTwo_phi_FromTaggedGenRawL,ev.ZTwo_mass_FromTaggedGenRawL,ev.ZTwo_pdgId_FromTaggedGenRawL,ev.ZTwo_genPartIdxMother_FromTaggedGenRawL,
-                ev.nZTwoDecay_FromTaggedGenRawL,ev.ZTwo_decaypdgId_FromTaggedGenRawL,
-                ev.ZPair_InvMass_FromTaggedGenRawL,ev.ZPair_EtaSep_FromTaggedGenRawL,
-                ev.H_pt_FromTaggedGenRawL,ev.H_eta_FromTaggedGenRawL,ev.H_phi_FromTaggedGenRawL,ev.H_mass_FromTaggedGenRawL,ev.H_pdgId_FromTaggedGenRawL,ev.H_genPartIdxMother_FromTaggedGenRawL,
-                ev.nHDecay_FromTaggedGenRawL,ev.H_decaypdgId_FromTaggedGenRawL,
-                ev.ZPairPlusH_InvMass_FromTaggedGenRawL]
-
-                for valItr,valA in enumerate(valAr):
-                    if onlyDoSomeHists and valItr >= histsToDo:
+                #Initialize all ZJGenTagged hists
+                print("Initializing ZJGenTagged hists")
+                for ZJGenTaggedItr, ZJGenTaggedSaveName in enumerate(ZJGenTaggedSaveNameAr):
+                    if onlyDoSomeHists and ZJGenTaggedItr >= histsToDo:
                         break
-                    #if evCtr <20 and evCtr > 10 and valItr == 0:
-                    #    print(valA)
-                    #if str(type(valA)) == "<class 'ROOT.vector<int>'>":
-                    if "vector" in str(type(valA)):
-                        for valEl in valA:
-                            histGenRawTaggedAr[k][valItr].Fill(valEl)
-                    else:
-                        histGenRawTaggedAr[k][valItr].Fill(valA)
-                evCtr += 1
+                    canZJGenTaggedAr[-1].append(TCanvas("{0}CanZJGenTagged{1}".format(ZJGenTaggedSaveName,datasetSaveNameAr[k]),"{0}CanZJGenTagged{1}".format(ZJGenTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
+                    histZJGenTaggedAr[-1].append(TH1D("{0}HistZJGenTagged{1}".format(ZJGenTaggedSaveName,datasetSaveNameAr[k]),"{0}HistZJGenTagged{1}".format(ZJGenTaggedSaveName,datasetSaveNameAr[k]), ZJGenTaggedBinsAndRangeAr[ZJGenTaggedItr][0], ZJGenTaggedBinsAndRangeAr[ZJGenTaggedItr][1], ZJGenTaggedBinsAndRangeAr[ZJGenTaggedItr][2]))
+                print("Looping over events")
+                #LOOP OVER EVENTS IN FILE k
+                for j,ev in enumerate(ZJGenTaggedTree):
+                    if breakEvEarly and evCtr >= breakEvAt:
+                        break
+                    if evCtr % 1000 == 0:
+                        print("ev:",evCtr)
+                    
+                    valAr = [ev.ZJLead_pt_FromTaggedGenMatchL,ev.ZJLead_eta_FromTaggedGenMatchL,ev.ZJLead_phi_FromTaggedGenMatchL,ev.ZJLead_mass_FromTaggedGenMatchL,ev.ZJLead_dRFromJ_FromTaggedGenMatchL,
+                    ev.nZJLeadDecay_FromTaggedGenMatchL,ev.ZJLead_decaypdgId_FromTaggedGenMatchL,
+                    ev.ZJTrailing_pt_FromTaggedGenMatchL,ev.ZJTrailing_eta_FromTaggedGenMatchL,ev.ZJTrailing_phi_FromTaggedGenMatchL,ev.ZJTrailing_mass_FromTaggedGenMatchL,ev.ZJTrailing_dRFromJ_FromTaggedGenMatchL,
+                    ev.nZJTrailingDecay_FromTaggedGenMatchL,ev.ZJTrailing_decaypdgId_FromTaggedGenMatchL,
+                    ev.ZJPair_InvMass_FromTaggedGenMatchL,ev.ZJPair_EtaSep_FromTaggedGenMatchL]
+
+                    for valItr,valA in enumerate(valAr):
+                        if onlyDoSomeHists and valItr >= histsToDo:
+                            break
+                        #if evCtr <20 and evCtr > 10 and valItr == 0:
+                        #    print(valA)
+                        #if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                        if "vector" in str(type(valA)):
+                            for valEl in valA:
+                                histZJGenTaggedAr[k][valItr].Fill(valEl)
+                        else:
+                            histZJGenTaggedAr[k][valItr].Fill(valA)
+                    evCtr += 1
 
 
-            
-
-        if useTaggedTrees and makeRaw:
-            evCtr = 0
-
-            RawTaggedTree = fileA.RawTaggedTree
-            histRawTaggedAr.append([])
-            canRawTaggedAr.append([])
-            
-            #Initialize all RawTagged hists
-            print("Initializing RawTagged hists")
-            for RawTaggedItr, RawTaggedSaveName in enumerate(RawTaggedSaveNameAr):
-                if onlyDoSomeHists and RawTaggedItr >= histsToDo:
-                    break
-                canRawTaggedAr[-1].append(TCanvas("{0}CanRawTagged{1}".format(RawTaggedSaveName,datasetSaveNameAr[k]),"{0}CanRawTagged{1}".format(RawTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
-                histRawTaggedAr[-1].append(TH1D("{0}HistRawTagged{1}".format(RawTaggedSaveName,datasetSaveNameAr[k]),"{0}HistRawTagged{1}".format(RawTaggedSaveName,datasetSaveNameAr[k]), RawTaggedBinsAndRangeAr[RawTaggedItr][0], RawTaggedBinsAndRangeAr[RawTaggedItr][1], RawTaggedBinsAndRangeAr[RawTaggedItr][2]))
-            print("Looping over events")
-            #LOOP OVER EVENTS IN FILE k
-            for j,ev in enumerate(RawTaggedTree):
-                if breakEvEarly and evCtr >= breakEvAt:
-                    break
-                if evCtr % 1000 == 0:
-                    print("ev:",evCtr)
                 
-                valAr = [ev.ZOne_pt_FromTaggedLHERawL,ev.ZOne_eta_FromTaggedLHERawL,ev.ZOne_phi_FromTaggedLHERawL,ev.ZOne_mass_FromTaggedLHERawL,
-                ev.ZTwo_pt_FromTaggedLHERawL,ev.ZTwo_eta_FromTaggedLHERawL,ev.ZTwo_phi_FromTaggedLHERawL,ev.ZTwo_mass_FromTaggedLHERawL,
-                ev.ZPair_InvMass_FromTaggedLHERawL,ev.ZPair_EtaSep_FromTaggedLHERawL,
-                ev.H_pt_FromTaggedLHERawL,ev.H_eta_FromTaggedLHERawL,ev.H_phi_FromTaggedLHERawL,ev.H_mass_FromTaggedLHERawL,ev.ZPairPlusH_InvMass_FromTaggedLHERawL,
-                ev.JOne_pt_FromTaggedLHERawL,ev.JOne_eta_FromTaggedLHERawL,ev.JOne_phi_FromTaggedLHERawL,ev.JOne_invmass_FromTaggedLHERawL,ev.JOne_pdgId_FromTaggedLHERawL,
-                ev.JTwo_pt_FromTaggedLHERawL,ev.JTwo_eta_FromTaggedLHERawL,ev.JTwo_phi_FromTaggedLHERawL,ev.JTwo_invmass_FromTaggedLHERawL,ev.JTwo_pdgId_FromTaggedLHERawL,
-                ev.JPair_invmass_FromTaggedLHERawL,ev.J_etasep_FromTaggedLHERawL]
-
-                for valItr,valA in enumerate(valAr):
-                    if onlyDoSomeHists and valItr >= histsToDo:
+            if makeGenRaw:
+                evCtr = 0
+                GenRawTaggedTree = fileA.GenRawTaggedTree
+                histGenRawTaggedAr.append([])
+                canGenRawTaggedAr.append([])
+                
+                #Initialize all GenRawTagged hists
+                print("Initializing GenRawTagged hists")
+                for GenRawTaggedItr, GenRawTaggedSaveName in enumerate(GenRawTaggedSaveNameAr):
+                    if onlyDoSomeHists and GenRawTaggedItr >= histsToDo:
                         break
-                    #if evCtr <20 and evCtr > 10 and valItr == 0:
-                    #    print(valA)
-                    histRawTaggedAr[k][valItr].Fill(valA)
-                evCtr += 1
-    
+                    canGenRawTaggedAr[-1].append(TCanvas("{0}CanGenRawTagged{1}".format(GenRawTaggedSaveName,datasetSaveNameAr[k]),"{0}CanGenRawTagged{1}".format(GenRawTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
+                    histGenRawTaggedAr[-1].append(TH1D("{0}HistGenRawTagged{1}".format(GenRawTaggedSaveName,datasetSaveNameAr[k]),"{0}HistGenRawTagged{1}".format(GenRawTaggedSaveName,datasetSaveNameAr[k]), GenRawTaggedBinsAndRangeAr[GenRawTaggedItr][0], GenRawTaggedBinsAndRangeAr[GenRawTaggedItr][1], GenRawTaggedBinsAndRangeAr[GenRawTaggedItr][2]))
+                print("Looping over events")
+                #LOOP OVER EVENTS IN FILE k
+                for j,ev in enumerate(GenRawTaggedTree):
+                    if breakEvEarly and evCtr >= breakEvAt:
+                        break
+                    if evCtr % 1000 == 0:
+                        print("ev:",evCtr)
+                    
+                    valAr = [ev.ZOne_pt_FromTaggedGenRawL,ev.ZOne_eta_FromTaggedGenRawL,ev.ZOne_phi_FromTaggedGenRawL,ev.ZOne_mass_FromTaggedGenRawL,ev.ZOne_pdgId_FromTaggedGenRawL,ev.ZOne_genPartIdxMother_FromTaggedGenRawL,
+                    ev.nZOneDecay_FromTaggedGenRawL,ev.ZOne_decaypdgId_FromTaggedGenRawL,
+                    ev.ZTwo_pt_FromTaggedGenRawL,ev.ZTwo_eta_FromTaggedGenRawL,ev.ZTwo_phi_FromTaggedGenRawL,ev.ZTwo_mass_FromTaggedGenRawL,ev.ZTwo_pdgId_FromTaggedGenRawL,ev.ZTwo_genPartIdxMother_FromTaggedGenRawL,
+                    ev.nZTwoDecay_FromTaggedGenRawL,ev.ZTwo_decaypdgId_FromTaggedGenRawL,
+                    ev.ZPair_InvMass_FromTaggedGenRawL,ev.ZPair_EtaSep_FromTaggedGenRawL,
+                    ev.H_pt_FromTaggedGenRawL,ev.H_eta_FromTaggedGenRawL,ev.H_phi_FromTaggedGenRawL,ev.H_mass_FromTaggedGenRawL,ev.H_pdgId_FromTaggedGenRawL,ev.H_genPartIdxMother_FromTaggedGenRawL,
+                    ev.nHDecay_FromTaggedGenRawL,ev.H_decaypdgId_FromTaggedGenRawL,
+                    ev.ZPairPlusH_InvMass_FromTaggedGenRawL]
+
+                    for valItr,valA in enumerate(valAr):
+                        if onlyDoSomeHists and valItr >= histsToDo:
+                            break
+                        #if evCtr <20 and evCtr > 10 and valItr == 0:
+                        #    print(valA)
+                        #if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                        if "vector" in str(type(valA)):
+                            for valEl in valA:
+                                histGenRawTaggedAr[k][valItr].Fill(valEl)
+                        else:
+                            histGenRawTaggedAr[k][valItr].Fill(valA)
+                    evCtr += 1
+
+
+                
+
+            if makeRaw:
+                evCtr = 0
+
+                RawTaggedTree = fileA.RawTaggedTree
+                histRawTaggedAr.append([])
+                canRawTaggedAr.append([])
+                
+                #Initialize all RawTagged hists
+                print("Initializing RawTagged hists")
+                for RawTaggedItr, RawTaggedSaveName in enumerate(RawTaggedSaveNameAr):
+                    if onlyDoSomeHists and RawTaggedItr >= histsToDo:
+                        break
+                    canRawTaggedAr[-1].append(TCanvas("{0}CanRawTagged{1}".format(RawTaggedSaveName,datasetSaveNameAr[k]),"{0}CanRawTagged{1}".format(RawTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
+                    histRawTaggedAr[-1].append(TH1D("{0}HistRawTagged{1}".format(RawTaggedSaveName,datasetSaveNameAr[k]),"{0}HistRawTagged{1}".format(RawTaggedSaveName,datasetSaveNameAr[k]), RawTaggedBinsAndRangeAr[RawTaggedItr][0], RawTaggedBinsAndRangeAr[RawTaggedItr][1], RawTaggedBinsAndRangeAr[RawTaggedItr][2]))
+                print("Looping over events")
+                #LOOP OVER EVENTS IN FILE k
+                for j,ev in enumerate(RawTaggedTree):
+                    if breakEvEarly and evCtr >= breakEvAt:
+                        break
+                    if evCtr % 1000 == 0:
+                        print("ev:",evCtr)
+                    
+                    valAr = [ev.ZOne_pt_FromTaggedLHERawL,ev.ZOne_eta_FromTaggedLHERawL,ev.ZOne_phi_FromTaggedLHERawL,ev.ZOne_mass_FromTaggedLHERawL,
+                    ev.ZTwo_pt_FromTaggedLHERawL,ev.ZTwo_eta_FromTaggedLHERawL,ev.ZTwo_phi_FromTaggedLHERawL,ev.ZTwo_mass_FromTaggedLHERawL,
+                    ev.ZPair_InvMass_FromTaggedLHERawL,ev.ZPair_EtaSep_FromTaggedLHERawL,
+                    ev.H_pt_FromTaggedLHERawL,ev.H_eta_FromTaggedLHERawL,ev.H_phi_FromTaggedLHERawL,ev.H_mass_FromTaggedLHERawL,ev.ZPairPlusH_InvMass_FromTaggedLHERawL,
+                    ev.JOne_pt_FromTaggedLHERawL,ev.JOne_eta_FromTaggedLHERawL,ev.JOne_phi_FromTaggedLHERawL,ev.JOne_invmass_FromTaggedLHERawL,ev.JOne_pdgId_FromTaggedLHERawL,
+                    ev.JTwo_pt_FromTaggedLHERawL,ev.JTwo_eta_FromTaggedLHERawL,ev.JTwo_phi_FromTaggedLHERawL,ev.JTwo_invmass_FromTaggedLHERawL,ev.JTwo_pdgId_FromTaggedLHERawL,
+                    ev.JPair_invmass_FromTaggedLHERawL,ev.J_etasep_FromTaggedLHERawL]
+
+                    for valItr,valA in enumerate(valAr):
+                        if onlyDoSomeHists and valItr >= histsToDo:
+                            break
+                        #if evCtr <20 and evCtr > 10 and valItr == 0:
+                        #    print(valA)
+                        histRawTaggedAr[k][valItr].Fill(valA)
+                    evCtr += 1
+
+            if makeHFJ:
+                
+                evCtr = 0
+
+                HFJGenSemiLepTaggedTree = fileA.HFJGenSemiLepTaggedTree
+                histHFJGenSemiLepTaggedAr.append([])
+                canHFJGenSemiLepTaggedAr.append([])
+                
+                #Initialize all HFJGenSemiLepTagged hists
+                print("Initializing HFJGenSemiLepTagged hists")
+                for HFJGenSemiLepTaggedItr, HFJGenSemiLepTaggedSaveName in enumerate(HFJGenSemiLepTaggedSaveNameAr):
+                    if onlyDoSomeHists and HFJGenSemiLepTaggedItr >= histsToDo:
+                        break
+                    canHFJGenSemiLepTaggedAr[-1].append(TCanvas("{0}CanHFJGenSemiLepTagged{1}".format(HFJGenSemiLepTaggedSaveName,datasetSaveNameAr[k]),"{0}CanHFJGenSemiLepTagged{1}".format(HFJGenSemiLepTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
+                    histHFJGenSemiLepTaggedAr[-1].append(TH1D("{0}HistHFJGenSemiLepTagged{1}".format(HFJGenSemiLepTaggedSaveName,datasetSaveNameAr[k]),"{0}HistHFJGenSemiLepTagged{1}".format(HFJGenSemiLepTaggedSaveName,datasetSaveNameAr[k]), HFJGenSemiLepTaggedBinsAndRangeAr[HFJGenSemiLepTaggedItr][0], HFJGenSemiLepTaggedBinsAndRangeAr[HFJGenSemiLepTaggedItr][1], HFJGenSemiLepTaggedBinsAndRangeAr[HFJGenSemiLepTaggedItr][2]))
+                print("Looping over events")
+                #LOOP OVER EVENTS IN FILE k
+                for j,ev in enumerate(HFJGenSemiLepTaggedTree):
+                    if breakEvEarly and evCtr >= breakEvAt:
+                        break
+                    if evCtr % 1000 == 0:
+                        print("ev:",evCtr)
+                    
+                    valAr = [ev.HFJ_pt_FromSemiLepTaggedGenMatchL,ev.HFJ_eta_FromSemiLepTaggedGenMatchL,ev.HFJ_phi_FromSemiLepTaggedGenMatchL,ev.HFJ_mass_FromSemiLepTaggedGenMatchL,ev.HFJ_dRFromFJ_FromSemiLepTaggedGenMatchL,
+                    ev.nHFJDecay_FromSemiLepTaggedGenMatchL,ev.HFJ_decaypdgId_FromSemiLepTaggedGenMatchL]
+
+                    for valItr,valA in enumerate(valAr):
+                        if onlyDoSomeHists and valItr >= histsToDo:
+                            break
+                        #if evCtr <20 and evCtr > 10 and valItr == 0:
+                        #    print(valA)
+                        #if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                        if "vector" in str(type(valA)):
+                            for valEl in valA:
+                                #print(valEl)
+                                histHFJGenSemiLepTaggedAr[k][valItr].Fill(valEl)
+                        else:
+                            histHFJGenSemiLepTaggedAr[k][valItr].Fill(valA)
+                    evCtr += 1
+
+                evCtr = 0
+
+            if makeZFJ:
+
+                ZFJGenSemiLepTaggedTree = fileA.ZFJGenSemiLepTaggedTree
+                histZFJGenSemiLepTaggedAr.append([])
+                canZFJGenSemiLepTaggedAr.append([])
+                
+                #Initialize all ZFJGenSemiLepTagged hists
+                print("Initializing ZFJGenSemiLepTagged hists")
+                for ZFJGenSemiLepTaggedItr, ZFJGenSemiLepTaggedSaveName in enumerate(ZFJGenSemiLepTaggedSaveNameAr):
+                    if onlyDoSomeHists and ZFJGenSemiLepTaggedItr >= histsToDo:
+                        break
+                    canZFJGenSemiLepTaggedAr[-1].append(TCanvas("{0}CanZFJGenSemiLepTagged{1}".format(ZFJGenSemiLepTaggedSaveName,datasetSaveNameAr[k]),"{0}CanZFJGenSemiLepTagged{1}".format(ZFJGenSemiLepTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
+                    histZFJGenSemiLepTaggedAr[-1].append(TH1D("{0}HistZFJGenSemiLepTagged{1}".format(ZFJGenSemiLepTaggedSaveName,datasetSaveNameAr[k]),"{0}HistZFJGenSemiLepTagged{1}".format(ZFJGenSemiLepTaggedSaveName,datasetSaveNameAr[k]), ZFJGenSemiLepTaggedBinsAndRangeAr[ZFJGenSemiLepTaggedItr][0], ZFJGenSemiLepTaggedBinsAndRangeAr[ZFJGenSemiLepTaggedItr][1], ZFJGenSemiLepTaggedBinsAndRangeAr[ZFJGenSemiLepTaggedItr][2]))
+                print("Looping over events")
+                #LOOP OVER EVENTS IN FILE k
+                for j,ev in enumerate(ZFJGenSemiLepTaggedTree):
+                    if breakEvEarly and evCtr >= breakEvAt:
+                        break
+                    if evCtr % 1000 == 0:
+                        print("ev:",evCtr)
+                    
+                    valAr = [ev.ZFJLead_pt_FromSemiLepTaggedGenMatchL,ev.ZFJLead_eta_FromSemiLepTaggedGenMatchL,ev.ZFJLead_phi_FromSemiLepTaggedGenMatchL,ev.ZFJLead_mass_FromSemiLepTaggedGenMatchL,ev.ZFJLead_dRFromFJ_FromSemiLepTaggedGenMatchL,
+                    ev.nZFJLeadDecay_FromSemiLepTaggedGenMatchL,ev.ZFJLead_decaypdgId_FromSemiLepTaggedGenMatchL,
+                    ev.ZFJTrailing_pt_FromSemiLepTaggedGenMatchL,ev.ZFJTrailing_eta_FromSemiLepTaggedGenMatchL,ev.ZFJTrailing_phi_FromSemiLepTaggedGenMatchL,ev.ZFJTrailing_mass_FromSemiLepTaggedGenMatchL,ev.ZFJTrailing_dRFromFJ_FromSemiLepTaggedGenMatchL,
+                    ev.nZFJTrailingDecay_FromSemiLepTaggedGenMatchL,ev.ZFJTrailing_decaypdgId_FromSemiLepTaggedGenMatchL,
+                    ev.ZFJPair_InvMass_FromSemiLepTaggedGenMatchL,ev.ZFJPair_EtaSep_FromSemiLepTaggedGenMatchL]
+
+                    for valItr,valA in enumerate(valAr):
+                        if onlyDoSomeHists and valItr >= histsToDo:
+                            break
+                        #if evCtr <20 and evCtr > 10 and valItr == 0:
+                        #    print(valA)
+                        #if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                        if "vector" in str(type(valA)):
+                            for valEl in valA:
+                                histZFJGenSemiLepTaggedAr[k][valItr].Fill(valEl)
+                        else:
+                            histZFJGenSemiLepTaggedAr[k][valItr].Fill(valA)
+                    evCtr += 1
+
+            if makeZHFJ:
+
+
+                evCtr = 0
+
+                ZHFJGenSemiLepTaggedTree = fileA.ZHFJGenSemiLepTaggedTree
+                histZHFJGenSemiLepTaggedAr.append([])
+                canZHFJGenSemiLepTaggedAr.append([])
+                
+                #Initialize all ZHFJGenSemiLepTagged hists
+                print("Initializing ZHFJGenSemiLepTagged hists")
+                for ZHFJGenSemiLepTaggedItr, ZHFJGenSemiLepTaggedSaveName in enumerate(ZHFJGenSemiLepTaggedSaveNameAr):
+                    if onlyDoSomeHists and ZHFJGenSemiLepTaggedItr >= histsToDo:
+                        break
+                    canZHFJGenSemiLepTaggedAr[-1].append(TCanvas("{0}CanZHFJGenSemiLepTagged{1}".format(ZHFJGenSemiLepTaggedSaveName,datasetSaveNameAr[k]),"{0}CanZHFJGenSemiLepTagged{1}".format(ZHFJGenSemiLepTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
+                    histZHFJGenSemiLepTaggedAr[-1].append(TH1D("{0}HistZHFJGenSemiLepTagged{1}".format(ZHFJGenSemiLepTaggedSaveName,datasetSaveNameAr[k]),"{0}HistZHFJGenSemiLepTagged{1}".format(ZHFJGenSemiLepTaggedSaveName,datasetSaveNameAr[k]), ZHFJGenSemiLepTaggedBinsAndRangeAr[ZHFJGenSemiLepTaggedItr][0], ZHFJGenSemiLepTaggedBinsAndRangeAr[ZHFJGenSemiLepTaggedItr][1], ZHFJGenSemiLepTaggedBinsAndRangeAr[ZHFJGenSemiLepTaggedItr][2]))
+                print("Looping over events")
+                #LOOP OVER EVENTS IN FILE k
+                for j,ev in enumerate(ZHFJGenSemiLepTaggedTree):
+                    if breakEvEarly and evCtr >= breakEvAt:
+                        break
+                    if evCtr % 1000 == 0:
+                        print("ev:",evCtr)
+                    
+                    valAr = [ev.ZHFJ_ZPairPlusHInvMass_FromSemiLepTaggedGenMatchL]
+
+                    for valItr,valA in enumerate(valAr):
+                        if onlyDoSomeHists and valItr >= histsToDo:
+                            break
+                        #if evCtr <20 and evCtr > 10 and valItr == 0:
+                        #    print(valA)
+                        histZHFJGenSemiLepTaggedAr[k][valItr].Fill(valA)
+                    evCtr += 1
+
+            if makeZHJ:
+                evCtr = 0
+
+                ZHJGenSemiLepTaggedTree = fileA.ZHJGenSemiLepTaggedTree
+                histZHJGenSemiLepTaggedAr.append([])
+                canZHJGenSemiLepTaggedAr.append([])
+                
+                #Initialize all ZHJGenSemiLepTagged hists
+                print("Initializing ZHJGenSemiLepTagged hists")
+                for ZHJGenSemiLepTaggedItr, ZHJGenSemiLepTaggedSaveName in enumerate(ZHJGenSemiLepTaggedSaveNameAr):
+                    if onlyDoSomeHists and ZHJGenSemiLepTaggedItr >= histsToDo:
+                        break
+                    canZHJGenSemiLepTaggedAr[-1].append(TCanvas("{0}CanZHJGenSemiLepTagged{1}".format(ZHJGenSemiLepTaggedSaveName,datasetSaveNameAr[k]),"{0}CanZHJGenSemiLepTagged{1}".format(ZHJGenSemiLepTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
+                    histZHJGenSemiLepTaggedAr[-1].append(TH1D("{0}HistZHJGenSemiLepTagged{1}".format(ZHJGenSemiLepTaggedSaveName,datasetSaveNameAr[k]),"{0}HistZHJGenSemiLepTagged{1}".format(ZHJGenSemiLepTaggedSaveName,datasetSaveNameAr[k]), ZHJGenSemiLepTaggedBinsAndRangeAr[ZHJGenSemiLepTaggedItr][0], ZHJGenSemiLepTaggedBinsAndRangeAr[ZHJGenSemiLepTaggedItr][1], ZHJGenSemiLepTaggedBinsAndRangeAr[ZHJGenSemiLepTaggedItr][2]))
+                print("Looping over events")
+                #LOOP OVER EVENTS IN FILE k
+                for j,ev in enumerate(ZHJGenSemiLepTaggedTree):
+                    if breakEvEarly and evCtr >= breakEvAt:
+                        break
+                    if evCtr % 1000 == 0:
+                        print("ev:",evCtr)
+                    
+                    valAr = [ev.ZHJ_ZPairPlusHInvMass_FromSemiLepTaggedGenMatchL]
+
+                    for valItr,valA in enumerate(valAr):
+                        if onlyDoSomeHists and valItr >= histsToDo:
+                            break
+                        #if evCtr <20 and evCtr > 10 and valItr == 0:
+                        #    print(valA)
+                        histZHJGenSemiLepTaggedAr[k][valItr].Fill(valA)
+                    evCtr += 1
+
+
+            if makeZJ:
+                evCtr = 0
+
+                ZJGenSemiLepTaggedTree = fileA.ZJGenSemiLepTaggedTree
+                histZJGenSemiLepTaggedAr.append([])
+                canZJGenSemiLepTaggedAr.append([])
+                
+                #Initialize all ZJGenSemiLepTagged hists
+                print("Initializing ZJGenSemiLepTagged hists")
+                for ZJGenSemiLepTaggedItr, ZJGenSemiLepTaggedSaveName in enumerate(ZJGenSemiLepTaggedSaveNameAr):
+                    if onlyDoSomeHists and ZJGenSemiLepTaggedItr >= histsToDo:
+                        break
+                    canZJGenSemiLepTaggedAr[-1].append(TCanvas("{0}CanZJGenSemiLepTagged{1}".format(ZJGenSemiLepTaggedSaveName,datasetSaveNameAr[k]),"{0}CanZJGenSemiLepTagged{1}".format(ZJGenSemiLepTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
+                    histZJGenSemiLepTaggedAr[-1].append(TH1D("{0}HistZJGenSemiLepTagged{1}".format(ZJGenSemiLepTaggedSaveName,datasetSaveNameAr[k]),"{0}HistZJGenSemiLepTagged{1}".format(ZJGenSemiLepTaggedSaveName,datasetSaveNameAr[k]), ZJGenSemiLepTaggedBinsAndRangeAr[ZJGenSemiLepTaggedItr][0], ZJGenSemiLepTaggedBinsAndRangeAr[ZJGenSemiLepTaggedItr][1], ZJGenSemiLepTaggedBinsAndRangeAr[ZJGenSemiLepTaggedItr][2]))
+                print("Looping over events")
+                #LOOP OVER EVENTS IN FILE k
+                for j,ev in enumerate(ZJGenSemiLepTaggedTree):
+                    if breakEvEarly and evCtr >= breakEvAt:
+                        break
+                    if evCtr % 1000 == 0:
+                        print("ev:",evCtr)
+                    
+                    valAr = [ev.ZJLead_pt_FromSemiLepTaggedGenMatchL,ev.ZJLead_eta_FromSemiLepTaggedGenMatchL,ev.ZJLead_phi_FromSemiLepTaggedGenMatchL,ev.ZJLead_mass_FromSemiLepTaggedGenMatchL,ev.ZJLead_dRFromJ_FromSemiLepTaggedGenMatchL,
+                    ev.nZJLeadDecay_FromSemiLepTaggedGenMatchL,ev.ZJLead_decaypdgId_FromSemiLepTaggedGenMatchL,
+                    ev.ZJTrailing_pt_FromSemiLepTaggedGenMatchL,ev.ZJTrailing_eta_FromSemiLepTaggedGenMatchL,ev.ZJTrailing_phi_FromSemiLepTaggedGenMatchL,ev.ZJTrailing_mass_FromSemiLepTaggedGenMatchL,ev.ZJTrailing_dRFromJ_FromSemiLepTaggedGenMatchL,
+                    ev.nZJTrailingDecay_FromSemiLepTaggedGenMatchL,ev.ZJTrailing_decaypdgId_FromSemiLepTaggedGenMatchL,
+                    ev.ZJPair_InvMass_FromSemiLepTaggedGenMatchL,ev.ZJPair_EtaSep_FromSemiLepTaggedGenMatchL]
+
+                    for valItr,valA in enumerate(valAr):
+                        if onlyDoSomeHists and valItr >= histsToDo:
+                            break
+                        #if evCtr <20 and evCtr > 10 and valItr == 0:
+                        #    print(valA)
+                        #if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                        if "vector" in str(type(valA)):
+                            for valEl in valA:
+                                histZJGenSemiLepTaggedAr[k][valItr].Fill(valEl)
+                        else:
+                            histZJGenSemiLepTaggedAr[k][valItr].Fill(valA)
+                    evCtr += 1
+
+
+                
+            if makeGenRaw:
+                evCtr = 0
+                GenRawSemiLepTaggedTree = fileA.GenRawSemiLepTaggedTree
+                histGenRawSemiLepTaggedAr.append([])
+                canGenRawSemiLepTaggedAr.append([])
+                
+                #Initialize all GenRawSemiLepTagged hists
+                print("Initializing GenRawSemiLepTagged hists")
+                for GenRawSemiLepTaggedItr, GenRawSemiLepTaggedSaveName in enumerate(GenRawSemiLepTaggedSaveNameAr):
+                    if onlyDoSomeHists and GenRawSemiLepTaggedItr >= histsToDo:
+                        break
+                    canGenRawSemiLepTaggedAr[-1].append(TCanvas("{0}CanGenRawSemiLepTagged{1}".format(GenRawSemiLepTaggedSaveName,datasetSaveNameAr[k]),"{0}CanGenRawSemiLepTagged{1}".format(GenRawSemiLepTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
+                    histGenRawSemiLepTaggedAr[-1].append(TH1D("{0}HistGenRawSemiLepTagged{1}".format(GenRawSemiLepTaggedSaveName,datasetSaveNameAr[k]),"{0}HistGenRawSemiLepTagged{1}".format(GenRawSemiLepTaggedSaveName,datasetSaveNameAr[k]), GenRawSemiLepTaggedBinsAndRangeAr[GenRawSemiLepTaggedItr][0], GenRawSemiLepTaggedBinsAndRangeAr[GenRawSemiLepTaggedItr][1], GenRawSemiLepTaggedBinsAndRangeAr[GenRawSemiLepTaggedItr][2]))
+                print("Looping over events")
+                #LOOP OVER EVENTS IN FILE k
+                for j,ev in enumerate(GenRawSemiLepTaggedTree):
+                    if breakEvEarly and evCtr >= breakEvAt:
+                        break
+                    if evCtr % 1000 == 0:
+                        print("ev:",evCtr)
+                    
+                    valAr = [ev.ZOne_pt_FromSemiLepTaggedGenRawL,ev.ZOne_eta_FromSemiLepTaggedGenRawL,ev.ZOne_phi_FromSemiLepTaggedGenRawL,ev.ZOne_mass_FromSemiLepTaggedGenRawL,ev.ZOne_pdgId_FromSemiLepTaggedGenRawL,ev.ZOne_genPartIdxMother_FromSemiLepTaggedGenRawL,
+                    ev.nZOneDecay_FromSemiLepTaggedGenRawL,ev.ZOne_decaypdgId_FromSemiLepTaggedGenRawL,
+                    ev.ZTwo_pt_FromSemiLepTaggedGenRawL,ev.ZTwo_eta_FromSemiLepTaggedGenRawL,ev.ZTwo_phi_FromSemiLepTaggedGenRawL,ev.ZTwo_mass_FromSemiLepTaggedGenRawL,ev.ZTwo_pdgId_FromSemiLepTaggedGenRawL,ev.ZTwo_genPartIdxMother_FromSemiLepTaggedGenRawL,
+                    ev.nZTwoDecay_FromSemiLepTaggedGenRawL,ev.ZTwo_decaypdgId_FromSemiLepTaggedGenRawL,
+                    ev.ZPair_InvMass_FromSemiLepTaggedGenRawL,ev.ZPair_EtaSep_FromSemiLepTaggedGenRawL,
+                    ev.H_pt_FromSemiLepTaggedGenRawL,ev.H_eta_FromSemiLepTaggedGenRawL,ev.H_phi_FromSemiLepTaggedGenRawL,ev.H_mass_FromSemiLepTaggedGenRawL,ev.H_pdgId_FromSemiLepTaggedGenRawL,ev.H_genPartIdxMother_FromSemiLepTaggedGenRawL,
+                    ev.nHDecay_FromSemiLepTaggedGenRawL,ev.H_decaypdgId_FromSemiLepTaggedGenRawL,
+                    ev.ZPairPlusH_InvMass_FromSemiLepTaggedGenRawL]
+
+                    for valItr,valA in enumerate(valAr):
+                        if onlyDoSomeHists and valItr >= histsToDo:
+                            break
+                        #if evCtr <20 and evCtr > 10 and valItr == 0:
+                        #    print(valA)
+                        #if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                        if "vector" in str(type(valA)):
+                            for valEl in valA:
+                                histGenRawSemiLepTaggedAr[k][valItr].Fill(valEl)
+                        else:
+                            histGenRawSemiLepTaggedAr[k][valItr].Fill(valA)
+                    evCtr += 1
+
+
+                
+
+            if makeRaw:
+                evCtr = 0
+
+                RawSemiLepTaggedTree = fileA.RawSemiLepTaggedTree
+                histRawSemiLepTaggedAr.append([])
+                canRawSemiLepTaggedAr.append([])
+                
+                #Initialize all RawSemiLepTagged hists
+                print("Initializing RawSemiLepTagged hists")
+                for RawSemiLepTaggedItr, RawSemiLepTaggedSaveName in enumerate(RawSemiLepTaggedSaveNameAr):
+                    if onlyDoSomeHists and RawSemiLepTaggedItr >= histsToDo:
+                        break
+                    canRawSemiLepTaggedAr[-1].append(TCanvas("{0}CanRawSemiLepTagged{1}".format(RawSemiLepTaggedSaveName,datasetSaveNameAr[k]),"{0}CanRawSemiLepTagged{1}".format(RawSemiLepTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
+                    histRawSemiLepTaggedAr[-1].append(TH1D("{0}HistRawSemiLepTagged{1}".format(RawSemiLepTaggedSaveName,datasetSaveNameAr[k]),"{0}HistRawSemiLepTagged{1}".format(RawSemiLepTaggedSaveName,datasetSaveNameAr[k]), RawSemiLepTaggedBinsAndRangeAr[RawSemiLepTaggedItr][0], RawSemiLepTaggedBinsAndRangeAr[RawSemiLepTaggedItr][1], RawSemiLepTaggedBinsAndRangeAr[RawSemiLepTaggedItr][2]))
+                print("Looping over events")
+                #LOOP OVER EVENTS IN FILE k
+                for j,ev in enumerate(RawSemiLepTaggedTree):
+                    if breakEvEarly and evCtr >= breakEvAt:
+                        break
+                    if evCtr % 1000 == 0:
+                        print("ev:",evCtr)
+                    
+                    valAr = [ev.ZOne_pt_FromSemiLepTaggedLHERawL,ev.ZOne_eta_FromSemiLepTaggedLHERawL,ev.ZOne_phi_FromSemiLepTaggedLHERawL,ev.ZOne_mass_FromSemiLepTaggedLHERawL,
+                    ev.ZTwo_pt_FromSemiLepTaggedLHERawL,ev.ZTwo_eta_FromSemiLepTaggedLHERawL,ev.ZTwo_phi_FromSemiLepTaggedLHERawL,ev.ZTwo_mass_FromSemiLepTaggedLHERawL,
+                    ev.ZPair_InvMass_FromSemiLepTaggedLHERawL,ev.ZPair_EtaSep_FromSemiLepTaggedLHERawL,
+                    ev.H_pt_FromSemiLepTaggedLHERawL,ev.H_eta_FromSemiLepTaggedLHERawL,ev.H_phi_FromSemiLepTaggedLHERawL,ev.H_mass_FromSemiLepTaggedLHERawL,ev.ZPairPlusH_InvMass_FromSemiLepTaggedLHERawL,
+                    ev.JOne_pt_FromSemiLepTaggedLHERawL,ev.JOne_eta_FromSemiLepTaggedLHERawL,ev.JOne_phi_FromSemiLepTaggedLHERawL,ev.JOne_invmass_FromSemiLepTaggedLHERawL,ev.JOne_pdgId_FromSemiLepTaggedLHERawL,
+                    ev.JTwo_pt_FromSemiLepTaggedLHERawL,ev.JTwo_eta_FromSemiLepTaggedLHERawL,ev.JTwo_phi_FromSemiLepTaggedLHERawL,ev.JTwo_invmass_FromSemiLepTaggedLHERawL,ev.JTwo_pdgId_FromSemiLepTaggedLHERawL,
+                    ev.JPair_invmass_FromSemiLepTaggedLHERawL,ev.J_etasep_FromSemiLepTaggedLHERawL]
+
+                    for valItr,valA in enumerate(valAr):
+                        if onlyDoSomeHists and valItr >= histsToDo:
+                            break
+                        #if evCtr <20 and evCtr > 10 and valItr == 0:
+                        #    print(valA)
+                        histRawSemiLepTaggedAr[k][valItr].Fill(valA)
+                    evCtr += 1
+
+
+
+            if makeHFJ:
+                
+                evCtr = 0
+
+                HFJGenLepTaggedTree = fileA.HFJGenLepTaggedTree
+                histHFJGenLepTaggedAr.append([])
+                canHFJGenLepTaggedAr.append([])
+                
+                #Initialize all HFJGenLepTagged hists
+                print("Initializing HFJGenLepTagged hists")
+                for HFJGenLepTaggedItr, HFJGenLepTaggedSaveName in enumerate(HFJGenLepTaggedSaveNameAr):
+                    if onlyDoSomeHists and HFJGenLepTaggedItr >= histsToDo:
+                        break
+                    canHFJGenLepTaggedAr[-1].append(TCanvas("{0}CanHFJGenLepTagged{1}".format(HFJGenLepTaggedSaveName,datasetSaveNameAr[k]),"{0}CanHFJGenLepTagged{1}".format(HFJGenLepTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
+                    histHFJGenLepTaggedAr[-1].append(TH1D("{0}HistHFJGenLepTagged{1}".format(HFJGenLepTaggedSaveName,datasetSaveNameAr[k]),"{0}HistHFJGenLepTagged{1}".format(HFJGenLepTaggedSaveName,datasetSaveNameAr[k]), HFJGenLepTaggedBinsAndRangeAr[HFJGenLepTaggedItr][0], HFJGenLepTaggedBinsAndRangeAr[HFJGenLepTaggedItr][1], HFJGenLepTaggedBinsAndRangeAr[HFJGenLepTaggedItr][2]))
+                print("Looping over events")
+                #LOOP OVER EVENTS IN FILE k
+                for j,ev in enumerate(HFJGenLepTaggedTree):
+                    if breakEvEarly and evCtr >= breakEvAt:
+                        break
+                    if evCtr % 1000 == 0:
+                        print("ev:",evCtr)
+                    
+                    valAr = [ev.HFJ_pt_FromLepTaggedGenMatchL,ev.HFJ_eta_FromLepTaggedGenMatchL,ev.HFJ_phi_FromLepTaggedGenMatchL,ev.HFJ_mass_FromLepTaggedGenMatchL,ev.HFJ_dRFromFJ_FromLepTaggedGenMatchL,
+                    ev.nHFJDecay_FromLepTaggedGenMatchL,ev.HFJ_decaypdgId_FromLepTaggedGenMatchL]
+
+                    for valItr,valA in enumerate(valAr):
+                        if onlyDoSomeHists and valItr >= histsToDo:
+                            break
+                        #if evCtr <20 and evCtr > 10 and valItr == 0:
+                        #    print(valA)
+                        #if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                        if "vector" in str(type(valA)):
+                            for valEl in valA:
+                                #print(valEl)
+                                histHFJGenLepTaggedAr[k][valItr].Fill(valEl)
+                        else:
+                            histHFJGenLepTaggedAr[k][valItr].Fill(valA)
+                    evCtr += 1
+
+                evCtr = 0
+
+            if makeZFJ:
+
+                ZFJGenLepTaggedTree = fileA.ZFJGenLepTaggedTree
+                histZFJGenLepTaggedAr.append([])
+                canZFJGenLepTaggedAr.append([])
+                
+                #Initialize all ZFJGenLepTagged hists
+                print("Initializing ZFJGenLepTagged hists")
+                for ZFJGenLepTaggedItr, ZFJGenLepTaggedSaveName in enumerate(ZFJGenLepTaggedSaveNameAr):
+                    if onlyDoSomeHists and ZFJGenLepTaggedItr >= histsToDo:
+                        break
+                    canZFJGenLepTaggedAr[-1].append(TCanvas("{0}CanZFJGenLepTagged{1}".format(ZFJGenLepTaggedSaveName,datasetSaveNameAr[k]),"{0}CanZFJGenLepTagged{1}".format(ZFJGenLepTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
+                    histZFJGenLepTaggedAr[-1].append(TH1D("{0}HistZFJGenLepTagged{1}".format(ZFJGenLepTaggedSaveName,datasetSaveNameAr[k]),"{0}HistZFJGenLepTagged{1}".format(ZFJGenLepTaggedSaveName,datasetSaveNameAr[k]), ZFJGenLepTaggedBinsAndRangeAr[ZFJGenLepTaggedItr][0], ZFJGenLepTaggedBinsAndRangeAr[ZFJGenLepTaggedItr][1], ZFJGenLepTaggedBinsAndRangeAr[ZFJGenLepTaggedItr][2]))
+                print("Looping over events")
+                #LOOP OVER EVENTS IN FILE k
+                for j,ev in enumerate(ZFJGenLepTaggedTree):
+                    if breakEvEarly and evCtr >= breakEvAt:
+                        break
+                    if evCtr % 1000 == 0:
+                        print("ev:",evCtr)
+                    
+                    valAr = [ev.ZFJLead_pt_FromLepTaggedGenMatchL,ev.ZFJLead_eta_FromLepTaggedGenMatchL,ev.ZFJLead_phi_FromLepTaggedGenMatchL,ev.ZFJLead_mass_FromLepTaggedGenMatchL,ev.ZFJLead_dRFromFJ_FromLepTaggedGenMatchL,
+                    ev.nZFJLeadDecay_FromLepTaggedGenMatchL,ev.ZFJLead_decaypdgId_FromLepTaggedGenMatchL,
+                    ev.ZFJTrailing_pt_FromLepTaggedGenMatchL,ev.ZFJTrailing_eta_FromLepTaggedGenMatchL,ev.ZFJTrailing_phi_FromLepTaggedGenMatchL,ev.ZFJTrailing_mass_FromLepTaggedGenMatchL,ev.ZFJTrailing_dRFromFJ_FromLepTaggedGenMatchL,
+                    ev.nZFJTrailingDecay_FromLepTaggedGenMatchL,ev.ZFJTrailing_decaypdgId_FromLepTaggedGenMatchL,
+                    ev.ZFJPair_InvMass_FromLepTaggedGenMatchL,ev.ZFJPair_EtaSep_FromLepTaggedGenMatchL]
+
+                    for valItr,valA in enumerate(valAr):
+                        if onlyDoSomeHists and valItr >= histsToDo:
+                            break
+                        #if evCtr <20 and evCtr > 10 and valItr == 0:
+                        #    print(valA)
+                        #if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                        if "vector" in str(type(valA)):
+                            for valEl in valA:
+                                histZFJGenLepTaggedAr[k][valItr].Fill(valEl)
+                        else:
+                            histZFJGenLepTaggedAr[k][valItr].Fill(valA)
+                    evCtr += 1
+
+            if makeZHFJ:
+
+
+                evCtr = 0
+
+                ZHFJGenLepTaggedTree = fileA.ZHFJGenLepTaggedTree
+                histZHFJGenLepTaggedAr.append([])
+                canZHFJGenLepTaggedAr.append([])
+                
+                #Initialize all ZHFJGenLepTagged hists
+                print("Initializing ZHFJGenLepTagged hists")
+                for ZHFJGenLepTaggedItr, ZHFJGenLepTaggedSaveName in enumerate(ZHFJGenLepTaggedSaveNameAr):
+                    if onlyDoSomeHists and ZHFJGenLepTaggedItr >= histsToDo:
+                        break
+                    canZHFJGenLepTaggedAr[-1].append(TCanvas("{0}CanZHFJGenLepTagged{1}".format(ZHFJGenLepTaggedSaveName,datasetSaveNameAr[k]),"{0}CanZHFJGenLepTagged{1}".format(ZHFJGenLepTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
+                    histZHFJGenLepTaggedAr[-1].append(TH1D("{0}HistZHFJGenLepTagged{1}".format(ZHFJGenLepTaggedSaveName,datasetSaveNameAr[k]),"{0}HistZHFJGenLepTagged{1}".format(ZHFJGenLepTaggedSaveName,datasetSaveNameAr[k]), ZHFJGenLepTaggedBinsAndRangeAr[ZHFJGenLepTaggedItr][0], ZHFJGenLepTaggedBinsAndRangeAr[ZHFJGenLepTaggedItr][1], ZHFJGenLepTaggedBinsAndRangeAr[ZHFJGenLepTaggedItr][2]))
+                print("Looping over events")
+                #LOOP OVER EVENTS IN FILE k
+                for j,ev in enumerate(ZHFJGenLepTaggedTree):
+                    if breakEvEarly and evCtr >= breakEvAt:
+                        break
+                    if evCtr % 1000 == 0:
+                        print("ev:",evCtr)
+                    
+                    valAr = [ev.ZHFJ_ZPairPlusHInvMass_FromLepTaggedGenMatchL]
+
+                    for valItr,valA in enumerate(valAr):
+                        if onlyDoSomeHists and valItr >= histsToDo:
+                            break
+                        #if evCtr <20 and evCtr > 10 and valItr == 0:
+                        #    print(valA)
+                        histZHFJGenLepTaggedAr[k][valItr].Fill(valA)
+                    evCtr += 1
+
+            if makeZHJ:
+                evCtr = 0
+
+                ZHJGenLepTaggedTree = fileA.ZHJGenLepTaggedTree
+                histZHJGenLepTaggedAr.append([])
+                canZHJGenLepTaggedAr.append([])
+                
+                #Initialize all ZHJGenLepTagged hists
+                print("Initializing ZHJGenLepTagged hists")
+                for ZHJGenLepTaggedItr, ZHJGenLepTaggedSaveName in enumerate(ZHJGenLepTaggedSaveNameAr):
+                    if onlyDoSomeHists and ZHJGenLepTaggedItr >= histsToDo:
+                        break
+                    canZHJGenLepTaggedAr[-1].append(TCanvas("{0}CanZHJGenLepTagged{1}".format(ZHJGenLepTaggedSaveName,datasetSaveNameAr[k]),"{0}CanZHJGenLepTagged{1}".format(ZHJGenLepTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
+                    histZHJGenLepTaggedAr[-1].append(TH1D("{0}HistZHJGenLepTagged{1}".format(ZHJGenLepTaggedSaveName,datasetSaveNameAr[k]),"{0}HistZHJGenLepTagged{1}".format(ZHJGenLepTaggedSaveName,datasetSaveNameAr[k]), ZHJGenLepTaggedBinsAndRangeAr[ZHJGenLepTaggedItr][0], ZHJGenLepTaggedBinsAndRangeAr[ZHJGenLepTaggedItr][1], ZHJGenLepTaggedBinsAndRangeAr[ZHJGenLepTaggedItr][2]))
+                print("Looping over events")
+                #LOOP OVER EVENTS IN FILE k
+                for j,ev in enumerate(ZHJGenLepTaggedTree):
+                    if breakEvEarly and evCtr >= breakEvAt:
+                        break
+                    if evCtr % 1000 == 0:
+                        print("ev:",evCtr)
+                    
+                    valAr = [ev.ZHJ_ZPairPlusHInvMass_FromLepTaggedGenMatchL]
+
+                    for valItr,valA in enumerate(valAr):
+                        if onlyDoSomeHists and valItr >= histsToDo:
+                            break
+                        #if evCtr <20 and evCtr > 10 and valItr == 0:
+                        #    print(valA)
+                        histZHJGenLepTaggedAr[k][valItr].Fill(valA)
+                    evCtr += 1
+
+
+            if makeZJ:
+                evCtr = 0
+
+                ZJGenLepTaggedTree = fileA.ZJGenLepTaggedTree
+                histZJGenLepTaggedAr.append([])
+                canZJGenLepTaggedAr.append([])
+                
+                #Initialize all ZJGenLepTagged hists
+                print("Initializing ZJGenLepTagged hists")
+                for ZJGenLepTaggedItr, ZJGenLepTaggedSaveName in enumerate(ZJGenLepTaggedSaveNameAr):
+                    if onlyDoSomeHists and ZJGenLepTaggedItr >= histsToDo:
+                        break
+                    canZJGenLepTaggedAr[-1].append(TCanvas("{0}CanZJGenLepTagged{1}".format(ZJGenLepTaggedSaveName,datasetSaveNameAr[k]),"{0}CanZJGenLepTagged{1}".format(ZJGenLepTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
+                    histZJGenLepTaggedAr[-1].append(TH1D("{0}HistZJGenLepTagged{1}".format(ZJGenLepTaggedSaveName,datasetSaveNameAr[k]),"{0}HistZJGenLepTagged{1}".format(ZJGenLepTaggedSaveName,datasetSaveNameAr[k]), ZJGenLepTaggedBinsAndRangeAr[ZJGenLepTaggedItr][0], ZJGenLepTaggedBinsAndRangeAr[ZJGenLepTaggedItr][1], ZJGenLepTaggedBinsAndRangeAr[ZJGenLepTaggedItr][2]))
+                print("Looping over events")
+                #LOOP OVER EVENTS IN FILE k
+                for j,ev in enumerate(ZJGenLepTaggedTree):
+                    if breakEvEarly and evCtr >= breakEvAt:
+                        break
+                    if evCtr % 1000 == 0:
+                        print("ev:",evCtr)
+                    
+                    valAr = [ev.ZJLead_pt_FromLepTaggedGenMatchL,ev.ZJLead_eta_FromLepTaggedGenMatchL,ev.ZJLead_phi_FromLepTaggedGenMatchL,ev.ZJLead_mass_FromLepTaggedGenMatchL,ev.ZJLead_dRFromJ_FromLepTaggedGenMatchL,
+                    ev.nZJLeadDecay_FromLepTaggedGenMatchL,ev.ZJLead_decaypdgId_FromLepTaggedGenMatchL,
+                    ev.ZJTrailing_pt_FromLepTaggedGenMatchL,ev.ZJTrailing_eta_FromLepTaggedGenMatchL,ev.ZJTrailing_phi_FromLepTaggedGenMatchL,ev.ZJTrailing_mass_FromLepTaggedGenMatchL,ev.ZJTrailing_dRFromJ_FromLepTaggedGenMatchL,
+                    ev.nZJTrailingDecay_FromLepTaggedGenMatchL,ev.ZJTrailing_decaypdgId_FromLepTaggedGenMatchL,
+                    ev.ZJPair_InvMass_FromLepTaggedGenMatchL,ev.ZJPair_EtaSep_FromLepTaggedGenMatchL]
+
+                    for valItr,valA in enumerate(valAr):
+                        if onlyDoSomeHists and valItr >= histsToDo:
+                            break
+                        #if evCtr <20 and evCtr > 10 and valItr == 0:
+                        #    print(valA)
+                        #if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                        if "vector" in str(type(valA)):
+                            for valEl in valA:
+                                histZJGenLepTaggedAr[k][valItr].Fill(valEl)
+                        else:
+                            histZJGenLepTaggedAr[k][valItr].Fill(valA)
+                    evCtr += 1
+
+
+                
+            if makeGenRaw:
+                evCtr = 0
+                GenRawLepTaggedTree = fileA.GenRawLepTaggedTree
+                histGenRawLepTaggedAr.append([])
+                canGenRawLepTaggedAr.append([])
+                
+                #Initialize all GenRawLepTagged hists
+                print("Initializing GenRawLepTagged hists")
+                for GenRawLepTaggedItr, GenRawLepTaggedSaveName in enumerate(GenRawLepTaggedSaveNameAr):
+                    if onlyDoSomeHists and GenRawLepTaggedItr >= histsToDo:
+                        break
+                    canGenRawLepTaggedAr[-1].append(TCanvas("{0}CanGenRawLepTagged{1}".format(GenRawLepTaggedSaveName,datasetSaveNameAr[k]),"{0}CanGenRawLepTagged{1}".format(GenRawLepTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
+                    histGenRawLepTaggedAr[-1].append(TH1D("{0}HistGenRawLepTagged{1}".format(GenRawLepTaggedSaveName,datasetSaveNameAr[k]),"{0}HistGenRawLepTagged{1}".format(GenRawLepTaggedSaveName,datasetSaveNameAr[k]), GenRawLepTaggedBinsAndRangeAr[GenRawLepTaggedItr][0], GenRawLepTaggedBinsAndRangeAr[GenRawLepTaggedItr][1], GenRawLepTaggedBinsAndRangeAr[GenRawLepTaggedItr][2]))
+                print("Looping over events")
+                #LOOP OVER EVENTS IN FILE k
+                for j,ev in enumerate(GenRawLepTaggedTree):
+                    if breakEvEarly and evCtr >= breakEvAt:
+                        break
+                    if evCtr % 1000 == 0:
+                        print("ev:",evCtr)
+                    
+                    valAr = [ev.ZOne_pt_FromLepTaggedGenRawL,ev.ZOne_eta_FromLepTaggedGenRawL,ev.ZOne_phi_FromLepTaggedGenRawL,ev.ZOne_mass_FromLepTaggedGenRawL,ev.ZOne_pdgId_FromLepTaggedGenRawL,ev.ZOne_genPartIdxMother_FromLepTaggedGenRawL,
+                    ev.nZOneDecay_FromLepTaggedGenRawL,ev.ZOne_decaypdgId_FromLepTaggedGenRawL,
+                    ev.ZTwo_pt_FromLepTaggedGenRawL,ev.ZTwo_eta_FromLepTaggedGenRawL,ev.ZTwo_phi_FromLepTaggedGenRawL,ev.ZTwo_mass_FromLepTaggedGenRawL,ev.ZTwo_pdgId_FromLepTaggedGenRawL,ev.ZTwo_genPartIdxMother_FromLepTaggedGenRawL,
+                    ev.nZTwoDecay_FromLepTaggedGenRawL,ev.ZTwo_decaypdgId_FromLepTaggedGenRawL,
+                    ev.ZPair_InvMass_FromLepTaggedGenRawL,ev.ZPair_EtaSep_FromLepTaggedGenRawL,
+                    ev.H_pt_FromLepTaggedGenRawL,ev.H_eta_FromLepTaggedGenRawL,ev.H_phi_FromLepTaggedGenRawL,ev.H_mass_FromLepTaggedGenRawL,ev.H_pdgId_FromLepTaggedGenRawL,ev.H_genPartIdxMother_FromLepTaggedGenRawL,
+                    ev.nHDecay_FromLepTaggedGenRawL,ev.H_decaypdgId_FromLepTaggedGenRawL,
+                    ev.ZPairPlusH_InvMass_FromLepTaggedGenRawL]
+
+                    for valItr,valA in enumerate(valAr):
+                        if onlyDoSomeHists and valItr >= histsToDo:
+                            break
+                        #if evCtr <20 and evCtr > 10 and valItr == 0:
+                        #    print(valA)
+                        #if str(type(valA)) == "<class 'ROOT.vector<int>'>":
+                        if "vector" in str(type(valA)):
+                            for valEl in valA:
+                                histGenRawLepTaggedAr[k][valItr].Fill(valEl)
+                        else:
+                            histGenRawLepTaggedAr[k][valItr].Fill(valA)
+                    evCtr += 1
+
+
+                
+
+            if makeRaw:
+                evCtr = 0
+
+                RawLepTaggedTree = fileA.RawLepTaggedTree
+                histRawLepTaggedAr.append([])
+                canRawLepTaggedAr.append([])
+                
+                #Initialize all RawLepTagged hists
+                print("Initializing RawLepTagged hists")
+                for RawLepTaggedItr, RawLepTaggedSaveName in enumerate(RawLepTaggedSaveNameAr):
+                    if onlyDoSomeHists and RawLepTaggedItr >= histsToDo:
+                        break
+                    canRawLepTaggedAr[-1].append(TCanvas("{0}CanRawLepTagged{1}".format(RawLepTaggedSaveName,datasetSaveNameAr[k]),"{0}CanRawLepTagged{1}".format(RawLepTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
+                    histRawLepTaggedAr[-1].append(TH1D("{0}HistRawLepTagged{1}".format(RawLepTaggedSaveName,datasetSaveNameAr[k]),"{0}HistRawLepTagged{1}".format(RawLepTaggedSaveName,datasetSaveNameAr[k]), RawLepTaggedBinsAndRangeAr[RawLepTaggedItr][0], RawLepTaggedBinsAndRangeAr[RawLepTaggedItr][1], RawLepTaggedBinsAndRangeAr[RawLepTaggedItr][2]))
+                print("Looping over events")
+                #LOOP OVER EVENTS IN FILE k
+                for j,ev in enumerate(RawLepTaggedTree):
+                    if breakEvEarly and evCtr >= breakEvAt:
+                        break
+                    if evCtr % 1000 == 0:
+                        print("ev:",evCtr)
+                    
+                    valAr = [ev.ZOne_pt_FromLepTaggedLHERawL,ev.ZOne_eta_FromLepTaggedLHERawL,ev.ZOne_phi_FromLepTaggedLHERawL,ev.ZOne_mass_FromLepTaggedLHERawL,
+                    ev.ZTwo_pt_FromLepTaggedLHERawL,ev.ZTwo_eta_FromLepTaggedLHERawL,ev.ZTwo_phi_FromLepTaggedLHERawL,ev.ZTwo_mass_FromLepTaggedLHERawL,
+                    ev.ZPair_InvMass_FromLepTaggedLHERawL,ev.ZPair_EtaSep_FromLepTaggedLHERawL,
+                    ev.H_pt_FromLepTaggedLHERawL,ev.H_eta_FromLepTaggedLHERawL,ev.H_phi_FromLepTaggedLHERawL,ev.H_mass_FromLepTaggedLHERawL,ev.ZPairPlusH_InvMass_FromLepTaggedLHERawL,
+                    ev.JOne_pt_FromLepTaggedLHERawL,ev.JOne_eta_FromLepTaggedLHERawL,ev.JOne_phi_FromLepTaggedLHERawL,ev.JOne_invmass_FromLepTaggedLHERawL,ev.JOne_pdgId_FromLepTaggedLHERawL,
+                    ev.JTwo_pt_FromLepTaggedLHERawL,ev.JTwo_eta_FromLepTaggedLHERawL,ev.JTwo_phi_FromLepTaggedLHERawL,ev.JTwo_invmass_FromLepTaggedLHERawL,ev.JTwo_pdgId_FromLepTaggedLHERawL,
+                    ev.JPair_invmass_FromLepTaggedLHERawL,ev.J_etasep_FromLepTaggedLHERawL]
+
+                    for valItr,valA in enumerate(valAr):
+                        if onlyDoSomeHists and valItr >= histsToDo:
+                            break
+                        #if evCtr <20 and evCtr > 10 and valItr == 0:
+                        #    print(valA)
+                        histRawLepTaggedAr[k][valItr].Fill(valA)
+                    evCtr += 1
+        
 
     
 ##################END MAIN LOOP##################
@@ -1473,427 +2028,1274 @@ if useLHETree and not onlyTaggedTrees:
 
 
 ###########################
-if useTaggedTrees and makeGenRaw:
-    ###############STARTING GEN RAW  GRAPHS###############
+if useTaggedTrees:
+    if makeGenRaw:
+        ###############STARTING GEN RAW  GRAPHS###############
 
-    
-    normalizeDataTogether = False
-
-
-    
-    dataName = ""
-    for k,fileA in enumerate(fileAr):
-        if useLHEAr[k]:
-            dataName += "_"+datasetSaveNameAr[k]
-
-    if not comparisonPlotsOnly:
-        for k,fileA in enumerate(fileAr):
-            if useLHEAr[k]:
-                for GenRawTaggedItr, GenRawTaggedSaveName in enumerate(GenRawTaggedSaveNameAr):
-                    if onlyDoSomeHists and GenRawTaggedItr >= histsToDo:
-                        break
-                    canGenRawTaggedAr[k][GenRawTaggedItr].cd()
-                    histGenRawTaggedAr[k][GenRawTaggedItr].Draw("hist")
         
-                    if savePathBool:
-                        canGenRawTaggedAr[k][GenRawTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],GenRawTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
-                    else:
-                        canGenRawTaggedAr[k][GenRawTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],GenRawTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
-    legUnstackedAr = []
-    padUnstackedAr = []
-    for GenRawTaggedItr, GenRawTaggedSaveName in enumerate(GenRawTaggedSaveNameAr):
-        if onlyDoSomeHists and GenRawTaggedItr >= histsToDo:
-            break
-        setUpLegend(legUnstackedAr)
-        setUpPadsAr(padUnstackedAr,"{0}Pad".format("GenRawTaggedSaveName"))
-
-    intComparisonAr = []
+        normalizeDataTogether = False
 
 
-
-    setHistoElementsForLHETrees(colorAr,histGenRawTaggedAr,weightsAr,intComparisonAr,GenRawTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
-
-    histMaxAr = normalizeHistsForLHETrees(histGenRawTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,GenRawTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
-
-    cloneHistAr = []
-
-    comparisonCanAr = []
-    #comparisonHistStackAr = []
-    for GenRawTaggedItr, GenRawTaggedSaveName in enumerate(GenRawTaggedSaveNameAr):
-        if onlyDoSomeHists and GenRawTaggedItr >= histsToDo:
-            break
-        comparisonCanAr.append(TCanvas("comparisonCan{0}".format(GenRawTaggedSaveName),"comparisonCan{0}".format(GenRawTaggedSaveName),3600,2400))
-        #comparisonHistStackAr.append(THStack("hist{0}Stack".format(GenRawTaggedSaveName),GenRawTaggedTitleAr[GenRawTaggedItr]))
-    comparisonUnstackedCanAr = []
-
-    for GenRawTaggedItr, GenRawTaggedSaveName in enumerate(GenRawTaggedSaveNameAr):
-        if onlyDoSomeHists and GenRawTaggedItr >= histsToDo:
-            break
-        comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(GenRawTaggedSaveName),"comparisonUnstackedCan{0}".format(GenRawTaggedSaveName),3600,2400))
-
-    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histGenRawTaggedAr,legUnstackedAr,dataName,GenRawTaggedSaveNameAr,GenRawTaggedTitleAr,GenRawTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
-
-
-if useTaggedTrees and makeRaw:
-    ###############STARTING RAW LHE GRAPHS###############
-
-    
-    normalizeDataTogether = False
-
-
-    
-    dataName = ""
-    for k,fileA in enumerate(fileAr):
-        if useLHEAr[k]:
-            dataName += "_"+datasetSaveNameAr[k]
-
-    if not comparisonPlotsOnly:
-        for k,fileA in enumerate(fileAr):
-            if useLHEAr[k]:
-                for RawTaggedItr, RawTaggedSaveName in enumerate(RawTaggedSaveNameAr):
-                    if onlyDoSomeHists and RawTaggedItr >= histsToDo:
-                        break
-                    canRawTaggedAr[k][RawTaggedItr].cd()
-                    histRawTaggedAr[k][RawTaggedItr].Draw("hist")
         
-                    if savePathBool:
-                        canRawTaggedAr[k][RawTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],RawTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
-                    else:
-                        canRawTaggedAr[k][RawTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],RawTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
-    legUnstackedAr = []
-    padUnstackedAr = []
-    for RawTaggedItr, RawTaggedSaveName in enumerate(RawTaggedSaveNameAr):
-        if onlyDoSomeHists and RawTaggedItr >= histsToDo:
-            break
-        setUpLegend(legUnstackedAr)
-        setUpPadsAr(padUnstackedAr,"{0}Pad".format("RawTaggedSaveName"))
-
-    intComparisonAr = []
-
-
-
-    setHistoElementsForLHETrees(colorAr,histRawTaggedAr,weightsAr,intComparisonAr,RawTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
-
-    histMaxAr = normalizeHistsForLHETrees(histRawTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,RawTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
-
-    cloneHistAr = []
-
-    comparisonCanAr = []
-    #comparisonHistStackAr = []
-    for RawTaggedItr, RawTaggedSaveName in enumerate(RawTaggedSaveNameAr):
-        if onlyDoSomeHists and RawTaggedItr >= histsToDo:
-            break
-        comparisonCanAr.append(TCanvas("comparisonCan{0}".format(RawTaggedSaveName),"comparisonCan{0}".format(RawTaggedSaveName),3600,2400))
-        #comparisonHistStackAr.append(THStack("hist{0}Stack".format(RawTaggedSaveName),RawTaggedTitleAr[RawTaggedItr]))
-    comparisonUnstackedCanAr = []
-
-    for RawTaggedItr, RawTaggedSaveName in enumerate(RawTaggedSaveNameAr):
-        if onlyDoSomeHists and RawTaggedItr >= histsToDo:
-            break
-        comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(RawTaggedSaveName),"comparisonUnstackedCan{0}".format(RawTaggedSaveName),3600,2400))
-
-    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histRawTaggedAr,legUnstackedAr,dataName,RawTaggedSaveNameAr,RawTaggedTitleAr,RawTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
-
-
-if useTaggedTrees and makeHFJ:
-    ###############STARTING HFJGenTagged GEN MATCHING GRAPHS###############
-
-    
-    normalizeDataTogether = False
-
-
-    
-    dataName = ""
-    for k,fileA in enumerate(fileAr):
-        if useLHEAr[k]:
-            dataName += "_"+datasetSaveNameAr[k]
-
-    if not comparisonPlotsOnly:
+        dataName = ""
         for k,fileA in enumerate(fileAr):
             if useLHEAr[k]:
-                for HFJGenTaggedItr, HFJGenTaggedSaveName in enumerate(HFJGenTaggedSaveNameAr):
-                    if onlyDoSomeHists and HFJGenTaggedItr >= histsToDo:
-                        break
-                    canHFJGenTaggedAr[k][HFJGenTaggedItr].cd()
-                    histHFJGenTaggedAr[k][HFJGenTaggedItr].Draw("hist")
+                dataName += "_"+datasetSaveNameAr[k]
+
+        if not comparisonPlotsOnly:
+            for k,fileA in enumerate(fileAr):
+                if useLHEAr[k]:
+                    for GenRawTaggedItr, GenRawTaggedSaveName in enumerate(GenRawTaggedSaveNameAr):
+                        if onlyDoSomeHists and GenRawTaggedItr >= histsToDo:
+                            break
+                        canGenRawTaggedAr[k][GenRawTaggedItr].cd()
+                        histGenRawTaggedAr[k][GenRawTaggedItr].Draw("hist")
+            
+                        if savePathBool:
+                            canGenRawTaggedAr[k][GenRawTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],GenRawTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+                        else:
+                            canGenRawTaggedAr[k][GenRawTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],GenRawTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        legUnstackedAr = []
+        padUnstackedAr = []
+        for GenRawTaggedItr, GenRawTaggedSaveName in enumerate(GenRawTaggedSaveNameAr):
+            if onlyDoSomeHists and GenRawTaggedItr >= histsToDo:
+                break
+            setUpLegend(legUnstackedAr)
+            setUpPadsAr(padUnstackedAr,"{0}Pad".format("GenRawTaggedSaveName"))
+
+        intComparisonAr = []
+
+
+
+        setHistoElementsForLHETrees(colorAr,histGenRawTaggedAr,weightsAr,intComparisonAr,GenRawTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
+
+        histMaxAr = normalizeHistsForLHETrees(histGenRawTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,GenRawTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+
+        cloneHistAr = []
+
+        comparisonCanAr = []
+        #comparisonHistStackAr = []
+        for GenRawTaggedItr, GenRawTaggedSaveName in enumerate(GenRawTaggedSaveNameAr):
+            if onlyDoSomeHists and GenRawTaggedItr >= histsToDo:
+                break
+            comparisonCanAr.append(TCanvas("comparisonCan{0}".format(GenRawTaggedSaveName),"comparisonCan{0}".format(GenRawTaggedSaveName),3600,2400))
+            #comparisonHistStackAr.append(THStack("hist{0}Stack".format(GenRawTaggedSaveName),GenRawTaggedTitleAr[GenRawTaggedItr]))
+        comparisonUnstackedCanAr = []
+
+        for GenRawTaggedItr, GenRawTaggedSaveName in enumerate(GenRawTaggedSaveNameAr):
+            if onlyDoSomeHists and GenRawTaggedItr >= histsToDo:
+                break
+            comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(GenRawTaggedSaveName),"comparisonUnstackedCan{0}".format(GenRawTaggedSaveName),3600,2400))
+
+        setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histGenRawTaggedAr,legUnstackedAr,dataName,GenRawTaggedSaveNameAr,GenRawTaggedTitleAr,GenRawTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
+
+
+    if makeRaw:
+        ###############STARTING RAW LHE GRAPHS###############
+
         
-                    if savePathBool:
-                        canHFJGenTaggedAr[k][HFJGenTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],HFJGenTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
-                    else:
-                        canHFJGenTaggedAr[k][HFJGenTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],HFJGenTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
-    legUnstackedAr = []
-    padUnstackedAr = []
-    for HFJGenTaggedItr, HFJGenTaggedSaveName in enumerate(HFJGenTaggedSaveNameAr):
-        if onlyDoSomeHists and HFJGenTaggedItr >= histsToDo:
-            break
-        setUpLegend(legUnstackedAr)
-        setUpPadsAr(padUnstackedAr,"{0}Pad".format("HFJGenTaggedSaveName"))
-
-    intComparisonAr = []
+        normalizeDataTogether = False
 
 
-
-    setHistoElementsForLHETrees(colorAr,histHFJGenTaggedAr,weightsAr,intComparisonAr,HFJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
-
-    histMaxAr = normalizeHistsForLHETrees(histHFJGenTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,HFJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
-
-    cloneHistAr = []
-
-    comparisonCanAr = []
-    #comparisonHistStackAr = []
-    for HFJGenTaggedItr, HFJGenTaggedSaveName in enumerate(HFJGenTaggedSaveNameAr):
-        if onlyDoSomeHists and HFJGenTaggedItr >= histsToDo:
-            break
-        comparisonCanAr.append(TCanvas("comparisonCan{0}".format(HFJGenTaggedSaveName),"comparisonCan{0}".format(HFJGenTaggedSaveName),3600,2400))
-        #comparisonHistStackAr.append(THStack("hist{0}Stack".format(HFJGenTaggedSaveName),HFJGenTaggedTitleAr[HFJGenTaggedItr]))
-    comparisonUnstackedCanAr = []
-
-    for HFJGenTaggedItr, HFJGenTaggedSaveName in enumerate(HFJGenTaggedSaveNameAr):
-        if onlyDoSomeHists and HFJGenTaggedItr >= histsToDo:
-            break
-        comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(HFJGenTaggedSaveName),"comparisonUnstackedCan{0}".format(HFJGenTaggedSaveName),3600,2400))
-
-    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histHFJGenTaggedAr,legUnstackedAr,dataName,HFJGenTaggedSaveNameAr,HFJGenTaggedTitleAr,HFJGenTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
-
-if useTaggedTrees and makeZFJ:
-    ###############STARTING ZFJGenTagged GEN MATCHING GRAPHS###############
-
-    
-    normalizeDataTogether = False
-
-
-    
-    dataName = ""
-    for k,fileA in enumerate(fileAr):
-        if useLHEAr[k]:
-            dataName += "_"+datasetSaveNameAr[k]
-
-    if not comparisonPlotsOnly:
-        for k,fileA in enumerate(fileAr):
-            if useLHEAr[k]:
-                for ZFJGenTaggedItr, ZFJGenTaggedSaveName in enumerate(ZFJGenTaggedSaveNameAr):
-                    if onlyDoSomeHists and ZFJGenTaggedItr >= histsToDo:
-                        break
-                    canZFJGenTaggedAr[k][ZFJGenTaggedItr].cd()
-                    histZFJGenTaggedAr[k][ZFJGenTaggedItr].Draw("hist")
-                
-                    if savePathBool:
-                        canZFJGenTaggedAr[k][ZFJGenTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],ZFJGenTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
-                    else:
-                        canZFJGenTaggedAr[k][ZFJGenTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],ZFJGenTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
-    legUnstackedAr = []
-    padUnstackedAr = []
-    for ZFJGenTaggedItr, ZFJGenTaggedSaveName in enumerate(ZFJGenTaggedSaveNameAr):
-        if onlyDoSomeHists and ZFJGenTaggedItr >= histsToDo:
-            break
-        setUpLegend(legUnstackedAr)
-        setUpPadsAr(padUnstackedAr,"{0}Pad".format("ZFJGenTaggedSaveName"))
-
-    intComparisonAr = []
-
-
-
-    setHistoElementsForLHETrees(colorAr,histZFJGenTaggedAr,weightsAr,intComparisonAr,ZFJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
-
-    histMaxAr = normalizeHistsForLHETrees(histZFJGenTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,ZFJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
-
-    cloneHistAr = []
-
-    comparisonCanAr = []
-    #comparisonHistStackAr = []
-    for ZFJGenTaggedItr, ZFJGenTaggedSaveName in enumerate(ZFJGenTaggedSaveNameAr):
-        if onlyDoSomeHists and ZFJGenTaggedItr >= histsToDo:
-            break
-        comparisonCanAr.append(TCanvas("comparisonCan{0}".format(ZFJGenTaggedSaveName),"comparisonCan{0}".format(ZFJGenTaggedSaveName),3600,2400))
-        #comparisonHistStackAr.append(THStack("hist{0}Stack".format(ZFJGenTaggedSaveName),ZFJGenTaggedTitleAr[ZFJGenTaggedItr]))
-    comparisonUnstackedCanAr = []
-
-    for ZFJGenTaggedItr, ZFJGenTaggedSaveName in enumerate(ZFJGenTaggedSaveNameAr):
-        if onlyDoSomeHists and ZFJGenTaggedItr >= histsToDo:
-            break
-        comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(ZFJGenTaggedSaveName),"comparisonUnstackedCan{0}".format(ZFJGenTaggedSaveName),3600,2400))
-
-    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZFJGenTaggedAr,legUnstackedAr,dataName,ZFJGenTaggedSaveNameAr,ZFJGenTaggedTitleAr,ZFJGenTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
-
-if useTaggedTrees and makeZHFJ:
-    ###############STARTING ZHFJGenTagged GEN MATCHING GRAPHS###############
-
-    
-    normalizeDataTogether = False
-
-
-    
-    dataName = ""
-    for k,fileA in enumerate(fileAr):
-        if useLHEAr[k]:
-            dataName += "_"+datasetSaveNameAr[k]
-
-    if not comparisonPlotsOnly:
-        for k,fileA in enumerate(fileAr):
-            if useLHEAr[k]:
-                for ZHFJGenTaggedItr, ZHFJGenTaggedSaveName in enumerate(ZHFJGenTaggedSaveNameAr):
-                    if onlyDoSomeHists and ZHFJGenTaggedItr >= histsToDo:
-                        break
-                    canZHFJGenTaggedAr[k][ZHFJGenTaggedItr].cd()
-                    histZHFJGenTaggedAr[k][ZHFJGenTaggedItr].Draw("hist")
         
-                    if savePathBool:
-                        canZHFJGenTaggedAr[k][ZHFJGenTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],ZHFJGenTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
-                    else:
-                        canZHFJGenTaggedAr[k][ZHFJGenTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],ZHFJGenTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
-    legUnstackedAr = []
-    padUnstackedAr = []
-    for ZHFJGenTaggedItr, ZHFJGenTaggedSaveName in enumerate(ZHFJGenTaggedSaveNameAr):
-        if onlyDoSomeHists and ZHFJGenTaggedItr >= histsToDo:
-            break
-        setUpLegend(legUnstackedAr)
-        setUpPadsAr(padUnstackedAr,"{0}Pad".format("ZHFJGenTaggedSaveName"))
-
-    intComparisonAr = []
-
-
-
-    setHistoElementsForLHETrees(colorAr,histZHFJGenTaggedAr,weightsAr,intComparisonAr,ZHFJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
-
-    histMaxAr = normalizeHistsForLHETrees(histZHFJGenTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,ZHFJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
-
-    cloneHistAr = []
-
-    comparisonCanAr = []
-    #comparisonHistStackAr = []
-    for ZHFJGenTaggedItr, ZHFJGenTaggedSaveName in enumerate(ZHFJGenTaggedSaveNameAr):
-        if onlyDoSomeHists and ZHFJGenTaggedItr >= histsToDo:
-            break
-        comparisonCanAr.append(TCanvas("comparisonCan{0}".format(ZHFJGenTaggedSaveName),"comparisonCan{0}".format(ZHFJGenTaggedSaveName),3600,2400))
-        #comparisonHistStackAr.append(THStack("hist{0}Stack".format(ZHFJGenTaggedSaveName),ZHFJGenTaggedTitleAr[ZHFJGenTaggedItr]))
-    comparisonUnstackedCanAr = []
-
-    for ZHFJGenTaggedItr, ZHFJGenTaggedSaveName in enumerate(ZHFJGenTaggedSaveNameAr):
-        if onlyDoSomeHists and ZHFJGenTaggedItr >= histsToDo:
-            break
-        comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(ZHFJGenTaggedSaveName),"comparisonUnstackedCan{0}".format(ZHFJGenTaggedSaveName),3600,2400))
-
-    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZHFJGenTaggedAr,legUnstackedAr,dataName,ZHFJGenTaggedSaveNameAr,ZHFJGenTaggedTitleAr,ZHFJGenTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
-
-if useTaggedTrees and makeZHJ:
-    ###############STARTING ZHJGenTagged GEN MATCHING GRAPHS###############
-
-    
-    normalizeDataTogether = False
-
-
-    
-    dataName = ""
-    for k,fileA in enumerate(fileAr):
-        if useLHEAr[k]:
-            dataName += "_"+datasetSaveNameAr[k]
-
-    if not comparisonPlotsOnly:
+        dataName = ""
         for k,fileA in enumerate(fileAr):
             if useLHEAr[k]:
-                for ZHJGenTaggedItr, ZHJGenTaggedSaveName in enumerate(ZHJGenTaggedSaveNameAr):
-                    if onlyDoSomeHists and ZHJGenTaggedItr >= histsToDo:
-                        break
-                    canZHJGenTaggedAr[k][ZHJGenTaggedItr].cd()
-                    histZHJGenTaggedAr[k][ZHJGenTaggedItr].Draw("hist")
+                dataName += "_"+datasetSaveNameAr[k]
 
-                    if savePathBool:
-                        canZHJGenTaggedAr[k][ZHJGenTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],ZHJGenTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
-                    else:
-                        canZHJGenTaggedAr[k][ZHJGenTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],ZHJGenTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
-    legUnstackedAr = []
-    padUnstackedAr = []
-    for ZHJGenTaggedItr, ZHJGenTaggedSaveName in enumerate(ZHJGenTaggedSaveNameAr):
-        if onlyDoSomeHists and ZHJGenTaggedItr >= histsToDo:
-            break
-        setUpLegend(legUnstackedAr)
-        setUpPadsAr(padUnstackedAr,"{0}Pad".format("ZHJGenTaggedSaveName"))
+        if not comparisonPlotsOnly:
+            for k,fileA in enumerate(fileAr):
+                if useLHEAr[k]:
+                    for RawTaggedItr, RawTaggedSaveName in enumerate(RawTaggedSaveNameAr):
+                        if onlyDoSomeHists and RawTaggedItr >= histsToDo:
+                            break
+                        canRawTaggedAr[k][RawTaggedItr].cd()
+                        histRawTaggedAr[k][RawTaggedItr].Draw("hist")
+            
+                        if savePathBool:
+                            canRawTaggedAr[k][RawTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],RawTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+                        else:
+                            canRawTaggedAr[k][RawTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],RawTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        legUnstackedAr = []
+        padUnstackedAr = []
+        for RawTaggedItr, RawTaggedSaveName in enumerate(RawTaggedSaveNameAr):
+            if onlyDoSomeHists and RawTaggedItr >= histsToDo:
+                break
+            setUpLegend(legUnstackedAr)
+            setUpPadsAr(padUnstackedAr,"{0}Pad".format("RawTaggedSaveName"))
 
-    intComparisonAr = []
-
-
-
-    setHistoElementsForLHETrees(colorAr,histZHJGenTaggedAr,weightsAr,intComparisonAr,ZHJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
-
-    histMaxAr = normalizeHistsForLHETrees(histZHJGenTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,ZHJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
-
-    cloneHistAr = []
-
-    comparisonCanAr = []
-    #comparisonHistStackAr = []
-    for ZHJGenTaggedItr, ZHJGenTaggedSaveName in enumerate(ZHJGenTaggedSaveNameAr):
-        if onlyDoSomeHists and ZHJGenTaggedItr >= histsToDo:
-            break
-        comparisonCanAr.append(TCanvas("comparisonCan{0}".format(ZHJGenTaggedSaveName),"comparisonCan{0}".format(ZHJGenTaggedSaveName),3600,2400))
-        #comparisonHistStackAr.append(THStack("hist{0}Stack".format(ZHJGenTaggedSaveName),ZHJGenTaggedTitleAr[ZHJGenTaggedItr]))
-    comparisonUnstackedCanAr = []
-
-    for ZHJGenTaggedItr, ZHJGenTaggedSaveName in enumerate(ZHJGenTaggedSaveNameAr):
-        if onlyDoSomeHists and ZHJGenTaggedItr >= histsToDo:
-            break
-        comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(ZHJGenTaggedSaveName),"comparisonUnstackedCan{0}".format(ZHJGenTaggedSaveName),3600,2400))
-
-    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZHJGenTaggedAr,legUnstackedAr,dataName,ZHJGenTaggedSaveNameAr,ZHJGenTaggedTitleAr,ZHJGenTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
+        intComparisonAr = []
 
 
-if useTaggedTrees and makeZJ:
-    ###############STARTING ZJGenTagged GEN MATCHING GRAPHS###############
 
-    
-    normalizeDataTogether = False
+        setHistoElementsForLHETrees(colorAr,histRawTaggedAr,weightsAr,intComparisonAr,RawTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
+
+        histMaxAr = normalizeHistsForLHETrees(histRawTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,RawTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+
+        cloneHistAr = []
+
+        comparisonCanAr = []
+        #comparisonHistStackAr = []
+        for RawTaggedItr, RawTaggedSaveName in enumerate(RawTaggedSaveNameAr):
+            if onlyDoSomeHists and RawTaggedItr >= histsToDo:
+                break
+            comparisonCanAr.append(TCanvas("comparisonCan{0}".format(RawTaggedSaveName),"comparisonCan{0}".format(RawTaggedSaveName),3600,2400))
+            #comparisonHistStackAr.append(THStack("hist{0}Stack".format(RawTaggedSaveName),RawTaggedTitleAr[RawTaggedItr]))
+        comparisonUnstackedCanAr = []
+
+        for RawTaggedItr, RawTaggedSaveName in enumerate(RawTaggedSaveNameAr):
+            if onlyDoSomeHists and RawTaggedItr >= histsToDo:
+                break
+            comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(RawTaggedSaveName),"comparisonUnstackedCan{0}".format(RawTaggedSaveName),3600,2400))
+
+        setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histRawTaggedAr,legUnstackedAr,dataName,RawTaggedSaveNameAr,RawTaggedTitleAr,RawTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
 
 
-    
-    dataName = ""
-    for k,fileA in enumerate(fileAr):
-        if useLHEAr[k]:
-            dataName += "_"+datasetSaveNameAr[k]
+    if makeHFJ:
+        ###############STARTING HFJGenTagged GEN MATCHING GRAPHS###############
 
-    if not comparisonPlotsOnly:
-        for k,fileA in enumerate(fileAr):
-            if useLHEAr[k]:
-                for ZJGenTaggedItr, ZJGenTaggedSaveName in enumerate(ZJGenTaggedSaveNameAr):
-                    if onlyDoSomeHists and ZJGenTaggedItr >= histsToDo:
-                        break
-                    canZJGenTaggedAr[k][ZJGenTaggedItr].cd()
-                    histZJGenTaggedAr[k][ZJGenTaggedItr].Draw("hist")
         
-                    if savePathBool:
-                        canZJGenTaggedAr[k][ZJGenTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],ZJGenTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
-                    else:
-                        canZJGenTaggedAr[k][ZJGenTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],ZJGenTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
-    legUnstackedAr = []
-    padUnstackedAr = []
-    for ZJGenTaggedItr, ZJGenTaggedSaveName in enumerate(ZJGenTaggedSaveNameAr):
-        if onlyDoSomeHists and ZJGenTaggedItr >= histsToDo:
-            break
-        setUpLegend(legUnstackedAr)
-        setUpPadsAr(padUnstackedAr,"{0}Pad".format("ZJGenTaggedSaveName"))
-
-    intComparisonAr = []
+        normalizeDataTogether = False
 
 
+        
+        dataName = ""
+        for k,fileA in enumerate(fileAr):
+            if useLHEAr[k]:
+                dataName += "_"+datasetSaveNameAr[k]
 
-    setHistoElementsForLHETrees(colorAr,histZJGenTaggedAr,weightsAr,intComparisonAr,ZJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
+        if not comparisonPlotsOnly:
+            for k,fileA in enumerate(fileAr):
+                if useLHEAr[k]:
+                    for HFJGenTaggedItr, HFJGenTaggedSaveName in enumerate(HFJGenTaggedSaveNameAr):
+                        if onlyDoSomeHists and HFJGenTaggedItr >= histsToDo:
+                            break
+                        canHFJGenTaggedAr[k][HFJGenTaggedItr].cd()
+                        histHFJGenTaggedAr[k][HFJGenTaggedItr].Draw("hist")
+            
+                        if savePathBool:
+                            canHFJGenTaggedAr[k][HFJGenTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],HFJGenTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+                        else:
+                            canHFJGenTaggedAr[k][HFJGenTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],HFJGenTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        legUnstackedAr = []
+        padUnstackedAr = []
+        for HFJGenTaggedItr, HFJGenTaggedSaveName in enumerate(HFJGenTaggedSaveNameAr):
+            if onlyDoSomeHists and HFJGenTaggedItr >= histsToDo:
+                break
+            setUpLegend(legUnstackedAr)
+            setUpPadsAr(padUnstackedAr,"{0}Pad".format("HFJGenTaggedSaveName"))
 
-    histMaxAr = normalizeHistsForLHETrees(histZJGenTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,ZJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+        intComparisonAr = []
 
-    cloneHistAr = []
 
-    comparisonCanAr = []
-    #comparisonHistStackAr = []
-    for ZJGenTaggedItr, ZJGenTaggedSaveName in enumerate(ZJGenTaggedSaveNameAr):
-        if onlyDoSomeHists and ZJGenTaggedItr >= histsToDo:
-            break
-        comparisonCanAr.append(TCanvas("comparisonCan{0}".format(ZJGenTaggedSaveName),"comparisonCan{0}".format(ZJGenTaggedSaveName),3600,2400))
-        #comparisonHistStackAr.append(THStack("hist{0}Stack".format(ZJGenTaggedSaveName),ZJGenTaggedTitleAr[ZJGenTaggedItr]))
-    comparisonUnstackedCanAr = []
 
-    for ZJGenTaggedItr, ZJGenTaggedSaveName in enumerate(ZJGenTaggedSaveNameAr):
-        if onlyDoSomeHists and ZJGenTaggedItr >= histsToDo:
-            break
-        comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(ZJGenTaggedSaveName),"comparisonUnstackedCan{0}".format(ZJGenTaggedSaveName),3600,2400))
+        setHistoElementsForLHETrees(colorAr,histHFJGenTaggedAr,weightsAr,intComparisonAr,HFJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
 
-    setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZJGenTaggedAr,legUnstackedAr,dataName,ZJGenTaggedSaveNameAr,ZJGenTaggedTitleAr,ZJGenTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
+        histMaxAr = normalizeHistsForLHETrees(histHFJGenTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,HFJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+
+        cloneHistAr = []
+
+        comparisonCanAr = []
+        #comparisonHistStackAr = []
+        for HFJGenTaggedItr, HFJGenTaggedSaveName in enumerate(HFJGenTaggedSaveNameAr):
+            if onlyDoSomeHists and HFJGenTaggedItr >= histsToDo:
+                break
+            comparisonCanAr.append(TCanvas("comparisonCan{0}".format(HFJGenTaggedSaveName),"comparisonCan{0}".format(HFJGenTaggedSaveName),3600,2400))
+            #comparisonHistStackAr.append(THStack("hist{0}Stack".format(HFJGenTaggedSaveName),HFJGenTaggedTitleAr[HFJGenTaggedItr]))
+        comparisonUnstackedCanAr = []
+
+        for HFJGenTaggedItr, HFJGenTaggedSaveName in enumerate(HFJGenTaggedSaveNameAr):
+            if onlyDoSomeHists and HFJGenTaggedItr >= histsToDo:
+                break
+            comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(HFJGenTaggedSaveName),"comparisonUnstackedCan{0}".format(HFJGenTaggedSaveName),3600,2400))
+
+        setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histHFJGenTaggedAr,legUnstackedAr,dataName,HFJGenTaggedSaveNameAr,HFJGenTaggedTitleAr,HFJGenTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
+
+    if makeZFJ:
+        ###############STARTING ZFJGenTagged GEN MATCHING GRAPHS###############
+
+        
+        normalizeDataTogether = False
+
+
+        
+        dataName = ""
+        for k,fileA in enumerate(fileAr):
+            if useLHEAr[k]:
+                dataName += "_"+datasetSaveNameAr[k]
+
+        if not comparisonPlotsOnly:
+            for k,fileA in enumerate(fileAr):
+                if useLHEAr[k]:
+                    for ZFJGenTaggedItr, ZFJGenTaggedSaveName in enumerate(ZFJGenTaggedSaveNameAr):
+                        if onlyDoSomeHists and ZFJGenTaggedItr >= histsToDo:
+                            break
+                        canZFJGenTaggedAr[k][ZFJGenTaggedItr].cd()
+                        histZFJGenTaggedAr[k][ZFJGenTaggedItr].Draw("hist")
+                    
+                        if savePathBool:
+                            canZFJGenTaggedAr[k][ZFJGenTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],ZFJGenTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+                        else:
+                            canZFJGenTaggedAr[k][ZFJGenTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],ZFJGenTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        legUnstackedAr = []
+        padUnstackedAr = []
+        for ZFJGenTaggedItr, ZFJGenTaggedSaveName in enumerate(ZFJGenTaggedSaveNameAr):
+            if onlyDoSomeHists and ZFJGenTaggedItr >= histsToDo:
+                break
+            setUpLegend(legUnstackedAr)
+            setUpPadsAr(padUnstackedAr,"{0}Pad".format("ZFJGenTaggedSaveName"))
+
+        intComparisonAr = []
+
+
+
+        setHistoElementsForLHETrees(colorAr,histZFJGenTaggedAr,weightsAr,intComparisonAr,ZFJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
+
+        histMaxAr = normalizeHistsForLHETrees(histZFJGenTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,ZFJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+
+        cloneHistAr = []
+
+        comparisonCanAr = []
+        #comparisonHistStackAr = []
+        for ZFJGenTaggedItr, ZFJGenTaggedSaveName in enumerate(ZFJGenTaggedSaveNameAr):
+            if onlyDoSomeHists and ZFJGenTaggedItr >= histsToDo:
+                break
+            comparisonCanAr.append(TCanvas("comparisonCan{0}".format(ZFJGenTaggedSaveName),"comparisonCan{0}".format(ZFJGenTaggedSaveName),3600,2400))
+            #comparisonHistStackAr.append(THStack("hist{0}Stack".format(ZFJGenTaggedSaveName),ZFJGenTaggedTitleAr[ZFJGenTaggedItr]))
+        comparisonUnstackedCanAr = []
+
+        for ZFJGenTaggedItr, ZFJGenTaggedSaveName in enumerate(ZFJGenTaggedSaveNameAr):
+            if onlyDoSomeHists and ZFJGenTaggedItr >= histsToDo:
+                break
+            comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(ZFJGenTaggedSaveName),"comparisonUnstackedCan{0}".format(ZFJGenTaggedSaveName),3600,2400))
+
+        setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZFJGenTaggedAr,legUnstackedAr,dataName,ZFJGenTaggedSaveNameAr,ZFJGenTaggedTitleAr,ZFJGenTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
+
+    if makeZHFJ:
+        ###############STARTING ZHFJGenTagged GEN MATCHING GRAPHS###############
+
+        
+        normalizeDataTogether = False
+
+
+        
+        dataName = ""
+        for k,fileA in enumerate(fileAr):
+            if useLHEAr[k]:
+                dataName += "_"+datasetSaveNameAr[k]
+
+        if not comparisonPlotsOnly:
+            for k,fileA in enumerate(fileAr):
+                if useLHEAr[k]:
+                    for ZHFJGenTaggedItr, ZHFJGenTaggedSaveName in enumerate(ZHFJGenTaggedSaveNameAr):
+                        if onlyDoSomeHists and ZHFJGenTaggedItr >= histsToDo:
+                            break
+                        canZHFJGenTaggedAr[k][ZHFJGenTaggedItr].cd()
+                        histZHFJGenTaggedAr[k][ZHFJGenTaggedItr].Draw("hist")
+            
+                        if savePathBool:
+                            canZHFJGenTaggedAr[k][ZHFJGenTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],ZHFJGenTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+                        else:
+                            canZHFJGenTaggedAr[k][ZHFJGenTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],ZHFJGenTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        legUnstackedAr = []
+        padUnstackedAr = []
+        for ZHFJGenTaggedItr, ZHFJGenTaggedSaveName in enumerate(ZHFJGenTaggedSaveNameAr):
+            if onlyDoSomeHists and ZHFJGenTaggedItr >= histsToDo:
+                break
+            setUpLegend(legUnstackedAr)
+            setUpPadsAr(padUnstackedAr,"{0}Pad".format("ZHFJGenTaggedSaveName"))
+
+        intComparisonAr = []
+
+
+
+        setHistoElementsForLHETrees(colorAr,histZHFJGenTaggedAr,weightsAr,intComparisonAr,ZHFJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
+
+        histMaxAr = normalizeHistsForLHETrees(histZHFJGenTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,ZHFJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+
+        cloneHistAr = []
+
+        comparisonCanAr = []
+        #comparisonHistStackAr = []
+        for ZHFJGenTaggedItr, ZHFJGenTaggedSaveName in enumerate(ZHFJGenTaggedSaveNameAr):
+            if onlyDoSomeHists and ZHFJGenTaggedItr >= histsToDo:
+                break
+            comparisonCanAr.append(TCanvas("comparisonCan{0}".format(ZHFJGenTaggedSaveName),"comparisonCan{0}".format(ZHFJGenTaggedSaveName),3600,2400))
+            #comparisonHistStackAr.append(THStack("hist{0}Stack".format(ZHFJGenTaggedSaveName),ZHFJGenTaggedTitleAr[ZHFJGenTaggedItr]))
+        comparisonUnstackedCanAr = []
+
+        for ZHFJGenTaggedItr, ZHFJGenTaggedSaveName in enumerate(ZHFJGenTaggedSaveNameAr):
+            if onlyDoSomeHists and ZHFJGenTaggedItr >= histsToDo:
+                break
+            comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(ZHFJGenTaggedSaveName),"comparisonUnstackedCan{0}".format(ZHFJGenTaggedSaveName),3600,2400))
+
+        setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZHFJGenTaggedAr,legUnstackedAr,dataName,ZHFJGenTaggedSaveNameAr,ZHFJGenTaggedTitleAr,ZHFJGenTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
+
+    if makeZHJ:
+        ###############STARTING ZHJGenTagged GEN MATCHING GRAPHS###############
+
+        
+        normalizeDataTogether = False
+
+
+        
+        dataName = ""
+        for k,fileA in enumerate(fileAr):
+            if useLHEAr[k]:
+                dataName += "_"+datasetSaveNameAr[k]
+
+        if not comparisonPlotsOnly:
+            for k,fileA in enumerate(fileAr):
+                if useLHEAr[k]:
+                    for ZHJGenTaggedItr, ZHJGenTaggedSaveName in enumerate(ZHJGenTaggedSaveNameAr):
+                        if onlyDoSomeHists and ZHJGenTaggedItr >= histsToDo:
+                            break
+                        canZHJGenTaggedAr[k][ZHJGenTaggedItr].cd()
+                        histZHJGenTaggedAr[k][ZHJGenTaggedItr].Draw("hist")
+
+                        if savePathBool:
+                            canZHJGenTaggedAr[k][ZHJGenTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],ZHJGenTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+                        else:
+                            canZHJGenTaggedAr[k][ZHJGenTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],ZHJGenTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        legUnstackedAr = []
+        padUnstackedAr = []
+        for ZHJGenTaggedItr, ZHJGenTaggedSaveName in enumerate(ZHJGenTaggedSaveNameAr):
+            if onlyDoSomeHists and ZHJGenTaggedItr >= histsToDo:
+                break
+            setUpLegend(legUnstackedAr)
+            setUpPadsAr(padUnstackedAr,"{0}Pad".format("ZHJGenTaggedSaveName"))
+
+        intComparisonAr = []
+
+
+
+        setHistoElementsForLHETrees(colorAr,histZHJGenTaggedAr,weightsAr,intComparisonAr,ZHJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
+
+        histMaxAr = normalizeHistsForLHETrees(histZHJGenTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,ZHJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+
+        cloneHistAr = []
+
+        comparisonCanAr = []
+        #comparisonHistStackAr = []
+        for ZHJGenTaggedItr, ZHJGenTaggedSaveName in enumerate(ZHJGenTaggedSaveNameAr):
+            if onlyDoSomeHists and ZHJGenTaggedItr >= histsToDo:
+                break
+            comparisonCanAr.append(TCanvas("comparisonCan{0}".format(ZHJGenTaggedSaveName),"comparisonCan{0}".format(ZHJGenTaggedSaveName),3600,2400))
+            #comparisonHistStackAr.append(THStack("hist{0}Stack".format(ZHJGenTaggedSaveName),ZHJGenTaggedTitleAr[ZHJGenTaggedItr]))
+        comparisonUnstackedCanAr = []
+
+        for ZHJGenTaggedItr, ZHJGenTaggedSaveName in enumerate(ZHJGenTaggedSaveNameAr):
+            if onlyDoSomeHists and ZHJGenTaggedItr >= histsToDo:
+                break
+            comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(ZHJGenTaggedSaveName),"comparisonUnstackedCan{0}".format(ZHJGenTaggedSaveName),3600,2400))
+
+        setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZHJGenTaggedAr,legUnstackedAr,dataName,ZHJGenTaggedSaveNameAr,ZHJGenTaggedTitleAr,ZHJGenTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
+
+
+    if makeZJ:
+        ###############STARTING ZJGenTagged GEN MATCHING GRAPHS###############
+
+        
+        normalizeDataTogether = False
+
+
+        
+        dataName = ""
+        for k,fileA in enumerate(fileAr):
+            if useLHEAr[k]:
+                dataName += "_"+datasetSaveNameAr[k]
+
+        if not comparisonPlotsOnly:
+            for k,fileA in enumerate(fileAr):
+                if useLHEAr[k]:
+                    for ZJGenTaggedItr, ZJGenTaggedSaveName in enumerate(ZJGenTaggedSaveNameAr):
+                        if onlyDoSomeHists and ZJGenTaggedItr >= histsToDo:
+                            break
+                        canZJGenTaggedAr[k][ZJGenTaggedItr].cd()
+                        histZJGenTaggedAr[k][ZJGenTaggedItr].Draw("hist")
+            
+                        if savePathBool:
+                            canZJGenTaggedAr[k][ZJGenTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],ZJGenTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+                        else:
+                            canZJGenTaggedAr[k][ZJGenTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],ZJGenTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        legUnstackedAr = []
+        padUnstackedAr = []
+        for ZJGenTaggedItr, ZJGenTaggedSaveName in enumerate(ZJGenTaggedSaveNameAr):
+            if onlyDoSomeHists and ZJGenTaggedItr >= histsToDo:
+                break
+            setUpLegend(legUnstackedAr)
+            setUpPadsAr(padUnstackedAr,"{0}Pad".format("ZJGenTaggedSaveName"))
+
+        intComparisonAr = []
+
+
+
+        setHistoElementsForLHETrees(colorAr,histZJGenTaggedAr,weightsAr,intComparisonAr,ZJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
+
+        histMaxAr = normalizeHistsForLHETrees(histZJGenTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,ZJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+
+        cloneHistAr = []
+
+        comparisonCanAr = []
+        #comparisonHistStackAr = []
+        for ZJGenTaggedItr, ZJGenTaggedSaveName in enumerate(ZJGenTaggedSaveNameAr):
+            if onlyDoSomeHists and ZJGenTaggedItr >= histsToDo:
+                break
+            comparisonCanAr.append(TCanvas("comparisonCan{0}".format(ZJGenTaggedSaveName),"comparisonCan{0}".format(ZJGenTaggedSaveName),3600,2400))
+            #comparisonHistStackAr.append(THStack("hist{0}Stack".format(ZJGenTaggedSaveName),ZJGenTaggedTitleAr[ZJGenTaggedItr]))
+        comparisonUnstackedCanAr = []
+
+        for ZJGenTaggedItr, ZJGenTaggedSaveName in enumerate(ZJGenTaggedSaveNameAr):
+            if onlyDoSomeHists and ZJGenTaggedItr >= histsToDo:
+                break
+            comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(ZJGenTaggedSaveName),"comparisonUnstackedCan{0}".format(ZJGenTaggedSaveName),3600,2400))
+
+        setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZJGenTaggedAr,legUnstackedAr,dataName,ZJGenTaggedSaveNameAr,ZJGenTaggedTitleAr,ZJGenTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
+
+    if makeGenRaw:
+        ###############STARTING GEN RAW  GRAPHS###############
+
+        
+        normalizeDataTogether = False
+
+
+        
+        dataName = ""
+        for k,fileA in enumerate(fileAr):
+            if useLHEAr[k]:
+                dataName += "_"+datasetSaveNameAr[k]
+
+        if not comparisonPlotsOnly:
+            for k,fileA in enumerate(fileAr):
+                if useLHEAr[k]:
+                    for GenRawSemiLepTaggedItr, GenRawSemiLepTaggedSaveName in enumerate(GenRawSemiLepTaggedSaveNameAr):
+                        if onlyDoSomeHists and GenRawSemiLepTaggedItr >= histsToDo:
+                            break
+                        canGenRawSemiLepTaggedAr[k][GenRawSemiLepTaggedItr].cd()
+                        histGenRawSemiLepTaggedAr[k][GenRawSemiLepTaggedItr].Draw("hist")
+            
+                        if savePathBool:
+                            canGenRawSemiLepTaggedAr[k][GenRawSemiLepTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],GenRawSemiLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+                        else:
+                            canGenRawSemiLepTaggedAr[k][GenRawSemiLepTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],GenRawSemiLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        legUnstackedAr = []
+        padUnstackedAr = []
+        for GenRawSemiLepTaggedItr, GenRawSemiLepTaggedSaveName in enumerate(GenRawSemiLepTaggedSaveNameAr):
+            if onlyDoSomeHists and GenRawSemiLepTaggedItr >= histsToDo:
+                break
+            setUpLegend(legUnstackedAr)
+            setUpPadsAr(padUnstackedAr,"{0}Pad".format("GenRawSemiLepTaggedSaveName"))
+
+        intComparisonAr = []
+
+
+
+        setHistoElementsForLHETrees(colorAr,histGenRawSemiLepTaggedAr,weightsAr,intComparisonAr,GenRawSemiLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
+
+        histMaxAr = normalizeHistsForLHETrees(histGenRawSemiLepTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,GenRawSemiLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+
+        cloneHistAr = []
+
+        comparisonCanAr = []
+        #comparisonHistStackAr = []
+        for GenRawSemiLepTaggedItr, GenRawSemiLepTaggedSaveName in enumerate(GenRawSemiLepTaggedSaveNameAr):
+            if onlyDoSomeHists and GenRawSemiLepTaggedItr >= histsToDo:
+                break
+            comparisonCanAr.append(TCanvas("comparisonCan{0}".format(GenRawSemiLepTaggedSaveName),"comparisonCan{0}".format(GenRawSemiLepTaggedSaveName),3600,2400))
+            #comparisonHistStackAr.append(THStack("hist{0}Stack".format(GenRawSemiLepTaggedSaveName),GenRawSemiLepTaggedTitleAr[GenRawSemiLepTaggedItr]))
+        comparisonUnstackedCanAr = []
+
+        for GenRawSemiLepTaggedItr, GenRawSemiLepTaggedSaveName in enumerate(GenRawSemiLepTaggedSaveNameAr):
+            if onlyDoSomeHists and GenRawSemiLepTaggedItr >= histsToDo:
+                break
+            comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(GenRawSemiLepTaggedSaveName),"comparisonUnstackedCan{0}".format(GenRawSemiLepTaggedSaveName),3600,2400))
+
+        setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histGenRawSemiLepTaggedAr,legUnstackedAr,dataName,GenRawSemiLepTaggedSaveNameAr,GenRawSemiLepTaggedTitleAr,GenRawSemiLepTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
+
+
+    if makeRaw:
+        ###############STARTING RAW LHE GRAPHS###############
+
+        
+        normalizeDataTogether = False
+
+
+        
+        dataName = ""
+        for k,fileA in enumerate(fileAr):
+            if useLHEAr[k]:
+                dataName += "_"+datasetSaveNameAr[k]
+
+        if not comparisonPlotsOnly:
+            for k,fileA in enumerate(fileAr):
+                if useLHEAr[k]:
+                    for RawSemiLepTaggedItr, RawSemiLepTaggedSaveName in enumerate(RawSemiLepTaggedSaveNameAr):
+                        if onlyDoSomeHists and RawSemiLepTaggedItr >= histsToDo:
+                            break
+                        canRawSemiLepTaggedAr[k][RawSemiLepTaggedItr].cd()
+                        histRawSemiLepTaggedAr[k][RawSemiLepTaggedItr].Draw("hist")
+            
+                        if savePathBool:
+                            canRawSemiLepTaggedAr[k][RawSemiLepTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],RawSemiLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+                        else:
+                            canRawSemiLepTaggedAr[k][RawSemiLepTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],RawSemiLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        legUnstackedAr = []
+        padUnstackedAr = []
+        for RawSemiLepTaggedItr, RawSemiLepTaggedSaveName in enumerate(RawSemiLepTaggedSaveNameAr):
+            if onlyDoSomeHists and RawSemiLepTaggedItr >= histsToDo:
+                break
+            setUpLegend(legUnstackedAr)
+            setUpPadsAr(padUnstackedAr,"{0}Pad".format("RawSemiLepTaggedSaveName"))
+
+        intComparisonAr = []
+
+
+
+        setHistoElementsForLHETrees(colorAr,histRawSemiLepTaggedAr,weightsAr,intComparisonAr,RawSemiLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
+
+        histMaxAr = normalizeHistsForLHETrees(histRawSemiLepTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,RawSemiLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+
+        cloneHistAr = []
+
+        comparisonCanAr = []
+        #comparisonHistStackAr = []
+        for RawSemiLepTaggedItr, RawSemiLepTaggedSaveName in enumerate(RawSemiLepTaggedSaveNameAr):
+            if onlyDoSomeHists and RawSemiLepTaggedItr >= histsToDo:
+                break
+            comparisonCanAr.append(TCanvas("comparisonCan{0}".format(RawSemiLepTaggedSaveName),"comparisonCan{0}".format(RawSemiLepTaggedSaveName),3600,2400))
+            #comparisonHistStackAr.append(THStack("hist{0}Stack".format(RawSemiLepTaggedSaveName),RawSemiLepTaggedTitleAr[RawSemiLepTaggedItr]))
+        comparisonUnstackedCanAr = []
+
+        for RawSemiLepTaggedItr, RawSemiLepTaggedSaveName in enumerate(RawSemiLepTaggedSaveNameAr):
+            if onlyDoSomeHists and RawSemiLepTaggedItr >= histsToDo:
+                break
+            comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(RawSemiLepTaggedSaveName),"comparisonUnstackedCan{0}".format(RawSemiLepTaggedSaveName),3600,2400))
+
+        setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histRawSemiLepTaggedAr,legUnstackedAr,dataName,RawSemiLepTaggedSaveNameAr,RawSemiLepTaggedTitleAr,RawSemiLepTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
+
+
+    if makeHFJ:
+        ###############STARTING HFJGenSemiLepTagged GEN MATCHING GRAPHS###############
+
+        
+        normalizeDataTogether = False
+
+
+        
+        dataName = ""
+        for k,fileA in enumerate(fileAr):
+            if useLHEAr[k]:
+                dataName += "_"+datasetSaveNameAr[k]
+
+        if not comparisonPlotsOnly:
+            for k,fileA in enumerate(fileAr):
+                if useLHEAr[k]:
+                    for HFJGenSemiLepTaggedItr, HFJGenSemiLepTaggedSaveName in enumerate(HFJGenSemiLepTaggedSaveNameAr):
+                        if onlyDoSomeHists and HFJGenSemiLepTaggedItr >= histsToDo:
+                            break
+                        canHFJGenSemiLepTaggedAr[k][HFJGenSemiLepTaggedItr].cd()
+                        histHFJGenSemiLepTaggedAr[k][HFJGenSemiLepTaggedItr].Draw("hist")
+            
+                        if savePathBool:
+                            canHFJGenSemiLepTaggedAr[k][HFJGenSemiLepTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],HFJGenSemiLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+                        else:
+                            canHFJGenSemiLepTaggedAr[k][HFJGenSemiLepTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],HFJGenSemiLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        legUnstackedAr = []
+        padUnstackedAr = []
+        for HFJGenSemiLepTaggedItr, HFJGenSemiLepTaggedSaveName in enumerate(HFJGenSemiLepTaggedSaveNameAr):
+            if onlyDoSomeHists and HFJGenSemiLepTaggedItr >= histsToDo:
+                break
+            setUpLegend(legUnstackedAr)
+            setUpPadsAr(padUnstackedAr,"{0}Pad".format("HFJGenSemiLepTaggedSaveName"))
+
+        intComparisonAr = []
+
+
+
+        setHistoElementsForLHETrees(colorAr,histHFJGenSemiLepTaggedAr,weightsAr,intComparisonAr,HFJGenSemiLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
+
+        histMaxAr = normalizeHistsForLHETrees(histHFJGenSemiLepTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,HFJGenSemiLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+
+        cloneHistAr = []
+
+        comparisonCanAr = []
+        #comparisonHistStackAr = []
+        for HFJGenSemiLepTaggedItr, HFJGenSemiLepTaggedSaveName in enumerate(HFJGenSemiLepTaggedSaveNameAr):
+            if onlyDoSomeHists and HFJGenSemiLepTaggedItr >= histsToDo:
+                break
+            comparisonCanAr.append(TCanvas("comparisonCan{0}".format(HFJGenSemiLepTaggedSaveName),"comparisonCan{0}".format(HFJGenSemiLepTaggedSaveName),3600,2400))
+            #comparisonHistStackAr.append(THStack("hist{0}Stack".format(HFJGenSemiLepTaggedSaveName),HFJGenSemiLepTaggedTitleAr[HFJGenSemiLepTaggedItr]))
+        comparisonUnstackedCanAr = []
+
+        for HFJGenSemiLepTaggedItr, HFJGenSemiLepTaggedSaveName in enumerate(HFJGenSemiLepTaggedSaveNameAr):
+            if onlyDoSomeHists and HFJGenSemiLepTaggedItr >= histsToDo:
+                break
+            comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(HFJGenSemiLepTaggedSaveName),"comparisonUnstackedCan{0}".format(HFJGenSemiLepTaggedSaveName),3600,2400))
+
+        setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histHFJGenSemiLepTaggedAr,legUnstackedAr,dataName,HFJGenSemiLepTaggedSaveNameAr,HFJGenSemiLepTaggedTitleAr,HFJGenSemiLepTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
+
+    if makeZFJ:
+        ###############STARTING ZFJGenSemiLepTagged GEN MATCHING GRAPHS###############
+
+        
+        normalizeDataTogether = False
+
+
+        
+        dataName = ""
+        for k,fileA in enumerate(fileAr):
+            if useLHEAr[k]:
+                dataName += "_"+datasetSaveNameAr[k]
+
+        if not comparisonPlotsOnly:
+            for k,fileA in enumerate(fileAr):
+                if useLHEAr[k]:
+                    for ZFJGenSemiLepTaggedItr, ZFJGenSemiLepTaggedSaveName in enumerate(ZFJGenSemiLepTaggedSaveNameAr):
+                        if onlyDoSomeHists and ZFJGenSemiLepTaggedItr >= histsToDo:
+                            break
+                        canZFJGenSemiLepTaggedAr[k][ZFJGenSemiLepTaggedItr].cd()
+                        histZFJGenSemiLepTaggedAr[k][ZFJGenSemiLepTaggedItr].Draw("hist")
+                    
+                        if savePathBool:
+                            canZFJGenSemiLepTaggedAr[k][ZFJGenSemiLepTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],ZFJGenSemiLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+                        else:
+                            canZFJGenSemiLepTaggedAr[k][ZFJGenSemiLepTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],ZFJGenSemiLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        legUnstackedAr = []
+        padUnstackedAr = []
+        for ZFJGenSemiLepTaggedItr, ZFJGenSemiLepTaggedSaveName in enumerate(ZFJGenSemiLepTaggedSaveNameAr):
+            if onlyDoSomeHists and ZFJGenSemiLepTaggedItr >= histsToDo:
+                break
+            setUpLegend(legUnstackedAr)
+            setUpPadsAr(padUnstackedAr,"{0}Pad".format("ZFJGenSemiLepTaggedSaveName"))
+
+        intComparisonAr = []
+
+
+
+        setHistoElementsForLHETrees(colorAr,histZFJGenSemiLepTaggedAr,weightsAr,intComparisonAr,ZFJGenSemiLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
+
+        histMaxAr = normalizeHistsForLHETrees(histZFJGenSemiLepTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,ZFJGenSemiLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+
+        cloneHistAr = []
+
+        comparisonCanAr = []
+        #comparisonHistStackAr = []
+        for ZFJGenSemiLepTaggedItr, ZFJGenSemiLepTaggedSaveName in enumerate(ZFJGenSemiLepTaggedSaveNameAr):
+            if onlyDoSomeHists and ZFJGenSemiLepTaggedItr >= histsToDo:
+                break
+            comparisonCanAr.append(TCanvas("comparisonCan{0}".format(ZFJGenSemiLepTaggedSaveName),"comparisonCan{0}".format(ZFJGenSemiLepTaggedSaveName),3600,2400))
+            #comparisonHistStackAr.append(THStack("hist{0}Stack".format(ZFJGenSemiLepTaggedSaveName),ZFJGenSemiLepTaggedTitleAr[ZFJGenSemiLepTaggedItr]))
+        comparisonUnstackedCanAr = []
+
+        for ZFJGenSemiLepTaggedItr, ZFJGenSemiLepTaggedSaveName in enumerate(ZFJGenSemiLepTaggedSaveNameAr):
+            if onlyDoSomeHists and ZFJGenSemiLepTaggedItr >= histsToDo:
+                break
+            comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(ZFJGenSemiLepTaggedSaveName),"comparisonUnstackedCan{0}".format(ZFJGenSemiLepTaggedSaveName),3600,2400))
+
+        setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZFJGenSemiLepTaggedAr,legUnstackedAr,dataName,ZFJGenSemiLepTaggedSaveNameAr,ZFJGenSemiLepTaggedTitleAr,ZFJGenSemiLepTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
+
+    if makeZHFJ:
+        ###############STARTING ZHFJGenSemiLepTagged GEN MATCHING GRAPHS###############
+
+        
+        normalizeDataTogether = False
+
+
+        
+        dataName = ""
+        for k,fileA in enumerate(fileAr):
+            if useLHEAr[k]:
+                dataName += "_"+datasetSaveNameAr[k]
+
+        if not comparisonPlotsOnly:
+            for k,fileA in enumerate(fileAr):
+                if useLHEAr[k]:
+                    for ZHFJGenSemiLepTaggedItr, ZHFJGenSemiLepTaggedSaveName in enumerate(ZHFJGenSemiLepTaggedSaveNameAr):
+                        if onlyDoSomeHists and ZHFJGenSemiLepTaggedItr >= histsToDo:
+                            break
+                        canZHFJGenSemiLepTaggedAr[k][ZHFJGenSemiLepTaggedItr].cd()
+                        histZHFJGenSemiLepTaggedAr[k][ZHFJGenSemiLepTaggedItr].Draw("hist")
+            
+                        if savePathBool:
+                            canZHFJGenSemiLepTaggedAr[k][ZHFJGenSemiLepTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],ZHFJGenSemiLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+                        else:
+                            canZHFJGenSemiLepTaggedAr[k][ZHFJGenSemiLepTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],ZHFJGenSemiLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        legUnstackedAr = []
+        padUnstackedAr = []
+        for ZHFJGenSemiLepTaggedItr, ZHFJGenSemiLepTaggedSaveName in enumerate(ZHFJGenSemiLepTaggedSaveNameAr):
+            if onlyDoSomeHists and ZHFJGenSemiLepTaggedItr >= histsToDo:
+                break
+            setUpLegend(legUnstackedAr)
+            setUpPadsAr(padUnstackedAr,"{0}Pad".format("ZHFJGenSemiLepTaggedSaveName"))
+
+        intComparisonAr = []
+
+
+
+        setHistoElementsForLHETrees(colorAr,histZHFJGenSemiLepTaggedAr,weightsAr,intComparisonAr,ZHFJGenSemiLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
+
+        histMaxAr = normalizeHistsForLHETrees(histZHFJGenSemiLepTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,ZHFJGenSemiLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+
+        cloneHistAr = []
+
+        comparisonCanAr = []
+        #comparisonHistStackAr = []
+        for ZHFJGenSemiLepTaggedItr, ZHFJGenSemiLepTaggedSaveName in enumerate(ZHFJGenSemiLepTaggedSaveNameAr):
+            if onlyDoSomeHists and ZHFJGenSemiLepTaggedItr >= histsToDo:
+                break
+            comparisonCanAr.append(TCanvas("comparisonCan{0}".format(ZHFJGenSemiLepTaggedSaveName),"comparisonCan{0}".format(ZHFJGenSemiLepTaggedSaveName),3600,2400))
+            #comparisonHistStackAr.append(THStack("hist{0}Stack".format(ZHFJGenSemiLepTaggedSaveName),ZHFJGenSemiLepTaggedTitleAr[ZHFJGenSemiLepTaggedItr]))
+        comparisonUnstackedCanAr = []
+
+        for ZHFJGenSemiLepTaggedItr, ZHFJGenSemiLepTaggedSaveName in enumerate(ZHFJGenSemiLepTaggedSaveNameAr):
+            if onlyDoSomeHists and ZHFJGenSemiLepTaggedItr >= histsToDo:
+                break
+            comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(ZHFJGenSemiLepTaggedSaveName),"comparisonUnstackedCan{0}".format(ZHFJGenSemiLepTaggedSaveName),3600,2400))
+
+        setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZHFJGenSemiLepTaggedAr,legUnstackedAr,dataName,ZHFJGenSemiLepTaggedSaveNameAr,ZHFJGenSemiLepTaggedTitleAr,ZHFJGenSemiLepTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
+
+    if makeZHJ:
+        ###############STARTING ZHJGenSemiLepTagged GEN MATCHING GRAPHS###############
+
+        
+        normalizeDataTogether = False
+
+
+        
+        dataName = ""
+        for k,fileA in enumerate(fileAr):
+            if useLHEAr[k]:
+                dataName += "_"+datasetSaveNameAr[k]
+
+        if not comparisonPlotsOnly:
+            for k,fileA in enumerate(fileAr):
+                if useLHEAr[k]:
+                    for ZHJGenSemiLepTaggedItr, ZHJGenSemiLepTaggedSaveName in enumerate(ZHJGenSemiLepTaggedSaveNameAr):
+                        if onlyDoSomeHists and ZHJGenSemiLepTaggedItr >= histsToDo:
+                            break
+                        canZHJGenSemiLepTaggedAr[k][ZHJGenSemiLepTaggedItr].cd()
+                        histZHJGenSemiLepTaggedAr[k][ZHJGenSemiLepTaggedItr].Draw("hist")
+
+                        if savePathBool:
+                            canZHJGenSemiLepTaggedAr[k][ZHJGenSemiLepTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],ZHJGenSemiLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+                        else:
+                            canZHJGenSemiLepTaggedAr[k][ZHJGenSemiLepTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],ZHJGenSemiLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        legUnstackedAr = []
+        padUnstackedAr = []
+        for ZHJGenSemiLepTaggedItr, ZHJGenSemiLepTaggedSaveName in enumerate(ZHJGenSemiLepTaggedSaveNameAr):
+            if onlyDoSomeHists and ZHJGenSemiLepTaggedItr >= histsToDo:
+                break
+            setUpLegend(legUnstackedAr)
+            setUpPadsAr(padUnstackedAr,"{0}Pad".format("ZHJGenSemiLepTaggedSaveName"))
+
+        intComparisonAr = []
+
+
+
+        setHistoElementsForLHETrees(colorAr,histZHJGenSemiLepTaggedAr,weightsAr,intComparisonAr,ZHJGenSemiLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
+
+        histMaxAr = normalizeHistsForLHETrees(histZHJGenSemiLepTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,ZHJGenSemiLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+
+        cloneHistAr = []
+
+        comparisonCanAr = []
+        #comparisonHistStackAr = []
+        for ZHJGenSemiLepTaggedItr, ZHJGenSemiLepTaggedSaveName in enumerate(ZHJGenSemiLepTaggedSaveNameAr):
+            if onlyDoSomeHists and ZHJGenSemiLepTaggedItr >= histsToDo:
+                break
+            comparisonCanAr.append(TCanvas("comparisonCan{0}".format(ZHJGenSemiLepTaggedSaveName),"comparisonCan{0}".format(ZHJGenSemiLepTaggedSaveName),3600,2400))
+            #comparisonHistStackAr.append(THStack("hist{0}Stack".format(ZHJGenSemiLepTaggedSaveName),ZHJGenSemiLepTaggedTitleAr[ZHJGenSemiLepTaggedItr]))
+        comparisonUnstackedCanAr = []
+
+        for ZHJGenSemiLepTaggedItr, ZHJGenSemiLepTaggedSaveName in enumerate(ZHJGenSemiLepTaggedSaveNameAr):
+            if onlyDoSomeHists and ZHJGenSemiLepTaggedItr >= histsToDo:
+                break
+            comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(ZHJGenSemiLepTaggedSaveName),"comparisonUnstackedCan{0}".format(ZHJGenSemiLepTaggedSaveName),3600,2400))
+
+        setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZHJGenSemiLepTaggedAr,legUnstackedAr,dataName,ZHJGenSemiLepTaggedSaveNameAr,ZHJGenSemiLepTaggedTitleAr,ZHJGenSemiLepTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
+
+
+    if makeZJ:
+        ###############STARTING ZJGenSemiLepTagged GEN MATCHING GRAPHS###############
+
+        
+        normalizeDataTogether = False
+
+
+        
+        dataName = ""
+        for k,fileA in enumerate(fileAr):
+            if useLHEAr[k]:
+                dataName += "_"+datasetSaveNameAr[k]
+
+        if not comparisonPlotsOnly:
+            for k,fileA in enumerate(fileAr):
+                if useLHEAr[k]:
+                    for ZJGenSemiLepTaggedItr, ZJGenSemiLepTaggedSaveName in enumerate(ZJGenSemiLepTaggedSaveNameAr):
+                        if onlyDoSomeHists and ZJGenSemiLepTaggedItr >= histsToDo:
+                            break
+                        canZJGenSemiLepTaggedAr[k][ZJGenSemiLepTaggedItr].cd()
+                        histZJGenSemiLepTaggedAr[k][ZJGenSemiLepTaggedItr].Draw("hist")
+            
+                        if savePathBool:
+                            canZJGenSemiLepTaggedAr[k][ZJGenSemiLepTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],ZJGenSemiLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+                        else:
+                            canZJGenSemiLepTaggedAr[k][ZJGenSemiLepTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],ZJGenSemiLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        legUnstackedAr = []
+        padUnstackedAr = []
+        for ZJGenSemiLepTaggedItr, ZJGenSemiLepTaggedSaveName in enumerate(ZJGenSemiLepTaggedSaveNameAr):
+            if onlyDoSomeHists and ZJGenSemiLepTaggedItr >= histsToDo:
+                break
+            setUpLegend(legUnstackedAr)
+            setUpPadsAr(padUnstackedAr,"{0}Pad".format("ZJGenSemiLepTaggedSaveName"))
+
+        intComparisonAr = []
+
+
+
+        setHistoElementsForLHETrees(colorAr,histZJGenSemiLepTaggedAr,weightsAr,intComparisonAr,ZJGenSemiLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
+
+        histMaxAr = normalizeHistsForLHETrees(histZJGenSemiLepTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,ZJGenSemiLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+
+        cloneHistAr = []
+
+        comparisonCanAr = []
+        #comparisonHistStackAr = []
+        for ZJGenSemiLepTaggedItr, ZJGenSemiLepTaggedSaveName in enumerate(ZJGenSemiLepTaggedSaveNameAr):
+            if onlyDoSomeHists and ZJGenSemiLepTaggedItr >= histsToDo:
+                break
+            comparisonCanAr.append(TCanvas("comparisonCan{0}".format(ZJGenSemiLepTaggedSaveName),"comparisonCan{0}".format(ZJGenSemiLepTaggedSaveName),3600,2400))
+            #comparisonHistStackAr.append(THStack("hist{0}Stack".format(ZJGenSemiLepTaggedSaveName),ZJGenSemiLepTaggedTitleAr[ZJGenSemiLepTaggedItr]))
+        comparisonUnstackedCanAr = []
+
+        for ZJGenSemiLepTaggedItr, ZJGenSemiLepTaggedSaveName in enumerate(ZJGenSemiLepTaggedSaveNameAr):
+            if onlyDoSomeHists and ZJGenSemiLepTaggedItr >= histsToDo:
+                break
+            comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(ZJGenSemiLepTaggedSaveName),"comparisonUnstackedCan{0}".format(ZJGenSemiLepTaggedSaveName),3600,2400))
+
+        setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZJGenSemiLepTaggedAr,legUnstackedAr,dataName,ZJGenSemiLepTaggedSaveNameAr,ZJGenSemiLepTaggedTitleAr,ZJGenSemiLepTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
+
+    if makeGenRaw:
+        ###############STARTING GEN RAW  GRAPHS###############
+
+        
+        normalizeDataTogether = False
+
+
+        
+        dataName = ""
+        for k,fileA in enumerate(fileAr):
+            if useLHEAr[k]:
+                dataName += "_"+datasetSaveNameAr[k]
+
+        if not comparisonPlotsOnly:
+            for k,fileA in enumerate(fileAr):
+                if useLHEAr[k]:
+                    for GenRawLepTaggedItr, GenRawLepTaggedSaveName in enumerate(GenRawLepTaggedSaveNameAr):
+                        if onlyDoSomeHists and GenRawLepTaggedItr >= histsToDo:
+                            break
+                        canGenRawLepTaggedAr[k][GenRawLepTaggedItr].cd()
+                        histGenRawLepTaggedAr[k][GenRawLepTaggedItr].Draw("hist")
+            
+                        if savePathBool:
+                            canGenRawLepTaggedAr[k][GenRawLepTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],GenRawLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+                        else:
+                            canGenRawLepTaggedAr[k][GenRawLepTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],GenRawLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        legUnstackedAr = []
+        padUnstackedAr = []
+        for GenRawLepTaggedItr, GenRawLepTaggedSaveName in enumerate(GenRawLepTaggedSaveNameAr):
+            if onlyDoSomeHists and GenRawLepTaggedItr >= histsToDo:
+                break
+            setUpLegend(legUnstackedAr)
+            setUpPadsAr(padUnstackedAr,"{0}Pad".format("GenRawLepTaggedSaveName"))
+
+        intComparisonAr = []
+
+
+
+        setHistoElementsForLHETrees(colorAr,histGenRawLepTaggedAr,weightsAr,intComparisonAr,GenRawLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
+
+        histMaxAr = normalizeHistsForLHETrees(histGenRawLepTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,GenRawLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+
+        cloneHistAr = []
+
+        comparisonCanAr = []
+        #comparisonHistStackAr = []
+        for GenRawLepTaggedItr, GenRawLepTaggedSaveName in enumerate(GenRawLepTaggedSaveNameAr):
+            if onlyDoSomeHists and GenRawLepTaggedItr >= histsToDo:
+                break
+            comparisonCanAr.append(TCanvas("comparisonCan{0}".format(GenRawLepTaggedSaveName),"comparisonCan{0}".format(GenRawLepTaggedSaveName),3600,2400))
+            #comparisonHistStackAr.append(THStack("hist{0}Stack".format(GenRawLepTaggedSaveName),GenRawLepTaggedTitleAr[GenRawLepTaggedItr]))
+        comparisonUnstackedCanAr = []
+
+        for GenRawLepTaggedItr, GenRawLepTaggedSaveName in enumerate(GenRawLepTaggedSaveNameAr):
+            if onlyDoSomeHists and GenRawLepTaggedItr >= histsToDo:
+                break
+            comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(GenRawLepTaggedSaveName),"comparisonUnstackedCan{0}".format(GenRawLepTaggedSaveName),3600,2400))
+
+        setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histGenRawLepTaggedAr,legUnstackedAr,dataName,GenRawLepTaggedSaveNameAr,GenRawLepTaggedTitleAr,GenRawLepTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
+
+
+    if makeRaw:
+        ###############STARTING RAW LHE GRAPHS###############
+
+        
+        normalizeDataTogether = False
+
+
+        
+        dataName = ""
+        for k,fileA in enumerate(fileAr):
+            if useLHEAr[k]:
+                dataName += "_"+datasetSaveNameAr[k]
+
+        if not comparisonPlotsOnly:
+            for k,fileA in enumerate(fileAr):
+                if useLHEAr[k]:
+                    for RawLepTaggedItr, RawLepTaggedSaveName in enumerate(RawLepTaggedSaveNameAr):
+                        if onlyDoSomeHists and RawLepTaggedItr >= histsToDo:
+                            break
+                        canRawLepTaggedAr[k][RawLepTaggedItr].cd()
+                        histRawLepTaggedAr[k][RawLepTaggedItr].Draw("hist")
+            
+                        if savePathBool:
+                            canRawLepTaggedAr[k][RawLepTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],RawLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+                        else:
+                            canRawLepTaggedAr[k][RawLepTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],RawLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        legUnstackedAr = []
+        padUnstackedAr = []
+        for RawLepTaggedItr, RawLepTaggedSaveName in enumerate(RawLepTaggedSaveNameAr):
+            if onlyDoSomeHists and RawLepTaggedItr >= histsToDo:
+                break
+            setUpLegend(legUnstackedAr)
+            setUpPadsAr(padUnstackedAr,"{0}Pad".format("RawLepTaggedSaveName"))
+
+        intComparisonAr = []
+
+
+
+        setHistoElementsForLHETrees(colorAr,histRawLepTaggedAr,weightsAr,intComparisonAr,RawLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
+
+        histMaxAr = normalizeHistsForLHETrees(histRawLepTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,RawLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+
+        cloneHistAr = []
+
+        comparisonCanAr = []
+        #comparisonHistStackAr = []
+        for RawLepTaggedItr, RawLepTaggedSaveName in enumerate(RawLepTaggedSaveNameAr):
+            if onlyDoSomeHists and RawLepTaggedItr >= histsToDo:
+                break
+            comparisonCanAr.append(TCanvas("comparisonCan{0}".format(RawLepTaggedSaveName),"comparisonCan{0}".format(RawLepTaggedSaveName),3600,2400))
+            #comparisonHistStackAr.append(THStack("hist{0}Stack".format(RawLepTaggedSaveName),RawLepTaggedTitleAr[RawLepTaggedItr]))
+        comparisonUnstackedCanAr = []
+
+        for RawLepTaggedItr, RawLepTaggedSaveName in enumerate(RawLepTaggedSaveNameAr):
+            if onlyDoSomeHists and RawLepTaggedItr >= histsToDo:
+                break
+            comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(RawLepTaggedSaveName),"comparisonUnstackedCan{0}".format(RawLepTaggedSaveName),3600,2400))
+
+        setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histRawLepTaggedAr,legUnstackedAr,dataName,RawLepTaggedSaveNameAr,RawLepTaggedTitleAr,RawLepTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
+
+
+    if makeHFJ:
+        ###############STARTING HFJGenLepTagged GEN MATCHING GRAPHS###############
+
+        
+        normalizeDataTogether = False
+
+
+        
+        dataName = ""
+        for k,fileA in enumerate(fileAr):
+            if useLHEAr[k]:
+                dataName += "_"+datasetSaveNameAr[k]
+
+        if not comparisonPlotsOnly:
+            for k,fileA in enumerate(fileAr):
+                if useLHEAr[k]:
+                    for HFJGenLepTaggedItr, HFJGenLepTaggedSaveName in enumerate(HFJGenLepTaggedSaveNameAr):
+                        if onlyDoSomeHists and HFJGenLepTaggedItr >= histsToDo:
+                            break
+                        canHFJGenLepTaggedAr[k][HFJGenLepTaggedItr].cd()
+                        histHFJGenLepTaggedAr[k][HFJGenLepTaggedItr].Draw("hist")
+            
+                        if savePathBool:
+                            canHFJGenLepTaggedAr[k][HFJGenLepTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],HFJGenLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+                        else:
+                            canHFJGenLepTaggedAr[k][HFJGenLepTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],HFJGenLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        legUnstackedAr = []
+        padUnstackedAr = []
+        for HFJGenLepTaggedItr, HFJGenLepTaggedSaveName in enumerate(HFJGenLepTaggedSaveNameAr):
+            if onlyDoSomeHists and HFJGenLepTaggedItr >= histsToDo:
+                break
+            setUpLegend(legUnstackedAr)
+            setUpPadsAr(padUnstackedAr,"{0}Pad".format("HFJGenLepTaggedSaveName"))
+
+        intComparisonAr = []
+
+
+
+        setHistoElementsForLHETrees(colorAr,histHFJGenLepTaggedAr,weightsAr,intComparisonAr,HFJGenLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
+
+        histMaxAr = normalizeHistsForLHETrees(histHFJGenLepTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,HFJGenLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+
+        cloneHistAr = []
+
+        comparisonCanAr = []
+        #comparisonHistStackAr = []
+        for HFJGenLepTaggedItr, HFJGenLepTaggedSaveName in enumerate(HFJGenLepTaggedSaveNameAr):
+            if onlyDoSomeHists and HFJGenLepTaggedItr >= histsToDo:
+                break
+            comparisonCanAr.append(TCanvas("comparisonCan{0}".format(HFJGenLepTaggedSaveName),"comparisonCan{0}".format(HFJGenLepTaggedSaveName),3600,2400))
+            #comparisonHistStackAr.append(THStack("hist{0}Stack".format(HFJGenLepTaggedSaveName),HFJGenLepTaggedTitleAr[HFJGenLepTaggedItr]))
+        comparisonUnstackedCanAr = []
+
+        for HFJGenLepTaggedItr, HFJGenLepTaggedSaveName in enumerate(HFJGenLepTaggedSaveNameAr):
+            if onlyDoSomeHists and HFJGenLepTaggedItr >= histsToDo:
+                break
+            comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(HFJGenLepTaggedSaveName),"comparisonUnstackedCan{0}".format(HFJGenLepTaggedSaveName),3600,2400))
+
+        setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histHFJGenLepTaggedAr,legUnstackedAr,dataName,HFJGenLepTaggedSaveNameAr,HFJGenLepTaggedTitleAr,HFJGenLepTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
+
+    if makeZFJ:
+        ###############STARTING ZFJGenLepTagged GEN MATCHING GRAPHS###############
+
+        
+        normalizeDataTogether = False
+
+
+        
+        dataName = ""
+        for k,fileA in enumerate(fileAr):
+            if useLHEAr[k]:
+                dataName += "_"+datasetSaveNameAr[k]
+
+        if not comparisonPlotsOnly:
+            for k,fileA in enumerate(fileAr):
+                if useLHEAr[k]:
+                    for ZFJGenLepTaggedItr, ZFJGenLepTaggedSaveName in enumerate(ZFJGenLepTaggedSaveNameAr):
+                        if onlyDoSomeHists and ZFJGenLepTaggedItr >= histsToDo:
+                            break
+                        canZFJGenLepTaggedAr[k][ZFJGenLepTaggedItr].cd()
+                        histZFJGenLepTaggedAr[k][ZFJGenLepTaggedItr].Draw("hist")
+                    
+                        if savePathBool:
+                            canZFJGenLepTaggedAr[k][ZFJGenLepTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],ZFJGenLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+                        else:
+                            canZFJGenLepTaggedAr[k][ZFJGenLepTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],ZFJGenLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        legUnstackedAr = []
+        padUnstackedAr = []
+        for ZFJGenLepTaggedItr, ZFJGenLepTaggedSaveName in enumerate(ZFJGenLepTaggedSaveNameAr):
+            if onlyDoSomeHists and ZFJGenLepTaggedItr >= histsToDo:
+                break
+            setUpLegend(legUnstackedAr)
+            setUpPadsAr(padUnstackedAr,"{0}Pad".format("ZFJGenLepTaggedSaveName"))
+
+        intComparisonAr = []
+
+
+
+        setHistoElementsForLHETrees(colorAr,histZFJGenLepTaggedAr,weightsAr,intComparisonAr,ZFJGenLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
+
+        histMaxAr = normalizeHistsForLHETrees(histZFJGenLepTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,ZFJGenLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+
+        cloneHistAr = []
+
+        comparisonCanAr = []
+        #comparisonHistStackAr = []
+        for ZFJGenLepTaggedItr, ZFJGenLepTaggedSaveName in enumerate(ZFJGenLepTaggedSaveNameAr):
+            if onlyDoSomeHists and ZFJGenLepTaggedItr >= histsToDo:
+                break
+            comparisonCanAr.append(TCanvas("comparisonCan{0}".format(ZFJGenLepTaggedSaveName),"comparisonCan{0}".format(ZFJGenLepTaggedSaveName),3600,2400))
+            #comparisonHistStackAr.append(THStack("hist{0}Stack".format(ZFJGenLepTaggedSaveName),ZFJGenLepTaggedTitleAr[ZFJGenLepTaggedItr]))
+        comparisonUnstackedCanAr = []
+
+        for ZFJGenLepTaggedItr, ZFJGenLepTaggedSaveName in enumerate(ZFJGenLepTaggedSaveNameAr):
+            if onlyDoSomeHists and ZFJGenLepTaggedItr >= histsToDo:
+                break
+            comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(ZFJGenLepTaggedSaveName),"comparisonUnstackedCan{0}".format(ZFJGenLepTaggedSaveName),3600,2400))
+
+        setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZFJGenLepTaggedAr,legUnstackedAr,dataName,ZFJGenLepTaggedSaveNameAr,ZFJGenLepTaggedTitleAr,ZFJGenLepTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
+
+    if makeZHFJ:
+        ###############STARTING ZHFJGenLepTagged GEN MATCHING GRAPHS###############
+
+        
+        normalizeDataTogether = False
+
+
+        
+        dataName = ""
+        for k,fileA in enumerate(fileAr):
+            if useLHEAr[k]:
+                dataName += "_"+datasetSaveNameAr[k]
+
+        if not comparisonPlotsOnly:
+            for k,fileA in enumerate(fileAr):
+                if useLHEAr[k]:
+                    for ZHFJGenLepTaggedItr, ZHFJGenLepTaggedSaveName in enumerate(ZHFJGenLepTaggedSaveNameAr):
+                        if onlyDoSomeHists and ZHFJGenLepTaggedItr >= histsToDo:
+                            break
+                        canZHFJGenLepTaggedAr[k][ZHFJGenLepTaggedItr].cd()
+                        histZHFJGenLepTaggedAr[k][ZHFJGenLepTaggedItr].Draw("hist")
+            
+                        if savePathBool:
+                            canZHFJGenLepTaggedAr[k][ZHFJGenLepTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],ZHFJGenLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+                        else:
+                            canZHFJGenLepTaggedAr[k][ZHFJGenLepTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],ZHFJGenLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        legUnstackedAr = []
+        padUnstackedAr = []
+        for ZHFJGenLepTaggedItr, ZHFJGenLepTaggedSaveName in enumerate(ZHFJGenLepTaggedSaveNameAr):
+            if onlyDoSomeHists and ZHFJGenLepTaggedItr >= histsToDo:
+                break
+            setUpLegend(legUnstackedAr)
+            setUpPadsAr(padUnstackedAr,"{0}Pad".format("ZHFJGenLepTaggedSaveName"))
+
+        intComparisonAr = []
+
+
+
+        setHistoElementsForLHETrees(colorAr,histZHFJGenLepTaggedAr,weightsAr,intComparisonAr,ZHFJGenLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
+
+        histMaxAr = normalizeHistsForLHETrees(histZHFJGenLepTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,ZHFJGenLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+
+        cloneHistAr = []
+
+        comparisonCanAr = []
+        #comparisonHistStackAr = []
+        for ZHFJGenLepTaggedItr, ZHFJGenLepTaggedSaveName in enumerate(ZHFJGenLepTaggedSaveNameAr):
+            if onlyDoSomeHists and ZHFJGenLepTaggedItr >= histsToDo:
+                break
+            comparisonCanAr.append(TCanvas("comparisonCan{0}".format(ZHFJGenLepTaggedSaveName),"comparisonCan{0}".format(ZHFJGenLepTaggedSaveName),3600,2400))
+            #comparisonHistStackAr.append(THStack("hist{0}Stack".format(ZHFJGenLepTaggedSaveName),ZHFJGenLepTaggedTitleAr[ZHFJGenLepTaggedItr]))
+        comparisonUnstackedCanAr = []
+
+        for ZHFJGenLepTaggedItr, ZHFJGenLepTaggedSaveName in enumerate(ZHFJGenLepTaggedSaveNameAr):
+            if onlyDoSomeHists and ZHFJGenLepTaggedItr >= histsToDo:
+                break
+            comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(ZHFJGenLepTaggedSaveName),"comparisonUnstackedCan{0}".format(ZHFJGenLepTaggedSaveName),3600,2400))
+
+        setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZHFJGenLepTaggedAr,legUnstackedAr,dataName,ZHFJGenLepTaggedSaveNameAr,ZHFJGenLepTaggedTitleAr,ZHFJGenLepTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
+
+    if makeZHJ:
+        ###############STARTING ZHJGenLepTagged GEN MATCHING GRAPHS###############
+
+        
+        normalizeDataTogether = False
+
+
+        
+        dataName = ""
+        for k,fileA in enumerate(fileAr):
+            if useLHEAr[k]:
+                dataName += "_"+datasetSaveNameAr[k]
+
+        if not comparisonPlotsOnly:
+            for k,fileA in enumerate(fileAr):
+                if useLHEAr[k]:
+                    for ZHJGenLepTaggedItr, ZHJGenLepTaggedSaveName in enumerate(ZHJGenLepTaggedSaveNameAr):
+                        if onlyDoSomeHists and ZHJGenLepTaggedItr >= histsToDo:
+                            break
+                        canZHJGenLepTaggedAr[k][ZHJGenLepTaggedItr].cd()
+                        histZHJGenLepTaggedAr[k][ZHJGenLepTaggedItr].Draw("hist")
+
+                        if savePathBool:
+                            canZHJGenLepTaggedAr[k][ZHJGenLepTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],ZHJGenLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+                        else:
+                            canZHJGenLepTaggedAr[k][ZHJGenLepTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],ZHJGenLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        legUnstackedAr = []
+        padUnstackedAr = []
+        for ZHJGenLepTaggedItr, ZHJGenLepTaggedSaveName in enumerate(ZHJGenLepTaggedSaveNameAr):
+            if onlyDoSomeHists and ZHJGenLepTaggedItr >= histsToDo:
+                break
+            setUpLegend(legUnstackedAr)
+            setUpPadsAr(padUnstackedAr,"{0}Pad".format("ZHJGenLepTaggedSaveName"))
+
+        intComparisonAr = []
+
+
+
+        setHistoElementsForLHETrees(colorAr,histZHJGenLepTaggedAr,weightsAr,intComparisonAr,ZHJGenLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
+
+        histMaxAr = normalizeHistsForLHETrees(histZHJGenLepTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,ZHJGenLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+
+        cloneHistAr = []
+
+        comparisonCanAr = []
+        #comparisonHistStackAr = []
+        for ZHJGenLepTaggedItr, ZHJGenLepTaggedSaveName in enumerate(ZHJGenLepTaggedSaveNameAr):
+            if onlyDoSomeHists and ZHJGenLepTaggedItr >= histsToDo:
+                break
+            comparisonCanAr.append(TCanvas("comparisonCan{0}".format(ZHJGenLepTaggedSaveName),"comparisonCan{0}".format(ZHJGenLepTaggedSaveName),3600,2400))
+            #comparisonHistStackAr.append(THStack("hist{0}Stack".format(ZHJGenLepTaggedSaveName),ZHJGenLepTaggedTitleAr[ZHJGenLepTaggedItr]))
+        comparisonUnstackedCanAr = []
+
+        for ZHJGenLepTaggedItr, ZHJGenLepTaggedSaveName in enumerate(ZHJGenLepTaggedSaveNameAr):
+            if onlyDoSomeHists and ZHJGenLepTaggedItr >= histsToDo:
+                break
+            comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(ZHJGenLepTaggedSaveName),"comparisonUnstackedCan{0}".format(ZHJGenLepTaggedSaveName),3600,2400))
+
+        setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZHJGenLepTaggedAr,legUnstackedAr,dataName,ZHJGenLepTaggedSaveNameAr,ZHJGenLepTaggedTitleAr,ZHJGenLepTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
+
+
+    if makeZJ:
+        ###############STARTING ZJGenLepTagged GEN MATCHING GRAPHS###############
+
+        
+        normalizeDataTogether = False
+
+
+        
+        dataName = ""
+        for k,fileA in enumerate(fileAr):
+            if useLHEAr[k]:
+                dataName += "_"+datasetSaveNameAr[k]
+
+        if not comparisonPlotsOnly:
+            for k,fileA in enumerate(fileAr):
+                if useLHEAr[k]:
+                    for ZJGenLepTaggedItr, ZJGenLepTaggedSaveName in enumerate(ZJGenLepTaggedSaveNameAr):
+                        if onlyDoSomeHists and ZJGenLepTaggedItr >= histsToDo:
+                            break
+                        canZJGenLepTaggedAr[k][ZJGenLepTaggedItr].cd()
+                        histZJGenLepTaggedAr[k][ZJGenLepTaggedItr].Draw("hist")
+            
+                        if savePathBool:
+                            canZJGenLepTaggedAr[k][ZJGenLepTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],ZJGenLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+                        else:
+                            canZJGenLepTaggedAr[k][ZJGenLepTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],ZJGenLepTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        legUnstackedAr = []
+        padUnstackedAr = []
+        for ZJGenLepTaggedItr, ZJGenLepTaggedSaveName in enumerate(ZJGenLepTaggedSaveNameAr):
+            if onlyDoSomeHists and ZJGenLepTaggedItr >= histsToDo:
+                break
+            setUpLegend(legUnstackedAr)
+            setUpPadsAr(padUnstackedAr,"{0}Pad".format("ZJGenLepTaggedSaveName"))
+
+        intComparisonAr = []
+
+
+
+        setHistoElementsForLHETrees(colorAr,histZJGenLepTaggedAr,weightsAr,intComparisonAr,ZJGenLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
+
+        histMaxAr = normalizeHistsForLHETrees(histZJGenLepTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,ZJGenLepTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
+
+        cloneHistAr = []
+
+        comparisonCanAr = []
+        #comparisonHistStackAr = []
+        for ZJGenLepTaggedItr, ZJGenLepTaggedSaveName in enumerate(ZJGenLepTaggedSaveNameAr):
+            if onlyDoSomeHists and ZJGenLepTaggedItr >= histsToDo:
+                break
+            comparisonCanAr.append(TCanvas("comparisonCan{0}".format(ZJGenLepTaggedSaveName),"comparisonCan{0}".format(ZJGenLepTaggedSaveName),3600,2400))
+            #comparisonHistStackAr.append(THStack("hist{0}Stack".format(ZJGenLepTaggedSaveName),ZJGenLepTaggedTitleAr[ZJGenLepTaggedItr]))
+        comparisonUnstackedCanAr = []
+
+        for ZJGenLepTaggedItr, ZJGenLepTaggedSaveName in enumerate(ZJGenLepTaggedSaveNameAr):
+            if onlyDoSomeHists and ZJGenLepTaggedItr >= histsToDo:
+                break
+            comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(ZJGenLepTaggedSaveName),"comparisonUnstackedCan{0}".format(ZJGenLepTaggedSaveName),3600,2400))
+
+        setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZJGenLepTaggedAr,legUnstackedAr,dataName,ZJGenLepTaggedSaveNameAr,ZJGenLepTaggedTitleAr,ZJGenLepTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
 
 
