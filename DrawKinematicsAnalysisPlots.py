@@ -46,7 +46,7 @@ if MGC2VEtaDifCut:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisC2VEtaDifCutTighterCut.root".format(forCondorStr)))
     else:
         fileAr.append(TFile.Open("{0}KinematicsAnalysisC2VEtaDifCut.root".format(forCondorStr)))
-    colorAr.append(9)
+    colorAr.append(1)
     datasetSaveNameAr.append("C2VEtaDifCut")
     
     

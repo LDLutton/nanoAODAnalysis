@@ -40,6 +40,13 @@
 #include<errno.h>
 
 
+
+////////////////////////////////START OF MAIN FUNCTION////////////////////////////////
+////////////////////////////////START OF MAIN FUNCTION////////////////////////////////
+////////////////////////////////START OF MAIN FUNCTION////////////////////////////////
+////////////////////////////////START OF MAIN FUNCTION////////////////////////////////
+
+
 void new022022KinematicsAnalysis(){
     // Open the file. Note that the name of your file outside this class
     // will probably NOT be experiment.root.
@@ -70,6 +77,11 @@ void new022022KinematicsAnalysis(){
     bool useLHETree = false;
     bool useFJGenMatchTree = false;
     bool useJGenMatchTree = false;
+
+    ////////////////////////////////GETTING DATASET////////////////////////////////
+    ////////////////////////////////GETTING DATASET////////////////////////////////
+    ////////////////////////////////GETTING DATASET////////////////////////////////
+    ////////////////////////////////GETTING DATASET////////////////////////////////
 
     if (MGC2VEtaDifCut){
         saveName = "C2VEtaDifCut";
@@ -200,6 +212,18 @@ void new022022KinematicsAnalysis(){
         checkChannelSplits = false;
     }
 
+    ////////////////////////////////DEFINING TREES////////////////////////////////
+    ////////////////////////////////DEFINING TREES////////////////////////////////
+    ////////////////////////////////DEFINING TREES////////////////////////////////
+    ////////////////////////////////DEFINING TREES////////////////////////////////
+
+
+
+    ////////////////////////////////HFJ TREE////////////////////////////////
+    ////////////////////////////////HFJ TREE////////////////////////////////
+    ////////////////////////////////HFJ TREE////////////////////////////////
+    ////////////////////////////////HFJ TREE////////////////////////////////
+
 
     float HFJ_pt_FromGenMatchL;
     float HFJ_eta_FromGenMatchL;
@@ -222,6 +246,12 @@ void new022022KinematicsAnalysis(){
     
     HFJGenTree->Branch("nHFJDecay_FromGenMatchL",&nHFJDecay_FromGenMatchL,"nHFJDecay_FromGenMatchL/i");
     HFJGenTree->Branch("HFJ_decaypdgId_FromGenMatchL",&HFJ_decaypdgId_FromGenMatchL);
+
+
+    ////////////////////////////////ZFJ TREE////////////////////////////////
+    ////////////////////////////////ZFJ TREE////////////////////////////////
+    ////////////////////////////////ZFJ TREE////////////////////////////////
+    ////////////////////////////////ZFJ TREE////////////////////////////////
 
 
     UInt_t ZFJSameJetCtr = 0;
@@ -247,6 +277,10 @@ void new022022KinematicsAnalysis(){
 
     float ZFJPair_InvMass_FromGenMatchL;
     float ZFJPair_EtaSep_FromGenMatchL;
+
+    //bool ZFJPair_IsLeptonic_FromGenMatchL;
+    //bool ZFJPair_IsSemiLeptonic_FromGenMatchL;
+    //bool ZFJPair_IsHadronic_FromGenMatchL;
 
     TTree *ZFJGenTree = new TTree("ZFJGenTree", "ZFJGenTree");
 
@@ -275,16 +309,49 @@ void new022022KinematicsAnalysis(){
     ZFJGenTree->Branch("ZFJPair_InvMass_FromGenMatchL",&ZFJPair_InvMass_FromGenMatchL,"ZFJPair_InvMass_FromGenMatchL/F");
     ZFJGenTree->Branch("ZFJPair_EtaSep_FromGenMatchL",&ZFJPair_EtaSep_FromGenMatchL,"ZFJPair_EtaSep_FromGenMatchL/F");
 
+    //ZFJGenTree->Branch("ZFJPair_IsLeptonic_FromGenMatchL",&ZFJPair_IsLeptonic_FromGenMatchL,"ZFJPair_IsLeptonic_FromGenMatchL/F");
+    //ZFJGenTree->Branch("ZFJPair_IsSemiLeptonic_FromGenMatchL",&ZFJPair_IsSemiLeptonic_FromGenMatchL,"ZFJPair_IsSemiLeptonic_FromGenMatchL/F");
+    //ZFJGenTree->Branch("ZFJPair_IsHadronic_FromGenMatchL",&ZFJPair_IsHadronic_FromGenMatchL,"ZFJPair_IsHadronic_FromGenMatchL/F");
+
+    ////////////////////////////////ZHFJ TREE////////////////////////////////
+    ////////////////////////////////ZHFJ TREE////////////////////////////////
+    ////////////////////////////////ZHFJ TREE////////////////////////////////
+    ////////////////////////////////ZHFJ TREE////////////////////////////////
+
     float ZHFJ_ZPairPlusHInvMass_FromGenMatchL;
+    //bool ZHFJ_IsLeptonic_FromGenMatchL;
+    //bool ZHFJ_IsSemiLeptonic_FromGenMatchL;
+    //bool ZHFJ_IsHadronic_FromGenMatchL;
     TTree *ZHFJGenTree = new TTree("ZHFJGenTree", "ZHFJGenTree");
     ZHFJGenTree->Branch("ZHFJ_ZPairPlusHInvMass_FromGenMatchL",&ZHFJ_ZPairPlusHInvMass_FromGenMatchL,"ZHFJ_ZPairPlusHInvMass_FromGenMatchL/F");
+    //ZHFJGenTree->Branch("ZHFJ_IsLeptonic_FromGenMatchL",&ZHFJ_IsLeptonic_FromGenMatchL,"ZHFJ_IsLeptonic_FromGenMatchL/F");
+    //ZHFJGenTree->Branch("ZHFJ_IsSemiLeptonic_FromGenMatchL",&ZHFJ_IsSemiLeptonic_FromGenMatchL,"ZHFJ_IsSemiLeptonic_FromGenMatchL/F");
+    //ZHFJGenTree->Branch("ZHFJ_IsHadronic_FromGenMatchL",&ZHFJ_IsHadronic_FromGenMatchL,"ZHFJ_IsHadronic_FromGenMatchL/F");
+
+
+
+    ////////////////////////////////ZHJ TREE////////////////////////////////
+    ////////////////////////////////ZHJ TREE////////////////////////////////
+    ////////////////////////////////ZHJ TREE////////////////////////////////
+    ////////////////////////////////ZHJ TREE////////////////////////////////
+
 
     float ZHJ_ZPairPlusHInvMass_FromGenMatchL;
+    //bool ZHJ_IsLeptonic_FromGenMatchL;
+    //bool ZHJ_IsSemiLeptonic_FromGenMatchL;
+    //bool ZHJ_IsHadronic_FromGenMatchL;
     TTree *ZHJGenTree = new TTree("ZHJGenTree", "ZHJGenTree");
     ZHJGenTree->Branch("ZHJ_ZPairPlusHInvMass_FromGenMatchL",&ZHJ_ZPairPlusHInvMass_FromGenMatchL,"ZHJ_ZPairPlusHInvMass_FromGenMatchL/F");
 
+    //ZHJGenTree->Branch("ZHJ_IsLeptonic_FromGenMatchL",&ZHJ_IsLeptonic_FromGenMatchL,"ZHJ_IsLeptonic_FromGenMatchL/F");
+    //ZHJGenTree->Branch("ZHJ_IsSemiLeptonic_FromGenMatchL",&ZHJ_IsSemiLeptonic_FromGenMatchL,"ZHJ_IsSemiLeptonic_FromGenMatchL/F");
+    //ZHJGenTree->Branch("ZHJ_IsHadronic_FromGenMatchL",&ZHJ_IsHadronic_FromGenMatchL,"ZHJ_IsHadronic_FromGenMatchL/F");
 
 
+    ////////////////////////////////ZJ TREE////////////////////////////////
+    ////////////////////////////////ZJ TREE////////////////////////////////
+    ////////////////////////////////ZJ TREE////////////////////////////////
+    ////////////////////////////////ZJ TREE////////////////////////////////
 
 
     UInt_t ZJSameJetCtr = 0;
@@ -312,6 +379,10 @@ void new022022KinematicsAnalysis(){
     float ZJPair_InvMass_FromGenMatchL;
     float ZJPair_EtaSep_FromGenMatchL;
 
+    //bool ZJPair_IsLeptonic_FromGenMatchL;
+    //bool ZJPair_IsSemiLeptonic_FromGenMatchL;
+    //bool ZJPair_IsHadronic_FromGenMatchL;
+
     TTree *ZJGenTree = new TTree("ZJGenTree", "ZJGenTree");
 
     ZJGenTree->Branch("ZJLead_pt_FromGenMatchL",&ZJLead_pt_FromGenMatchL,"ZJLead_pt_FromGenMatchL/F");
@@ -337,8 +408,16 @@ void new022022KinematicsAnalysis(){
     ZJGenTree->Branch("ZJPair_InvMass_FromGenMatchL",&ZJPair_InvMass_FromGenMatchL,"ZJPair_InvMass_FromGenMatchL/F");
     ZJGenTree->Branch("ZJPair_EtaSep_FromGenMatchL",&ZJPair_EtaSep_FromGenMatchL,"ZJPair_EtaSep_FromGenMatchL/F");
 
+    //ZJGenTree->Branch("ZJPair_IsLeptonic_FromGenMatchL",&ZJPair_IsLeptonic_FromGenMatchL,"ZJPair_IsLeptonic_FromGenMatchL/F");
+    //ZJGenTree->Branch("ZJPair_IsSemiLeptonic_FromGenMatchL",&ZJPair_IsSemiLeptonic_FromGenMatchL,"ZJPair_IsSemiLeptonic_FromGenMatchL/F");
+    //ZJGenTree->Branch("ZJPair_IsHadronic_FromGenMatchL",&ZJPair_IsHadronic_FromGenMatchL,"ZJPair_IsHadronic_FromGenMatchL/F");
 
 
+
+    ////////////////////////////////GENRAW TREE////////////////////////////////
+    ////////////////////////////////GENRAW TREE////////////////////////////////
+    ////////////////////////////////GENRAW TREE////////////////////////////////
+    ////////////////////////////////GENRAW TREE////////////////////////////////
 
 
     //This tree is for gen variables before the cuts
@@ -418,6 +497,11 @@ void new022022KinematicsAnalysis(){
     GenRawTree->Branch("ZPairPlusH_InvMass_FromGenRawL",&ZPairPlusH_InvMass_FromGenRawL,"ZPairPlusH_InvMass_FromGenRawL/F");
 
 
+
+    ////////////////////////////////LHERAW TREE////////////////////////////////
+    ////////////////////////////////LHERAW TREE////////////////////////////////
+    ////////////////////////////////LHERAW TREE////////////////////////////////
+    ////////////////////////////////LHERAW TREE////////////////////////////////
 
     //This tree is for variables before the cuts
     //Can only use this on EFT and SM, not background
@@ -503,8 +587,19 @@ void new022022KinematicsAnalysis(){
     RawTree->Branch("JPair_invmass_FromLHERawL",&JPair_invmass_FromLHERawL,"JPair_invmass_FromLHERawL/F");
     RawTree->Branch("J_etasep_FromLHERawL",&J_etasep_FromLHERawL,"J_etasep_FromLHERawL/F");
 
+    ////////////////////////////////START OF TAGGED TREES////////////////////////////////
+    ////////////////////////////////START OF TAGGED TREES////////////////////////////////
+    ////////////////////////////////START OF TAGGED TREES////////////////////////////////
+    ////////////////////////////////START OF TAGGED TREES////////////////////////////////
 
 
+    ////////////////////////////////HADRONIC TREES////////////////////////////////
+    ////////////////////////////////HADRONIC TREES////////////////////////////////
+    ////////////////////////////////HADRONIC TREES////////////////////////////////
+    ////////////////////////////////HADRONIC TREES////////////////////////////////
+
+
+    //"tagged" trees are ones tagged as hadronic by checking Z decay pdg IDs
 
 
     float HFJ_pt_FromTaggedGenMatchL;
@@ -803,7 +898,615 @@ void new022022KinematicsAnalysis(){
     RawTaggedTree->Branch("J_etasep_FromTaggedLHERawL",&J_etasep_FromTaggedLHERawL,"J_etasep_FromTaggedLHERawL/F");
 
 
-    UInt_t passhbbCtr = 0;
+
+    ////////////////////////////////SEMI-LEPTONIC TREES////////////////////////////////
+    ////////////////////////////////SEMI-LEPTONIC TREES////////////////////////////////
+    ////////////////////////////////SEMI-LEPTONIC TREES////////////////////////////////
+    ////////////////////////////////SEMI-LEPTONIC TREES////////////////////////////////
+
+
+    //these trees are ones tagged as Semi-leptonic by checking Z decay pdg IDs
+
+
+    float HFJ_pt_FromSemiLepTaggedGenMatchL;
+    float HFJ_eta_FromSemiLepTaggedGenMatchL;
+    float HFJ_phi_FromSemiLepTaggedGenMatchL;
+    float HFJ_mass_FromSemiLepTaggedGenMatchL;
+    float HFJ_dRFromFJ_FromSemiLepTaggedGenMatchL;
+
+    UInt_t nHFJDecay_FromSemiLepTaggedGenMatchL;
+    std::vector<Int_t> HFJ_decaypdgId_FromSemiLepTaggedGenMatchL;
+
+
+
+    TTree *HFJGenSemiLepTaggedTree = new TTree("HFJGenSemiLepTaggedTree", "HFJGenSemiLepTaggedTree");
+
+    HFJGenSemiLepTaggedTree->Branch("HFJ_pt_FromSemiLepTaggedGenMatchL",&HFJ_pt_FromSemiLepTaggedGenMatchL,"HFJ_pt_FromSemiLepTaggedGenMatchL/F");
+    HFJGenSemiLepTaggedTree->Branch("HFJ_eta_FromSemiLepTaggedGenMatchL",&HFJ_eta_FromSemiLepTaggedGenMatchL,"HFJ_eta_FromSemiLepTaggedGenMatchL/F");
+    HFJGenSemiLepTaggedTree->Branch("HFJ_phi_FromSemiLepTaggedGenMatchL",&HFJ_phi_FromSemiLepTaggedGenMatchL,"HFJ_phi_FromSemiLepTaggedGenMatchL/F");
+    HFJGenSemiLepTaggedTree->Branch("HFJ_mass_FromSemiLepTaggedGenMatchL",&HFJ_mass_FromSemiLepTaggedGenMatchL,"HFJ_mass_FromSemiLepTaggedGenMatchL/F");
+    HFJGenSemiLepTaggedTree->Branch("HFJ_dRFromFJ_FromSemiLepTaggedGenMatchL",&HFJ_dRFromFJ_FromSemiLepTaggedGenMatchL,"HFJ_dRFromFJ_FromSemiLepTaggedGenMatchL/F");
+
+    HFJGenSemiLepTaggedTree->Branch("nHFJDecay_FromSemiLepTaggedGenMatchL",&nHFJDecay_FromSemiLepTaggedGenMatchL,"nHFJDecay_FromSemiLepTaggedGenMatchL/i");
+    HFJGenSemiLepTaggedTree->Branch("HFJ_decaypdgId_FromSemiLepTaggedGenMatchL",&HFJ_decaypdgId_FromSemiLepTaggedGenMatchL);
+
+
+    UInt_t ZFJSameJetSemiLepTaggedCtr = 0;
+
+    float ZFJLead_pt_FromSemiLepTaggedGenMatchL;
+    float ZFJLead_eta_FromSemiLepTaggedGenMatchL;
+    float ZFJLead_phi_FromSemiLepTaggedGenMatchL;
+    float ZFJLead_mass_FromSemiLepTaggedGenMatchL;
+    float ZFJLead_dRFromFJ_FromSemiLepTaggedGenMatchL;
+
+    UInt_t nZFJLeadDecay_FromSemiLepTaggedGenMatchL;
+    std::vector<Int_t> ZFJLead_decaypdgId_FromSemiLepTaggedGenMatchL;
+    
+
+    float ZFJTrailing_pt_FromSemiLepTaggedGenMatchL;
+    float ZFJTrailing_eta_FromSemiLepTaggedGenMatchL;
+    float ZFJTrailing_phi_FromSemiLepTaggedGenMatchL;
+    float ZFJTrailing_mass_FromSemiLepTaggedGenMatchL;
+    float ZFJTrailing_dRFromFJ_FromSemiLepTaggedGenMatchL;
+
+    UInt_t nZFJTrailingDecay_FromSemiLepTaggedGenMatchL;
+    std::vector<Int_t> ZFJTrailing_decaypdgId_FromSemiLepTaggedGenMatchL;
+
+    float ZFJPair_InvMass_FromSemiLepTaggedGenMatchL;
+    float ZFJPair_EtaSep_FromSemiLepTaggedGenMatchL;
+
+    TTree *ZFJGenSemiLepTaggedTree = new TTree("ZFJGenSemiLepTaggedTree", "ZFJGenSemiLepTaggedTree");
+
+    ZFJGenSemiLepTaggedTree->Branch("ZFJLead_pt_FromSemiLepTaggedGenMatchL",&ZFJLead_pt_FromSemiLepTaggedGenMatchL,"ZFJLead_pt_FromSemiLepTaggedGenMatchL/F");
+    ZFJGenSemiLepTaggedTree->Branch("ZFJLead_eta_FromSemiLepTaggedGenMatchL",&ZFJLead_eta_FromSemiLepTaggedGenMatchL,"ZFJLead_eta_FromSemiLepTaggedGenMatchL/F");
+    ZFJGenSemiLepTaggedTree->Branch("ZFJLead_phi_FromSemiLepTaggedGenMatchL",&ZFJLead_phi_FromSemiLepTaggedGenMatchL,"ZFJLead_phi_FromSemiLepTaggedGenMatchL/F");
+    ZFJGenSemiLepTaggedTree->Branch("ZFJLead_mass_FromSemiLepTaggedGenMatchL",&ZFJLead_mass_FromSemiLepTaggedGenMatchL,"ZFJLead_mass_FromSemiLepTaggedGenMatchL/F");
+    ZFJGenSemiLepTaggedTree->Branch("ZFJLead_dRFromFJ_FromSemiLepTaggedGenMatchL",&ZFJLead_dRFromFJ_FromSemiLepTaggedGenMatchL,"ZFJLead_dRFromFJ_FromSemiLepTaggedGenMatchL/F");
+
+    ZFJGenSemiLepTaggedTree->Branch("nZFJLeadDecay_FromSemiLepTaggedGenMatchL",&nZFJLeadDecay_FromSemiLepTaggedGenMatchL,"nZFJLeadDecay_FromSemiLepTaggedGenMatchL/i");
+    ZFJGenSemiLepTaggedTree->Branch("ZFJLead_decaypdgId_FromSemiLepTaggedGenMatchL",&ZFJLead_decaypdgId_FromSemiLepTaggedGenMatchL);
+
+    ZFJGenSemiLepTaggedTree->Branch("ZFJTrailing_pt_FromSemiLepTaggedGenMatchL",&ZFJTrailing_pt_FromSemiLepTaggedGenMatchL,"ZFJTrailing_pt_FromSemiLepTaggedGenMatchL/F");
+    ZFJGenSemiLepTaggedTree->Branch("ZFJTrailing_eta_FromSemiLepTaggedGenMatchL",&ZFJTrailing_eta_FromSemiLepTaggedGenMatchL,"ZFJTrailing_eta_FromSemiLepTaggedGenMatchL/F");
+    ZFJGenSemiLepTaggedTree->Branch("ZFJTrailing_phi_FromSemiLepTaggedGenMatchL",&ZFJTrailing_phi_FromSemiLepTaggedGenMatchL,"ZFJTrailing_phi_FromSemiLepTaggedGenMatchL/F");
+    ZFJGenSemiLepTaggedTree->Branch("ZFJTrailing_mass_FromSemiLepTaggedGenMatchL",&ZFJTrailing_mass_FromSemiLepTaggedGenMatchL,"ZFJTrailing_mass_FromSemiLepTaggedGenMatchL/F");
+    ZFJGenSemiLepTaggedTree->Branch("ZFJTrailing_dRFromFJ_FromSemiLepTaggedGenMatchL",&ZFJTrailing_dRFromFJ_FromSemiLepTaggedGenMatchL,"ZFJTrailing_dRFromFJ_FromSemiLepTaggedGenMatchL/F");
+
+    ZFJGenSemiLepTaggedTree->Branch("nZFJTrailingDecay_FromSemiLepTaggedGenMatchL",&nZFJTrailingDecay_FromSemiLepTaggedGenMatchL,"nZFJTrailingDecay_FromSemiLepTaggedGenMatchL/i");
+    ZFJGenSemiLepTaggedTree->Branch("ZFJTrailing_decaypdgId_FromSemiLepTaggedGenMatchL",&ZFJTrailing_decaypdgId_FromSemiLepTaggedGenMatchL);
+
+    ZFJGenSemiLepTaggedTree->Branch("ZFJPair_InvMass_FromSemiLepTaggedGenMatchL",&ZFJPair_InvMass_FromSemiLepTaggedGenMatchL,"ZFJPair_InvMass_FromSemiLepTaggedGenMatchL/F");
+    ZFJGenSemiLepTaggedTree->Branch("ZFJPair_EtaSep_FromSemiLepTaggedGenMatchL",&ZFJPair_EtaSep_FromSemiLepTaggedGenMatchL,"ZFJPair_EtaSep_FromSemiLepTaggedGenMatchL/F");
+
+    float ZHFJ_ZPairPlusHInvMass_FromSemiLepTaggedGenMatchL;
+    TTree *ZHFJGenSemiLepTaggedTree = new TTree("ZHFJGenSemiLepTaggedTree", "ZHFJGenSemiLepTaggedTree");
+    ZHFJGenSemiLepTaggedTree->Branch("ZHFJ_ZPairPlusHInvMass_FromSemiLepTaggedGenMatchL",&ZHFJ_ZPairPlusHInvMass_FromSemiLepTaggedGenMatchL,"ZHFJ_ZPairPlusHInvMass_FromSemiLepTaggedGenMatchL/F");
+
+    float ZHJ_ZPairPlusHInvMass_FromSemiLepTaggedGenMatchL;
+    TTree *ZHJGenSemiLepTaggedTree = new TTree("ZHJGenSemiLepTaggedTree", "ZHJGenSemiLepTaggedTree");
+    ZHJGenSemiLepTaggedTree->Branch("ZHJ_ZPairPlusHInvMass_FromSemiLepTaggedGenMatchL",&ZHJ_ZPairPlusHInvMass_FromSemiLepTaggedGenMatchL,"ZHJ_ZPairPlusHInvMass_FromSemiLepTaggedGenMatchL/F");
+
+
+
+
+
+    UInt_t ZJSameJetSemiLepTaggedCtr = 0;
+
+
+    float ZJLead_pt_FromSemiLepTaggedGenMatchL;
+    float ZJLead_eta_FromSemiLepTaggedGenMatchL;
+    float ZJLead_phi_FromSemiLepTaggedGenMatchL;
+    float ZJLead_mass_FromSemiLepTaggedGenMatchL;
+    float ZJLead_dRFromJ_FromSemiLepTaggedGenMatchL;
+
+    UInt_t nZJLeadDecay_FromSemiLepTaggedGenMatchL;
+    std::vector<Int_t> ZJLead_decaypdgId_FromSemiLepTaggedGenMatchL;
+    
+
+    float ZJTrailing_pt_FromSemiLepTaggedGenMatchL;
+    float ZJTrailing_eta_FromSemiLepTaggedGenMatchL;
+    float ZJTrailing_phi_FromSemiLepTaggedGenMatchL;
+    float ZJTrailing_mass_FromSemiLepTaggedGenMatchL;
+    float ZJTrailing_dRFromJ_FromSemiLepTaggedGenMatchL;
+
+    UInt_t nZJTrailingDecay_FromSemiLepTaggedGenMatchL;
+    std::vector<Int_t> ZJTrailing_decaypdgId_FromSemiLepTaggedGenMatchL;
+
+    float ZJPair_InvMass_FromSemiLepTaggedGenMatchL;
+    float ZJPair_EtaSep_FromSemiLepTaggedGenMatchL;
+
+    TTree *ZJGenSemiLepTaggedTree = new TTree("ZJGenSemiLepTaggedTree", "ZJGenSemiLepTaggedTree");
+
+    ZJGenSemiLepTaggedTree->Branch("ZJLead_pt_FromSemiLepTaggedGenMatchL",&ZJLead_pt_FromSemiLepTaggedGenMatchL,"ZJLead_pt_FromSemiLepTaggedGenMatchL/F");
+    ZJGenSemiLepTaggedTree->Branch("ZJLead_eta_FromSemiLepTaggedGenMatchL",&ZJLead_eta_FromSemiLepTaggedGenMatchL,"ZJLead_eta_FromSemiLepTaggedGenMatchL/F");
+    ZJGenSemiLepTaggedTree->Branch("ZJLead_phi_FromSemiLepTaggedGenMatchL",&ZJLead_phi_FromSemiLepTaggedGenMatchL,"ZJLead_phi_FromSemiLepTaggedGenMatchL/F");
+    ZJGenSemiLepTaggedTree->Branch("ZJLead_mass_FromSemiLepTaggedGenMatchL",&ZJLead_mass_FromSemiLepTaggedGenMatchL,"ZJLead_mass_FromSemiLepTaggedGenMatchL/F");
+    ZJGenSemiLepTaggedTree->Branch("ZJLead_dRFromJ_FromSemiLepTaggedGenMatchL",&ZJLead_dRFromJ_FromSemiLepTaggedGenMatchL,"ZJLead_dRFromJ_FromSemiLepTaggedGenMatchL/F");
+
+    ZJGenSemiLepTaggedTree->Branch("nZJLeadDecay_FromSemiLepTaggedGenMatchL",&nZJLeadDecay_FromSemiLepTaggedGenMatchL,"nZJLeadDecay_FromSemiLepTaggedGenMatchL/i");
+    ZJGenSemiLepTaggedTree->Branch("ZJLead_decaypdgId_FromSemiLepTaggedGenMatchL",&ZJLead_decaypdgId_FromSemiLepTaggedGenMatchL);
+
+    ZJGenSemiLepTaggedTree->Branch("ZJTrailing_pt_FromSemiLepTaggedGenMatchL",&ZJTrailing_pt_FromSemiLepTaggedGenMatchL,"ZJTrailing_pt_FromSemiLepTaggedGenMatchL/F");
+    ZJGenSemiLepTaggedTree->Branch("ZJTrailing_eta_FromSemiLepTaggedGenMatchL",&ZJTrailing_eta_FromSemiLepTaggedGenMatchL,"ZJTrailing_eta_FromSemiLepTaggedGenMatchL/F");
+    ZJGenSemiLepTaggedTree->Branch("ZJTrailing_phi_FromSemiLepTaggedGenMatchL",&ZJTrailing_phi_FromSemiLepTaggedGenMatchL,"ZJTrailing_phi_FromSemiLepTaggedGenMatchL/F");
+    ZJGenSemiLepTaggedTree->Branch("ZJTrailing_mass_FromSemiLepTaggedGenMatchL",&ZJTrailing_mass_FromSemiLepTaggedGenMatchL,"ZJTrailing_mass_FromSemiLepTaggedGenMatchL/F");
+    ZJGenSemiLepTaggedTree->Branch("ZJTrailing_dRFromJ_FromSemiLepTaggedGenMatchL",&ZJTrailing_dRFromJ_FromSemiLepTaggedGenMatchL,"ZJTrailing_dRFromJ_FromSemiLepTaggedGenMatchL/F");
+
+    ZJGenSemiLepTaggedTree->Branch("nZJTrailingDecay_FromSemiLepTaggedGenMatchL",&nZJTrailingDecay_FromSemiLepTaggedGenMatchL,"nZJTrailingDecay_FromSemiLepTaggedGenMatchL/i");
+    ZJGenSemiLepTaggedTree->Branch("ZJTrailing_decaypdgId_FromSemiLepTaggedGenMatchL",&ZJTrailing_decaypdgId_FromSemiLepTaggedGenMatchL);
+
+    ZJGenSemiLepTaggedTree->Branch("ZJPair_InvMass_FromSemiLepTaggedGenMatchL",&ZJPair_InvMass_FromSemiLepTaggedGenMatchL,"ZJPair_InvMass_FromSemiLepTaggedGenMatchL/F");
+    ZJGenSemiLepTaggedTree->Branch("ZJPair_EtaSep_FromSemiLepTaggedGenMatchL",&ZJPair_EtaSep_FromSemiLepTaggedGenMatchL,"ZJPair_EtaSep_FromSemiLepTaggedGenMatchL/F");
+
+
+
+
+
+    //This tree is for gen variables before the cuts
+    //Can only use this on EFT and SM, not background
+
+
+    float ZOne_pt_FromSemiLepTaggedGenRawL;
+    float ZOne_eta_FromSemiLepTaggedGenRawL;
+    float ZOne_phi_FromSemiLepTaggedGenRawL;
+    float ZOne_mass_FromSemiLepTaggedGenRawL;
+    float ZOne_pdgId_FromSemiLepTaggedGenRawL;
+    float ZOne_genPartIdxMother_FromSemiLepTaggedGenRawL;
+
+    UInt_t nZOneDecay_FromSemiLepTaggedGenRawL;
+    std::vector<Int_t> ZOne_decaypdgId_FromSemiLepTaggedGenRawL;
+
+    float ZTwo_pt_FromSemiLepTaggedGenRawL;
+    float ZTwo_eta_FromSemiLepTaggedGenRawL;
+    float ZTwo_phi_FromSemiLepTaggedGenRawL;
+    float ZTwo_mass_FromSemiLepTaggedGenRawL;
+    float ZTwo_pdgId_FromSemiLepTaggedGenRawL;
+    float ZTwo_genPartIdxMother_FromSemiLepTaggedGenRawL;
+
+    UInt_t nZTwoDecay_FromSemiLepTaggedGenRawL;
+    std::vector<Int_t> ZTwo_decaypdgId_FromSemiLepTaggedGenRawL;
+
+    float ZPair_InvMass_FromSemiLepTaggedGenRawL;
+    float ZPair_EtaSep_FromSemiLepTaggedGenRawL;
+
+    float H_pt_FromSemiLepTaggedGenRawL;
+    float H_eta_FromSemiLepTaggedGenRawL;
+    float H_phi_FromSemiLepTaggedGenRawL;
+    float H_mass_FromSemiLepTaggedGenRawL;
+    float H_pdgId_FromSemiLepTaggedGenRawL;
+    float H_genPartIdxMother_FromSemiLepTaggedGenRawL;
+
+    UInt_t nHDecay_FromSemiLepTaggedGenRawL;
+    std::vector<Int_t> H_decaypdgId_FromSemiLepTaggedGenRawL;
+
+    float ZPairPlusH_InvMass_FromSemiLepTaggedGenRawL;
+
+    TTree *GenRawSemiLepTaggedTree = new TTree("GenRawSemiLepTaggedTree", "GenRawSemiLepTaggedTree");
+
+    GenRawSemiLepTaggedTree->Branch("ZOne_pt_FromSemiLepTaggedGenRawL",&ZOne_pt_FromSemiLepTaggedGenRawL,"ZOne_pt_FromSemiLepTaggedGenRawL/F");
+    GenRawSemiLepTaggedTree->Branch("ZOne_eta_FromSemiLepTaggedGenRawL",&ZOne_eta_FromSemiLepTaggedGenRawL,"ZOne_eta_FromSemiLepTaggedGenRawL/F");
+    GenRawSemiLepTaggedTree->Branch("ZOne_phi_FromSemiLepTaggedGenRawL",&ZOne_phi_FromSemiLepTaggedGenRawL,"ZOne_phi_FromSemiLepTaggedGenRawL/F");
+    GenRawSemiLepTaggedTree->Branch("ZOne_mass_FromSemiLepTaggedGenRawL",&ZOne_mass_FromSemiLepTaggedGenRawL,"ZOne_mass_FromSemiLepTaggedGenRawL/F");
+    GenRawSemiLepTaggedTree->Branch("ZOne_pdgId_FromSemiLepTaggedGenRawL",&ZOne_pdgId_FromSemiLepTaggedGenRawL,"ZOne_pdgId_FromSemiLepTaggedGenRawL/F");
+    GenRawSemiLepTaggedTree->Branch("ZOne_genPartIdxMother_FromSemiLepTaggedGenRawL",&ZOne_genPartIdxMother_FromSemiLepTaggedGenRawL,"ZOne_genPartIdxMother_FromSemiLepTaggedGenRawL/F");
+
+    GenRawSemiLepTaggedTree->Branch("nZOneDecay_FromSemiLepTaggedGenRawL",&nZOneDecay_FromSemiLepTaggedGenRawL,"nZOneDecay_FromSemiLepTaggedGenRawL/i");
+    GenRawSemiLepTaggedTree->Branch("ZOne_decaypdgId_FromSemiLepTaggedGenRawL",&ZOne_decaypdgId_FromSemiLepTaggedGenRawL);
+
+    GenRawSemiLepTaggedTree->Branch("ZTwo_pt_FromSemiLepTaggedGenRawL",&ZTwo_pt_FromSemiLepTaggedGenRawL,"ZTwo_pt_FromSemiLepTaggedGenRawL/F");
+    GenRawSemiLepTaggedTree->Branch("ZTwo_eta_FromSemiLepTaggedGenRawL",&ZTwo_eta_FromSemiLepTaggedGenRawL,"ZTwo_eta_FromSemiLepTaggedGenRawL/F");
+    GenRawSemiLepTaggedTree->Branch("ZTwo_phi_FromSemiLepTaggedGenRawL",&ZTwo_phi_FromSemiLepTaggedGenRawL,"ZTwo_phi_FromSemiLepTaggedGenRawL/F");
+    GenRawSemiLepTaggedTree->Branch("ZTwo_mass_FromSemiLepTaggedGenRawL",&ZTwo_mass_FromSemiLepTaggedGenRawL,"ZTwo_mass_FromSemiLepTaggedGenRawL/F");
+    GenRawSemiLepTaggedTree->Branch("ZTwo_pdgId_FromSemiLepTaggedGenRawL",&ZTwo_pdgId_FromSemiLepTaggedGenRawL,"ZTwo_pdgId_FromSemiLepTaggedGenRawL/F");
+    GenRawSemiLepTaggedTree->Branch("ZTwo_genPartIdxMother_FromSemiLepTaggedGenRawL",&ZTwo_genPartIdxMother_FromSemiLepTaggedGenRawL,"ZTwo_genPartIdxMother_FromSemiLepTaggedGenRawL/F");
+
+    GenRawSemiLepTaggedTree->Branch("nZTwoDecay_FromSemiLepTaggedGenRawL",&nZTwoDecay_FromSemiLepTaggedGenRawL,"nZTwoDecay_FromSemiLepTaggedGenRawL/i");
+    GenRawSemiLepTaggedTree->Branch("ZTwo_decaypdgId_FromSemiLepTaggedGenRawL",&ZTwo_decaypdgId_FromSemiLepTaggedGenRawL);
+
+    GenRawSemiLepTaggedTree->Branch("ZPair_InvMass_FromSemiLepTaggedGenRawL",&ZPair_InvMass_FromSemiLepTaggedGenRawL,"ZPair_InvMass_FromSemiLepTaggedGenRawL/F");
+    GenRawSemiLepTaggedTree->Branch("ZPair_EtaSep_FromSemiLepTaggedGenRawL",&ZPair_EtaSep_FromSemiLepTaggedGenRawL,"ZPair_EtaSep_FromSemiLepTaggedGenRawL/F");
+
+    GenRawSemiLepTaggedTree->Branch("H_pt_FromSemiLepTaggedGenRawL",&H_pt_FromSemiLepTaggedGenRawL,"H_pt_FromSemiLepTaggedGenRawL/F");
+    GenRawSemiLepTaggedTree->Branch("H_eta_FromSemiLepTaggedGenRawL",&H_eta_FromSemiLepTaggedGenRawL,"H_eta_FromSemiLepTaggedGenRawL/F");
+    GenRawSemiLepTaggedTree->Branch("H_phi_FromSemiLepTaggedGenRawL",&H_phi_FromSemiLepTaggedGenRawL,"H_phi_FromSemiLepTaggedGenRawL/F");
+    GenRawSemiLepTaggedTree->Branch("H_mass_FromSemiLepTaggedGenRawL",&H_mass_FromSemiLepTaggedGenRawL,"H_mass_FromSemiLepTaggedGenRawL/F");
+    GenRawSemiLepTaggedTree->Branch("H_pdgId_FromSemiLepTaggedGenRawL",&H_pdgId_FromSemiLepTaggedGenRawL,"H_pdgId_FromSemiLepTaggedGenRawL/F");
+    GenRawSemiLepTaggedTree->Branch("H_genPartIdxMother_FromSemiLepTaggedGenRawL",&H_genPartIdxMother_FromSemiLepTaggedGenRawL,"H_genPartIdxMother_FromSemiLepTaggedGenRawL/F");
+
+    GenRawSemiLepTaggedTree->Branch("nHDecay_FromSemiLepTaggedGenRawL",&nHDecay_FromSemiLepTaggedGenRawL,"nHDecay_FromSemiLepTaggedGenRawL/i");
+    GenRawSemiLepTaggedTree->Branch("H_decaypdgId_FromSemiLepTaggedGenRawL",&H_decaypdgId_FromSemiLepTaggedGenRawL);
+
+    GenRawSemiLepTaggedTree->Branch("ZPairPlusH_InvMass_FromSemiLepTaggedGenRawL",&ZPairPlusH_InvMass_FromSemiLepTaggedGenRawL,"ZPairPlusH_InvMass_FromSemiLepTaggedGenRawL/F");
+
+
+
+    //This tree is for variables before the cuts
+    //Can only use this on EFT and SM, not background
+
+
+    float ZOne_pt_FromSemiLepTaggedLHERawL;
+    float ZOne_eta_FromSemiLepTaggedLHERawL;
+    float ZOne_phi_FromSemiLepTaggedLHERawL;
+    float ZOne_mass_FromSemiLepTaggedLHERawL;
+
+    float ZTwo_pt_FromSemiLepTaggedLHERawL;
+    float ZTwo_eta_FromSemiLepTaggedLHERawL;
+    float ZTwo_phi_FromSemiLepTaggedLHERawL;
+    float ZTwo_mass_FromSemiLepTaggedLHERawL;
+
+    float ZPair_InvMass_FromSemiLepTaggedLHERawL;
+    float ZPair_EtaSep_FromSemiLepTaggedLHERawL;
+
+    float H_pt_FromSemiLepTaggedLHERawL;
+    float H_eta_FromSemiLepTaggedLHERawL;
+    float H_phi_FromSemiLepTaggedLHERawL;
+    float H_mass_FromSemiLepTaggedLHERawL;
+
+    float ZPairPlusH_InvMass_FromSemiLepTaggedLHERawL;
+
+    float JOne_pt_FromSemiLepTaggedLHERawL;
+    float JOne_eta_FromSemiLepTaggedLHERawL;
+    float JOne_phi_FromSemiLepTaggedLHERawL;
+    float JOne_pdgId_FromSemiLepTaggedLHERawL;
+
+    float JTwo_pt_FromSemiLepTaggedLHERawL;
+    float JTwo_eta_FromSemiLepTaggedLHERawL;
+    float JTwo_phi_FromSemiLepTaggedLHERawL;
+    float JTwo_pdgId_FromSemiLepTaggedLHERawL;
+
+    float JOne_invmass_FromSemiLepTaggedLHERawL;
+    float JTwo_invmass_FromSemiLepTaggedLHERawL;
+
+    
+    
+
+    float JPair_invmass_FromSemiLepTaggedLHERawL;
+    float J_etasep_FromSemiLepTaggedLHERawL;
+
+    TTree *RawSemiLepTaggedTree = new TTree("RawSemiLepTaggedTree", "RawSemiLepTaggedTree");
+
+    RawSemiLepTaggedTree->Branch("ZOne_pt_FromSemiLepTaggedLHERawL",&ZOne_pt_FromSemiLepTaggedLHERawL,"ZOne_pt_FromSemiLepTaggedLHERawL/F");
+    RawSemiLepTaggedTree->Branch("ZOne_eta_FromSemiLepTaggedLHERawL",&ZOne_eta_FromSemiLepTaggedLHERawL,"ZOne_eta_FromSemiLepTaggedLHERawL/F");
+    RawSemiLepTaggedTree->Branch("ZOne_phi_FromSemiLepTaggedLHERawL",&ZOne_phi_FromSemiLepTaggedLHERawL,"ZOne_phi_FromSemiLepTaggedLHERawL/F");
+    RawSemiLepTaggedTree->Branch("ZOne_mass_FromSemiLepTaggedLHERawL",&ZOne_mass_FromSemiLepTaggedLHERawL,"ZOne_mass_FromSemiLepTaggedLHERawL/F");
+
+    RawSemiLepTaggedTree->Branch("ZTwo_pt_FromSemiLepTaggedLHERawL",&ZTwo_pt_FromSemiLepTaggedLHERawL,"ZTwo_pt_FromSemiLepTaggedLHERawL/F");
+    RawSemiLepTaggedTree->Branch("ZTwo_eta_FromSemiLepTaggedLHERawL",&ZTwo_eta_FromSemiLepTaggedLHERawL,"ZTwo_eta_FromSemiLepTaggedLHERawL/F");
+    RawSemiLepTaggedTree->Branch("ZTwo_phi_FromSemiLepTaggedLHERawL",&ZTwo_phi_FromSemiLepTaggedLHERawL,"ZTwo_phi_FromSemiLepTaggedLHERawL/F");
+    RawSemiLepTaggedTree->Branch("ZTwo_mass_FromSemiLepTaggedLHERawL",&ZTwo_mass_FromSemiLepTaggedLHERawL,"ZTwo_mass_FromSemiLepTaggedLHERawL/F");
+
+    RawSemiLepTaggedTree->Branch("ZPair_InvMass_FromSemiLepTaggedLHERawL",&ZPair_InvMass_FromSemiLepTaggedLHERawL,"ZPair_InvMass_FromSemiLepTaggedLHERawL/F");
+    RawSemiLepTaggedTree->Branch("ZPair_EtaSep_FromSemiLepTaggedLHERawL",&ZPair_EtaSep_FromSemiLepTaggedLHERawL,"ZPair_EtaSep_FromSemiLepTaggedLHERawL/F");
+
+    RawSemiLepTaggedTree->Branch("H_pt_FromSemiLepTaggedLHERawL",&H_pt_FromSemiLepTaggedLHERawL,"H_pt_FromSemiLepTaggedLHERawL/F");
+    RawSemiLepTaggedTree->Branch("H_eta_FromSemiLepTaggedLHERawL",&H_eta_FromSemiLepTaggedLHERawL,"H_eta_FromSemiLepTaggedLHERawL/F");
+    RawSemiLepTaggedTree->Branch("H_phi_FromSemiLepTaggedLHERawL",&H_phi_FromSemiLepTaggedLHERawL,"H_phi_FromSemiLepTaggedLHERawL/F");
+    RawSemiLepTaggedTree->Branch("H_mass_FromSemiLepTaggedLHERawL",&H_mass_FromSemiLepTaggedLHERawL,"H_mass_FromSemiLepTaggedLHERawL/F");
+
+
+    RawSemiLepTaggedTree->Branch("ZPairPlusH_InvMass_FromSemiLepTaggedLHERawL",&ZPairPlusH_InvMass_FromSemiLepTaggedLHERawL,"ZPairPlusH_InvMass_FromSemiLepTaggedLHERawL/F");
+
+    RawSemiLepTaggedTree->Branch("JOne_pt_FromSemiLepTaggedLHERawL",&JOne_pt_FromSemiLepTaggedLHERawL,"JOne_pt_FromSemiLepTaggedLHERawL/F");
+    RawSemiLepTaggedTree->Branch("JOne_eta_FromSemiLepTaggedLHERawL",&JOne_eta_FromSemiLepTaggedLHERawL,"JOne_eta_FromSemiLepTaggedLHERawL/F");
+    RawSemiLepTaggedTree->Branch("JOne_phi_FromSemiLepTaggedLHERawL",&JOne_phi_FromSemiLepTaggedLHERawL,"JOne_phi_FromSemiLepTaggedLHERawL/F");
+    RawSemiLepTaggedTree->Branch("JOne_invmass_FromSemiLepTaggedLHERawL",&JOne_invmass_FromSemiLepTaggedLHERawL,"JOne_invmass_FromSemiLepTaggedLHERawL/F");
+    RawSemiLepTaggedTree->Branch("JOne_pdgId_FromSemiLepTaggedLHERawL",&JOne_pdgId_FromSemiLepTaggedLHERawL,"JOne_pdgId_FromSemiLepTaggedLHERawL/F");
+
+    RawSemiLepTaggedTree->Branch("JTwo_pt_FromSemiLepTaggedLHERawL",&JTwo_pt_FromSemiLepTaggedLHERawL,"JTwo_pt_FromSemiLepTaggedLHERawL/F");
+    RawSemiLepTaggedTree->Branch("JTwo_eta_FromSemiLepTaggedLHERawL",&JTwo_eta_FromSemiLepTaggedLHERawL,"JTwo_eta_FromSemiLepTaggedLHERawL/F");
+    RawSemiLepTaggedTree->Branch("JTwo_phi_FromSemiLepTaggedLHERawL",&JTwo_phi_FromSemiLepTaggedLHERawL,"JTwo_phi_FromSemiLepTaggedLHERawL/F");
+    RawSemiLepTaggedTree->Branch("JTwo_invmass_FromSemiLepTaggedLHERawL",&JTwo_invmass_FromSemiLepTaggedLHERawL,"JTwo_invmass_FromSemiLepTaggedLHERawL/F");
+    RawSemiLepTaggedTree->Branch("JTwo_pdgId_FromSemiLepTaggedLHERawL",&JTwo_pdgId_FromSemiLepTaggedLHERawL,"JTwo_pdgId_FromSemiLepTaggedLHERawL/F");
+
+    
+
+    RawSemiLepTaggedTree->Branch("JPair_invmass_FromSemiLepTaggedLHERawL",&JPair_invmass_FromSemiLepTaggedLHERawL,"JPair_invmass_FromSemiLepTaggedLHERawL/F");
+    RawSemiLepTaggedTree->Branch("J_etasep_FromSemiLepTaggedLHERawL",&J_etasep_FromSemiLepTaggedLHERawL,"J_etasep_FromSemiLepTaggedLHERawL/F");
+
+
+    ////////////////////////////////LEPTONIC TREES////////////////////////////////
+    ////////////////////////////////LEPTONIC TREES////////////////////////////////
+    ////////////////////////////////LEPTONIC TREES////////////////////////////////
+    ////////////////////////////////LEPTONIC TREES////////////////////////////////
+
+    //these trees are ones tagged as leptonic by checking Z decay pdg IDs
+
+
+    float HFJ_pt_FromLepTaggedGenMatchL;
+    float HFJ_eta_FromLepTaggedGenMatchL;
+    float HFJ_phi_FromLepTaggedGenMatchL;
+    float HFJ_mass_FromLepTaggedGenMatchL;
+    float HFJ_dRFromFJ_FromLepTaggedGenMatchL;
+
+    UInt_t nHFJDecay_FromLepTaggedGenMatchL;
+    std::vector<Int_t> HFJ_decaypdgId_FromLepTaggedGenMatchL;
+
+
+
+    TTree *HFJGenLepTaggedTree = new TTree("HFJGenLepTaggedTree", "HFJGenLepTaggedTree");
+
+    HFJGenLepTaggedTree->Branch("HFJ_pt_FromLepTaggedGenMatchL",&HFJ_pt_FromLepTaggedGenMatchL,"HFJ_pt_FromLepTaggedGenMatchL/F");
+    HFJGenLepTaggedTree->Branch("HFJ_eta_FromLepTaggedGenMatchL",&HFJ_eta_FromLepTaggedGenMatchL,"HFJ_eta_FromLepTaggedGenMatchL/F");
+    HFJGenLepTaggedTree->Branch("HFJ_phi_FromLepTaggedGenMatchL",&HFJ_phi_FromLepTaggedGenMatchL,"HFJ_phi_FromLepTaggedGenMatchL/F");
+    HFJGenLepTaggedTree->Branch("HFJ_mass_FromLepTaggedGenMatchL",&HFJ_mass_FromLepTaggedGenMatchL,"HFJ_mass_FromLepTaggedGenMatchL/F");
+    HFJGenLepTaggedTree->Branch("HFJ_dRFromFJ_FromLepTaggedGenMatchL",&HFJ_dRFromFJ_FromLepTaggedGenMatchL,"HFJ_dRFromFJ_FromLepTaggedGenMatchL/F");
+
+    HFJGenLepTaggedTree->Branch("nHFJDecay_FromLepTaggedGenMatchL",&nHFJDecay_FromLepTaggedGenMatchL,"nHFJDecay_FromLepTaggedGenMatchL/i");
+    HFJGenLepTaggedTree->Branch("HFJ_decaypdgId_FromLepTaggedGenMatchL",&HFJ_decaypdgId_FromLepTaggedGenMatchL);
+
+
+    UInt_t ZFJSameJetLepTaggedCtr = 0;
+
+    float ZFJLead_pt_FromLepTaggedGenMatchL;
+    float ZFJLead_eta_FromLepTaggedGenMatchL;
+    float ZFJLead_phi_FromLepTaggedGenMatchL;
+    float ZFJLead_mass_FromLepTaggedGenMatchL;
+    float ZFJLead_dRFromFJ_FromLepTaggedGenMatchL;
+
+    UInt_t nZFJLeadDecay_FromLepTaggedGenMatchL;
+    std::vector<Int_t> ZFJLead_decaypdgId_FromLepTaggedGenMatchL;
+    
+
+    float ZFJTrailing_pt_FromLepTaggedGenMatchL;
+    float ZFJTrailing_eta_FromLepTaggedGenMatchL;
+    float ZFJTrailing_phi_FromLepTaggedGenMatchL;
+    float ZFJTrailing_mass_FromLepTaggedGenMatchL;
+    float ZFJTrailing_dRFromFJ_FromLepTaggedGenMatchL;
+
+    UInt_t nZFJTrailingDecay_FromLepTaggedGenMatchL;
+    std::vector<Int_t> ZFJTrailing_decaypdgId_FromLepTaggedGenMatchL;
+
+    float ZFJPair_InvMass_FromLepTaggedGenMatchL;
+    float ZFJPair_EtaSep_FromLepTaggedGenMatchL;
+
+    TTree *ZFJGenLepTaggedTree = new TTree("ZFJGenLepTaggedTree", "ZFJGenLepTaggedTree");
+
+    ZFJGenLepTaggedTree->Branch("ZFJLead_pt_FromLepTaggedGenMatchL",&ZFJLead_pt_FromLepTaggedGenMatchL,"ZFJLead_pt_FromLepTaggedGenMatchL/F");
+    ZFJGenLepTaggedTree->Branch("ZFJLead_eta_FromLepTaggedGenMatchL",&ZFJLead_eta_FromLepTaggedGenMatchL,"ZFJLead_eta_FromLepTaggedGenMatchL/F");
+    ZFJGenLepTaggedTree->Branch("ZFJLead_phi_FromLepTaggedGenMatchL",&ZFJLead_phi_FromLepTaggedGenMatchL,"ZFJLead_phi_FromLepTaggedGenMatchL/F");
+    ZFJGenLepTaggedTree->Branch("ZFJLead_mass_FromLepTaggedGenMatchL",&ZFJLead_mass_FromLepTaggedGenMatchL,"ZFJLead_mass_FromLepTaggedGenMatchL/F");
+    ZFJGenLepTaggedTree->Branch("ZFJLead_dRFromFJ_FromLepTaggedGenMatchL",&ZFJLead_dRFromFJ_FromLepTaggedGenMatchL,"ZFJLead_dRFromFJ_FromLepTaggedGenMatchL/F");
+
+    ZFJGenLepTaggedTree->Branch("nZFJLeadDecay_FromLepTaggedGenMatchL",&nZFJLeadDecay_FromLepTaggedGenMatchL,"nZFJLeadDecay_FromLepTaggedGenMatchL/i");
+    ZFJGenLepTaggedTree->Branch("ZFJLead_decaypdgId_FromLepTaggedGenMatchL",&ZFJLead_decaypdgId_FromLepTaggedGenMatchL);
+
+    ZFJGenLepTaggedTree->Branch("ZFJTrailing_pt_FromLepTaggedGenMatchL",&ZFJTrailing_pt_FromLepTaggedGenMatchL,"ZFJTrailing_pt_FromLepTaggedGenMatchL/F");
+    ZFJGenLepTaggedTree->Branch("ZFJTrailing_eta_FromLepTaggedGenMatchL",&ZFJTrailing_eta_FromLepTaggedGenMatchL,"ZFJTrailing_eta_FromLepTaggedGenMatchL/F");
+    ZFJGenLepTaggedTree->Branch("ZFJTrailing_phi_FromLepTaggedGenMatchL",&ZFJTrailing_phi_FromLepTaggedGenMatchL,"ZFJTrailing_phi_FromLepTaggedGenMatchL/F");
+    ZFJGenLepTaggedTree->Branch("ZFJTrailing_mass_FromLepTaggedGenMatchL",&ZFJTrailing_mass_FromLepTaggedGenMatchL,"ZFJTrailing_mass_FromLepTaggedGenMatchL/F");
+    ZFJGenLepTaggedTree->Branch("ZFJTrailing_dRFromFJ_FromLepTaggedGenMatchL",&ZFJTrailing_dRFromFJ_FromLepTaggedGenMatchL,"ZFJTrailing_dRFromFJ_FromLepTaggedGenMatchL/F");
+
+    ZFJGenLepTaggedTree->Branch("nZFJTrailingDecay_FromLepTaggedGenMatchL",&nZFJTrailingDecay_FromLepTaggedGenMatchL,"nZFJTrailingDecay_FromLepTaggedGenMatchL/i");
+    ZFJGenLepTaggedTree->Branch("ZFJTrailing_decaypdgId_FromLepTaggedGenMatchL",&ZFJTrailing_decaypdgId_FromLepTaggedGenMatchL);
+
+    ZFJGenLepTaggedTree->Branch("ZFJPair_InvMass_FromLepTaggedGenMatchL",&ZFJPair_InvMass_FromLepTaggedGenMatchL,"ZFJPair_InvMass_FromLepTaggedGenMatchL/F");
+    ZFJGenLepTaggedTree->Branch("ZFJPair_EtaSep_FromLepTaggedGenMatchL",&ZFJPair_EtaSep_FromLepTaggedGenMatchL,"ZFJPair_EtaSep_FromLepTaggedGenMatchL/F");
+
+    float ZHFJ_ZPairPlusHInvMass_FromLepTaggedGenMatchL;
+    TTree *ZHFJGenLepTaggedTree = new TTree("ZHFJGenLepTaggedTree", "ZHFJGenLepTaggedTree");
+    ZHFJGenLepTaggedTree->Branch("ZHFJ_ZPairPlusHInvMass_FromLepTaggedGenMatchL",&ZHFJ_ZPairPlusHInvMass_FromLepTaggedGenMatchL,"ZHFJ_ZPairPlusHInvMass_FromLepTaggedGenMatchL/F");
+
+    float ZHJ_ZPairPlusHInvMass_FromLepTaggedGenMatchL;
+    TTree *ZHJGenLepTaggedTree = new TTree("ZHJGenLepTaggedTree", "ZHJGenLepTaggedTree");
+    ZHJGenLepTaggedTree->Branch("ZHJ_ZPairPlusHInvMass_FromLepTaggedGenMatchL",&ZHJ_ZPairPlusHInvMass_FromLepTaggedGenMatchL,"ZHJ_ZPairPlusHInvMass_FromLepTaggedGenMatchL/F");
+
+
+
+
+
+    UInt_t ZJSameJetLepTaggedCtr = 0;
+
+
+    float ZJLead_pt_FromLepTaggedGenMatchL;
+    float ZJLead_eta_FromLepTaggedGenMatchL;
+    float ZJLead_phi_FromLepTaggedGenMatchL;
+    float ZJLead_mass_FromLepTaggedGenMatchL;
+    float ZJLead_dRFromJ_FromLepTaggedGenMatchL;
+
+    UInt_t nZJLeadDecay_FromLepTaggedGenMatchL;
+    std::vector<Int_t> ZJLead_decaypdgId_FromLepTaggedGenMatchL;
+    
+
+    float ZJTrailing_pt_FromLepTaggedGenMatchL;
+    float ZJTrailing_eta_FromLepTaggedGenMatchL;
+    float ZJTrailing_phi_FromLepTaggedGenMatchL;
+    float ZJTrailing_mass_FromLepTaggedGenMatchL;
+    float ZJTrailing_dRFromJ_FromLepTaggedGenMatchL;
+
+    UInt_t nZJTrailingDecay_FromLepTaggedGenMatchL;
+    std::vector<Int_t> ZJTrailing_decaypdgId_FromLepTaggedGenMatchL;
+
+    float ZJPair_InvMass_FromLepTaggedGenMatchL;
+    float ZJPair_EtaSep_FromLepTaggedGenMatchL;
+
+    TTree *ZJGenLepTaggedTree = new TTree("ZJGenLepTaggedTree", "ZJGenLepTaggedTree");
+
+    ZJGenLepTaggedTree->Branch("ZJLead_pt_FromLepTaggedGenMatchL",&ZJLead_pt_FromLepTaggedGenMatchL,"ZJLead_pt_FromLepTaggedGenMatchL/F");
+    ZJGenLepTaggedTree->Branch("ZJLead_eta_FromLepTaggedGenMatchL",&ZJLead_eta_FromLepTaggedGenMatchL,"ZJLead_eta_FromLepTaggedGenMatchL/F");
+    ZJGenLepTaggedTree->Branch("ZJLead_phi_FromLepTaggedGenMatchL",&ZJLead_phi_FromLepTaggedGenMatchL,"ZJLead_phi_FromLepTaggedGenMatchL/F");
+    ZJGenLepTaggedTree->Branch("ZJLead_mass_FromLepTaggedGenMatchL",&ZJLead_mass_FromLepTaggedGenMatchL,"ZJLead_mass_FromLepTaggedGenMatchL/F");
+    ZJGenLepTaggedTree->Branch("ZJLead_dRFromJ_FromLepTaggedGenMatchL",&ZJLead_dRFromJ_FromLepTaggedGenMatchL,"ZJLead_dRFromJ_FromLepTaggedGenMatchL/F");
+
+    ZJGenLepTaggedTree->Branch("nZJLeadDecay_FromLepTaggedGenMatchL",&nZJLeadDecay_FromLepTaggedGenMatchL,"nZJLeadDecay_FromLepTaggedGenMatchL/i");
+    ZJGenLepTaggedTree->Branch("ZJLead_decaypdgId_FromLepTaggedGenMatchL",&ZJLead_decaypdgId_FromLepTaggedGenMatchL);
+
+    ZJGenLepTaggedTree->Branch("ZJTrailing_pt_FromLepTaggedGenMatchL",&ZJTrailing_pt_FromLepTaggedGenMatchL,"ZJTrailing_pt_FromLepTaggedGenMatchL/F");
+    ZJGenLepTaggedTree->Branch("ZJTrailing_eta_FromLepTaggedGenMatchL",&ZJTrailing_eta_FromLepTaggedGenMatchL,"ZJTrailing_eta_FromLepTaggedGenMatchL/F");
+    ZJGenLepTaggedTree->Branch("ZJTrailing_phi_FromLepTaggedGenMatchL",&ZJTrailing_phi_FromLepTaggedGenMatchL,"ZJTrailing_phi_FromLepTaggedGenMatchL/F");
+    ZJGenLepTaggedTree->Branch("ZJTrailing_mass_FromLepTaggedGenMatchL",&ZJTrailing_mass_FromLepTaggedGenMatchL,"ZJTrailing_mass_FromLepTaggedGenMatchL/F");
+    ZJGenLepTaggedTree->Branch("ZJTrailing_dRFromJ_FromLepTaggedGenMatchL",&ZJTrailing_dRFromJ_FromLepTaggedGenMatchL,"ZJTrailing_dRFromJ_FromLepTaggedGenMatchL/F");
+
+    ZJGenLepTaggedTree->Branch("nZJTrailingDecay_FromLepTaggedGenMatchL",&nZJTrailingDecay_FromLepTaggedGenMatchL,"nZJTrailingDecay_FromLepTaggedGenMatchL/i");
+    ZJGenLepTaggedTree->Branch("ZJTrailing_decaypdgId_FromLepTaggedGenMatchL",&ZJTrailing_decaypdgId_FromLepTaggedGenMatchL);
+
+    ZJGenLepTaggedTree->Branch("ZJPair_InvMass_FromLepTaggedGenMatchL",&ZJPair_InvMass_FromLepTaggedGenMatchL,"ZJPair_InvMass_FromLepTaggedGenMatchL/F");
+    ZJGenLepTaggedTree->Branch("ZJPair_EtaSep_FromLepTaggedGenMatchL",&ZJPair_EtaSep_FromLepTaggedGenMatchL,"ZJPair_EtaSep_FromLepTaggedGenMatchL/F");
+
+
+
+
+
+    //This tree is for gen variables before the cuts
+    //Can only use this on EFT and SM, not background
+
+
+    float ZOne_pt_FromLepTaggedGenRawL;
+    float ZOne_eta_FromLepTaggedGenRawL;
+    float ZOne_phi_FromLepTaggedGenRawL;
+    float ZOne_mass_FromLepTaggedGenRawL;
+    float ZOne_pdgId_FromLepTaggedGenRawL;
+    float ZOne_genPartIdxMother_FromLepTaggedGenRawL;
+
+    UInt_t nZOneDecay_FromLepTaggedGenRawL;
+    std::vector<Int_t> ZOne_decaypdgId_FromLepTaggedGenRawL;
+
+    float ZTwo_pt_FromLepTaggedGenRawL;
+    float ZTwo_eta_FromLepTaggedGenRawL;
+    float ZTwo_phi_FromLepTaggedGenRawL;
+    float ZTwo_mass_FromLepTaggedGenRawL;
+    float ZTwo_pdgId_FromLepTaggedGenRawL;
+    float ZTwo_genPartIdxMother_FromLepTaggedGenRawL;
+
+    UInt_t nZTwoDecay_FromLepTaggedGenRawL;
+    std::vector<Int_t> ZTwo_decaypdgId_FromLepTaggedGenRawL;
+
+    float ZPair_InvMass_FromLepTaggedGenRawL;
+    float ZPair_EtaSep_FromLepTaggedGenRawL;
+
+    float H_pt_FromLepTaggedGenRawL;
+    float H_eta_FromLepTaggedGenRawL;
+    float H_phi_FromLepTaggedGenRawL;
+    float H_mass_FromLepTaggedGenRawL;
+    float H_pdgId_FromLepTaggedGenRawL;
+    float H_genPartIdxMother_FromLepTaggedGenRawL;
+
+    UInt_t nHDecay_FromLepTaggedGenRawL;
+    std::vector<Int_t> H_decaypdgId_FromLepTaggedGenRawL;
+
+    float ZPairPlusH_InvMass_FromLepTaggedGenRawL;
+
+    TTree *GenRawLepTaggedTree = new TTree("GenRawLepTaggedTree", "GenRawLepTaggedTree");
+
+    GenRawLepTaggedTree->Branch("ZOne_pt_FromLepTaggedGenRawL",&ZOne_pt_FromLepTaggedGenRawL,"ZOne_pt_FromLepTaggedGenRawL/F");
+    GenRawLepTaggedTree->Branch("ZOne_eta_FromLepTaggedGenRawL",&ZOne_eta_FromLepTaggedGenRawL,"ZOne_eta_FromLepTaggedGenRawL/F");
+    GenRawLepTaggedTree->Branch("ZOne_phi_FromLepTaggedGenRawL",&ZOne_phi_FromLepTaggedGenRawL,"ZOne_phi_FromLepTaggedGenRawL/F");
+    GenRawLepTaggedTree->Branch("ZOne_mass_FromLepTaggedGenRawL",&ZOne_mass_FromLepTaggedGenRawL,"ZOne_mass_FromLepTaggedGenRawL/F");
+    GenRawLepTaggedTree->Branch("ZOne_pdgId_FromLepTaggedGenRawL",&ZOne_pdgId_FromLepTaggedGenRawL,"ZOne_pdgId_FromLepTaggedGenRawL/F");
+    GenRawLepTaggedTree->Branch("ZOne_genPartIdxMother_FromLepTaggedGenRawL",&ZOne_genPartIdxMother_FromLepTaggedGenRawL,"ZOne_genPartIdxMother_FromLepTaggedGenRawL/F");
+
+    GenRawLepTaggedTree->Branch("nZOneDecay_FromLepTaggedGenRawL",&nZOneDecay_FromLepTaggedGenRawL,"nZOneDecay_FromLepTaggedGenRawL/i");
+    GenRawLepTaggedTree->Branch("ZOne_decaypdgId_FromLepTaggedGenRawL",&ZOne_decaypdgId_FromLepTaggedGenRawL);
+
+    GenRawLepTaggedTree->Branch("ZTwo_pt_FromLepTaggedGenRawL",&ZTwo_pt_FromLepTaggedGenRawL,"ZTwo_pt_FromLepTaggedGenRawL/F");
+    GenRawLepTaggedTree->Branch("ZTwo_eta_FromLepTaggedGenRawL",&ZTwo_eta_FromLepTaggedGenRawL,"ZTwo_eta_FromLepTaggedGenRawL/F");
+    GenRawLepTaggedTree->Branch("ZTwo_phi_FromLepTaggedGenRawL",&ZTwo_phi_FromLepTaggedGenRawL,"ZTwo_phi_FromLepTaggedGenRawL/F");
+    GenRawLepTaggedTree->Branch("ZTwo_mass_FromLepTaggedGenRawL",&ZTwo_mass_FromLepTaggedGenRawL,"ZTwo_mass_FromLepTaggedGenRawL/F");
+    GenRawLepTaggedTree->Branch("ZTwo_pdgId_FromLepTaggedGenRawL",&ZTwo_pdgId_FromLepTaggedGenRawL,"ZTwo_pdgId_FromLepTaggedGenRawL/F");
+    GenRawLepTaggedTree->Branch("ZTwo_genPartIdxMother_FromLepTaggedGenRawL",&ZTwo_genPartIdxMother_FromLepTaggedGenRawL,"ZTwo_genPartIdxMother_FromLepTaggedGenRawL/F");
+
+    GenRawLepTaggedTree->Branch("nZTwoDecay_FromLepTaggedGenRawL",&nZTwoDecay_FromLepTaggedGenRawL,"nZTwoDecay_FromLepTaggedGenRawL/i");
+    GenRawLepTaggedTree->Branch("ZTwo_decaypdgId_FromLepTaggedGenRawL",&ZTwo_decaypdgId_FromLepTaggedGenRawL);
+
+    GenRawLepTaggedTree->Branch("ZPair_InvMass_FromLepTaggedGenRawL",&ZPair_InvMass_FromLepTaggedGenRawL,"ZPair_InvMass_FromLepTaggedGenRawL/F");
+    GenRawLepTaggedTree->Branch("ZPair_EtaSep_FromLepTaggedGenRawL",&ZPair_EtaSep_FromLepTaggedGenRawL,"ZPair_EtaSep_FromLepTaggedGenRawL/F");
+
+    GenRawLepTaggedTree->Branch("H_pt_FromLepTaggedGenRawL",&H_pt_FromLepTaggedGenRawL,"H_pt_FromLepTaggedGenRawL/F");
+    GenRawLepTaggedTree->Branch("H_eta_FromLepTaggedGenRawL",&H_eta_FromLepTaggedGenRawL,"H_eta_FromLepTaggedGenRawL/F");
+    GenRawLepTaggedTree->Branch("H_phi_FromLepTaggedGenRawL",&H_phi_FromLepTaggedGenRawL,"H_phi_FromLepTaggedGenRawL/F");
+    GenRawLepTaggedTree->Branch("H_mass_FromLepTaggedGenRawL",&H_mass_FromLepTaggedGenRawL,"H_mass_FromLepTaggedGenRawL/F");
+    GenRawLepTaggedTree->Branch("H_pdgId_FromLepTaggedGenRawL",&H_pdgId_FromLepTaggedGenRawL,"H_pdgId_FromLepTaggedGenRawL/F");
+    GenRawLepTaggedTree->Branch("H_genPartIdxMother_FromLepTaggedGenRawL",&H_genPartIdxMother_FromLepTaggedGenRawL,"H_genPartIdxMother_FromLepTaggedGenRawL/F");
+
+    GenRawLepTaggedTree->Branch("nHDecay_FromLepTaggedGenRawL",&nHDecay_FromLepTaggedGenRawL,"nHDecay_FromLepTaggedGenRawL/i");
+    GenRawLepTaggedTree->Branch("H_decaypdgId_FromLepTaggedGenRawL",&H_decaypdgId_FromLepTaggedGenRawL);
+
+    GenRawLepTaggedTree->Branch("ZPairPlusH_InvMass_FromLepTaggedGenRawL",&ZPairPlusH_InvMass_FromLepTaggedGenRawL,"ZPairPlusH_InvMass_FromLepTaggedGenRawL/F");
+
+
+
+    //This tree is for variables before the cuts
+    //Can only use this on EFT and SM, not background
+
+
+    float ZOne_pt_FromLepTaggedLHERawL;
+    float ZOne_eta_FromLepTaggedLHERawL;
+    float ZOne_phi_FromLepTaggedLHERawL;
+    float ZOne_mass_FromLepTaggedLHERawL;
+
+    float ZTwo_pt_FromLepTaggedLHERawL;
+    float ZTwo_eta_FromLepTaggedLHERawL;
+    float ZTwo_phi_FromLepTaggedLHERawL;
+    float ZTwo_mass_FromLepTaggedLHERawL;
+
+    float ZPair_InvMass_FromLepTaggedLHERawL;
+    float ZPair_EtaSep_FromLepTaggedLHERawL;
+
+    float H_pt_FromLepTaggedLHERawL;
+    float H_eta_FromLepTaggedLHERawL;
+    float H_phi_FromLepTaggedLHERawL;
+    float H_mass_FromLepTaggedLHERawL;
+
+    float ZPairPlusH_InvMass_FromLepTaggedLHERawL;
+
+    float JOne_pt_FromLepTaggedLHERawL;
+    float JOne_eta_FromLepTaggedLHERawL;
+    float JOne_phi_FromLepTaggedLHERawL;
+    float JOne_pdgId_FromLepTaggedLHERawL;
+
+    float JTwo_pt_FromLepTaggedLHERawL;
+    float JTwo_eta_FromLepTaggedLHERawL;
+    float JTwo_phi_FromLepTaggedLHERawL;
+    float JTwo_pdgId_FromLepTaggedLHERawL;
+
+    float JOne_invmass_FromLepTaggedLHERawL;
+    float JTwo_invmass_FromLepTaggedLHERawL;
+
+
+    float JPair_invmass_FromLepTaggedLHERawL;
+    float J_etasep_FromLepTaggedLHERawL;
+
+    TTree *RawLepTaggedTree = new TTree("RawLepTaggedTree", "RawLepTaggedTree");
+
+    RawLepTaggedTree->Branch("ZOne_pt_FromLepTaggedLHERawL",&ZOne_pt_FromLepTaggedLHERawL,"ZOne_pt_FromLepTaggedLHERawL/F");
+    RawLepTaggedTree->Branch("ZOne_eta_FromLepTaggedLHERawL",&ZOne_eta_FromLepTaggedLHERawL,"ZOne_eta_FromLepTaggedLHERawL/F");
+    RawLepTaggedTree->Branch("ZOne_phi_FromLepTaggedLHERawL",&ZOne_phi_FromLepTaggedLHERawL,"ZOne_phi_FromLepTaggedLHERawL/F");
+    RawLepTaggedTree->Branch("ZOne_mass_FromLepTaggedLHERawL",&ZOne_mass_FromLepTaggedLHERawL,"ZOne_mass_FromLepTaggedLHERawL/F");
+
+    RawLepTaggedTree->Branch("ZTwo_pt_FromLepTaggedLHERawL",&ZTwo_pt_FromLepTaggedLHERawL,"ZTwo_pt_FromLepTaggedLHERawL/F");
+    RawLepTaggedTree->Branch("ZTwo_eta_FromLepTaggedLHERawL",&ZTwo_eta_FromLepTaggedLHERawL,"ZTwo_eta_FromLepTaggedLHERawL/F");
+    RawLepTaggedTree->Branch("ZTwo_phi_FromLepTaggedLHERawL",&ZTwo_phi_FromLepTaggedLHERawL,"ZTwo_phi_FromLepTaggedLHERawL/F");
+    RawLepTaggedTree->Branch("ZTwo_mass_FromLepTaggedLHERawL",&ZTwo_mass_FromLepTaggedLHERawL,"ZTwo_mass_FromLepTaggedLHERawL/F");
+
+    RawLepTaggedTree->Branch("ZPair_InvMass_FromLepTaggedLHERawL",&ZPair_InvMass_FromLepTaggedLHERawL,"ZPair_InvMass_FromLepTaggedLHERawL/F");
+    RawLepTaggedTree->Branch("ZPair_EtaSep_FromLepTaggedLHERawL",&ZPair_EtaSep_FromLepTaggedLHERawL,"ZPair_EtaSep_FromLepTaggedLHERawL/F");
+
+    RawLepTaggedTree->Branch("H_pt_FromLepTaggedLHERawL",&H_pt_FromLepTaggedLHERawL,"H_pt_FromLepTaggedLHERawL/F");
+    RawLepTaggedTree->Branch("H_eta_FromLepTaggedLHERawL",&H_eta_FromLepTaggedLHERawL,"H_eta_FromLepTaggedLHERawL/F");
+    RawLepTaggedTree->Branch("H_phi_FromLepTaggedLHERawL",&H_phi_FromLepTaggedLHERawL,"H_phi_FromLepTaggedLHERawL/F");
+    RawLepTaggedTree->Branch("H_mass_FromLepTaggedLHERawL",&H_mass_FromLepTaggedLHERawL,"H_mass_FromLepTaggedLHERawL/F");
+
+
+    RawLepTaggedTree->Branch("ZPairPlusH_InvMass_FromLepTaggedLHERawL",&ZPairPlusH_InvMass_FromLepTaggedLHERawL,"ZPairPlusH_InvMass_FromLepTaggedLHERawL/F");
+
+    RawLepTaggedTree->Branch("JOne_pt_FromLepTaggedLHERawL",&JOne_pt_FromLepTaggedLHERawL,"JOne_pt_FromLepTaggedLHERawL/F");
+    RawLepTaggedTree->Branch("JOne_eta_FromLepTaggedLHERawL",&JOne_eta_FromLepTaggedLHERawL,"JOne_eta_FromLepTaggedLHERawL/F");
+    RawLepTaggedTree->Branch("JOne_phi_FromLepTaggedLHERawL",&JOne_phi_FromLepTaggedLHERawL,"JOne_phi_FromLepTaggedLHERawL/F");
+    RawLepTaggedTree->Branch("JOne_invmass_FromLepTaggedLHERawL",&JOne_invmass_FromLepTaggedLHERawL,"JOne_invmass_FromLepTaggedLHERawL/F");
+    RawLepTaggedTree->Branch("JOne_pdgId_FromLepTaggedLHERawL",&JOne_pdgId_FromLepTaggedLHERawL,"JOne_pdgId_FromLepTaggedLHERawL/F");
+
+    RawLepTaggedTree->Branch("JTwo_pt_FromLepTaggedLHERawL",&JTwo_pt_FromLepTaggedLHERawL,"JTwo_pt_FromLepTaggedLHERawL/F");
+    RawLepTaggedTree->Branch("JTwo_eta_FromLepTaggedLHERawL",&JTwo_eta_FromLepTaggedLHERawL,"JTwo_eta_FromLepTaggedLHERawL/F");
+    RawLepTaggedTree->Branch("JTwo_phi_FromLepTaggedLHERawL",&JTwo_phi_FromLepTaggedLHERawL,"JTwo_phi_FromLepTaggedLHERawL/F");
+    RawLepTaggedTree->Branch("JTwo_invmass_FromLepTaggedLHERawL",&JTwo_invmass_FromLepTaggedLHERawL,"JTwo_invmass_FromLepTaggedLHERawL/F");
+    RawLepTaggedTree->Branch("JTwo_pdgId_FromLepTaggedLHERawL",&JTwo_pdgId_FromLepTaggedLHERawL,"JTwo_pdgId_FromLepTaggedLHERawL/F");
+
+    
+
+    RawLepTaggedTree->Branch("JPair_invmass_FromLepTaggedLHERawL",&JPair_invmass_FromLepTaggedLHERawL,"JPair_invmass_FromLepTaggedLHERawL/F");
+    RawLepTaggedTree->Branch("J_etasep_FromLepTaggedLHERawL",&J_etasep_FromLepTaggedLHERawL,"J_etasep_FromLepTaggedLHERawL/F");
+
+
+    UInt_t passHLTCtr = 0;
     UInt_t passAnyChannelCtr = 0;
     UInt_t passLepChannelCtr = 0;
     UInt_t passSemiLepChannelCtr = 0;
@@ -1303,16 +2006,6 @@ void new022022KinematicsAnalysis(){
             bool passedAsSemiLepBool = false;
             bool passedAsHadBool = false;
 
-            //Some tagging done early for the hadronic genmatching trees
-            
-            //First check that it passes the hbb tagging
-            bool hbbTag = *HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02 || *HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np2 || *HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np4;
-
-            //Hadronic
-            bool hadHLT =  (*HLT_PFHT1050 || *HLT_AK8PFJet500 || *HLT_AK8PFJet360_TrimMass30 || *HLT_AK8PFHT750_TrimMass50 || *HLT_AK8PFJet380_TrimMass30 ||
-            *HLT_AK8PFJet400_TrimMass30 || *HLT_AK8PFJet420_TrimMass30 ||
-            *HLT_AK8PFHT800_TrimMass50 || *HLT_AK8PFHT850_TrimMass50 || *HLT_AK8PFHT900_TrimMass50);
-
             //If SM or EFT, get LHE information
             
             if (useLHETree) {
@@ -1523,7 +2216,17 @@ void new022022KinematicsAnalysis(){
 
                 }
                 if (useFJGenMatchTree || useJGenMatchTree) {
+                    bool ZIsLeptonic = false;
+                    bool ZIsSemiLeptonic = false;
                     bool ZIsHadronic = false;
+
+                    bool ZOneIsLeptonic = false;
+                    bool ZOneIsHadronic = false;
+
+                    bool ZTwoIsLeptonic = false;
+                    bool ZTwoIsHadronic = false;
+                    
+                    
                     std::vector<std::vector<Int_t>> tmpHFJAr;
                     std::vector<std::vector<Int_t>> tmpZFJAr;
                     //std::vector<Int_t> tmpZFJAr;
@@ -1895,8 +2598,15 @@ void new022022KinematicsAnalysis(){
                         //std::cout << evCount-1 << " " << finalZAr[0] << " " << finalZAr[1] << "\n";
                         if (ZDecFound) {
                             if (debugGenPart) std::cout << "finalZDecAr[0][0] " << finalZDecAr[0][0] << " finalZDecAr[0][1] " << finalZDecAr[0][1] << " finalZDecAr[1][0] " << finalZDecAr[1][0] << " finalZDecAr[1][1] " << finalZDecAr[1][1] << "\n";
-                            ZIsHadronic = (finalZDecAr[0][0]>-9 && finalZDecAr[0][0]<9 && finalZDecAr[0][1]>-9 && finalZDecAr[0][1]<9 && finalZDecAr[1][0]>-9 && finalZDecAr[1][0]<9 && finalZDecAr[1][1]>-9 && finalZDecAr[1][1]<9);
-                            if (debugGenPart) std::cout << "ZIsHadronic " << ZIsHadronic << "\n";
+                            ZOneIsHadronic = (finalZDecAr[0][0]>-9 && finalZDecAr[0][0]<9 && finalZDecAr[0][1]>-9 && finalZDecAr[0][1]<9);
+                            ZTwoIsHadronic = (finalZDecAr[1][0]>-9 && finalZDecAr[1][0]<9 && finalZDecAr[1][1]>-9 && finalZDecAr[1][1]<9);
+                            ZOneIsLeptonic = ((abs(finalZDecAr[0][0])==11 || abs(finalZDecAr[0][0])==13 || abs(finalZDecAr[0][0])==15) && (abs(finalZDecAr[0][1])==11 || abs(finalZDecAr[0][1])==13 || abs(finalZDecAr[0][1])==15));
+                            ZTwoIsLeptonic = ((abs(finalZDecAr[1][0])==11 || abs(finalZDecAr[1][0])==13 || abs(finalZDecAr[1][0])==15) && (abs(finalZDecAr[1][1])==11 || abs(finalZDecAr[1][1])==13 || abs(finalZDecAr[1][1])==15));
+                            if (ZOneIsLeptonic && ZTwoIsLeptonic) ZIsLeptonic = true;
+                            else if ((ZOneIsLeptonic && ZTwoIsHadronic) || (ZOneIsHadronic && ZTwoIsLeptonic)) ZIsSemiLeptonic = true;
+                            else if (ZOneIsHadronic && ZTwoIsHadronic) ZIsHadronic = true;
+                            //ZIsHadronic = (finalZDecAr[0][0]>-9 && finalZDecAr[0][0]<9 && finalZDecAr[0][1]>-9 && finalZDecAr[0][1]<9 && finalZDecAr[1][0]>-9 && finalZDecAr[1][0]<9 && finalZDecAr[1][1]>-9 && finalZDecAr[1][1]<9);
+                            if (debugGenPart) std::cout << "ZIsHadronic " << ZIsHadronic << "ZIsLeptonic" << ZIsLeptonic << "ZIsSemiLeptonic" << ZIsSemiLeptonic << "\n";
                         }
 
 
@@ -2091,6 +2801,8 @@ void new022022KinematicsAnalysis(){
                                 mindROne = mindROneSecondPlace;
                                 ZFJSameJetCtr += 1;
                                 if (ZIsHadronic) ZFJSameJetTaggedCtr += 1;
+                                if (ZIsSemiLeptonic) ZFJSameJetSemiLepTaggedCtr += 1;
+                                if (ZIsLeptonic) ZFJSameJetLepTaggedCtr += 1;
                                 if (debugGenPart) std::cout << "evCount " << evCount -1 << " zJetIndOne " << zJetIndOne << " zJetIndTwo " << zJetIndTwo << " mindROne " << mindROne << " mindRTwo " << mindRTwo << "\n";
                             }
 
@@ -2212,6 +2924,81 @@ void new022022KinematicsAnalysis(){
                                     ZFJTrailing_decaypdgId_FromTaggedGenMatchL.clear();
                                 }
 
+                                if (ZIsSemiLeptonic) {
+
+                                    ZFJLead_pt_FromSemiLepTaggedGenMatchL = ZFJLead_pt_FromGenMatch;
+                                    ZFJLead_eta_FromSemiLepTaggedGenMatchL = ZFJLead_eta_FromGenMatch;
+                                    ZFJLead_phi_FromSemiLepTaggedGenMatchL = ZFJLead_phi_FromGenMatch;
+                                    ZFJLead_mass_FromSemiLepTaggedGenMatchL = ZFJLead_mass_FromGenMatch;
+                                    ZFJLead_dRFromFJ_FromSemiLepTaggedGenMatchL = ZFJLead_dRFromFJ_FromGenMatch;
+
+                                    nZFJLeadDecay_FromSemiLepTaggedGenMatchL = nZFJLeadDecay_FromGenMatch;
+                                    //ZFJLead_decaypdgId_FromSemiLepTaggedGenMatchL = ZFJLead_decaypdgId_FromGenMatch;
+
+                                    for (UInt_t tmpZDecItr=0;tmpZDecItr<ZFJLead_decaypdgId_FromGenMatch.size();tmpZDecItr++){
+                                        ZFJLead_decaypdgId_FromSemiLepTaggedGenMatchL.push_back(ZFJLead_decaypdgId_FromGenMatch[tmpZDecItr]);
+                                    }
+                                    
+
+                                    ZFJTrailing_pt_FromSemiLepTaggedGenMatchL = ZFJTrailing_pt_FromGenMatch;
+                                    ZFJTrailing_eta_FromSemiLepTaggedGenMatchL = ZFJTrailing_eta_FromGenMatch;
+                                    ZFJTrailing_phi_FromSemiLepTaggedGenMatchL = ZFJTrailing_phi_FromGenMatch;
+                                    ZFJTrailing_mass_FromSemiLepTaggedGenMatchL = ZFJTrailing_mass_FromGenMatch;
+                                    ZFJTrailing_dRFromFJ_FromSemiLepTaggedGenMatchL = ZFJTrailing_dRFromFJ_FromGenMatch;
+
+
+                                    nZFJTrailingDecay_FromSemiLepTaggedGenMatchL = nZFJTrailingDecay_FromGenMatch;
+                                    //ZFJTrailing_decaypdgId_FromSemiLepTaggedGenMatchL = ZFJTrailing_decaypdgId_FromGenMatch;
+
+                                    for (UInt_t tmpZDecItr=0;tmpZDecItr<ZFJTrailing_decaypdgId_FromGenMatch.size();tmpZDecItr++){
+                                        ZFJTrailing_decaypdgId_FromSemiLepTaggedGenMatchL.push_back(ZFJTrailing_decaypdgId_FromGenMatch[tmpZDecItr]);
+                                    }
+
+                                    ZFJPair_InvMass_FromSemiLepTaggedGenMatchL = ZFJPair_InvMass_FromGenMatch;
+                                    ZFJPair_EtaSep_FromSemiLepTaggedGenMatchL = ZFJPair_EtaSep_FromGenMatch;
+                                    ZFJGenSemiLepTaggedTree->Fill();
+
+                                    ZFJLead_decaypdgId_FromSemiLepTaggedGenMatchL.clear();
+                                    ZFJTrailing_decaypdgId_FromSemiLepTaggedGenMatchL.clear();
+                                }
+                                if (ZIsLeptonic) {
+
+                                    ZFJLead_pt_FromLepTaggedGenMatchL = ZFJLead_pt_FromGenMatch;
+                                    ZFJLead_eta_FromLepTaggedGenMatchL = ZFJLead_eta_FromGenMatch;
+                                    ZFJLead_phi_FromLepTaggedGenMatchL = ZFJLead_phi_FromGenMatch;
+                                    ZFJLead_mass_FromLepTaggedGenMatchL = ZFJLead_mass_FromGenMatch;
+                                    ZFJLead_dRFromFJ_FromLepTaggedGenMatchL = ZFJLead_dRFromFJ_FromGenMatch;
+
+                                    nZFJLeadDecay_FromLepTaggedGenMatchL = nZFJLeadDecay_FromGenMatch;
+                                    //ZFJLead_decaypdgId_FromLepTaggedGenMatchL = ZFJLead_decaypdgId_FromGenMatch;
+
+                                    for (UInt_t tmpZDecItr=0;tmpZDecItr<ZFJLead_decaypdgId_FromGenMatch.size();tmpZDecItr++){
+                                        ZFJLead_decaypdgId_FromLepTaggedGenMatchL.push_back(ZFJLead_decaypdgId_FromGenMatch[tmpZDecItr]);
+                                    }
+                                    
+
+                                    ZFJTrailing_pt_FromLepTaggedGenMatchL = ZFJTrailing_pt_FromGenMatch;
+                                    ZFJTrailing_eta_FromLepTaggedGenMatchL = ZFJTrailing_eta_FromGenMatch;
+                                    ZFJTrailing_phi_FromLepTaggedGenMatchL = ZFJTrailing_phi_FromGenMatch;
+                                    ZFJTrailing_mass_FromLepTaggedGenMatchL = ZFJTrailing_mass_FromGenMatch;
+                                    ZFJTrailing_dRFromFJ_FromLepTaggedGenMatchL = ZFJTrailing_dRFromFJ_FromGenMatch;
+
+
+                                    nZFJTrailingDecay_FromLepTaggedGenMatchL = nZFJTrailingDecay_FromGenMatch;
+                                    //ZFJTrailing_decaypdgId_FromLepTaggedGenMatchL = ZFJTrailing_decaypdgId_FromGenMatch;
+
+                                    for (UInt_t tmpZDecItr=0;tmpZDecItr<ZFJTrailing_decaypdgId_FromGenMatch.size();tmpZDecItr++){
+                                        ZFJTrailing_decaypdgId_FromLepTaggedGenMatchL.push_back(ZFJTrailing_decaypdgId_FromGenMatch[tmpZDecItr]);
+                                    }
+
+                                    ZFJPair_InvMass_FromLepTaggedGenMatchL = ZFJPair_InvMass_FromGenMatch;
+                                    ZFJPair_EtaSep_FromLepTaggedGenMatchL = ZFJPair_EtaSep_FromGenMatch;
+                                    ZFJGenLepTaggedTree->Fill();
+
+                                    ZFJLead_decaypdgId_FromLepTaggedGenMatchL.clear();
+                                    ZFJTrailing_decaypdgId_FromLepTaggedGenMatchL.clear();
+                                }
+
 
 
                                 if (hJetFound){
@@ -2226,6 +3013,18 @@ void new022022KinematicsAnalysis(){
 
                                         ZHFJ_ZPairPlusHInvMass_FromTaggedGenMatchL = tmpHZFJVec.M();
                                         ZHFJGenTaggedTree->Fill();
+
+                                    }
+                                    if (ZIsSemiLeptonic) {
+
+                                        ZHFJ_ZPairPlusHInvMass_FromSemiLepTaggedGenMatchL = tmpHZFJVec.M();
+                                        ZHFJGenSemiLepTaggedTree->Fill();
+
+                                    }
+                                    if (ZIsLeptonic) {
+
+                                        ZHFJ_ZPairPlusHInvMass_FromLepTaggedGenMatchL = tmpHZFJVec.M();
+                                        ZHFJGenLepTaggedTree->Fill();
 
                                     }
 
@@ -2441,6 +3240,8 @@ void new022022KinematicsAnalysis(){
                                 mindROne = mindROneSecondPlace;
                                 ZJSameJetCtr += 1;
                                 if (ZIsHadronic) ZJSameJetTaggedCtr += 1;
+                                if (ZIsSemiLeptonic) ZJSameJetSemiLepTaggedCtr += 1;
+                                if (ZIsLeptonic) ZJSameJetLepTaggedCtr += 1;
                             }
 
 
@@ -2553,6 +3354,84 @@ void new022022KinematicsAnalysis(){
 
                                 }
 
+                                if (ZIsSemiLeptonic) {
+
+                                    ZJLead_pt_FromSemiLepTaggedGenMatchL = ZJLead_pt_FromGenMatch;
+                                    ZJLead_eta_FromSemiLepTaggedGenMatchL = ZJLead_eta_FromGenMatch;
+                                    ZJLead_phi_FromSemiLepTaggedGenMatchL = ZJLead_phi_FromGenMatch;
+                                    ZJLead_mass_FromSemiLepTaggedGenMatchL = ZJLead_mass_FromGenMatch;
+                                    ZJLead_dRFromJ_FromSemiLepTaggedGenMatchL = ZJLead_dRFromJ_FromGenMatch;
+
+                                    nZJLeadDecay_FromSemiLepTaggedGenMatchL = nZFJLeadDecay_FromGenMatch;
+                                    //ZJLead_decaypdgId_FromSemiLepTaggedGenMatchL = ZFJLead_decaypdgId_FromGenMatch;
+
+                                    for (UInt_t tmpZDecItr=0;tmpZDecItr<ZFJLead_decaypdgId_FromGenMatch.size();tmpZDecItr++){
+                                        ZJLead_decaypdgId_FromSemiLepTaggedGenMatchL.push_back(ZFJLead_decaypdgId_FromGenMatch[tmpZDecItr]);
+                                    }
+                                    
+
+                                    ZJTrailing_pt_FromSemiLepTaggedGenMatchL = ZJTrailing_pt_FromGenMatch;
+                                    ZJTrailing_eta_FromSemiLepTaggedGenMatchL = ZJTrailing_eta_FromGenMatch;
+                                    ZJTrailing_phi_FromSemiLepTaggedGenMatchL = ZJTrailing_phi_FromGenMatch;
+                                    ZJTrailing_mass_FromSemiLepTaggedGenMatchL = ZJTrailing_mass_FromGenMatch;
+                                    ZJTrailing_dRFromJ_FromSemiLepTaggedGenMatchL = ZJTrailing_dRFromJ_FromGenMatch;
+
+                                    nZJTrailingDecay_FromSemiLepTaggedGenMatchL = nZFJTrailingDecay_FromGenMatch;
+                                    //ZJTrailing_decaypdgId_FromSemiLepTaggedGenMatchL = ZFJTrailing_decaypdgId_FromGenMatch;
+
+                                    for (UInt_t tmpZDecItr=0;tmpZDecItr<ZFJTrailing_decaypdgId_FromGenMatch.size();tmpZDecItr++){
+                                        ZJTrailing_decaypdgId_FromSemiLepTaggedGenMatchL.push_back(ZFJTrailing_decaypdgId_FromGenMatch[tmpZDecItr]);
+                                    }
+
+                                    ZJPair_InvMass_FromSemiLepTaggedGenMatchL = ZJPair_InvMass_FromGenMatch;
+                                    ZJPair_EtaSep_FromSemiLepTaggedGenMatchL = ZJPair_EtaSep_FromGenMatch;
+                                    ZJGenSemiLepTaggedTree->Fill();
+
+                                    ZJLead_decaypdgId_FromSemiLepTaggedGenMatchL.clear();
+                                    ZJTrailing_decaypdgId_FromSemiLepTaggedGenMatchL.clear();
+
+
+                                }
+
+                                if (ZIsLeptonic) {
+
+                                    ZJLead_pt_FromLepTaggedGenMatchL = ZJLead_pt_FromGenMatch;
+                                    ZJLead_eta_FromLepTaggedGenMatchL = ZJLead_eta_FromGenMatch;
+                                    ZJLead_phi_FromLepTaggedGenMatchL = ZJLead_phi_FromGenMatch;
+                                    ZJLead_mass_FromLepTaggedGenMatchL = ZJLead_mass_FromGenMatch;
+                                    ZJLead_dRFromJ_FromLepTaggedGenMatchL = ZJLead_dRFromJ_FromGenMatch;
+
+                                    nZJLeadDecay_FromLepTaggedGenMatchL = nZFJLeadDecay_FromGenMatch;
+                                    //ZJLead_decaypdgId_FromLepTaggedGenMatchL = ZFJLead_decaypdgId_FromGenMatch;
+
+                                    for (UInt_t tmpZDecItr=0;tmpZDecItr<ZFJLead_decaypdgId_FromGenMatch.size();tmpZDecItr++){
+                                        ZJLead_decaypdgId_FromLepTaggedGenMatchL.push_back(ZFJLead_decaypdgId_FromGenMatch[tmpZDecItr]);
+                                    }
+                                    
+
+                                    ZJTrailing_pt_FromLepTaggedGenMatchL = ZJTrailing_pt_FromGenMatch;
+                                    ZJTrailing_eta_FromLepTaggedGenMatchL = ZJTrailing_eta_FromGenMatch;
+                                    ZJTrailing_phi_FromLepTaggedGenMatchL = ZJTrailing_phi_FromGenMatch;
+                                    ZJTrailing_mass_FromLepTaggedGenMatchL = ZJTrailing_mass_FromGenMatch;
+                                    ZJTrailing_dRFromJ_FromLepTaggedGenMatchL = ZJTrailing_dRFromJ_FromGenMatch;
+
+                                    nZJTrailingDecay_FromLepTaggedGenMatchL = nZFJTrailingDecay_FromGenMatch;
+                                    //ZJTrailing_decaypdgId_FromLepTaggedGenMatchL = ZFJTrailing_decaypdgId_FromGenMatch;
+
+                                    for (UInt_t tmpZDecItr=0;tmpZDecItr<ZFJTrailing_decaypdgId_FromGenMatch.size();tmpZDecItr++){
+                                        ZJTrailing_decaypdgId_FromLepTaggedGenMatchL.push_back(ZFJTrailing_decaypdgId_FromGenMatch[tmpZDecItr]);
+                                    }
+
+                                    ZJPair_InvMass_FromLepTaggedGenMatchL = ZJPair_InvMass_FromGenMatch;
+                                    ZJPair_EtaSep_FromLepTaggedGenMatchL = ZJPair_EtaSep_FromGenMatch;
+                                    ZJGenLepTaggedTree->Fill();
+
+                                    ZJLead_decaypdgId_FromLepTaggedGenMatchL.clear();
+                                    ZJTrailing_decaypdgId_FromLepTaggedGenMatchL.clear();
+
+
+                                }
+
                                 
 
                                 if (hJetFound){
@@ -2567,6 +3446,18 @@ void new022022KinematicsAnalysis(){
 
                                         ZHJ_ZPairPlusHInvMass_FromTaggedGenMatchL = tmpHZJVec.M();
                                         ZHJGenTaggedTree->Fill();
+
+                                    }
+                                    if (ZIsSemiLeptonic) {
+
+                                        ZHJ_ZPairPlusHInvMass_FromSemiLepTaggedGenMatchL = tmpHZJVec.M();
+                                        ZHJGenSemiLepTaggedTree->Fill();
+
+                                    }
+                                    if (ZIsLeptonic) {
+
+                                        ZHJ_ZPairPlusHInvMass_FromLepTaggedGenMatchL = tmpHZJVec.M();
+                                        ZHJGenLepTaggedTree->Fill();
 
                                     }
                                 }
@@ -2681,6 +3572,90 @@ void new022022KinematicsAnalysis(){
                                 GenRawTaggedTree->Fill();
 
                             }
+
+                            if (ZIsSemiLeptonic) {
+
+                                H_pt_FromSemiLepTaggedGenRawL = H_pt_FromGenRaw;
+                                H_eta_FromSemiLepTaggedGenRawL = H_eta_FromGenRaw;
+                                H_phi_FromSemiLepTaggedGenRawL = H_phi_FromGenRaw;
+                                H_mass_FromSemiLepTaggedGenRawL = H_mass_FromGenRaw;
+                                H_pdgId_FromSemiLepTaggedGenRawL = H_pdgId_FromGenRaw;
+                                H_genPartIdxMother_FromSemiLepTaggedGenRawL = H_genPartIdxMother_FromGenRaw;
+
+                                nHDecay_FromSemiLepTaggedGenRawL = nHFJDecay_FromGenMatch;
+                                H_decaypdgId_FromSemiLepTaggedGenRawL = HFJ_decaypdgId_FromGenMatch;
+
+
+                                ZOne_pt_FromSemiLepTaggedGenRawL = ZOne_pt_FromGenRaw;
+                                ZOne_eta_FromSemiLepTaggedGenRawL = ZOne_eta_FromGenRaw;
+                                ZOne_phi_FromSemiLepTaggedGenRawL = ZOne_phi_FromGenRaw;
+                                ZOne_mass_FromSemiLepTaggedGenRawL = ZOne_mass_FromGenRaw;
+                                ZOne_pdgId_FromSemiLepTaggedGenRawL = ZOne_pdgId_FromGenRaw;
+                                ZOne_genPartIdxMother_FromSemiLepTaggedGenRawL = ZOne_genPartIdxMother_FromGenRaw;
+
+                                nZOneDecay_FromSemiLepTaggedGenRawL = nZFJLeadDecay_FromGenMatch;
+                                ZOne_decaypdgId_FromSemiLepTaggedGenRawL = ZFJLead_decaypdgId_FromGenMatch;
+
+                                ZTwo_pt_FromSemiLepTaggedGenRawL = ZTwo_pt_FromGenRaw;
+                                ZTwo_eta_FromSemiLepTaggedGenRawL = ZTwo_eta_FromGenRaw;
+                                ZTwo_phi_FromSemiLepTaggedGenRawL = ZTwo_phi_FromGenRaw;
+                                ZTwo_mass_FromSemiLepTaggedGenRawL = ZTwo_mass_FromGenRaw;
+                                ZTwo_pdgId_FromSemiLepTaggedGenRawL = ZTwo_pdgId_FromGenRaw;
+                                ZTwo_genPartIdxMother_FromSemiLepTaggedGenRawL = ZTwo_genPartIdxMother_FromGenRaw;
+
+                                nZTwoDecay_FromSemiLepTaggedGenRawL = nZFJTrailingDecay_FromGenMatch;
+                                ZTwo_decaypdgId_FromSemiLepTaggedGenRawL = ZFJTrailing_decaypdgId_FromGenMatch;
+
+                                ZPair_InvMass_FromSemiLepTaggedGenRawL = ZPair_InvMass_FromGenRaw;
+                                ZPair_EtaSep_FromSemiLepTaggedGenRawL = ZPair_EtaSep_FromGenRaw;
+
+                                ZPairPlusH_InvMass_FromSemiLepTaggedGenRawL = ZPairPlusH_InvMass_FromGenRaw;
+
+                                GenRawSemiLepTaggedTree->Fill();
+
+                            }
+
+                            if (ZIsLeptonic) {
+
+                                H_pt_FromLepTaggedGenRawL = H_pt_FromGenRaw;
+                                H_eta_FromLepTaggedGenRawL = H_eta_FromGenRaw;
+                                H_phi_FromLepTaggedGenRawL = H_phi_FromGenRaw;
+                                H_mass_FromLepTaggedGenRawL = H_mass_FromGenRaw;
+                                H_pdgId_FromLepTaggedGenRawL = H_pdgId_FromGenRaw;
+                                H_genPartIdxMother_FromLepTaggedGenRawL = H_genPartIdxMother_FromGenRaw;
+
+                                nHDecay_FromLepTaggedGenRawL = nHFJDecay_FromGenMatch;
+                                H_decaypdgId_FromLepTaggedGenRawL = HFJ_decaypdgId_FromGenMatch;
+
+
+                                ZOne_pt_FromLepTaggedGenRawL = ZOne_pt_FromGenRaw;
+                                ZOne_eta_FromLepTaggedGenRawL = ZOne_eta_FromGenRaw;
+                                ZOne_phi_FromLepTaggedGenRawL = ZOne_phi_FromGenRaw;
+                                ZOne_mass_FromLepTaggedGenRawL = ZOne_mass_FromGenRaw;
+                                ZOne_pdgId_FromLepTaggedGenRawL = ZOne_pdgId_FromGenRaw;
+                                ZOne_genPartIdxMother_FromLepTaggedGenRawL = ZOne_genPartIdxMother_FromGenRaw;
+
+                                nZOneDecay_FromLepTaggedGenRawL = nZFJLeadDecay_FromGenMatch;
+                                ZOne_decaypdgId_FromLepTaggedGenRawL = ZFJLead_decaypdgId_FromGenMatch;
+
+                                ZTwo_pt_FromLepTaggedGenRawL = ZTwo_pt_FromGenRaw;
+                                ZTwo_eta_FromLepTaggedGenRawL = ZTwo_eta_FromGenRaw;
+                                ZTwo_phi_FromLepTaggedGenRawL = ZTwo_phi_FromGenRaw;
+                                ZTwo_mass_FromLepTaggedGenRawL = ZTwo_mass_FromGenRaw;
+                                ZTwo_pdgId_FromLepTaggedGenRawL = ZTwo_pdgId_FromGenRaw;
+                                ZTwo_genPartIdxMother_FromLepTaggedGenRawL = ZTwo_genPartIdxMother_FromGenRaw;
+
+                                nZTwoDecay_FromLepTaggedGenRawL = nZFJTrailingDecay_FromGenMatch;
+                                ZTwo_decaypdgId_FromLepTaggedGenRawL = ZFJTrailing_decaypdgId_FromGenMatch;
+
+                                ZPair_InvMass_FromLepTaggedGenRawL = ZPair_InvMass_FromGenRaw;
+                                ZPair_EtaSep_FromLepTaggedGenRawL = ZPair_EtaSep_FromGenRaw;
+
+                                ZPairPlusH_InvMass_FromLepTaggedGenRawL = ZPairPlusH_InvMass_FromGenRaw;
+
+                                GenRawLepTaggedTree->Fill();
+
+                            }
                             
 
                         }
@@ -2745,6 +3720,127 @@ void new022022KinematicsAnalysis(){
 
 
                         }
+                        if (ZIsSemiLeptonic) {
+
+                            ZOne_pt_FromSemiLepTaggedLHERawL = ZOne_pt_FromLHERaw;
+                            ZOne_eta_FromSemiLepTaggedLHERawL = ZOne_eta_FromLHERaw;
+                            ZOne_phi_FromSemiLepTaggedLHERawL = ZOne_phi_FromLHERaw;
+                            ZOne_mass_FromSemiLepTaggedLHERawL = ZOne_mass_FromLHERaw;
+
+                            ZTwo_pt_FromSemiLepTaggedLHERawL = ZTwo_pt_FromLHERaw;
+                            ZTwo_eta_FromSemiLepTaggedLHERawL = ZTwo_eta_FromLHERaw;
+                            ZTwo_phi_FromSemiLepTaggedLHERawL = ZTwo_phi_FromLHERaw;
+                            ZTwo_mass_FromSemiLepTaggedLHERawL = ZTwo_mass_FromLHERaw;
+
+                            ZPair_InvMass_FromSemiLepTaggedLHERawL = ZPair_InvMass_FromLHERaw;
+                            ZPair_EtaSep_FromSemiLepTaggedLHERawL = ZPair_EtaSep_FromLHERaw;
+
+                            H_pt_FromSemiLepTaggedLHERawL = H_pt_FromLHERaw;
+                            H_eta_FromSemiLepTaggedLHERawL = H_eta_FromLHERaw;
+                            H_phi_FromSemiLepTaggedLHERawL = H_phi_FromLHERaw;
+                            H_mass_FromSemiLepTaggedLHERawL = H_mass_FromLHERaw;
+
+                            ZPairPlusH_InvMass_FromSemiLepTaggedLHERawL = ZPairPlusH_InvMass_FromLHERaw;
+
+                            JOne_pt_FromSemiLepTaggedLHERawL = JOne_pt_FromLHERaw;
+                            JOne_eta_FromSemiLepTaggedLHERawL = JOne_eta_FromLHERaw;
+                            JOne_pdgId_FromSemiLepTaggedLHERawL = JOne_pdgId_FromLHERaw;
+
+                            JTwo_pt_FromSemiLepTaggedLHERawL = JTwo_pt_FromLHERaw;
+                            JTwo_eta_FromSemiLepTaggedLHERawL = JTwo_eta_FromLHERaw;
+                            JTwo_pdgId_FromSemiLepTaggedLHERawL = JTwo_pdgId_FromLHERaw;
+
+                            JOne_invmass_FromSemiLepTaggedLHERawL = JOne_invmass_FromLHERaw;
+                            JTwo_invmass_FromSemiLepTaggedLHERawL = JTwo_invmass_FromLHERaw;
+
+                            JOne_phi_FromSemiLepTaggedLHERawL = JOne_phi_FromLHERaw;
+
+                            JTwo_phi_FromSemiLepTaggedLHERawL = JTwo_phi_FromLHERaw;
+                            JPair_invmass_FromSemiLepTaggedLHERawL = JPair_invmass_FromLHERaw;
+
+                            J_etasep_FromSemiLepTaggedLHERawL = J_etasep_FromLHERaw;
+
+                            RawSemiLepTaggedTree->Fill();
+
+                            if (hGenFound && hJetFound) {
+
+                                HFJ_pt_FromSemiLepTaggedGenMatchL = HFJ_pt_FromGenMatch;
+                                HFJ_eta_FromSemiLepTaggedGenMatchL = HFJ_eta_FromGenMatch;
+                                HFJ_phi_FromSemiLepTaggedGenMatchL = HFJ_phi_FromGenMatch;
+                                HFJ_mass_FromSemiLepTaggedGenMatchL = HFJ_mass_FromGenMatch;
+                                HFJ_dRFromFJ_FromSemiLepTaggedGenMatchL = HFJ_dRFromFJ_FromGenMatch;
+
+                                nHFJDecay_FromSemiLepTaggedGenMatchL = nHFJDecay_FromGenMatch;
+                                HFJ_decaypdgId_FromSemiLepTaggedGenMatchL = HFJ_decaypdgId_FromGenMatch;
+                                    
+                                HFJGenSemiLepTaggedTree->Fill();
+                            }
+
+
+
+
+                        }
+
+                        if (ZIsLeptonic) {
+
+                            ZOne_pt_FromLepTaggedLHERawL = ZOne_pt_FromLHERaw;
+                            ZOne_eta_FromLepTaggedLHERawL = ZOne_eta_FromLHERaw;
+                            ZOne_phi_FromLepTaggedLHERawL = ZOne_phi_FromLHERaw;
+                            ZOne_mass_FromLepTaggedLHERawL = ZOne_mass_FromLHERaw;
+
+                            ZTwo_pt_FromLepTaggedLHERawL = ZTwo_pt_FromLHERaw;
+                            ZTwo_eta_FromLepTaggedLHERawL = ZTwo_eta_FromLHERaw;
+                            ZTwo_phi_FromLepTaggedLHERawL = ZTwo_phi_FromLHERaw;
+                            ZTwo_mass_FromLepTaggedLHERawL = ZTwo_mass_FromLHERaw;
+
+                            ZPair_InvMass_FromLepTaggedLHERawL = ZPair_InvMass_FromLHERaw;
+                            ZPair_EtaSep_FromLepTaggedLHERawL = ZPair_EtaSep_FromLHERaw;
+
+                            H_pt_FromLepTaggedLHERawL = H_pt_FromLHERaw;
+                            H_eta_FromLepTaggedLHERawL = H_eta_FromLHERaw;
+                            H_phi_FromLepTaggedLHERawL = H_phi_FromLHERaw;
+                            H_mass_FromLepTaggedLHERawL = H_mass_FromLHERaw;
+
+                            ZPairPlusH_InvMass_FromLepTaggedLHERawL = ZPairPlusH_InvMass_FromLHERaw;
+
+                            JOne_pt_FromLepTaggedLHERawL = JOne_pt_FromLHERaw;
+                            JOne_eta_FromLepTaggedLHERawL = JOne_eta_FromLHERaw;
+                            JOne_pdgId_FromLepTaggedLHERawL = JOne_pdgId_FromLHERaw;
+
+                            JTwo_pt_FromLepTaggedLHERawL = JTwo_pt_FromLHERaw;
+                            JTwo_eta_FromLepTaggedLHERawL = JTwo_eta_FromLHERaw;
+                            JTwo_pdgId_FromLepTaggedLHERawL = JTwo_pdgId_FromLHERaw;
+
+                            JOne_invmass_FromLepTaggedLHERawL = JOne_invmass_FromLHERaw;
+                            JTwo_invmass_FromLepTaggedLHERawL = JTwo_invmass_FromLHERaw;
+
+                            JOne_phi_FromLepTaggedLHERawL = JOne_phi_FromLHERaw;
+
+                            JTwo_phi_FromLepTaggedLHERawL = JTwo_phi_FromLHERaw;
+                            JPair_invmass_FromLepTaggedLHERawL = JPair_invmass_FromLHERaw;
+
+                            J_etasep_FromLepTaggedLHERawL = J_etasep_FromLHERaw;
+
+                            RawLepTaggedTree->Fill();
+
+                            if (hGenFound && hJetFound) {
+
+                                HFJ_pt_FromLepTaggedGenMatchL = HFJ_pt_FromGenMatch;
+                                HFJ_eta_FromLepTaggedGenMatchL = HFJ_eta_FromGenMatch;
+                                HFJ_phi_FromLepTaggedGenMatchL = HFJ_phi_FromGenMatch;
+                                HFJ_mass_FromLepTaggedGenMatchL = HFJ_mass_FromGenMatch;
+                                HFJ_dRFromFJ_FromLepTaggedGenMatchL = HFJ_dRFromFJ_FromGenMatch;
+
+                                nHFJDecay_FromLepTaggedGenMatchL = nHFJDecay_FromGenMatch;
+                                HFJ_decaypdgId_FromLepTaggedGenMatchL = HFJ_decaypdgId_FromGenMatch;
+                                    
+                                HFJGenLepTaggedTree->Fill();
+                            }
+
+
+
+
+                        }
                             
                     }
                 }
@@ -2752,11 +3848,20 @@ void new022022KinematicsAnalysis(){
             
 
 
+            
+            //First check that it passes the hbb tagging
+            bool hbbTag = *HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02 || *HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np2 || *HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np4;
+
+            //Hadronic
+            bool hadHLT =  (*HLT_PFHT1050 || *HLT_AK8PFJet500 || *HLT_AK8PFJet360_TrimMass30 || *HLT_AK8PFHT750_TrimMass50 || *HLT_AK8PFJet380_TrimMass30 ||
+            *HLT_AK8PFJet400_TrimMass30 || *HLT_AK8PFJet420_TrimMass30 ||
+            *HLT_AK8PFHT800_TrimMass50 || *HLT_AK8PFHT850_TrimMass50 || *HLT_AK8PFHT900_TrimMass50);
+            /*
 
             
             if (!hbbTag) continue;
             passhbbCtr += 1;
-            
+            */
 
             //Now check that it can be sorted into either leptonic, semi-leptonic, || hadronic
             //Leptonic
@@ -2775,7 +3880,10 @@ void new022022KinematicsAnalysis(){
 
             bool muonHLT = *HLT_IsoMu24 || *HLT_IsoMu27 || *HLT_IsoMu30 || *HLT_Mu50;
 
-            bool lepHLT = elecHLT || muonHLT;
+            bool passHLTBool = hbbTag || hadHLT || doubleElecHLT || doubleMuonHLT || muonEGHLT || elecHLT || muonHLT;
+
+            if (!passHLTBool) continue;
+            passHLTCtr += 1;
             
             
 
@@ -2783,9 +3891,12 @@ void new022022KinematicsAnalysis(){
             bool isSemiLeptonic = (elecHLT || muonHLT) && hadHLT;
             bool isHadronic = hadHLT;
 
-            if (!(isLeptonic || isSemiLeptonic || isHadronic)) continue;
+            /*
 
-            passAnyChannelCtr += 1;
+            if (!(isLeptonic || isSemiLeptonic || isHadronic)) continue;
+            */
+            
+            if (isLeptonic || isSemiLeptonic || isHadronic) passAnyChannelCtr += 1;
             if (isLeptonic){
                 
                 if (isSemiLeptonic){
@@ -3172,7 +4283,7 @@ void new022022KinematicsAnalysis(){
     evNumTree->Fill();
 
     std::cout << "evRunOver: " << evRunOver << " -------------------\n";
-    std::cout << "passes hbb cut: " << passhbbCtr << " -------------------\n";
+    std::cout << "passes HLT cut: " << passHLTCtr << " -------------------\n";
     std::cout << "passes channel cut: " << passAnyChannelCtr << " -------------------\n";
     std::cout << "passes lep channel cut: " << passLepChannelCtr << "\n";
     std::cout << "passes semi lep channel cut: " << passSemiLepChannelCtr << "\n";
@@ -3193,6 +4304,12 @@ void new022022KinematicsAnalysis(){
 
     std::cout << "ZFJSameJetTaggedCtr " << ZFJSameJetTaggedCtr << "\n";
     std::cout << "ZJSameJetTaggedCtr " << ZJSameJetTaggedCtr << "\n";
+    
+    std::cout << "ZFJSameJetSemiLepTaggedCtr " << ZFJSameJetSemiLepTaggedCtr << "\n";
+    std::cout << "ZJSameJetSemiLepTaggedCtr " << ZJSameJetSemiLepTaggedCtr << "\n";
+
+    std::cout << "ZFJSameJetLepTaggedCtr " << ZFJSameJetLepTaggedCtr << "\n";
+    std::cout << "ZJSameJetLepTaggedCtr " << ZJSameJetLepTaggedCtr << "\n";
 
     if (!isBackground){
         std::cout << "Cross section average before division: " << crossSectionAvg << "\n";
@@ -3216,6 +4333,8 @@ void new022022KinematicsAnalysis(){
         SelectedTree->Write("",TObject::kOverwrite);
 
         RawTaggedTree->Write("",TObject::kOverwrite);
+        RawSemiLepTaggedTree->Write("",TObject::kOverwrite);
+        RawLepTaggedTree->Write("",TObject::kOverwrite);
         if (useFJGenMatchTree) {
             ZFJGenTree->Write("",TObject::kOverwrite);
             HFJGenTree->Write("",TObject::kOverwrite);
@@ -3224,7 +4343,14 @@ void new022022KinematicsAnalysis(){
             ZFJGenTaggedTree->Write("",TObject::kOverwrite);
             HFJGenTaggedTree->Write("",TObject::kOverwrite);
             ZHFJGenTaggedTree->Write("",TObject::kOverwrite);
+
+            ZFJGenSemiLepTaggedTree->Write("",TObject::kOverwrite);
+            HFJGenSemiLepTaggedTree->Write("",TObject::kOverwrite);
+            ZHFJGenSemiLepTaggedTree->Write("",TObject::kOverwrite);
             
+            ZFJGenLepTaggedTree->Write("",TObject::kOverwrite);
+            HFJGenLepTaggedTree->Write("",TObject::kOverwrite);
+            ZHFJGenLepTaggedTree->Write("",TObject::kOverwrite);
             
         }
         if (useJGenMatchTree) {
@@ -3233,10 +4359,18 @@ void new022022KinematicsAnalysis(){
 
             ZJGenTaggedTree->Write("",TObject::kOverwrite);
             ZHJGenTaggedTree->Write("",TObject::kOverwrite);
+
+            ZJGenSemiLepTaggedTree->Write("",TObject::kOverwrite);
+            ZHJGenSemiLepTaggedTree->Write("",TObject::kOverwrite);
+
+            ZJGenLepTaggedTree->Write("",TObject::kOverwrite);
+            ZHJGenLepTaggedTree->Write("",TObject::kOverwrite);
         }
         if (useJGenMatchTree || useFJGenMatchTree) {
             GenRawTree->Write("",TObject::kOverwrite);
             GenRawTaggedTree->Write("",TObject::kOverwrite);
+            GenRawSemiLepTaggedTree->Write("",TObject::kOverwrite);
+            GenRawLepTaggedTree->Write("",TObject::kOverwrite);
         }
 
     }
