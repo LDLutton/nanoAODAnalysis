@@ -5,7 +5,7 @@ from ROOT import TLegend, TPad,TCanvas
 today = datetime.datetime.today()
 
 
-forCondor = False
+forCondor = True
 if forCondor:
     forCondorStr = "/scratch365/dlutton/HistosAndPNGs/KinematicsAnalysis/Slimmed/"
     savePathBool = False
@@ -24,12 +24,12 @@ MGSM = True
 
 MGC2VEtaDifCut = True
 
-MGOSix = True
-MGOSixEtaDifCut = True
-MGOHBox = True
-MGOHBoxEtaDifCut = True
-MGOHDD = True
-MGOHDDEtaDifCut = True
+MGOSix = False
+MGOSixEtaDifCut = False
+MGOHBox = False
+MGOHBoxEtaDifCut = False
+MGOHDD = False
+MGOHDDEtaDifCut = False
 
 normalizeDataTogether = False
 makeUnstacked = True
@@ -48,16 +48,16 @@ histsToDo = 2
 breakEvEarly = False
 breakEvAt = 2500
 
-onlyLHETree = False
+onlyLHETree = True
 useLHETree = True
-onlyTaggedTrees = False
+onlyTaggedTrees = True
 useTaggedTrees = True
 
-makeRaw = True
+makeRaw = False
 makeGenRaw = True
-makeHFJ = True
-makeZHFJ = True
-makeZFJ = True
+makeHFJ = False
+makeZHFJ = False
+makeZFJ = False
 
 scaleSignalToBackground = False
 
