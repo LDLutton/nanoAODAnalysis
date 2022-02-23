@@ -7,7 +7,7 @@ today = datetime.datetime.today()
 
 forCondor = False
 if forCondor:
-    forCondorStr = "/scratch365/dlutton/HistosAndPNGs/KinematicsAnalysis/"
+    forCondorStr = "/scratch365/dlutton/HistosAndPNGs/KinematicsAnalysis/Slimmed/"
     savePathBool = False
 else:
     forCondorStr = ""
