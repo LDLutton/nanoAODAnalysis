@@ -113,9 +113,6 @@ canGenRawTaggedAr = []
 histRawTaggedAr = []
 canRawTaggedAr = []
 
-histHFJGenTaggedAr = []
-canHFJGenTaggedAr = []
-
 histZFJGenTaggedAr = []
 canZFJGenTaggedAr = []
 
@@ -268,21 +265,6 @@ RawBinsAndRangeAr = [[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,200],
 
 
 ################ TAGGING TREES
-
-#Higgs gen matching with FatJets tree
-
-HFJGenTaggedSaveNameAr = ["HPtFromHFJGenTagged","HEtaFromHFJGenTagged","HPhiFromHFJGenTagged","HMassFromHFJGenTagged","HdRFromFJFromHFJGenTagged",
-"HnDecayFromHFJGenTagged","HDecaypdgIdFromHFJGenTagged"]
-HFJGenTaggedSaveNameAr = [genSaveName+tightCutStr for genSaveName in HFJGenTaggedSaveNameAr]
-
-HFJGenTaggedTitleAr = ["H Pt for Hadronic Events","H Eta for Hadronic Events","H Phi for Hadronic Events","H Mass for Hadronic Events","Gen Higgs dR from Matched Fat Jet for Hadronic Events",
-"Number of Decay Products from Higgs for Hadronic Events","Higgs Decay Particle PDG Id for Hadronic Events"]
-
-HFJGenTaggedXTitleAr = ["Pt (GeV)","Eta","Phi","Mass (GeV)","dR",
-"N","pdgId"]
-
-HFJGenTaggedBinsAndRangeAr = [[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,400],[50,0,0.4],
-[5,0,5],[12,-6,6]]
 
 #Z gen matching with FatJets tree
 

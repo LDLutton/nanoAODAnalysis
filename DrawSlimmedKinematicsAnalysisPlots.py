@@ -445,49 +445,11 @@ for k,fileA in enumerate(fileAr):
 
         #####################
         if useTaggedTrees:
-            if makeHFJ:
-                
-                evCtr = 0
-
-                HFJGenTaggedTree = fileA.HFJGenTaggedTree
-                histHFJGenTaggedAr.append([])
-                canHFJGenTaggedAr.append([])
-                
-                #Initialize all HFJGenTagged hists
-                print("Initializing HFJGenTagged hists")
-                for HFJGenTaggedItr, HFJGenTaggedSaveName in enumerate(HFJGenTaggedSaveNameAr):
-                    if onlyDoSomeHists and HFJGenTaggedItr >= histsToDo:
-                        break
-                    canHFJGenTaggedAr[-1].append(TCanvas("{0}CanHFJGenTagged{1}".format(HFJGenTaggedSaveName,datasetSaveNameAr[k]),"{0}CanHFJGenTagged{1}".format(HFJGenTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
-                    histHFJGenTaggedAr[-1].append(TH1D("{0}HistHFJGenTagged{1}".format(HFJGenTaggedSaveName,datasetSaveNameAr[k]),"{0}HistHFJGenTagged{1}".format(HFJGenTaggedSaveName,datasetSaveNameAr[k]), HFJGenTaggedBinsAndRangeAr[HFJGenTaggedItr][0], HFJGenTaggedBinsAndRangeAr[HFJGenTaggedItr][1], HFJGenTaggedBinsAndRangeAr[HFJGenTaggedItr][2]))
-                print("Looping over events")
-                #LOOP OVER EVENTS IN FILE k
-                for j,ev in enumerate(HFJGenTaggedTree):
-                    if breakEvEarly and evCtr >= breakEvAt:
-                        break
-                    if evCtr % 1000 == 0:
-                        print("ev:",evCtr)
-                    
-                    valAr = [ev.HFJ_pt_FromTaggedGenMatchL,ev.HFJ_eta_FromTaggedGenMatchL,ev.HFJ_phi_FromTaggedGenMatchL,ev.HFJ_mass_FromTaggedGenMatchL,ev.HFJ_dRFromFJ_FromTaggedGenMatchL,
-                    ev.nHFJDecay_FromTaggedGenMatchL,ev.HFJ_decaypdgId_FromTaggedGenMatchL]
-
-                    for valItr,valA in enumerate(valAr):
-                        if onlyDoSomeHists and valItr >= histsToDo:
-                            break
-                        #if evCtr <20 and evCtr > 10 and valItr == 0:
-                        #    print(valA)
-                        #if str(type(valA)) == "<class 'ROOT.vector<int>'>":
-                        if "vector" in str(type(valA)):
-                            for valEl in valA:
-                                #print(valEl)
-                                histHFJGenTaggedAr[k][valItr].Fill(valEl)
-                        else:
-                            histHFJGenTaggedAr[k][valItr].Fill(valA)
-                    evCtr += 1
-
-                evCtr = 0
+            
+            
 
             if makeZFJ:
+                evCtr = 0
 
                 ZFJGenTaggedTree = fileA.ZFJGenTaggedTree
                 histZFJGenTaggedAr.append([])
