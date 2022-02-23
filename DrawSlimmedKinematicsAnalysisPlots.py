@@ -1117,66 +1117,6 @@ if useTaggedTrees:
         setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histRawTaggedAr,legUnstackedAr,dataName,RawTaggedSaveNameAr,RawTaggedTitleAr,RawTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
 
 
-    if makeHFJ:
-        ###############STARTING HFJGenTagged GEN MATCHING GRAPHS###############
-
-        
-        normalizeDataTogether = False
-
-
-        
-        dataName = ""
-        for k,fileA in enumerate(fileAr):
-            if useLHEAr[k]:
-                dataName += "_"+datasetSaveNameAr[k]
-
-        if not comparisonPlotsOnly:
-            for k,fileA in enumerate(fileAr):
-                if useLHEAr[k]:
-                    for HFJGenTaggedItr, HFJGenTaggedSaveName in enumerate(HFJGenTaggedSaveNameAr):
-                        if onlyDoSomeHists and HFJGenTaggedItr >= histsToDo:
-                            break
-                        canHFJGenTaggedAr[k][HFJGenTaggedItr].cd()
-                        histHFJGenTaggedAr[k][HFJGenTaggedItr].Draw("hist")
-            
-                        if savePathBool:
-                            canHFJGenTaggedAr[k][HFJGenTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],HFJGenTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
-                        else:
-                            canHFJGenTaggedAr[k][HFJGenTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],HFJGenTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
-        legUnstackedAr = []
-        padUnstackedAr = []
-        for HFJGenTaggedItr, HFJGenTaggedSaveName in enumerate(HFJGenTaggedSaveNameAr):
-            if onlyDoSomeHists and HFJGenTaggedItr >= histsToDo:
-                break
-            setUpLegend(legUnstackedAr)
-            setUpPadsAr(padUnstackedAr,"{0}Pad".format("HFJGenTaggedSaveName"))
-
-        intComparisonAr = []
-
-
-
-        setHistoElementsForLHETrees(colorAr,histHFJGenTaggedAr,weightsAr,intComparisonAr,HFJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
-
-        histMaxAr = normalizeHistsForLHETrees(histHFJGenTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,HFJGenTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
-
-        cloneHistAr = []
-
-        comparisonCanAr = []
-        #comparisonHistStackAr = []
-        for HFJGenTaggedItr, HFJGenTaggedSaveName in enumerate(HFJGenTaggedSaveNameAr):
-            if onlyDoSomeHists and HFJGenTaggedItr >= histsToDo:
-                break
-            comparisonCanAr.append(TCanvas("comparisonCan{0}".format(HFJGenTaggedSaveName),"comparisonCan{0}".format(HFJGenTaggedSaveName),3600,2400))
-            #comparisonHistStackAr.append(THStack("hist{0}Stack".format(HFJGenTaggedSaveName),HFJGenTaggedTitleAr[HFJGenTaggedItr]))
-        comparisonUnstackedCanAr = []
-
-        for HFJGenTaggedItr, HFJGenTaggedSaveName in enumerate(HFJGenTaggedSaveNameAr):
-            if onlyDoSomeHists and HFJGenTaggedItr >= histsToDo:
-                break
-            comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(HFJGenTaggedSaveName),"comparisonUnstackedCan{0}".format(HFJGenTaggedSaveName),3600,2400))
-
-        setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histHFJGenTaggedAr,legUnstackedAr,dataName,HFJGenTaggedSaveNameAr,HFJGenTaggedTitleAr,HFJGenTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
-
     if makeZFJ:
         ###############STARTING ZFJGenTagged GEN MATCHING GRAPHS###############
 
