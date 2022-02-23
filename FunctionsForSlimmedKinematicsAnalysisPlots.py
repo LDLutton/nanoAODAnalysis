@@ -110,8 +110,6 @@ canZHFJGenAr = []
 histGenRawTaggedAr = []
 canGenRawTaggedAr = []
 
-histRawTaggedAr = []
-canRawTaggedAr = []
 
 histZFJGenTaggedAr = []
 canZFJGenTaggedAr = []
@@ -357,42 +355,6 @@ GenRawTaggedBinsAndRangeAr = [[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,2
 [34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,200],[60,-30,30],[110,0,110],
 [34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,200],[60,-30,30],[110,0,110],
 [34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,200],[60,-30,30],[110,0,110]]
-
-
-
-RawTaggedSaveNameAr = ["Z1PtFromLHERawTagged","Z1EtaFromLHERawTagged","Z1PhiFromLHERawTagged","Z1MassFromLHERawTagged",
-"Z2PtFromLHERawTagged","Z2EtaFromLHERawTagged","Z2PhiFromLHERawTagged","Z2MassFromLHERawTagged",
-"ZPairInvMassFromLHERawTagged","ZPairEtaSepFromLHERawTagged",
-"HPtFromLHERawTagged","HEtaFromLHERawTagged","HPhiFromLHERawTagged","HMassFromLHERawTagged","ZPairPlusHInvMassFromLHERawTagged",
-"JetLeadPtFromLHERawTagged","JetLeadEtaFromLHERawTagged","JetLeadPhiFromLHERawTagged","JetLeadInvMassFromLHERawTagged","JetLeadpdgIdFromLHERawTagged",
-"JetTrailingPtFromLHERawTagged","JetTrailingEtaFromLHERawTagged","JetTrailingPhiFromLHERawTagged","JetTrailingInvMassFromLHERawTagged","JetTrailingpdgIdFromLHERawTagged",
-"JPairInvMassFromLHERawTagged","JPairEtaSepFromLHERawTagged"]
-
-
-RawTaggedTitleAr = ["Lead Z Pt for Hadronic Events","Lead Z Eta for Hadronic Events","Lead Z Phi for Hadronic Events","Lead Z Mass for Hadronic Events",
-"Trailing Z Pt for Hadronic Events","Trailing Z Eta for Hadronic Events","Trailing Z Phi for Hadronic Events","Trailing Z Mass for Hadronic Events",
-"Z Pair Invariant Mass for Hadronic Events","Z Pair Eta Separation for Hadronic Events",
-"H Pt for Hadronic Events","H Eta for Hadronic Events","H Phi for Hadronic Events","H Mass for Hadronic Events","Z Pair Plus H Invariant Mass for Hadronic Events",
-"Jet Lead Pt for Hadronic Events","Jet Lead Eta for Hadronic Events","Jet Lead Phi for Hadronic Events","Jet Lead Invariant Mass for Hadronic Events","Jet Lead pdgId for Hadronic Events",
-"Jet Trailing Pt for Hadronic Events","Jet Trailing Eta for Hadronic Events","Jet Trailing Phi for Hadronic Events","Jet Trailing Invariant Mass for Hadronic Events","Jet Trailing pdgId for Hadronic Events",
-"Jet Pair Invariant Mass for Hadronic Events", "Jet Pair Eta Separation for Hadronic Events"]
-
-RawTaggedXTitleAr = ["Pt (GeV)","Eta","Phi","Mass (GeV)",
-"Pt (GeV)","Eta","Phi","Mass (GeV)",
-"Mass (GeV)","Eta Separation",
-"Pt (GeV)","Eta","Phi","Mass (GeV)","Mass (GeV)", 
-"Pt (GeV)","Eta","Phi","Invariant Mass (GeV)","pdg Id",
-"Pt (GeV)","Eta","Phi","Invariant Mass (GeV)","pdg Id",
-"Invariant Mass (GeV)", "Eta Separation"]
-
-RawTaggedBinsAndRangeAr = [[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,200],
-[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,200],
-[100,0,6000],[40,0,8],
-[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,200],[100,0,6000],
-[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[50,-0.03,0.03],[10,-5,5],
-[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[50,-0.03,0.03],[10,-5,5],
-[100,0,6000],[40,0,8]]
-
 
 
 ############

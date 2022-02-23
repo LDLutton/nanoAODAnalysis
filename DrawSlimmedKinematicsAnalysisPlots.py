@@ -577,45 +577,6 @@ for k,fileA in enumerate(fileAr):
 
 
                 
-
-            if makeRaw:
-                evCtr = 0
-
-                RawTaggedTree = fileA.RawTaggedTree
-                histRawTaggedAr.append([])
-                canRawTaggedAr.append([])
-                
-                #Initialize all RawTagged hists
-                print("Initializing RawTagged hists")
-                for RawTaggedItr, RawTaggedSaveName in enumerate(RawTaggedSaveNameAr):
-                    if onlyDoSomeHists and RawTaggedItr >= histsToDo:
-                        break
-                    canRawTaggedAr[-1].append(TCanvas("{0}CanRawTagged{1}".format(RawTaggedSaveName,datasetSaveNameAr[k]),"{0}CanRawTagged{1}".format(RawTaggedSaveName,datasetSaveNameAr[k]),3600,2400))
-                    histRawTaggedAr[-1].append(TH1D("{0}HistRawTagged{1}".format(RawTaggedSaveName,datasetSaveNameAr[k]),"{0}HistRawTagged{1}".format(RawTaggedSaveName,datasetSaveNameAr[k]), RawTaggedBinsAndRangeAr[RawTaggedItr][0], RawTaggedBinsAndRangeAr[RawTaggedItr][1], RawTaggedBinsAndRangeAr[RawTaggedItr][2]))
-                print("Looping over events")
-                #LOOP OVER EVENTS IN FILE k
-                for j,ev in enumerate(RawTaggedTree):
-                    if breakEvEarly and evCtr >= breakEvAt:
-                        break
-                    if evCtr % 1000 == 0:
-                        print("ev:",evCtr)
-                    
-                    valAr = [ev.ZOne_pt_FromTaggedLHERawL,ev.ZOne_eta_FromTaggedLHERawL,ev.ZOne_phi_FromTaggedLHERawL,ev.ZOne_mass_FromTaggedLHERawL,
-                    ev.ZTwo_pt_FromTaggedLHERawL,ev.ZTwo_eta_FromTaggedLHERawL,ev.ZTwo_phi_FromTaggedLHERawL,ev.ZTwo_mass_FromTaggedLHERawL,
-                    ev.ZPair_InvMass_FromTaggedLHERawL,ev.ZPair_EtaSep_FromTaggedLHERawL,
-                    ev.H_pt_FromTaggedLHERawL,ev.H_eta_FromTaggedLHERawL,ev.H_phi_FromTaggedLHERawL,ev.H_mass_FromTaggedLHERawL,ev.ZPairPlusH_InvMass_FromTaggedLHERawL,
-                    ev.JOne_pt_FromTaggedLHERawL,ev.JOne_eta_FromTaggedLHERawL,ev.JOne_phi_FromTaggedLHERawL,ev.JOne_invmass_FromTaggedLHERawL,ev.JOne_pdgId_FromTaggedLHERawL,
-                    ev.JTwo_pt_FromTaggedLHERawL,ev.JTwo_eta_FromTaggedLHERawL,ev.JTwo_phi_FromTaggedLHERawL,ev.JTwo_invmass_FromTaggedLHERawL,ev.JTwo_pdgId_FromTaggedLHERawL,
-                    ev.JPair_invmass_FromTaggedLHERawL,ev.J_etasep_FromTaggedLHERawL]
-
-                    for valItr,valA in enumerate(valAr):
-                        if onlyDoSomeHists and valItr >= histsToDo:
-                            break
-                        #if evCtr <20 and evCtr > 10 and valItr == 0:
-                        #    print(valA)
-                        histRawTaggedAr[k][valItr].Fill(valA)
-                    evCtr += 1
-
             evCtr = 0
 
             if makeZFJ:
@@ -1054,67 +1015,6 @@ if useTaggedTrees:
             comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(GenRawTaggedSaveName),"comparisonUnstackedCan{0}".format(GenRawTaggedSaveName),3600,2400))
 
         setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histGenRawTaggedAr,legUnstackedAr,dataName,GenRawTaggedSaveNameAr,GenRawTaggedTitleAr,GenRawTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
-
-
-    if makeRaw:
-        ###############STARTING RAW LHE GRAPHS###############
-
-        
-        normalizeDataTogether = False
-
-
-        
-        dataName = ""
-        for k,fileA in enumerate(fileAr):
-            if useLHEAr[k]:
-                dataName += "_"+datasetSaveNameAr[k]
-
-        if not comparisonPlotsOnly:
-            for k,fileA in enumerate(fileAr):
-                if useLHEAr[k]:
-                    for RawTaggedItr, RawTaggedSaveName in enumerate(RawTaggedSaveNameAr):
-                        if onlyDoSomeHists and RawTaggedItr >= histsToDo:
-                            break
-                        canRawTaggedAr[k][RawTaggedItr].cd()
-                        histRawTaggedAr[k][RawTaggedItr].Draw("hist")
-            
-                        if savePathBool:
-                            canRawTaggedAr[k][RawTaggedItr].SaveAs("./Graphs/General/{0}/{1}{2}.png".format(datasetSaveNameAr[k],RawTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
-                        else:
-                            canRawTaggedAr[k][RawTaggedItr].SaveAs("{0}{1}{2}.png".format(datasetSaveNameAr[k],RawTaggedSaveName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
-        legUnstackedAr = []
-        padUnstackedAr = []
-        for RawTaggedItr, RawTaggedSaveName in enumerate(RawTaggedSaveNameAr):
-            if onlyDoSomeHists and RawTaggedItr >= histsToDo:
-                break
-            setUpLegend(legUnstackedAr)
-            setUpPadsAr(padUnstackedAr,"{0}Pad".format("RawTaggedSaveName"))
-
-        intComparisonAr = []
-
-
-
-        setHistoElementsForLHETrees(colorAr,histRawTaggedAr,weightsAr,intComparisonAr,RawTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr,useFillColorInPlots)
-
-        histMaxAr = normalizeHistsForLHETrees(histRawTaggedAr,weightsAr,legUnstackedAr,datasetSaveNameAr,intComparisonAr,RawTaggedSaveNameAr,onlyDoSomeHists,histsToDo,useLHEAr)
-
-        cloneHistAr = []
-
-        comparisonCanAr = []
-        #comparisonHistStackAr = []
-        for RawTaggedItr, RawTaggedSaveName in enumerate(RawTaggedSaveNameAr):
-            if onlyDoSomeHists and RawTaggedItr >= histsToDo:
-                break
-            comparisonCanAr.append(TCanvas("comparisonCan{0}".format(RawTaggedSaveName),"comparisonCan{0}".format(RawTaggedSaveName),3600,2400))
-            #comparisonHistStackAr.append(THStack("hist{0}Stack".format(RawTaggedSaveName),RawTaggedTitleAr[RawTaggedItr]))
-        comparisonUnstackedCanAr = []
-
-        for RawTaggedItr, RawTaggedSaveName in enumerate(RawTaggedSaveNameAr):
-            if onlyDoSomeHists and RawTaggedItr >= histsToDo:
-                break
-            comparisonUnstackedCanAr.append(TCanvas("comparisonUnstackedCan{0}".format(RawTaggedSaveName),"comparisonUnstackedCan{0}".format(RawTaggedSaveName),3600,2400))
-
-        setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histRawTaggedAr,legUnstackedAr,dataName,RawTaggedSaveNameAr,RawTaggedTitleAr,RawTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
 
 
     if makeZFJ:
