@@ -123,8 +123,8 @@ canGenRawSemiLepTaggedAr = []
 histRawSemiLepTaggedAr = []
 canRawSemiLepTaggedAr = []
 
-histZFJGenSemiLepTaggedAr = []
-canZFJGenSemiLepTaggedAr = []
+#histZFJGenSemiLepTaggedAr = []
+#canZFJGenSemiLepTaggedAr = []
 
 histZHFJGenSemiLepTaggedAr = []
 canZHFJGenSemiLepTaggedAr = []
@@ -360,7 +360,7 @@ GenRawTaggedBinsAndRangeAr = [[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,2
 ############
 
 #Z gen matching with FatJets tree
-
+"""
 ZFJGenSemiLepTaggedSaveNameAr = ["ZLeadPtFromZFJGenSemiLepTagged","ZLeadEtaFromZFJGenSemiLepTagged","ZLeadPhiFromZFJGenSemiLepTagged","ZLeadMassFromZFJGenSemiLepTagged","ZLeaddRFromFJFromZFJGenSemiLepTagged",
 "ZLeadnDecayFromZFJGenSemiLepTagged","ZLeadDecaypdgIdFromZFJGenSemiLepTagged",
 "ZTrailingPtFromZFJGenSemiLepTagged","ZTrailingEtaFromZFJGenSemiLepTagged","ZTrailingPhiFromZFJGenSemiLepTagged","ZTrailingMassFromZFJGenSemiLepTagged","ZTrailingdRFromFJFromZFJGenSemiLepTagged",
@@ -395,7 +395,7 @@ ZHFJGenSemiLepTaggedSaveNameAr = [genSaveName+tightCutStr for genSaveName in ZHF
 ZHFJGenSemiLepTaggedTitleAr = ["Invariant Mass of Z Pair With Higgs for Semi-Leptonic Events"]
 ZHFJGenSemiLepTaggedXTitleAr = ["Invariant Mass (GeV)"]
 ZHFJGenSemiLepTaggedBinsAndRangeAr = [[100,0,6000]]
-
+"""
 
 GenRawSemiLepTaggedSaveNameAr = ["Z1PtFromGenRawSemiLepTagged","Z1EtaFromGenRawSemiLepTagged","Z1PhiFromGenRawSemiLepTagged","Z1MassFromGenRawSemiLepTagged","Z1pdgIdFromGenRawSemiLepTagged","Z1genPartIdxMotherFromGenRawSemiLepTagged",
 "Z1nDecayFromGenRawSemiLepTagged","Z1DecaypdgIdFromGenRawSemiLepTagged",
