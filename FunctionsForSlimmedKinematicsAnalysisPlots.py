@@ -24,6 +24,8 @@ MGSM = True
 
 MGC2VEtaDifCut = True
 
+SDC2V3MC = True
+
 MGOSix = False
 MGOSixEtaDifCut = False
 MGOHBox = False
