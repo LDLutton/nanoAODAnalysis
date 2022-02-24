@@ -12313,5 +12313,5 @@ std::string SDC2V3MCAr[2568] = {"root://cmsxrootd.fnal.gov///store/user/phchang/
 "root://cmsxrootd.fnal.gov///store/user/phchang/VBSHWWSignalGeneration/RunIISummer20UL18_VBSZZH_incl_C2V_3_Azure_v1/output_NANOAOD_zstmj9g0UY.root",
 "root://cmsxrootd.fnal.gov///store/user/phchang/VBSHWWSignalGeneration/RunIISummer20UL18_VBSZZH_incl_C2V_3_Azure_v1/output_NANOAOD_ztDj1lMiSj.root",
 "root://cmsxrootd.fnal.gov///store/user/phchang/VBSHWWSignalGeneration/RunIISummer20UL18_VBSZZH_incl_C2V_3_Azure_v1/output_NANOAOD_zuvn5KxhAJ.root",
-"root://cmsxrootd.fnal.gov///store/user/phchang/VBSHWWSignalGeneration/RunIISummer20UL18_VBSZZH_incl_C2V_3_Azure_v1/output_NANOAOD_zuwzK3uhqZ.root"}
+"root://cmsxrootd.fnal.gov///store/user/phchang/VBSHWWSignalGeneration/RunIISummer20UL18_VBSZZH_incl_C2V_3_Azure_v1/output_NANOAOD_zuwzK3uhqZ.root"};
 
