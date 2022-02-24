@@ -76,7 +76,6 @@ void new022022KinematicsAnalysisSlimmed(){
     bool isBackground;
     bool useLHETree = false;
     bool useFJGenMatchTree = false;
-    bool useJGenMatchTree = false;
 
     ////////////////////////////////GETTING DATASET////////////////////////////////
     ////////////////////////////////GETTING DATASET////////////////////////////////
@@ -93,7 +92,19 @@ void new022022KinematicsAnalysisSlimmed(){
         }
         useLHETree = true;
         useFJGenMatchTree = true;
-        useJGenMatchTree = true;
+        
+    }
+    else if (SDC2V3MC){
+        saveName = "SDC2V3MC";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V3MCAr)/sizeof(SDC2V3MCAr[0]);
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V3MCAr[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
     }
     else if (MGOSix){
         saveName = "OSix";
@@ -105,7 +116,7 @@ void new022022KinematicsAnalysisSlimmed(){
         }
         useLHETree = true;
         useFJGenMatchTree = true;
-        useJGenMatchTree = true;
+        
     }
     else if (MGOSixEtaDifCut){
         saveName = "OSix_EtaDifCut";
@@ -117,7 +128,7 @@ void new022022KinematicsAnalysisSlimmed(){
         }
         useLHETree = true;
         useFJGenMatchTree = true;
-        useJGenMatchTree = true;
+        
     }
     else if (MGOHBox){
         saveName = "OHBox";
@@ -129,7 +140,7 @@ void new022022KinematicsAnalysisSlimmed(){
         }
         useLHETree = true;
         useFJGenMatchTree = true;
-        useJGenMatchTree = true;
+        
     }
     else if (MGOHBoxEtaDifCut){
         saveName = "OHBox_EtaDifCut";
@@ -141,7 +152,7 @@ void new022022KinematicsAnalysisSlimmed(){
         }
         useLHETree = true;
         useFJGenMatchTree = true;
-        useJGenMatchTree = true;
+        
     }
     else if (MGOHDD){
         saveName = "OHDD";
@@ -153,7 +164,7 @@ void new022022KinematicsAnalysisSlimmed(){
         }
         useLHETree = true;
         useFJGenMatchTree = true;
-        useJGenMatchTree = true;
+        
     }
     else if (MGOHDDEtaDifCut){
         saveName = "OHDD_EtaDifCut";
@@ -165,7 +176,7 @@ void new022022KinematicsAnalysisSlimmed(){
         }
         useLHETree = true;
         useFJGenMatchTree = true;
-        useJGenMatchTree = true;
+        
     }
     else if (MGOHW){
         saveName = "OHW";
@@ -177,7 +188,7 @@ void new022022KinematicsAnalysisSlimmed(){
         }
         useLHETree = true;
         useFJGenMatchTree = true;
-        useJGenMatchTree = true;
+        
     }
     else if (MGSM){
         saveName = "SM";
@@ -189,14 +200,14 @@ void new022022KinematicsAnalysisSlimmed(){
         }
         useLHETree = true;
         useFJGenMatchTree = true;
-        useJGenMatchTree = true;
+        
     }
     else if (testRun){
         saveName = "testRun";
         fileAr.push_back("./unweighted_eventspphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev10080Seed_0p999cHW100GeVIMJetCut_200.root");
         useLHETree = true;
         useFJGenMatchTree = true;
-        useJGenMatchTree = true;
+        
     }
     else{
         std::cout << "ERROR. NO INPUT DATASET NAME GIVEN\n";
@@ -1562,7 +1573,7 @@ void new022022KinematicsAnalysisSlimmed(){
 
 
                 }
-                if (useFJGenMatchTree || useJGenMatchTree) {
+                if (useFJGenMatchTree) {
                     bool ZIsLeptonic = false;
                     bool ZIsSemiLeptonic = false;
                     bool ZIsHadronic = false;
@@ -2930,7 +2941,7 @@ void new022022KinematicsAnalysisSlimmed(){
             HFJGenTree->Write("",TObject::kOverwrite);
             ZHFJGenTaggedTree->Write("",TObject::kOverwrite);
         }
-        if (useJGenMatchTree || useFJGenMatchTree) {
+        if (useFJGenMatchTree) {
             GenRawTree->Write("",TObject::kOverwrite);
             GenRawTaggedTree->Write("",TObject::kOverwrite);
             GenRawSemiLepTaggedTree->Write("",TObject::kOverwrite);
