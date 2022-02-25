@@ -1620,9 +1620,9 @@ void new022022KinematicsAnalysisSlimmed(){
                                         tmpHFJAr[tmpHItr].push_back(tmpPDGId);
                                         isHDecay = true;
                                         if (debugGenPart){
-                                            std::cout << "Checking if pdg id == 23. pdgid " << tmpPDGId << "tmpZFJAr.size()" << tmpZFJAr.size() << "\n";
+                                            std::cout << "Checking if pdg id == 23. pdgid " << tmpPDGId << " tmpZFJAr.size() " << tmpZFJAr.size() << "\n";
                                         }
-                                        if (tmpPDGId == 23 && tmpZFJAr.size() >=2) {
+                                        if (tmpPDGId == 23 && tmpZFJAr.size() <=1) {
                                             //HToZIndVec.push_back(i)
                                             HToZBoolVec.push_back(true);
                                         }
