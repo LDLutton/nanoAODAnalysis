@@ -1591,17 +1591,42 @@ void new022022KinematicsAnalysisSlimmed(){
                     std::vector<std::vector<Int_t>> tmpZDaughterIndAr;
 
                     //std::vector<Int_t> tmpZFJAr;
+                    //Usually should be straightforward 2Z 1H 2J
+                    //however, sometimes there are intermediary particles on the way to that in the gen that aren't in the LHE
+                    //Some situations:
+                    //Starting with 1Z 2H 0J
+                    //Leads to H->JJZ
+                    //can also have normal start but H->ZX (X can be gamma or another Z)
+                    //check starting particles by looking at what has the status 4481.
+                    //These will bounce around with status 257 until they get status 10497 (indicates "isLastCopy" bit)
+                    //or with H sometimes status 26881 (includes "isLastCopyBeforeFSR" bit)
+
+
+                    bool HFound = false;
+                    //std::vector<Int_t> HToZIndVec;
+                    std::vector<bool> HToZBoolVec;
+
                     for (UInt_t i=0;i<*nGenPart;i++){
                         Int_t tmpPDGId = GenPart_pdgId[i];
                         Int_t tmpMotherID = GenPart_genPartIdxMother[i];
                         if (debugGenPart) std::cout << "i " << i << " GenPart_pdgId[i] " << tmpPDGId << "\n";
-
+                        bool isHDecay = false;
                         if (tmpHFJAr.size()){
                             for (UInt_t tmpHItr=0;tmpHItr<tmpHFJAr.size();tmpHItr++){
                                 if (debugGenPart) std::cout << "tmpHItr " << tmpHItr << " tmpMotherID " << tmpMotherID << "\n";
                                 if (tmpMotherID == tmpHFJAr[tmpHItr][0]){
                                     if (tmpPDGId == 25) std::cout <<"ERROR, ERROR, DAUGHTER PARTICLE IS H\n";
-                                    else tmpHFJAr[tmpHItr].push_back(tmpPDGId);
+                                    else {
+                                        tmpHFJAr[tmpHItr].push_back(tmpPDGId);
+                                        isHDecay = true;
+                                        if (tmpPDGId == 23 && tmpZFJAr.size() >=2) {
+                                            //HToZIndVec.push_back(i)
+                                            HToZBoolVec.push_back(true);
+                                        }
+                                        else {
+                                            HToZBoolVec.push_back(false);
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -1643,9 +1668,11 @@ void new022022KinematicsAnalysisSlimmed(){
                             std::vector<Int_t> tmpZFJVec;
                             tmpZFJVec.push_back(i);
                             std::vector<Int_t> tmpZOneDaughterVec;
-                            if (tmpStatusBin) {
-                                tmpZFJAr.push_back(tmpZFJVec);
-                                tmpZDaughterIndAr.push_back(tmpZOneDaughterVec);
+                            if (tmpZFJAr.size()<2 || !isHDecay){
+                                if (tmpStatusBin) {
+                                    tmpZFJAr.push_back(tmpZFJVec);
+                                    tmpZDaughterIndAr.push_back(tmpZOneDaughterVec);
+                                }
                             }
 
                         }
@@ -1682,6 +1709,9 @@ void new022022KinematicsAnalysisSlimmed(){
                                         break;
                                     }
                                 }
+                            }
+                            else if (std::count(tmpHFJAr[tmpHItr].begin(), tmpHFJAr[tmpHItr].end(), 23) && HToZBoolVec[tmpHItr]){
+                                intermediaryH = tmpHItr;
                             }
                         }
                     }
@@ -1730,7 +1760,7 @@ void new022022KinematicsAnalysisSlimmed(){
                     
                     
                     if (finalHAr.size() != 1) {
-                        std::cout <<"ERROR ERROR, MORE OR LESS THAN ONE H,evCount,JOne_pdgId_FromLHERaw,JTwo_pdgId_FromLHERaw " << evCount<< " " <<JOne_pdgId_FromLHERaw<< " " <<JTwo_pdgId_FromLHERaw << "\n";
+                        std::cout <<"ERROR ERROR, MORE OR LESS THAN ONE H,evCount,JOne_pdgId_FromLHERaw,JTwo_pdgId_FromLHERaw " << evCount-1<< " " <<JOne_pdgId_FromLHERaw<< " " <<JTwo_pdgId_FromLHERaw << "\n";
                     }
                     else{
                         hInd = finalHAr[0];
