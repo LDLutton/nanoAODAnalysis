@@ -1614,7 +1614,7 @@ void new022022KinematicsAnalysisSlimmed(){
                         if (debugGenPart) std::cout << "i " << i << " GenPart_pdgId[i] " << tmpPDGId << "\n";
                         bool isHDecay = false;
                         if (isInHDecChainVec.size()){
-                            if (std::count(isInHDecChainVec.begin(), isInHDecChainVec.end(), i)) {
+                            if (std::count(isInHDecChainVec.begin(), isInHDecChainVec.end(), tmpMotherID)) {
                                 isHDecay = true;
                                 isInHDecChainVec.push_back(i);
 
