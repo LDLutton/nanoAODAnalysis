@@ -1624,10 +1624,7 @@ void new022022KinematicsAnalysisSlimmed(){
                                         }
                                         if (tmpPDGId == 23 && tmpZFJAr.size() <=1) {
                                             //HToZIndVec.push_back(i)
-                                            HToZBoolVec.push_back(true);
-                                        }
-                                        else {
-                                            HToZBoolVec.push_back(false);
+                                            HToZBoolVec[tmpHItr] =true;
                                         }
                                     }
                                 }
@@ -1644,7 +1641,10 @@ void new022022KinematicsAnalysisSlimmed(){
                             //tmpIsEnd = tmpStatusBin[-14];
                             std::vector<Int_t> tmpHFJVec;
                             tmpHFJVec.push_back(i);
-                            if (tmpStatusBin) tmpHFJAr.push_back(tmpHFJVec);
+                            if (tmpStatusBin) {
+                                tmpHFJAr.push_back(tmpHFJVec);
+                                HToZBoolVec.push_back(false);
+                            }
                         }
                         
                         if (tmpZFJAr.size()){
