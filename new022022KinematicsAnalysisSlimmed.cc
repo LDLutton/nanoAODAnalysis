@@ -1605,12 +1605,22 @@ void new022022KinematicsAnalysisSlimmed(){
                     bool HFound = false;
                     //std::vector<Int_t> HToZIndVec;
                     std::vector<bool> HToZBoolVec;
+                    std::vector<Int_t> isInHDecChainVec;
+
 
                     for (UInt_t i=0;i<*nGenPart;i++){
                         Int_t tmpPDGId = GenPart_pdgId[i];
                         Int_t tmpMotherID = GenPart_genPartIdxMother[i];
                         if (debugGenPart) std::cout << "i " << i << " GenPart_pdgId[i] " << tmpPDGId << "\n";
                         bool isHDecay = false;
+                        if (isInHDecChainVec.size()){
+                            if ((std::count(isInHDecChainVec.begin(), isInHDecChainVec.end(), i)) {
+                                isHDecay = true
+                                isInHDecChainVec.push_back(i);
+
+                            }
+                        }
+
                         if (tmpHFJAr.size()){
                             for (UInt_t tmpHItr=0;tmpHItr<tmpHFJAr.size();tmpHItr++){
                                 if (debugGenPart) std::cout << "tmpHItr " << tmpHItr << " tmpMotherID " << tmpMotherID << "\n";
@@ -1619,6 +1629,7 @@ void new022022KinematicsAnalysisSlimmed(){
                                     else {
                                         tmpHFJAr[tmpHItr].push_back(tmpPDGId);
                                         isHDecay = true;
+                                        isInHDecChainVec.push_back(i);
                                         if (debugGenPart){
                                             std::cout << "Checking if pdg id == 23. pdgid " << tmpPDGId << " tmpZFJAr.size() " << tmpZFJAr.size() << "\n";
                                         }
@@ -1665,13 +1676,14 @@ void new022022KinematicsAnalysisSlimmed(){
                             //bool tmpStatusBin = tmpStatusBitSet(GenPart_statusFlags[i]).test(13);
                             bool tmpStatusBin = GenPart_statusFlags[i] & (1 << 13);
                             //tmpStatusBin = bin(GenPart_statusFlags[i]);
-                            if (debugGenPart) std::cout <<"GenPart_statusFlags[i] " << GenPart_statusFlags[i] << " tmpStatusBin " << tmpStatusBin << "\n";
+                            if (debugGenPart) std::cout <<"GenPart_statusFlags[i] " << GenPart_statusFlags[i] << " tmpStatusBin " << tmpStatusBin << " tmpZFJAr.size() " << tmpZFJAr.size() << " isHDecay " << isHDecay << "\n";
                             
                             //tmpIsEnd = tmpStatusBin[-14];
                             std::vector<Int_t> tmpZFJVec;
                             tmpZFJVec.push_back(i);
                             std::vector<Int_t> tmpZOneDaughterVec;
-                            if (tmpZFJAr.size()<2 || !isHDecay){
+                            
+                            if (tmpZFJAr.size()<=1 || !isHDecay){
                                 if (tmpStatusBin) {
                                     tmpZFJAr.push_back(tmpZFJVec);
                                     tmpZDaughterIndAr.push_back(tmpZOneDaughterVec);
