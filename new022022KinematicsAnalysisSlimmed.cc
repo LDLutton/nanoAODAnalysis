@@ -1388,7 +1388,7 @@ void new022022KinematicsAnalysisSlimmed(){
             if (evCount % 1000 == 0) std::cout << "Event: " << evCount << "\n";
             if (debug){
                 std::cout << "-------------------------\n";
-                std::cout << evCount+1 << " starting jets loop\n";
+                std::cout << evCount << " starting jets loop\n";
             }
             //Increment event count
             evRunOver += 1;
@@ -1687,6 +1687,12 @@ void new022022KinematicsAnalysisSlimmed(){
                                 std::cout << "\n";
                             }
                         }
+                        if (HToZBoolVec.size()){
+                            for (UInt_t tmpHItr=0;tmpHItr<HToZBoolVec.size();tmpHItr++){
+                                std::cout << HToZBoolVec[tmpHItr] << ", ";
+                            }
+                            std::cout << "\n";
+                        }
                         std::cout <<"tmpZFJAr:\n";
                         if (tmpZFJAr.size()){
                             for (UInt_t tmpZItr=0;tmpZItr<tmpZFJAr.size();tmpZItr++){
@@ -1710,8 +1716,9 @@ void new022022KinematicsAnalysisSlimmed(){
                                     }
                                 }
                             }
-                            else if (std::count(tmpHFJAr[tmpHItr].begin(), tmpHFJAr[tmpHItr].end(), 23) && HToZBoolVec[tmpHItr]){
+                            if (std::count(tmpHFJAr[tmpHItr].begin(), tmpHFJAr[tmpHItr].end(), 23) && HToZBoolVec[tmpHItr]){
                                 intermediaryH = tmpHItr;
+                                break;
                             }
                         }
                     }
