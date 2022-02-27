@@ -549,7 +549,7 @@ for k,fileA in enumerate(fileAr):
                     evCtr += 1
 
                 
-            if makeGenRaw:
+            if makeGenRawHad:
                 evCtr = 0
                 GenRawTaggedTree = fileA.GenRawTaggedTree
                 histGenRawTaggedAr.append([])
@@ -605,7 +605,7 @@ for k,fileA in enumerate(fileAr):
             evCtr = 0
 
                 
-            if makeGenRaw:
+            if makeGenRawSemiLep:
                 evCtr = 0
                 GenRawSemiLepTaggedTree = fileA.GenRawSemiLepTaggedTree
                 histGenRawSemiLepTaggedAr.append([])
@@ -656,7 +656,7 @@ for k,fileA in enumerate(fileAr):
                 
 
 
-            if makeGenRaw:
+            if makeGenRawLep:
                 evCtr = 0
                 GenRawLepTaggedTree = fileA.GenRawLepTaggedTree
                 histGenRawLepTaggedAr.append([])
@@ -906,7 +906,7 @@ if useLHETree and not onlyTaggedTrees:
 
 ###########################
 if useTaggedTrees:
-    if makeGenRaw:
+    if makeGenRawHad:
         ###############STARTING GEN RAW  GRAPHS###############
 
         
@@ -1087,7 +1087,7 @@ if useTaggedTrees:
 
         setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histZHFJGenTaggedAr,legUnstackedAr,dataName,ZHFJGenTaggedSaveNameAr,ZHFJGenTaggedTitleAr,ZHFJGenTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
 
-    if makeGenRaw:
+    if makeGenRawSemiLep:
         ###############STARTING GEN RAW  GRAPHS###############
 
         
@@ -1147,7 +1147,7 @@ if useTaggedTrees:
 
         setUpNonStackedHistAndFoMPlotForLHETrees(comparisonUnstackedCanAr,cloneHistAr,padUnstackedAr,histMaxAr,histGenRawSemiLepTaggedAr,legUnstackedAr,dataName,GenRawSemiLepTaggedSaveNameAr,GenRawSemiLepTaggedTitleAr,GenRawSemiLepTaggedXTitleAr,onlyDoSomeHists,histsToDo,useLHEAr,datasetSaveNameAr)
 
-    if makeGenRaw:
+    if makeGenRawLep:
         ###############STARTING GEN RAW  GRAPHS###############
 
         

@@ -56,7 +56,9 @@ onlyTaggedTrees = True
 useTaggedTrees = True
 
 makeRaw = False
-makeGenRaw = True
+makeGenRawHad = False
+makeGenRawSemiLep = False
+makeGenRawLep = True
 makeHFJ = False
 makeZHFJ = False
 makeZFJ = False
