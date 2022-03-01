@@ -55,7 +55,9 @@ useLHETree = True
 onlyTaggedTrees = True
 useTaggedTrees = True
 
+makeFA = False
 makeRaw = False
+makeGenRaw = False
 makeGenRawHad = False
 makeGenRawSemiLep = False
 makeGenRawLep = True
