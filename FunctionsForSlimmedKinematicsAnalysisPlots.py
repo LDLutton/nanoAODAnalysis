@@ -147,44 +147,56 @@ canRawLepTaggedAr = []
 #Higgs gen matching with FatJets tree
 
 HFJGenSaveNameAr = ["HPtFromHFJGen","HEtaFromHFJGen","HPhiFromHFJGen","HMassFromHFJGen","HdRFromFJFromHFJGen",
-"HnDecayFromHFJGen","HDecaypdgIdFromHFJGen"]
+"HnDecayFromHFJGen","HDecaypdgIdFromHFJGen",
+"HDeepTagFromHFJGen","HDeepTagMDFromHFJGen","HParticleNetFromHFJGen"]
 
 HFJGenSaveNameAr = [genSaveName+tightCutStr for genSaveName in HFJGenSaveNameAr]
 HFJGenTitleAr = ["H Pt","H Eta","H Phi","H Mass","Gen Higgs dR from Matched Fat Jet",
-"Number of Decay Products from Higgs","Higgs Decay Particle PDG Id"]
+"Number of Decay Products from Higgs","Higgs Decay Particle PDG Id",
+"Higgs Deep Tag", "Higgs MD Deep Tag", "Higgs Particle Net"]
 
 HFJGenXTitleAr = ["Pt (GeV)","Eta","Phi","Mass (GeV)","dR",
-"N","pdgId"]
+"N","pdgId",
+"Deep Tag Value","MD Deep Tag Value","Particle Net Value"]
 
 HFJGenBinsAndRangeAr = [[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,400],[50,0,0.4],
-[5,0,5],[12,-6,6]]
+[5,0,5],[12,-6,6],
+[100,0,1],[100,0,1],[100,0,1]]
 
 #Z gen matching with FatJets tree
 
 ZFJGenSaveNameAr = ["ZLeadPtFromZFJGen","ZLeadEtaFromZFJGen","ZLeadPhiFromZFJGen","ZLeadMassFromZFJGen","ZLeaddRFromFJFromZFJGen",
 "ZLeadnDecayFromZFJGen","ZLeadDecaypdgIdFromZFJGen",
+"ZLeadDeepTagFromZFJGen","ZLeadDeepTagMDFromZFJGen","ZLeadParticleNetFromZFJGen",
 "ZTrailingPtFromZFJGen","ZTrailingEtaFromZFJGen","ZTrailingPhiFromZFJGen","ZTrailingMassFromZFJGen","ZTrailingdRFromFJFromZFJGen",
 "ZTrailingnDecayFromZFJGen","ZTrailingDecaypdgIdFromZFJGen",
+"ZTrailingDeepTagFromZFJGen","ZTrailingDeepTagMDFromZFJGen","ZTrailingParticleNetFromZFJGen",
 "ZPairInvMassFromZFJGen","ZPairEtaSepFromZFJGen"]
 
 ZFJGenSaveNameAr = [genSaveName+tightCutStr for genSaveName in ZFJGenSaveNameAr]
 
 ZFJGenTitleAr = ["Lead Z Pt","Lead Z Eta","Lead Z Phi","Lead Z Mass","Gen Lead Z dR from Matched Fat Jet",
 "Number of Decay Products from Lead Z","Lead Z Decay Particle PDG Id",
+"Lead Z Deep Tag", "Lead Z MD Deep Tag", "Lead Z Particle Net",
 "Trailing Z Pt","Trailing Z Eta","Trailing Z Phi","Trailing Z Mass","Gen Trailing Z dR from Matched Fat Jet",
 "Number of Decay Products from Trailing Z","Trailing Z Decay Particle PDG Id",
+"Lead Z Deep Tag", "Lead Z MD Deep Tag", "Lead Z Particle Net"
 "Z Pair Invariant Mass","Z Pair Eta Separation"]
 
 ZFJGenXTitleAr = ["Pt (GeV)","Eta","Phi","Mass (GeV)","dR",
 "N","pdgId",
+"Deep Tag Value","MD Deep Tag Value","Particle Net Value",
 "Pt (GeV)","Eta","Phi","Mass (GeV)","dR",
 "N","pdgId",
+"Deep Tag Value","MD Deep Tag Value","Particle Net Value",
 "Invariant Mass (GeV)","Eta Separation"]
 
 ZFJGenBinsAndRangeAr = [[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,400],[50,0,0.4],
 [4,0,4],[36,-18,18],
+[100,0,1],[100,0,1],[100,0,1],
 [34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,400],[50,0,0.4],
 [4,0,4],[36,-18,18],
+[100,0,1],[100,0,1],[100,0,1],
 [100,0,6000],[40,0,8]]
 
 #Higgs and Z gen matching with FatJets tree

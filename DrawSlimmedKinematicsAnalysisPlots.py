@@ -361,7 +361,8 @@ for k,fileA in enumerate(fileAr):
                         print("ev:",evCtr)
                     
                     valAr = [ev.HFJ_pt_FromGenMatchL,ev.HFJ_eta_FromGenMatchL,ev.HFJ_phi_FromGenMatchL,ev.HFJ_mass_FromGenMatchL,ev.HFJ_dRFromFJ_FromGenMatchL,
-                    ev.nHFJDecay_FromGenMatchL,ev.HFJ_decaypdgId_FromGenMatchL]
+                    ev.nHFJDecay_FromGenMatchL,ev.HFJ_decaypdgId_FromGenMatchL,
+                    ev.HFJ_deepTag_H_FromGenMatchL,ev.HFJ_deepTagMD_HbbvsQCD_FromGenMatchL,ev.HFJ_particleNet_HbbvsQCD_FromGenMatchL]
 
                     for valItr,valA in enumerate(valAr):
                         if onlyDoSomeHists and valItr >= histsToDo:
@@ -500,8 +501,10 @@ for k,fileA in enumerate(fileAr):
                     
                     valAr = [ev.ZFJLead_pt_FromTaggedGenMatchL,ev.ZFJLead_eta_FromTaggedGenMatchL,ev.ZFJLead_phi_FromTaggedGenMatchL,ev.ZFJLead_mass_FromTaggedGenMatchL,ev.ZFJLead_dRFromFJ_FromTaggedGenMatchL,
                     ev.nZFJLeadDecay_FromTaggedGenMatchL,ev.ZFJLead_decaypdgId_FromTaggedGenMatchL,
+                    ev.ZFJLead_deepTag_ZvsQCDFromTaggedGenMatchL,ev.ZFJLead_deepTagMD_ZvsQCDFromTaggedGenMatchL,ev.ZFJLead_particleNet_ZvsQCDFromTaggedGenMatchL,
                     ev.ZFJTrailing_pt_FromTaggedGenMatchL,ev.ZFJTrailing_eta_FromTaggedGenMatchL,ev.ZFJTrailing_phi_FromTaggedGenMatchL,ev.ZFJTrailing_mass_FromTaggedGenMatchL,ev.ZFJTrailing_dRFromFJ_FromTaggedGenMatchL,
                     ev.nZFJTrailingDecay_FromTaggedGenMatchL,ev.ZFJTrailing_decaypdgId_FromTaggedGenMatchL,
+                    ev.ZFJTrailing_deepTag_ZvsQCDFromTaggedGenMatchL,ev.ZFJTrailing_deepTagMD_ZvsQCDFromTaggedGenMatchL,ev.ZFJTrailing_particleNet_ZvsQCDFromTaggedGenMatchL,
                     ev.ZFJPair_InvMass_FromTaggedGenMatchL,ev.ZFJPair_EtaSep_FromTaggedGenMatchL]
 
                     for valItr,valA in enumerate(valAr):
