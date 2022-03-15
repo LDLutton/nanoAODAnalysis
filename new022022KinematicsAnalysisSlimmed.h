@@ -7,6 +7,7 @@ bool endAfter = false;
 int NToStart = 0;
 int NToEnd = 2500;
 
+bool scratchDown = true;
 bool useTighterCut = false;
 
 bool testRun = true;
