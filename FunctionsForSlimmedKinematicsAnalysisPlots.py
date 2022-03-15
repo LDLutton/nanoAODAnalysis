@@ -6,8 +6,12 @@ today = datetime.datetime.today()
 
 
 forCondor = True
+scratchDown = True
 if forCondor:
-    forCondorStr = "/scratch365/dlutton/HistosAndPNGs/KinematicsAnalysis/Slimmed/"
+    if scratchDown:
+      forCondorStr = "/afs/crc.nd.edu/user/d/dlutton/Public/condorStuff/NanoAODToHistos/tmpHoldForNanoAODWithoutScratch/"
+    else:
+      forCondorStr = "/scratch365/dlutton/HistosAndPNGs/KinematicsAnalysis/Slimmed/"
     savePathBool = False
 else:
     forCondorStr = ""
