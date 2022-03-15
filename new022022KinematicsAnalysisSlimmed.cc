@@ -263,7 +263,7 @@ void new022022KinematicsAnalysisSlimmed(){
     HFJGenTree->Branch("HFJ_decaypdgId_FromGenMatchL",&HFJ_decaypdgId_FromGenMatchL);
 
     HFJGenTree->Branch("HFJ_deepTag_H_FromGenMatchL",&HFJ_deepTag_H_FromGenMatchL);
-    HFJGenTree->Branch("HFJ__deepTagMD_HbbvsQCD_FromGenMatchL",&HFJ__deepTagMD_HbbvsQCD_FromGenMatchL);
+    HFJGenTree->Branch("HFJ_deepTagMD_HbbvsQCD_FromGenMatchL",&HFJ_deepTagMD_HbbvsQCD_FromGenMatchL);
     HFJGenTree->Branch("HFJ_particleNet_HbbvsQCD_FromGenMatchL",&HFJ_particleNet_HbbvsQCD_FromGenMatchL);
 
 
