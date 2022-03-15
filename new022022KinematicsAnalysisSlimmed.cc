@@ -1268,7 +1268,7 @@ void new022022KinematicsAnalysisSlimmed(){
         TTreeReaderArray<Float_t> FatJet_deepTagMD_HbbvsQCD(myEventsReader, "FatJet_deepTagMD_HbbvsQCD");
         TTreeReaderArray<Float_t> FatJet_particleNet_HbbvsQCD(myEventsReader, "FatJet_particleNet_HbbvsQCD");
         TTreeReaderArray<Float_t> FatJet_deepTag_ZvsQCD(myEventsReader, "FatJet_deepTag_ZvsQCD");
-        TTreeReaderArray<Float_t> FatJet_deepTagMD_ZvsQCD(myEventsReader, "FatJet_deepTag_ZvsQCD");
+        TTreeReaderArray<Float_t> FatJet_deepTagMD_ZvsQCD(myEventsReader, "FatJet_deepTagMD_ZvsQCD");
         TTreeReaderArray<Float_t> FatJet_particleNet_ZvsQCD(myEventsReader, "FatJet_particleNet_ZvsQCD");
 
         //Gen part stuff
