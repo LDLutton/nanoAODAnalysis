@@ -199,8 +199,6 @@ void new022022KinematicsAnalysisSlimmed(){
         isBackground = false;
         int arrSize = sizeof(MGSMAr)/sizeof(MGSMAr[0]);
         for (int i=0; i<arrSize; i++){
-            std::string tmpStrAdd;
-            if 
             std::string tmpStrWithPath = strAdd+"/dlutton/NanoAODFiles/pphzzjjQCD0SMHLOOP0QEDE5NPE0/"+MGSMAr[i];
             fileAr.push_back(tmpStrWithPath);
         }
