@@ -491,7 +491,7 @@ void new022022KinematicsAnalysisSlimmed(){
 
     float ZFJPair_InvMass_FromTaggedGenMatchL;
     float ZFJPair_EtaSep_FromTaggedGenMatchL;
-    float ZFJPair_PtSum_FromTaggedGenMatchL
+    float ZFJPair_PtSum_FromTaggedGenMatchL;
 
     TTree *ZFJGenTaggedTree = new TTree("ZFJGenTaggedTree", "ZFJGenTaggedTree");
 
