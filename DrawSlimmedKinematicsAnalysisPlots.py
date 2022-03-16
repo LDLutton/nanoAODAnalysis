@@ -505,7 +505,7 @@ for k,fileA in enumerate(fileAr):
                     ev.ZFJTrailing_pt_FromTaggedGenMatchL,ev.ZFJTrailing_eta_FromTaggedGenMatchL,ev.ZFJTrailing_phi_FromTaggedGenMatchL,ev.ZFJTrailing_mass_FromTaggedGenMatchL,ev.ZFJTrailing_dRFromFJ_FromTaggedGenMatchL,
                     ev.nZFJTrailingDecay_FromTaggedGenMatchL,ev.ZFJTrailing_decaypdgId_FromTaggedGenMatchL,
                     ev.ZFJTrailing_deepTag_ZvsQCDFromTaggedGenMatchL,ev.ZFJTrailing_deepTagMD_ZvsQCDFromTaggedGenMatchL,ev.ZFJTrailing_particleNet_ZvsQCDFromTaggedGenMatchL,
-                    ev.ZFJPair_InvMass_FromTaggedGenMatchL,ev.ZFJPair_EtaSep_FromTaggedGenMatchL]
+                    ev.ZFJPair_InvMass_FromTaggedGenMatchL,ev.ZFJPair_EtaSep_FromTaggedGenMatchL,ev.ZFJPair_PtSum_FromTaggedGenMatchL]
 
                     for valItr,valA in enumerate(valAr):
                         if onlyDoSomeHists and valItr >= histsToDo:
@@ -544,7 +544,7 @@ for k,fileA in enumerate(fileAr):
                     if evCtr % 1000 == 0:
                         print("ev:",evCtr)
                     
-                    valAr = [ev.ZHFJ_ZPairPlusHInvMass_FromTaggedGenMatchL]
+                    valAr = [ev.ZHFJ_ZPairPlusHInvMass_FromTaggedGenMatchL,ev.ZHFJ_PtSum_FromTaggedGenMatchL]
 
                     for valItr,valA in enumerate(valAr):
                         if onlyDoSomeHists and valItr >= histsToDo:
