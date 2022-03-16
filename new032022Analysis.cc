@@ -21,9 +21,9 @@
 #include<TTreeReader.h>
 #include<TTreeReaderArray.h>
 #include<TTreeReaderValue.h>
-#include "new032022KinematicsAnalysisSlimmed.h"
-#include "new032022KinematicsAnalysis_Functions.h"
-#include "new032022KinematicsAnalysis_FileList.h"
+#include "new032022AnalysisSlimmed.h"
+#include "new032022Analysis_Functions.h"
+#include "new022022KinematicsAnalysis_FileList.h"
 #include<time.h>
 
 #include<algorithm>
