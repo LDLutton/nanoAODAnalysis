@@ -35,7 +35,7 @@ bool QCDPT3200toInfBackground = false;
 
 bool isBackground = false;
 
-
+bool scratchDown = true;
 
 //VBF jet pair selection;
 //Defining jet matching cuts;
