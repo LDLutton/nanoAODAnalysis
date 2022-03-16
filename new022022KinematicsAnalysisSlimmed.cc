@@ -491,6 +491,7 @@ void new022022KinematicsAnalysisSlimmed(){
 
     float ZFJPair_InvMass_FromTaggedGenMatchL;
     float ZFJPair_EtaSep_FromTaggedGenMatchL;
+    float ZFJPair_PtSum_FromTaggedGenMatchL
 
     TTree *ZFJGenTaggedTree = new TTree("ZFJGenTaggedTree", "ZFJGenTaggedTree");
 
@@ -524,10 +525,13 @@ void new022022KinematicsAnalysisSlimmed(){
 
     ZFJGenTaggedTree->Branch("ZFJPair_InvMass_FromTaggedGenMatchL",&ZFJPair_InvMass_FromTaggedGenMatchL,"ZFJPair_InvMass_FromTaggedGenMatchL/F");
     ZFJGenTaggedTree->Branch("ZFJPair_EtaSep_FromTaggedGenMatchL",&ZFJPair_EtaSep_FromTaggedGenMatchL,"ZFJPair_EtaSep_FromTaggedGenMatchL/F");
+    ZFJGenTaggedTree->Branch("ZFJPair_PtSum_FromTaggedGenMatchL",&ZFJPair_PtSum_FromTaggedGenMatchL,"ZFJPair_PtSum_FromTaggedGenMatchL/F");
 
     float ZHFJ_ZPairPlusHInvMass_FromTaggedGenMatchL;
+    float ZHFJ_PtSum_FromTaggedGenMatchL;
     TTree *ZHFJGenTaggedTree = new TTree("ZHFJGenTaggedTree", "ZHFJGenTaggedTree");
     ZHFJGenTaggedTree->Branch("ZHFJ_ZPairPlusHInvMass_FromTaggedGenMatchL",&ZHFJ_ZPairPlusHInvMass_FromTaggedGenMatchL,"ZHFJ_ZPairPlusHInvMass_FromTaggedGenMatchL/F");
+    ZHFJGenTaggedTree->Branch("ZHFJ_PtSum_FromTaggedGenMatchL",&ZHFJ_PtSum_FromTaggedGenMatchL,"ZHFJ_PtSum_FromTaggedGenMatchL/F");
 
 
 
@@ -2376,6 +2380,7 @@ void new022022KinematicsAnalysisSlimmed(){
                                     ZFJTrailing_deepTag_ZvsQCDFromTaggedGenMatchL = FatJet_deepTag_ZvsQCD[tmpTrailingInd];
                                     ZFJTrailing_deepTagMD_ZvsQCDFromTaggedGenMatchL = FatJet_deepTagMD_ZvsQCD[tmpTrailingInd];
                                     ZFJTrailing_particleNet_ZvsQCDFromTaggedGenMatchL = FatJet_particleNet_ZvsQCD[tmpTrailingInd];
+                                    
 
 
                                     nZFJTrailingDecay_FromTaggedGenMatchL = nZFJTrailingDecay_FromGenMatch;
@@ -2387,10 +2392,12 @@ void new022022KinematicsAnalysisSlimmed(){
 
                                     ZFJPair_InvMass_FromTaggedGenMatchL = ZFJPair_InvMass_FromGenMatch;
                                     ZFJPair_EtaSep_FromTaggedGenMatchL = ZFJPair_EtaSep_FromGenMatch;
+                                    ZFJPair_PtSum_FromTaggedGenMatchL = ZFJLead_pt_FromTaggedGenMatchL + ZFJTrailing_pt_FromTaggedGenMatchL;
                                     ZFJGenTaggedTree->Fill();
 
                                     ZFJLead_decaypdgId_FromTaggedGenMatchL.clear();
                                     ZFJTrailing_decaypdgId_FromTaggedGenMatchL.clear();
+
                                 }
 
                                 
@@ -2401,7 +2408,7 @@ void new022022KinematicsAnalysisSlimmed(){
                                     ROOT::Math::PtEtaPhiMVector tmpHFJVec  = ROOT::Math::PtEtaPhiMVector(HFJ_pt_FromGenMatch,HFJ_eta_FromGenMatch,HFJ_phi_FromGenMatch,HFJ_mass_FromGenMatch);
 
                                     ROOT::Math::PtEtaPhiMVector tmpHZFJVec = tmpHFJVec+tmpZFJPairVec;
-                                    
+                                    ZHFJ_PtSum_FromTaggedGenMatchL = ZFJPair_PtSum_FromTaggedGenMatchL + HFJ_pt_FromGenMatchL;
                                     ZHFJ_ZPairPlusHInvMass_FromTaggedGenMatchL = tmpHZFJVec.M();
                                     ZHFJGenTaggedTree->Fill();
 
