@@ -175,7 +175,7 @@ ZFJGenSaveNameAr = ["ZLeadPtFromZFJGen","ZLeadEtaFromZFJGen","ZLeadPhiFromZFJGen
 "ZTrailingPtFromZFJGen","ZTrailingEtaFromZFJGen","ZTrailingPhiFromZFJGen","ZTrailingMassFromZFJGen","ZTrailingdRFromFJFromZFJGen",
 "ZTrailingnDecayFromZFJGen","ZTrailingDecaypdgIdFromZFJGen",
 "ZTrailingDeepTagFromZFJGen","ZTrailingDeepTagMDFromZFJGen","ZTrailingParticleNetFromZFJGen",
-"ZPairInvMassFromZFJGen","ZPairEtaSepFromZFJGen","ZPairPtSumFromZFJGen"]
+"ZPairInvMassFromZFJGen","ZPairEtaSepFromZFJGen"]
 
 ZFJGenSaveNameAr = [genSaveName+tightCutStr for genSaveName in ZFJGenSaveNameAr]
 
@@ -185,7 +185,7 @@ ZFJGenTitleAr = ["Lead Z Pt","Lead Z Eta","Lead Z Phi","Lead Z Mass","Gen Lead Z
 "Trailing Z Pt","Trailing Z Eta","Trailing Z Phi","Trailing Z Mass","Gen Trailing Z dR from Matched Fat Jet",
 "Number of Decay Products from Trailing Z","Trailing Z Decay Particle PDG Id",
 "Trailing Z Deep Tag", "Trailing Z MD Deep Tag", "Trailing Z Particle Net",
-"Z Pair Invariant Mass","Z Pair Eta Separation","Z Pair Pt Sum"]
+"Z Pair Invariant Mass","Z Pair Eta Separation"]
 
 ZFJGenXTitleAr = ["Pt (GeV)","Eta","Phi","Mass (GeV)","dR",
 "N","pdgId",
@@ -193,7 +193,7 @@ ZFJGenXTitleAr = ["Pt (GeV)","Eta","Phi","Mass (GeV)","dR",
 "Pt (GeV)","Eta","Phi","Mass (GeV)","dR",
 "N","pdgId",
 "Deep Tag Value","MD Deep Tag Value","Particle Net Value",
-"Invariant Mass (GeV)","Eta Separation","Pt Sum (GeV)"]
+"Invariant Mass (GeV)","Eta Separation"]
 
 ZFJGenBinsAndRangeAr = [[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,400],[50,0,0.4],
 [4,0,4],[36,-18,18],
@@ -201,15 +201,15 @@ ZFJGenBinsAndRangeAr = [[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,400],[5
 [34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,400],[50,0,0.4],
 [4,0,4],[36,-18,18],
 [100,0,1],[100,0,1],[100,0,1],
-[100,0,6000],[40,0,8],[100,0,6000]]
+[100,0,6000],[40,0,8]]
 
 #Higgs and Z gen matching with FatJets tree
 
-ZHFJGenSaveNameAr = ["ZPairPlusHInvMassFromZHFJGen","ZPairPlusHPtSumFromZFJGen"]
+ZHFJGenSaveNameAr = ["ZPairPlusHInvMassFromZHFJGen"]
 ZHFJGenSaveNameAr = [genSaveName+tightCutStr for genSaveName in ZHFJGenSaveNameAr]
-ZHFJGenTitleAr = ["Invariant Mass of Z Pair With Higgs","Z Pair Pt Sum"]
-ZHFJGenXTitleAr = ["Invariant Mass (GeV)","Pt Sum (GeV)"]
-ZHFJGenBinsAndRangeAr = [[100,0,6000],[100,0,6000]]
+ZHFJGenTitleAr = ["Invariant Mass of Z Pair With Higgs"]
+ZHFJGenXTitleAr = ["Invariant Mass (GeV)"]
+ZHFJGenBinsAndRangeAr = [[100,0,6000]]
 
 GenRawSaveNameAr = ["Z1PtFromGenRaw","Z1EtaFromGenRaw","Z1PhiFromGenRaw","Z1MassFromGenRaw","Z1pdgIdFromGenRaw","Z1genPartIdxMotherFromGenRaw",
 "Z1nDecayFromGenRaw","Z1DecaypdgIdFromGenRaw",
@@ -294,7 +294,7 @@ ZFJGenTaggedSaveNameAr = ["ZLeadPtFromZFJGenTagged","ZLeadEtaFromZFJGenTagged","
 "ZTrailingPtFromZFJGenTagged","ZTrailingEtaFromZFJGenTagged","ZTrailingPhiFromZFJGenTagged","ZTrailingMassFromZFJGenTagged","ZTrailingdRFromFJFromZFJGenTagged",
 "ZTrailingnDecayFromZFJGenTagged","ZTrailingDecaypdgIdFromZFJGenTagged",
 "ZTrailingDeepTagFromZFJGenTagged","ZTrailingDeepTagMDFromZFJGenTagged","ZTrailingParticleNetFromZFJGenTagged",
-"ZPairInvMassFromZFJGenTagged","ZPairEtaSepFromZFJGenTagged"]
+"ZPairInvMassFromZFJGenTagged","ZPairEtaSepFromZFJGenTagged","ZPairPtSumFromZFJGen"]
 
 ZFJGenTaggedSaveNameAr = [genSaveName+tightCutStr for genSaveName in ZFJGenTaggedSaveNameAr]
 
@@ -304,7 +304,7 @@ ZFJGenTaggedTitleAr = ["Lead Z Pt for Hadronic Events","Lead Z Eta for Hadronic 
 "Trailing Z Pt for Hadronic Events","Trailing Z Eta for Hadronic Events","Trailing Z Phi for Hadronic Events","Trailing Z Mass for Hadronic Events","GenTagged Trailing Z dR from Matched Fat Jet for Hadronic Events",
 "Number of Decay Products from Trailing Z for Hadronic Events","Trailing Z Decay Particle PDG Id for Hadronic Events",
 "Trailing Z Deep Tag for Hadronic Events", "Trailing Z MD Deep Tag for Hadronic Events", "Trailing Z Particle Net for Hadronic Events",
-"Z Pair Invariant Mass for Hadronic Events","Z Pair Eta Separation for Hadronic Events"]
+"Z Pair Invariant Mass for Hadronic Events","Z Pair Eta Separation for Hadronic Events","Z Pair Pt Sum for Hadronic Events"]
 
 ZFJGenTaggedXTitleAr = ["Pt (GeV)","Eta","Phi","Mass (GeV)","dR",
 "N","pdgId",
@@ -312,7 +312,7 @@ ZFJGenTaggedXTitleAr = ["Pt (GeV)","Eta","Phi","Mass (GeV)","dR",
 "Pt (GeV)","Eta","Phi","Mass (GeV)","dR",
 "N","pdgId",
 "Deep Tag Value","MD Deep Tag Value","Particle Net Value",
-"Invariant Mass (GeV)","Eta Separation"]
+"Invariant Mass (GeV)","Eta Separation","Pt Sum (GeV)"]
 
 ZFJGenTaggedBinsAndRangeAr = [[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,400],[50,0,0.4],
 [4,0,4],[36,-18,18],
@@ -320,19 +320,19 @@ ZFJGenTaggedBinsAndRangeAr = [[34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,4
 [34,0.,2500.],[50,-4.5,4.5],[50,-3.5,3.5],[100,0,400],[50,0,0.4],
 [4,0,4],[36,-18,18],
 [100,0,1],[100,0,1],[100,0,1],
-[100,0,6000],[40,0,8]]
+[100,0,6000],[40,0,8],[100,0,6000]]
 
 
 
 
 #Higgs and Z gen matching with FatJets tree
 
-ZHFJGenTaggedSaveNameAr = ["ZPairPlusHInvMassFromZHFJGenTagged"]
+ZHFJGenTaggedSaveNameAr = ["ZPairPlusHInvMassFromZHFJGenTagged","ZPairPlusHPtSumFromZFJGenTagged"]
 ZHFJGenTaggedSaveNameAr = [genSaveName+tightCutStr for genSaveName in ZHFJGenTaggedSaveNameAr]
 
-ZHFJGenTaggedTitleAr = ["Invariant Mass of Z Pair With Higgs for Hadronic Events"]
-ZHFJGenTaggedXTitleAr = ["Invariant Mass (GeV)"]
-ZHFJGenTaggedBinsAndRangeAr = [[100,0,6000]]
+ZHFJGenTaggedTitleAr = ["Invariant Mass of Z Pair With Higgs for Hadronic Events","Z Pair Plus H Pt Sum"]
+ZHFJGenTaggedXTitleAr = ["Invariant Mass (GeV)","Pt Sum (GeV)"]
+ZHFJGenTaggedBinsAndRangeAr = [[100,0,6000],[100,0,6000]]
 
 
 
