@@ -299,6 +299,7 @@ bool doSemiLepISOCut(float leadIso,float trailingIso,float lepIsoCut){
 
 
 void doVBFJetCut(UInt_t nJetLen,TTreeReaderArray<Float_t> &Jet_pt,TTreeReaderArray<Int_t> &Jet_jetId,TTreeReaderArray<Float_t> &Jet_eta,TTreeReaderArray<Float_t> &Jet_phi,TTreeReaderArray<Float_t> &Jet_mass,float jetPTCut,float jetEtaDifCut,float jetInvMassCut,float &jetPairInvMass,float &jetLeadPt,float &jetLeadEta,float &jetLeadPhi,float &jetTrailingPt,float &jetTrailingEta,float &jetTrailingPhi,UInt_t &leadJet_1,UInt_t &leadJet_2,vector<float> &selectedFJ_phi,vector<float> &selectedFJ_eta,bool debug){
+    //debug = true;
     for (UInt_t jetIndOne=0; jetIndOne<nJetLen-1;jetIndOne++){
         float jetPtOne = Jet_pt[jetIndOne];
         Int_t jetIdOne = Jet_jetId[jetIndOne];
@@ -309,8 +310,10 @@ void doVBFJetCut(UInt_t nJetLen,TTreeReaderArray<Float_t> &Jet_pt,TTreeReaderArr
             Int_t jetIdTwo = Jet_jetId[jetIndTwo];
             if (debug) std::cout << "jetIndTwo: " << jetIndTwo << " Jet_pt[jetIndTwo]: " << Jet_pt[jetIndTwo] << " Jet_jetId[jetIndTwo]: " << Jet_jetId[jetIndTwo] << "\n";
             if (jetPtTwo < jetPTCut || !(jetIdTwo == 6)) continue;
+            
             float jetEtaOne = Jet_eta[jetIndOne];
             float jetEtaTwo = Jet_eta[jetIndTwo];
+            if (debug) std::cout << "jetEtaOne: " << jetEtaOne << " jetEtaTwo: " << jetEtaTwo << " jetEtaDifCut: " << jetEtaDifCut << "\n";
             if (abs(jetEtaOne - jetEtaTwo) < jetEtaDifCut) continue;
             
             float jetPhiOne = Jet_phi[jetIndOne];
@@ -321,21 +324,26 @@ void doVBFJetCut(UInt_t nJetLen,TTreeReaderArray<Float_t> &Jet_pt,TTreeReaderArr
             ROOT::Math::PtEtaPhiMVector tmpVecTwo = ROOT::Math::PtEtaPhiMVector(jetPtTwo, jetEtaTwo, jetPhiTwo, jetMassTwo);
             ROOT::Math::PtEtaPhiMVector tmpVecSum = tmpVecOne+tmpVecTwo;
             float tmpJetPairInvMass = tmpVecSum.M();
+
+            if (debug) std::cout << "tmpJetPairInvMass: " << tmpJetPairInvMass << " jetInvMassCut: " << jetInvMassCut << "\n";
+
+
             if (tmpJetPairInvMass < jetInvMassCut) continue;
             if (tmpJetPairInvMass > jetPairInvMass){
                 //Check dR to Higgs and Z FJs
                 bool FJdRPass = true;
                 for (UInt_t tmpFJItr=0;tmpFJItr<selectedFJ_phi.size();tmpFJItr++){
   
-                    if (calcDeltaR(selectedFJ_phi[tmpFJItr],selectedFJ_eta[tmpFJItr],jetPhiOne,jetEtaOne)) {
+                    if (calcDeltaR(selectedFJ_phi[tmpFJItr],selectedFJ_eta[tmpFJItr],jetPhiOne,jetEtaOne) <= hFatJetdRCut) {
                         FJdRPass = false;
                         break;
                     }
-                    if (calcDeltaR(selectedFJ_phi[tmpFJItr],selectedFJ_eta[tmpFJItr],jetPhiTwo,jetEtaTwo)) {
+                    if (calcDeltaR(selectedFJ_phi[tmpFJItr],selectedFJ_eta[tmpFJItr],jetPhiTwo,jetEtaTwo) <= hFatJetdRCut) {
                         FJdRPass = false;
                         break;
                     }
                 }
+                if (debug) std::cout << "FJdRPass: " << FJdRPass << " FJdRPass: " << FJdRPass << "\n";
                 if (FJdRPass){
                     jetPairInvMass = tmpJetPairInvMass;
                     if (jetPtOne >= jetPtTwo) {
@@ -362,6 +370,7 @@ void doVBFJetCut(UInt_t nJetLen,TTreeReaderArray<Float_t> &Jet_pt,TTreeReaderArr
             }
         }
     }
+    //debug = false;
 }
 
 void debugOutputForVBFJetCut(UInt_t evCount,UInt_t leadJet_1,UInt_t leadJet_2,TTreeReaderArray<Float_t> &Jet_phi,TTreeReaderArray<Float_t> &Jet_eta,bool debug){
@@ -521,14 +530,14 @@ void doSemiLepChanFatJetCut(Int_t &FJInd,Int_t numFatJet,UInt_t hFatJet_ind_from
         }
     }
     if (FJInd >= 0) {
-        selectedFJ_phi.push_back(hFatJet_phi_fromHTag);
-        selectedFJ_eta.push_back(hFatJet_eta_fromHTag);
+        selectedFJ_phi.push_back(semiLepFatJet_phi);
+        selectedFJ_eta.push_back(semiLepFatJet_eta);
     }
     
 
 }
 
-void doHadChanFatJetCut(Int_t &LFJOneInd,Int_t &LFJTwoInd,float &FJInvMass,Int_t numFatJet,UInt_t hFatJet_ind_fromHTag,float fatJetPTCut,float fatJetZPairInvMassCut,TTreeReaderArray<Float_t> &FatJet_pt,TTreeReaderArray<Float_t> &FatJet_phi,TTreeReaderArray<Float_t> &FatJet_eta,TTreeReaderArray<Float_t> &FatJet_mass,TTreeReaderArray<Float_t> &FatJet_deepTag_ZvsQCD,vector<float> &selectedFJ_phi,vector<float> &selectedFJ_eta,float HFJ_pt){
+void doHadChanFatJetCut(Int_t &LFJOneInd,Int_t &LFJTwoInd,Int_t numFatJet,UInt_t hFatJet_ind_fromHTag,float fatJetPTCut,float fatJetZPairInvMassCut,TTreeReaderArray<Float_t> &FatJet_pt,TTreeReaderArray<Float_t> &FatJet_phi,TTreeReaderArray<Float_t> &FatJet_eta,TTreeReaderArray<Float_t> &FatJet_mass,TTreeReaderArray<Float_t> &FatJet_deepTag_ZvsQCD,vector<float> &selectedFJ_phi,vector<float> &selectedFJ_eta,float HFJ_pt){
 
     float leadFatJetMaxTag = 0;
     float secondFatJetMaxTag = 0;
@@ -606,12 +615,11 @@ void doHadChanFatJetCut(Int_t &LFJOneInd,Int_t &LFJTwoInd,float &FJInvMass,Int_t
 
                             leadFatJet_phi = FatJet_phi[tmpFJLeadInd];
                             leadFatJet_eta = FatJet_eta[tmpFJLeadInd];
-                            secondFatJet_phi = FatJet_phi[tmpFJSecondInd];
-                            secondFatJet_eta = FatJet_eta[tmpFJSecondInd];
+                            secondFatJet_phi = FatJet_phi[tmpFJTrailingInd];
+                            secondFatJet_eta = FatJet_eta[tmpFJTrailingInd];
 
                             LFJOneInd = tmpFJLeadInd;
                             LFJTwoInd = tmpFJTrailingInd;
-                            FJInvMass = tmpFJInvMass;
                         }
                         //If that jet is already part of the current selected pair,
                         //select based on the respective lower pt jets in the pairs
@@ -621,13 +629,12 @@ void doHadChanFatJetCut(Int_t &LFJOneInd,Int_t &LFJTwoInd,float &FJInvMass,Int_t
 
                                 leadFatJet_phi = FatJet_phi[tmpFJLeadInd];
                                 leadFatJet_eta = FatJet_eta[tmpFJLeadInd];
-                                secondFatJet_phi = FatJet_phi[tmpFJSecondInd];
-                                secondFatJet_eta = FatJet_eta[tmpFJSecondInd];
+                                secondFatJet_phi = FatJet_phi[tmpFJTrailingInd];
+                                secondFatJet_eta = FatJet_eta[tmpFJTrailingInd];
 
 
                                 LFJOneInd = tmpFJLeadInd;
                                 LFJTwoInd = tmpFJTrailingInd;
-                                FJInvMass = tmpFJInvMass;
                             }
                         }
 

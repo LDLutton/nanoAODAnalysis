@@ -21,9 +21,9 @@
 #include<TTreeReader.h>
 #include<TTreeReaderArray.h>
 #include<TTreeReaderValue.h>
-#include "new032022AnalysisSlimmed.h"
+#include "new032022Analysis.h"
 #include "new032022Analysis_Functions.h"
-#include "new022022KinematicsAnalysis_FileList.h"
+#include "new032022Analysis_FileList.h"
 #include<time.h>
 
 #include<algorithm>
@@ -399,11 +399,12 @@ void new032022Analysis(){
     UInt_t passAllChannelCtr = 0;
     UInt_t passVBFJets = 0;
     UInt_t passFatJets = 0;
-    UInt_t passGenPart = 0;
     UInt_t passFJMatch = 0;
     UInt_t passLepCut = 0;
     UInt_t passSemiLepCut = 0;
     UInt_t passHadCut = 0;
+
+    UInt_t passChannelCtr = 0;
 
     UInt_t ZFJSameJetCtr = 0;
 
@@ -1090,50 +1091,6 @@ void new032022Analysis(){
 
             
 
-
-            
-
-
-            //Now gen matching
-            UInt_t nGenPartLen = *nGenPart;
-            /*
-            float hGenPartDR_fromPt = 999.;
-            Int_t hGenPartInd_fromPt = -1;
-            Int_t hGenPartpdgId_fromPt = -1;
-            */
-            float hGenPartDR_fromHTag = 999.;
-            Int_t hGenPartInd_fromHTag = -1;
-            Int_t hGenPartpdgId_fromHTag = -1;
-            for (UInt_t genPartInd=0; genPartInd < nGenPartLen; genPartInd++){
-                float tmpGenPart_phi = GenPart_phi[genPartInd];
-                float tmpGenPart_eta = GenPart_eta[genPartInd];
-                /*
-                float tmpDR_fromPt = calcDeltaR(hFatJet_phi_fromPt,hFatJet_eta_fromPt,tmpGenPart_phi,tmpGenPart_eta);
-                if (tmpDR_fromPt < hGenPartDR_fromPt){
-                    hGenPartDR_fromPt = tmpDR_fromPt;
-                    hGenPartInd_fromPt = genPartInd;
-                    hGenPartpdgId_fromPt = GenPart_pdgId[genPartInd];
-                }
-                */
-                float tmpDR_fromHTag = calcDeltaR(hFatJet_phi_fromHTag,hFatJet_eta_fromHTag,tmpGenPart_phi,tmpGenPart_eta);
-                if (tmpDR_fromHTag < hGenPartDR_fromHTag){
-                    hGenPartDR_fromHTag = tmpDR_fromHTag;
-                    hGenPartInd_fromHTag = genPartInd;
-                    hGenPartpdgId_fromHTag = GenPart_pdgId[genPartInd];
-                }
-            }
-            //if (!(hGenPartInd_fromPt == -1) && !(hGenPartInd_fromHTag == -1)){
-            if (!(hGenPartInd_fromHTag == -1)){
-                if (debug) std::cout << " found gen part\n";
-                passGenPart += 1;
-                
-                //Get genPart first mom
-                if (debug) std::cout << "GenPart_genPartIdxMother[hGenPartInd_fromPt] " << GenPart_genPartIdxMother[hGenPartInd_fromPt] << "\n";
-                //Int_t hGenPartFirstMompdgId_fromPt = getInitialMother(GenPart_genPartIdxMother,GenPart_pdgId,hGenPartInd_fromPt,debug);
-                Int_t hGenPartFirstMompdgId_fromHTag = getInitialMother(GenPart_genPartIdxMother,GenPart_pdgId,hGenPartInd_fromHTag,debug);
-                //if (debug) std::cout << "hGenPartFirstMompdgId_fromPt: " << hGenPartFirstMompdgId_fromPt << " hGenPartFirstMompdgId_fromHTag: " << hGenPartFirstMompdgId_fromHTag << "\n";
-                if (debug) std::cout << "hGenPartFirstMompdgId_fromHTag: " << hGenPartFirstMompdgId_fromHTag << "\n";
-            }
             if (true) {
                 UInt_t neLep = *nElectron;
                 UInt_t nmLep = *nMuon;
@@ -1646,7 +1603,6 @@ void new032022Analysis(){
                     tryingHadCtr += 1;
                     LFJOneInd = -1;
                     LFJTwoInd = -1;
-                    FJInvMass = -1;
                     if (debugHadronic) std::cout << "---------------- Event " << evCount - 1 << " ----------------\n";
                     //if (debugHadronic) std::cout << "hFatJet_ind_fromHTag " << hFatJet_ind_fromHTag << "\n";
                     if (debugHadronic) std::cout << "fatJetPTCut " << fatJetPTCut << "\n";
@@ -1654,7 +1610,7 @@ void new032022Analysis(){
                     if (debugHadronic) std::cout << "--------- Entering FJ loop for Hadronic Channel ---------\n";
 
                     UInt_t numFatJet = *nFatJet;
-                    doHadChanFatJetCut(LFJOneInd,LFJTwoInd,FJInvMass,numFatJet,hFatJet_ind_fromHTag,fatJetPTCut,fatJetZPairInvMassCut,FatJet_pt,FatJet_phi,FatJet_eta,FatJet_mass,selectedFJ_phi,selectedFJ_eta,hFatJet_pt_fromHTag);
+                    doHadChanFatJetCut(LFJOneInd,LFJTwoInd,numFatJet,hFatJet_ind_fromHTag,fatJetPTCut,fatJetZPairInvMassCut,FatJet_pt,FatJet_phi,FatJet_eta,FatJet_mass,FatJet_deepTag_ZvsQCD,selectedFJ_phi,selectedFJ_eta,hFatJet_pt_fromHTag);
 
                     
                     if (LFJOneInd != LFJTwoInd){
@@ -1663,6 +1619,8 @@ void new032022Analysis(){
                         passedAsHadBool = true;
                     }
                 }
+                if ((!passesCutsBool)) continue;
+                else passChannelCtr += 1;
 
 
                 //Now match VBF jets
@@ -1679,8 +1637,8 @@ void new032022Analysis(){
                 float jetLeadEta     = 0;
                 float jetTrailingEta = 0;
                 if (debug) std::cout << "Entering jet loop. Len: " << nJetLen << "\n";
-                doVBFJetCut(nJetLen,Jet_pt,Jet_jetId,Jet_eta,Jet_phi,Jet_mass,jetPTCut,jetEtaDifCut,jetInvMassCut,jetPairInvMass,jetLeadPt,jetLeadEta,jetLeadPhi,jetTrailingPt,jetTrailingEta,jetTrailingPhi,leadJet_1,leadJet_2,,selectedFJ_phi,selectedFJ_eta,debug);
-                
+                doVBFJetCut(nJetLen,Jet_pt,Jet_jetId,Jet_eta,Jet_phi,Jet_mass,jetPTCut,jetEtaDifCut,jetInvMassCut,jetPairInvMass,jetLeadPt,jetLeadEta,jetLeadPhi,jetTrailingPt,jetTrailingEta,jetTrailingPhi,leadJet_1,leadJet_2,selectedFJ_phi,selectedFJ_eta,debug);
+                //std::cout << jetLeadPt << endl;
                 if (jetLeadPt == 0) continue;
                 debugOutputForVBFJetCut(evCount,leadJet_1,leadJet_2,Jet_phi,Jet_eta,debug);
                 /*
@@ -1727,22 +1685,6 @@ void new032022Analysis(){
                     hFatJet_mass_fromHTagL = hFatJet_mass_fromHTag;
                     hFatJet_HTag_fromHTagL = hFatJet_HTag_fromHTag;
                     
-
-                    //Now GenPart
-                    //print(nGenPart)
-                    if (debug) std::cout << "Filling gen parts\n";
-
-                    nGenPartL = *nGenPart;
-                    /*
-                    hGenPartDR_fromPtL = hGenPartDR_fromPt;
-                    hGenPartInd_fromPtL = hGenPartInd_fromPt;
-                    hGenPartpdgId_fromPtL = hGenPartpdgId_fromPt;
-                    hGenPartFirstMompdgId_fromPtL = hGenPartFirstMompdgId_fromPt;
-                    */
-                    hGenPartDR_fromHTagL = hGenPartDR_fromHTag;
-                    hGenPartInd_fromHTagL = hGenPartInd_fromHTag;
-                    hGenPartpdgId_fromHTagL = hGenPartpdgId_fromHTag;
-                    hGenPartFirstMompdgId_fromHTagL = hGenPartFirstMompdgId_fromHTag;
 
                     //HLT stuff
                     if (debug) std::cout << "Filling HLT\n";
@@ -1804,16 +1746,16 @@ void new032022Analysis(){
     std::cout << "passes lep and had channel cut: " << passLepAndHadChannelCtr << "\n";
     std::cout << "passes semi lep and had channel cut: " << passSemiLepAndHadChannelCtr << "\n";
     std::cout << "passes all channel cut: " << passAllChannelCtr << "\n";
-    std::cout << "passes VBF Jet cut: " << passVBFJets << " -------------------\n";
     std::cout << "passes Higgs FatJet cut: " << passFatJets << "\n";
-    std::cout << "passes Higgs GenPart cut: " << passGenPart << " -------------------\n";
+    std::cout << "passes actual channel cut: " << passChannelCtr << "\n";
+    std::cout << "passes in lep channel: " << passLepCut << "\n";
+    std::cout << "passes in semi lep channel: " << passSemiLepCut << "\n";
+    std::cout << "passes in had channel: " << passHadCut << "\n";
+    std::cout << "passes VBF Jet cut: " << passVBFJets << " -------------------\n";
+    
 
     std::cout << "passes all cuts: " << passesCutsCtr << " -------------------\n";
     std::cout << "evPassCount: " << evPassCount << "\n";
-
-    std::cout << "ZFJSameJetCtr " << ZFJSameJetCtr << "\n";
-
-    std::cout << "ZFJSameJetTaggedCtr " << ZFJSameJetTaggedCtr << "\n";
 
     if (!isBackground){
         std::cout << "Cross section average before division: " << crossSectionAvg << "\n";
@@ -1832,21 +1774,6 @@ void new032022Analysis(){
     outFile->cd();
     evNumTree->Write("",TObject::kOverwrite);
     FATree->Write("",TObject::kOverwrite);
-    if (useLHETree) {
-        RawTree->Write("",TObject::kOverwrite);
-        if (useFJGenMatchTree) {
-            ZFJGenTaggedTree->Write("",TObject::kOverwrite);
-            HFJGenTree->Write("",TObject::kOverwrite);
-            ZHFJGenTaggedTree->Write("",TObject::kOverwrite);
-        }
-        if (useJGenMatchTree || useFJGenMatchTree) {
-            GenRawTree->Write("",TObject::kOverwrite);
-            GenRawTaggedTree->Write("",TObject::kOverwrite);
-            GenRawSemiLepTaggedTree->Write("",TObject::kOverwrite);
-            GenRawLepTaggedTree->Write("",TObject::kOverwrite);
-        }
-
-    }
 
     outFile->Close();
 }

@@ -32,6 +32,7 @@ bool QCDPT1400to1800Background = false;
 bool QCDPT1800to2400Background = false;
 bool QCDPT2400to3200Background = false;
 bool QCDPT3200toInfBackground = false;
+bool LaraTest = false;
 
 bool isBackground = false;
 
@@ -79,4 +80,4 @@ float fatJetZTagCut = 0.2;
 float fatJetZPairInvMassCut = 300;
 //EtaDifCut probably not necessary
 //float fatJetEtaDifCut = 5.0;
-float fatJetZPlusHPTCut = 1050
+float fatJetZPlusHPTCut = 1050;
