@@ -1050,6 +1050,8 @@ void new022022KinematicsAnalysisSlimmed(){
 
     float crossSectionAvg = 0.;
     UInt_t crossSectionCtr = 0;
+    float totCrossSectionWeight = 0.;
+    UInt_t totCrossSectionEvCount = 0;
     UInt_t evRunOver = 0;
     UInt_t evCount = 0;
     UInt_t evPassCount = 0;
@@ -1399,6 +1401,8 @@ void new022022KinematicsAnalysisSlimmed(){
                     std::cout << *genEventSumw << "\n";
                     std::cout << *genEventCount << "\n";
                 }
+                totCrossSectionWeight += *genEventSumw;
+                totCrossSectionEvCount += *genEventCount;
                 crossSection += *genEventSumw / *genEventCount;
                 if (debug) std::cout << crossSection << "\n";
                 crossSection = crossSection / eventLoopMax;
@@ -3035,6 +3039,9 @@ void new022022KinematicsAnalysisSlimmed(){
         std::cout << "Cross section counter: " << crossSectionCtr << "\n";
         crossSectionAvg = crossSectionAvg / crossSectionCtr;
         std::cout << "Cross section average after division: " << crossSectionAvg << "\n";
+        std::cout << "Tot Weight: " << totCrossSectionWeight <<"\n";
+        std::cout << "Tot XS Count: " << totCrossSectionEvCount <<"\n";
+        std::cout << "Tot Weight/Tot XS Count: " << totCrossSectionWeight/totCrossSectionEvCount <<"\n";
         //XS Tree
         float crossSectionVar;
         TTree* crossSectionTree = new TTree("crossSectionTree","crossSectionTree");
