@@ -98,6 +98,18 @@ void new032022Analysis(){
         useLHETree = true;
         useFJGenMatchTree = true;
     }
+    else if (SDC2V3MC){
+        saveName = "SDC2V3MC";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V3MCAr)/sizeof(SDC2V3MCAr[0]);
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V3MCAr[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
     else if (MGOSix){
         saveName = "OSix";
         isBackground = false;
