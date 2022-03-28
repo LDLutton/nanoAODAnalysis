@@ -714,58 +714,58 @@ void new032022VBFJetInvMassCutFoMAnalysis(){
         TTreeReader myEventsReader("FilteredEventsTree", tmpfile);
         //jets
 
-        TTreeReaderValue<UInt_t> nJetL(myEventsReader, "nJet");
-        TTreeReaderArray<Float_t> Jet_etaL(myEventsReader, "Jet_eta");
-        TTreeReaderArray<Float_t> Jet_ptL(myEventsReader, "Jet_pt");
-        TTreeReaderArray<Float_t> Jet_phiL(myEventsReader, "Jet_phi");
-        TTreeReaderArray<Float_t> Jet_massL(myEventsReader, "Jet_mass");
-        TTreeReaderArray<Int_t> Jet_jetIdL(myEventsReader, "Jet_jetId");
+        TTreeReaderValue<UInt_t> nJetL(myEventsReader, "nJetL");
+        TTreeReaderArray<Float_t> Jet_etaL(myEventsReader, "Jet_etaL");
+        TTreeReaderArray<Float_t> Jet_ptL(myEventsReader, "Jet_ptL");
+        TTreeReaderArray<Float_t> Jet_phiL(myEventsReader, "Jet_phiL");
+        TTreeReaderArray<Float_t> Jet_massL(myEventsReader, "Jet_massL");
+        TTreeReaderArray<Int_t> Jet_jetIdL(myEventsReader, "Jet_jetIdL");
 
         //Fat jets
 
-        TTreeReaderValue<UInt_t> nFatJetL(myEventsReader, "nFatJet");
-        TTreeReaderArray<Float_t> FatJet_etaL(myEventsReader, "FatJet_eta");
-        TTreeReaderArray<Float_t> FatJet_ptL(myEventsReader, "FatJet_pt");
-        TTreeReaderArray<Float_t> FatJet_phiL(myEventsReader, "FatJet_phi");
-        TTreeReaderArray<Float_t> FatJet_massL(myEventsReader, "FatJet_mass");
-        TTreeReaderArray<Int_t> FatJet_jetIdL(myEventsReader, "FatJet_jetId");
-        TTreeReaderArray<Float_t> FatJet_deepTag_HL(myEventsReader, "FatJet_deepTag_H");
-        TTreeReaderArray<Float_t> FatJet_deepTag_ZvsQCDL(myEventsReader, "FatJet_deepTag_ZvsQCD");
+        TTreeReaderValue<UInt_t> nFatJetL(myEventsReader, "nFatJetL");
+        TTreeReaderArray<Float_t> FatJet_etaL(myEventsReader, "FatJet_etaL");
+        TTreeReaderArray<Float_t> FatJet_ptL(myEventsReader, "FatJet_ptL");
+        TTreeReaderArray<Float_t> FatJet_phiL(myEventsReader, "FatJet_phiL");
+        TTreeReaderArray<Float_t> FatJet_massL(myEventsReader, "FatJet_massL");
+        TTreeReaderArray<Int_t> FatJet_jetIdL(myEventsReader, "FatJet_jetIdL");
+        TTreeReaderArray<Float_t> FatJet_deepTag_HL(myEventsReader, "FatJet_deepTag_HL");
+        TTreeReaderArray<Float_t> FatJet_deepTag_ZvsQCDL(myEventsReader, "FatJet_deepTag_ZvsQCDL");
 
         //Gen part stuff
 
-        TTreeReaderValue<UInt_t> nGenPartL(myEventsReader, "nGenPart");
-        TTreeReaderArray<Float_t> GenPart_etaL(myEventsReader, "GenPart_eta");
-        TTreeReaderArray<Float_t> GenPart_massL(myEventsReader, "GenPart_mass");
-        TTreeReaderArray<Float_t> GenPart_phiL(myEventsReader, "GenPart_phi");
-        TTreeReaderArray<Float_t> GenPart_ptL(myEventsReader, "GenPart_pt");
-        TTreeReaderArray<Int_t> GenPart_genPartIdxMotherL(myEventsReader, "GenPart_genPartIdxMother");
-        TTreeReaderArray<Int_t> GenPart_pdgIdL(myEventsReader, "GenPart_pdgId");
-        TTreeReaderArray<Int_t> GenPart_statusL(myEventsReader, "GenPart_status");
-        TTreeReaderArray<Int_t> GenPart_statusFlagsL(myEventsReader, "GenPart_statusFlags");
+        TTreeReaderValue<UInt_t> nGenPartL(myEventsReader, "nGenPartL");
+        TTreeReaderArray<Float_t> GenPart_etaL(myEventsReader, "GenPart_etaL");
+        TTreeReaderArray<Float_t> GenPart_massL(myEventsReader, "GenPart_massL");
+        TTreeReaderArray<Float_t> GenPart_phiL(myEventsReader, "GenPart_phiL");
+        TTreeReaderArray<Float_t> GenPart_ptL(myEventsReader, "GenPart_ptL");
+        TTreeReaderArray<Int_t> GenPart_genPartIdxMotherL(myEventsReader, "GenPart_genPartIdxMotherL");
+        TTreeReaderArray<Int_t> GenPart_pdgIdL(myEventsReader, "GenPart_pdgIdL");
+        TTreeReaderArray<Int_t> GenPart_statusL(myEventsReader, "GenPart_statusL");
+        TTreeReaderArray<Int_t> GenPart_statusFlagsL(myEventsReader, "GenPart_statusFlagsL");
         
         //Electrons
-        TTreeReaderValue<UInt_t> nElectronL(myEventsReader, "nElectron");
-        TTreeReaderArray<Float_t> Electron_etaL(myEventsReader, "Electron_eta");
-        TTreeReaderArray<Float_t> Electron_massL(myEventsReader, "Electron_mass");
-        TTreeReaderArray<Int_t> Electron_chargeL(myEventsReader, "Electron_charge");
-        TTreeReaderArray<Float_t> Electron_phiL(myEventsReader, "Electron_phi");
-        TTreeReaderArray<Float_t> Electron_ptL(myEventsReader, "Electron_pt");
-        TTreeReaderArray<Float_t> Electron_dr03EcalRecHitSumEtL(myEventsReader, "Electron_dr03EcalRecHitSumEt");
-        TTreeReaderArray<Float_t> Electron_dr03TkSumPtL(myEventsReader, "Electron_dr03TkSumPt");
-        TTreeReaderArray<Float_t> Electron_dr03HcalDepth1TowerSumEtL(myEventsReader, "Electron_dr03HcalDepth1TowerSumEt");
-        TTreeReaderArray<Float_t> Electron_pfRelIso03_allL(myEventsReader, "Electron_pfRelIso03_all");
-        TTreeReaderArray<Float_t> Electron_sip3dL(myEventsReader, "Electron_sip3d");
+        TTreeReaderValue<UInt_t> nElectronL(myEventsReader, "nElectronL");
+        TTreeReaderArray<Float_t> Electron_etaL(myEventsReader, "Electron_etaL");
+        TTreeReaderArray<Float_t> Electron_massL(myEventsReader, "Electron_massL");
+        TTreeReaderArray<Int_t> Electron_chargeL(myEventsReader, "Electron_chargeL");
+        TTreeReaderArray<Float_t> Electron_phiL(myEventsReader, "Electron_phiL");
+        TTreeReaderArray<Float_t> Electron_ptL(myEventsReader, "Electron_ptL");
+        TTreeReaderArray<Float_t> Electron_dr03EcalRecHitSumEtL(myEventsReader, "Electron_dr03EcalRecHitSumEtL");
+        TTreeReaderArray<Float_t> Electron_dr03TkSumPtL(myEventsReader, "Electron_dr03TkSumPtL");
+        TTreeReaderArray<Float_t> Electron_dr03HcalDepth1TowerSumEtL(myEventsReader, "Electron_dr03HcalDepth1TowerSumEtL");
+        TTreeReaderArray<Float_t> Electron_pfRelIso03_allL(myEventsReader, "Electron_pfRelIso03_allL");
+        TTreeReaderArray<Float_t> Electron_sip3dL(myEventsReader, "Electron_sip3dL");
 
         //Muons
-        TTreeReaderValue<UInt_t> nMuonL(myEventsReader, "nMuon");
-        TTreeReaderArray<Float_t> Muon_etaL(myEventsReader, "Muon_eta");
-        TTreeReaderArray<Float_t> Muon_massL(myEventsReader, "Muon_mass");
-        TTreeReaderArray<Int_t> Muon_chargeL(myEventsReader, "Muon_charge");
-        TTreeReaderArray<Float_t> Muon_phiL(myEventsReader, "Muon_phi");
-        TTreeReaderArray<Float_t> Muon_ptL(myEventsReader, "Muon_pt");
-        TTreeReaderArray<Float_t> Muon_pfRelIso03_allL(myEventsReader, "Muon_pfRelIso03_all");
-        TTreeReaderArray<Float_t> Muon_sip3dL(myEventsReader, "Muon_sip3d");
+        TTreeReaderValue<UInt_t> nMuonL(myEventsReader, "nMuonL");
+        TTreeReaderArray<Float_t> Muon_etaL(myEventsReader, "Muon_etaL");
+        TTreeReaderArray<Float_t> Muon_massL(myEventsReader, "Muon_massL");
+        TTreeReaderArray<Int_t> Muon_chargeL(myEventsReader, "Muon_chargeL");
+        TTreeReaderArray<Float_t> Muon_phiL(myEventsReader, "Muon_phiL");
+        TTreeReaderArray<Float_t> Muon_ptL(myEventsReader, "Muon_ptL");
+        TTreeReaderArray<Float_t> Muon_pfRelIso03_allL(myEventsReader, "Muon_pfRelIso03_allL");
+        TTreeReaderArray<Float_t> Muon_sip3dL(myEventsReader, "Muon_sip3dL");
 
         Int_t tmpPDGId;
 
