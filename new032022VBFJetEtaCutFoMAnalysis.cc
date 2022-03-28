@@ -414,292 +414,12 @@ void new032022VBFJetEtaCutFoMAnalysis(){
 
     UInt_t passesCutsCtr = 0;
 
+    float dataXS;
+    UInt_t datanEv;
+    UInt_t datanEvPass;
 
-    float crossSectionAvg = 0.;
-    UInt_t crossSectionCtr = 0;
-    UInt_t evRunOver = 0;
     UInt_t evCount = 0;
-    UInt_t evPassCount = 0;
-    
-    UInt_t nEv;
-    UInt_t nEvPass;
-
-    TTree *evNumTree = new TTree("evNumTree","evNumTree");
-
-    evNumTree->Branch("nEv",&nEv,"nEv/i");
-    evNumTree->Branch("nEvPass",&nEvPass,"nEvPass/i");
-
-
-    //creating Full Analysis tree
-    //"FullPassL" is for leaf
-    //First jets
-    UInt_t nJetFullPassL;
-    float jetLeadPtFullPassL;
-    float jetTrailingPtFullPassL;
-    float jetLeadPhiFullPassL;
-    float jetTrailingPhiFullPassL;
-    float jetPairInvMassFullPassL;
-    float jetLeadEtaFullPassL;
-    float jetTrailingEtaFullPassL;
-    //now fat jets
-    UInt_t nFatJetFullPassL;
-    /*
-    float hFatJet_pt_fromPtFullPassL;
-    float hFatJet_phi_fromPtFullPassL;
-    float hFatJet_eta_fromPtFullPassL;
-    float hFatJet_mass_fromPtFullPassL;
-    float hFatJet_HTag_fromPtFullPassL;
-    */
-    float hFatJet_pt_fromHTagFullPassL;
-    float hFatJet_phi_fromHTagFullPassL;
-    float hFatJet_eta_fromHTagFullPassL;
-    float hFatJet_mass_fromHTagFullPassL;
-    float hFatJet_HTag_fromHTagFullPassL;
-
-    //Now GenPart
-
-    UInt_t nGenPartFullPassL;
-    /*
-    float hGenPartDR_fromPtFullPassL;
-    float hGenPartInd_fromPtFullPassL;
-    float hGenPartpdgId_fromPtFullPassL;
-    Int_t hGenPartFirstMompdgId_fromPtFullPassL;
-    */
-    float hGenPartDR_fromHTagFullPassL;
-    float hGenPartInd_fromHTagFullPassL;
-    float hGenPartpdgId_fromHTagFullPassL;
-    Int_t hGenPartFirstMompdgId_fromHTagFullPassL;
-
-    //Now HLT stuff;
-
-    //Branches for distinguishing between channels;
-    bool passedLepFullPassL;
-    bool passedSemiLepFullPassL;
-    bool passedHadFullPassL;
-
-    //Now tree and branches;
-
-    TTree *FATree = new TTree("FATree", "FATree");
-
-    //cutTree->Branch("evInd",evInd,"evInd/I");
-
-    FATree->Branch("nJetFullPassL",&nJetFullPassL,"nJetFullPassL/i");
-    FATree->Branch("jetLeadPtFullPassL",&jetLeadPtFullPassL,"jetLeadPtFullPassL/F");
-    FATree->Branch("jetTrailingPtFullPassL",&jetTrailingPtFullPassL,"jetTrailingPtFullPassL/F");
-    FATree->Branch("jetLeadPhiFullPassL",&jetLeadPhiFullPassL,"jetLeadPhiFullPassL/F");
-    FATree->Branch("jetTrailingPhiFullPassL",&jetTrailingPhiFullPassL,"jetTrailingPhiFullPassL/F");
-    FATree->Branch("jetPairInvMassFullPassL",&jetPairInvMassFullPassL,"jetPairInvMassFullPassL/F");
-    FATree->Branch("jetLeadEtaFullPassL",&jetLeadEtaFullPassL,"jetLeadEtaFullPassL/F");
-    FATree->Branch("jetTrailingEtaFullPassL",&jetTrailingEtaFullPassL,"jetTrailingEtaFullPassL/F");
-    //now fat jets;
-    FATree->Branch("nFatJetFullPassL",&nFatJetFullPassL,"nFatJetFullPassL/i");
-    /*
-    FATree->Branch("hFatJet_pt_fromPtFullPassL",&hFatJet_pt_fromPtFullPassL,"hFatJet_pt_fromPtFullPassL/F");
-    FATree->Branch("hFatJet_phi_fromPtFullPassL",&hFatJet_phi_fromPtFullPassL,"hFatJet_phi_fromPtFullPassL/F");
-    FATree->Branch("hFatJet_eta_fromPtFullPassL",&hFatJet_eta_fromPtFullPassL,"hFatJet_eta_fromPtFullPassL/F");
-    FATree->Branch("hFatJet_mass_fromPtFullPassL",&hFatJet_mass_fromPtFullPassL,"hFatJet_mass_fromPtFullPassL/F");
-    FATree->Branch("hFatJet_HTag_fromPtFullPassL",&hFatJet_HTag_fromPtFullPassL,"hFatJet_HTag_fromPtFullPassL/F");
-    */
-    FATree->Branch("hFatJet_pt_fromHTagFullPassL",&hFatJet_pt_fromHTagFullPassL,"hFatJet_pt_fromHTagFullPassL/F");
-    FATree->Branch("hFatJet_phi_fromHTagFullPassL",&hFatJet_phi_fromHTagFullPassL,"hFatJet_phi_fromHTagFullPassL/F");
-    FATree->Branch("hFatJet_eta_fromHTagFullPassL",&hFatJet_eta_fromHTagFullPassL,"hFatJet_eta_fromHTagFullPassL/F");
-    FATree->Branch("hFatJet_mass_fromHTagFullPassL",&hFatJet_mass_fromHTagFullPassL,"hFatJet_mass_fromHTagFullPassL/F");
-    FATree->Branch("hFatJet_HTag_fromHTagFullPassL",&hFatJet_HTag_fromHTagFullPassL,"hFatJet_HTag_fromHTagFullPassL/F");
-
-    //now genpart
-    FATree->Branch("nGenPartFullPassL",&nGenPartFullPassL,"nGenPartFullPassL/i");
-    /*
-    FATree->Branch("hGenPartDR_fromPtFullPassL",&hGenPartDR_fromPtFullPassL,"hGenPartDR_fromPtFullPassL/F");
-    FATree->Branch("hGenPartInd_fromPtFullPassL",&hGenPartInd_fromPtFullPassL,"hGenPartInd_fromPtFullPassL/F");
-    FATree->Branch("hGenPartpdgId_fromPtFullPassL",&hGenPartpdgId_fromPtFullPassL,"hGenPartpdgId_fromPtFullPassL/F");
-    FATree->Branch("hGenPartFirstMompdgId_fromPtFullPassL",&hGenPartFirstMompdgId_fromPtFullPassL,"hGenPartFirstMompdgId_fromPtFullPassL/I");
-    */
-    FATree->Branch("hGenPartDR_fromHTagFullPassL",&hGenPartDR_fromHTagFullPassL,"hGenPartDR_fromHTagFullPassL/F");
-    FATree->Branch("hGenPartInd_fromHTagFullPassL",&hGenPartInd_fromHTagFullPassL,"hGenPartInd_fromHTagFullPassL/F");
-    FATree->Branch("hGenPartpdgId_fromHTagFullPassL",&hGenPartpdgId_fromHTagFullPassL,"hGenPartpdgId_fromHTagFullPassL/F");
-    FATree->Branch("hGenPartFirstMompdgId_fromHTagFullPassL",&hGenPartFirstMompdgId_fromHTagFullPassL,"hGenPartFirstMompdgId_fromHTagFullPassL/I");
-
-
-    //Branches for distinguishing between channels;
-    FATree->Branch("passedLepFullPassL",&passedLepFullPassL,"passedLepFullPassL/O");
-    FATree->Branch("passedSemiLepFullPassL",&passedSemiLepFullPassL,"passedSemiLepFullPassL/O");
-    FATree->Branch("passedHadFullPassL",&passedHadFullPassL,"passedHadFullPassL/O");
-
-
-
-
-    //Now trees for specific channels;
-
-    //Leptonic variables;
-    float lepZ1LeadPtFullPassL;
-    float lepZ1TrailingPtFullPassL;
-    float lepZ1LeadPhiFullPassL;
-    float lepZ1TrailingPhiFullPassL;
-    float lepZ1PairInvMassFullPassL;
-    float lepZ1LeadEtaFullPassL;
-    float lepZ1TrailingEtaFullPassL;
-    bool lepZ1IsElectronFullPassL;
-    bool lepZ1IsMuonFullPassL;
-    float lepZ1LeadIsoFullPassL;
-    float lepZ1TrailingIsoFullPassL;
-    float lepZ1LeadSIPFullPassL;
-    float lepZ1TrailingSIPFullPassL;
-
-    float lepZ2LeadPtFullPassL;
-    float lepZ2TrailingPtFullPassL;
-    float lepZ2LeadPhiFullPassL;
-    float lepZ2TrailingPhiFullPassL;
-    float lepZ2PairInvMassFullPassL;
-    float lepZ2LeadEtaFullPassL;
-    float lepZ2TrailingEtaFullPassL;
-    bool lepZ2IsElectronFullPassL;
-    bool lepZ2IsMuonFullPassL;
-    float lepZ2LeadIsoFullPassL;
-    float lepZ2TrailingIsoFullPassL;
-    float lepZ2LeadSIPFullPassL;
-    float lepZ2TrailingSIPFullPassL;
-
-    float lepChanHiggsFatJet_pt_fromHTagFullPassL;
-    float lepChanHiggsFatJet_phi_fromHTagFullPassL;
-    float lepChanHiggsFatJet_eta_fromHTagFullPassL;
-    float lepChanHiggsFatJet_mass_fromHTagFullPassL;
-    float lepChanHiggsFatJet_HTag_fromHTagFullPassL;
-
-    //Leptonic tree;
-    TTree *LepTree = new TTree("LepTree", "LepTree");
-
-    LepTree->Branch("lepZ1LeadPtFullPassL",&lepZ1LeadPtFullPassL,"lepZ1LeadPtFullPassL/F");
-    LepTree->Branch("lepZ1TrailingPtFullPassL",&lepZ1TrailingPtFullPassL,"lepZ1TrailingPtFullPassL/F");
-    LepTree->Branch("lepZ1LeadPhiFullPassL",&lepZ1LeadPhiFullPassL,"lepZ1LeadPhiFullPassL/F");
-    LepTree->Branch("lepZ1TrailingPhiFullPassL",&lepZ1TrailingPhiFullPassL,"lepZ1TrailingPhiFullPassL/F");
-    LepTree->Branch("lepZ1PairInvMassFullPassL",&lepZ1PairInvMassFullPassL,"lepZ1PairInvMassFullPassL/F");
-    LepTree->Branch("lepZ1LeadEtaFullPassL",&lepZ1LeadEtaFullPassL,"lepZ1LeadEtaFullPassL/F");
-    LepTree->Branch("lepZ1TrailingEtaFullPassL",&lepZ1TrailingEtaFullPassL,"lepZ1TrailingEtaFullPassL/F");
-    LepTree->Branch("lepZ1IsElectronFullPassL",&lepZ1IsElectronFullPassL,"lepZ1IsElectronFullPassL/O");
-    LepTree->Branch("lepZ1IsMuonFullPassL",&lepZ1IsMuonFullPassL,"lepZ1IsMuonFullPassL/O");
-    LepTree->Branch("lepZ1LeadIsoFullPassL",&lepZ1LeadIsoFullPassL,"lepZ1LeadIsoFullPassL/F");
-    LepTree->Branch("lepZ1TrailingIsoFullPassL",&lepZ1TrailingIsoFullPassL,"lepZ1TrailingIsoFullPassL/F");
-    LepTree->Branch("lepZ1LeadSIPFullPassL",&lepZ1LeadSIPFullPassL,"lepZ1LeadSIPFullPassL/F");
-    LepTree->Branch("lepZ1TrailingSIPFullPassL",&lepZ1TrailingSIPFullPassL,"lepZ1TrailingSIPFullPassL/F");
-
-    LepTree->Branch("lepZ2LeadPtFullPassL",&lepZ2LeadPtFullPassL,"lepZ2LeadPtFullPassL/F");
-    LepTree->Branch("lepZ2TrailingPtFullPassL",&lepZ2TrailingPtFullPassL,"lepZ2TrailingPtFullPassL/F");
-    LepTree->Branch("lepZ2LeadPhiFullPassL",&lepZ2LeadPhiFullPassL,"lepZ2LeadPhiFullPassL/F");
-    LepTree->Branch("lepZ2TrailingPhiFullPassL",&lepZ2TrailingPhiFullPassL,"lepZ2TrailingPhiFullPassL/F");
-    LepTree->Branch("lepZ2PairInvMassFullPassL",&lepZ2PairInvMassFullPassL,"lepZ2PairInvMassFullPassL/F");
-    LepTree->Branch("lepZ2LeadEtaFullPassL",&lepZ2LeadEtaFullPassL,"lepZ2LeadEtaFullPassL/F");
-    LepTree->Branch("lepZ2TrailingEtaFullPassL",&lepZ2TrailingEtaFullPassL,"lepZ2TrailingEtaFullPassL/F");
-    LepTree->Branch("lepZ2IsElectronFullPassL",&lepZ2IsElectronFullPassL,"lepZ2IsElectronFullPassL/O");
-    LepTree->Branch("lepZ2IsMuonFullPassL",&lepZ2IsMuonFullPassL,"lepZ2IsMuonFullPassL/O");
-    LepTree->Branch("lepZ2LeadIsoFullPassL",&lepZ2LeadIsoFullPassL,"lepZ2LeadIsoFullPassL/F");
-    LepTree->Branch("lepZ2TrailingIsoFullPassL",&lepZ2TrailingIsoFullPassL,"lepZ2TrailingIsoFullPassL/F");
-    LepTree->Branch("lepZ2LeadSIPFullPassL",&lepZ2LeadSIPFullPassL,"lepZ2LeadSIPFullPassL/F");
-    LepTree->Branch("lepZ2TrailingSIPFullPassL",&lepZ2TrailingSIPFullPassL,"lepZ2TrailingSIPFullPassL/F");
-
-    LepTree->Branch("lepChanHiggsFatJet_pt_fromHTagFullPassL",&lepChanHiggsFatJet_pt_fromHTagFullPassL,"lepChanHiggsFatJet_pt_fromHTagFullPassL/F");
-    LepTree->Branch("lepChanHiggsFatJet_phi_fromHTagFullPassL",&lepChanHiggsFatJet_phi_fromHTagFullPassL,"lepChanHiggsFatJet_phi_fromHTagFullPassL/F");
-    LepTree->Branch("lepChanHiggsFatJet_eta_fromHTagFullPassL",&lepChanHiggsFatJet_eta_fromHTagFullPassL,"lepChanHiggsFatJet_eta_fromHTagFullPassL/F");
-    LepTree->Branch("lepChanHiggsFatJet_mass_fromHTagFullPassL",&lepChanHiggsFatJet_mass_fromHTagFullPassL,"lepChanHiggsFatJet_mass_fromHTagFullPassL/F");
-    LepTree->Branch("lepChanHiggsFatJet_HTag_fromHTagFullPassL",&lepChanHiggsFatJet_HTag_fromHTagFullPassL,"lepChanHiggsFatJet_HTag_fromHTagFullPassL/F");
-
-
-    //SemiLeptonic variables;
-    float lepLeadPtFullPassL;
-    float lepTrailingPtFullPassL;
-    float lepLeadPhiFullPassL;
-    float lepTrailingPhiFullPassL;
-    float lepPairInvMassFullPassL;
-    float lepLeadEtaFullPassL;
-    float lepTrailingEtaFullPassL;
-    float lepLeadIsoFullPassL;
-    float lepTrailingIsoFullPassL;
-    float lepLeadSIPFullPassL;
-    float lepTrailingSIPFullPassL;
-    bool lepIsElectronFullPassL;
-    bool lepIsMuonFullPassL;
-
-
-    float FJPtFullPassL;
-    float FJPhiFullPassL;
-    float FJMassFullPassL;
-    float FJEtaFullPassL;
-
-
-    float semiLepChanHiggsFatJet_pt_fromHTagFullPassL;
-    float semiLepChanHiggsFatJet_phi_fromHTagFullPassL;
-    float semiLepChanHiggsFatJet_eta_fromHTagFullPassL;
-    float semiLepChanHiggsFatJet_mass_fromHTagFullPassL;
-    float semiLepChanHiggsFatJet_HTag_fromHTagFullPassL;
-
-    //SemiLeptonic tree;
-    TTree *SemiLepTree = new TTree("SemiLepTree", "SemiLepTree");
-
-    SemiLepTree->Branch("lepLeadPtFullPassL",&lepLeadPtFullPassL,"lepLeadPtFullPassL/F");
-    SemiLepTree->Branch("lepTrailingPtFullPassL",&lepTrailingPtFullPassL,"lepTrailingPtFullPassL/F");
-    SemiLepTree->Branch("lepLeadPhiFullPassL",&lepLeadPhiFullPassL,"lepLeadPhiFullPassL/F");
-    SemiLepTree->Branch("lepTrailingPhiFullPassL",&lepTrailingPhiFullPassL,"lepTrailingPhiFullPassL/F");
-    SemiLepTree->Branch("lepPairInvMassFullPassL",&lepPairInvMassFullPassL,"lepPairInvMassFullPassL/F");
-    SemiLepTree->Branch("lepLeadEtaFullPassL",&lepLeadEtaFullPassL,"lepLeadEtaFullPassL/F");
-    SemiLepTree->Branch("lepTrailingEtaFullPassL",&lepTrailingEtaFullPassL,"lepTrailingEtaFullPassL/F");
-    SemiLepTree->Branch("lepIsElectronFullPassL",&lepIsElectronFullPassL,"lepIsElectronFullPassL/O");
-    SemiLepTree->Branch("lepIsMuonFullPassL",&lepIsMuonFullPassL,"lepIsMuonFullPassL/O");
-    SemiLepTree->Branch("lepLeadIsoFullPassL",&lepLeadIsoFullPassL,"lepLeadIsoFullPassL/F");
-    SemiLepTree->Branch("lepTrailingIsoFullPassL",&lepTrailingIsoFullPassL,"lepTrailingIsoFullPassL/F");
-    SemiLepTree->Branch("lepLeadSIPFullPassL",&lepLeadSIPFullPassL,"lepLeadSIPFullPassL/F");
-    SemiLepTree->Branch("lepTrailingSIPFullPassL",&lepTrailingSIPFullPassL,"lepTrailingSIPFullPassL/F");
-    
-
-    SemiLepTree->Branch("FJPtFullPassL",&FJPtFullPassL,"FJPtFullPassL/F");
-    SemiLepTree->Branch("FJPhiFullPassL",&FJPhiFullPassL,"FJPhiFullPassL/F");
-    SemiLepTree->Branch("FJMassFullPassL",&FJMassFullPassL,"FJMassFullPassL/F");
-    SemiLepTree->Branch("FJEtaFullPassL",&FJEtaFullPassL,"FJEtaFullPassL/F");
-
-
-    SemiLepTree->Branch("semiLepChanHiggsFatJet_pt_fromHTagFullPassL",&semiLepChanHiggsFatJet_pt_fromHTagFullPassL,"semiLepChanHiggsFatJet_pt_fromHTagFullPassL/F");
-    SemiLepTree->Branch("semiLepChanHiggsFatJet_phi_fromHTagFullPassL",&semiLepChanHiggsFatJet_phi_fromHTagFullPassL,"semiLepChanHiggsFatJet_phi_fromHTagFullPassL/F");
-    SemiLepTree->Branch("semiLepChanHiggsFatJet_eta_fromHTagFullPassL",&semiLepChanHiggsFatJet_eta_fromHTagFullPassL,"semiLepChanHiggsFatJet_eta_fromHTagFullPassL/F");
-    SemiLepTree->Branch("semiLepChanHiggsFatJet_mass_fromHTagFullPassL",&semiLepChanHiggsFatJet_mass_fromHTagFullPassL,"semiLepChanHiggsFatJet_mass_fromHTagFullPassL/F");
-    SemiLepTree->Branch("semiLepChanHiggsFatJet_HTag_fromHTagFullPassL",&semiLepChanHiggsFatJet_HTag_fromHTagFullPassL,"semiLepChanHiggsFatJet_HTag_fromHTagFullPassL/F");
-
-
-    //Hadronic variables;
-    float FJLeadPtFullPassL;
-    float FJTrailingPtFullPassL;
-    float FJLeadPhiFullPassL;
-    float FJTrailingPhiFullPassL;
-    float FJLeadMassFullPassL;
-    float FJTrailingMassFullPassL;
-    float FJPairInvMassFullPassL;
-    float FJLeadEtaFullPassL;
-    float FJTrailingEtaFullPassL;
-    float FJEtaSepFullPassL;
-
-    float hadChanHiggsFatJet_pt_fromHTagFullPassL;
-    float hadChanHiggsFatJet_phi_fromHTagFullPassL;
-    float hadChanHiggsFatJet_eta_fromHTagFullPassL;
-    float hadChanHiggsFatJet_mass_fromHTagFullPassL;
-    float hadChanHiggsFatJet_HTag_fromHTagFullPassL;
-
-    //Hadronic tree;
-    TTree *HadTree = new TTree("HadTree", "HadTree");
-
-    HadTree->Branch("FJLeadPtFullPassL",&FJLeadPtFullPassL,"FJLeadPtFullPassL/F");
-    HadTree->Branch("FJTrailingPtFullPassL",&FJTrailingPtFullPassL,"FJTrailingPtFullPassL/F");
-    HadTree->Branch("FJLeadPhiFullPassL",&FJLeadPhiFullPassL,"FJLeadPhiFullPassL/F");
-    HadTree->Branch("FJTrailingPhiFullPassL",&FJTrailingPhiFullPassL,"FJTrailingPhiFullPassL/F");
-    HadTree->Branch("FJLeadMassFullPassL",&FJLeadMassFullPassL,"FJLeadMassFullPassL/F");
-    HadTree->Branch("FJTrailingMassFullPassL",&FJTrailingMassFullPassL,"FJTrailingMassFullPassL/F");
-    HadTree->Branch("FJPairInvMassFullPassL",&FJPairInvMassFullPassL,"FJPairInvMassFullPassL/F");
-    HadTree->Branch("FJLeadEtaFullPassL",&FJLeadEtaFullPassL,"FJLeadEtaFullPassL/F");
-    HadTree->Branch("FJTrailingEtaFullPassL",&FJTrailingEtaFullPassL,"FJTrailingEtaFullPassL/F");
-    HadTree->Branch("FJEtaSepFullPassL",&FJEtaSepFullPassL,"FJEtaSepFullPassL/F");
-
-
-    HadTree->Branch("hadChanHiggsFatJet_pt_fromHTagFullPassL",&hadChanHiggsFatJet_pt_fromHTagFullPassL,"hadChanHiggsFatJet_pt_fromHTagFullPassL/F");
-    HadTree->Branch("hadChanHiggsFatJet_phi_fromHTagFullPassL",&hadChanHiggsFatJet_phi_fromHTagFullPassL,"hadChanHiggsFatJet_phi_fromHTagFullPassL/F");
-    HadTree->Branch("hadChanHiggsFatJet_eta_fromHTagFullPassL",&hadChanHiggsFatJet_eta_fromHTagFullPassL,"hadChanHiggsFatJet_eta_fromHTagFullPassL/F");
-    HadTree->Branch("hadChanHiggsFatJet_mass_fromHTagFullPassL",&hadChanHiggsFatJet_mass_fromHTagFullPassL,"hadChanHiggsFatJet_mass_fromHTagFullPassL/F");
-    HadTree->Branch("hadChanHiggsFatJet_HTag_fromHTagFullPassL",&hadChanHiggsFatJet_HTag_fromHTagFullPassL,"hadChanHiggsFatJet_HTag_fromHTagFullPassL/F");
+    UInt_t evRunOver = 0;
 
 
     
@@ -755,6 +475,13 @@ void new032022VBFJetEtaCutFoMAnalysis(){
         TTreeReaderArray<Float_t> Muon_pfRelIso03_allL(myEventsReader, "Muon_pfRelIso03_allL");
         TTreeReaderArray<Float_t> Muon_sip3dL(myEventsReader, "Muon_sip3dL");
 
+        TTreeReader myEvNumReader("evNumTree", tmpfile);
+        TTreeReaderValue<UInt_t> nEv(myEvNumReader, "nEv");
+        TTreeReaderValue<UInt_t> nEvPass(myEvNumReader, "nEvPass");
+
+        TTreeReader myXSReader("crossSectionTree", tmpfile);
+        TTreeReaderValue<Float_t> crossSectionVar(myXSReader, "crossSectionVar");
+
         Int_t tmpPDGId;
 
 
@@ -790,6 +517,16 @@ void new032022VBFJetEtaCutFoMAnalysis(){
 
         //Getting the cross section
         //For background it's precalculated
+
+        if (!isBackground){
+            while (myXSReader.Next()){
+                dataXS = *crossSectionVar;
+            }
+        }
+        while (myEvNumReader.Next()){
+            datanEv = *nEv;
+            datanEvPass = *nEvPass;
+        }
         
         if (k % 10 == 0){
             double tmpTime = (double)(clock()-startt)/CLOCKS_PER_SEC;
@@ -1042,9 +779,25 @@ void new032022VBFJetEtaCutFoMAnalysis(){
 
 
     std::cout << "Finished file loop. " << "time: " << time_spent << "\n";
+    if (!isBackground){
+        std::cout << "XS: " << dataXS << "\n";
+    }
+    std::cout << "nEv total: " << datanEv << "\n";
+    std::cout << "nEv post HLT: " << datanEvPass << "\n"; 
     for (UInt_t rangeItr=0; rangeItr<cutAmnt+1; rangeItr++){
         std::cout << "cutRangeAr[rangeItr] " << cutRangeAr[rangeItr] << " cutPassAr[rangeItr] " << cutPassAr[rangeItr] << "\n";
     }
+    std::cout << "std::vector<float> cutRangeAr = [";
+    for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
+        std::cout << cutRangeAr[rangeItr] << ",";
+    }
+    std::cout << cutRangeAr[cutAmnt] << "];\n";
+
+    std::cout << "std::vector<UInt_t> " << saveName << "PassAr = [";
+    for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
+        std::cout << cutPassAr[rangeItr] << ",";
+    }
+    std::cout << cutPassAr[cutAmnt] << "];\n";
 
     /*
     nEv = evRunOver;
