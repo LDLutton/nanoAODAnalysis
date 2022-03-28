@@ -110,7 +110,7 @@ void new032022VBFJetPtCutFoMAnalysis(){
         isBackground = false;
         int arrSize = sizeof(MGOSixAr)/sizeof(MGOSixAr[0]);
         for (int i=0; i<arrSize; i++){
-            std::string tmpStrWithPath = strAdd+"/dlutton/NanoAODFiles/pphzzjj_OSix_QCD0SMHLOOP0NPLE1NPcHE1_100Ev_0p4cH_100GeVIMJetCut/"+MGOSixAr[i];
+            std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisOSix.root";
             fileAr.push_back(tmpStrWithPath);
         }
         useLHETree = true;
@@ -121,7 +121,7 @@ void new032022VBFJetPtCutFoMAnalysis(){
         isBackground = false;
         int arrSize = sizeof(MGOSixEtaDifCutAr)/sizeof(MGOSixEtaDifCutAr[0]);
         for (int i=0; i<arrSize; i++){
-            std::string tmpStrWithPath = strAdd+"/dlutton/NanoAODFiles/pphzzjj_OSix_QCD0SMHLOOP0NPLE1NPcHE1_100Ev_0p4cH_100GeVIMJetCut_2EtaDifCut/"+MGOSixEtaDifCutAr[i];
+            std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisOSix_EtaDifCut.root";
             fileAr.push_back(tmpStrWithPath);
         }
         useLHETree = true;
@@ -132,7 +132,7 @@ void new032022VBFJetPtCutFoMAnalysis(){
         isBackground = false;
         int arrSize = sizeof(MGOHBoxAr)/sizeof(MGOHBoxAr[0]);
         for (int i=0; i<arrSize; i++){
-            std::string tmpStrWithPath = strAdd+"/dlutton/NanoAODFiles/pphzzjj_OHBox_QCD0SMHLOOP0NPLE1NPcHBoxE1_100Ev_0p5cHBox_100GeVIMJetCut/"+MGOHBoxAr[i];
+            std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisOHBox.root";
             fileAr.push_back(tmpStrWithPath);
         }
         useLHETree = true;
@@ -144,7 +144,7 @@ void new032022VBFJetPtCutFoMAnalysis(){
         isBackground = false;
         int arrSize = sizeof(MGOHBoxEtaDifCutAr)/sizeof(MGOHBoxEtaDifCutAr[0]);
         for (int i=0; i<arrSize; i++){
-            std::string tmpStrWithPath = strAdd+"/dlutton/NanoAODFiles/pphzzjj_OHBox_QCD0SMHLOOP0NPLE1NPcHBoxE1_100Ev_0p5cHBox_100GeVIMJetCut_2EtaDifCut/"+MGOHBoxEtaDifCutAr[i];
+            std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisOHBox_EtaDifCut.root";
             fileAr.push_back(tmpStrWithPath);
         }
         useLHETree = true;
@@ -156,7 +156,7 @@ void new032022VBFJetPtCutFoMAnalysis(){
         isBackground = false;
         int arrSize = sizeof(MGOHDDAr)/sizeof(MGOHDDAr[0]);
         for (int i=0; i<arrSize; i++){
-            std::string tmpStrWithPath = strAdd+"/dlutton/NanoAODFiles/pphzzjj_OHDD_QCD0SMHLOOP0NPLE1NPcHDDE1_0p6cHDD_100GeVIMJetCut/"+MGOHDDAr[i];
+            std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisOHDD.root";
             fileAr.push_back(tmpStrWithPath);
         }
         useLHETree = true;
@@ -168,7 +168,7 @@ void new032022VBFJetPtCutFoMAnalysis(){
         isBackground = false;
         int arrSize = sizeof(MGOHDDEtaDifCutAr)/sizeof(MGOHDDEtaDifCutAr[0]);
         for (int i=0; i<arrSize; i++){
-            std::string tmpStrWithPath = strAdd+"/dlutton/NanoAODFiles/pphzzjj_OHDD_QCD0SMHLOOP0NPLE1NPcHDDE1_0p6cHDD_100GeVIMJetCut_2EtaDifCut/"+MGOHDDEtaDifCutAr[i];
+            std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisOHDD_EtaDifCut.root";
             fileAr.push_back(tmpStrWithPath);
         }
         useLHETree = true;
@@ -197,10 +197,9 @@ void new032022VBFJetPtCutFoMAnalysis(){
         saveName = "ttHToBB";
         
         isBackground = true;
-        int arrSize = sizeof(ttHToBBBackgroundAr)/sizeof(ttHToBBBackgroundAr[0]);
-        for (int i=0; i<arrSize; i++){
-            fileAr.push_back(ttHToBBBackgroundAr[i]);
-        }
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisttHToBB.root";
+        fileAr.push_back(tmpStrWithPath);
+        
     }
     else if (ttZJetsBackground){
         //saveName = "ttZJets";
@@ -208,10 +207,8 @@ void new032022VBFJetPtCutFoMAnalysis(){
         crossSection = 0.5407;
         saveName = "ttZJets";
         isBackground = true;
-        int arrSize = sizeof(ttZJetsBackgroundAr)/sizeof(ttZJetsBackgroundAr[0]);
-        for (int i=0; i<arrSize; i++){
-            fileAr.push_back(ttZJetsBackgroundAr[i]);
-        }
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisttZJets.root";
+        fileAr.push_back(tmpStrWithPath);
     }
     else if (DYBackground){
         //saveName = "DY";
@@ -220,10 +217,8 @@ void new032022VBFJetPtCutFoMAnalysis(){
         saveName = "DY";
 
         isBackground = true;
-        int arrSize = sizeof(DYBackgroundAr)/sizeof(DYBackgroundAr[0]);
-        for (int i=0; i<arrSize; i++){
-            fileAr.push_back(DYBackgroundAr[i]);
-        }
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisDY.root";
+        fileAr.push_back(tmpStrWithPath);
     }
     else if (QCDPT170to300Background){
         //saveName = "QCDPT170to300";
@@ -233,10 +228,8 @@ void new032022VBFJetPtCutFoMAnalysis(){
         saveName = "QCDPT170to300";
         
         isBackground = true;
-        int arrSize = sizeof(QCDPT170to300BackgroundAr)/sizeof(QCDPT170to300BackgroundAr[0]);
-        for (int i=0; i<arrSize; i++){
-            fileAr.push_back(QCDPT170to300BackgroundAr[i]);
-        }
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT170to300.root";
+        fileAr.push_back(tmpStrWithPath);
     }
     else if (QCDPT300to470Background){
         //saveName = "QCDPT300to470";
@@ -246,10 +239,8 @@ void new032022VBFJetPtCutFoMAnalysis(){
         saveName = "QCDPT300to470";
         
         isBackground = true;
-        int arrSize = sizeof(QCDPT300to470BackgroundAr)/sizeof(QCDPT300to470BackgroundAr[0]);
-        for (int i=0; i<arrSize; i++){
-            fileAr.push_back(QCDPT300to470BackgroundAr[i]);
-        }
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT300to470.root";
+        fileAr.push_back(tmpStrWithPath);
     }
     else if (QCDPT470to600Background){
         //saveName = "QCDPT470to600";
@@ -259,10 +250,8 @@ void new032022VBFJetPtCutFoMAnalysis(){
         saveName = "QCDPT470to600";
 
         isBackground = true;
-        int arrSize = sizeof(QCDPT470to600BackgroundAr)/sizeof(QCDPT470to600BackgroundAr[0]);
-        for (int i=0; i<arrSize; i++){
-            fileAr.push_back(QCDPT470to600BackgroundAr[i]);
-        }
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT470to600.root";
+        fileAr.push_back(tmpStrWithPath);
     }
     else if (QCDPT600to800Background){
         //saveName = "QCDPT600to800";
@@ -272,10 +261,8 @@ void new032022VBFJetPtCutFoMAnalysis(){
         saveName = "QCDPT600to800";
         
         isBackground = true;
-        int arrSize = sizeof(QCDPT600to800BackgroundAr)/sizeof(QCDPT600to800BackgroundAr[0]);
-        for (int i=0; i<arrSize; i++){
-            fileAr.push_back(QCDPT600to800BackgroundAr[i]);
-        }
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT600to800.root";
+        fileAr.push_back(tmpStrWithPath);
     }
     else if (QCDPT800to1000Background){
         //saveName = "QCDPT800to1000";
@@ -285,10 +272,8 @@ void new032022VBFJetPtCutFoMAnalysis(){
         saveName = "QCDPT800to1000";
         
         isBackground = true;
-        int arrSize = sizeof(QCDPT800to1000BackgroundAr)/sizeof(QCDPT800to1000BackgroundAr[0]);
-        for (int i=0; i<arrSize; i++){
-            fileAr.push_back(QCDPT800to1000BackgroundAr[i]);
-        }
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT800to1000.root";
+        fileAr.push_back(tmpStrWithPath);
     }
     else if (QCDPT1000to1400Background){
         //saveName = "QCDPT1000to1400";
@@ -298,10 +283,8 @@ void new032022VBFJetPtCutFoMAnalysis(){
         saveName = "QCDPT1000to1400";
         
         isBackground = true;
-        int arrSize = sizeof(QCDPT1000to1400BackgroundAr)/sizeof(QCDPT1000to1400BackgroundAr[0]);
-        for (int i=0; i<arrSize; i++){
-            fileAr.push_back(QCDPT1000to1400BackgroundAr[i]);
-        }
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT1000to1400.root";
+        fileAr.push_back(tmpStrWithPath);
     }
     else if (QCDPT1400to1800Background){
         //saveName = "QCDPT1400to1800";
@@ -311,10 +294,8 @@ void new032022VBFJetPtCutFoMAnalysis(){
         saveName = "QCDPT1400to1800";
         
         isBackground = true;
-        int arrSize = sizeof(QCDPT1400to1800BackgroundAr)/sizeof(QCDPT1400to1800BackgroundAr[0]);
-        for (int i=0; i<arrSize; i++){
-            fileAr.push_back(QCDPT1400to1800BackgroundAr[i]);
-        }
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT1400to1800.root";
+        fileAr.push_back(tmpStrWithPath);
     }
     else if (QCDPT1800to2400Background){
         //saveName = "QCDPT1800to2400";
@@ -324,10 +305,8 @@ void new032022VBFJetPtCutFoMAnalysis(){
         saveName = "QCDPT1800to2400";
         
         isBackground = true;
-        int arrSize = sizeof(QCDPT1800to2400BackgroundAr)/sizeof(QCDPT1800to2400BackgroundAr[0]);
-        for (int i=0; i<arrSize; i++){
-            fileAr.push_back(QCDPT1800to2400BackgroundAr[i]);
-        }
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT1800to2400.root";
+        fileAr.push_back(tmpStrWithPath);
     }
     else if (QCDPT2400to3200Background){
         //saveName = "QCDPT2400to3200";
@@ -337,10 +316,8 @@ void new032022VBFJetPtCutFoMAnalysis(){
         saveName = "QCDPT2400to3200";
         
         isBackground = true;
-        int arrSize = sizeof(QCDPT2400to3200BackgroundAr)/sizeof(QCDPT2400to3200BackgroundAr[0]);
-        for (int i=0; i<arrSize; i++){
-            fileAr.push_back(QCDPT2400to3200BackgroundAr[i]);
-        }
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT2400to3200.root";
+        fileAr.push_back(tmpStrWithPath);
     }
     else if (QCDPT3200toInfBackground){
         //saveName = "QCDPT3200toInf";
@@ -350,10 +327,8 @@ void new032022VBFJetPtCutFoMAnalysis(){
         saveName = "QCDPT3200toInf";
         
         isBackground = true;
-        int arrSize = sizeof(QCDPT3200toInfBackgroundAr)/sizeof(QCDPT3200toInfBackgroundAr[0]);
-        for (int i=0; i<arrSize; i++){
-            fileAr.push_back(QCDPT3200toInfBackgroundAr[i]);
-        }
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT3200toInf.root";
+        fileAr.push_back(tmpStrWithPath);
     }
     else if (testRun){
         saveName = "testRun";
