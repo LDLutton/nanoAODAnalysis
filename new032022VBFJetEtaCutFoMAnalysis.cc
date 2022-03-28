@@ -711,7 +711,7 @@ void new032022VBFJetEtaCutFoMAnalysis(){
         //Open the file, get the Events tree
         TFile* tmpfile = TFile::Open(fileAr[k].c_str());
         //outFile->cd();
-        TTreeReader myEventsReader("Events", tmpfile);
+        TTreeReader myEventsReader("FilteredEventsTree", tmpfile);
         //jets
 
         TTreeReaderValue<UInt_t> nJetL(myEventsReader, "nJet");
