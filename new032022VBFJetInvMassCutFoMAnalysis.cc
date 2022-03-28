@@ -357,7 +357,7 @@ void new032022VBFJetInvMassCutFoMAnalysis(){
     }
     else if (testRun){
         saveName = "testRun";
-        fileAr.push_back("./unweighted_eventspphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev10080Seed_0p999cHW100GeVIMJetCut_200.root");
+        fileAr.push_back("./HLTFilteredForAnalysistestRun.root");
         useLHETree = true;
         useFJGenMatchTree = true;
         
@@ -732,18 +732,6 @@ void new032022VBFJetInvMassCutFoMAnalysis(){
         TTreeReaderArray<Float_t> FatJet_deepTag_HL(myEventsReader, "FatJet_deepTag_HL");
         TTreeReaderArray<Float_t> FatJet_deepTag_ZvsQCDL(myEventsReader, "FatJet_deepTag_ZvsQCDL");
 
-        //Gen part stuff
-
-        TTreeReaderValue<UInt_t> nGenPartL(myEventsReader, "nGenPartL");
-        TTreeReaderArray<Float_t> GenPart_etaL(myEventsReader, "GenPart_etaL");
-        TTreeReaderArray<Float_t> GenPart_massL(myEventsReader, "GenPart_massL");
-        TTreeReaderArray<Float_t> GenPart_phiL(myEventsReader, "GenPart_phiL");
-        TTreeReaderArray<Float_t> GenPart_ptL(myEventsReader, "GenPart_ptL");
-        TTreeReaderArray<Int_t> GenPart_genPartIdxMotherL(myEventsReader, "GenPart_genPartIdxMotherL");
-        TTreeReaderArray<Int_t> GenPart_pdgIdL(myEventsReader, "GenPart_pdgIdL");
-        TTreeReaderArray<Int_t> GenPart_statusL(myEventsReader, "GenPart_statusL");
-        TTreeReaderArray<Int_t> GenPart_statusFlagsL(myEventsReader, "GenPart_statusFlagsL");
-        
         //Electrons
         TTreeReaderValue<UInt_t> nElectronL(myEventsReader, "nElectronL");
         TTreeReaderArray<Float_t> Electron_etaL(myEventsReader, "Electron_etaL");
