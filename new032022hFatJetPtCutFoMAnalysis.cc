@@ -90,7 +90,7 @@ void new032022hFatJetPtCutFoMAnalysis(){
 
     std::string strAdd;
     if (scratchDown) strAdd ="/afs/crc.nd.edu/user/d/dlutton/Public/condorStuff/NanoAODToHistos/tmpHoldForNanoAODWithoutScratch/";
-    else strAdd ="/scratch365/HLTFilteredFiles/";
+    else strAdd ="/scratch365/dlutton/HLTFilteredFiles/";
 
     if (MGC2VEtaDifCut){
         saveName = "C2VEtaDifCut";
