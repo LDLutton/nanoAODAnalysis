@@ -47,10 +47,10 @@
 ////////////////////////////////START OF MAIN FUNCTION////////////////////////////////
 
 
-void new032022VBFJetEtaCutFoMAnalysis(){
+void new032022SemiLepFatJetPtCutFoMAnalysis(){
     // Open the file. Note that the name of your file outside this class
     // will probably NOT be experiment.root.
-    std::cout << "start VBFJetEtaCut FoM Analysis\n";
+    std::cout << "start SemiLepFatJetPTCut FoM Analysis\n";
     clock_t startt = clock();
     //Analyzer will run over all files put into fileAr
 
@@ -60,7 +60,7 @@ void new032022VBFJetEtaCutFoMAnalysis(){
         cutSemiLepPassAr.push_back(0);
         cutHadPassAr.push_back(0);
         cutLepOrSemiLepPassAr.push_back(0);
-        cutRangeAr.push_back(jetEtaRangeBottom+(rangeItr*jetEtaCutStep));
+        cutRangeAr.push_back(fatJetPTRangeBottom+(rangeItr*fatJetPTCutStep));
     }
 
     std::vector<std::string> fileAr;
@@ -621,54 +621,66 @@ void new032022VBFJetEtaCutFoMAnalysis(){
             Z1LeadSIP,Electron_sip3dL,Z1TrailingSIP,Z2LeadSIP,Muon_sip3dL,Z2TrailingSIP,SIPCut,passLepCut,passesCutsBool,passedAsLepBool,
             debug);
 
-            Int_t FJInd;
+            
             if (debug) std::cout << "passesCutsBool " << passesCutsBool << "\n";
-            if ((!passesCutsBool)){
-                if (debug) std::cout << "trying SemiLeptonic\n";
-                tryingSemiLepCtr += 1;
-                FJInd = -1;
-                UInt_t numFatJet = *nFatJetL;
-                doSemiLepChanFatJetCut(FJInd,numFatJet,hFatJet_ind_fromHTag,fatJetPTCut,fatJetZTagCut,FatJet_ptL,FatJet_phiL,FatJet_etaL,FatJet_deepTag_ZvsQCDL,selectedFJ_phi,selectedFJ_eta);
-                /*
-                for (UInt_t i=0; i<*nFatJet;i++){
-                    tmpFatJetPT = FatJet_ptL[i];
-                    if (tmpFatJetPT > fatJetPTCut) FJInd = i;
-                }
-                */
-                doSemiLepCut(FJInd,enoughElecCands,negElecCands,posElecCands,totElecCands,Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut,
-                 enoughMuonCands,negMuonCands,posMuonCands,totMuonCands,Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,nmLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut,
-                 enoughLepCands,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,Z1Cand,difFromZMassOne,Z1LeadItr,Z1TrailingItr,Z1LeadPt,Z1TrailingPt,Z1IsMuon,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,
-                 Electron_dr03EcalRecHitSumEtL,Electron_dr03TkSumPtL,Electron_dr03HcalDepth1TowerSumEtL,Electron_pfRelIso03_allL,
-                 Z1LeadIso,Muon_pfRelIso03_allL,Z1TrailingIso,
-                 passSemiLepCut,passesCutsBool,passedAsSemiLepBool,
-                 debug);
-            }
-            if (debug) std::cout << "Test\n";
-            if ((!passesCutsBool)){
-                tryingHadCtr += 1;
-                LFJOneInd = -1;
-                LFJTwoInd = -1;
-                if (debugHadronic) std::cout << "---------------- Event " << evCount - 1 << " ----------------\n";
-                //if (debugHadronic) std::cout << "hFatJet_ind_fromHTag " << hFatJet_ind_fromHTag << "\n";
-                if (debugHadronic) std::cout << "fatJetPTCut " << fatJetPTCut << "\n";
-
-                if (debugHadronic) std::cout << "--------- Entering FJ loop for Hadronic Channel ---------\n";
-
-                UInt_t numFatJet = *nFatJetL;
-                doHadChanFatJetCut(LFJOneInd,LFJTwoInd,numFatJet,hFatJet_ind_fromHTag,fatJetPTCut,fatJetZPairInvMassCut,FatJet_ptL,FatJet_phiL,FatJet_etaL,FatJet_massL,FatJet_deepTag_ZvsQCDL,selectedFJ_phi,selectedFJ_eta,hFatJet_pt_fromHTag);
-
-                
-                if (LFJOneInd != LFJTwoInd){
-                    passHadCut += 1;
-                    passesCutsBool = true;
-                    passedAsHadBool = true;
-                }
-            }
-            if ((!passesCutsBool)) continue;
-            else passChannelCtr += 1;
-
+            bool oldPassesCutsBool = passesCutsBool;
+            bool oldPassedAsSemiLepBool = passedAsSemiLepBool;
+            bool oldPassedAsHadBool = passedAsHadBool; 
             for (UInt_t rangeItr=0; rangeItr<cutAmnt+1; rangeItr++){
-                float tmpVBFJetEtaCutVal = cutRangeAr[rangeItr];
+                float tmpFatJetPTCutVal = cutRangeAr[rangeItr];
+                Int_t FJInd;
+                passesCutsBool = oldPassesCutsBool;
+                passedAsSemiLepBool = oldPassedAsSemiLepBool;
+                passedAsHadBool = oldPassedAsHadBool;
+
+                if ((!passesCutsBool)){
+                    if (debug) std::cout << "trying SemiLeptonic\n";
+                    tryingSemiLepCtr += 1;
+                    FJInd = -1;
+                    UInt_t numFatJet = *nFatJetL;
+                    //Replacing fatJetPTCut
+                    //std::cout << rangeItr << " " << tmpFatJetPTCutVal << "\n";
+                    doSemiLepChanFatJetCut(FJInd,numFatJet,hFatJet_ind_fromHTag,tmpFatJetPTCutVal,fatJetZTagCut,FatJet_ptL,FatJet_phiL,FatJet_etaL,FatJet_deepTag_ZvsQCDL,selectedFJ_phi,selectedFJ_eta);
+                    /*
+                    for (UInt_t i=0; i<*nFatJet;i++){
+                        tmpFatJetPT = FatJet_ptL[i];
+                        if (tmpFatJetPT > fatJetPTCut) FJInd = i;
+                    }
+                    */
+                    doSemiLepCut(FJInd,enoughElecCands,negElecCands,posElecCands,totElecCands,Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut,
+                    enoughMuonCands,negMuonCands,posMuonCands,totMuonCands,Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,nmLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut,
+                    enoughLepCands,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,Z1Cand,difFromZMassOne,Z1LeadItr,Z1TrailingItr,Z1LeadPt,Z1TrailingPt,Z1IsMuon,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,
+                    Electron_dr03EcalRecHitSumEtL,Electron_dr03TkSumPtL,Electron_dr03HcalDepth1TowerSumEtL,Electron_pfRelIso03_allL,
+                    Z1LeadIso,Muon_pfRelIso03_allL,Z1TrailingIso,
+                    passSemiLepCut,passesCutsBool,passedAsSemiLepBool,
+                    debug);
+                }
+                if (debug) std::cout << "Test\n";
+                if ((!passesCutsBool)){
+                    tryingHadCtr += 1;
+                    LFJOneInd = -1;
+                    LFJTwoInd = -1;
+                    if (debugHadronic) std::cout << "---------------- Event " << evCount - 1 << " ----------------\n";
+                    //if (debugHadronic) std::cout << "hFatJet_ind_fromHTag " << hFatJet_ind_fromHTag << "\n";
+                    if (debugHadronic) std::cout << "fatJetPTCut " << fatJetPTCut << "\n";
+
+                    if (debugHadronic) std::cout << "--------- Entering FJ loop for Hadronic Channel ---------\n";
+
+                    UInt_t numFatJet = *nFatJetL;
+                    doHadChanFatJetCut(LFJOneInd,LFJTwoInd,numFatJet,hFatJet_ind_fromHTag,fatJetPTCut,fatJetZPairInvMassCut,FatJet_ptL,FatJet_phiL,FatJet_etaL,FatJet_massL,FatJet_deepTag_ZvsQCDL,selectedFJ_phi,selectedFJ_eta,hFatJet_pt_fromHTag);
+
+                    
+                    if (LFJOneInd != LFJTwoInd){
+                        passHadCut += 1;
+                        passesCutsBool = true;
+                        passedAsHadBool = true;
+                    }
+                }
+                if ((!passesCutsBool)) continue;
+                else passChannelCtr += 1;
+
+            
+                
                 //Now match VBF jets
                 UInt_t nJetLen        = *nJetL;
                 UInt_t leadJet_1      = 0;
@@ -685,8 +697,8 @@ void new032022VBFJetEtaCutFoMAnalysis(){
                 if (debug) std::cout << "Entering jet loop. Len: " << nJetLen << "\n";
             
                 //std::cout << tmpVBFJetdRCutVal << "\n";
-                //Replacing jetEtaDifCut
-                doVBFJetCut(nJetLen,Jet_ptL,Jet_jetIdL,Jet_etaL,Jet_phiL,Jet_massL,jetPTCut,tmpVBFJetEtaCutVal,jetInvMassCut,jetPairInvMass,jetLeadPt,jetLeadEta,jetLeadPhi,jetTrailingPt,jetTrailingEta,jetTrailingPhi,leadJet_1,leadJet_2,selectedFJ_phi,selectedFJ_eta,VBFJetdRCut,debug);
+                
+                doVBFJetCut(nJetLen,Jet_ptL,Jet_jetIdL,Jet_etaL,Jet_phiL,Jet_massL,jetPTCut,jetEtaDifCut,jetInvMassCut,jetPairInvMass,jetLeadPt,jetLeadEta,jetLeadPhi,jetTrailingPt,jetTrailingEta,jetTrailingPhi,leadJet_1,leadJet_2,selectedFJ_phi,selectedFJ_eta,VBFJetdRCut,debug);
                 //std::cout << jetLeadPt << endl;
                 if (jetLeadPt == 0) continue;
                 debugOutputForVBFJetCut(evCount,leadJet_1,leadJet_2,Jet_phiL,Jet_etaL,debug);

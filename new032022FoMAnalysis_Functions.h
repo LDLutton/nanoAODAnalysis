@@ -522,7 +522,9 @@ void doSemiLepChanFatJetCut(Int_t &FJInd,Int_t numFatJet,UInt_t hFatJet_ind_from
         float tmpFatJetTag = FatJet_deepTag_ZvsQCD[i];
         //Trying out tagging instead of pt for choosing final H FJ
         //if (tmpFatJetTag > fatJetZTagCut && tmpFatJetPT > fatJetPTCut && tmpFatJetPT > semiLepFatJetPT){
+        //std::cout << "tmpFatJetPT " << tmpFatJetPT << " fatJetPTCut " << fatJetPTCut <<"\n";
         if (tmpFatJetTag > fatJetZTagCut && tmpFatJetPT > fatJetPTCut && tmpFatJetTag > semiLepFatJetTag){
+            //std::cout << "Wow it passed!\n";
             FJInd = i;
             semiLepFatJetPT = tmpFatJetPT;
             semiLepFatJetTag = tmpFatJetTag;
@@ -963,13 +965,13 @@ std::vector<std::array<UInt_t,2>> muonPassesZ2CutsAr,std::vector<std::array<UInt
 void doLeptonicCuts(TTreeReaderArray<Float_t> &Electron_etaL,TTreeReaderArray<Float_t> &Electron_massL,TTreeReaderArray<Int_t> &Electron_chargeL,TTreeReaderArray<Float_t> &Electron_phiL,TTreeReaderArray<Float_t> &Electron_ptL,UInt_t neLep,std::vector<UInt_t> elecCandIndAr,std::vector<ROOT::Math::PtEtaPhiMVector> elecCandVecAr,std::vector<Int_t> elecCandChargeAr,UInt_t &negElecCands,UInt_t &posElecCands,UInt_t &totElecCands,bool enoughElecCands,UInt_t &negMuonCands,UInt_t &posMuonCands,UInt_t &totMuonCands,bool enoughMuonCands,bool enoughLepCands,float ePtCut,float eEtaCut,
 TTreeReaderArray<Float_t> &Muon_etaL,TTreeReaderArray<Float_t> &Muon_massL,TTreeReaderArray<Int_t> &Muon_chargeL,TTreeReaderArray<Float_t> &Muon_phiL,TTreeReaderArray<Float_t> &Muon_ptL,UInt_t nmLep,std::vector<UInt_t> muonCandIndAr,std::vector<ROOT::Math::PtEtaPhiMVector> muonCandVecAr,std::vector<Int_t> muonCandChargeAr,float mPtCut,float mEtaCut,
 bool &Z1IsMuon,float invMassCutLow,float invMassCutHigh,float ptLeadCut,float ptTrailingCut,
-float &Z1LeadPt,float &Z1TrailingPt,Int_t &Z1LeadItr,Int_t &Z1TrailingItr,ROOT::Math::PtEtaPhiMVector &Z1LeadVec,ROOT::Math::PtEtaPhiMVector &Z1TrailingVec,Int_t &Z1LeadCharge,Int_t &Z1TrailingCharge,float difFromZMassOne,
+float &Z1LeadPt,float &Z1TrailingPt,Int_t &Z1LeadItr,Int_t &Z1TrailingItr,ROOT::Math::PtEtaPhiMVector &Z1LeadVec,ROOT::Math::PtEtaPhiMVector &Z1TrailingVec,Int_t &Z1LeadCharge,Int_t &Z1TrailingCharge,float &difFromZMassOne,
 std::vector<std::array<ROOT::Math::PtEtaPhiMVector,2>> eZ2VecPairAr,Int_t &tmpZ2Ind,bool &Z2IsMuon,float &tmpTopZ2LeadPt,float &tmpTopZ2TrailingPt,float fourLepInvMassCut,float optLepInvMassCut,
 std::vector<std::array<ROOT::Math::PtEtaPhiMVector,2>> mZ2VecPairAr,
 ROOT::Math::PtEtaPhiMVector &tmpZ1Vec,float &tmpZ1M,
 TTreeReaderArray<Float_t> &Electron_dr03EcalRecHitSumEtL,TTreeReaderArray<Float_t> &Electron_dr03TkSumPtL,TTreeReaderArray<Float_t> &Electron_dr03HcalDepth1TowerSumEtL,TTreeReaderArray<Float_t> &Electron_pfRelIso03_allL,
 float &Z1LeadIso,TTreeReaderArray<Float_t> &Muon_pfRelIso03_allL,float &Z1TrailingIso,float &Z2LeadIso,float &Z2TrailingIso,float lepIsoCut,
-float &Z1LeadSIP,TTreeReaderArray<Float_t> &Electron_sip3dL,float &Z1TrailingSIP,float &Z2LeadSIP,TTreeReaderArray<Float_t> &Muon_sip3dL,float &Z2TrailingSIP,UInt_t &passLepCut,bool &passesCutsBool, bool &passedAsLepBool,
+float &Z1LeadSIP,TTreeReaderArray<Float_t> &Electron_sip3dL,float &Z1TrailingSIP,float &Z2LeadSIP,TTreeReaderArray<Float_t> &Muon_sip3dL,float &Z2TrailingSIP,float SIPCut,UInt_t &passLepCut,bool &passesCutsBool, bool &passedAsLepBool,
 bool debug
 ) {
     if (neLep){
@@ -1118,7 +1120,7 @@ bool debug
 
 void doSemiLepCut(Int_t &FJInd,bool &enoughElecCands,UInt_t &negElecCands,UInt_t &posElecCands,UInt_t &totElecCands,TTreeReaderArray<Float_t> &Electron_etaL,TTreeReaderArray<Float_t> &Electron_massL,TTreeReaderArray<Int_t> &Electron_chargeL,TTreeReaderArray<Float_t> &Electron_phiL,TTreeReaderArray<Float_t> &Electron_ptL,UInt_t neLep,std::vector<UInt_t> &elecCandIndAr,std::vector<ROOT::Math::PtEtaPhiMVector> &elecCandVecAr,std::vector<Int_t> &elecCandChargeAr,float ePtCut,float eEtaCut,
 bool &enoughMuonCands,UInt_t &negMuonCands,UInt_t &posMuonCands,UInt_t &totMuonCands,TTreeReaderArray<Float_t> &Muon_etaL,TTreeReaderArray<Float_t> &Muon_massL,TTreeReaderArray<Int_t> &Muon_chargeL,TTreeReaderArray<Float_t> &Muon_phiL,TTreeReaderArray<Float_t> &Muon_ptL,UInt_t nmLep,std::vector<UInt_t> &muonCandIndAr,std::vector<ROOT::Math::PtEtaPhiMVector> &muonCandVecAr,std::vector<Int_t> &muonCandChargeAr,float mPtCut,float mEtaCut,
-bool &enoughLepCands,bool &Z1Cand,float &difFromZMassOne,Int_t &Z1LeadItr,Int_t &Z1TrailingItr,float &Z1LeadPt,float &Z1TrailingPt,bool &Z1IsMuon,ROOT::Math::PtEtaPhiMVector &Z1LeadVec,ROOT::Math::PtEtaPhiMVector &Z1TrailingVec,Int_t &Z1LeadCharge,Int_t &Z1TrailingCharge,
+bool &enoughLepCands,float invMassCutLow,float invMassCutHigh,float ptLeadCut,float ptTrailingCut,bool &Z1Cand,float &difFromZMassOne,Int_t &Z1LeadItr,Int_t &Z1TrailingItr,float &Z1LeadPt,float &Z1TrailingPt,bool &Z1IsMuon,ROOT::Math::PtEtaPhiMVector &Z1LeadVec,ROOT::Math::PtEtaPhiMVector &Z1TrailingVec,Int_t &Z1LeadCharge,Int_t &Z1TrailingCharge,
 TTreeReaderArray<Float_t> &Electron_dr03EcalRecHitSumEtL,TTreeReaderArray<Float_t> &Electron_dr03TkSumPtL,TTreeReaderArray<Float_t> &Electron_dr03HcalDepth1TowerSumEtL,TTreeReaderArray<Float_t> &Electron_pfRelIso03_allL,
 float &Z1LeadIso,TTreeReaderArray<Float_t> &Muon_pfRelIso03_allL,float &Z1TrailingIso,
 UInt_t &passSemiLepCut,bool &passesCutsBool,bool &passedAsSemiLepBool,
@@ -1220,6 +1222,7 @@ bool debug){
                     passSemiLepCut += 1;
                     passesCutsBool = true;
                     passedAsSemiLepBool = true;
+                    //std::cout << "PASSED ALL THE WAY!!!!\n";
                     if (debug) {
                         std::cout << "Z1IsMuon " <<Z1IsMuon<< "\n";
                         std::cout << "elecCandIndAr size " << elecCandIndAr.size() << "\n";

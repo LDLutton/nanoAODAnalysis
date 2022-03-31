@@ -56,6 +56,10 @@ void new032022VBFJetPtCutFoMAnalysis(){
 
     for (UInt_t rangeItr=0; rangeItr<cutAmnt+1; rangeItr++){
         cutPassAr.push_back(0);
+        cutLepPassAr.push_back(0);
+        cutSemiLepPassAr.push_back(0);
+        cutHadPassAr.push_back(0);
+        cutLepOrSemiLepPassAr.push_back(0);
         cutRangeAr.push_back(jetPTRangeBottom+(rangeItr*jetPTCutStep));
     }
 
@@ -614,7 +618,7 @@ void new032022VBFJetPtCutFoMAnalysis(){
             tmpZ1Vec,tmpZ1M,
             Electron_dr03EcalRecHitSumEtL,Electron_dr03TkSumPtL,Electron_dr03HcalDepth1TowerSumEtL,Electron_pfRelIso03_allL,
             Z1LeadIso,Muon_pfRelIso03_allL,Z1TrailingIso,Z2LeadIso,Z2TrailingIso,lepIsoCut,
-            Z1LeadSIP,Electron_sip3dL,Z1TrailingSIP,Z2LeadSIP,Muon_sip3dL,Z2TrailingSIP,passLepCut,passesCutsBool,passedAsLepBool,
+            Z1LeadSIP,Electron_sip3dL,Z1TrailingSIP,Z2LeadSIP,Muon_sip3dL,Z2TrailingSIP,SIPCut,passLepCut,passesCutsBool,passedAsLepBool,
             debug);
 
             Int_t FJInd;
@@ -633,7 +637,7 @@ void new032022VBFJetPtCutFoMAnalysis(){
                 */
                 doSemiLepCut(FJInd,enoughElecCands,negElecCands,posElecCands,totElecCands,Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut,
                  enoughMuonCands,negMuonCands,posMuonCands,totMuonCands,Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,nmLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut,
-                 enoughLepCands,Z1Cand,difFromZMassOne,Z1LeadItr,Z1TrailingItr,Z1LeadPt,Z1TrailingPt,Z1IsMuon,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,
+                 enoughLepCands,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,Z1Cand,difFromZMassOne,Z1LeadItr,Z1TrailingItr,Z1LeadPt,Z1TrailingPt,Z1IsMuon,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,
                  Electron_dr03EcalRecHitSumEtL,Electron_dr03TkSumPtL,Electron_dr03HcalDepth1TowerSumEtL,Electron_pfRelIso03_allL,
                  Z1LeadIso,Muon_pfRelIso03_allL,Z1TrailingIso,
                  passSemiLepCut,passesCutsBool,passedAsSemiLepBool,
@@ -681,6 +685,7 @@ void new032022VBFJetPtCutFoMAnalysis(){
                 if (debug) std::cout << "Entering jet loop. Len: " << nJetLen << "\n";
             
                 //std::cout << tmpVBFJetdRCutVal << "\n";
+                //Replacing jetPTCut
                 doVBFJetCut(nJetLen,Jet_ptL,Jet_jetIdL,Jet_etaL,Jet_phiL,Jet_massL,tmpVBFJetPtCutVal,jetEtaDifCut,jetInvMassCut,jetPairInvMass,jetLeadPt,jetLeadEta,jetLeadPhi,jetTrailingPt,jetTrailingEta,jetTrailingPhi,leadJet_1,leadJet_2,selectedFJ_phi,selectedFJ_eta,VBFJetdRCut,debug);
                 //std::cout << jetLeadPt << endl;
                 if (jetLeadPt == 0) continue;
@@ -701,6 +706,17 @@ void new032022VBFJetPtCutFoMAnalysis(){
 
                 if (passesCutsBool){
                     cutPassAr[rangeItr] += 1;
+                    if (passedAsLepBool){
+                        cutLepPassAr[rangeItr] += 1;
+                        cutLepOrSemiLepPassAr[rangeItr] += 1;
+                    }
+                    else if (passedAsSemiLepBool){
+                        cutSemiLepPassAr[rangeItr] += 1;
+                        cutLepOrSemiLepPassAr[rangeItr] += 1;
+                    }
+                    else if (passedAsHadBool) {
+                        cutHadPassAr[rangeItr] += 1;
+                    }
                     /*
                     if (debug) std::cout << "Passed cuts. Now filling trees\n";
                     passesCutsCtr += 1;
@@ -759,8 +775,8 @@ void new032022VBFJetPtCutFoMAnalysis(){
     }
     std::cout << "nEv total: " << datanEv << "\n";
     std::cout << "nEv post HLT: " << datanEvPass << "\n"; 
-    for (UInt_t rangeItr=0; rangeItr<cutAmnt+1; rangeItr++){
-        std::cout << "cutRangeAr[rangeItr] " << cutRangeAr[rangeItr] << " cutPassAr[rangeItr] " << cutPassAr[rangeItr] << "\n";
+   for (UInt_t rangeItr=0; rangeItr<cutAmnt+1; rangeItr++){
+        std::cout << "cutRangeAr[rangeItr] " << cutRangeAr[rangeItr] << " cutPassAr[rangeItr] " << cutPassAr[rangeItr] << " cutLepPassAr[rangeItr] " << cutLepPassAr[rangeItr] << " cutSemiLepPassAr[rangeItr] " << cutSemiLepPassAr[rangeItr] << " cutLepOrSemiLepPassAr[rangeItr] " << cutLepOrSemiLepPassAr[rangeItr] << " cutHadPassAr[rangeItr] " << cutHadPassAr[rangeItr] << "\n";
     }
     std::cout << "std::vector<float> cutRangeAr = [";
     for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
@@ -773,6 +789,30 @@ void new032022VBFJetPtCutFoMAnalysis(){
         std::cout << cutPassAr[rangeItr] << ",";
     }
     std::cout << cutPassAr[cutAmnt] << "];\n";
+
+    std::cout << "std::vector<UInt_t> " << saveName << "LepPassAr = [";
+    for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
+        std::cout << cutLepPassAr[rangeItr] << ",";
+    }
+    std::cout << cutLepPassAr[cutAmnt] << "];\n";
+
+    std::cout << "std::vector<UInt_t> " << saveName << "SemiLepPassAr = [";
+    for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
+        std::cout << cutSemiLepPassAr[rangeItr] << ",";
+    }
+    std::cout << cutSemiLepPassAr[cutAmnt] << "];\n";
+
+    std::cout << "std::vector<UInt_t> " << saveName << "LepOrSemiLepPassAr = [";
+    for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
+        std::cout << cutLepOrSemiLepPassAr[rangeItr] << ",";
+    }
+    std::cout << cutLepOrSemiLepPassAr[cutAmnt] << "];\n";
+
+    std::cout << "std::vector<UInt_t> " << saveName << "HadPassAr = [";
+    for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
+        std::cout << cutHadPassAr[rangeItr] << ",";
+    }
+    std::cout << cutHadPassAr[cutAmnt] << "];\n";
 
     /*
     nEv = evRunOver;

@@ -56,6 +56,10 @@ void new032022hFatJetDeepTagCutFoMAnalysis(){
 
     for (UInt_t rangeItr=0; rangeItr<cutAmnt+1; rangeItr++){
         cutPassAr.push_back(0);
+        cutLepPassAr.push_back(0);
+        cutSemiLepPassAr.push_back(0);
+        cutHadPassAr.push_back(0);
+        cutLepOrSemiLepPassAr.push_back(0);
         cutRangeAr.push_back(hFatJetDeepTagRangeBottom+(rangeItr*hFatJetDeepTagCutStep));
     }
 
@@ -563,7 +567,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(){
                 vector<float> selectedFJ_eta;
 
                 //doHiggsFatJetCut(nFatJetLen,hFatJet_HTag_fromPt,hFatJet_pt_fromPt,hFatJet_phi_fromPt,hFatJet_eta_fromPt,hFatJet_mass_fromPt,hFatJet_pt_fromHTag,hFatJet_phi_fromHTag,hFatJet_eta_fromHTag,hFatJet_mass_fromHTag,hFatJet_HTag_fromHTag,hFatJet_ind_fromHTag,FatJet_deepTag_HL,hFatJetDeepTagCut,FatJet_ptL,hFatJetPTCut,FatJet_jetIdL,FatJet_phiL,FatJet_etaL,jetLeadPhi,jetLeadEta,jetTrailingPhi,jetTrailingEta,hFatJetdRCut,FatJet_massL);
-                
+                //Replacing hFatJetDeepTagCut
                 doHiggsFatJetCut(nFatJetLen,hFatJet_pt_fromHTag,hFatJet_phi_fromHTag,hFatJet_eta_fromHTag,hFatJet_mass_fromHTag,hFatJet_HTag_fromHTag,hFatJet_ind_fromHTag,FatJet_deepTag_HL,tmphFatJetDeepTagCutVal,FatJet_ptL,hFatJetPTCut,FatJet_jetIdL,FatJet_phiL,FatJet_etaL,FatJet_massL,selectedFJ_phi,selectedFJ_eta);
                 
                 if (hFatJet_pt_fromHTag == 0) continue;
@@ -617,7 +621,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(){
                 tmpZ1Vec,tmpZ1M,
                 Electron_dr03EcalRecHitSumEtL,Electron_dr03TkSumPtL,Electron_dr03HcalDepth1TowerSumEtL,Electron_pfRelIso03_allL,
                 Z1LeadIso,Muon_pfRelIso03_allL,Z1TrailingIso,Z2LeadIso,Z2TrailingIso,lepIsoCut,
-                Z1LeadSIP,Electron_sip3dL,Z1TrailingSIP,Z2LeadSIP,Muon_sip3dL,Z2TrailingSIP,passLepCut,passesCutsBool,passedAsLepBool,
+                Z1LeadSIP,Electron_sip3dL,Z1TrailingSIP,Z2LeadSIP,Muon_sip3dL,Z2TrailingSIP,SIPCut,passLepCut,passesCutsBool,passedAsLepBool,
                 debug);
 
                 Int_t FJInd;
@@ -636,7 +640,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(){
                     */
                     doSemiLepCut(FJInd,enoughElecCands,negElecCands,posElecCands,totElecCands,Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut,
                      enoughMuonCands,negMuonCands,posMuonCands,totMuonCands,Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,nmLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut,
-                     enoughLepCands,Z1Cand,difFromZMassOne,Z1LeadItr,Z1TrailingItr,Z1LeadPt,Z1TrailingPt,Z1IsMuon,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,
+                     enoughLepCands,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,Z1Cand,difFromZMassOne,Z1LeadItr,Z1TrailingItr,Z1LeadPt,Z1TrailingPt,Z1IsMuon,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,
                      Electron_dr03EcalRecHitSumEtL,Electron_dr03TkSumPtL,Electron_dr03HcalDepth1TowerSumEtL,Electron_pfRelIso03_allL,
                      Z1LeadIso,Muon_pfRelIso03_allL,Z1TrailingIso,
                      passSemiLepCut,passesCutsBool,passedAsSemiLepBool,
@@ -701,6 +705,17 @@ void new032022hFatJetDeepTagCutFoMAnalysis(){
 
                 if (passesCutsBool){
                     cutPassAr[rangeItr] += 1;
+                    if (passedAsLepBool){
+                        cutLepPassAr[rangeItr] += 1;
+                        cutLepOrSemiLepPassAr[rangeItr] += 1;
+                    }
+                    else if (passedAsSemiLepBool){
+                        cutSemiLepPassAr[rangeItr] += 1;
+                        cutLepOrSemiLepPassAr[rangeItr] += 1;
+                    }
+                    else if (passedAsHadBool) {
+                        cutHadPassAr[rangeItr] += 1;
+                    }
                     /*
                     if (debug) std::cout << "Passed cuts. Now filling trees\n";
                     passesCutsCtr += 1;
@@ -759,8 +774,8 @@ void new032022hFatJetDeepTagCutFoMAnalysis(){
     }
     std::cout << "nEv total: " << datanEv << "\n";
     std::cout << "nEv post HLT: " << datanEvPass << "\n"; 
-    for (UInt_t rangeItr=0; rangeItr<cutAmnt+1; rangeItr++){
-        std::cout << "cutRangeAr[rangeItr] " << cutRangeAr[rangeItr] << " cutPassAr[rangeItr] " << cutPassAr[rangeItr] << "\n";
+   for (UInt_t rangeItr=0; rangeItr<cutAmnt+1; rangeItr++){
+        std::cout << "cutRangeAr[rangeItr] " << cutRangeAr[rangeItr] << " cutPassAr[rangeItr] " << cutPassAr[rangeItr] << " cutLepPassAr[rangeItr] " << cutLepPassAr[rangeItr] << " cutSemiLepPassAr[rangeItr] " << cutSemiLepPassAr[rangeItr] << " cutLepOrSemiLepPassAr[rangeItr] " << cutLepOrSemiLepPassAr[rangeItr] << " cutHadPassAr[rangeItr] " << cutHadPassAr[rangeItr] << "\n";
     }
     std::cout << "std::vector<float> cutRangeAr = [";
     for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
@@ -773,6 +788,30 @@ void new032022hFatJetDeepTagCutFoMAnalysis(){
         std::cout << cutPassAr[rangeItr] << ",";
     }
     std::cout << cutPassAr[cutAmnt] << "];\n";
+
+    std::cout << "std::vector<UInt_t> " << saveName << "LepPassAr = [";
+    for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
+        std::cout << cutLepPassAr[rangeItr] << ",";
+    }
+    std::cout << cutLepPassAr[cutAmnt] << "];\n";
+
+    std::cout << "std::vector<UInt_t> " << saveName << "SemiLepPassAr = [";
+    for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
+        std::cout << cutSemiLepPassAr[rangeItr] << ",";
+    }
+    std::cout << cutSemiLepPassAr[cutAmnt] << "];\n";
+
+    std::cout << "std::vector<UInt_t> " << saveName << "LepOrSemiLepPassAr = [";
+    for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
+        std::cout << cutLepOrSemiLepPassAr[rangeItr] << ",";
+    }
+    std::cout << cutLepOrSemiLepPassAr[cutAmnt] << "];\n";
+
+    std::cout << "std::vector<UInt_t> " << saveName << "HadPassAr = [";
+    for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
+        std::cout << cutHadPassAr[rangeItr] << ",";
+    }
+    std::cout << cutHadPassAr[cutAmnt] << "];\n";
 
     /*
     nEv = evRunOver;
