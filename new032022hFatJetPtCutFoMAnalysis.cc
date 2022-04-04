@@ -34,7 +34,7 @@
 #include<mutex>
 
 #include<thread>
-
+#include<string>
 
 #include<sys/stat.h>
 #include<errno.h>
@@ -47,7 +47,7 @@
 ////////////////////////////////START OF MAIN FUNCTION////////////////////////////////
 
 
-void new032022hFatJetPtCutFoMAnalysis(){
+void new032022hFatJetPtCutFoMAnalysis(string datasetString){
     // Open the file. Note that the name of your file outside this class
     // will probably NOT be experiment.root.
     std::cout << "start hFatJetPtCut FoM Analysis\n";
@@ -86,6 +86,33 @@ void new032022hFatJetPtCutFoMAnalysis(){
     bool useLHETree = false;
     bool useFJGenMatchTree = false;
     bool useJGenMatchTree = false;
+
+    
+    if (datasetString == "testRun") testRun = true;
+    if (datasetString == "SDC2V3MC") SDC2V3MC = true;
+    if (datasetString == "C2VEtaDifCut") MGC2VEtaDifCut = true;
+    if (datasetString == "OSix") MGOSix = true;
+    if (datasetString == "OSixEtaDifCut") MGOSixEtaDifCut = true;
+    if (datasetString == "OHBox") MGOHBox = true;
+    if (datasetString == "OHBoxEtaDifCut") MGOHBoxEtaDifCut = true;
+    if (datasetString == "OHDD") MGOHDD = true;
+    if (datasetString == "OHDDEtaDifCut") MGOHDDEtaDifCut = true;
+    if (datasetString == "OHW") MGOHW = true;
+    if (datasetString == "SM") MGSM = true;
+    if (datasetString == "ttHToBB") ttHToBBBackground = true;
+    if (datasetString == "ttZJets") ttZJetsBackground = true;
+    if (datasetString == "DY") DYBackground = true;
+    if (datasetString == "QCDPT170to300") QCDPT170to300Background = true;
+    if (datasetString == "QCDPT300to470") QCDPT300to470Background = true;
+    if (datasetString == "QCDPT470to600") QCDPT470to600Background = true;
+    if (datasetString == "QCDPT600to800") QCDPT600to800Background = true;
+    if (datasetString == "QCDPT800to1000") QCDPT800to1000Background = true;
+    if (datasetString == "QCDPT1000to1400") QCDPT1000to1400Background = true;
+    if (datasetString == "QCDPT1400to1800") QCDPT1400to1800Background = true;
+    if (datasetString == "QCDPT1800to2400") QCDPT1800to2400Background = true;
+    if (datasetString == "QCDPT2400to3200") QCDPT2400to3200Background = true;
+    if (datasetString == "QCDPT3200toInf") QCDPT3200toInfBackground = true;
+    if (datasetString == "LaraTest") LaraTest = true;
 
     ////////////////////////////////GETTING DATASET////////////////////////////////
     ////////////////////////////////GETTING DATASET////////////////////////////////
