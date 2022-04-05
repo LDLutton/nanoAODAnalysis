@@ -89,7 +89,7 @@ float hFatJetPTCutRangeBottom = 0.;
 float hFatJetPTCutStep = (hFatJetPTCutRangeTop - hFatJetPTCutRangeBottom) / cutAmnt;
 
 
-float hFatJetDeepTagCut = 0.8;
+float hFatJetDeepTagCut = 0.9;
 float hFatJetDeepTagRangeTop = 1.;
 float hFatJetDeepTagRangeBottom = 0.;
 float hFatJetDeepTagCutStep = (hFatJetDeepTagRangeTop - hFatJetDeepTagRangeBottom) / cutAmnt;
