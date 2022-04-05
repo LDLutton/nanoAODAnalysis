@@ -11,7 +11,7 @@ bool useTighterCut = false;
 
 bool FoMOnHiggsCut = true;
 
-bool testRun = true;
+bool testRun = false;
 bool SDC2V3MC = false;
 bool MGC2VEtaDifCut = false;
 bool MGOSix = false;
@@ -39,7 +39,7 @@ bool LaraTest = false;
 
 bool isBackground = false;
 
-bool scratchDown = true;
+bool scratchDown = false;
 
 //VBF jet pair selection;
 //Defining jet matching cuts;
