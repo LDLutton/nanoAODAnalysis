@@ -170,7 +170,7 @@ float SIPCutStep = (SIPRangeTop - SIPRangeBottom) / cutAmnt;
 //Hadronic cuts
 //0.2 is a placeholder value
 float fatJetHTagCut = 0.2;
-float fatJetZTagCut = 0.2;
+float fatJetZTagCut = 0.8;
 float fatJetZTagRangeTop = 1.;
 float fatJetZTagRangeBottom = 0.;
 float fatJetZTagCutStep = (fatJetZTagRangeTop - fatJetZTagRangeBottom) / cutAmnt;
