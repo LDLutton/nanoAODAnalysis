@@ -426,9 +426,9 @@ void DoHLTFilterBeforeAnalysis(){
         saveName = "ST_t_ChannelTop";
         
         isBackground = true;
-        int arrSize = sizeof(ST_t_ChannelTopBackgroundBackgroundAr)/sizeof(ST_t_ChannelTopBackgroundBackgroundAr[0]);
+        int arrSize = sizeof(ST_t_ChannelTopBackgroundAr)/sizeof(ST_t_ChannelTopBackgroundAr[0]);
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(ST_t_ChannelTopBackgroundBackgroundAr[i]);
+            fileAr.push_back(ST_t_ChannelTopBackgroundAr[i]);
         }
     }
     else if (ZZTo2Q2NuBackground){
@@ -439,9 +439,9 @@ void DoHLTFilterBeforeAnalysis(){
         saveName = "ZZTo2Q2Nu";
         
         isBackground = true;
-        int arrSize = sizeof(ZZTo2Q2NuBackgroundBackgroundAr)/sizeof(ZZTo2Q2NuBackgroundBackgroundAr[0]);
+        int arrSize = sizeof(ZZTo2Q2NuBackgroundAr)/sizeof(ZZTo2Q2NuBackgroundAr[0]);
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(ZZTo2Q2NuBackgroundBackgroundAr[i]);
+            fileAr.push_back(ZZTo2Q2NuBackgroundAr[i]);
         }
     }
     else if (WWTo2L2NuBackground){
@@ -452,9 +452,9 @@ void DoHLTFilterBeforeAnalysis(){
         saveName = "WWTo2L2Nu";
         
         isBackground = true;
-        int arrSize = sizeof(WWTo2L2NuBackgroundBackgroundAr)/sizeof(WWTo2L2NuBackgroundBackgroundAr[0]);
+        int arrSize = sizeof(WWTo2L2NuBackgroundAr)/sizeof(WWTo2L2NuBackgroundAr[0]);
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(WWTo2L2NuBackgroundBackgroundAr[i]);
+            fileAr.push_back(WWTo2L2NuBackgroundAr[i]);
         }
     }
     else if (WZTo3LNuBackground){
@@ -465,9 +465,9 @@ void DoHLTFilterBeforeAnalysis(){
         saveName = "WZTo3LNu";
         
         isBackground = true;
-        int arrSize = sizeof(WZTo3LNuBackgroundBackgroundAr)/sizeof(WZTo3LNuBackgroundBackgroundAr[0]);
+        int arrSize = sizeof(WZTo3LNuBackgroundAr)/sizeof(WZTo3LNuBackgroundAr[0]);
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(WZTo3LNuBackgroundBackgroundAr[i]);
+            fileAr.push_back(WZTo3LNuBackgroundAr[i]);
         }
     }
     else if (testRun){
