@@ -112,6 +112,17 @@ void new032022LepePtCutFoMAnalysis(string datasetString){
     if (datasetString == "QCDPT1800to2400") QCDPT1800to2400Background = true;
     if (datasetString == "QCDPT2400to3200") QCDPT2400to3200Background = true;
     if (datasetString == "QCDPT3200toInf") QCDPT3200toInfBackground = true;
+
+    if (datasetString == "TTToHadronic") TTToHadronicBackground = true;
+    if (datasetString == "TTTo2L2Nu") TTTo2L2NuBackground = true;
+    if (datasetString == "TTToSemiLeptonic") TTToSemiLeptonicBackground = true;
+    if (datasetString == "ST_s_Channel") ST_s_ChannelBackground = true;
+    if (datasetString == "ST_t_ChannelAntiTop") ST_t_ChannelAntiTopBackground = true;
+    if (datasetString == "ST_t_ChannelTop") ST_t_ChannelTopBackground = true;
+    if (datasetString == "ZZTo2Q2Nu") ZZTo2Q2NuBackground = true;
+    if (datasetString == "WWTo2L2Nu") WWTo2L2NuBackground = true;
+    if (datasetString == "WZTo3LNu") WZTo3LNuBackground = true;
+
     if (datasetString == "LaraTest") LaraTest = true;
 
     ////////////////////////////////GETTING DATASET////////////////////////////////
@@ -359,6 +370,105 @@ void new032022LepePtCutFoMAnalysis(string datasetString){
         
         isBackground = true;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT3200toInf.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (TTToHadronicBackground){
+        //saveName = "QCDPT3200toInf";
+        
+        crossSection = 377.96;
+
+        saveName = "TTToHadronic";
+        
+        isBackground = true;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisTTToHadronic.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (TTTo2L2NuBackground){
+        //saveName = "QCDPT3200toInf";
+        
+        crossSection = 88.29;
+
+        saveName = "TTTo2L2Nu";
+        
+        isBackground = true;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisTTTo2L2Nu.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (TTToSemiLeptonicBackground){
+        //saveName = "QCDPT3200toInf";
+        
+        crossSection = 365.34;
+
+        saveName = "TTToSemiLeptonic";
+        
+        isBackground = true;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisTTToSemiLeptonic.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ST_s_ChannelBackground){
+        //saveName = "QCDPT3200toInf";
+        
+        crossSection = 3.74;
+
+        saveName = "ST_s_Channel";
+        
+        isBackground = true;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisST_s_Channel.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ST_t_ChannelAntiTopBackground){
+        //saveName = "QCDPT3200toInf";
+        
+        crossSection = 69.09;
+
+        saveName = "ST_t_ChannelAntiTop";
+        
+        isBackground = true;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisST_t_ChannelAntiTop.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ST_t_ChannelTopBackground){
+        //saveName = "QCDPT3200toInf";
+        
+        crossSection = 115.3;
+
+        saveName = "ST_t_ChannelTop";
+        
+        isBackground = true;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisST_t_ChannelTop.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ZZTo2Q2NuBackground){
+        //saveName = "QCDPT3200toInf";
+        
+        crossSection = 4.561;
+
+        saveName = "ZZTo2Q2Nu";
+        
+        isBackground = true;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisZZTo2Q2Nu.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (WWTo2L2NuBackground){
+        //saveName = "QCDPT3200toInf";
+        
+        crossSection = 10.48;
+
+        saveName = "WWTo2L2Nu";
+        
+        isBackground = true;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisWWTo2L2Nu.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (WZTo3LNuBackground){
+        //saveName = "QCDPT3200toInf";
+        
+        crossSection = 5.052;
+
+        saveName = "WZTo3LNu";
+        
+        isBackground = true;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisWZTo3LNu.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (testRun){
