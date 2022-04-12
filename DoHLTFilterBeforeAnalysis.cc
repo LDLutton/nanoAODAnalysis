@@ -615,6 +615,11 @@ void DoHLTFilterBeforeAnalysis(){
         if (debug) std::cout<<"File:    "<<fileAr[k]<<"\n";
         //Open the file, get the Events tree
         TFile* tmpfile = TFile::Open(fileAr[k].c_str());
+        if (!tmpfile) {
+            std::cerr << "Could not open " << fileAr[k] << "\n";
+            std::cerr << "Moving to next file.\n";
+            continue;
+        }
         outFile->cd();
         TTreeReader myEventsReader("Events", tmpfile);
 
