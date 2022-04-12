@@ -35,6 +35,17 @@ bool QCDPT1400to1800Background = false;
 bool QCDPT1800to2400Background = false;
 bool QCDPT2400to3200Background = false;
 bool QCDPT3200toInfBackground = false;
+
+bool TTToHadronicBackground = false;
+bool TTTo2L2NuBackground = false;
+bool TTToSemiLeptonicBackground = false;
+bool ST_s_ChannelBackground = false;
+bool ST_t_ChannelAntiTopBackground = false;
+bool ST_t_ChannelTopBackground = false;
+bool ZZTo2Q2NuBackground = false;
+bool WWTo2L2NuBackground = false;
+bool WZTo3LNuBackground = false;
+
 bool LaraTest = false;
 
 bool isBackground = false;
