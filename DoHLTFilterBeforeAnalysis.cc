@@ -353,6 +353,123 @@ void DoHLTFilterBeforeAnalysis(){
             fileAr.push_back(QCDPT3200toInfBackgroundAr[i]);
         }
     }
+    else if (TTToHadronicBackground){
+        //saveName = "QCDPT3200toInf";
+        
+        crossSection = 377.96;
+
+        saveName = "TTToHadronic";
+        
+        isBackground = true;
+        int arrSize = sizeof(TTToHadronicBackgroundAr)/sizeof(TTToHadronicBackgroundAr[0]);
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(TTToHadronicBackgroundAr[i]);
+        }
+    }
+    else if (TTTo2L2NuBackground){
+        //saveName = "";
+        
+        crossSection = 88.29;
+
+        saveName = "TTTo2L2Nu";
+        
+        isBackground = true;
+        int arrSize = sizeof(TTTo2L2NuBackgroundAr)/sizeof(TTTo2L2NuBackgroundAr[0]);
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(TTTo2L2NuBackgroundAr[i]);
+        }
+    }
+    else if (TTToSemiLeptonicBackground){
+        //saveName = "";
+        
+        crossSection = 365.34;
+
+        saveName = "TTToSemiLeptonic";
+        
+        isBackground = true;
+        int arrSize = sizeof(TTTo2L2NuBackgroundAr)/sizeof(TTTo2L2NuBackgroundAr[0]);
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(TTTo2L2NuBackgroundAr[i]);
+        }
+    }
+    else if (ST_s_ChannelBackground){
+        //saveName = "";
+        
+        crossSection = 3.74;
+
+        saveName = "ST_s_Channel";
+        
+        isBackground = true;
+        int arrSize = sizeof(ST_s_ChannelBackgroundAr)/sizeof(ST_s_ChannelBackgroundAr[0]);
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(ST_s_ChannelBackgroundAr[i]);
+        }
+    }
+    else if (ST_t_ChannelAntiTopBackground){
+        //saveName = "";
+        
+        crossSection = 69.09;
+
+        saveName = "ST_t_ChannelAntiTop";
+        
+        isBackground = true;
+        int arrSize = sizeof(ST_t_ChannelAntiTopBackgroundAr)/sizeof(ST_t_ChannelAntiTopBackgroundAr[0]);
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(ST_t_ChannelAntiTopBackgroundAr[i]);
+        }
+    }
+    else if (ST_t_ChannelTopBackground){
+        //saveName = "";
+        
+        crossSection = 115.3;
+
+        saveName = "ST_t_ChannelTop";
+        
+        isBackground = true;
+        int arrSize = sizeof(ST_t_ChannelTopBackgroundBackgroundAr)/sizeof(ST_t_ChannelTopBackgroundBackgroundAr[0]);
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(ST_t_ChannelTopBackgroundBackgroundAr[i]);
+        }
+    }
+    else if (ZZTo2Q2NuBackground){
+        //saveName = "";
+        
+        crossSection = 4.561;
+
+        saveName = "ZZTo2Q2Nu";
+        
+        isBackground = true;
+        int arrSize = sizeof(ZZTo2Q2NuBackgroundBackgroundAr)/sizeof(ZZTo2Q2NuBackgroundBackgroundAr[0]);
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(ZZTo2Q2NuBackgroundBackgroundAr[i]);
+        }
+    }
+    else if (WWTo2L2NuBackground){
+        //saveName = "";
+        
+        crossSection = 10.48;
+
+        saveName = "WWTo2L2Nu";
+        
+        isBackground = true;
+        int arrSize = sizeof(WWTo2L2NuBackgroundBackgroundAr)/sizeof(WWTo2L2NuBackgroundBackgroundAr[0]);
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(WWTo2L2NuBackgroundBackgroundAr[i]);
+        }
+    }
+    else if (WZTo3LNuBackground){
+        //saveName = "";
+        
+        crossSection = 5.052;
+
+        saveName = "WZTo3LNu";
+        
+        isBackground = true;
+        int arrSize = sizeof(WZTo3LNuBackgroundBackgroundAr)/sizeof(WZTo3LNuBackgroundBackgroundAr[0]);
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(WZTo3LNuBackgroundBackgroundAr[i]);
+        }
+    }
     else if (testRun){
         saveName = "testRun";
         fileAr.push_back("./unweighted_eventspphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev10080Seed_0p999cHW100GeVIMJetCut_200.root");
@@ -842,18 +959,18 @@ void DoHLTFilterBeforeAnalysis(){
     if (!isBackground){
         std::cout << "Cross section average before division: " << crossSectionAvg << "\n";
         std::cout << "Cross section counter: " << crossSectionCtr << "\n";
-        crossSectionAvg = crossSectionAvg / crossSectionCtr;
-        std::cout << "Cross section average after division: " << crossSectionAvg << "\n";
+        crossSectionAvg = (crossSectionAvg*hTobbBR) / crossSectionCtr;
+        std::cout << "Cross section average after division and hTobb branching ratio: " << crossSectionAvg << "\n";
         std::cout << "Tot Weight: " << totCrossSectionWeight <<"\n";
         std::cout << "Tot XS Count: " << totCrossSectionEvCount <<"\n";
         float crossSectionAvgAlt = totCrossSectionWeight/totCrossSectionEvCount;
-        std::cout << "Tot Weight/Tot XS Count: " << crossSectionAvgAlt <<"\n";
+        std::cout << "(Tot Weight*hTobbBR)/Tot XS Count: " << crossSectionAvgAlt*hTobbBR <<"\n";
         //XS Tree
         float crossSectionVar;
         TTree* crossSectionTree = new TTree("crossSectionTree","crossSectionTree");
         crossSectionTree->Branch("crossSectionVar",&crossSectionVar,"crossSectionVar/F");
         //crossSectionVar = crossSectionAvg;
-        crossSectionVar = crossSectionAvgAlt;
+        crossSectionVar = crossSectionAvgAlt*hTobbBR;
         crossSectionTree->Fill();
         crossSectionTree->Write("",TObject::kOverwrite);
     }
