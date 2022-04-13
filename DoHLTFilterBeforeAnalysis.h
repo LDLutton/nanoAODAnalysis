@@ -32,6 +32,7 @@ bool QCDPT1800to2400Background = false;
 bool QCDPT2400to3200Background = false;
 bool QCDPT3200toInfBackground = false;
 
+bool TTJetsBackground = false;
 bool TTToHadronicBackground = false;
 bool TTTo2L2NuBackground = false;
 bool TTToSemiLeptonicBackground = false;

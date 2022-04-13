@@ -366,6 +366,19 @@ void DoHLTFilterBeforeAnalysis(){
             fileAr.push_back(TTToHadronicBackgroundAr[i]);
         }
     }
+    else if (TTJetsBackground){
+        //saveName = "";
+        
+        crossSection = 722.8;
+
+        saveName = "TTJets";
+        
+        isBackground = true;
+        int arrSize = sizeof(TTJetsBackgroundAr)/sizeof(TTJetsBackgroundAr[0]);
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(TTJetsBackgroundAr[i]);
+        }
+    }
     else if (TTTo2L2NuBackground){
         //saveName = "";
         
