@@ -113,6 +113,7 @@ void new032022InvMassCutLowCutFoMAnalysis(string datasetString){
     if (datasetString == "QCDPT2400to3200") QCDPT2400to3200Background = true;
     if (datasetString == "QCDPT3200toInf") QCDPT3200toInfBackground = true;
 
+    if (datasetString == "TTJets") TTJetsBackground = true;
     if (datasetString == "TTToHadronic") TTToHadronicBackground = true;
     if (datasetString == "TTTo2L2Nu") TTTo2L2NuBackground = true;
     if (datasetString == "TTToSemiLeptonic") TTToSemiLeptonicBackground = true;
@@ -370,6 +371,17 @@ void new032022InvMassCutLowCutFoMAnalysis(string datasetString){
         
         isBackground = true;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT3200toInf.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (TTJetsBackground){
+        //saveName = "QCDPT3200toInf";
+        
+        crossSection = 722.8;
+
+        saveName = "TTJets";
+        
+        isBackground = true;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisTTJets.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (TTToHadronicBackground){
