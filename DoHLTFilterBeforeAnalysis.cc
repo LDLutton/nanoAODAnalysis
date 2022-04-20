@@ -522,7 +522,6 @@ void DoHLTFilterBeforeAnalysis(){
     UInt_t totCrossSectionEvCount = 0;
     UInt_t evRunOver = 0;
     UInt_t evCount = 0;
-    UInt_t evPassCount = 0;
     
     UInt_t nEv;
     UInt_t nEvPass;
@@ -532,7 +531,10 @@ void DoHLTFilterBeforeAnalysis(){
     evNumTree->Branch("nEv",&nEv,"nEv/i");
     evNumTree->Branch("nEvPass",&nEvPass,"nEvPass/i");
 
+    //EventWeights
+    Float_t genWeightL;
 
+    //Jets
     UInt_t nJetL;
     std::vector<Float_t> Jet_etaL;
     std::vector<Float_t> Jet_ptL;
@@ -576,8 +578,10 @@ void DoHLTFilterBeforeAnalysis(){
 
 
     TTree *FilteredEventsTree = new TTree("FilteredEventsTree", "FilteredEventsTree");
+    //gen weights
+    FilteredEventsTree->Branch("genWeightL",&genWeightL,"genWeightL/F");
 
-    
+    //Jets    
     FilteredEventsTree->Branch("nJetL",&nJetL,"nJetL/i");
     FilteredEventsTree->Branch("Jet_etaL",&Jet_etaL);
     FilteredEventsTree->Branch("Jet_ptL",&Jet_ptL);
@@ -619,7 +623,7 @@ void DoHLTFilterBeforeAnalysis(){
     FilteredEventsTree->Branch("Muon_pfRelIso03_allL",&Muon_pfRelIso03_allL);
     FilteredEventsTree->Branch("Muon_sip3dL",&Muon_sip3dL);
 
-
+    float sumOfGenWeights = 0;
     
     std::cout << "Going into file loop.\n";
 
@@ -636,13 +640,19 @@ void DoHLTFilterBeforeAnalysis(){
         outFile->cd();
         TTreeReader myEventsReader("Events", tmpfile);
 
+        //genWeights
+        TTreeReaderValue<Float_t> genWeight(myEventsReader, "genWeight");
+
+       
+
+        //HLT Branches
         TTreeReaderValue<Bool_t> HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02(myEventsReader, "HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02");
         TTreeReaderValue<Bool_t> HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np2(myEventsReader, "HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np2");
         TTreeReaderValue<Bool_t> HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np4(myEventsReader, "HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np4");
         TTreeReaderValue<Bool_t> HLT_TripleMu_10_5_5_DZ(myEventsReader, "HLT_TripleMu_10_5_5_DZ");
         TTreeReaderValue<Bool_t> HLT_TripleMu_12_10_5(myEventsReader, "HLT_TripleMu_12_10_5");
 
-        //HLT Branches
+
         TTreeReaderValue<Bool_t> HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ(myEventsReader, "HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ");
         TTreeReaderValue<Bool_t> HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL(myEventsReader, "HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL");
         TTreeReaderValue<Bool_t> HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ(myEventsReader, "HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ");
@@ -781,8 +791,13 @@ void DoHLTFilterBeforeAnalysis(){
         std::vector<std::array<ROOT::Math::PtEtaPhiMVector,2>> eZ2VecPairAr;
         std::vector<std::array<ROOT::Math::PtEtaPhiMVector,2>> mZ2VecPairAr;
 
+        
+        
+
+
         //Getting the cross section
         //For background it's precalculated
+        
         if (!isBackground){
             crossSection = 0.;
             Long64_t eventLoopMax = myRunsReader.GetEntries();
@@ -803,6 +818,7 @@ void DoHLTFilterBeforeAnalysis(){
                 crossSectionCtr += 1;
             }
         }
+        
         if (k % 10 == 0){
             double tmpTime = (double)(clock()-startt)/CLOCKS_PER_SEC;
             std::cout << "Going into event loop for file" << k << " .\ttime:" << (double)(clock()-startt)/CLOCKS_PER_SEC << "\n";
@@ -827,6 +843,8 @@ void DoHLTFilterBeforeAnalysis(){
             //Increment event count
             evRunOver += 1;
             evCount += 1;
+
+            sumOfGenWeights += *genWeight;
 
 
 
@@ -874,6 +892,8 @@ void DoHLTFilterBeforeAnalysis(){
             //std::cout << testPassHLTBool << " " << passHLTBool << "\n";
             if (!passHLTBool) continue;
             passHLTCtr += 1;
+
+            genWeightL = *genWeight;
             
             nJetL = *nJet;
             for (UInt_t nJetItr=0; nJetItr<nJetL;nJetItr++){
@@ -980,7 +1000,8 @@ void DoHLTFilterBeforeAnalysis(){
     std::cout << "evRunOver: " << evRunOver << " -------------------\n";
     std::cout << "passes HLT cut: " << passHLTCtr << " -------------------\n";
 
-    std::cout << "evPassCount: " << evPassCount << "\n";
+    
+    std::cout << "sumOfGenWeights: " << sumOfGenWeights << "\n";
 
     if (!isBackground){
         std::cout << "Cross section average before division: " << crossSectionAvg << "\n";
