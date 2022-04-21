@@ -31,6 +31,7 @@
 #include<fstream>
 #include<iostream>
 #include<mutex>
+#include<string>
 
 #include<thread>
 
@@ -480,22 +481,6 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         */
         fileAr.push_back(TTTo2L2NuBackgroundAr[fileInd]);
     }
-    else if (TTToSemiLeptonicBackground){
-        //saveName = "";
-        
-        crossSection = 365.34;
-
-        saveName = "TTToSemiLeptonic";
-        
-        isBackground = true;
-        int arrSize = sizeof(TTToSemiLeptonicBackgroundAr)/sizeof(TTToSemiLeptonicBackgroundAr[0]);
-        /*
-        for (int i=0; i<arrSize; i++){
-            fileAr.push_back(TTToSemiLeptonicBackgroundAr[i]);
-        }
-        */
-        fileAr.push_back(TTToSemiLeptonicBackground[fileInd]);
-    }
     else if (ST_s_ChannelBackground){
         //saveName = "";
         
@@ -609,7 +594,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
 
     std::cout << "Doing " << saveName << "\n";
     //Setting up outfile for tree
-    std::string outFileStr = "HLTFilteredForAnalysis"+saveName+"_"+str(fileInd)+".root";
+    std::string outFileStr = "HLTFilteredForAnalysis"+saveName+"_"std::to_string(fileInd)+".root";
     std::cout << "OutFile: " << outFileStr << "\n";
     TFile *outFile = new TFile(outFileStr.c_str(),"RECREATE");
     bool checkChannelSplits;
