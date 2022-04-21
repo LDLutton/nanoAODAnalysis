@@ -46,7 +46,7 @@
 ////////////////////////////////START OF MAIN FUNCTION////////////////////////////////
 
 
-void DoHLTFilterBeforeAnalysis(){
+void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     // Open the file. Note that the name of your file outside this class
     // will probably NOT be experiment.root.
     std::cout << "start\n";
@@ -75,55 +75,75 @@ void DoHLTFilterBeforeAnalysis(){
         saveName = "C2VEtaDifCut";
         isBackground = false;
         int arrSize = sizeof(MGC2VEtaDifCutAr)/sizeof(MGC2VEtaDifCutAr[0]);
+        std::string tmpStrWithPath = strAdd+"/dlutton/NanoAODFiles/pphzzjj_C2V_QCD0SMHLOOP0NPLE1C2VE1KappaFramework_100Ev_3p0c2V_100GeVIMJetCut_2EtaDifCut/"+MGC2VEtaDifCutAr[fileInd];
+        /*
         for (int i=0; i<arrSize; i++){
             std::string tmpStrWithPath = strAdd+"/dlutton/NanoAODFiles/pphzzjj_C2V_QCD0SMHLOOP0NPLE1C2VE1KappaFramework_100Ev_3p0c2V_100GeVIMJetCut_2EtaDifCut/"+MGC2VEtaDifCutAr[i];
             fileAr.push_back(tmpStrWithPath);
         }
+        */
+        fileAr.push_back(tmpStrWithPath);
         useLHETree = true;
-        useFJGenMatchTree = true;
+        useFJGenMatchTree = true;;
     }
     else if (SDC2V3MC){
         saveName = "SDC2V3MC";
         isBackground = false;
         int arrSize = sizeof(SDC2V3MCAr)/sizeof(SDC2V3MCAr[0]);
+        std::string tmpStrWithPath = SDC2V3MCAr[fileInd];
+        /*
         for (int i=0; i<arrSize; i++){
             std::string tmpStrWithPath = SDC2V3MCAr[i];
             fileAr.push_back(tmpStrWithPath);
         }
+        */
+        fileAr.push_back(tmpStrWithPath);
         useLHETree = true;
-        useFJGenMatchTree = true;
+        useFJGenMatchTree = true;;
         
     }
     else if (MGOSix){
         saveName = "OSix";
         isBackground = false;
         int arrSize = sizeof(MGOSixAr)/sizeof(MGOSixAr[0]);
+        std::string tmpStrWithPath = strAdd+"/dlutton/NanoAODFiles/pphzzjj_OSix_QCD0SMHLOOP0NPLE1NPcHE1_100Ev_0p4cH_100GeVIMJetCut/"+MGOSixAr[fileInd];
+        /*
         for (int i=0; i<arrSize; i++){
             std::string tmpStrWithPath = strAdd+"/dlutton/NanoAODFiles/pphzzjj_OSix_QCD0SMHLOOP0NPLE1NPcHE1_100Ev_0p4cH_100GeVIMJetCut/"+MGOSixAr[i];
             fileAr.push_back(tmpStrWithPath);
         }
+        */
+        fileAr.push_back(tmpStrWithPath);
         useLHETree = true;
-        useFJGenMatchTree = true;
+        useFJGenMatchTree = true;;
     }
     else if (MGOSixEtaDifCut){
         saveName = "OSix_EtaDifCut";
         isBackground = false;
         int arrSize = sizeof(MGOSixEtaDifCutAr)/sizeof(MGOSixEtaDifCutAr[0]);
+        std::string tmpStrWithPath = strAdd+"/dlutton/NanoAODFiles/pphzzjj_OSix_QCD0SMHLOOP0NPLE1NPcHE1_100Ev_0p4cH_100GeVIMJetCut_2EtaDifCut/"+MGOSixEtaDifCutAr[fileInd];
+        /*
         for (int i=0; i<arrSize; i++){
             std::string tmpStrWithPath = strAdd+"/dlutton/NanoAODFiles/pphzzjj_OSix_QCD0SMHLOOP0NPLE1NPcHE1_100Ev_0p4cH_100GeVIMJetCut_2EtaDifCut/"+MGOSixEtaDifCutAr[i];
             fileAr.push_back(tmpStrWithPath);
         }
+        */
+        fileAr.push_back(tmpStrWithPath);
         useLHETree = true;
-        useFJGenMatchTree = true;
+        useFJGenMatchTree = true;;
     }
     else if (MGOHBox){
         saveName = "OHBox";
         isBackground = false;
         int arrSize = sizeof(MGOHBoxAr)/sizeof(MGOHBoxAr[0]);
+        std::string tmpStrWithPath = strAdd+"/dlutton/NanoAODFiles/pphzzjj_OHBox_QCD0SMHLOOP0NPLE1NPcHBoxE1_100Ev_0p5cHBox_100GeVIMJetCut/"+MGOHBoxAr[fileInd];
+        /*
         for (int i=0; i<arrSize; i++){
             std::string tmpStrWithPath = strAdd+"/dlutton/NanoAODFiles/pphzzjj_OHBox_QCD0SMHLOOP0NPLE1NPcHBoxE1_100Ev_0p5cHBox_100GeVIMJetCut/"+MGOHBoxAr[i];
             fileAr.push_back(tmpStrWithPath);
         }
+        */
+        fileAr.push_back(tmpStrWithPath);
         useLHETree = true;
         useFJGenMatchTree = true;
         
@@ -132,60 +152,80 @@ void DoHLTFilterBeforeAnalysis(){
         saveName = "OHBox_EtaDifCut";
         isBackground = false;
         int arrSize = sizeof(MGOHBoxEtaDifCutAr)/sizeof(MGOHBoxEtaDifCutAr[0]);
+        std::string tmpStrWithPath = strAdd+"/dlutton/NanoAODFiles/pphzzjj_OHBox_QCD0SMHLOOP0NPLE1NPcHBoxE1_100Ev_0p5cHBox_100GeVIMJetCut_2EtaDifCut/"+MGOHBoxEtaDifCutAr[fileInd];
+        /*
         for (int i=0; i<arrSize; i++){
             std::string tmpStrWithPath = strAdd+"/dlutton/NanoAODFiles/pphzzjj_OHBox_QCD0SMHLOOP0NPLE1NPcHBoxE1_100Ev_0p5cHBox_100GeVIMJetCut_2EtaDifCut/"+MGOHBoxEtaDifCutAr[i];
             fileAr.push_back(tmpStrWithPath);
         }
+        */
+        fileAr.push_back(tmpStrWithPath);
         useLHETree = true;
-        useFJGenMatchTree = true;
+        useFJGenMatchTree = true;;
         
     }
     else if (MGOHDD){
         saveName = "OHDD";
         isBackground = false;
         int arrSize = sizeof(MGOHDDAr)/sizeof(MGOHDDAr[0]);
+        std::string tmpStrWithPath = strAdd+"/dlutton/NanoAODFiles/pphzzjj_OHDD_QCD0SMHLOOP0NPLE1NPcHDDE1_0p6cHDD_100GeVIMJetCut/"+MGOHDDAr[fileInd];
+        /*
         for (int i=0; i<arrSize; i++){
             std::string tmpStrWithPath = strAdd+"/dlutton/NanoAODFiles/pphzzjj_OHDD_QCD0SMHLOOP0NPLE1NPcHDDE1_0p6cHDD_100GeVIMJetCut/"+MGOHDDAr[i];
             fileAr.push_back(tmpStrWithPath);
         }
+        */
+        fileAr.push_back(tmpStrWithPath);
         useLHETree = true;
-        useFJGenMatchTree = true;
+        useFJGenMatchTree = true;;
         
     }
     else if (MGOHDDEtaDifCut){
         saveName = "OHDD_EtaDifCut";
         isBackground = false;
         int arrSize = sizeof(MGOHDDEtaDifCutAr)/sizeof(MGOHDDEtaDifCutAr[0]);
+        std::string tmpStrWithPath = strAdd+"/dlutton/NanoAODFiles/pphzzjj_OHDD_QCD0SMHLOOP0NPLE1NPcHDDE1_0p6cHDD_100GeVIMJetCut_2EtaDifCut/"+MGOHDDEtaDifCutAr[fileInd];
+        /*
         for (int i=0; i<arrSize; i++){
             std::string tmpStrWithPath = strAdd+"/dlutton/NanoAODFiles/pphzzjj_OHDD_QCD0SMHLOOP0NPLE1NPcHDDE1_0p6cHDD_100GeVIMJetCut_2EtaDifCut/"+MGOHDDEtaDifCutAr[i];
             fileAr.push_back(tmpStrWithPath);
         }
+        */
+        fileAr.push_back(tmpStrWithPath);
         useLHETree = true;
-        useFJGenMatchTree = true;
+        useFJGenMatchTree = true;;
         
     }
     else if (MGOHW){
         saveName = "OHW";
         isBackground = false;
         int arrSize = sizeof(MGOHWAr)/sizeof(MGOHWAr[0]);
+        std::string tmpStrWithPath = strAdd+"/dlutton/NanoAODFiles/pphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5/"+MGOHWAr[fileInd];
+        /*
         for (int i=0; i<arrSize; i++){
             std::string tmpStrWithPath = strAdd+"/dlutton/NanoAODFiles/pphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5/"+MGOHWAr[i];
             fileAr.push_back(tmpStrWithPath);
         }
+        */
+        fileAr.push_back(tmpStrWithPath);
         useLHETree = true;
-        useFJGenMatchTree = true;
+        useFJGenMatchTree = true;;
         
     }
     else if (MGSM){
         saveName = "SM";
         isBackground = false;
         int arrSize = sizeof(MGSMAr)/sizeof(MGSMAr[0]);
+        std::string tmpStrWithPath = strAdd+"/dlutton/NanoAODFiles/pphzzjjQCD0SMHLOOP0QEDE5NPE0/"+MGSMAr[fileInd];
+        /*
         for (int i=0; i<arrSize; i++){
             std::string tmpStrWithPath = strAdd+"/dlutton/NanoAODFiles/pphzzjjQCD0SMHLOOP0QEDE5NPE0/"+MGSMAr[i];
             fileAr.push_back(tmpStrWithPath);
         }
+        */
+        fileAr.push_back(tmpStrWithPath);
         useLHETree = true;
-        useFJGenMatchTree = true;
+        useFJGenMatchTree = true;;
         
     }
     else if (ttHToBBBackground){
@@ -196,9 +236,12 @@ void DoHLTFilterBeforeAnalysis(){
         
         isBackground = true;
         int arrSize = sizeof(ttHToBBBackgroundAr)/sizeof(ttHToBBBackgroundAr[0]);
+        /*
         for (int i=0; i<arrSize; i++){
             fileAr.push_back(ttHToBBBackgroundAr[i]);
         }
+        */
+        fileAr.push_back(ttHToBBBackgroundAr[fileInd]);
     }
     else if (ttZJetsBackground){
         //saveName = "ttZJets";
@@ -207,9 +250,12 @@ void DoHLTFilterBeforeAnalysis(){
         saveName = "ttZJets";
         isBackground = true;
         int arrSize = sizeof(ttZJetsBackgroundAr)/sizeof(ttZJetsBackgroundAr[0]);
+        /*
         for (int i=0; i<arrSize; i++){
             fileAr.push_back(ttZJetsBackgroundAr[i]);
         }
+        */
+        fileAr.push_back(ttZJetsBackgroundAr[fileInd]);
     }
     else if (DYBackground){
         //saveName = "DY";
@@ -219,9 +265,12 @@ void DoHLTFilterBeforeAnalysis(){
 
         isBackground = true;
         int arrSize = sizeof(DYBackgroundAr)/sizeof(DYBackgroundAr[0]);
+        /*
         for (int i=0; i<arrSize; i++){
             fileAr.push_back(DYBackgroundAr[i]);
         }
+        */
+        fileAr.push_back(DYBackgroundAr[fileInd]);
     }
     else if (QCDPT170to300Background){
         //saveName = "QCDPT170to300";
@@ -232,9 +281,12 @@ void DoHLTFilterBeforeAnalysis(){
         
         isBackground = true;
         int arrSize = sizeof(QCDPT170to300BackgroundAr)/sizeof(QCDPT170to300BackgroundAr[0]);
+        /*
         for (int i=0; i<arrSize; i++){
             fileAr.push_back(QCDPT170to300BackgroundAr[i]);
         }
+        */
+        fileAr.push_back(QCDPT170to300BackgroundAr[fileInd]);
     }
     else if (QCDPT300to470Background){
         //saveName = "QCDPT300to470";
@@ -245,9 +297,12 @@ void DoHLTFilterBeforeAnalysis(){
         
         isBackground = true;
         int arrSize = sizeof(QCDPT300to470BackgroundAr)/sizeof(QCDPT300to470BackgroundAr[0]);
+        /*
         for (int i=0; i<arrSize; i++){
             fileAr.push_back(QCDPT300to470BackgroundAr[i]);
         }
+        */
+        fileAr.push_back(QCDPT300to470BackgroundAr[fileInd]);
     }
     else if (QCDPT470to600Background){
         //saveName = "QCDPT470to600";
@@ -258,9 +313,12 @@ void DoHLTFilterBeforeAnalysis(){
 
         isBackground = true;
         int arrSize = sizeof(QCDPT470to600BackgroundAr)/sizeof(QCDPT470to600BackgroundAr[0]);
+        /*
         for (int i=0; i<arrSize; i++){
             fileAr.push_back(QCDPT470to600BackgroundAr[i]);
         }
+        */
+        fileAr.push_back(QCDPT470to600BackgroundAr[fileInd]);
     }
     else if (QCDPT600to800Background){
         //saveName = "QCDPT600to800";
@@ -271,9 +329,12 @@ void DoHLTFilterBeforeAnalysis(){
         
         isBackground = true;
         int arrSize = sizeof(QCDPT600to800BackgroundAr)/sizeof(QCDPT600to800BackgroundAr[0]);
+        /*
         for (int i=0; i<arrSize; i++){
             fileAr.push_back(QCDPT600to800BackgroundAr[i]);
         }
+        */
+        fileAr.push_back(QCDPT600to800BackgroundAr[fileInd]);
     }
     else if (QCDPT800to1000Background){
         //saveName = "QCDPT800to1000";
@@ -284,9 +345,12 @@ void DoHLTFilterBeforeAnalysis(){
         
         isBackground = true;
         int arrSize = sizeof(QCDPT800to1000BackgroundAr)/sizeof(QCDPT800to1000BackgroundAr[0]);
+        /*
         for (int i=0; i<arrSize; i++){
             fileAr.push_back(QCDPT800to1000BackgroundAr[i]);
         }
+        */
+        fileAr.push_back(QCDPT800to1000BackgroundAr[fileInd]);
     }
     else if (QCDPT1000to1400Background){
         //saveName = "QCDPT1000to1400";
@@ -297,9 +361,12 @@ void DoHLTFilterBeforeAnalysis(){
         
         isBackground = true;
         int arrSize = sizeof(QCDPT1000to1400BackgroundAr)/sizeof(QCDPT1000to1400BackgroundAr[0]);
+        /*
         for (int i=0; i<arrSize; i++){
             fileAr.push_back(QCDPT1000to1400BackgroundAr[i]);
         }
+        */
+        fileAr.push_back(QCDPT1000to1400BackgroundAr[fileInd]);
     }
     else if (QCDPT1400to1800Background){
         //saveName = "QCDPT1400to1800";
@@ -310,9 +377,12 @@ void DoHLTFilterBeforeAnalysis(){
         
         isBackground = true;
         int arrSize = sizeof(QCDPT1400to1800BackgroundAr)/sizeof(QCDPT1400to1800BackgroundAr[0]);
+        /*
         for (int i=0; i<arrSize; i++){
             fileAr.push_back(QCDPT1400to1800BackgroundAr[i]);
         }
+        */
+        fileAr.push_back(QCDPT1400to1800BackgroundAr[fileInd]);
     }
     else if (QCDPT1800to2400Background){
         //saveName = "QCDPT1800to2400";
@@ -323,9 +393,12 @@ void DoHLTFilterBeforeAnalysis(){
         
         isBackground = true;
         int arrSize = sizeof(QCDPT1800to2400BackgroundAr)/sizeof(QCDPT1800to2400BackgroundAr[0]);
+        /*
         for (int i=0; i<arrSize; i++){
             fileAr.push_back(QCDPT1800to2400BackgroundAr[i]);
         }
+        */
+        fileAr.push_back(QCDPT1800to2400BackgroundAr[fileInd]);
     }
     else if (QCDPT2400to3200Background){
         //saveName = "QCDPT2400to3200";
@@ -336,9 +409,12 @@ void DoHLTFilterBeforeAnalysis(){
         
         isBackground = true;
         int arrSize = sizeof(QCDPT2400to3200BackgroundAr)/sizeof(QCDPT2400to3200BackgroundAr[0]);
+        /*
         for (int i=0; i<arrSize; i++){
             fileAr.push_back(QCDPT2400to3200BackgroundAr[i]);
         }
+        */
+        fileAr.push_back(QCDPT2400to3200BackgroundAr[fileInd]);
     }
     else if (QCDPT3200toInfBackground){
         //saveName = "QCDPT3200toInf";
@@ -349,9 +425,12 @@ void DoHLTFilterBeforeAnalysis(){
         
         isBackground = true;
         int arrSize = sizeof(QCDPT3200toInfBackgroundAr)/sizeof(QCDPT3200toInfBackgroundAr[0]);
+        /*
         for (int i=0; i<arrSize; i++){
             fileAr.push_back(QCDPT3200toInfBackgroundAr[i]);
         }
+        */
+        fileAr.push_back(QCDPT3200toInfBackgroundAr[fileInd]);
     }
     else if (TTToHadronicBackground){
         //saveName = "QCDPT3200toInf";
@@ -362,9 +441,12 @@ void DoHLTFilterBeforeAnalysis(){
         
         isBackground = true;
         int arrSize = sizeof(TTToHadronicBackgroundAr)/sizeof(TTToHadronicBackgroundAr[0]);
+        /*
         for (int i=0; i<arrSize; i++){
             fileAr.push_back(TTToHadronicBackgroundAr[i]);
         }
+        */
+        fileAr.push_back(TTToHadronicBackgroundAr[fileInd]);
     }
     else if (TTJetsBackground){
         //saveName = "";
@@ -375,9 +457,12 @@ void DoHLTFilterBeforeAnalysis(){
         
         isBackground = true;
         int arrSize = sizeof(TTJetsBackgroundAr)/sizeof(TTJetsBackgroundAr[0]);
+        /*
         for (int i=0; i<arrSize; i++){
             fileAr.push_back(TTJetsBackgroundAr[i]);
         }
+        */
+        fileAr.push_back(TTJetsBackgroundAr[fileInd]);
     }
     else if (TTTo2L2NuBackground){
         //saveName = "";
@@ -388,9 +473,12 @@ void DoHLTFilterBeforeAnalysis(){
         
         isBackground = true;
         int arrSize = sizeof(TTTo2L2NuBackgroundAr)/sizeof(TTTo2L2NuBackgroundAr[0]);
+        /*
         for (int i=0; i<arrSize; i++){
             fileAr.push_back(TTTo2L2NuBackgroundAr[i]);
         }
+        */
+        fileAr.push_back(TTTo2L2NuBackgroundAr[fileInd]);
     }
     else if (TTToSemiLeptonicBackground){
         //saveName = "";
@@ -400,10 +488,13 @@ void DoHLTFilterBeforeAnalysis(){
         saveName = "TTToSemiLeptonic";
         
         isBackground = true;
-        int arrSize = sizeof(TTTo2L2NuBackgroundAr)/sizeof(TTTo2L2NuBackgroundAr[0]);
+        int arrSize = sizeof(TTToSemiLeptonicBackgroundAr)/sizeof(TTToSemiLeptonicBackgroundAr[0]);
+        /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(TTTo2L2NuBackgroundAr[i]);
+            fileAr.push_back(TTToSemiLeptonicBackgroundAr[i]);
         }
+        */
+        fileAr.push_back(TTToSemiLeptonicBackground[fileInd]);
     }
     else if (ST_s_ChannelBackground){
         //saveName = "";
@@ -414,9 +505,12 @@ void DoHLTFilterBeforeAnalysis(){
         
         isBackground = true;
         int arrSize = sizeof(ST_s_ChannelBackgroundAr)/sizeof(ST_s_ChannelBackgroundAr[0]);
+        /*
         for (int i=0; i<arrSize; i++){
             fileAr.push_back(ST_s_ChannelBackgroundAr[i]);
         }
+        */
+        fileAr.push_back(ST_s_ChannelBackgroundAr[fileInd]);
     }
     else if (ST_t_ChannelAntiTopBackground){
         //saveName = "";
@@ -427,9 +521,12 @@ void DoHLTFilterBeforeAnalysis(){
         
         isBackground = true;
         int arrSize = sizeof(ST_t_ChannelAntiTopBackgroundAr)/sizeof(ST_t_ChannelAntiTopBackgroundAr[0]);
+        /*
         for (int i=0; i<arrSize; i++){
             fileAr.push_back(ST_t_ChannelAntiTopBackgroundAr[i]);
         }
+        */
+        fileAr.push_back(ST_t_ChannelAntiTopBackgroundAr[fileInd]);
     }
     else if (ST_t_ChannelTopBackground){
         //saveName = "";
@@ -440,9 +537,12 @@ void DoHLTFilterBeforeAnalysis(){
         
         isBackground = true;
         int arrSize = sizeof(ST_t_ChannelTopBackgroundAr)/sizeof(ST_t_ChannelTopBackgroundAr[0]);
+        /*
         for (int i=0; i<arrSize; i++){
             fileAr.push_back(ST_t_ChannelTopBackgroundAr[i]);
         }
+        */
+        fileAr.push_back(ST_t_ChannelTopBackgroundAr[fileInd]);
     }
     else if (ZZTo2Q2NuBackground){
         //saveName = "";
@@ -453,9 +553,12 @@ void DoHLTFilterBeforeAnalysis(){
         
         isBackground = true;
         int arrSize = sizeof(ZZTo2Q2NuBackgroundAr)/sizeof(ZZTo2Q2NuBackgroundAr[0]);
+        /*
         for (int i=0; i<arrSize; i++){
             fileAr.push_back(ZZTo2Q2NuBackgroundAr[i]);
         }
+        */
+        fileAr.push_back(ZZTo2Q2NuBackgroundAr[fileInd]);
     }
     else if (WWTo2L2NuBackground){
         //saveName = "";
@@ -466,9 +569,12 @@ void DoHLTFilterBeforeAnalysis(){
         
         isBackground = true;
         int arrSize = sizeof(WWTo2L2NuBackgroundAr)/sizeof(WWTo2L2NuBackgroundAr[0]);
+        /*
         for (int i=0; i<arrSize; i++){
             fileAr.push_back(WWTo2L2NuBackgroundAr[i]);
         }
+        */
+        fileAr.push_back(WWTo2L2NuBackgroundAr[fileInd]);
     }
     else if (WZTo3LNuBackground){
         //saveName = "";
@@ -479,9 +585,12 @@ void DoHLTFilterBeforeAnalysis(){
         
         isBackground = true;
         int arrSize = sizeof(WZTo3LNuBackgroundAr)/sizeof(WZTo3LNuBackgroundAr[0]);
+        /*
         for (int i=0; i<arrSize; i++){
             fileAr.push_back(WZTo3LNuBackgroundAr[i]);
         }
+        */
+        fileAr.push_back(WZTo3LNuBackgroundAr[fileInd]);
     }
     else if (testRun){
         saveName = "testRun";
@@ -500,7 +609,7 @@ void DoHLTFilterBeforeAnalysis(){
 
     std::cout << "Doing " << saveName << "\n";
     //Setting up outfile for tree
-    std::string outFileStr = "HLTFilteredForAnalysis"+saveName+".root";
+    std::string outFileStr = "HLTFilteredForAnalysis"+saveName+"_"+str(fileInd)+".root";
     std::cout << "OutFile: " << outFileStr << "\n";
     TFile *outFile = new TFile(outFileStr.c_str(),"RECREATE");
     bool checkChannelSplits;
