@@ -718,7 +718,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     FilteredEventsTree->Branch("Muon_pfRelIso03_allL",&Muon_pfRelIso03_allL);
     FilteredEventsTree->Branch("Muon_sip3dL",&Muon_sip3dL);
 
-    float sumOfGenWeights = 0;
+    Double_t sumOfGenWeights = 0;
     
     std::cout << "Going into file loop.\n";
 
