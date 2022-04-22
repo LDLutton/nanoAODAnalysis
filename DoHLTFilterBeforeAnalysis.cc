@@ -626,7 +626,8 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     evNumTree->Branch("nEvPass",&nEvPass,"nEvPass/i");
 
     //EventWeights
-    Float_t genWeightL;
+    //Float_t genWeightL;
+    Double_t genWeightL;
 
     //Jets
     UInt_t nJetL;
@@ -673,7 +674,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
 
     TTree *FilteredEventsTree = new TTree("FilteredEventsTree", "FilteredEventsTree");
     //gen weights
-    FilteredEventsTree->Branch("genWeightL",&genWeightL,"genWeightL/F");
+    FilteredEventsTree->Branch("genWeightL",&genWeightL,"genWeightL/D");
 
     //Jets    
     FilteredEventsTree->Branch("nJetL",&nJetL,"nJetL/i");
