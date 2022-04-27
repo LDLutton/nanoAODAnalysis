@@ -117,11 +117,11 @@ std::vector<UInt_t> cutSemiLepPassAr;
 std::vector<UInt_t> cutHadPassAr;
 std::vector<UInt_t> cutLepOrSemiLepPassAr;
 
-std::vector<UInt_t> cutPassWeightedAr;
-std::vector<UInt_t> cutLepPassWeightedAr;
-std::vector<UInt_t> cutSemiLepPassWeightedAr;
-std::vector<UInt_t> cutHadPassWeightedAr;
-std::vector<UInt_t> cutLepOrSemiLepPassWeightedAr;
+std::vector<Double_t> cutPassWeightedAr;
+std::vector<Double_t> cutLepPassWeightedAr;
+std::vector<Double_t> cutSemiLepPassWeightedAr;
+std::vector<Double_t> cutHadPassWeightedAr;
+std::vector<Double_t> cutLepOrSemiLepPassWeightedAr;
 std::vector<float> cutRangeAr;
 
 
