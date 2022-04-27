@@ -997,31 +997,31 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
     std::cout << cutRangeAr[cutAmnt] << "];\n";
 
     std::cout << "std::vector<Double_t> " << saveName << "PassAr = [";
-    for (Double_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
+    for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
         std::cout << cutPassWeightedAr[rangeItr] << ",";
     }
     std::cout << cutPassWeightedAr[cutAmnt] << "];\n";
 
     std::cout << "std::vector<Double_t> " << saveName << "LepPassWeightedAr = [";
-    for (Double_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
+    for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
         std::cout << cutLepPassWeightedAr[rangeItr] << ",";
     }
     std::cout << cutLepPassWeightedAr[cutAmnt] << "];\n";
 
     std::cout << "std::vector<Double_t> " << saveName << "SemiLepPassWeightedAr = [";
-    for (Double_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
+    for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
         std::cout << cutSemiLepPassWeightedAr[rangeItr] << ",";
     }
     std::cout << cutSemiLepPassWeightedAr[cutAmnt] << "];\n";
 
     std::cout << "std::vector<Double_t> " << saveName << "LepOrSemiLepPassWeightedAr = [";
-    for (Double_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
+    for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
         std::cout << cutLepOrSemiLepPassWeightedAr[rangeItr] << ",";
     }
     std::cout << cutLepOrSemiLepPassWeightedAr[cutAmnt] << "];\n";
 
     std::cout << "std::vector<Double_t> " << saveName << "HadPassWeightedAr = [";
-    for (Double_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
+    for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
         std::cout << cutHadPassWeightedAr[rangeItr] << ",";
     }
     std::cout << cutHadPassWeightedAr[cutAmnt] << "];\n";
