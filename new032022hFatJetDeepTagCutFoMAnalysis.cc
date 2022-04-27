@@ -68,7 +68,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         cutHadPassWeightedAr.push_back(0.);
         cutLepOrSemiLepPassWeightedAr.push_back(0.);
 
-        cutRangeAr.push_back(hFatJetPTCutRangeBottom+(rangeItr*hFatJetPTCutStep));
+        cutRangeAr.push_back(hFatJetDeepTagRangeBottom+(rangeItr*hFatJetDeepTagCutStep));
     }
 
     std::vector<std::string> fileAr;
