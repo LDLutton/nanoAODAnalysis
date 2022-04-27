@@ -609,11 +609,11 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
 
 
     UInt_t passHLTCtr = 0;
-    UInt_t passHLTWeightedCtr = 0;
+    Double_t passHLTWeightedCtr = 0;
     UInt_t passnFJCtr = 0;
-    UInt_t passnFJWeightedCtr = 0;
+    Double_t passnFJWeightedCtr = 0;
     UInt_t passnVBFCtr = 0;
-    UInt_t passnVBFWeightedCtr = 0;
+    Double_t passnVBFWeightedCtr = 0;
 
     float crossSectionAvg = 0.;
     UInt_t crossSectionCtr = 0;
