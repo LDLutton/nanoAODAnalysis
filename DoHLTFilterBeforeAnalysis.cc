@@ -609,6 +609,11 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
 
 
     UInt_t passHLTCtr = 0;
+    UInt_t passHLTWeightedCtr = 0;
+    UInt_t passnFJCtr = 0;
+    UInt_t passnFJWeightedCtr = 0;
+    UInt_t passnVBFCtr = 0;
+    UInt_t passnVBFWeightedCtr = 0;
 
     float crossSectionAvg = 0.;
     UInt_t crossSectionCtr = 0;
@@ -619,6 +624,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     
     UInt_t nEv;
     UInt_t nEvPass;
+    
 
     TTree *evNumTree = new TTree("evNumTree","evNumTree");
 
@@ -719,6 +725,8 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     FilteredEventsTree->Branch("Muon_sip3dL",&Muon_sip3dL);
 
     Double_t sumOfGenWeights = 0;
+
+    
     
     std::cout << "Going into file loop.\n";
 
@@ -987,10 +995,27 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
             //std::cout << testPassHLTBool << " " << passHLTBool << "\n";
             if (!passHLTBool) continue;
             passHLTCtr += 1;
+            passHLTWeightedCtr += *genWeight; 
+            
 
             genWeightL = *genWeight;
+
+            //Check if any fat jets in event
+            UInt_t tmpnFatJets = *nFatJet;
+            if (tmpnFatJets<=0) continue;
+            passnFJCtr += 1;
+            passnFJWeightedCtr += *genWeight; 
+
+            // check if two or more VBF jets in event
+            UInt_t tmpnVBFJets = *nJet;
             
-            nJetL = *nJet;
+            if (tmpnVBFJets < 2) continue;
+
+            passnVBFCtr += 1;
+            passnVBFWeightedCtr += *genWeight; 
+            std::cout << evRunOver-1 << "passed\n";
+            
+            nJetL = tmpnVBFJets;
             for (UInt_t nJetItr=0; nJetItr<nJetL;nJetItr++){
                 Jet_etaL.push_back(Jet_eta[nJetItr]);
                 Jet_ptL.push_back(Jet_pt[nJetItr]);
@@ -1001,7 +1026,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
 
             //Fat jets
 
-            nFatJetL = *nFatJet;
+            nFatJetL = tmpnFatJets;
             for (UInt_t nFatJetItr=0; nFatJetItr<nFatJetL;nFatJetItr++){
                 FatJet_etaL.push_back(FatJet_eta[nFatJetItr]);
                 FatJet_ptL.push_back(FatJet_pt[nFatJetItr]);
@@ -1093,7 +1118,9 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     evNumTree->Fill();
 
     std::cout << "evRunOver: " << evRunOver << " -------------------\n";
-    std::cout << "passes HLT cut: " << passHLTCtr << " -------------------\n";
+    std::cout << "passes HLT cut: " << passHLTCtr << " ------------------- " << passHLTWeightedCtr<< "\n";
+    std::cout << "passes nFJ cut: " << passnFJCtr << " ------------------- " << passnFJWeightedCtr<< "\n";
+    std::cout << "passes nVBF cut: " << passnVBFCtr << " ------------------- " << passnVBFWeightedCtr<< "\n";
 
     
     std::cout << "sumOfGenWeights: " << sumOfGenWeights << "\n";
