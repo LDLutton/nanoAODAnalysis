@@ -61,6 +61,13 @@ void new032022SemiLepeEtaCutFoMAnalysis(string datasetString){
         cutSemiLepPassAr.push_back(0);
         cutHadPassAr.push_back(0);
         cutLepOrSemiLepPassAr.push_back(0);
+
+        cutPassWeightedAr.push_back(0);
+        cutLepPassWeightedAr.push_back(0);
+        cutSemiLepPassWeightedAr.push_back(0);
+        cutHadPassWeightedAr.push_back(0);
+        cutLepOrSemiLepPassWeightedAr.push_back(0);
+
         cutRangeAr.push_back(eEtaRangeBottom+(rangeItr*eEtaCutStep));
     }
 
@@ -868,16 +875,29 @@ void new032022SemiLepeEtaCutFoMAnalysis(string datasetString){
 
                 if (passesCutsBool){
                     cutPassAr[rangeItr] += 1;
-                    if (passedAsLepBool){
+
+                    cutPassWeightedAr[rangeItr] += *genWeightL;
+                    //std::cout << passedAsLepBool << " "<< passedAsSemiLepBool << " " << passedAsHadBool << "\n";
+                    if (passedAsLepBool) {
                         cutLepPassAr[rangeItr] += 1;
                         cutLepOrSemiLepPassAr[rangeItr] += 1;
+
+                        cutLepPassWeightedAr[rangeItr] += *genWeightL;
+                        cutLepOrSemiLepPassWeightedAr[rangeItr] += *genWeightL;;
+                        
                     }
+                    
                     else if (passedAsSemiLepBool){
                         cutSemiLepPassAr[rangeItr] += 1;
                         cutLepOrSemiLepPassAr[rangeItr] += 1;
+
+                        cutSemiLepPassWeightedAr[rangeItr] += *genWeightL;
+                        cutLepOrSemiLepPassWeightedAr[rangeItr] += *genWeightL;
                     }
                     else if (passedAsHadBool) {
                         cutHadPassAr[rangeItr] += 1;
+                        
+                        cutHadPassWeightedAr[rangeItr] += *genWeightL;
                     }
                     /*
                     if (debug) std::cout << "Passed cuts. Now filling trees\n";
@@ -975,6 +995,49 @@ void new032022SemiLepeEtaCutFoMAnalysis(string datasetString){
         std::cout << cutHadPassAr[rangeItr] << ",";
     }
     std::cout << cutHadPassAr[cutAmnt] << "];\n";
+
+    //
+    //
+    //
+
+    for (UInt_t rangeItr=0; rangeItr<cutAmnt+1; rangeItr++){
+        std::cout << "cutRangeAr[rangeItr] " << cutRangeAr[rangeItr] << " cutPassWeightedAr[rangeItr] " << cutPassWeightedAr[rangeItr] << " cutLepPassWeightedAr[rangeItr] " << cutLepPassWeightedAr[rangeItr] << " cutSemiLepPassWeightedAr[rangeItr] " << cutSemiLepPassWeightedAr[rangeItr] << " cutLepOrSemiLepPassWeightedAr[rangeItr] " << cutLepOrSemiLepPassWeightedAr[rangeItr] << " cutHadPassWeightedAr[rangeItr] " << cutHadPassWeightedAr[rangeItr] << "\n";
+    }
+    std::cout << "std::vector<float> cutRangeAr = [";
+    for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
+        std::cout << cutRangeAr[rangeItr] << ",";
+    }
+    std::cout << cutRangeAr[cutAmnt] << "];\n";
+
+    std::cout << "std::vector<UInt_t> " << saveName << "PassAr = [";
+    for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
+        std::cout << cutPassWeightedAr[rangeItr] << ",";
+    }
+    std::cout << cutPassWeightedAr[cutAmnt] << "];\n";
+
+    std::cout << "std::vector<UInt_t> " << saveName << "LepPassWeightedAr = [";
+    for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
+        std::cout << cutLepPassWeightedAr[rangeItr] << ",";
+    }
+    std::cout << cutLepPassWeightedAr[cutAmnt] << "];\n";
+
+    std::cout << "std::vector<UInt_t> " << saveName << "SemiLepPassWeightedAr = [";
+    for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
+        std::cout << cutSemiLepPassWeightedAr[rangeItr] << ",";
+    }
+    std::cout << cutSemiLepPassWeightedAr[cutAmnt] << "];\n";
+
+    std::cout << "std::vector<UInt_t> " << saveName << "LepOrSemiLepPassWeightedAr = [";
+    for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
+        std::cout << cutLepOrSemiLepPassWeightedAr[rangeItr] << ",";
+    }
+    std::cout << cutLepOrSemiLepPassWeightedAr[cutAmnt] << "];\n";
+
+    std::cout << "std::vector<UInt_t> " << saveName << "HadPassWeightedAr = [";
+    for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
+        std::cout << cutHadPassWeightedAr[rangeItr] << ",";
+    }
+    std::cout << cutHadPassWeightedAr[cutAmnt] << "];\n";
 
     /*
     nEv = evRunOver;

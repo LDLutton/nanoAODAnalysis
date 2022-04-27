@@ -63,6 +63,8 @@ float hFatJetdRCutStep = (hFatJetdRRangeTop - hFatJetdRRangeBottom) / cutAmnt;
 */
 UInt_t cutAmnt = 200;
 
+UInt_t lumi = 137600;
+
 float VBFJetdRCut = 0.4;
 float VBFJetdRRangeTop = 4.;
 float VBFJetdRRangeBottom = 0.;
@@ -114,6 +116,12 @@ std::vector<UInt_t> cutLepPassAr;
 std::vector<UInt_t> cutSemiLepPassAr;
 std::vector<UInt_t> cutHadPassAr;
 std::vector<UInt_t> cutLepOrSemiLepPassAr;
+
+std::vector<UInt_t> cutPassWeightedAr;
+std::vector<UInt_t> cutLepPassWeightedAr;
+std::vector<UInt_t> cutSemiLepPassWeightedAr;
+std::vector<UInt_t> cutHadPassWeightedAr;
+std::vector<UInt_t> cutLepOrSemiLepPassWeightedAr;
 std::vector<float> cutRangeAr;
 
 
