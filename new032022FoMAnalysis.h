@@ -63,7 +63,7 @@ float hFatJetdRCutStep = (hFatJetdRRangeTop - hFatJetdRRangeBottom) / cutAmnt;
 */
 UInt_t cutAmnt = 200;
 
-UInt_t lumi = 137600;
+UInt_t Run2Lumi = 137600;
 
 float VBFJetdRCut = 0.4;
 float VBFJetdRRangeTop = 4.;

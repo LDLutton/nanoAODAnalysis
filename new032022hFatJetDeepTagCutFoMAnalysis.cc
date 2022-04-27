@@ -567,6 +567,9 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         TFile* tmpfile = TFile::Open(fileAr[k].c_str());
         //outFile->cd();
         TTreeReader myEventsReader("FilteredEventsTree", tmpfile);
+
+        //genWeights
+        TTreeReaderValue<Float_t> genWeightL(myEventsReader, "genWeightL");
         //jets
 
         TTreeReaderValue<UInt_t> nJetL(myEventsReader, "nJetL");
