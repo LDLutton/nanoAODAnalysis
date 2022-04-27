@@ -1013,7 +1013,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
 
             passnVBFCtr += 1;
             passnVBFWeightedCtr += *genWeight; 
-            std::cout << evRunOver-1 << "passed\n";
+            //std::cout << evRunOver-1 << "passed\n";
             
             nJetL = tmpnVBFJets;
             for (UInt_t nJetItr=0; nJetItr<nJetL;nJetItr++){
