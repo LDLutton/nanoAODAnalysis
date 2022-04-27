@@ -556,8 +556,6 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
     UInt_t evCount = 0;
     UInt_t evRunOver = 0;
 
-
-    
     std::cout << "Going into file loop.\n";
 
     for (UInt_t k=0; k<fileAr.size(); k++){
@@ -569,7 +567,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         TTreeReader myEventsReader("FilteredEventsTree", tmpfile);
 
         //genWeights
-        TTreeReaderValue<Float_t> genWeightL(myEventsReader, "genWeightL");
+        TTreeReaderValue<Double_t> genWeightL(myEventsReader, "genWeightL");
         //jets
 
         TTreeReaderValue<UInt_t> nJetL(myEventsReader, "nJetL");
