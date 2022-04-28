@@ -89,7 +89,8 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
 
 
     std::string saveName;
-    float crossSection;
+    float crossSection = 1;
+    float totWeight = 1;
     bool isBackground;
     bool useLHETree = false;
     bool useFJGenMatchTree = false;
@@ -145,6 +146,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
     if (MGC2VEtaDifCut){
         saveName = "C2VEtaDifCut";
         isBackground = false;
+        totWeight = 643.339314999999;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisC2VEtaDifCut.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -236,6 +238,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
     else if (MGSM){
         saveName = "SM";
         isBackground = false;
+        totWeight = 11.713886530000012;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSM.root";
         fileAr.push_back(tmpStrWithPath);
         
@@ -247,6 +250,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         saveName = "ttHToBB";
         
         isBackground = true;
+        totWeight = 4834432.8;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisttHToBB.root";
         fileAr.push_back(tmpStrWithPath);
         
@@ -257,6 +261,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         crossSection = 0.5407;
         saveName = "ttZJets";
         isBackground = true;
+        totWeight = 32793821;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisttZJets.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -267,6 +272,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         saveName = "DY";
 
         isBackground = true;
+        totWeight = 96233326;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisDY.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -278,6 +284,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         saveName = "QCDPT170to300";
         
         isBackground = true;
+        totWeight = 29478000;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT170to300.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -289,6 +296,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         saveName = "QCDPT300to470";
         
         isBackground = true;
+        totWeight = 57868000;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT300to470.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -300,6 +308,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         saveName = "QCDPT470to600";
 
         isBackground = true;
+        totWeight = 51062083.800000004;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT470to600.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -311,6 +320,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         saveName = "QCDPT600to800";
         
         isBackground = true;
+        totWeight = 66914000;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT600to800.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -322,6 +332,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         saveName = "QCDPT800to1000";
         
         isBackground = true;
+        totWeight = 36830000;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT800to1000.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -333,6 +344,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         saveName = "QCDPT1000to1400";
         
         isBackground = true;
+        totWeight = 19664000;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT1000to1400.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -344,6 +356,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         saveName = "QCDPT1400to1800";
         
         isBackground = true;
+        totWeight = 10982000;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT1400to1800.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -355,6 +368,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         saveName = "QCDPT1800to2400";
         
         isBackground = true;
+        totWeight = 5491000;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT1800to2400.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -366,6 +380,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         saveName = "QCDPT2400to3200";
         
         isBackground = true;
+        totWeight = 2931000;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT2400to3200.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -377,6 +392,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         saveName = "QCDPT3200toInf";
         
         isBackground = true;
+        totWeight = 1000000;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT3200toInf.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -388,6 +404,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         saveName = "TTJets";
         
         isBackground = true;
+        totWeight = 610815599000;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisTTJets.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -399,6 +416,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         saveName = "TTToHadronic";
         
         isBackground = true;
+        totWeight = 643;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisTTToHadronic.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -410,6 +428,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         saveName = "TTTo2L2Nu";
         
         isBackground = true;
+        totWeight = 643;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisTTTo2L2Nu.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -421,6 +440,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         saveName = "TTToSemiLeptonic";
         
         isBackground = true;
+        totWeight = 643;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisTTToSemiLeptonic.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -432,6 +452,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         saveName = "ST_s_Channel";
         
         isBackground = true;
+        totWeight = 68767088;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisST_s_Channel.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -443,6 +464,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         saveName = "ST_t_ChannelAntiTop";
         
         isBackground = true;
+        totWeight = 6014529940;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisST_t_ChannelAntiTop.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -454,6 +476,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         saveName = "ST_t_ChannelTop";
         
         isBackground = true;
+        totWeight = 18955976000;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisST_t_ChannelTop.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -465,6 +488,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         saveName = "ZZTo2Q2Nu";
         
         isBackground = true;
+        totWeight = 137620470.60000002;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisZZTo2Q2Nu.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -476,6 +500,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         saveName = "WWTo2L2Nu";
         
         isBackground = true;
+        totWeight = 110795338.10000001;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisWWTo2L2Nu.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -487,6 +512,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         saveName = "WZTo3LNu";
         
         isBackground = true;
+        totWeight = 83145925.5;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisWZTo3LNu.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -495,6 +521,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
         fileAr.push_back("./HLTFilteredForAnalysistestRun.root");
         useLHETree = true;
         useFJGenMatchTree = true;
+        totWeight = 1;
         
     }
     else if (LaraTest){
@@ -988,7 +1015,7 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
     //
 
     for (UInt_t rangeItr=0; rangeItr<cutAmnt+1; rangeItr++){
-        std::cout << "cutRangeAr[rangeItr] " << cutRangeAr[rangeItr] << " cutPassWeightedAr[rangeItr] " << cutPassWeightedAr[rangeItr] << " cutLepPassWeightedAr[rangeItr] " << cutLepPassWeightedAr[rangeItr] << " cutSemiLepPassWeightedAr[rangeItr] " << cutSemiLepPassWeightedAr[rangeItr] << " cutLepOrSemiLepPassWeightedAr[rangeItr] " << cutLepOrSemiLepPassWeightedAr[rangeItr] << " cutHadPassWeightedAr[rangeItr] " << cutHadPassWeightedAr[rangeItr] << "\n";
+        std::cout << "cutRangeAr[rangeItr] " << cutRangeAr[rangeItr] << " cutPassWeightedAr[rangeItr*crossSection*Run2Lumi/totWeight] " << cutPassWeightedAr[rangeItr]*crossSection*Run2Lumi/totWeight << " cutLepPassWeightedAr[rangeItr]*crossSection*Run2Lumi/totWeight " << cutLepPassWeightedAr[rangeItr]*crossSection*Run2Lumi/totWeight << " cutSemiLepPassWeightedAr[rangeItr]*crossSection*Run2Lumi/totWeight " << cutSemiLepPassWeightedAr[rangeItr]*crossSection*Run2Lumi/totWeight << " cutLepOrSemiLepPassWeightedAr[rangeItr]*crossSection*Run2Lumi/totWeight " << cutLepOrSemiLepPassWeightedAr[rangeItr]*crossSection*Run2Lumi/totWeight << " cutHadPassWeightedAr[rangeItr]*crossSection*Run2Lumi/totWeight " << cutHadPassWeightedAr[rangeItr]*crossSection*Run2Lumi/totWeight << "\n";
     }
     std::cout << "std::vector<float> cutRangeAr = [";
     for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
@@ -998,33 +1025,35 @@ void new032022hFatJetDeepTagCutFoMAnalysis(string datasetString){
 
     std::cout << "std::vector<Double_t> " << saveName << "PassAr = [";
     for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
-        std::cout << cutPassWeightedAr[rangeItr] << ",";
+        std::cout << cutPassWeightedAr[rangeItr]*crossSection*Run2Lumi/totWeight << ",";
     }
-    std::cout << cutPassWeightedAr[cutAmnt] << "];\n";
+    std::cout << cutPassWeightedAr[cutAmnt]*crossSection*Run2Lumi/totWeight << "];\n";
 
     std::cout << "std::vector<Double_t> " << saveName << "LepPassWeightedAr = [";
     for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
-        std::cout << cutLepPassWeightedAr[rangeItr] << ",";
+        std::cout << cutLepPassWeightedAr[rangeItr]*crossSection*Run2Lumi/totWeight << ",";
     }
-    std::cout << cutLepPassWeightedAr[cutAmnt] << "];\n";
+    std::cout << cutLepPassWeightedAr[cutAmnt]*crossSection*Run2Lumi/totWeight << "];\n";
 
     std::cout << "std::vector<Double_t> " << saveName << "SemiLepPassWeightedAr = [";
     for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
-        std::cout << cutSemiLepPassWeightedAr[rangeItr] << ",";
+        std::cout << cutSemiLepPassWeightedAr[rangeItr]*crossSection*Run2Lumi/totWeight << ",";
     }
-    std::cout << cutSemiLepPassWeightedAr[cutAmnt] << "];\n";
+    std::cout << cutSemiLepPassWeightedAr[cutAmnt]*crossSection*Run2Lumi/totWeight << "];\n";
 
     std::cout << "std::vector<Double_t> " << saveName << "LepOrSemiLepPassWeightedAr = [";
     for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
-        std::cout << cutLepOrSemiLepPassWeightedAr[rangeItr] << ",";
+        std::cout << cutLepOrSemiLepPassWeightedAr[rangeItr]*crossSection*Run2Lumi/totWeight << ",";
     }
-    std::cout << cutLepOrSemiLepPassWeightedAr[cutAmnt] << "];\n";
+    std::cout << cutLepOrSemiLepPassWeightedAr[cutAmnt]*crossSection*Run2Lumi/totWeight << "];\n";
 
     std::cout << "std::vector<Double_t> " << saveName << "HadPassWeightedAr = [";
     for (UInt_t rangeItr=0; rangeItr<cutAmnt; rangeItr++){
-        std::cout << cutHadPassWeightedAr[rangeItr] << ",";
+        std::cout << cutHadPassWeightedAr[rangeItr]*crossSection*Run2Lumi/totWeight << ",";
     }
-    std::cout << cutHadPassWeightedAr[cutAmnt] << "];\n";
+    std::cout << cutHadPassWeightedAr[cutAmnt]*crossSection*Run2Lumi/totWeight << "];\n";
+
+    std::cout << cutHadPassWeightedAr[0] << " " << crossSection<< " " <<Run2Lumi << " " <<totWeight << "\n";
 
     /*
     nEv = evRunOver;
