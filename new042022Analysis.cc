@@ -518,16 +518,16 @@ void new042022Analysis(string datasetString){
     UInt_t passAsHadCtr = 0;
     
 
-    Double_t passHiggsFJWeightedCtr = 0;
-    Double_t passChannelWeightedCtr = 0;
-    Double_t passLepOrSemiLepChannelWeightedCtr = 0;
-    Double_t passLepChannelWeightedCtr = 0;
-    Double_t passSemiLepChannelWeightedCtr = 0;
-    Double_t passHadChannelWeightedCtr = 0;
-    Double_t passVBFJetsWeightedCtr = 0;
-    Double_t passAsLepWeightedCtr = 0;
-    Double_t passAsSemiLepWeightedCtr = 0;
-    Double_t passAsHadWeightedCtr = 0;
+    Double_t passHiggsFJWeightedCtr = 0.;
+    Double_t passChannelWeightedCtr = 0.;
+    Double_t passLepOrSemiLepChannelWeightedCtr = 0.;
+    Double_t passLepChannelWeightedCtr = 0.;
+    Double_t passSemiLepChannelWeightedCtr = 0.;
+    Double_t passHadChannelWeightedCtr = 0.;
+    Double_t passVBFJetsWeightedCtr = 0.;
+    Double_t passAsLepWeightedCtr = 0.;
+    Double_t passAsSemiLepWeightedCtr = 0.;
+    Double_t passAsHadWeightedCtr = 0.;
 
     
     UInt_t passAnyChannelCtr = 0;
