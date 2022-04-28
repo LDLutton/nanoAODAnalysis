@@ -542,24 +542,9 @@ void new042022Analysis(string datasetString){
     UInt_t passSemiLepCut = 0;
     UInt_t passHadCut = 0;
 
-    UInt_t passAnyChannelWeightedCtr = 0;
-    UInt_t passLepAndSemiLepChannelWeightedCtr = 0;
-    UInt_t passLepAndHadChannelWeightedCtr = 0;
-    UInt_t passSemiLepAndHadChannelWeightedCtr = 0;
-    UInt_t passAllChannelWeightedCtr = 0;
-    UInt_t passFatJetsWeightedCtr = 0;
-    UInt_t passFJMatchWeightedCtr = 0;
-    UInt_t passLepCutWeightedCtr = 0;
-    UInt_t passSemiLepCutWeightedCtr = 0;
-    UInt_t passHadCutWeightedCtr = 0;
-    
-    UInt_t ZFJSameJetCtr = 0;
-
     UInt_t tryingLepCtr = 0;
     UInt_t tryingSemiLepCtr = 0;
     UInt_t tryingHadCtr = 0;
-
-    UInt_t passesCutsCtr = 0;
 
     float dataXS;
     UInt_t datanEv;
@@ -885,7 +870,7 @@ void new042022Analysis(string datasetString){
 
             if (passesCutsBool){
                 passVBFJetsCtr += 1;
-                passVBFJetsWeightedCtr += 1;
+                passVBFJetsWeightedCtr += tmpGenWeights;
 
                 //std::cout << passedAsLepBool << " "<< passedAsSemiLepBool << " " << passedAsHadBool << "\n";
                 if (passedAsLepBool) {
