@@ -845,7 +845,6 @@ void new042022Analysis(string datasetString){
                 }
             }
             if ((!passesCutsBool)) continue;
-            else passChannelCtr += 1;
 
 
             //Now match VBF jets
