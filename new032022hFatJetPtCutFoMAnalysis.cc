@@ -576,7 +576,7 @@ void new032022hFatJetPtCutFoMAnalysis(string datasetString){
 
     UInt_t passesCutsCtr = 0;
 
-    float dataXS;
+    
     UInt_t datanEv;
     UInt_t datanEvPass;
 
@@ -683,7 +683,7 @@ void new032022hFatJetPtCutFoMAnalysis(string datasetString){
 
         if (!isBackground){
             while (myXSReader.Next()){
-                dataXS = *crossSectionVar;
+                crossSection = *crossSectionVar;
             }
         }
         while (myEvNumReader.Next()){
@@ -888,6 +888,8 @@ void new032022hFatJetPtCutFoMAnalysis(string datasetString){
                 */
                 passVBFJets += 1;
 
+                if (debug) std::cout << "passesCuts\n";
+
                 if (passesCutsBool){
                     if (debug) std::cout << "passesCuts\n";
                     if (debug) std::cout << "evCount " << evCount << "\n";
@@ -971,7 +973,7 @@ void new032022hFatJetPtCutFoMAnalysis(string datasetString){
 
     std::cout << "Finished file loop. " << "time: " << time_spent << "\n";
     if (!isBackground){
-        std::cout << "XS: " << dataXS << "\n";
+        std::cout << "XS: " << crossSection << "\n";
     }
     std::cout << "nEv total: " << datanEv << "\n";
     std::cout << "nEv post HLT: " << datanEvPass << "\n"; 
