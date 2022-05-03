@@ -47,6 +47,8 @@ bool ZZTo2Q2NuBackground = false;
 bool WWTo2L2NuBackground = false;
 bool WZTo3LNuBackground = false;
 
+bool weakCuts = true;
+
 bool LaraTest = false;
 
 bool isBackground = false;
@@ -199,3 +201,170 @@ float fatJetZPairInvMassCut = 300;
 //EtaDifCut probably not necessary
 //float fatJetEtaDifCut = 5.0;
 float fatJetZPlusHPTCut = 1050;
+
+//Weak cuts
+float VBFJetdRWeakCut = 0.1;
+
+float jetPTWeakCut = 20.;
+
+float jetEtaDifWeakCut = 1.0;
+
+float jetInvMassWeakCut = 200.;
+
+//Higgs FJ cuts
+
+float hFatJetPTWeakCut = 200.;
+
+float hFatJetDeepTagWeakCut = 0.1;
+
+
+
+//Lep cuts
+
+float ePtWeakCut = 1.;
+
+float eEtaWeakCut = 3.0;
+
+float mPtWeakCut = 1.;
+
+float mEtaWeakCut = 3.0;
+
+float invMassWeakCutLow=40.;
+
+float invMassWeakCutHigh=140.;
+
+float ptLeadWeakCut=10.;
+
+float ptTrailingWeakCut=5.;
+
+float fourLepInvMassWeakCut = 50.;
+
+float optLepInvMassWeakCut = 6.;
+
+float lepIsoWeakCut = 1.5;
+
+float SIPWeakCut = 8.;
+
+//Semi-Lep cuts
+//fatJetPTWeakCut = 200.;
+
+float fatJetZTagWeakCut = 0.1;
+
+
+
+
+/*
+//Weakest cuts
+float VBFJetdRWeakCut = 0.1;
+
+float jetPTWeakCut = 20.;
+
+float jetEtaDifWeakCut = 1.0;
+
+float jetInvMassWeakCut = 200.;
+
+//Higgs FJ cuts
+
+float hFatJetPTWeakCut = 200.;
+
+float hFatJetDeepTagWeakCut = 0.1;
+
+
+
+//Lep cuts
+
+float ePtWeakCut = 1.;
+
+float eEtaWeakCut = 3.1;
+
+float mPtWeakCut = 1.;
+
+float mEtaWeakCut = 3.1;
+
+float invMassWeakCutLow=0.;
+
+float invMassWeakCutHigh=999.;
+
+float ptLeadWeakCut=0.;
+
+float ptTrailingWeakCut=0.;
+
+float fourLepInvMassWeakCut = 0.;
+
+float optLepInvMassWeakCut = 0.;
+
+float lepIsoWeakCut = 999999.;
+
+float SIPWeakCut = 0.;
+
+//Semi-Lep cuts
+//fatJetPTWeakCut = 200.;
+
+float fatJetZTagWeakCut = 0.1;
+
+//Not implemented
+
+//fatJetZPairInvMassWeakCut = 300;
+
+//fatJetZPlusHPTWeakCut = 1050;
+
+*/
+
+
+/*
+if (weakCuts){
+    //VBF Cuts
+    VBFJetdRCut = 0.1;
+
+    jetPTCut = 20.;
+
+    jetEtaDifCut = 1.0;
+
+    jetInvMassCut = 200.;
+
+    //Higgs FJ cuts
+
+    hFatJetPTCut = 200.;
+
+    hFatJetDeepTagCut = 0.1;
+
+    
+
+    //Lep cuts
+
+    //ePtCut = 7.;
+
+    //eEtaCut = 2.5;
+
+    //mPtCut = 5.;
+
+    //mEtaCut = 2.4;
+
+    invMassCutLow=60.;
+
+    invMassCutHigh=120.;
+
+    //ptLeadCut=20.;
+
+    //ptTrailingCut=10.;
+
+    fourLepInvMassCut = 100.;
+
+    optLepInvMassCut = 12.;
+
+    lepIsoCut = 1.0;
+
+    SIPCut = 5.;
+
+    //Semi-Lep cuts
+    //fatJetPTCut = 200.;
+
+    fatJetZTagCut = 0.1;
+
+    //Not implemented
+
+    //fatJetZPairInvMassCut = 300;
+
+    //fatJetZPlusHPTCut = 1050;
+}
+*/
