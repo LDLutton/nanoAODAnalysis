@@ -582,7 +582,57 @@ void new032022hFatJetPtCutFoMAnalysis(string datasetString){
 
     UInt_t evCount = 0;
     UInt_t evRunOver = 0;
-    
+
+    if (weakCuts){
+        std::cout << "Using weak cuts\n";
+        VBFJetdRCut = VBFJetdRWeakCut;
+
+        jetPTCut = jetPTWeakCut;
+
+        jetEtaDifCut = jetEtaDifWeakCut;
+
+        jetInvMassCut = jetInvMassWeakCut;
+
+        //Higgs FJ cuts
+
+        hFatJetPTCut = hFatJetPTWeakCut;
+
+        hFatJetDeepTagCut = hFatJetDeepTagWeakCut;
+
+
+
+        //Lep cuts
+
+        ePtCut = ePtWeakCut;
+
+        eEtaCut = eEtaWeakCut;
+
+        mPtCut = mPtWeakCut;
+
+        mEtaCut = mEtaWeakCut;
+
+        invMassCutLow=invMassWeakCutLow;
+
+        invMassCutHigh=invMassWeakCutHigh;
+
+        ptLeadCut=ptLeadWeakCut;
+
+        ptTrailingCut=ptTrailingWeakCut;
+
+        fourLepInvMassCut = fourLepInvMassWeakCut;
+
+        optLepInvMassCut = optLepInvMassWeakCut;
+
+        lepIsoCut = lepIsoWeakCut;
+
+        SIPCut = SIPWeakCut;
+
+        //Semi-Lep cuts
+        //fatJetPTCut = 200.;
+
+        fatJetZTagCut = fatJetZTagWeakCut;
+    }
+
     std::cout << "Going into file loop.\n";
 
     for (UInt_t k=0; k<fileAr.size(); k++){

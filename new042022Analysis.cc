@@ -129,7 +129,8 @@ void new042022Analysis(string datasetString){
     if (MGC2VEtaDifCut){
         saveName = "C2VEtaDifCut";
         isBackground = false;
-        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisC2VEtaDifCut.root";
+        //std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisC2VEtaDifCut.root";
+        std::string tmpStrWithPath = "HLTFilteredForAnalysisC2VEtaDifCut.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SDC2V3MC){
@@ -510,6 +511,9 @@ void new042022Analysis(string datasetString){
     UInt_t passChannelCtr = 0;
     UInt_t passLepOrSemiLepChannelCtr = 0;
     UInt_t passLepChannelCtr = 0;
+    UInt_t tryingSemiLepChannelCtr = 0;
+    UInt_t passFJInSemiLepChannelCtr = 0;
+    UInt_t passEnoughLepsInSemiLepChannelCtr = 0;
     UInt_t passSemiLepChannelCtr = 0;
     UInt_t passHadChannelCtr = 0;
     UInt_t passVBFJetsCtr = 0;
@@ -522,6 +526,9 @@ void new042022Analysis(string datasetString){
     Double_t passChannelWeightedCtr = 0.;
     Double_t passLepOrSemiLepChannelWeightedCtr = 0.;
     Double_t passLepChannelWeightedCtr = 0.;
+    Double_t tryingSemiLepChannelWeightedCtr = 0;
+    Double_t passFJInSemiLepChannelWeightedCtr = 0;
+    Double_t passEnoughLepsInSemiLepChannelWeightedCtr = 0;
     Double_t passSemiLepChannelWeightedCtr = 0.;
     Double_t passHadChannelWeightedCtr = 0.;
     Double_t passVBFJetsWeightedCtr = 0.;
@@ -546,12 +553,70 @@ void new042022Analysis(string datasetString){
     UInt_t tryingSemiLepCtr = 0;
     UInt_t tryingHadCtr = 0;
 
-    float dataXS;
+    //float dataXS;
+    /*
     UInt_t datanEv;
     UInt_t datanEvPass;
-
+    */
+    UInt_t datanEv = 0;
+    UInt_t datanEvPass = 0;
     UInt_t evCount = 0;
     UInt_t evRunOver = 0;
+
+    float crossSectionAvg = 0;
+    float crossSectionCnt = 0;
+
+
+    if (weakCuts){
+        std::cout << "Using weak cuts\n";
+        VBFJetdRCut = VBFJetdRWeakCut;
+
+        jetPTCut = jetPTWeakCut;
+
+        jetEtaDifCut = jetEtaDifWeakCut;
+
+        jetInvMassCut = jetInvMassWeakCut;
+
+        //Higgs FJ cuts
+
+        hFatJetPTCut = hFatJetPTWeakCut;
+
+        hFatJetDeepTagCut = hFatJetDeepTagWeakCut;
+
+
+
+        //Lep cuts
+
+        ePtCut = ePtWeakCut;
+
+        eEtaCut = eEtaWeakCut;
+
+        mPtCut = mPtWeakCut;
+
+        mEtaCut = mEtaWeakCut;
+
+        invMassCutLow=invMassWeakCutLow;
+
+        invMassCutHigh=invMassWeakCutHigh;
+
+        ptLeadCut=ptLeadWeakCut;
+
+        ptTrailingCut=ptTrailingWeakCut;
+
+        fourLepInvMassCut = fourLepInvMassWeakCut;
+
+        optLepInvMassCut = optLepInvMassWeakCut;
+
+        lepIsoCut = lepIsoWeakCut;
+
+        SIPCut = SIPWeakCut;
+
+        //Semi-Lep cuts
+        //fatJetPTCut = 200.;
+
+        fatJetZTagCut = fatJetZTagWeakCut;
+    }
+
 
     std::cout << "Going into file loop.\n";
 
@@ -653,12 +718,18 @@ void new042022Analysis(string datasetString){
 
         if (!isBackground){
             while (myXSReader.Next()){
-                dataXS = *crossSectionVar;
+                crossSectionAvg += *crossSectionVar;
+                crossSectionCnt += 1;
+                //dataXS = *crossSectionVar;
             }
         }
         while (myEvNumReader.Next()){
+            /*
             datanEv = *nEv;
             datanEvPass = *nEvPass;
+            */
+            datanEv += *nEv;
+            datanEvPass += *nEvPass;
         }
         
         if (k % 10 == 0){
@@ -789,7 +860,10 @@ void new042022Analysis(string datasetString){
                 passLepOrSemiLepChannelWeightedCtr += tmpGenWeights;
             }
             if ((!passesCutsBool)){
+                
                 if (debug) std::cout << "trying SemiLeptonic\n";
+                tryingSemiLepChannelCtr += 1;
+                tryingSemiLepChannelWeightedCtr += tmpGenWeights;
                 tryingSemiLepCtr += 1;
                 FJInd = -1;
                 UInt_t numFatJet = *nFatJetL;
@@ -800,6 +874,12 @@ void new042022Analysis(string datasetString){
                     if (tmpFatJetPT > fatJetPTCut) FJInd = i;
                 }
                 */
+               if (FJInd >= 0){
+                   passFJInSemiLepChannelCtr += 1;
+                   passFJInSemiLepChannelWeightedCtr += tmpGenWeights;
+                   
+               }
+               enoughLepCands = false;
                 doSemiLepCut(FJInd,enoughElecCands,negElecCands,posElecCands,totElecCands,Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut,
                  enoughMuonCands,negMuonCands,posMuonCands,totMuonCands,Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,nmLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut,
                  enoughLepCands,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,Z1Cand,difFromZMassOne,Z1LeadItr,Z1TrailingItr,Z1LeadPt,Z1TrailingPt,Z1IsMuon,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,
@@ -807,6 +887,10 @@ void new042022Analysis(string datasetString){
                  Z1LeadIso,Muon_pfRelIso03_allL,Z1TrailingIso,
                  passSemiLepCut,passesCutsBool,passedAsSemiLepBool,
                  debug);
+                if (enoughLepCands){
+                    passEnoughLepsInSemiLepChannelCtr += 1;
+                    passEnoughLepsInSemiLepChannelWeightedCtr += tmpGenWeights;
+                }
                 if (passesCutsBool){
                     passChannelCtr += 1;
                     passChannelWeightedCtr += tmpGenWeights;
@@ -904,13 +988,25 @@ void new042022Analysis(string datasetString){
 
     std::cout << "Finished file loop. " << "time: " << time_spent << "\n";
     if (!isBackground){
-        std::cout << "XS: " << dataXS << "\n";
+        crossSection = crossSectionAvg / crossSectionCnt;
+        
+        //std::cout << "XS: " << dataXS << "\n";
     }
+    std::cout << "XS: " << crossSection << "\n";
     std::cout << "nEv total: " << datanEv << "\n";
     std::cout << "nEv post pre-selection: " << datanEvPass << "\n"; 
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "PassHiggsFJCtr = " << passHiggsFJCtr << "\n";
     std::cout << "Double_t " << saveName << "passHiggsFJWeightedCtr = " << passHiggsFJWeightedCtr << "\n";
+    std::cout << "------------------------\n";
+    std::cout << "UInt_t " << saveName << "tryingSemiLepChannelCtr = " << tryingSemiLepChannelCtr << "\n";
+    std::cout << "Double_t " << saveName << "tryingSemiLepChannelWeightedCtr = " << tryingSemiLepChannelWeightedCtr << "\n";
+    std::cout << "------------------------\n";
+    std::cout << "UInt_t " << saveName << "passFJInSemiLepChannelCtr = " << passFJInSemiLepChannelCtr << "\n";
+    std::cout << "Double_t " << saveName << "passFJInSemiLepChannelWeightedCtr = " << passFJInSemiLepChannelWeightedCtr << "\n";
+    std::cout << "------------------------\n";
+    std::cout << "UInt_t " << saveName << "passEnoughLepsInSemiLepChannelCtr = " << passEnoughLepsInSemiLepChannelCtr << "\n";
+    std::cout << "Double_t " << saveName << "passEnoughLepsInSemiLepChannelWeightedCtr = " << passEnoughLepsInSemiLepChannelWeightedCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "PassChannelCtr = " << passChannelCtr << "\n";
     std::cout << "Double_t " << saveName << "PassChannelWeightedCtr = " << passChannelWeightedCtr << "\n";
