@@ -243,7 +243,7 @@ float optLepInvMassWeakCut = 6.;
 
 float lepIsoWeakCut = 1.5;
 
-float SIPWeakCut = 8.;
+float SIPWeakCut = 5.5;
 
 //Semi-Lep cuts
 //fatJetPTWeakCut = 200.;
