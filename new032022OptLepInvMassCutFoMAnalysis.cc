@@ -888,7 +888,7 @@ void new032022OptLepInvMassCutFoMAnalysis(string datasetString){
                     enoughMuonCands,negMuonCands,posMuonCands,totMuonCands,Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,nmLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut,
                     enoughLepCands,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,Z1Cand,difFromZMassOne,Z1LeadItr,Z1TrailingItr,Z1LeadPt,Z1TrailingPt,Z1IsMuon,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,
                     Electron_dr03EcalRecHitSumEtL,Electron_dr03TkSumPtL,Electron_dr03HcalDepth1TowerSumEtL,Electron_pfRelIso03_allL,
-                    Z1LeadIso,Muon_pfRelIso03_allL,Z1TrailingIso,
+                    Z1LeadIso,Muon_pfRelIso03_allL,Z1TrailingIso,lepIsoCut
                     passSemiLepCut,passesCutsBool,passedAsSemiLepBool,
                     debug);
                 }
