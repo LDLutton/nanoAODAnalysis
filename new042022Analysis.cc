@@ -617,6 +617,23 @@ void new042022Analysis(string datasetString){
         fatJetZTagCut = fatJetZTagWeakCut;
     }
 
+    std::string outFileStr = "BeforeCutEvents"+saveName+".root";
+    std::cout << "OutFile: " << outFileStr << "\n";
+    TFile *outFile = new TFile(outFileStr.c_str(),"RECREATE");
+
+    std::vector<Float_t> LepInvMassL;
+
+    TTree *BeforeCutLepInvMassTree = new TTree("BeforeCutLepInvMassTree", "BeforeCutLepInvMassTree");
+    
+    BeforeCutLepInvMassTree->Branch("LepInvMassL",&LepInvMassL);
+    
+
+    std::vector<Float_t> SemiLepInvMassL;
+
+    TTree *BeforeCutSemiLepInvMassTree = new TTree("BeforeCutSemiLepInvMassTree", "BeforeCutSemiLepInvMassTree");
+    
+    BeforeCutSemiLepInvMassTree->Branch("SemiLepInvMassL",&SemiLepInvMassL);
+    
 
     std::cout << "Going into file loop.\n";
 
@@ -834,10 +851,10 @@ void new042022Analysis(string datasetString){
 
             if (debug) cout << "trying Leptonic\n";
             tryingLepCtr += 1;
-                
+            std::vector<Float_t> LepInvMass;
             
                 
-            doLeptonicCuts(Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL, neLep, elecCandIndAr, elecCandVecAr, elecCandChargeAr,negElecCands,posElecCands,totElecCands,enoughElecCands,negMuonCands,posMuonCands,totMuonCands,enoughMuonCands,enoughLepCands,ePtCut,eEtaCut,
+            doLeptonicCutsWithTree(Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL, neLep, elecCandIndAr, elecCandVecAr, elecCandChargeAr,negElecCands,posElecCands,totElecCands,enoughElecCands,negMuonCands,posMuonCands,totMuonCands,enoughMuonCands,enoughLepCands,ePtCut,eEtaCut,
             Muon_etaL,Muon_massL, Muon_chargeL,Muon_phiL,Muon_ptL, nmLep, muonCandIndAr, muonCandVecAr, muonCandChargeAr,mPtCut,mEtaCut,
             Z1IsMuon,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,
             Z1LeadPt,Z1TrailingPt,Z1LeadItr,Z1TrailingItr,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,difFromZMassOne,
@@ -847,7 +864,13 @@ void new042022Analysis(string datasetString){
             Electron_dr03EcalRecHitSumEtL,Electron_dr03TkSumPtL,Electron_dr03HcalDepth1TowerSumEtL,Electron_pfRelIso03_allL,
             Z1LeadIso,Muon_pfRelIso03_allL,Z1TrailingIso,Z2LeadIso,Z2TrailingIso,lepIsoCut,
             Z1LeadSIP,Electron_sip3dL,Z1TrailingSIP,Z2LeadSIP,Muon_sip3dL,Z2TrailingSIP,SIPCut,passLepCut,passesCutsBool,passedAsLepBool,
+            LepInvMass,
             debug);
+            if (LepInvMass.size()) {
+                LepInvMassL = LepInvMass;
+                BeforeCutLepInvMassTree->Fill();
+                LepInvMassL.clear();
+            }
 
             Int_t FJInd;
             if (debug) std::cout << "passesCutsBool " << passesCutsBool << "\n";
@@ -860,6 +883,7 @@ void new042022Analysis(string datasetString){
                 passLepOrSemiLepChannelWeightedCtr += tmpGenWeights;
             }
             if ((!passesCutsBool)){
+                std::vector<Float_t> SemiLepInvMass;
                 
                 if (debug) std::cout << "trying SemiLeptonic\n";
                 tryingSemiLepChannelCtr += 1;
@@ -874,19 +898,25 @@ void new042022Analysis(string datasetString){
                     if (tmpFatJetPT > fatJetPTCut) FJInd = i;
                 }
                 */
-               if (FJInd >= 0){
+                if (FJInd >= 0){
                    passFJInSemiLepChannelCtr += 1;
                    passFJInSemiLepChannelWeightedCtr += tmpGenWeights;
                    
-               }
-               enoughLepCands = false;
-                doSemiLepCut(FJInd,enoughElecCands,negElecCands,posElecCands,totElecCands,Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut,
+                }
+                enoughLepCands = false;
+                doSemiLepCutWithTree(FJInd,enoughElecCands,negElecCands,posElecCands,totElecCands,Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut,
                  enoughMuonCands,negMuonCands,posMuonCands,totMuonCands,Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,nmLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut,
                  enoughLepCands,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,Z1Cand,difFromZMassOne,Z1LeadItr,Z1TrailingItr,Z1LeadPt,Z1TrailingPt,Z1IsMuon,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,
                  Electron_dr03EcalRecHitSumEtL,Electron_dr03TkSumPtL,Electron_dr03HcalDepth1TowerSumEtL,Electron_pfRelIso03_allL,
                  Z1LeadIso,Muon_pfRelIso03_allL,Z1TrailingIso,lepIsoCut,
                  passSemiLepCut,passesCutsBool,passedAsSemiLepBool,
+                 SemiLepInvMass,
                  debug);
+                if (SemiLepInvMass.size()) {
+                    SemiLepInvMassL = SemiLepInvMass;
+                    BeforeCutSemiLepInvMassTree->Fill();
+                    SemiLepInvMassL.clear();
+                }
                 if (enoughLepCands){
                     passEnoughLepsInSemiLepChannelCtr += 1;
                     passEnoughLepsInSemiLepChannelWeightedCtr += tmpGenWeights;
@@ -1036,6 +1066,10 @@ void new042022Analysis(string datasetString){
     std::cout << "Double_t " << saveName << "PassAsHadWeightedCtr = " << passAsHadWeightedCtr << "\n";
     std::cout << "------------------------\n";
 
+    outFile->cd();
+    BeforeCutLepInvMassTree->Write("",TObject::kOverwrite);
+    BeforeCutSemiLepInvMassTree->Write("",TObject::kOverwrite);
 
+    outFile->Close();
 
 }

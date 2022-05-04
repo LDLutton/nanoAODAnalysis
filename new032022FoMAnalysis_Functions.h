@@ -1118,6 +1118,8 @@ bool debug
 
 }
 
+
+
 void doSemiLepCut(Int_t &FJInd,bool &enoughElecCands,UInt_t &negElecCands,UInt_t &posElecCands,UInt_t &totElecCands,TTreeReaderArray<Float_t> &Electron_etaL,TTreeReaderArray<Float_t> &Electron_massL,TTreeReaderArray<Int_t> &Electron_chargeL,TTreeReaderArray<Float_t> &Electron_phiL,TTreeReaderArray<Float_t> &Electron_ptL,UInt_t neLep,std::vector<UInt_t> &elecCandIndAr,std::vector<ROOT::Math::PtEtaPhiMVector> &elecCandVecAr,std::vector<Int_t> &elecCandChargeAr,float ePtCut,float eEtaCut,
 bool &enoughMuonCands,UInt_t &negMuonCands,UInt_t &posMuonCands,UInt_t &totMuonCands,TTreeReaderArray<Float_t> &Muon_etaL,TTreeReaderArray<Float_t> &Muon_massL,TTreeReaderArray<Int_t> &Muon_chargeL,TTreeReaderArray<Float_t> &Muon_phiL,TTreeReaderArray<Float_t> &Muon_ptL,UInt_t nmLep,std::vector<UInt_t> &muonCandIndAr,std::vector<ROOT::Math::PtEtaPhiMVector> &muonCandVecAr,std::vector<Int_t> &muonCandChargeAr,float mPtCut,float mEtaCut,
 bool &enoughLepCands,float invMassCutLow,float invMassCutHigh,float ptLeadCut,float ptTrailingCut,bool &Z1Cand,float &difFromZMassOne,Int_t &Z1LeadItr,Int_t &Z1TrailingItr,float &Z1LeadPt,float &Z1TrailingPt,bool &Z1IsMuon,ROOT::Math::PtEtaPhiMVector &Z1LeadVec,ROOT::Math::PtEtaPhiMVector &Z1TrailingVec,Int_t &Z1LeadCharge,Int_t &Z1TrailingCharge,
@@ -1210,6 +1212,379 @@ bool debug){
             std::vector<std::array<UInt_t,2>> muonPassesZ2CutsAr;
             if (enoughMuonCands){ //If enough muon cands, run Z1 cuts
                 dolZ1Cut(Muon_ptL,muonCandIndAr,muonCandVecAr,muonCandChargeAr,muonPassesZ2CutsAr,Z1IsMuon,true,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,Z1LeadPt,Z1TrailingPt,Z1LeadItr,Z1TrailingItr,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,difFromZMassOne,debug);
+            }
+            if (debug) std::cout <<"Z1LeadItr " << Z1LeadItr << " Z1TrailingItr " << Z1TrailingItr << " Z1LeadPt " << Z1LeadPt << " Z1TrailingPt " << Z1TrailingPt << " Z1LeadVec " << Z1LeadVec << " Z1TrailingVec " << Z1TrailingVec << " Z1LeadCharge " << Z1LeadCharge << " Z1TrailingCharge " << Z1TrailingCharge << " Z1IsMuon " << Z1IsMuon << " difFromZMassOne " << difFromZMassOne << "\n";
+            //if (Z1LeadItr<0) {
+            //    std::cout << "ddntpass Z1LeadItr" << Z1LeadItr << "\n";
+            //}
+            if (Z1LeadItr >= 0) { //If Z1 found
+                bool semiLepPassIso = false;
+                getSemiLepIsoVars(Z1IsMuon,Z1LeadPt,Electron_etaL,elecCandIndAr,Z1LeadItr,Electron_dr03EcalRecHitSumEtL,Electron_dr03TkSumPtL,Electron_dr03HcalDepth1TowerSumEtL,Electron_ptL,Electron_pfRelIso03_allL,
+                Z1TrailingItr,Z1LeadIso,Z1TrailingPt, Muon_pfRelIso03_allL,muonCandIndAr,Z1TrailingIso,debug);
+                semiLepPassIso = doSemiLepISOCut(Z1LeadIso,Z1TrailingIso,lepIsoCut);
+                //if (!semiLepPassIso) {
+                //    std::cout << "ddntpass semiLepPassIso" << semiLepPassIso << "\n";
+                //}
+                if (semiLepPassIso) {
+                    if (debug) std::cout << "Passed as SemiLep\n";
+                    passSemiLepCut += 1;
+                    passesCutsBool = true;
+                    passedAsSemiLepBool = true;
+                    //std::cout << "PASSED ALL THE WAY!!!!\n";
+                    if (debug) {
+                        std::cout << "Z1IsMuon " <<Z1IsMuon<< "\n";
+                        std::cout << "elecCandIndAr size " << elecCandIndAr.size() << "\n";
+
+                        std::cout << "muonCandIndAr loop " << muonCandIndAr.size() << "\n";
+                        
+                        for (UInt_t muonCandIndInd=0; muonCandIndInd<muonCandIndAr.size();muonCandIndInd++){
+                            std::cout << "muonCandIndInd " << muonCandIndInd << "muonCandIndAr[muonCandIndInd]" << muonCandIndAr[muonCandIndInd] << "\n";
+
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+
+void dolZ1CutWithTree(TTreeReaderArray<Float_t> &Lep_pt,std::vector<UInt_t> lepCandIndAr,std::vector<ROOT::Math::PtEtaPhiMVector> lepCandVecAr,std::vector<Int_t> lepCandChargeAr,std::vector<std::array<UInt_t,2>> &lepPassesZ2CutsAr,bool &Z1IsMuon,bool forMuon,float invMassCutLow,float invMassCutHigh,float ptLeadCut,float ptTrailingCut,float &tmpTopZ1LeadPt,float &tmpTopZ1TrailingPt,Int_t &tmpTopLeadItr,Int_t &tmpTopTrailingItr,ROOT::Math::PtEtaPhiMVector &tmpTopLeadVec,ROOT::Math::PtEtaPhiMVector &tmpTopTrailingVec,Int_t &tmpTopLeadCharge,Int_t &tmpTopTrailingCharge,float &difFromZMassOne,std::vector<Float_t> &SemiLepOrLepInvMass,bool debug){
+    if (debug) std::cout << "in dolZ1Cut fcn\n";
+    for (UInt_t lItrOne=0; lItrOne<lepCandIndAr.size()-1; lItrOne++) { //LEP LOOP ONE
+        Int_t tmpChargeOne = lepCandChargeAr[lItrOne];
+        if (debug) std::cout << "lItrOne " << lItrOne << " lepCandIndAr[lItrOne] " << lepCandIndAr[lItrOne] << " tmpChargeOne " << tmpChargeOne << "\n";
+        for (UInt_t lItrTwo=lItrOne+1; lItrTwo<lepCandIndAr.size(); lItrTwo++){ //LEP LOOP TWO
+            Int_t tmpChargeTwo = lepCandChargeAr[lItrTwo];
+            if (debug) std::cout << "lItrTwo " << lItrTwo << " lepCandIndAr[lItrTwo] " << lepCandIndAr[lItrTwo] << " tmpChargeOne " << tmpChargeTwo << "\n";
+            if (tmpChargeOne != tmpChargeTwo){ //CHECK IF OPPOSITE CHARGE
+                ROOT::Math::PtEtaPhiMVector tmpZ1VecOne = lepCandVecAr[lItrOne];
+                ROOT::Math::PtEtaPhiMVector tmpZ1VecTwo = lepCandVecAr[lItrTwo];
+                ROOT::Math::PtEtaPhiMVector tmpZ1Vec =  tmpZ1VecOne+tmpZ1VecTwo;
+                float tmpZ1Mass = tmpZ1Vec.M();
+                if (debug){
+                    std::cout << "not the same charge. yay\n";
+                    std::cout << "tmpZ1VecOne " << tmpZ1VecOne << "tmpZ1VecTwo " << tmpZ1VecTwo << "tmpZ1Vec " << tmpZ1Vec << "\n";
+                }
+                SemiLepOrLepInvMass.push_back(tmpZ1Mass);
+                if (tmpZ1Mass > invMassCutLow && tmpZ1Mass < invMassCutHigh){ //CHECK IF INV MASS PASSES CUTS
+                    if (debug) std::cout << "Passed inv mass cut\n";
+                    float tmpZDif = abs(tmpZ1Mass - ZMass);
+                    float tmpPtOne = Lep_pt[lepCandIndAr[lItrOne]];
+                    float tmpPtTwo = Lep_pt[lepCandIndAr[lItrTwo]];
+                    if (debug) std::cout << "tmpZDif " << tmpZDif << "tmpPtOne " << tmpPtOne << "tmpPtTwo " << tmpPtTwo << "\n";
+                    float tmpPtLead;
+                    float tmpPtTrailing;
+                    UInt_t tmpLeadItr;
+                    UInt_t tmpTrailingItr;
+                    ROOT::Math::PtEtaPhiMVector tmpLeadVec;
+                    ROOT::Math::PtEtaPhiMVector tmpTrailingVec;
+                    Int_t tmpLeadCharge;
+                    Int_t tmpTrailingCharge;
+                    if (tmpPtOne >= tmpPtTwo){ //SORT PTS
+                        //lepPassesZ2CutsAr.append([lepCandIndAr[lItrOne],lepCandIndAr[lItrTwo]])
+                        tmpPtLead = tmpPtOne;
+                        tmpPtTrailing = tmpPtTwo;
+                        tmpLeadItr = lItrOne;
+                        tmpTrailingItr = lItrTwo;
+                        tmpLeadVec = tmpZ1VecOne;
+                        tmpTrailingVec = tmpZ1VecTwo;
+                        tmpLeadCharge = tmpChargeOne;
+                        tmpTrailingCharge = tmpChargeTwo;
+                    }
+                    else{
+                        //lepPassesZ2CutsAr.append([lepCandIndAr[lItrTwo],lepCandIndAr[lItrOne]])
+                        tmpPtLead = tmpPtTwo;
+                        tmpPtTrailing = tmpPtOne;
+                        tmpLeadItr = lItrTwo;
+                        tmpTrailingItr = lItrOne;
+                        tmpLeadVec = tmpZ1VecTwo;
+                        tmpTrailingVec = tmpZ1VecOne;
+                        tmpLeadCharge = tmpChargeTwo;
+                        tmpTrailingCharge = tmpChargeOne;
+                    }
+
+
+                    if (tmpZDif < difFromZMassOne){ //CHECK IF INV MASS DIF LESS THAN CURRENT SMALLEST DIF
+                        if (debug) std::cout << "current smallest zdif yay\n";
+                        
+                        if (tmpPtLead > ptLeadCut && tmpPtTrailing > ptTrailingCut){ //CHECK IF PASSES PT CUT
+                            if (debug) std::cout << "wow it passed the pt cut also yay\n";
+                            tmpTopZ1LeadPt = tmpPtLead;
+                            tmpTopZ1TrailingPt = tmpPtTrailing;
+                            difFromZMassOne = tmpZDif;
+                            tmpTopLeadItr = tmpLeadItr;
+                            tmpTopTrailingItr = tmpTrailingItr;
+                            if (debug) std::cout << "forMuon " << forMuon << " Z1IsMuon " << Z1IsMuon << "\n";
+                            if (!forMuon) Z1IsMuon = false;
+                            else Z1IsMuon = true;
+                            if (debug) std::cout << "forMuon " << forMuon << " Z1IsMuon " << Z1IsMuon << "\n";
+                            tmpTopLeadVec = tmpLeadVec;
+                            tmpTopTrailingVec = tmpTrailingVec;
+                            tmpTopLeadCharge = tmpLeadCharge;
+                            tmpTopTrailingCharge = tmpTrailingCharge;
+                        }
+                    }
+                    std::array<UInt_t,2> tmpItrList = {tmpLeadItr,tmpTrailingItr};
+                    lepPassesZ2CutsAr.push_back(tmpItrList);
+                    
+                }
+            }
+        }
+    }
+}
+
+void doLeptonicCutsWithTree(TTreeReaderArray<Float_t> &Electron_etaL,TTreeReaderArray<Float_t> &Electron_massL,TTreeReaderArray<Int_t> &Electron_chargeL,TTreeReaderArray<Float_t> &Electron_phiL,TTreeReaderArray<Float_t> &Electron_ptL,UInt_t neLep,std::vector<UInt_t> elecCandIndAr,std::vector<ROOT::Math::PtEtaPhiMVector> elecCandVecAr,std::vector<Int_t> elecCandChargeAr,UInt_t &negElecCands,UInt_t &posElecCands,UInt_t &totElecCands,bool enoughElecCands,UInt_t &negMuonCands,UInt_t &posMuonCands,UInt_t &totMuonCands,bool enoughMuonCands,bool enoughLepCands,float ePtCut,float eEtaCut,
+TTreeReaderArray<Float_t> &Muon_etaL,TTreeReaderArray<Float_t> &Muon_massL,TTreeReaderArray<Int_t> &Muon_chargeL,TTreeReaderArray<Float_t> &Muon_phiL,TTreeReaderArray<Float_t> &Muon_ptL,UInt_t nmLep,std::vector<UInt_t> muonCandIndAr,std::vector<ROOT::Math::PtEtaPhiMVector> muonCandVecAr,std::vector<Int_t> muonCandChargeAr,float mPtCut,float mEtaCut,
+bool &Z1IsMuon,float invMassCutLow,float invMassCutHigh,float ptLeadCut,float ptTrailingCut,
+float &Z1LeadPt,float &Z1TrailingPt,Int_t &Z1LeadItr,Int_t &Z1TrailingItr,ROOT::Math::PtEtaPhiMVector &Z1LeadVec,ROOT::Math::PtEtaPhiMVector &Z1TrailingVec,Int_t &Z1LeadCharge,Int_t &Z1TrailingCharge,float &difFromZMassOne,
+std::vector<std::array<ROOT::Math::PtEtaPhiMVector,2>> eZ2VecPairAr,Int_t &tmpZ2Ind,bool &Z2IsMuon,float &tmpTopZ2LeadPt,float &tmpTopZ2TrailingPt,float fourLepInvMassCut,float optLepInvMassCut,
+std::vector<std::array<ROOT::Math::PtEtaPhiMVector,2>> mZ2VecPairAr,
+ROOT::Math::PtEtaPhiMVector &tmpZ1Vec,float &tmpZ1M,
+TTreeReaderArray<Float_t> &Electron_dr03EcalRecHitSumEtL,TTreeReaderArray<Float_t> &Electron_dr03TkSumPtL,TTreeReaderArray<Float_t> &Electron_dr03HcalDepth1TowerSumEtL,TTreeReaderArray<Float_t> &Electron_pfRelIso03_allL,
+float &Z1LeadIso,TTreeReaderArray<Float_t> &Muon_pfRelIso03_allL,float &Z1TrailingIso,float &Z2LeadIso,float &Z2TrailingIso,float lepIsoCut,
+float &Z1LeadSIP,TTreeReaderArray<Float_t> &Electron_sip3dL,float &Z1TrailingSIP,float &Z2LeadSIP,TTreeReaderArray<Float_t> &Muon_sip3dL,float &Z2TrailingSIP,float SIPCut,UInt_t &passLepCut,bool &passesCutsBool, bool &passedAsLepBool,
+std::vector<Float_t> &LepInvMass,
+bool debug
+) {
+    if (neLep){
+        if (debug) std::cout << "Doing elec cand cut\n";
+        dolCandCut(Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut,debug);
+        //doeCandCut(Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut);
+        for (UInt_t elecCandChargeInd=0;elecCandChargeInd<elecCandChargeAr.size();elecCandChargeInd++){
+            if (elecCandChargeAr[elecCandChargeInd] == -1) negElecCands += 1;
+            else posElecCands += 1;
+        }
+        totElecCands = std::min(negElecCands,posElecCands);
+        if (totElecCands >= 1) enoughElecCands = true;
+    }
+
+
+    
+    
+    if (debug){
+        std::cout << "--------------------------------------------\n";
+        std::cout << "neLep " << neLep << "\n";
+        for (UInt_t tmpItr=0; tmpItr < neLep; tmpItr++){
+            std::cout <<"tmpItr " << tmpItr << " Electron_ptL[tmpItr] " << Electron_ptL[tmpItr] << " Electron_etaL[tmpItr] " << Electron_etaL[tmpItr] << " Electron_chargeL[tmpItr] " << Electron_chargeL[tmpItr] << "\n";
+        }
+    }
+    if (nmLep){
+        if (debug) std::cout << "Doing muon cand cut\n";
+
+        dolCandCut(Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,nmLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut,debug);
+
+        //domCandCut(Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,neLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut);
+        for (UInt_t muonCandChargeInd=0;muonCandChargeInd<muonCandChargeAr.size();muonCandChargeInd++){
+            if (muonCandChargeAr[muonCandChargeInd] == -1) negMuonCands += 1;
+            else posMuonCands += 1;
+        }
+        totMuonCands = std::min(negMuonCands,posMuonCands);
+        if (totMuonCands >= 1) enoughMuonCands = true;
+    }
+
+    enoughLepCands = false;
+    if (totElecCands+totMuonCands >= 2) enoughLepCands = true;
+    if (debug){
+        std::cout << "negElecCands " << negElecCands << " posElecCands " << posElecCands << " totElecCands " << totElecCands << "\n";
+        std::cout << "nmLep " << nmLep << " negMuonCands " << negMuonCands << " posMuonCands " << posMuonCands << " totMuonCands " << totMuonCands << "\n";
+        std::cout << "enoughLepCands " << enoughLepCands << "\n";
+    }
+    
+    
+
+    
+
+    if (enoughLepCands){ //Check there are enough lep cands after candidate cuts
+        //passesCandCutsCtr += 1
+        std::vector<std::array<UInt_t,2>> elecPassesZ2CutsAr;
+        if (enoughElecCands){ //If enough elec cands, run Z1 cuts
+            dolZ1CutWithTree(Electron_ptL,elecCandIndAr,elecCandVecAr,elecCandChargeAr,elecPassesZ2CutsAr,Z1IsMuon,false,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,Z1LeadPt,Z1TrailingPt,Z1LeadItr,Z1TrailingItr,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,difFromZMassOne,LepInvMass,debug);
+        }
+        std::vector<std::array<UInt_t,2>> muonPassesZ2CutsAr;
+        if (enoughMuonCands){ //If enough muon cands, run Z1 cuts
+            dolZ1CutWithTree(Muon_ptL,muonCandIndAr,muonCandVecAr,muonCandChargeAr,muonPassesZ2CutsAr,Z1IsMuon,true,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,Z1LeadPt,Z1TrailingPt,Z1LeadItr,Z1TrailingItr,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,difFromZMassOne,LepInvMass,debug);
+        }
+        if (debug) std::cout <<"Z1LeadItr " << Z1LeadItr << " Z1TrailingItr " << Z1TrailingItr << " Z1LeadPt " << Z1LeadPt << " Z1TrailingPt " << Z1TrailingPt << " Z1LeadVec " << Z1LeadVec << " Z1TrailingVec " << Z1TrailingVec << " Z1LeadCharge " << Z1LeadCharge << " Z1TrailingCharge " << Z1TrailingCharge << " Z1IsMuon " << Z1IsMuon << " difFromZMassOne " << difFromZMassOne << "\n";
+        if (Z1LeadItr >= 0) { //If Z1 found
+            //passesZ1CutsCtr += 1
+            if (debug) std::cout <<"passed Z1 cut. checking for enough Z2 now\n";
+
+            std::vector<std::array<UInt_t,2>> elecPassesZ2CutsFinalAr;
+                
+            
+            std::vector<std::array<double,2>> eZ2PtPairAr;
+            std::vector<std::array<Int_t,2>> eZ2ChargePairAr;
+            bool tmpIgnore;
+            if (!Z1IsMuon) tmpIgnore = true;
+            else tmpIgnore = false;
+            std::array<Int_t,2> indsToIgnore = {Z1LeadItr,Z1TrailingItr};
+            bool eZ2CandsBool = false;
+            bool mZ2CandsBool = false;
+                
+
+            fillZ2Ars(elecPassesZ2CutsFinalAr,eZ2VecPairAr,eZ2PtPairAr,eZ2ChargePairAr,elecPassesZ2CutsAr,elecCandChargeAr,elecCandVecAr,tmpIgnore,indsToIgnore,eZ2CandsBool);
+
+            std::vector<std::array<UInt_t,2>> muonPassesZ2CutsFinalAr;
+                
+            
+            std::vector<std::array<double,2>> mZ2PtPairAr;
+            std::vector<std::array<Int_t,2>> mZ2ChargePairAr;
+            fillZ2Ars(muonPassesZ2CutsFinalAr,mZ2VecPairAr,mZ2PtPairAr,mZ2ChargePairAr,muonPassesZ2CutsAr,muonCandChargeAr,muonCandVecAr,!tmpIgnore,indsToIgnore,mZ2CandsBool);
+
+
+            if (debug){
+                postZ2DebugOut(elecCandIndAr,elecCandVecAr,elecCandChargeAr,elecPassesZ2CutsAr,elecPassesZ2CutsFinalAr,
+                muonCandIndAr,muonCandVecAr,muonCandChargeAr,muonPassesZ2CutsAr,muonPassesZ2CutsFinalAr);
+
+            }
+
+
+            //if (elecPassesZ2CutsFinalAr || muonPassesZ2CutsFinalAr){
+            if (eZ2CandsBool || mZ2CandsBool) {
+                if (debug) std::cout << "passed to Z2 Cut\n";
+                tmpZ2Ind = -1;
+                Z2IsMuon = false;
+                tmpTopZ2LeadPt = 0;
+                tmpTopZ2TrailingPt = 0;
+                tmpZ1Vec = Z1LeadVec+Z1TrailingVec;
+                tmpZ1M = tmpZ1Vec.M();
+
+                
+                if (eZ2CandsBool) dolZ2Cut(Z1LeadVec,Z1TrailingVec,tmpZ1Vec,tmpZ1M,Z1LeadCharge,Z1TrailingCharge,Z1IsMuon,eZ2VecPairAr,eZ2PtPairAr,eZ2ChargePairAr,tmpZ2Ind,Z2IsMuon,tmpTopZ2LeadPt,tmpTopZ2TrailingPt,fourLepInvMassCut,optLepInvMassCut,true);
+                if (mZ2CandsBool) dolZ2Cut(Z1LeadVec,Z1TrailingVec,tmpZ1Vec,tmpZ1M,Z1LeadCharge,Z1TrailingCharge,Z1IsMuon,mZ2VecPairAr,mZ2PtPairAr,mZ2ChargePairAr,tmpZ2Ind,Z2IsMuon,tmpTopZ2LeadPt,tmpTopZ2TrailingPt,fourLepInvMassCut,optLepInvMassCut,false);
+                if (debug) std::cout << "tmpZ2Ind " << tmpZ2Ind << " Z2IsMuon " << Z2IsMuon << " tmpTopZ2LeadPt " << tmpTopZ2LeadPt << " tmpTopZ2TrailingPt " << tmpTopZ2TrailingPt << "\n";
+                if (tmpZ2Ind >= 0){ //Passed Z2 Cut
+                    if (debug) std::cout << "passed Z2 cut\n";
+                    //passesZ2CutsCtr += 1
+                    getIsoVars(Z1IsMuon,Z1LeadPt,Electron_etaL,elecCandIndAr,Z1LeadItr,Electron_dr03EcalRecHitSumEtL,Electron_dr03TkSumPtL,Electron_dr03HcalDepth1TowerSumEtL,Electron_ptL,Electron_pfRelIso03_allL,
+                    Z1TrailingItr,Z1LeadIso,Z1TrailingPt,Muon_pfRelIso03_allL,muonCandIndAr,Z1TrailingIso,Z2IsMuon,elecPassesZ2CutsAr,tmpZ2Ind,Z2LeadIso,Z2TrailingIso,tmpTopZ2LeadPt,tmpTopZ2TrailingPt,muonPassesZ2CutsFinalAr,debug);
+                    if (debug) std::cout << "Z1LeadIso " << Z1LeadIso << " Z1TrailingIso " << Z1TrailingIso << " Z2LeadIso " << Z2LeadIso << " Z2TrailingIso " << Z2TrailingIso << "\n";
+
+                    
+                    bool passIsoCut = doISOCut(Z1LeadIso,Z1TrailingIso,Z2LeadIso,Z2TrailingIso,lepIsoCut);
+
+                    if (passIsoCut){
+                        
+                        if (debug) std::cout << "passed iso cut yay\n";
+                        //passesIsoCutCtr += 1
+                        getSIPVars(Z1IsMuon,Z1LeadSIP,Electron_sip3dL,elecCandIndAr,Z1LeadItr,Z1TrailingItr,Z1TrailingSIP,Z2IsMuon,Z2LeadSIP,Muon_sip3dL,muonCandIndAr,elecPassesZ2CutsFinalAr,tmpZ2Ind,muonPassesZ2CutsFinalAr,Z2TrailingSIP);
+                        if (debug) std::cout << "Z1LeadSIP " << Z1LeadSIP << " Z1TrailingSIP " << Z1TrailingSIP << " Z2LeadSIP " << Z2LeadSIP << " Z2TrailingSIP " << Z2TrailingSIP << "\n"; 
+                        //Fill with HIGHEST SIP
+                        
+                        bool passSIPCut = doSIPCut(Z1LeadSIP,Z1TrailingSIP,Z2LeadSIP,Z2TrailingSIP,SIPCut);
+                        if (passSIPCut){
+                            if (debug) cout << "passed SIP cut yay\n";
+                            passLepCut += 1;
+                            passesCutsBool = true;
+                            passedAsLepBool = true;
+                        }
+                    }
+
+                }
+
+            }
+                                
+                            
+        }
+    }
+
+}
+
+void doSemiLepCutWithTree(Int_t &FJInd,bool &enoughElecCands,UInt_t &negElecCands,UInt_t &posElecCands,UInt_t &totElecCands,TTreeReaderArray<Float_t> &Electron_etaL,TTreeReaderArray<Float_t> &Electron_massL,TTreeReaderArray<Int_t> &Electron_chargeL,TTreeReaderArray<Float_t> &Electron_phiL,TTreeReaderArray<Float_t> &Electron_ptL,UInt_t neLep,std::vector<UInt_t> &elecCandIndAr,std::vector<ROOT::Math::PtEtaPhiMVector> &elecCandVecAr,std::vector<Int_t> &elecCandChargeAr,float ePtCut,float eEtaCut,
+bool &enoughMuonCands,UInt_t &negMuonCands,UInt_t &posMuonCands,UInt_t &totMuonCands,TTreeReaderArray<Float_t> &Muon_etaL,TTreeReaderArray<Float_t> &Muon_massL,TTreeReaderArray<Int_t> &Muon_chargeL,TTreeReaderArray<Float_t> &Muon_phiL,TTreeReaderArray<Float_t> &Muon_ptL,UInt_t nmLep,std::vector<UInt_t> &muonCandIndAr,std::vector<ROOT::Math::PtEtaPhiMVector> &muonCandVecAr,std::vector<Int_t> &muonCandChargeAr,float mPtCut,float mEtaCut,
+bool &enoughLepCands,float invMassCutLow,float invMassCutHigh,float ptLeadCut,float ptTrailingCut,bool &Z1Cand,float &difFromZMassOne,Int_t &Z1LeadItr,Int_t &Z1TrailingItr,float &Z1LeadPt,float &Z1TrailingPt,bool &Z1IsMuon,ROOT::Math::PtEtaPhiMVector &Z1LeadVec,ROOT::Math::PtEtaPhiMVector &Z1TrailingVec,Int_t &Z1LeadCharge,Int_t &Z1TrailingCharge,
+TTreeReaderArray<Float_t> &Electron_dr03EcalRecHitSumEtL,TTreeReaderArray<Float_t> &Electron_dr03TkSumPtL,TTreeReaderArray<Float_t> &Electron_dr03HcalDepth1TowerSumEtL,TTreeReaderArray<Float_t> &Electron_pfRelIso03_allL,
+float &Z1LeadIso,TTreeReaderArray<Float_t> &Muon_pfRelIso03_allL,float &Z1TrailingIso,float lepIsoCut,
+UInt_t &passSemiLepCut,bool &passesCutsBool,bool &passedAsSemiLepBool,
+std::vector<Float_t> &SemiLepInvMass,
+bool debug){
+    if (FJInd != -1){
+        if (debug) cout << "passed FJ check\n";
+
+        enoughElecCands = false;
+        negElecCands = 0;
+        posElecCands = 0;
+        totElecCands = 0;
+        elecCandIndAr.clear();
+        elecCandVecAr.clear();
+        elecCandChargeAr.clear();
+
+        if (neLep){
+            if (debug) std::cout << "Doing elec cand cut\n";
+            dolCandCut(Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut,debug);
+            
+            for (UInt_t elecCandChargeInd=0;elecCandChargeInd<elecCandChargeAr.size();elecCandChargeInd++){
+                if (debug) std::cout << "elecCandChargeInd " << elecCandChargeInd << " elecCandChargeAr[elecCandChargeInd] " << elecCandChargeAr[elecCandChargeInd] << "\n";
+                if (elecCandChargeAr[elecCandChargeInd] == -1) negElecCands += 1;
+                else posElecCands += 1;
+            }
+            totElecCands = std::min(negElecCands,posElecCands);
+            if (totElecCands >= 1) enoughElecCands = true;
+        }
+
+
+        enoughMuonCands = false;
+        negMuonCands = 0;
+        posMuonCands = 0;
+        totMuonCands = 0;
+        muonCandIndAr.clear();
+        muonCandVecAr.clear();
+        muonCandChargeAr.clear();
+
+        if (debug){
+            std::cout << "--------------------------------------------\n";
+            std::cout << "neLep " << neLep << "\n";
+            for (UInt_t tmpItr=0; tmpItr < neLep; tmpItr++){
+                std::cout <<"tmpItr " << tmpItr << " Electron_ptL[tmpItr] " << Electron_ptL[tmpItr] << " Electron_etaL[tmpItr] " << Electron_etaL[tmpItr] << " Electron_chargeL[tmpItr] " << Electron_chargeL[tmpItr] << "\n";
+            }
+        }
+        if (nmLep){
+            if (debug) std::cout << "Doing muon cand cut\n";
+
+            dolCandCut(Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,nmLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut,debug);
+
+            //domCandCut(Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,neLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut);
+            for (UInt_t muonCandChargeInd=0;muonCandChargeInd<muonCandChargeAr.size();muonCandChargeInd++){
+                if (muonCandChargeAr[muonCandChargeInd] == -1) negMuonCands += 1;
+                else posMuonCands += 1;
+            }
+            totMuonCands = std::min(negMuonCands,posMuonCands);
+            if (totMuonCands >= 1) enoughMuonCands = true;
+        }
+
+
+        enoughLepCands = false;
+        if (totElecCands || totMuonCands) enoughLepCands = true;
+        if (debug){
+            std::cout << "negElecCands " << negElecCands << " posElecCands " << posElecCands << " totElecCands " << totElecCands << "\n";
+            std::cout << "nmLep " << nmLep << " negMuonCands " << negMuonCands << " posMuonCands " << posMuonCands << " totMuonCands " << totMuonCands << "\n";
+            std::cout << "enoughLepCands " << enoughLepCands << "\n";
+        }
+        
+        
+        if (enoughLepCands){ //Check there are enough lep cands after candidate cuts
+            //passesCandCutsCtr += 1
+            Z1Cand = false;
+            difFromZMassOne = 1000.;
+            Z1LeadItr = -1;
+            Z1TrailingItr = -1;
+            Z1LeadPt = 0.;
+            Z1TrailingPt = 0.;
+            Z1IsMuon = false;
+            Z1LeadCharge = 0;
+            Z1TrailingCharge = 0;
+            Z1LeadIso = 0;
+            Z1TrailingIso = 0;
+            std::vector<std::array<UInt_t,2>> elecPassesZ2CutsAr;
+            if (enoughElecCands){ //If enough elec cands, run Z1 cuts
+            
+                dolZ1CutWithTree(Electron_ptL,elecCandIndAr,elecCandVecAr,elecCandChargeAr,elecPassesZ2CutsAr,Z1IsMuon,false,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,Z1LeadPt,Z1TrailingPt,Z1LeadItr,Z1TrailingItr,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,difFromZMassOne,SemiLepInvMass,debug);
+            }
+            std::vector<std::array<UInt_t,2>> muonPassesZ2CutsAr;
+            if (enoughMuonCands){ //If enough muon cands, run Z1 cuts
+                dolZ1CutWithTree(Muon_ptL,muonCandIndAr,muonCandVecAr,muonCandChargeAr,muonPassesZ2CutsAr,Z1IsMuon,true,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,Z1LeadPt,Z1TrailingPt,Z1LeadItr,Z1TrailingItr,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,difFromZMassOne,SemiLepInvMass,debug);
             }
             if (debug) std::cout <<"Z1LeadItr " << Z1LeadItr << " Z1TrailingItr " << Z1TrailingItr << " Z1LeadPt " << Z1LeadPt << " Z1TrailingPt " << Z1TrailingPt << " Z1LeadVec " << Z1LeadVec << " Z1TrailingVec " << Z1TrailingVec << " Z1LeadCharge " << Z1LeadCharge << " Z1TrailingCharge " << Z1TrailingCharge << " Z1IsMuon " << Z1IsMuon << " difFromZMassOne " << difFromZMassOne << "\n";
             //if (Z1LeadItr<0) {
