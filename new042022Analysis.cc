@@ -126,9 +126,12 @@ void new042022Analysis(string datasetString){
     if (scratchDown) strAdd ="/afs/crc.nd.edu/user/d/dlutton/Public/condorStuff/NanoAODToHistos/tmpHoldForNanoAODWithoutScratch/";
     else strAdd ="/scratch365/dlutton/HLTFilteredFiles/";
 
+    float totWeight = 1;
+
     if (MGC2VEtaDifCut){
         saveName = "C2VEtaDifCut";
         isBackground = false;
+        totWeight = 643.339314999999;
         //std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisC2VEtaDifCut.root";
         std::string tmpStrWithPath = "HLTFilteredForAnalysisC2VEtaDifCut.root";
         fileAr.push_back(tmpStrWithPath);
@@ -220,6 +223,7 @@ void new042022Analysis(string datasetString){
     else if (MGSM){
         saveName = "SM";
         isBackground = false;
+        totWeight = 11.713886530000012;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSM.root";
         fileAr.push_back(tmpStrWithPath);
         
@@ -227,7 +231,7 @@ void new042022Analysis(string datasetString){
     else if (ttHToBBBackground){
         //saveName = "ttHToBB";
         crossSection = 0.5071*0.582;
-
+        totWeight = 4834432.8;
         saveName = "ttHToBB";
         
         isBackground = true;
@@ -241,6 +245,7 @@ void new042022Analysis(string datasetString){
         crossSection = 0.5407;
         saveName = "ttZJets";
         isBackground = true;
+        totWeight = 32793821;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisttZJets.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -248,6 +253,7 @@ void new042022Analysis(string datasetString){
         //saveName = "DY";
         
         crossSection = 5364;
+        totWeight = 96233326;
         saveName = "DY";
 
         isBackground = true;
@@ -258,6 +264,7 @@ void new042022Analysis(string datasetString){
         //saveName = "QCDPT170to300";
         
         crossSection = 103300.0;
+        totWeight = 29478000;
 
         saveName = "QCDPT170to300";
         
@@ -269,6 +276,7 @@ void new042022Analysis(string datasetString){
         //saveName = "QCDPT300to470";
         
         crossSection = 6826.0;
+        totWeight = 57868000;
 
         saveName = "QCDPT300to470";
         
@@ -280,6 +288,7 @@ void new042022Analysis(string datasetString){
         //saveName = "QCDPT470to600";
         
         crossSection = 552.6;
+        totWeight = 51062083.800000004;
         
         saveName = "QCDPT470to600";
 
@@ -291,6 +300,7 @@ void new042022Analysis(string datasetString){
         //saveName = "QCDPT600to800";
         
         crossSection = 156.6;
+        totWeight = 66914000;
 
         saveName = "QCDPT600to800";
         
@@ -302,6 +312,7 @@ void new042022Analysis(string datasetString){
         //saveName = "QCDPT800to1000";
         
         crossSection = 26.32;
+        totWeight = 36830000;
 
         saveName = "QCDPT800to1000";
         
@@ -313,6 +324,8 @@ void new042022Analysis(string datasetString){
         //saveName = "QCDPT1000to1400";
         
         crossSection = 7.5;
+        totWeight = 19664000;
+
 
         saveName = "QCDPT1000to1400";
         
@@ -324,6 +337,7 @@ void new042022Analysis(string datasetString){
         //saveName = "QCDPT1400to1800";
         
         crossSection = 0.6479;
+        totWeight = 10982000;
 
         saveName = "QCDPT1400to1800";
         
@@ -335,6 +349,7 @@ void new042022Analysis(string datasetString){
         //saveName = "QCDPT1800to2400";
         
         crossSection = 0.08715;
+        totWeight = 5491000;
 
         saveName = "QCDPT1800to2400";
         
@@ -346,6 +361,7 @@ void new042022Analysis(string datasetString){
         //saveName = "QCDPT2400to3200";
         
         crossSection = 0.005242;
+        totWeight = 2931000;
 
         saveName = "QCDPT2400to3200";
         
@@ -357,6 +373,7 @@ void new042022Analysis(string datasetString){
         //saveName = "QCDPT3200toInf";
         
         crossSection = 0.0001349;
+        totWeight = 1000000;
 
         saveName = "QCDPT3200toInf";
         
@@ -368,6 +385,7 @@ void new042022Analysis(string datasetString){
         //saveName = "QCDPT3200toInf";
         
         crossSection = 722.8;
+        totWeight = 610815599000;
 
         saveName = "TTJets";
         
@@ -412,6 +430,7 @@ void new042022Analysis(string datasetString){
         //saveName = "QCDPT3200toInf";
         
         crossSection = 3.74;
+        totWeight = 68767088;
 
         saveName = "ST_s_Channel";
         
@@ -423,6 +442,7 @@ void new042022Analysis(string datasetString){
         //saveName = "QCDPT3200toInf";
         
         crossSection = 69.09;
+        totWeight = 6014529940;
 
         saveName = "ST_t_ChannelAntiTop";
         
@@ -434,6 +454,7 @@ void new042022Analysis(string datasetString){
         //saveName = "QCDPT3200toInf";
         
         crossSection = 115.3;
+        totWeight = 18955976000;
 
         saveName = "ST_t_ChannelTop";
         
@@ -445,6 +466,7 @@ void new042022Analysis(string datasetString){
         //saveName = "QCDPT3200toInf";
         
         crossSection = 4.561;
+        totWeight = 137620470.60000002;
 
         saveName = "ZZTo2Q2Nu";
         
@@ -456,6 +478,7 @@ void new042022Analysis(string datasetString){
         //saveName = "QCDPT3200toInf";
         
         crossSection = 10.48;
+        totWeight = 110795338.10000001;
 
         saveName = "WWTo2L2Nu";
         
@@ -467,6 +490,7 @@ void new042022Analysis(string datasetString){
         //saveName = "QCDPT3200toInf";
         
         crossSection = 5.052;
+        totWeight = 83145925.5;
 
         saveName = "WZTo3LNu";
         
@@ -479,6 +503,7 @@ void new042022Analysis(string datasetString){
         fileAr.push_back("./HLTFilteredForAnalysistestRun.root");
         useLHETree = true;
         useFJGenMatchTree = true;
+        totWeight = 1;
         
     }
     else if (LaraTest){
@@ -616,22 +641,31 @@ void new042022Analysis(string datasetString){
 
         fatJetZTagCut = fatJetZTagWeakCut;
     }
-
-    std::string outFileStr = "BeforeCutEvents"+saveName+".root";
+    std::string outFileStr;
+    if (weakCuts){
+        outFileStr = "BeforeWeakCutEvents"+saveName+".root";
+    }
+    else{
+        outFileStr = "BeforeCutEvents"+saveName+".root";
+    }
+    //std::string outFileStr = "BeforeCutEvents"+saveName+".root";
     std::cout << "OutFile: " << outFileStr << "\n";
     TFile *outFile = new TFile(outFileStr.c_str(),"RECREATE");
 
+    Double_t genLepWeightL;
     std::vector<Float_t> LepInvMassL;
 
     TTree *BeforeCutLepInvMassTree = new TTree("BeforeCutLepInvMassTree", "BeforeCutLepInvMassTree");
-    
+
+    BeforeCutLepInvMassTree->Branch("genLepWeightL",&genLepWeightL,"genLepWeightL/D");
     BeforeCutLepInvMassTree->Branch("LepInvMassL",&LepInvMassL);
     
-
+    Double_t genSemiLepWeightL;
     std::vector<Float_t> SemiLepInvMassL;
 
     TTree *BeforeCutSemiLepInvMassTree = new TTree("BeforeCutSemiLepInvMassTree", "BeforeCutSemiLepInvMassTree");
     
+    BeforeCutSemiLepInvMassTree->Branch("genSemiLepWeightL",&genSemiLepWeightL,"genSemiLepWeightL/D");
     BeforeCutSemiLepInvMassTree->Branch("SemiLepInvMassL",&SemiLepInvMassL);
     
 
@@ -868,6 +902,7 @@ void new042022Analysis(string datasetString){
             debug);
             if (LepInvMass.size()) {
                 LepInvMassL = LepInvMass;
+                genLepWeightL = *genWeightL;
                 BeforeCutLepInvMassTree->Fill();
                 LepInvMassL.clear();
             }
@@ -914,6 +949,7 @@ void new042022Analysis(string datasetString){
                  debug);
                 if (SemiLepInvMass.size()) {
                     SemiLepInvMassL = SemiLepInvMass;
+                    genSemiLepWeightL = *genWeightL;
                     BeforeCutSemiLepInvMassTree->Fill();
                     SemiLepInvMassL.clear();
                 }
