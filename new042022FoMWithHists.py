@@ -26,7 +26,7 @@ normalizeBackgroundsTogether = True
 sumQCD = True
 isQCDAr = []
 altNameAr = []
-
+"""
 MGSM = True
 MGEFT = False
 MGC2VEtaDifCut = True
@@ -44,6 +44,18 @@ QCDPT1800to2400Background = True
 QCDPT2400to3200Background = True
 QCDPT3200toInfBackground = True
 """
+TTJetsBackground = False
+TTToHadronicBackground = False
+TTTo2L2NuBackground = False
+TTToSemiLeptonicBackground = False
+ST_s_ChannelBackground = False
+ST_t_ChannelAntiTopBackground = False
+ST_t_ChannelTopBackground = False
+ZZTo2Q2NuBackground = False
+WWTo2L2NuBackground = False
+WZTo3LNuBackground = False
+
+
 MGSM = True
 MGEFT = False
 MGC2VEtaDifCut = True
@@ -61,17 +73,8 @@ QCDPT1400to1800Background = False
 QCDPT1800to2400Background = False
 QCDPT2400to3200Background = False
 QCDPT3200toInfBackground = False
-"""
-TTJetsBackground = True
-TTToHadronicBackground = False
-TTTo2L2NuBackground = False
-TTToSemiLeptonicBackground = False
-ST_s_ChannelBackground = True
-ST_t_ChannelAntiTopBackground = True
-ST_t_ChannelTopBackground = True
-ZZTo2Q2NuBackground = True
-WWTo2L2NuBackground = True
-WZTo3LNuBackground = True
+
+
 
 """
 
@@ -3182,6 +3185,9 @@ elif saveName == "SL":
 elif saveName == "Lep" or saveName == "Had":
     logOrNot= False
     chanName = saveName
+
+if weakCuts:
+    chanName = "WeakCuts_"+chanName
 
 print(logOrNot)
 #makeFoMPlots(evPassVarCutAr,varCutSignalPassAr,varCutBackgroundPassAr,weightsSignalAr,weightsBackgroundAr,varCutRangeAr,cutAmnt,cutNameAr,nameAr,skipEvPassGraphs,saveName,isSignalAr,isQCDAr,anyQCD,chanName)

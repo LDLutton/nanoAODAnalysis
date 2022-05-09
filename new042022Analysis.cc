@@ -653,14 +653,14 @@ void new042022Analysis(string datasetString){
     TFile *outFile = new TFile(outFileStr.c_str(),"RECREATE");
 
     Double_t genLepWeightL;
-    //std::vector<Float_t> LepInvMassL;
-    Float_t LepInvMassL;
+    std::vector<Float_t> LepInvMassL;
+    //Float_t LepInvMassL;
 
     TTree *BeforeCutLepInvMassTree = new TTree("BeforeCutLepInvMassTree", "BeforeCutLepInvMassTree");
 
     BeforeCutLepInvMassTree->Branch("genLepWeightL",&genLepWeightL,"genLepWeightL/D");
-    //BeforeCutLepInvMassTree->Branch("LepInvMassL",&LepInvMassL);
-    BeforeCutLepInvMassTree->Branch("LepInvMassL",&LepInvMassL,"LepInvMassL/F");
+    BeforeCutLepInvMassTree->Branch("LepInvMassL",&LepInvMassL);
+    //BeforeCutLepInvMassTree->Branch("LepInvMassL",&LepInvMassL,"LepInvMassL/F");
     
     Double_t genSemiLepWeightL;
     //std::vector<Float_t> SemiLepInvMassL;
@@ -907,21 +907,38 @@ void new042022Analysis(string datasetString){
 
             
 
-            if (LepInvMass.size()) {
-                Float_t closestInvMassDif = 999999.;
-                Float_t tmpInvMass = 0.;
+            if (LepInvMass.size() >= 2) {
+                /*
+                Float_t closestInvMassDifOne = 999999.;
+                Float_t tmpInvMassOne = 0.;
+                Float_t closestInvMassDifTwo = 999999.;
+                Float_t tmpInvMassTwo = 0.;
+                */
+                std::vector<Float_t> tmpInvMassVec;
+                tmpInvMassVec.push_back(0.);
+                tmpInvMassVec.push_back(0.);
+                std::vector<Float_t> closestInvMassDifVec;
+                closestInvMassDifVec.push_back(999999.);
+                closestInvMassDifVec.push_back(999999.);
                 for (UInt_t LepInvMassInd=0;LepInvMassInd<LepInvMass.size();LepInvMassInd++){
                     Float_t tmpInvMassDif = abs(ZMass - LepInvMass[LepInvMassInd]);
-                    if (tmpInvMassDif < closestInvMassDif) {
-                        closestInvMassDif = tmpInvMassDif;
-                        tmpInvMass = LepInvMass[LepInvMassInd];
+                    if (tmpInvMassDif < closestInvMassDifVec[0]) {
+                        tmpInvMassVec[1] = tmpInvMassVec[0];
+                        closestInvMassDifVec[1] = closestInvMassDifVec[0];
+                        tmpInvMassVec[0] = LepInvMass[LepInvMassInd];
+                        closestInvMassDifVec[0] = tmpInvMassDif;
+
+                    }
+                    else if (tmpInvMassDif < closestInvMassDifVec[1]) {
+                        closestInvMassDifVec[1] = tmpInvMassDif;
+                        tmpInvMassVec[1] = LepInvMass[LepInvMassInd];
                     }
                 }
                 //LepInvMassL = LepInvMass;
-                LepInvMassL = tmpInvMass;
+                LepInvMassL = tmpInvMassVec;
                 genLepWeightL = *genWeightL;
                 BeforeCutLepInvMassTree->Fill();
-                //LepInvMassL.clear();
+                LepInvMassL.clear();
             }
 
             Int_t FJInd;
