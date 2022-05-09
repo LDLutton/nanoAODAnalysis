@@ -850,7 +850,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         TTreeReaderArray<Float_t> Electron_dr03HcalDepth1TowerSumEt(myEventsReader, "Electron_dr03HcalDepth1TowerSumEt");
         TTreeReaderArray<Float_t> Electron_pfRelIso03_all(myEventsReader, "Electron_pfRelIso03_all");
         TTreeReaderArray<Float_t> Electron_sip3d(myEventsReader, "Electron_sip3d");
-        TTreeReaderArray<Float_t> Electron_cutBased(myEventsReader, "Electron_cutBased");
+        TTreeReaderArray<Int_t> Electron_cutBased(myEventsReader, "Electron_cutBased");
 
         //Muons
         TTreeReaderValue<UInt_t> nMuon(myEventsReader, "nMuon");
@@ -861,7 +861,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         TTreeReaderArray<Float_t> Muon_pt(myEventsReader, "Muon_pt");
         TTreeReaderArray<Float_t> Muon_pfRelIso03_all(myEventsReader, "Muon_pfRelIso03_all");
         TTreeReaderArray<Float_t> Muon_sip3d(myEventsReader, "Muon_sip3d");
-        TTreeReaderArray<Float_t> Muon_tightId(myEventsReader, "Muon_tightId");
+        TTreeReaderArray<Bool_t> Muon_tightId(myEventsReader, "Muon_tightId");
 
 
 
