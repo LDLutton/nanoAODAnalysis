@@ -850,6 +850,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         TTreeReaderArray<Float_t> Electron_dr03HcalDepth1TowerSumEt(myEventsReader, "Electron_dr03HcalDepth1TowerSumEt");
         TTreeReaderArray<Float_t> Electron_pfRelIso03_all(myEventsReader, "Electron_pfRelIso03_all");
         TTreeReaderArray<Float_t> Electron_sip3d(myEventsReader, "Electron_sip3d");
+        TTreeReaderArray<Float_t> Electron_cutBased(myEventsReader, "Electron_cutBased");
 
         //Muons
         TTreeReaderValue<UInt_t> nMuon(myEventsReader, "nMuon");
@@ -1055,7 +1056,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                 Electron_dr03HcalDepth1TowerSumEtL.push_back(Electron_dr03HcalDepth1TowerSumEt[nElectronItr]);
                 Electron_pfRelIso03_allL.push_back(Electron_pfRelIso03_all[nElectronItr]);
                 Electron_sip3dL.push_back(Electron_sip3d[nElectronItr]);
-                Electron_cutBasedL.push_back(Electron_cutBasedL[nElectronItr]);
+                Electron_cutBasedL.push_back(Electron_cutBased[nElectronItr]);
             }
 
             //Muons
@@ -1099,7 +1100,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
             Electron_dr03HcalDepth1TowerSumEtL.clear();
             Electron_pfRelIso03_allL.clear();
             Electron_sip3dL.clear();
-            Electron_cutBased.clear();
+            Electron_cutBasedL.clear();
             
 
             Muon_etaL.clear();
