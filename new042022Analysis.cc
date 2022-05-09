@@ -653,20 +653,24 @@ void new042022Analysis(string datasetString){
     TFile *outFile = new TFile(outFileStr.c_str(),"RECREATE");
 
     Double_t genLepWeightL;
-    std::vector<Float_t> LepInvMassL;
+    //std::vector<Float_t> LepInvMassL;
+    Float_t LepInvMassL;
 
     TTree *BeforeCutLepInvMassTree = new TTree("BeforeCutLepInvMassTree", "BeforeCutLepInvMassTree");
 
     BeforeCutLepInvMassTree->Branch("genLepWeightL",&genLepWeightL,"genLepWeightL/D");
-    BeforeCutLepInvMassTree->Branch("LepInvMassL",&LepInvMassL);
+    //BeforeCutLepInvMassTree->Branch("LepInvMassL",&LepInvMassL);
+    BeforeCutLepInvMassTree->Branch("LepInvMassL",&LepInvMassL,"LepInvMassL/F");
     
     Double_t genSemiLepWeightL;
-    std::vector<Float_t> SemiLepInvMassL;
+    //std::vector<Float_t> SemiLepInvMassL;
+    Float_t SemiLepInvMassL;
 
     TTree *BeforeCutSemiLepInvMassTree = new TTree("BeforeCutSemiLepInvMassTree", "BeforeCutSemiLepInvMassTree");
     
     BeforeCutSemiLepInvMassTree->Branch("genSemiLepWeightL",&genSemiLepWeightL,"genSemiLepWeightL/D");
-    BeforeCutSemiLepInvMassTree->Branch("SemiLepInvMassL",&SemiLepInvMassL);
+    //BeforeCutSemiLepInvMassTree->Branch("SemiLepInvMassL",&SemiLepInvMassL);
+    BeforeCutSemiLepInvMassTree->Branch("SemiLepInvMassL",&SemiLepInvMassL,"SemiLepInvMassL/F");
     
 
     std::cout << "Going into file loop.\n";
@@ -900,11 +904,24 @@ void new042022Analysis(string datasetString){
             Z1LeadSIP,Electron_sip3dL,Z1TrailingSIP,Z2LeadSIP,Muon_sip3dL,Z2TrailingSIP,SIPCut,passLepCut,passesCutsBool,passedAsLepBool,
             LepInvMass,
             debug);
+
+            
+
             if (LepInvMass.size()) {
-                LepInvMassL = LepInvMass;
+                Float_t closestInvMassDif = 999999.;
+                Float_t tmpInvMass = 0.;
+                for (UInt_t LepInvMassInd=0;LepInvMassInd<LepInvMass.size();LepInvMassInd++){
+                    Float_t tmpInvMassDif = abs(ZMass - LepInvMass[LepInvMassInd]);
+                    if (tmpInvMassDif < closestInvMassDif) {
+                        closestInvMassDif = tmpInvMassDif;
+                        tmpInvMass = LepInvMass[LepInvMassInd];
+                    }
+                }
+                //LepInvMassL = LepInvMass;
+                LepInvMassL = tmpInvMass;
                 genLepWeightL = *genWeightL;
                 BeforeCutLepInvMassTree->Fill();
-                LepInvMassL.clear();
+                //LepInvMassL.clear();
             }
 
             Int_t FJInd;
@@ -947,12 +964,37 @@ void new042022Analysis(string datasetString){
                  passSemiLepCut,passesCutsBool,passedAsSemiLepBool,
                  SemiLepInvMass,
                  debug);
+                /*
                 if (SemiLepInvMass.size()) {
                     SemiLepInvMassL = SemiLepInvMass;
                     genSemiLepWeightL = *genWeightL;
                     BeforeCutSemiLepInvMassTree->Fill();
                     SemiLepInvMassL.clear();
                 }
+                */
+
+
+                if (SemiLepInvMass.size()) {
+                    Float_t closestInvMassDif = 999999.;
+                    Float_t tmpInvMass = 0.;
+                    for (UInt_t SemiLepInvMassInd=0;SemiLepInvMassInd<SemiLepInvMass.size();SemiLepInvMassInd++){
+                        Float_t tmpInvMassDif = abs(ZMass - SemiLepInvMass[SemiLepInvMassInd]);
+                        if (tmpInvMassDif < closestInvMassDif) {
+                            closestInvMassDif = tmpInvMassDif;
+                            tmpInvMass = SemiLepInvMass[SemiLepInvMassInd];
+                        }
+                    }
+                    //SemiLepInvMassL = SemiLepInvMass;
+                    SemiLepInvMassL = tmpInvMass;
+                    genSemiLepWeightL = *genWeightL;
+                    BeforeCutSemiLepInvMassTree->Fill();
+                    //SemiLepInvMassL.clear();
+                }
+
+
+
+
+
                 if (enoughLepCands){
                     passEnoughLepsInSemiLepChannelCtr += 1;
                     passEnoughLepsInSemiLepChannelWeightedCtr += tmpGenWeights;
