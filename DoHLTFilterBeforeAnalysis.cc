@@ -666,6 +666,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     std::vector<Float_t> Electron_dr03HcalDepth1TowerSumEtL;
     std::vector<Float_t> Electron_pfRelIso03_allL;
     std::vector<Float_t> Electron_sip3dL;
+    std::vector<Int_t> Electron_cutBasedL;
 
     //Muons
     UInt_t nMuonL;
@@ -676,6 +677,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     std::vector<Float_t> Muon_ptL;
     std::vector<Float_t> Muon_pfRelIso03_allL;
     std::vector<Float_t> Muon_sip3dL;
+    std::vector<Bool_t> Muon_tightIdL;
 
 
     TTree *FilteredEventsTree = new TTree("FilteredEventsTree", "FilteredEventsTree");
@@ -713,6 +715,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     FilteredEventsTree->Branch("Electron_dr03HcalDepth1TowerSumEtL",&Electron_dr03HcalDepth1TowerSumEtL);
     FilteredEventsTree->Branch("Electron_pfRelIso03_allL",&Electron_pfRelIso03_allL);
     FilteredEventsTree->Branch("Electron_sip3dL",&Electron_sip3dL);
+    FilteredEventsTree->Branch("Electron_cutBasedL",&Electron_cutBasedL);
 
     //Muons
     FilteredEventsTree->Branch("nMuonL",&nMuonL,"nMuonL/i");
@@ -723,6 +726,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     FilteredEventsTree->Branch("Muon_ptL",&Muon_ptL);
     FilteredEventsTree->Branch("Muon_pfRelIso03_allL",&Muon_pfRelIso03_allL);
     FilteredEventsTree->Branch("Muon_sip3dL",&Muon_sip3dL);
+    FilteredEventsTree->Branch("Muon_tightIdL",&Muon_tightIdL);
 
     Double_t sumOfGenWeights = 0;
 
@@ -856,6 +860,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         TTreeReaderArray<Float_t> Muon_pt(myEventsReader, "Muon_pt");
         TTreeReaderArray<Float_t> Muon_pfRelIso03_all(myEventsReader, "Muon_pfRelIso03_all");
         TTreeReaderArray<Float_t> Muon_sip3d(myEventsReader, "Muon_sip3d");
+        TTreeReaderArray<Float_t> Muon_tightId(myEventsReader, "Muon_tightId");
 
 
 
@@ -1050,6 +1055,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                 Electron_dr03HcalDepth1TowerSumEtL.push_back(Electron_dr03HcalDepth1TowerSumEt[nElectronItr]);
                 Electron_pfRelIso03_allL.push_back(Electron_pfRelIso03_all[nElectronItr]);
                 Electron_sip3dL.push_back(Electron_sip3d[nElectronItr]);
+                Electron_cutBasedL.push_back(Electron_cutBasedL[nElectronItr]);
             }
 
             //Muons
@@ -1062,6 +1068,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                 Muon_ptL.push_back(Muon_pt[nMuonItr]);
                 Muon_pfRelIso03_allL.push_back(Muon_pfRelIso03_all[nMuonItr]);
                 Muon_sip3dL.push_back(Muon_sip3d[nMuonItr]);
+                Muon_tightIdL.push_back(Muon_tightId[nMuonItr]);
             }
 
             FilteredEventsTree->Fill();
@@ -1092,6 +1099,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
             Electron_dr03HcalDepth1TowerSumEtL.clear();
             Electron_pfRelIso03_allL.clear();
             Electron_sip3dL.clear();
+            Electron_cutBased.clear();
             
 
             Muon_etaL.clear();
@@ -1101,6 +1109,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
             Muon_ptL.clear();
             Muon_pfRelIso03_allL.clear();
             Muon_sip3dL.clear();
+            Muon_tightIdL.clear();
                 
 
         }
