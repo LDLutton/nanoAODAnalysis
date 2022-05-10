@@ -308,7 +308,7 @@ void new032022SemiLepInvMassCutHighCutFoMAnalysis(string datasetString){
         saveName = "QCDPT470to600";
 
         isBackground = true;
-        totWeight = 51062083.800000004;
+        totWeight = 52448083.800000004;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT470to600.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -464,7 +464,7 @@ void new032022SemiLepInvMassCutHighCutFoMAnalysis(string datasetString){
         saveName = "ST_t_ChannelAntiTop";
         
         isBackground = true;
-        totWeight = 6014529940;
+        totWeight = 6114949140;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisST_t_ChannelAntiTop.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -677,6 +677,7 @@ void new032022SemiLepInvMassCutHighCutFoMAnalysis(string datasetString){
         TTreeReaderArray<Float_t> Electron_dr03HcalDepth1TowerSumEtL(myEventsReader, "Electron_dr03HcalDepth1TowerSumEtL");
         TTreeReaderArray<Float_t> Electron_pfRelIso03_allL(myEventsReader, "Electron_pfRelIso03_allL");
         TTreeReaderArray<Float_t> Electron_sip3dL(myEventsReader, "Electron_sip3dL");
+        TTreeReaderArray<Int_t> Electron_cutBasedL(myEventsReader, "Electron_cutBasedL");
 
         //Muons
         TTreeReaderValue<UInt_t> nMuonL(myEventsReader, "nMuonL");
@@ -687,6 +688,7 @@ void new032022SemiLepInvMassCutHighCutFoMAnalysis(string datasetString){
         TTreeReaderArray<Float_t> Muon_ptL(myEventsReader, "Muon_ptL");
         TTreeReaderArray<Float_t> Muon_pfRelIso03_allL(myEventsReader, "Muon_pfRelIso03_allL");
         TTreeReaderArray<Float_t> Muon_sip3dL(myEventsReader, "Muon_sip3dL");
+        TTreeReaderArray<Bool_t> Muon_tightIdL(myEventsReader, "Muon_tightIdL");
 
         TTreeReader myEvNumReader("evNumTree", tmpfile);
         TTreeReaderValue<UInt_t> nEv(myEvNumReader, "nEv");
@@ -840,8 +842,10 @@ void new032022SemiLepInvMassCutHighCutFoMAnalysis(string datasetString){
 
             if (debug) cout << "trying Leptonic\n";
             tryingLepCtr += 1;
-                
-                
+            std::vector<Bool_t> elecIDVec;
+            findElecIDBools(elecIDVec,neLep,Electron_cutBasedL);    
+            std::vector<Bool_t> muonIDVec;
+            findMuonIDBools(muonIDVec,nmLep,Muon_tightIdL);  
                 
             doLeptonicCuts(Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL, neLep, elecCandIndAr, elecCandVecAr, elecCandChargeAr,negElecCands,posElecCands,totElecCands,enoughElecCands,negMuonCands,posMuonCands,totMuonCands,enoughMuonCands,enoughLepCands,ePtCut,eEtaCut,
             Muon_etaL,Muon_massL, Muon_chargeL,Muon_phiL,Muon_ptL, nmLep, muonCandIndAr, muonCandVecAr, muonCandChargeAr,mPtCut,mEtaCut,
@@ -853,6 +857,7 @@ void new032022SemiLepInvMassCutHighCutFoMAnalysis(string datasetString){
             Electron_dr03EcalRecHitSumEtL,Electron_dr03TkSumPtL,Electron_dr03HcalDepth1TowerSumEtL,Electron_pfRelIso03_allL,
             Z1LeadIso,Muon_pfRelIso03_allL,Z1TrailingIso,Z2LeadIso,Z2TrailingIso,lepIsoCut,
             Z1LeadSIP,Electron_sip3dL,Z1TrailingSIP,Z2LeadSIP,Muon_sip3dL,Z2TrailingSIP,SIPCut,passLepCut,passesCutsBool,passedAsLepBool,
+            elecIDVec,muonIDVec,
             debug);
 
             
@@ -888,6 +893,7 @@ void new032022SemiLepInvMassCutHighCutFoMAnalysis(string datasetString){
                     Electron_dr03EcalRecHitSumEtL,Electron_dr03TkSumPtL,Electron_dr03HcalDepth1TowerSumEtL,Electron_pfRelIso03_allL,
                     Z1LeadIso,Muon_pfRelIso03_allL,Z1TrailingIso,lepIsoCut
                     passSemiLepCut,passesCutsBool,passedAsSemiLepBool,
+                    elecIDVec,muonIDVec,
                     debug);
                 }
                 if (debug) std::cout << "Test\n";
