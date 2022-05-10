@@ -667,6 +667,12 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     std::vector<Float_t> Electron_pfRelIso03_allL;
     std::vector<Float_t> Electron_sip3dL;
     std::vector<Int_t> Electron_cutBasedL;
+    std::vector<Bool_t> Electron_mvaFall17V2Iso_WP80L;
+    std::vector<Bool_t> Electron_mvaFall17V2Iso_WP90L;
+    std::vector<Bool_t> Electron_mvaFall17V2Iso_WPLL;
+    std::vector<Bool_t> Electron_mvaFall17V2noIso_WP80L;
+    std::vector<Bool_t> Electron_mvaFall17V2noIso_WP90L;
+    std::vector<Bool_t> Electron_mvaFall17V2noIso_WPLL;
 
     //Muons
     UInt_t nMuonL;
@@ -678,6 +684,8 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     std::vector<Float_t> Muon_pfRelIso03_allL;
     std::vector<Float_t> Muon_sip3dL;
     std::vector<Bool_t> Muon_tightIdL;
+    std::vector<Bool_t> Muon_mediumIdL;
+    std::vector<Bool_t> Muon_looseIdL;
 
 
     TTree *FilteredEventsTree = new TTree("FilteredEventsTree", "FilteredEventsTree");
@@ -716,6 +724,13 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     FilteredEventsTree->Branch("Electron_pfRelIso03_allL",&Electron_pfRelIso03_allL);
     FilteredEventsTree->Branch("Electron_sip3dL",&Electron_sip3dL);
     FilteredEventsTree->Branch("Electron_cutBasedL",&Electron_cutBasedL);
+    FilteredEventsTree->Branch("Electron_mvaFall17V2Iso_WP80L",&Electron_mvaFall17V2Iso_WP80L);
+    FilteredEventsTree->Branch("Electron_mvaFall17V2Iso_WP90L",&Electron_mvaFall17V2Iso_WP90L);
+    FilteredEventsTree->Branch("Electron_mvaFall17V2Iso_WPLL",&Electron_mvaFall17V2Iso_WPLL);
+    FilteredEventsTree->Branch("Electron_mvaFall17V2noIso_WP80L",&Electron_mvaFall17V2noIso_WP80L);
+    FilteredEventsTree->Branch("Electron_mvaFall17V2noIso_WP90L",&Electron_mvaFall17V2noIso_WP90L);
+    FilteredEventsTree->Branch("Electron_mvaFall17V2noIso_WPLL",&Electron_mvaFall17V2noIso_WPLL);
+
 
     //Muons
     FilteredEventsTree->Branch("nMuonL",&nMuonL,"nMuonL/i");
@@ -727,6 +742,8 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     FilteredEventsTree->Branch("Muon_pfRelIso03_allL",&Muon_pfRelIso03_allL);
     FilteredEventsTree->Branch("Muon_sip3dL",&Muon_sip3dL);
     FilteredEventsTree->Branch("Muon_tightIdL",&Muon_tightIdL);
+    FilteredEventsTree->Branch("Muon_mediumIdL",&Muon_mediumIdL);
+    FilteredEventsTree->Branch("Muon_looseIdL",&Muon_looseIdL);
 
     Double_t sumOfGenWeights = 0;
 
@@ -851,6 +868,12 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         TTreeReaderArray<Float_t> Electron_pfRelIso03_all(myEventsReader, "Electron_pfRelIso03_all");
         TTreeReaderArray<Float_t> Electron_sip3d(myEventsReader, "Electron_sip3d");
         TTreeReaderArray<Int_t> Electron_cutBased(myEventsReader, "Electron_cutBased");
+        TTreeReaderArray<Bool_t> Electron_mvaFall17V2Iso_WP80(myEventsReader, "Electron_mvaFall17V2Iso_WP80");
+        TTreeReaderArray<Bool_t> Electron_mvaFall17V2Iso_WP90(myEventsReader, "Electron_mvaFall17V2Iso_WP90");
+        TTreeReaderArray<Bool_t> Electron_mvaFall17V2Iso_WPL(myEventsReader, "Electron_mvaFall17V2Iso_WPL");
+        TTreeReaderArray<Bool_t> Electron_mvaFall17V2noIso_WP80(myEventsReader, "Electron_mvaFall17V2noIso_WP80");
+        TTreeReaderArray<Bool_t> Electron_mvaFall17V2noIso_WP90(myEventsReader, "Electron_mvaFall17V2noIso_WP90");
+        TTreeReaderArray<Bool_t> Electron_mvaFall17V2noIso_WPL(myEventsReader, "Electron_mvaFall17V2noIso_WPL");
 
         //Muons
         TTreeReaderValue<UInt_t> nMuon(myEventsReader, "nMuon");
@@ -862,6 +885,8 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         TTreeReaderArray<Float_t> Muon_pfRelIso03_all(myEventsReader, "Muon_pfRelIso03_all");
         TTreeReaderArray<Float_t> Muon_sip3d(myEventsReader, "Muon_sip3d");
         TTreeReaderArray<Bool_t> Muon_tightId(myEventsReader, "Muon_tightId");
+        TTreeReaderArray<Bool_t> Muon_mediumId(myEventsReader, "Muon_mediumId");
+        TTreeReaderArray<Bool_t> Muon_looseId(myEventsReader, "Muon_looseId");
 
 
 
@@ -1057,6 +1082,12 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                 Electron_pfRelIso03_allL.push_back(Electron_pfRelIso03_all[nElectronItr]);
                 Electron_sip3dL.push_back(Electron_sip3d[nElectronItr]);
                 Electron_cutBasedL.push_back(Electron_cutBased[nElectronItr]);
+                Electron_mvaFall17V2Iso_WP80L.push_back(Electron_mvaFall17V2Iso_WP80[nElectronItr]);
+                Electron_mvaFall17V2Iso_WP90L.push_back(Electron_mvaFall17V2Iso_WP90[nElectronItr]);
+                Electron_mvaFall17V2Iso_WPLL.push_back(Electron_mvaFall17V2Iso_WPL[nElectronItr]);
+                Electron_mvaFall17V2noIso_WP80L.push_back(Electron_mvaFall17V2noIso_WP80[nElectronItr]);
+                Electron_mvaFall17V2noIso_WP90L.push_back(Electron_mvaFall17V2noIso_WP90[nElectronItr]);
+                Electron_mvaFall17V2noIso_WPLL.push_back(Electron_mvaFall17V2noIso_WPL[nElectronItr]);
             }
 
             //Muons
@@ -1070,6 +1101,8 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                 Muon_pfRelIso03_allL.push_back(Muon_pfRelIso03_all[nMuonItr]);
                 Muon_sip3dL.push_back(Muon_sip3d[nMuonItr]);
                 Muon_tightIdL.push_back(Muon_tightId[nMuonItr]);
+                Muon_mediumIdL.push_back(Muon_mediumId[nMuonItr]);
+                Muon_looseIdL.push_back(Muon_looseId[nMuonItr]);
             }
 
             FilteredEventsTree->Fill();
@@ -1101,6 +1134,12 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
             Electron_pfRelIso03_allL.clear();
             Electron_sip3dL.clear();
             Electron_cutBasedL.clear();
+            Electron_mvaFall17V2Iso_WP80L.clear();
+            Electron_mvaFall17V2Iso_WP90L.clear();
+            Electron_mvaFall17V2Iso_WPLL.clear();
+            Electron_mvaFall17V2noIso_WP80L.clear();
+            Electron_mvaFall17V2noIso_WP90L.clear();
+            Electron_mvaFall17V2noIso_WPLL.clear();
             
 
             Muon_etaL.clear();
@@ -1111,7 +1150,8 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
             Muon_pfRelIso03_allL.clear();
             Muon_sip3dL.clear();
             Muon_tightIdL.clear();
-                
+            Muon_mediumIdL.clear();
+            Muon_looseIdL.clear();
 
         }
     }
