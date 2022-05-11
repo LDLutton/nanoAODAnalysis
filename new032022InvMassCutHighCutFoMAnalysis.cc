@@ -677,7 +677,7 @@ void new032022InvMassCutHighCutFoMAnalysis(string datasetString){
         TTreeReaderArray<Float_t> Electron_dr03HcalDepth1TowerSumEtL(myEventsReader, "Electron_dr03HcalDepth1TowerSumEtL");
         TTreeReaderArray<Float_t> Electron_pfRelIso03_allL(myEventsReader, "Electron_pfRelIso03_allL");
         TTreeReaderArray<Float_t> Electron_sip3dL(myEventsReader, "Electron_sip3dL");
-        TTreeReaderArray<Int_t> Electron_cutBasedL(myEventsReader, "Electron_cutBasedL");
+        TTreeReaderArray<Bool_t> Electron_mvaFall17V2Iso_WP80L(myEventsReader, "Electron_mvaFall17V2Iso_WP80L");
 
         //Muons
         TTreeReaderValue<UInt_t> nMuonL(myEventsReader, "nMuonL");
@@ -857,10 +857,7 @@ void new032022InvMassCutHighCutFoMAnalysis(string datasetString){
 
                 if (debug) cout << "trying Leptonic\n";
                 tryingLepCtr += 1;
-                std::vector<Bool_t> elecIDVec;
-                findElecIDBools(elecIDVec,neLep,Electron_cutBasedL);    
-                std::vector<Bool_t> muonIDVec;
-                findMuonIDBools(muonIDVec,nmLep,Muon_tightIdL);  
+                 
                   
                     
                 
@@ -875,7 +872,7 @@ void new032022InvMassCutHighCutFoMAnalysis(string datasetString){
                 Electron_dr03EcalRecHitSumEtL,Electron_dr03TkSumPtL,Electron_dr03HcalDepth1TowerSumEtL,Electron_pfRelIso03_allL,
                 Z1LeadIso,Muon_pfRelIso03_allL,Z1TrailingIso,Z2LeadIso,Z2TrailingIso,lepIsoCut,
                 Z1LeadSIP,Electron_sip3dL,Z1TrailingSIP,Z2LeadSIP,Muon_sip3dL,Z2TrailingSIP,SIPCut,passLepCut,passesCutsBool,passedAsLepBool,
-                elecIDVec,muonIDVec,
+                Electron_mvaFall17V2Iso_WP80L,Muon_tightIdL,
                 debug);
 
                 Int_t FJInd;
@@ -898,7 +895,7 @@ void new032022InvMassCutHighCutFoMAnalysis(string datasetString){
                     Electron_dr03EcalRecHitSumEtL,Electron_dr03TkSumPtL,Electron_dr03HcalDepth1TowerSumEtL,Electron_pfRelIso03_allL,
                     Z1LeadIso,Muon_pfRelIso03_allL,Z1TrailingIso,lepIsoCut,
                     passSemiLepCut,passesCutsBool,passedAsSemiLepBool,
-                    elecIDVec,muonIDVec,
+                    Electron_mvaFall17V2Iso_WP80L,Muon_tightIdL,
                     debug);
                 }
                 if (debug) std::cout << "Test\n";

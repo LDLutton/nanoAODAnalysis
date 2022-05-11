@@ -89,10 +89,10 @@ void dolCandCut(TTreeReaderArray<Float_t> &Lep_eta,TTreeReaderArray<Float_t> &Le
 }
 
 
-void dolCandCutWithID(std::vector<Bool_t> lepIDVec,TTreeReaderArray<Float_t> &Lep_eta,TTreeReaderArray<Float_t> &Lep_mass,TTreeReaderArray<Int_t> &Lep_charge,TTreeReaderArray<Float_t> &Lep_phi,TTreeReaderArray<Float_t> &Lep_pt,UInt_t nlLep,std::vector<UInt_t> &lepCandIndAr,std::vector<ROOT::Math::PtEtaPhiMVector> &lepCandVecAr,std::vector<Int_t> &lepCandChargeAr,float lPtCut,float lEtaCut,bool debug){
+void dolCandCutWithID(TTreeReaderArray<Bool_t> &Lep_IdL,TTreeReaderArray<Float_t> &Lep_eta,TTreeReaderArray<Float_t> &Lep_mass,TTreeReaderArray<Int_t> &Lep_charge,TTreeReaderArray<Float_t> &Lep_phi,TTreeReaderArray<Float_t> &Lep_pt,UInt_t nlLep,std::vector<UInt_t> &lepCandIndAr,std::vector<ROOT::Math::PtEtaPhiMVector> &lepCandVecAr,std::vector<Int_t> &lepCandChargeAr,float lPtCut,float lEtaCut,bool debug){
     for (UInt_t lItr=0; lItr < nlLep; lItr++){
         if (debug) std::cout << "lItr " << lItr<< "lepIDVec[lItr]" << lepIDVec[lItr] << "\n";
-        if (!lepIDVec[lItr]){
+        if (!Lep_IdL[lItr]){
             continue;
         }
         float tmpPt = Lep_pt[lItr];
@@ -992,6 +992,7 @@ std::vector<std::array<UInt_t,2>> muonPassesZ2CutsAr,std::vector<std::array<UInt
     }
 }
 
+/*
 void findElecIDBools(std::vector<Bool_t> &elecIDVec,UInt_t neLep,TTreeReaderArray<Int_t> &Electron_cutBasedL){
     for (UInt_t lItr=0; lItr < neLep; lItr++){
         if (Electron_cutBasedL[lItr] >= 2){
@@ -1015,6 +1016,7 @@ void findMuonIDBools(std::vector<Bool_t> &muonIDVec,UInt_t nmLep,TTreeReaderArra
     }
 
 }
+*/
 
 void doLeptonicCuts(TTreeReaderArray<Float_t> &Electron_etaL,TTreeReaderArray<Float_t> &Electron_massL,TTreeReaderArray<Int_t> &Electron_chargeL,TTreeReaderArray<Float_t> &Electron_phiL,TTreeReaderArray<Float_t> &Electron_ptL,UInt_t neLep,std::vector<UInt_t> elecCandIndAr,std::vector<ROOT::Math::PtEtaPhiMVector> elecCandVecAr,std::vector<Int_t> elecCandChargeAr,UInt_t &negElecCands,UInt_t &posElecCands,UInt_t &totElecCands,bool enoughElecCands,UInt_t &negMuonCands,UInt_t &posMuonCands,UInt_t &totMuonCands,bool enoughMuonCands,bool enoughLepCands,float ePtCut,float eEtaCut,
 TTreeReaderArray<Float_t> &Muon_etaL,TTreeReaderArray<Float_t> &Muon_massL,TTreeReaderArray<Int_t> &Muon_chargeL,TTreeReaderArray<Float_t> &Muon_phiL,TTreeReaderArray<Float_t> &Muon_ptL,UInt_t nmLep,std::vector<UInt_t> muonCandIndAr,std::vector<ROOT::Math::PtEtaPhiMVector> muonCandVecAr,std::vector<Int_t> muonCandChargeAr,float mPtCut,float mEtaCut,
@@ -1026,12 +1028,12 @@ ROOT::Math::PtEtaPhiMVector &tmpZ1Vec,float &tmpZ1M,
 TTreeReaderArray<Float_t> &Electron_dr03EcalRecHitSumEtL,TTreeReaderArray<Float_t> &Electron_dr03TkSumPtL,TTreeReaderArray<Float_t> &Electron_dr03HcalDepth1TowerSumEtL,TTreeReaderArray<Float_t> &Electron_pfRelIso03_allL,
 float &Z1LeadIso,TTreeReaderArray<Float_t> &Muon_pfRelIso03_allL,float &Z1TrailingIso,float &Z2LeadIso,float &Z2TrailingIso,float lepIsoCut,
 float &Z1LeadSIP,TTreeReaderArray<Float_t> &Electron_sip3dL,float &Z1TrailingSIP,float &Z2LeadSIP,TTreeReaderArray<Float_t> &Muon_sip3dL,float &Z2TrailingSIP,float SIPCut,UInt_t &passLepCut,bool &passesCutsBool, bool &passedAsLepBool,
-std::vector<Bool_t> elecIDVec,std::vector<Bool_t> muonIDVec,
+TTreeReaderArray<Bool_t> &Elec_IdL,TTreeReaderArray<Bool_t> &Muon_IdL,
 bool debug
 ) {
     if (neLep){
         if (debug) std::cout << "Doing elec cand cut\n";
-        dolCandCutWithID(elecIDVec,Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut,debug);
+        dolCandCutWithID(Elec_IdL,Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut,debug);
         //doeCandCut(Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut);
         for (UInt_t elecCandChargeInd=0;elecCandChargeInd<elecCandChargeAr.size();elecCandChargeInd++){
             if (elecCandChargeAr[elecCandChargeInd] == -1) negElecCands += 1;
@@ -1054,7 +1056,7 @@ bool debug
     if (nmLep){
         if (debug) std::cout << "Doing muon cand cut\n";
 
-        dolCandCutWithID(muonIDVec,Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,nmLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut,debug);
+        dolCandCutWithID(Muon_IdL,Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,nmLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut,debug);
 
         //domCandCut(Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,neLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut);
         for (UInt_t muonCandChargeInd=0;muonCandChargeInd<muonCandChargeAr.size();muonCandChargeInd++){
@@ -1181,7 +1183,7 @@ bool &enoughLepCands,float invMassCutLow,float invMassCutHigh,float ptLeadCut,fl
 TTreeReaderArray<Float_t> &Electron_dr03EcalRecHitSumEtL,TTreeReaderArray<Float_t> &Electron_dr03TkSumPtL,TTreeReaderArray<Float_t> &Electron_dr03HcalDepth1TowerSumEtL,TTreeReaderArray<Float_t> &Electron_pfRelIso03_allL,
 float &Z1LeadIso,TTreeReaderArray<Float_t> &Muon_pfRelIso03_allL,float &Z1TrailingIso,float lepIsoCut,
 UInt_t &passSemiLepCut,bool &passesCutsBool,bool &passedAsSemiLepBool,
-std::vector<Bool_t> elecIDVec,std::vector<Bool_t> muonIDVec,
+TTreeReaderArray<Bool_t> &Elec_IdL,TTreeReaderArray<Bool_t> &Muon_IdL,
 bool debug){
     if (FJInd != -1){
         if (debug) cout << "passed FJ check\n";
@@ -1196,7 +1198,7 @@ bool debug){
 
         if (neLep){
             if (debug) std::cout << "Doing elec cand cut\n";
-            dolCandCutWithID(elecIDVec,Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut,debug);
+            dolCandCutWithID(Elec_IdL,Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut,debug);
             
             for (UInt_t elecCandChargeInd=0;elecCandChargeInd<elecCandChargeAr.size();elecCandChargeInd++){
                 if (debug) std::cout << "elecCandChargeInd " << elecCandChargeInd << " elecCandChargeAr[elecCandChargeInd] " << elecCandChargeAr[elecCandChargeInd] << "\n";
@@ -1226,7 +1228,7 @@ bool debug){
         if (nmLep){
             if (debug) std::cout << "Doing muon cand cut\n";
 
-            dolCandCutWithID(muonIDVec,Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,nmLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut,debug);
+            dolCandCutWithID(Muon_IdL,Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,nmLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut,debug);
 
             //domCandCut(Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,neLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut);
             for (UInt_t muonCandChargeInd=0;muonCandChargeInd<muonCandChargeAr.size();muonCandChargeInd++){
@@ -1402,12 +1404,12 @@ TTreeReaderArray<Float_t> &Electron_dr03EcalRecHitSumEtL,TTreeReaderArray<Float_
 float &Z1LeadIso,TTreeReaderArray<Float_t> &Muon_pfRelIso03_allL,float &Z1TrailingIso,float &Z2LeadIso,float &Z2TrailingIso,float lepIsoCut,
 float &Z1LeadSIP,TTreeReaderArray<Float_t> &Electron_sip3dL,float &Z1TrailingSIP,float &Z2LeadSIP,TTreeReaderArray<Float_t> &Muon_sip3dL,float &Z2TrailingSIP,float SIPCut,UInt_t &passLepCut,bool &passesCutsBool, bool &passedAsLepBool,
 std::vector<Float_t> &LepInvMass,
-std::vector<Bool_t> elecIDVec,std::vector<Bool_t> muonIDVec,
+TTreeReaderArray<Bool_t> &Elec_IdL,TTreeReaderArray<Bool_t> &Muon_IdL,
 bool debug
 ) {
     if (neLep){
         if (debug) std::cout << "Doing elec cand cut\n";
-        dolCandCutWithID(elecIDVec,Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut,debug);
+        dolCandCutWithID(Elec_IdL,Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut,debug);
         //doeCandCut(Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut);
         for (UInt_t elecCandChargeInd=0;elecCandChargeInd<elecCandChargeAr.size();elecCandChargeInd++){
             if (elecCandChargeAr[elecCandChargeInd] == -1) negElecCands += 1;
@@ -1430,7 +1432,7 @@ bool debug
     if (nmLep){
         if (debug) std::cout << "Doing muon cand cut\n";
 
-        dolCandCutWithID(muonIDVec,Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,nmLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut,debug);
+        dolCandCutWithID(Muon_IdL,Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,nmLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut,debug);
 
         //domCandCut(Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,neLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut);
         for (UInt_t muonCandChargeInd=0;muonCandChargeInd<muonCandChargeAr.size();muonCandChargeInd++){
@@ -1556,7 +1558,7 @@ TTreeReaderArray<Float_t> &Electron_dr03EcalRecHitSumEtL,TTreeReaderArray<Float_
 float &Z1LeadIso,TTreeReaderArray<Float_t> &Muon_pfRelIso03_allL,float &Z1TrailingIso,float lepIsoCut,
 UInt_t &passSemiLepCut,bool &passesCutsBool,bool &passedAsSemiLepBool,
 std::vector<Float_t> &SemiLepInvMass,
-std::vector<Bool_t> elecIDVec,std::vector<Bool_t> muonIDVec,
+TTreeReaderArray<Bool_t> &Elec_IdL,TTreeReaderArray<Bool_t> &Muon_IdL,
 bool debug){
     if (FJInd != -1){
         if (debug) cout << "passed FJ check\n";
@@ -1571,7 +1573,7 @@ bool debug){
 
         if (neLep){
             if (debug) std::cout << "Doing elec cand cut\n";
-            dolCandCutWithID(elecIDVec,Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut,debug);
+            dolCandCutWithID(Elec_IdL,Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut,debug);
             
             for (UInt_t elecCandChargeInd=0;elecCandChargeInd<elecCandChargeAr.size();elecCandChargeInd++){
                 if (debug) std::cout << "elecCandChargeInd " << elecCandChargeInd << " elecCandChargeAr[elecCandChargeInd] " << elecCandChargeAr[elecCandChargeInd] << "\n";
@@ -1601,7 +1603,7 @@ bool debug){
         if (nmLep){
             if (debug) std::cout << "Doing muon cand cut\n";
 
-            dolCandCutWithID(muonIDVec,Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,nmLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut,debug);
+            dolCandCutWithID(Muon_IdL,Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,nmLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut,debug);
 
             //domCandCut(Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,neLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut);
             for (UInt_t muonCandChargeInd=0;muonCandChargeInd<muonCandChargeAr.size();muonCandChargeInd++){

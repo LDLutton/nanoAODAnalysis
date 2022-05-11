@@ -717,7 +717,7 @@ void new042022Analysis(string datasetString){
         TTreeReaderArray<Float_t> Electron_dr03HcalDepth1TowerSumEtL(myEventsReader, "Electron_dr03HcalDepth1TowerSumEtL");
         TTreeReaderArray<Float_t> Electron_pfRelIso03_allL(myEventsReader, "Electron_pfRelIso03_allL");
         TTreeReaderArray<Float_t> Electron_sip3dL(myEventsReader, "Electron_sip3dL");
-        TTreeReaderArray<Int_t> Electron_cutBasedL(myEventsReader, "Electron_cutBasedL");
+        TTreeReaderArray<Bool_t> Electron_mvaFall17V2Iso_WP80L(myEventsReader, "Electron_mvaFall17V2Iso_WP80L");
 
         //Muons
         TTreeReaderValue<UInt_t> nMuonL(myEventsReader, "nMuonL");
@@ -892,10 +892,8 @@ void new042022Analysis(string datasetString){
             if (debug) cout << "trying Leptonic\n";
             tryingLepCtr += 1;
             std::vector<Float_t> LepInvMass;
-            std::vector<Bool_t> elecIDVec;
-            findElecIDBools(elecIDVec,neLep,Electron_cutBasedL);    
-            std::vector<Bool_t> muonIDVec;
-            findMuonIDBools(muonIDVec,nmLep,Muon_tightIdL);  
+
+            
             /*
             std::cout << "elecIDVec.size() " << elecIDVec.size() << "\n";
 
@@ -917,7 +915,7 @@ void new042022Analysis(string datasetString){
             Z1LeadIso,Muon_pfRelIso03_allL,Z1TrailingIso,Z2LeadIso,Z2TrailingIso,lepIsoCut,
             Z1LeadSIP,Electron_sip3dL,Z1TrailingSIP,Z2LeadSIP,Muon_sip3dL,Z2TrailingSIP,SIPCut,passLepCut,passesCutsBool,passedAsLepBool,
             LepInvMass,
-            elecIDVec,muonIDVec,
+            Electron_mvaFall17V2Iso_WP80L,Muon_tightIdL,
             debug);
 
             
@@ -995,7 +993,7 @@ void new042022Analysis(string datasetString){
                  Z1LeadIso,Muon_pfRelIso03_allL,Z1TrailingIso,lepIsoCut,
                  passSemiLepCut,passesCutsBool,passedAsSemiLepBool,
                  SemiLepInvMass,
-                 elecIDVec,muonIDVec,
+                 Electron_mvaFall17V2Iso_WP80L,Muon_tightIdL,
                  debug);
                 /*
                 if (SemiLepInvMass.size()) {
