@@ -91,7 +91,7 @@ void dolCandCut(TTreeReaderArray<Float_t> &Lep_eta,TTreeReaderArray<Float_t> &Le
 
 void dolCandCutWithID(TTreeReaderArray<Bool_t> &Lep_IdL,TTreeReaderArray<Float_t> &Lep_eta,TTreeReaderArray<Float_t> &Lep_mass,TTreeReaderArray<Int_t> &Lep_charge,TTreeReaderArray<Float_t> &Lep_phi,TTreeReaderArray<Float_t> &Lep_pt,UInt_t nlLep,std::vector<UInt_t> &lepCandIndAr,std::vector<ROOT::Math::PtEtaPhiMVector> &lepCandVecAr,std::vector<Int_t> &lepCandChargeAr,float lPtCut,float lEtaCut,bool debug){
     for (UInt_t lItr=0; lItr < nlLep; lItr++){
-        if (debug) std::cout << "lItr " << lItr<< "lepIDVec[lItr]" << lepIDVec[lItr] << "\n";
+        if (debug) std::cout << "lItr " << lItr<< "Lep_IdL[lItr]" << Lep_IdL[lItr] << "\n";
         if (!Lep_IdL[lItr]){
             continue;
         }
@@ -103,15 +103,14 @@ void dolCandCutWithID(TTreeReaderArray<Bool_t> &Lep_IdL,TTreeReaderArray<Float_t
             if (debug) std::cout << "tmpEta " <<tmpEta << "\n";
             if (abs(tmpEta) < lEtaCut){
                 if (debug) std::cout << "passed eta cut\n";
-                if (lepIDVec[lItr]){
-                    lepCandIndAr.push_back(lItr);
-                    float tmpPhi = Lep_phi[lItr];
-                    float tmpMass = Lep_mass[lItr];
-                    ROOT::Math::PtEtaPhiMVector tmpVec = ROOT::Math::PtEtaPhiMVector(tmpPt, tmpEta, tmpPhi, tmpMass);
-                    lepCandVecAr.push_back(tmpVec);
-                    Int_t tmpCharge = Lep_charge[lItr];
-                    lepCandChargeAr.push_back(tmpCharge);
-                }
+                lepCandIndAr.push_back(lItr);
+                float tmpPhi = Lep_phi[lItr];
+                float tmpMass = Lep_mass[lItr];
+                ROOT::Math::PtEtaPhiMVector tmpVec = ROOT::Math::PtEtaPhiMVector(tmpPt, tmpEta, tmpPhi, tmpMass);
+                lepCandVecAr.push_back(tmpVec);
+                Int_t tmpCharge = Lep_charge[lItr];
+                lepCandChargeAr.push_back(tmpCharge);
+                
             }
         }
     }
