@@ -8,7 +8,7 @@ from math import sqrt,pi,log
 
 ZMass = 91.1876
 
-weakCuts = False
+weakCuts = True
 
 VBFJetdRCut = 0.4
 
@@ -82,6 +82,9 @@ if weakCuts:
 
     SemiLepInvMassCutHighCut = 140.
 
+    SemiLepPtLeadCut=10.
+    SemiLepPtTrailingCut=5.
+
     InvMassCutLow=40.
 
     InvMassCutHigh=140.
@@ -89,6 +92,9 @@ if weakCuts:
     PtLeadCut=10.
 
     PtTrailingCut=5.
+
+    InvMassCutLowCut=40.
+    InvMassCutHighCut=140.
 
     FourLepInvMassCut = 50.
 
@@ -107,13 +113,14 @@ SemiLepeEtaCut,SemiLepPtLeadCut,SemiLepPtTrailingCut,SemiLepInvMassCutLowCut,
 SemiLepInvMassCutHighCut,SemiLepFatJetPtCut,SemiLepFatJetZTagCut,LepmPtCut,
 LepmEtaCut,LepeEtaCut,LepePtCut,PtLeadCut,PtTrailingCut,InvMassCutLowCut,
 InvMassCutHighCut,FourLepInvMassCut,OptLepInvMassCut,LepIsoCut,SIPCut]
+#cutsToPlot = [10,11] #SL
+cutsToPlot = [22,23] #Lep
 #cutsToPlot = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15] #SL
-cutsToPlot = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15] #SL
 #cutsToPlot = [0,1,2,3,4,5,16,17,18,19,20,21,22,23,24,25,26,27] #Lep
 #cutsToPlot = [0,1,2,3,4,5,12,13,14,15,22,23,24,26,27]
 #cutsToPlot = [i for i in range(len(defaultCutPosAr))] #All
-#badCutIndsForSL = [0,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
-badCutIndsForSL = []
+badCutIndsForSL = [0,1,2,3,6,7,8,9,10,11,13,15,26]
+#badCutIndsForSL = []
 today = datetime.datetime.today()
 
 def find2ndToLast(a,b,c,d):
@@ -670,12 +677,12 @@ def makeFoMWithEvPassPlots(evPassVarCutAr,varCutSignalPassAr,varCutBackgroundPas
         #for varCutSignalPass in varCutSignalPassAr:
         #    #print(len(varCutSignalPass))
         for varCutSignalPass,weightsSignal in zip(varCutSignalPassAr[cutInd],weightsSignalAr):
-            print(varCutSignalPass,weightsSignal)
+            #print(varCutSignalPass,weightsSignal)
             for c in range(cutAmnt+1):
                 #print(c)
                 varCutSignalSumAr[c] += varCutSignalPass[c]*weightsSignal
         for varCutBackgroundPass,weightsBackground in zip(varCutBackgroundPassAr[cutInd],weightsBackgroundAr):
-            print(varCutBackgroundPass,weightsBackground)
+            #print(varCutBackgroundPass,weightsBackground)
             for c in range(cutAmnt+1):
                 varCutBackgroundSumAr[c] += varCutBackgroundPass[c]*weightsBackground
 
@@ -730,7 +737,7 @@ def makeFoMWithEvPassPlots(evPassVarCutAr,varCutSignalPassAr,varCutBackgroundPas
                     yellowSkip += 7
                 if k-subQCDInd == 11:
                     yellowSkip += 7
-                print(k,k-subQCDInd,yellowSkip,k+1-subQCDInd+yellowSkip)
+                #print(k,k-subQCDInd,yellowSkip,k+1-subQCDInd+yellowSkip)
                 
                 evPassVarCutGraphAr[-1].SetLineColor(k+1-subQCDInd+yellowSkip)
                 evPassMGAr[-1].Add(evPassVarCutGraphAr[-1],"lp")
@@ -771,7 +778,7 @@ def makeFoMWithEvPassPlots(evPassVarCutAr,varCutSignalPassAr,varCutBackgroundPas
         setUpGraphs(tmpGraphHold[-1],3,22,"FoM Plot",cutName,"FoM Value")
         tmpGraphHold[-1].GetYaxis().CenterTitle()
         tmpGraphHold[-1].Draw("APL* same")
-        print(varCutRangeAr[cutInd][0],varCutRangeAr[cutInd][1])
+        #print(varCutRangeAr[cutInd][0],varCutRangeAr[cutInd][1])
         tmpGraphHold[-1].GetXaxis().SetLimits(varCutRangeAr[cutInd][0],varCutRangeAr[cutInd][-1])
         
         tmpGraphHold[-1].Draw("APL* same")
@@ -787,7 +794,7 @@ def makeFoMWithEvPassPlots(evPassVarCutAr,varCutSignalPassAr,varCutBackgroundPas
         evPassVarCutCanAr[-1].Update()
         evPassVarCutCanAr[-1].Draw()
         #"FP" stands for "Full Pass"
-        print(cutInd)
+        #print(cutInd)
         evPassVarCutCanAr[-1].SaveAs("FoMPlotWithEvPassMG_{0}_{1}_{2}.png".format(saveName,cutName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 
 
