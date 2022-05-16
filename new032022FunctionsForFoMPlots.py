@@ -48,7 +48,77 @@ LepIsoCut = 0.35
 SIPCut = 4.
 SemiLepFatJetZTagCut = 0.8
 
+defaultNonWeakCutPosAr = [hFatJetPtCut,hFatJetDeepTagCut,VBFJetPtCut,VBFJetdRCut,VBFJetEtaCut,
+VBFJetInvMassCut,SemiLepmPtCut,SemiLepmEtaCut,SemiLepePtCut,
+SemiLepeEtaCut,SemiLepPtLeadCut,SemiLepPtTrailingCut,SemiLepInvMassCutLowCut,
+SemiLepInvMassCutHighCut,SemiLepFatJetPtCut,SemiLepFatJetZTagCut,LepmPtCut,
+LepmEtaCut,LepeEtaCut,LepePtCut,PtLeadCut,PtTrailingCut,InvMassCutLowCut,
+InvMassCutHighCut,FourLepInvMassCut,OptLepInvMassCut,LepIsoCut,SIPCut]
+
 if weakCuts:
+
+    #V2 Weak Cuts
+    
+    VBFJetdRCut = 0.4
+
+    VBFJetPtCut = 20.
+
+    VBFJetEtaCut = 2.0
+
+    VBFJetInvMassCut = 200.
+
+    hFatJetPtCut = 200.
+
+    hFatJetDeepTagCut = 0.1
+
+    LepePtCut = 7.
+
+    LepeEtaCut = 2.5
+
+    LepmPtCut = 5.
+
+    LepmEtaCut = 2.4
+
+
+    SemiLepePtCut = LepePtCut
+
+    SemiLepeEtaCut = LepeEtaCut
+
+    SemiLepmPtCut = LepmPtCut
+
+    SemiLepmEtaCut = LepmEtaCut
+
+    SemiLepInvMassCutLowCut = 80.
+
+    SemiLepInvMassCutHighCut = 100.
+
+    SemiLepPtLeadCut=20.
+    SemiLepPtTrailingCut=10.
+
+    InvMassCutLow=SemiLepInvMassCutLowCut
+
+    InvMassCutHigh=SemiLepInvMassCutHighCut
+
+    PtLeadCut=SemiLepPtLeadCut
+
+    PtTrailingCut=SemiLepPtTrailingCut
+
+    InvMassCutLowCut=SemiLepInvMassCutLowCut
+    InvMassCutHighCut=SemiLepInvMassCutHighCut
+
+    FourLepInvMassCut = 100.
+
+    OptLepInvMassCut = 12.
+
+    LepIsoCut = 1.5
+
+    SIPCut = 4.
+
+
+    SemiLepFatJetZTagCut = 0.1
+
+    #V1 Weak Cuts
+    """
     VBFJetdRCut = 0.1
 
     VBFJetPtCut = 20.
@@ -106,6 +176,7 @@ if weakCuts:
 
 
     SemiLepFatJetZTagCut = 0.1
+    """
 
 defaultCutPosAr = [hFatJetPtCut,hFatJetDeepTagCut,VBFJetPtCut,VBFJetdRCut,VBFJetEtaCut,
 VBFJetInvMassCut,SemiLepmPtCut,SemiLepmEtaCut,SemiLepePtCut,
@@ -113,13 +184,13 @@ SemiLepeEtaCut,SemiLepPtLeadCut,SemiLepPtTrailingCut,SemiLepInvMassCutLowCut,
 SemiLepInvMassCutHighCut,SemiLepFatJetPtCut,SemiLepFatJetZTagCut,LepmPtCut,
 LepmEtaCut,LepeEtaCut,LepePtCut,PtLeadCut,PtTrailingCut,InvMassCutLowCut,
 InvMassCutHighCut,FourLepInvMassCut,OptLepInvMassCut,LepIsoCut,SIPCut]
-#cutsToPlot = [10,11] #SL
-cutsToPlot = [22,23] #Lep
-#cutsToPlot = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15] #SL
-#cutsToPlot = [0,1,2,3,4,5,16,17,18,19,20,21,22,23,24,25,26,27] #Lep
+#cutsToPlot = [26] #SL
+#cutsToPlot = [22,23] #Lep
+#cutsToPlot = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,26] #SL
+cutsToPlot = [0,1,2,3,4,5,16,17,18,19,20,21,22,23,24,25,26,27] #Lep
 #cutsToPlot = [0,1,2,3,4,5,12,13,14,15,22,23,24,26,27]
 #cutsToPlot = [i for i in range(len(defaultCutPosAr))] #All
-badCutIndsForSL = [0,1,2,3,6,7,8,9,10,11,13,15,26]
+badCutIndsForSL = [0,1,2,3,4,5,6,7,8,9,10,11,13,15,26]
 #badCutIndsForSL = []
 today = datetime.datetime.today()
 
@@ -649,7 +720,7 @@ def makeEvPassMultiGraphs(nameAr,evPassCanAr,evPassMGAr,evPassGraphAr,evPassGrap
     evPassCanAr[-1].SaveAs("evPassCutMultiGraph_FP_{0}_V2_{1}.png".format(cutName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 
 
-def makeFoMWithEvPassPlots(evPassVarCutAr,varCutSignalPassAr,varCutBackgroundPassAr,weightsSignalAr,weightsBackgroundAr,varCutRangeAr,cutAmnt,cutNameAr,nameAr,skipEvPassGraphs,saveName,isSignalAr,isQCDAr,anyQCD,chanName,defaultCutPosAr,logOrNot,cutsToPlot,badCutIndsForSL):
+def makeFoMWithEvPassPlots(evPassVarCutAr,varCutSignalPassAr,varCutBackgroundPassAr,weightsSignalAr,weightsBackgroundAr,varCutRangeAr,cutAmnt,cutNameAr,nameAr,skipEvPassGraphs,saveName,isSignalAr,isQCDAr,anyQCD,chanName,defaultCutPosAr,logOrNot,cutsToPlot,badCutIndsForSL,weakCuts,defaultNonWeakCutPosAr):
     #print(evPassVarCutAr)
     padAr = []
     legAr = []
@@ -791,11 +862,20 @@ def makeFoMWithEvPassPlots(evPassVarCutAr,varCutSignalPassAr,varCutBackgroundPas
         defaultCutLine.SetLineWidth(3)
         defaultCutLine.SetLineStyle(9)
         defaultCutLine.Draw()
+        if weakCuts:
+            defaultNonWeakCutLine = TLine(defaultNonWeakCutPosAr[cutInd],gPad.GetUymin(),defaultNonWeakCutPosAr[cutInd],gPad.GetUymax())
+            defaultNonWeakCutLine.SetLineColor(3)
+            defaultNonWeakCutLine.SetLineWidth(3)
+            defaultNonWeakCutLine.SetLineStyle(9)
+            defaultNonWeakCutLine.Draw()
         evPassVarCutCanAr[-1].Update()
         evPassVarCutCanAr[-1].Draw()
         #"FP" stands for "Full Pass"
         #print(cutInd)
-        evPassVarCutCanAr[-1].SaveAs("FoMPlotWithEvPassMG_{0}_{1}_{2}.png".format(saveName,cutName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        if weakCuts:
+            evPassVarCutCanAr[-1].SaveAs("FoMPlotWithEvPassMG_WeakCutsV2_{0}_{1}_{2}.png".format(saveName,cutName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+        else:
+            evPassVarCutCanAr[-1].SaveAs("FoMPlotWithEvPassMG_{0}_{1}_{2}.png".format(saveName,cutName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 
 
 def MakeFoMCalcGraphs(FoMGraphAr,evPassVarCutAr,varCutSignalPassAr,varCutBackgroundPassAr,weightsSignalAr,weightsBackgroundAr,varCutRangeAr,cutAmnt,cutNameAr,nameAr,skipEvPassGraphs,saveName,isSignalAr,isQCDAr,anyQCD,chanName,defaultCutPosAr,logOrNot,cutsToPlot,badCutIndsForSL):
