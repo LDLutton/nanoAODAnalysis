@@ -57,6 +57,67 @@ InvMassCutHighCut,FourLepInvMassCut,OptLepInvMassCut,LepIsoCut,SIPCut]
 
 if weakCuts:
 
+    #V3 Weak Cuts
+    
+    VBFJetdRCut = 0.4
+
+    VBFJetPtCut = 20.
+
+    VBFJetEtaCut = 2.0
+
+    VBFJetInvMassCut = 400.
+
+    hFatJetPtCut = 200.
+
+    hFatJetDeepTagCut = 0.1
+
+    LepePtCut = 7.
+
+    LepeEtaCut = 2.5
+
+    LepmPtCut = 5.
+
+    LepmEtaCut = 2.4
+
+
+    SemiLepePtCut = LepePtCut
+
+    SemiLepeEtaCut = LepeEtaCut
+
+    SemiLepmPtCut = LepmPtCut
+
+    SemiLepmEtaCut = LepmEtaCut
+
+    SemiLepInvMassCutLowCut = 80.
+
+    SemiLepInvMassCutHighCut = 100.
+
+    SemiLepPtLeadCut=20.
+    SemiLepPtTrailingCut=10.
+
+    InvMassCutLow=SemiLepInvMassCutLowCut
+
+    InvMassCutHigh=SemiLepInvMassCutHighCut
+
+    PtLeadCut=SemiLepPtLeadCut
+
+    PtTrailingCut=SemiLepPtTrailingCut
+
+    InvMassCutLowCut=SemiLepInvMassCutLowCut
+    InvMassCutHighCut=SemiLepInvMassCutHighCut
+
+    FourLepInvMassCut = 100.
+
+    OptLepInvMassCut = 12.
+
+    LepIsoCut = 0.35
+
+    SIPCut = 4.
+
+
+    SemiLepFatJetZTagCut = 0.1
+
+    """
     #V2 Weak Cuts
     
     VBFJetdRCut = 0.4
@@ -116,7 +177,7 @@ if weakCuts:
 
 
     SemiLepFatJetZTagCut = 0.1
-
+    """
     #V1 Weak Cuts
     """
     VBFJetdRCut = 0.1
@@ -190,7 +251,7 @@ InvMassCutHighCut,FourLepInvMassCut,OptLepInvMassCut,LepIsoCut,SIPCut]
 cutsToPlot = [0,1,2,3,4,5,16,17,18,19,20,21,22,23,24,25,26,27] #Lep
 #cutsToPlot = [0,1,2,3,4,5,12,13,14,15,22,23,24,26,27]
 #cutsToPlot = [i for i in range(len(defaultCutPosAr))] #All
-badCutIndsForSL = [0,1,2,3,4,5,6,7,8,9,10,11,13,15,26]
+badCutIndsForSL = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,26]
 #badCutIndsForSL = []
 today = datetime.datetime.today()
 
@@ -873,7 +934,7 @@ def makeFoMWithEvPassPlots(evPassVarCutAr,varCutSignalPassAr,varCutBackgroundPas
         #"FP" stands for "Full Pass"
         #print(cutInd)
         if weakCuts:
-            evPassVarCutCanAr[-1].SaveAs("FoMPlotWithEvPassMG_WeakCutsV2_{0}_{1}_{2}.png".format(saveName,cutName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
+            evPassVarCutCanAr[-1].SaveAs("FoMPlotWithEvPassMG_WeakCutsV3_{0}_{1}_{2}.png".format(saveName,cutName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
         else:
             evPassVarCutCanAr[-1].SaveAs("FoMPlotWithEvPassMG_{0}_{1}_{2}.png".format(saveName,cutName,"{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 
