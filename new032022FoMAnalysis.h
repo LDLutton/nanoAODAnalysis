@@ -202,6 +202,11 @@ float fatJetZPairInvMassCut = 300;
 //float fatJetEtaDifCut = 5.0;
 float fatJetZPlusHPTCut = 1050;
 
+float fatJetZPlusHInvMassCut = 0;
+float fatJetZPlusHInvMassRangeTop = 4000.;
+float fatJetZPlusHInvMassRangeBottom = 0.;
+float fatJetZPlusHInvMassCutStep = (fatJetZPlusHInvMassRangeTop - fatJetZPlusHInvMassRangeBottom) / cutAmnt;
+
 //Weak cuts V4 05172022 Moving up certain cuts
 float VBFJetdRWeakCut = 0.4;
 
