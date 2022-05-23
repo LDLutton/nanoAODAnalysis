@@ -1,6 +1,6 @@
 #include<TTree.h>
 
-bool debug = true;
+bool debug = false;
 bool debugHadronic = false;
 bool debugGenPart = false;
 bool endAfter = false;

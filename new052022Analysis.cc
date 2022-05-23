@@ -1046,6 +1046,7 @@ void new052022Analysis(string datasetString){
             }
             if (debug) std::cout << "Test\n";
             if ((!passesCutsBool)){
+                dRCheckVecAr.clear();
                 tryingHadCtr += 1;
                 LFJOneInd = -1;
                 LFJTwoInd = -1;
