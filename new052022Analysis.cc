@@ -533,6 +533,9 @@ void new052022Analysis(string datasetString){
 
 
     UInt_t passHiggsFJCtr = 0;
+    UInt_t passHiggsFJLepCtr = 0;
+    UInt_t passHiggsFJSemiLepCtr = 0;
+    UInt_t passHiggsFJHadCtr = 0;
     UInt_t passChannelCtr = 0;
     UInt_t passLepOrSemiLepChannelCtr = 0;
     UInt_t passLepChannelCtr = 0;
@@ -549,6 +552,9 @@ void new052022Analysis(string datasetString){
     
 
     Double_t passHiggsFJWeightedCtr = 0.;
+    Double_t passHiggsFJWeightedLepCtr = 0.;
+    Double_t passHiggsFJWeightedSemiLepCtr = 0.;
+    Double_t passHiggsFJWeightedHadCtr = 0.;
     Double_t passChannelWeightedCtr = 0.;
     Double_t passLepOrSemiLepChannelWeightedCtr = 0.;
     Double_t passLepChannelWeightedCtr = 0.;
@@ -1103,6 +1109,18 @@ void new052022Analysis(string datasetString){
             
             passHiggsFJCtr += 1;
             passHiggsFJWeightedCtr += tmpGenWeights;
+            if (passedAsLepBool) {
+                passHiggsFJLepCtr += 1;
+                passHiggsFJWeightedLepCtr += tmpGenWeights;
+            }
+            else if (passedAsSemiLepBool) {
+                passHiggsFJSemiLepCtr += 1;
+                passHiggsFJWeightedSemiLepCtr += tmpGenWeights;
+            }
+            else if (passedAsHadBool) {
+                passHiggsFJHadCtr += 1;
+                passHiggsFJWeightedHadCtr += tmpGenWeights;
+            }
             //passFatJets += 1;
 
 
@@ -1211,6 +1229,15 @@ void new052022Analysis(string datasetString){
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "PassHiggsFJCtr = " << passHiggsFJCtr << "\n";
     std::cout << "Double_t " << saveName << "passHiggsFJWeightedCtr = " << passHiggsFJWeightedCtr << "\n";
+    std::cout << "------------------------\n";
+    std::cout << "UInt_t " << saveName << "PassHiggsFJLepCtr = " << passHiggsFJLepCtr << "\n";
+    std::cout << "Double_t " << saveName << "passHiggsFJWeightedLepCtr = " << passHiggsFJWeightedLepCtr << "\n";
+    std::cout << "------------------------\n";
+    std::cout << "UInt_t " << saveName << "PassHiggsFJSemiLepCtr = " << passHiggsFJSemiLepCtr << "\n";
+    std::cout << "Double_t " << saveName << "passHiggsFJWeightedSemiLepCtr = " << passHiggsFJWeightedSemiLepCtr << "\n";
+    std::cout << "------------------------\n";
+    std::cout << "UInt_t " << saveName << "PassHiggsFJHadCtr = " << passHiggsFJHadCtr << "\n";
+    std::cout << "Double_t " << saveName << "passHiggsFJWeightedHadCtr = " << passHiggsFJWeightedHadCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "PassVBFJetsCtr = " << passVBFJetsCtr << "\n";
     std::cout << "Double_t " << saveName << "PassVBFJetsWeightedCtr = " << passVBFJetsWeightedCtr << "\n";
