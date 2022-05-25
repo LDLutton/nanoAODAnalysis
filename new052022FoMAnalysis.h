@@ -1,8 +1,6 @@
 #include<TTree.h>
 
 bool debug = false;
-bool debugHadronic = false;
-bool debugGenPart = false;
 bool endAfter = false;
 int NToStart = 17;
 int NToEnd = 18;

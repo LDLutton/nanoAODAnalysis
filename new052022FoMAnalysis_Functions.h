@@ -696,7 +696,8 @@ void doHiggsFatJetCut(UInt_t nFatJetLen,float &hFatJet_pt_fromHTag,float &hFatJe
                             tmpFJVec += dRCheckVecAr[dRCheckVecInd];
 
                         }
-                        if (tmpPassdR && tmpFJVec.M() > ZPairPlusHInvMassCut) {
+                        //std::cout << "tmpPassdR " << tmpPassdR << " tmpFJVec.M() " << tmpFJVec.M() << " ZPairPlusHInvMassCut " << ZPairPlusHInvMassCut<< "\n";
+                        if (tmpPassdR && (tmpFJVec.M() > ZPairPlusHInvMassCut)) {
                             if (tmpZPairPlusHPt > ZPairPlusHPtCut){
                             
 
@@ -801,7 +802,7 @@ void doHadChanFatJetCut(Int_t &LFJOneInd,Int_t &LFJTwoInd,Int_t numFatJet,float 
     //ROOT::Math::PtEtaPhiMVector secondFatJetVec;
 
     for (UInt_t i=0;i<numFatJet-1;i++){
-        if (debugHadronic) std::cout << "First FatJet " << i << "\n";
+        if (debug) std::cout << "First FatJet " << i << "\n";
 
         //Skip selected higgs fatjet
         //if (i == hFatJet_ind_fromHTag) continue;
@@ -812,12 +813,12 @@ void doHadChanFatJetCut(Int_t &LFJOneInd,Int_t &LFJTwoInd,Int_t numFatJet,float 
 
 
         float tmpFatJetPT = FatJet_pt[i];
-        if (debugHadronic) std::cout << "tmpFatJetPT " << tmpFatJetPT << "\n";
+        if (debug) std::cout << "tmpFatJetPT " << tmpFatJetPT << "\n";
 
         if (tmpFatJet_Tag_One > fatJetZTagCut && tmpFatJetPT > fatJetPTCut){
             //Looping through all jets past the current one
             for (UInt_t j=i+1;j<numFatJet;j++){
-                if (debugHadronic) std::cout << "Second FatJet " << j << "\n";
+                if (debug) std::cout << "Second FatJet " << j << "\n";
 
                 //Skip selected higgs fatjet
                 //if (j == hFatJet_ind_fromHTag) continue;
@@ -829,14 +830,14 @@ void doHadChanFatJetCut(Int_t &LFJOneInd,Int_t &LFJTwoInd,Int_t numFatJet,float 
                 //Getting PT of the second jet
                 float tmpFatJetPTTwo = FatJet_pt[j];
 
-                if (debugHadronic) std::cout << "tmpFatJetPTTwo " << tmpFatJetPTTwo << "\n";
+                if (debug) std::cout << "tmpFatJetPTTwo " << tmpFatJetPTTwo << "\n";
 
                 //Checking if it passes the pt cut and tag cut
                 if (tmpFatJet_Tag_Two > fatJetZTagCut && tmpFatJetPTTwo > fatJetPTCut){
                     //float tmpZPairPlusH_pt = HFJ_pt + tmpFatJetPT + tmpFatJetPTTwo;
                     //if (tmpZPairPlusH_pt > fatJetZPlusHPTCut){
                     if (true){
-                        if (debugHadronic) std::cout << "Passed all cuts!!!!!!!!!!!!!!\n";
+                        if (debug) std::cout << "Passed all cuts!!!!!!!!!!!!!!\n";
                         
                         //Selecting on top jet pt first
                         float tmpMaxPtLead = 0;
@@ -923,7 +924,7 @@ void doHadChanFatJetCut(Int_t &LFJOneInd,Int_t &LFJTwoInd,Int_t numFatJet,float 
                         //Getting the eta dif between the two jets
                         tmpEtaDif = abs(FatJet_eta[i]-FatJet_eta[j]);
 
-                        if (debugHadronic) std::cout << "tmpEtaDif " << tmpEtaDif << "\n";
+                        if (debug) std::cout << "tmpEtaDif " << tmpEtaDif << "\n";
 
                         //Getting four vectors for the two jets, using pt, eta, phi, and mass
                         ROOT::Math::PtEtaPhiMVector tmpVecOne = ROOT::Math::PtEtaPhiMVector(tmpFatJetPT, tmpFatJet_eta_One, tmpFatJet_phi_One, FatJet_mass[i]);
@@ -931,11 +932,11 @@ void doHadChanFatJetCut(Int_t &LFJOneInd,Int_t &LFJTwoInd,Int_t numFatJet,float 
                         //Adding four vectors together and getting their invariant mass
                         ROOT::Math::PtEtaPhiMVector tmpDiJetVec = tmpVecOne+tmpVecTwo;
                         float tmpFJInvMass = tmpDiJetVec.M();
-                        if (debugHadronic) std::cout << "tmpFJInvMass " << tmpFJInvMass << "\n";
+                        if (debug) std::cout << "tmpFJInvMass " << tmpFJInvMass << "\n";
 
                         //Checking if their InvMass passes the InvMass cut
                         if (tmpFJInvMass > fatJetZPairInvMassCut){
-                            if (debugHadronic) std::cout << "Passed all cuts!!!!!!!!!!!!!!\n";
+                            if (debug) std::cout << "Passed all cuts!!!!!!!!!!!!!!\n";
                             
                             //Selecting on top jet pt first
                             float tmpMaxPtLead = 0;
