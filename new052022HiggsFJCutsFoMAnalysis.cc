@@ -712,7 +712,7 @@ void new052022HiggsFJCutsFoMAnalysis(string inputString){
         fatJetZTagCut = fatJetZTagWeakCut;
         ZPairPlusHInvMassCut = ZPairPlusHInvMassWeakCut;
         ZPairPlusHPtCut = ZPairPlusHPtWeakCut;
-    }
+    
     }
     
     

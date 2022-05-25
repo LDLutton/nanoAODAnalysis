@@ -707,7 +707,7 @@ void new052022VBFJetCutsFoMAnalysis(string inputString){
         fatJetZTagCut = fatJetZTagWeakCut;
         ZPairPlusHInvMassCut = ZPairPlusHInvMassWeakCut;
         ZPairPlusHPtCut = ZPairPlusHPtWeakCut;
-    }
+    
     }
     
     
