@@ -729,7 +729,9 @@ void new052022SemiLepCutsFoMAnalysis(string inputString){
         //fatJetPTCut = 200.;
 
         fatJetZTagCut = fatJetZTagWeakCut;
-        fatJetZPairPlusHInvMassCut = fatJetZPairPlusHInvMassWeakCut;
+        ZPairPlusHInvMassCut = ZPairPlusHInvMassWeakCut;
+        ZPairPlusHPtCut = ZPairPlusHPtWeakCut;
+    }
     }
     
     

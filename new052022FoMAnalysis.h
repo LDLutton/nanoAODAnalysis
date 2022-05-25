@@ -199,7 +199,7 @@ float fatJetZPairInvMassCut = 300;
 //EtaDifCut probably not necessary
 //float fatJetEtaDifCut = 5.0;
 float fatJetZPlusHPTCut = 1050;
-
+/*
 float fatJetZPlusHInvMassCut = 0;
 float fatJetZPlusHInvMassRangeTop = 4000.;
 float fatJetZPlusHInvMassRangeBottom = 0.;
@@ -209,7 +209,7 @@ float fatJetZPairPlusHInvMassCut = 0;
 float fatJetZPairPlusHInvMassRangeTop = 4000.;
 float fatJetZPairPlusHInvMassRangeBottom = 0.;
 float fatJetZPairPlusHInvMassCutStep = (fatJetZPlusHInvMassRangeTop - fatJetZPlusHInvMassRangeBottom) / cutAmnt;
-
+*/
 float ZPairPlusHInvMassCut = 0;
 float ZPairPlusHInvMassRangeTop = 4000.;
 float ZPairPlusHInvMassRangeBottom = 0.;
@@ -227,7 +227,63 @@ float dRCutRangeTop = 4.;
 float dRCutRangeBottom = 0.;
 float dRCutCutStep = (dRCutRangeTop - dRCutRangeBottom) / cutAmnt;
 
-//Weak cuts V4 05172022 Moving up certain cuts
+
+//Weak cuts V6 05252022 Moving back down cuts to account for new cuts 
+//Setting default ZPairPlusH cuts to 500GeV, which is very low
+float VBFJetdRWeakCut = 0.1;
+
+float jetPTWeakCut = 15.;
+
+float jetEtaDifWeakCut = 1.0;
+
+float jetInvMassWeakCut = 200.;
+
+//Higgs FJ cuts
+
+float hFatJetPTWeakCut = 200.;
+
+float hFatJetDeepTagWeakCut = 0.1;
+
+
+
+//Lep cuts
+
+float ePtWeakCut = 7.;
+
+float eEtaWeakCut = 2.5;
+
+float mPtWeakCut = 5.;
+
+float mEtaWeakCut = 2.4;
+
+float invMassWeakCutLow=40.;
+
+float invMassWeakCutHigh=140.;
+
+float ptLeadWeakCut=10.;
+
+float ptTrailingWeakCut=5.;
+
+float fourLepInvMassWeakCut = 50.;
+
+float optLepInvMassWeakCut = 6.;
+
+float lepIsoWeakCut = 1.35;
+
+float SIPWeakCut = 5.;
+
+//Semi-Lep cuts
+//fatJetPTWeakCut = 200.;
+
+float fatJetZTagWeakCut = 0.1;
+
+float ZPairPlusHInvMassWeakCut = 500;
+float ZPairPlusHPtWeakCut = 500;
+
+
+
+/*
+//Weak cuts V5 05252022 Changing things for new052022Analysis and adding in new cuts
 float VBFJetdRWeakCut = 0.4;
 
 float jetPTWeakCut = 30.;
@@ -276,6 +332,58 @@ float SIPWeakCut = 4.;
 float fatJetZTagWeakCut = 0.5;
 
 float fatJetZPairPlusHInvMassWeakCut = 0;
+*/
+
+/*
+//Weak cuts V4 05172022 Moving up certain cuts
+float VBFJetdRWeakCut = 0.4;
+
+float jetPTWeakCut = 30.;
+
+float jetEtaDifWeakCut = 2.0;
+
+float jetInvMassWeakCut = 400.;
+
+//Higgs FJ cuts
+
+float hFatJetPTWeakCut = 300.;
+
+float hFatJetDeepTagWeakCut = 0.1;
+
+
+
+//Lep cuts
+
+float ePtWeakCut = 7.;
+
+float eEtaWeakCut = 2.5;
+
+float mPtWeakCut = 5.;
+
+float mEtaWeakCut = 2.4;
+
+float invMassWeakCutLow=80.;
+
+float invMassWeakCutHigh=100.;
+
+float ptLeadWeakCut=20.;
+
+float ptTrailingWeakCut=10.;
+
+float fourLepInvMassWeakCut = 100.;
+
+float optLepInvMassWeakCut = 12.;
+
+float lepIsoWeakCut = 0.35;
+
+float SIPWeakCut = 4.;
+
+//Semi-Lep cuts
+//fatJetPTWeakCut = 200.;
+
+float fatJetZTagWeakCut = 0.5;
+
+*/
 
 
 /*
