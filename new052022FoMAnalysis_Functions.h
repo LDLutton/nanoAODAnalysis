@@ -417,7 +417,7 @@ bool doSemiLepISOCut(float leadIso,float trailingIso,float lepIsoCut){
 }
 
 
-void doVBFJetCut(UInt_t nJetLen,TTreeReaderArray<Float_t> &Jet_pt,TTreeReaderArray<Int_t> &Jet_jetId,TTreeReaderArray<Float_t> &Jet_eta,TTreeReaderArray<Float_t> &Jet_phi,TTreeReaderArray<Float_t> &Jet_mass,float jetPTCut,float jetEtaDifCut,float jetInvMassCut,float &jetPairInvMass,float &jetLeadPt,float &jetLeadEta,float &jetLeadPhi,float &jetTrailingPt,float &jetTrailingEta,float &jetTrailingPhi,UInt_t &leadJet_1,UInt_t &leadJet_2,float VBFJetdRCut,std::vector<ROOT::Math::PtEtaPhiMVector> dRCheckVecAr,float dRCut,bool debug){
+void doVBFJetCut(UInt_t nJetLen,TTreeReaderArray<Float_t> &Jet_pt,TTreeReaderArray<Int_t> &Jet_jetId,TTreeReaderArray<Float_t> &Jet_eta,TTreeReaderArray<Float_t> &Jet_phi,TTreeReaderArray<Float_t> &Jet_mass,float jetPTCut,float jetEtaDifCut,float jetInvMassCut,float &jetPairInvMass,float &jetLeadPt,float &jetLeadEta,float &jetLeadPhi,float &jetTrailingPt,float &jetTrailingEta,float &jetTrailingPhi,UInt_t &leadJet_1,UInt_t &leadJet_2,std::vector<ROOT::Math::PtEtaPhiMVector> dRCheckVecAr,float dRCut,bool debug){
     //debug = true;
     //std::cout << "++++++++ "<< VBFJetdRCut << "\n";
     for (UInt_t jetIndOne=0; jetIndOne<nJetLen-1;jetIndOne++){

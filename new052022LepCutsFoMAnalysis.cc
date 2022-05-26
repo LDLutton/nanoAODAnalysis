@@ -733,7 +733,7 @@ void new052022LepCutsFoMAnalysis(string inputString){
 
     if (weakCuts){
         std::cout << "Using weak cuts\n";
-        VBFJetdRCut = VBFJetdRWeakCut;
+        dRCut = dRWeakCut;
 
         jetPTCut = jetPTWeakCut;
 
@@ -1211,7 +1211,7 @@ void new052022LepCutsFoMAnalysis(string inputString){
                 float jetLeadEta     = 0;
                 float jetTrailingEta = 0;
                 if (debug) std::cout << "Entering jet loop. Len: " << nJetLen << "\n";
-                doVBFJetCut(nJetLen,Jet_ptL,Jet_jetIdL,Jet_etaL,Jet_phiL,Jet_massL,jetPTCut,jetEtaDifCut,jetInvMassCut,jetPairInvMass,jetLeadPt,jetLeadEta,jetLeadPhi,jetTrailingPt,jetTrailingEta,jetTrailingPhi,leadJet_1,leadJet_2,VBFJetdRCut,dRCheckVecAr,dRCut,debug);
+                doVBFJetCut(nJetLen,Jet_ptL,Jet_jetIdL,Jet_etaL,Jet_phiL,Jet_massL,jetPTCut,jetEtaDifCut,jetInvMassCut,jetPairInvMass,jetLeadPt,jetLeadEta,jetLeadPhi,jetTrailingPt,jetTrailingEta,jetTrailingPhi,leadJet_1,leadJet_2,dRCheckVecAr,dRCut,debug);
                 //std::cout << jetLeadPt << endl;
                 if (jetLeadPt == 0) continue;
                 debugOutputForVBFJetCut(evCount,leadJet_1,leadJet_2,Jet_phiL,Jet_etaL,debug);

@@ -210,12 +210,12 @@ float fatJetZPairPlusHInvMassRangeTop = 4000.;
 float fatJetZPairPlusHInvMassRangeBottom = 0.;
 float fatJetZPairPlusHInvMassCutStep = (fatJetZPlusHInvMassRangeTop - fatJetZPlusHInvMassRangeBottom) / cutAmnt;
 */
-float ZPairPlusHInvMassCut = 0;
+float ZPairPlusHInvMassCut = 500.;
 float ZPairPlusHInvMassRangeTop = 4000.;
 float ZPairPlusHInvMassRangeBottom = 0.;
 float ZPairPlusHInvMassCutStep = (ZPairPlusHInvMassRangeTop - ZPairPlusHInvMassRangeBottom) / cutAmnt;
 
-float ZPairPlusHPtCut = 0;
+float ZPairPlusHPtCut = 500.;
 float ZPairPlusHPtRangeTop = 4000.;
 float ZPairPlusHPtRangeBottom = 0.;
 float ZPairPlusHPtCutStep = (ZPairPlusHPtRangeTop - ZPairPlusHPtRangeBottom) / cutAmnt;
@@ -230,7 +230,8 @@ float dRCutCutStep = (dRCutRangeTop - dRCutRangeBottom) / cutAmnt;
 
 //Weak cuts V6 05252022 Moving back down cuts to account for new cuts 
 //Setting default ZPairPlusH cuts to 500GeV, which is very low
-float VBFJetdRWeakCut = 0.1;
+
+float dRWeakCut = 0.1;
 
 float jetPTWeakCut = 15.;
 
