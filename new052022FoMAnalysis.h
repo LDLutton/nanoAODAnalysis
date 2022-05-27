@@ -228,6 +228,60 @@ float dRCutRangeBottom = 0.;
 float dRCutCutStep = (dRCutRangeTop - dRCutRangeBottom) / cutAmnt;
 
 
+
+//Weak cuts V7 05252022 Moving up invmass and ZPair+H cuts
+
+float dRWeakCut = 0.1;
+
+float jetPTWeakCut = 15.;
+
+float jetEtaDifWeakCut = 1.0;
+
+float jetInvMassWeakCut = 200.;
+
+//Higgs FJ cuts
+
+float hFatJetPTWeakCut = 200.;
+
+float hFatJetDeepTagWeakCut = 0.1;
+
+
+
+//Lep cuts
+
+float ePtWeakCut = 7.;
+
+float eEtaWeakCut = 2.5;
+
+float mPtWeakCut = 5.;
+
+float mEtaWeakCut = 2.4;
+
+float invMassWeakCutLow=80.;
+
+float invMassWeakCutHigh=100.;
+
+float ptLeadWeakCut=10.;
+
+float ptTrailingWeakCut=5.;
+
+float fourLepInvMassWeakCut = 50.;
+
+float optLepInvMassWeakCut = 6.;
+
+float lepIsoWeakCut = 1.35;
+
+float SIPWeakCut = 5.;
+
+//Semi-Lep cuts
+//fatJetPTWeakCut = 200.;
+
+float fatJetZTagWeakCut = 0.1;
+
+float ZPairPlusHInvMassWeakCut = 1000;
+float ZPairPlusHPtWeakCut = 1000;
+
+/*
 //Weak cuts V6 05252022 Moving back down cuts to account for new cuts 
 //Setting default ZPairPlusH cuts to 500GeV, which is very low
 
@@ -281,7 +335,7 @@ float fatJetZTagWeakCut = 0.1;
 float ZPairPlusHInvMassWeakCut = 500;
 float ZPairPlusHPtWeakCut = 500;
 
-
+*/
 
 /*
 //Weak cuts V5 05252022 Changing things for new052022Analysis and adding in new cuts
