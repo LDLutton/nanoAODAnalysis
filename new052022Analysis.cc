@@ -604,7 +604,7 @@ void new052022Analysis(string datasetString){
 
     if (weakCuts){
         std::cout << "Using weak cuts\n";
-        VBFJetdRCut = VBFJetdRWeakCut;
+        dRCut = dRWeakCut;
 
         jetPTCut = jetPTWeakCut;
 
@@ -650,7 +650,9 @@ void new052022Analysis(string datasetString){
         //fatJetPTCut = 200.;
 
         fatJetZTagCut = fatJetZTagWeakCut;
-        fatJetZPairPlusHInvMassCut = fatJetZPairPlusHInvMassWeakCut;
+
+        ZPairPlusHInvMassCut = ZPairPlusHInvMassWeakCut;
+        ZPairPlusHPtCut = ZPairPlusHPtWeakCut;
     }
     std::string outFileStr;
     if (weakCuts){
@@ -1056,11 +1058,11 @@ void new052022Analysis(string datasetString){
                 tryingHadCtr += 1;
                 LFJOneInd = -1;
                 LFJTwoInd = -1;
-                if (debugHadronic) std::cout << "---------------- Event " << evCount - 1 << " ----------------\n";
-                //if (debugHadronic) std::cout << "hFatJet_ind_fromHTag " << hFatJet_ind_fromHTag << "\n";
-                if (debugHadronic) std::cout << "fatJetPTCut " << fatJetPTCut << "\n";
+                if (debug) std::cout << "---------------- Event " << evCount - 1 << " ----------------\n";
+                //if (debug) std::cout << "hFatJet_ind_fromHTag " << hFatJet_ind_fromHTag << "\n";
+                if (debug) std::cout << "fatJetPTCut " << fatJetPTCut << "\n";
 
-                if (debugHadronic) std::cout << "--------- Entering FJ loop for Hadronic Channel ---------\n";
+                if (debug) std::cout << "--------- Entering FJ loop for Hadronic Channel ---------\n";
 
                 UInt_t numFatJet = *nFatJetL;
                 doHadChanFatJetCut(LFJOneInd,LFJTwoInd,numFatJet,fatJetPTCut,fatJetZPairInvMassCut,FatJet_ptL,FatJet_phiL,FatJet_etaL,FatJet_massL,FatJet_deepTag_ZvsQCDL);
@@ -1141,7 +1143,7 @@ void new052022Analysis(string datasetString){
             float jetLeadEta     = 0;
             float jetTrailingEta = 0;
             if (debug) std::cout << "Entering jet loop. Len: " << nJetLen << "\n";
-            doVBFJetCut(nJetLen,Jet_ptL,Jet_jetIdL,Jet_etaL,Jet_phiL,Jet_massL,jetPTCut,jetEtaDifCut,jetInvMassCut,jetPairInvMass,jetLeadPt,jetLeadEta,jetLeadPhi,jetTrailingPt,jetTrailingEta,jetTrailingPhi,leadJet_1,leadJet_2,VBFJetdRCut,dRCheckVecAr,dRCut,debug);
+            doVBFJetCut(nJetLen,Jet_ptL,Jet_jetIdL,Jet_etaL,Jet_phiL,Jet_massL,jetPTCut,jetEtaDifCut,jetInvMassCut,jetPairInvMass,jetLeadPt,jetLeadEta,jetLeadPhi,jetTrailingPt,jetTrailingEta,jetTrailingPhi,leadJet_1,leadJet_2,dRCheckVecAr,dRCut,debug);
             //std::cout << jetLeadPt << endl;
             if (jetLeadPt == 0) continue;
             debugOutputForVBFJetCut(evCount,leadJet_1,leadJet_2,Jet_phiL,Jet_etaL,debug);
