@@ -674,6 +674,18 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     std::vector<Bool_t> Electron_mvaFall17V2noIso_WP90L;
     std::vector<Bool_t> Electron_mvaFall17V2noIso_WPLL;
 
+    std::vector<Float_t> Electron_dxyL;
+    std::vector<Float_t> Electron_dzL;
+    std::vector<Float_t> Electron_miniPFRelIso_allL;
+    std::vector<Float_t> Electron_sieieL;
+    std::vector<Float_t> Electron_hoeL;
+    std::vector<Float_t> Electron_eInvMinusPInvL;
+    std::vector<Bool_t> Electron_convVetoL;
+    std::vector<UChar_t> Electron_lostHitsL;
+    std::vector<Int_t> Electron_jetIdxL;
+    std::vector<Float_t> Electron_jetRelIsoL;
+    std::vector<Float_t> Electron_mvaTTHL;
+
     //Muons
     UInt_t nMuonL;
     std::vector<Float_t> Muon_etaL;
@@ -686,6 +698,22 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     std::vector<Bool_t> Muon_tightIdL;
     std::vector<Bool_t> Muon_mediumIdL;
     std::vector<Bool_t> Muon_looseIdL;
+
+    std::vector<Float_t> Muon_dxyL;
+    std::vector<Float_t> Muon_dzL;
+    std::vector<Float_t> Muon_miniPFRelIso_allL;
+    std::vector<Int_t> Muon_jetIdxL;
+    std::vector<Float_t> Muon_jetRelIsoL;
+    std::vector<Float_t> Muon_mvaTTHL;
+
+    std::vector<Float_t> Jet_btagDeepFlavBL;
+
+    //ParticleNet
+    std::vector<Float_t> FatJet_particleNet_HbbvsQCDL;
+    std::vector<Float_t> FatJet_particleNet_ZvsQCDL;
+
+    //
+    Float_t fixedGridRhoFastjetAllL;
 
 
     TTree *FilteredEventsTree = new TTree("FilteredEventsTree", "FilteredEventsTree");
@@ -744,6 +772,37 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     FilteredEventsTree->Branch("Muon_tightIdL",&Muon_tightIdL);
     FilteredEventsTree->Branch("Muon_mediumIdL",&Muon_mediumIdL);
     FilteredEventsTree->Branch("Muon_looseIdL",&Muon_looseIdL);
+
+
+    //For LepID
+    FilteredEventsTree->Branch("Electron_dxyL",&Electron_dxyL);
+    FilteredEventsTree->Branch("Electron_dzL",&Electron_dzL);
+    FilteredEventsTree->Branch("Electron_miniPFRelIso_allL",&Electron_miniPFRelIso_allL);
+    FilteredEventsTree->Branch("Electron_sieieL",&Electron_sieieL);
+    FilteredEventsTree->Branch("Electron_hoeL",&Electron_hoeL);
+    FilteredEventsTree->Branch("Electron_eInvMinusPInvL",&Electron_eInvMinusPInvL);
+    FilteredEventsTree->Branch("Electron_convVetoL",&Electron_convVetoL);
+    FilteredEventsTree->Branch("Electron_lostHitsL",&Electron_lostHitsL);
+    FilteredEventsTree->Branch("Electron_jetIdxL",&Electron_jetIdxL);
+    FilteredEventsTree->Branch("Electron_jetRelIsoL",&Electron_jetRelIsoL);
+    FilteredEventsTree->Branch("Electron_mvaTTHL",&Electron_mvaTTHL);
+
+    FilteredEventsTree->Branch("Muon_dxyL",&Muon_dxyL);
+    FilteredEventsTree->Branch("Muon_dzL",&Muon_dzL);
+    FilteredEventsTree->Branch("Muon_miniPFRelIso_allL",&Muon_miniPFRelIso_allL);
+    FilteredEventsTree->Branch("Muon_jetIdxL",&Muon_jetIdxL);
+    FilteredEventsTree->Branch("Muon_jetRelIsoL",&Muon_jetRelIsoL);
+    FilteredEventsTree->Branch("Muon_mvaTTHL",&Muon_mvaTTHL);
+
+    FilteredEventsTree->Branch("Jet_btagDeepFlavBL",&Jet_btagDeepFlavBL);
+
+    //ParticleNet
+    FilteredEventsTree->Branch("FatJet_particleNet_HbbvsQCDL",&FatJet_particleNet_HbbvsQCDL);
+    FilteredEventsTree->Branch("FatJet_particleNet_ZvsQCDL",&FatJet_particleNet_ZvsQCDL);
+
+    //
+    FilteredEventsTree->Branch("fixedGridRhoFastjetAllL",&fixedGridRhoFastjetAllL);
+    
 
     Double_t sumOfGenWeights = 0;
 
@@ -866,6 +925,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         TTreeReaderArray<Float_t> Electron_dr03TkSumPt(myEventsReader, "Electron_dr03TkSumPt");
         TTreeReaderArray<Float_t> Electron_dr03HcalDepth1TowerSumEt(myEventsReader, "Electron_dr03HcalDepth1TowerSumEt");
         TTreeReaderArray<Float_t> Electron_pfRelIso03_all(myEventsReader, "Electron_pfRelIso03_all");
+        
         TTreeReaderArray<Float_t> Electron_sip3d(myEventsReader, "Electron_sip3d");
         TTreeReaderArray<Int_t> Electron_cutBased(myEventsReader, "Electron_cutBased");
         TTreeReaderArray<Bool_t> Electron_mvaFall17V2Iso_WP80(myEventsReader, "Electron_mvaFall17V2Iso_WP80");
@@ -883,50 +943,47 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         TTreeReaderArray<Float_t> Muon_phi(myEventsReader, "Muon_phi");
         TTreeReaderArray<Float_t> Muon_pt(myEventsReader, "Muon_pt");
         TTreeReaderArray<Float_t> Muon_pfRelIso03_all(myEventsReader, "Muon_pfRelIso03_all");
+        
         TTreeReaderArray<Float_t> Muon_sip3d(myEventsReader, "Muon_sip3d");
         TTreeReaderArray<Bool_t> Muon_tightId(myEventsReader, "Muon_tightId");
         TTreeReaderArray<Bool_t> Muon_mediumId(myEventsReader, "Muon_mediumId");
         TTreeReaderArray<Bool_t> Muon_looseId(myEventsReader, "Muon_looseId");
+
+        //For LepID
+        TTreeReaderArray<Float_t> Electron_dxy(myEventsReader, "Electron_dxy");
+        TTreeReaderArray<Float_t> Electron_dz(myEventsReader, "Electron_dz");
+        TTreeReaderArray<Float_t> Electron_miniPFRelIso_all(myEventsReader, "Electron_miniPFRelIso_all");
+        TTreeReaderArray<Float_t> Electron_sieie(myEventsReader, "Electron_sieie");
+        TTreeReaderArray<Float_t> Electron_hoe(myEventsReader, "Electron_hoe");
+        TTreeReaderArray<Float_t> Electron_eInvMinusPInv(myEventsReader, "Electron_eInvMinusPInv");
+        TTreeReaderArray<Bool_t> Electron_convVeto(myEventsReader, "Electron_convVeto");
+        TTreeReaderArray<UChar_t> Electron_lostHits(myEventsReader, "Electron_lostHits");
+        TTreeReaderArray<Int_t> Electron_jetIdx(myEventsReader, "Electron_jetIdx");
+        TTreeReaderArray<Float_t> Electron_jetRelIso(myEventsReader, "Electron_jetRelIso");
+        TTreeReaderArray<Float_t> Electron_mvaTTH(myEventsReader, "Electron_mvaTTH");
+
+        TTreeReaderArray<Float_t> Muon_dxy(myEventsReader, "Muon_dxy");
+        TTreeReaderArray<Float_t> Muon_dz(myEventsReader, "Muon_dz");
+        TTreeReaderArray<Float_t> Muon_miniPFRelIso_all(myEventsReader, "Muon_miniPFRelIso_all");
+        TTreeReaderArray<Int_t> Muon_jetIdx(myEventsReader, "Muon_jetIdx");
+        TTreeReaderArray<Float_t> Muon_jetRelIso(myEventsReader, "Muon_jetRelIso");
+        TTreeReaderArray<Float_t> Muon_mvaTTH(myEventsReader, "Muon_mvaTTH");
+
+        TTreeReaderArray<Float_t> Jet_btagDeepFlavB(myEventsReader,"Jet_btagDeepFlavB");
+
+        //ParticleNet
+        TTreeReaderArray<Float_t> FatJet_particleNet_HbbvsQCD(myEventsReader, "FatJet_particleNet_HbbvsQCD");
+        TTreeReaderArray<Float_t> FatJet_particleNet_ZvsQCD(myEventsReader, "FatJet_particleNet_ZvsQCD");
+
+        //
+
+        TTreeReaderValue<Float_t> fixedGridRhoFastjetAll(myEventsReader, "fixedGridRhoFastjetAll");
 
 
 
         TTreeReader myRunsReader("Runs", tmpfile);
         TTreeReaderValue<Long64_t> genEventCount(myRunsReader, "genEventCount");
         TTreeReaderValue<Double_t> genEventSumw(myRunsReader, "genEventSumw");
-
-        Int_t tmpPDGId;
-
-        float tmpIso;
-
-        Int_t tmpZ2Ind = -1;
-        bool Z2IsMuon = false;
-        float tmpTopZ2LeadPt = 0;
-        float tmpTopZ2TrailingPt = 0;
-        ROOT::Math::PtEtaPhiMVector tmpZ1Vec;
-        float tmpZ1M;
-
-        float Z1LeadIso;
-        float Z1TrailingIso;
-        float Z2LeadIso;
-        float Z2TrailingIso;
-        float Z1LeadSIP;
-        float Z1TrailingSIP;
-        float Z2LeadSIP;
-        float Z2TrailingSIP;
-
-        float tmpAdd;
-
-        Int_t LFJOneInd = -1;
-        Int_t LFJTwoInd = -1;
-        float leadFatJetMaxPT = -1;
-        float secondFatJetMaxPT = -1;
-        float FJInvMass = -1;
-
-        std::vector<std::array<ROOT::Math::PtEtaPhiMVector,2>> eZ2VecPairAr;
-        std::vector<std::array<ROOT::Math::PtEtaPhiMVector,2>> mZ2VecPairAr;
-
-        
-        
 
 
         //Getting the cross section
@@ -1026,7 +1083,10 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
             //std::cout << testPassHLTBool << " " << passHLTBool << "\n";
             if (!passHLTBool) continue;
             passHLTCtr += 1;
-            passHLTWeightedCtr += *genWeight; 
+            passHLTWeightedCtr += *genWeight;
+            if (debug){
+                std::cout <<"Passed HLT\n";
+            }
             
 
             genWeightL = *genWeight;
@@ -1034,6 +1094,9 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
             //Check if any fat jets in event
             UInt_t tmpnFatJets = *nFatJet;
             if (tmpnFatJets<=0) continue;
+            if (debug){
+                std::cout <<"Passed nFJs\n";
+            }
             passnFJCtr += 1;
             passnFJWeightedCtr += *genWeight; 
 
@@ -1041,11 +1104,16 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
             UInt_t tmpnVBFJets = *nJet;
             
             if (tmpnVBFJets < 2) continue;
+            if (debug){
+                std::cout <<"Passed nJs\n";
+            }
 
             passnVBFCtr += 1;
             passnVBFWeightedCtr += *genWeight; 
             //std::cout << evRunOver-1 << "passed\n";
-            
+            if (debug){
+                std::cout <<"Filling Jets\n";
+            }
             nJetL = tmpnVBFJets;
             for (UInt_t nJetItr=0; nJetItr<nJetL;nJetItr++){
                 Jet_etaL.push_back(Jet_eta[nJetItr]);
@@ -1053,10 +1121,13 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                 Jet_phiL.push_back(Jet_phi[nJetItr]);
                 Jet_massL.push_back(Jet_mass[nJetItr]);
                 Jet_jetIdL.push_back(Jet_jetId[nJetItr]);
+                Jet_btagDeepFlavBL.push_back(Jet_btagDeepFlavB[nJetItr]);
             }
 
             //Fat jets
-
+            if (debug){
+                std::cout <<"Filling FJs\n";
+            }
             nFatJetL = tmpnFatJets;
             for (UInt_t nFatJetItr=0; nFatJetItr<nFatJetL;nFatJetItr++){
                 FatJet_etaL.push_back(FatJet_eta[nFatJetItr]);
@@ -1066,9 +1137,14 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                 FatJet_jetIdL.push_back(FatJet_jetId[nFatJetItr]);
                 FatJet_deepTag_HL.push_back(FatJet_deepTag_H[nFatJetItr]);
                 FatJet_deepTag_ZvsQCDL.push_back(FatJet_deepTag_ZvsQCD[nFatJetItr]);
+                FatJet_particleNet_HbbvsQCDL.push_back(FatJet_particleNet_HbbvsQCD[nFatJetItr]);
+                FatJet_particleNet_ZvsQCDL.push_back(FatJet_particleNet_ZvsQCD[nFatJetItr]);
             }
 
             //Electrons
+            if (debug){
+                std::cout <<"Filling Electrons\n";
+            }
             nElectronL = *nElectron;
             for (UInt_t nElectronItr=0; nElectronItr<nElectronL;nElectronItr++){
                 Electron_etaL.push_back(Electron_eta[nElectronItr]);
@@ -1088,6 +1164,22 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                 Electron_mvaFall17V2noIso_WP80L.push_back(Electron_mvaFall17V2noIso_WP80[nElectronItr]);
                 Electron_mvaFall17V2noIso_WP90L.push_back(Electron_mvaFall17V2noIso_WP90[nElectronItr]);
                 Electron_mvaFall17V2noIso_WPLL.push_back(Electron_mvaFall17V2noIso_WPL[nElectronItr]);
+
+                Electron_dxyL.push_back(Electron_dxy[nElectronItr]);
+                Electron_dzL.push_back(Electron_dz[nElectronItr]);
+                Electron_miniPFRelIso_allL.push_back(Electron_miniPFRelIso_all[nElectronItr]);
+                Electron_sieieL.push_back(Electron_sieie[nElectronItr]);
+                Electron_hoeL.push_back(Electron_hoe[nElectronItr]);
+                Electron_eInvMinusPInvL.push_back(Electron_eInvMinusPInv[nElectronItr]);
+                Electron_convVetoL.push_back(Electron_convVeto[nElectronItr]);
+                Electron_lostHitsL.push_back(Electron_lostHits[nElectronItr]);
+                Electron_jetIdxL.push_back(Electron_jetIdx[nElectronItr]);
+                Electron_jetRelIsoL.push_back(Electron_jetRelIso[nElectronItr]);
+                Electron_mvaTTHL.push_back(Electron_mvaTTH[nElectronItr]);
+                
+
+
+
             }
 
             //Muons
@@ -1103,7 +1195,16 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                 Muon_tightIdL.push_back(Muon_tightId[nMuonItr]);
                 Muon_mediumIdL.push_back(Muon_mediumId[nMuonItr]);
                 Muon_looseIdL.push_back(Muon_looseId[nMuonItr]);
+
+                Muon_dxyL.push_back(Muon_dxy[nMuonItr]);
+                Muon_dzL.push_back(Muon_dz[nMuonItr]);
+                Muon_miniPFRelIso_allL.push_back(Muon_miniPFRelIso_all[nMuonItr]);
+                Muon_jetIdxL.push_back(Muon_jetIdx[nMuonItr]);
+                Muon_jetRelIsoL.push_back(Muon_jetRelIso[nMuonItr]);
+                Muon_mvaTTHL.push_back(Muon_mvaTTH[nMuonItr]);
             }
+
+            fixedGridRhoFastjetAllL = *fixedGridRhoFastjetAll;
 
             FilteredEventsTree->Fill();
 
@@ -1112,6 +1213,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
             Jet_phiL.clear();
             Jet_massL.clear();
             Jet_jetIdL.clear();
+            Jet_btagDeepFlavBL.clear();
             
 
             FatJet_etaL.clear();
@@ -1140,6 +1242,27 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
             Electron_mvaFall17V2noIso_WP80L.clear();
             Electron_mvaFall17V2noIso_WP90L.clear();
             Electron_mvaFall17V2noIso_WPLL.clear();
+
+            Electron_dxyL.clear();
+            Electron_dzL.clear();
+            Electron_miniPFRelIso_allL.clear();
+            Electron_sieieL.clear();
+            Electron_hoeL.clear();
+            Electron_eInvMinusPInvL.clear();
+            Electron_convVetoL.clear();
+            Electron_lostHitsL.clear();
+            Electron_jetIdxL.clear();
+            Electron_jetRelIsoL.clear();
+            Electron_mvaTTHL.clear();
+
+            Muon_dxyL.clear();
+            Muon_dzL.clear();
+            Muon_miniPFRelIso_allL.clear();
+            Muon_jetIdxL.clear();
+            Muon_jetRelIsoL.clear();
+            Muon_mvaTTHL.clear();
+
+            
             
 
             Muon_etaL.clear();
@@ -1152,6 +1275,9 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
             Muon_tightIdL.clear();
             Muon_mediumIdL.clear();
             Muon_looseIdL.clear();
+
+            FatJet_particleNet_HbbvsQCDL.clear();
+            FatJet_particleNet_ZvsQCDL.clear();
 
         }
     }
