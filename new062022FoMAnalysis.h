@@ -132,15 +132,15 @@ std::vector<float> cutRangeAr;
 
 //New 062022 Lepton ID cuts
 float lDxyCut = 0.05;
-float lDxyRangeTop = 0.1;
+float lDxyRangeTop = 0.5;
 float lDxyRangeBottom = 0.;
 float lDxyCutStep = (lDxyRangeTop - lDxyRangeBottom) / cutAmnt;
 float lDzCut = 0.1;
-float lDzRangeTop = 0.2;
+float lDzRangeTop = 1.;
 float lDzRangeBottom = 0.;
 float lDzCutStep = (lDzRangeTop - lDzRangeBottom) / cutAmnt;
 float lMiniPFRelIsoCut = 0.4;
-float lMiniPFRelIsoRangeTop = 1.;
+float lMiniPFRelIsoRangeTop = 15.;
 float lMiniPFRelIsoRangeBottom = 0.;
 float lMiniPFRelIsoCutStep = (lMiniPFRelIsoRangeTop - lMiniPFRelIsoRangeBottom) / cutAmnt;
 float eSieieBarrelCut = 0.011;
@@ -160,17 +160,17 @@ float eHoeRangeBottom = 0.;
 float eHoeCutStep = (eHoeRangeTop - eHoeRangeBottom) / cutAmnt;
 float eInvMinusPInvCut = -0.04;
 float eInvMinusPInvRangeTop = 0.05;
-float eInvMinusPInvRangeBottom = -0.15;
+float eInvMinusPInvRangeBottom = -0.2;
 float eInvMinusPInvCutStep = (eInvMinusPInvRangeTop - eInvMinusPInvRangeBottom) / cutAmnt;
 float ePromptMVACut = 0.8;
 float ePromptMVARangeTop = 1.;
-float ePromptMVARangeBottom = 0.;
+float ePromptMVARangeBottom = -1.;
 float ePromptMVACutStep = (ePromptMVARangeTop - ePromptMVARangeBottom) / cutAmnt;
 
 UInt_t eLostHitsCut = 0;
 
-float lepJetDeepTagLooseCut = 0.0521;
-float lepJetDeepTagLooseRangeTop = 0.3033;
+float lepJetDeepTagLooseCut = 0.3;
+float lepJetDeepTagLooseRangeTop = 0.5;
 float lepJetDeepTagLooseRangeBottom = 0.;
 float lepJetDeepTagLooseCutStep = (lepJetDeepTagLooseRangeTop - lepJetDeepTagLooseRangeBottom) / cutAmnt;
 float lepJetDeepTagMediumCut = 0.3033;
@@ -180,7 +180,7 @@ float lepJetDeepTagMediumCutStep = (lepJetDeepTagMediumRangeTop - lepJetDeepTagM
 
 float mPromptMVACut = 0.85;
 float mPromptMVARangeTop = 1.;
-float mPromptMVARangeBottom = 0.;
+float mPromptMVARangeBottom = -1.;
 float mPromptMVACutStep = (mPromptMVARangeTop - mPromptMVARangeBottom) / cutAmnt;
 
 
@@ -237,12 +237,12 @@ float optLepInvMassRangeBottom = 0.;
 float optLepInvMassCutStep = (optLepInvMassRangeTop - optLepInvMassRangeBottom) / cutAmnt;
 
 float lepIsoCut = 0.35;
-float lepIsoRangeTop = 4.;
+float lepIsoRangeTop = 15.;
 float lepIsoRangeBottom = 0.;
 float lepIsoCutStep = (lepIsoRangeTop - lepIsoRangeBottom) / cutAmnt;
 
 float SIPCut = 4.;
-float SIPRangeTop = 6.;
+float SIPRangeTop = 10.;
 float SIPRangeBottom = 0.;
 float SIPCutStep = (SIPRangeTop - SIPRangeBottom) / cutAmnt;
 
@@ -313,13 +313,13 @@ float hFatJetParticleNetWeakCut = 0.005;
 
 //Lep cuts
 
-float ePtWeakCut = 5.;
+float ePtWeakCut = 7.;
 
-float eEtaWeakCut = 3.;
+float eEtaWeakCut = 2.5;
 
-float mPtWeakCut = 3.;
+float mPtWeakCut = 5.;
 
-float mEtaWeakCut = 3.;
+float mEtaWeakCut = 2.4;
 
 float invMassWeakCutLow=20.;
 
@@ -352,7 +352,7 @@ float lMiniPFRelIsoWeakCut = 10.;
 float eSieieBarrelWeakCut = 0.05;
 float eSieieEndcapWeakCut = 0.070;
 
-float eHoeWeakCut = 2.;
+float eHoeWeakCut = 1.5;
 float eInvMinusPInvWeakCut = -0.15;
 float ePromptMVAWeakCut = -0.8;
 float lepJetDeepTagLooseWeakCut = 0.0221;

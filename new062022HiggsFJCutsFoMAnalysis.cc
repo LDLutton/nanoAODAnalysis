@@ -184,7 +184,7 @@ void new062022HiggsFJCutsFoMAnalysis(string inputString){
     }
     else if (SDC2V3MC){
         saveName = "SDC2V3MC";
-        totWeight = 1045.172;
+        totWeight = 1845.172;
         isBackground = false;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSDC2V3MC.root";
         fileAr.push_back(tmpStrWithPath);

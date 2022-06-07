@@ -138,6 +138,7 @@ void new062022Analysis(string datasetString){
     }
     else if (SDC2V3MC){
         saveName = "SDC2V3MC";
+        totWeight = 1845.172;
         isBackground = false;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSDC2V3MCEtaDifCut.root";
         fileAr.push_back(tmpStrWithPath);
