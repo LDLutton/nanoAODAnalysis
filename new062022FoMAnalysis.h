@@ -169,13 +169,13 @@ float ePromptMVACutStep = (ePromptMVARangeTop - ePromptMVARangeBottom) / cutAmnt
 
 UInt_t eLostHitsCut = 0;
 
-float lepJetDeepTagLooseCut = 0.3;
-float lepJetDeepTagLooseRangeTop = 0.5;
+float lepJetDeepTagLooseCut = 0.0521;
+float lepJetDeepTagLooseRangeTop = 0.49;
 float lepJetDeepTagLooseRangeBottom = 0.;
 float lepJetDeepTagLooseCutStep = (lepJetDeepTagLooseRangeTop - lepJetDeepTagLooseRangeBottom) / cutAmnt;
 float lepJetDeepTagMediumCut = 0.3033;
 float lepJetDeepTagMediumRangeTop = 1.;
-float lepJetDeepTagMediumRangeBottom = 0.0521;
+float lepJetDeepTagMediumRangeBottom = 0.31;
 float lepJetDeepTagMediumCutStep = (lepJetDeepTagMediumRangeTop - lepJetDeepTagMediumRangeBottom) / cutAmnt;
 
 float mPromptMVACut = 0.85;
@@ -355,8 +355,8 @@ float eSieieEndcapWeakCut = 0.070;
 float eHoeWeakCut = 1.5;
 float eInvMinusPInvWeakCut = -0.15;
 float ePromptMVAWeakCut = -0.8;
-float lepJetDeepTagLooseWeakCut = 0.0221;
-float lepJetDeepTagMediumWeakCut = 0.0533;
+float lepJetDeepTagLooseWeakCut = 0.3;
+float lepJetDeepTagMediumWeakCut = 0.5;
 float mPromptMVAWeakCut = 0.2;
 
 //unused
