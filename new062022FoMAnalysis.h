@@ -132,35 +132,35 @@ std::vector<float> cutRangeAr;
 
 //New 062022 Lepton ID cuts
 float lDxyCut = 0.05;
-float lDxyRangeTop = 0.5;
+float lDxyRangeTop = 0.1;
 float lDxyRangeBottom = 0.;
 float lDxyCutStep = (lDxyRangeTop - lDxyRangeBottom) / cutAmnt;
 float lDzCut = 0.1;
-float lDzRangeTop = 1.;
+float lDzRangeTop = 0.2;
 float lDzRangeBottom = 0.;
 float lDzCutStep = (lDzRangeTop - lDzRangeBottom) / cutAmnt;
 float lMiniPFRelIsoCut = 0.4;
-float lMiniPFRelIsoRangeTop = 15.;
+float lMiniPFRelIsoRangeTop = 1.;
 float lMiniPFRelIsoRangeBottom = 0.;
 float lMiniPFRelIsoCutStep = (lMiniPFRelIsoRangeTop - lMiniPFRelIsoRangeBottom) / cutAmnt;
 float eSieieBarrelCut = 0.011;
-float eSieieBarrelRangeTop = 0.5;
+float eSieieBarrelRangeTop = 0.1;
 float eSieieBarrelRangeBottom = 0.;
 float eSieieBarrelCutStep = (eSieieBarrelRangeTop - eSieieBarrelRangeBottom) / cutAmnt;
 
 float eSieieEndcapCut = 0.030;
-float eSieieEndcapRangeTop = 0.5;
+float eSieieEndcapRangeTop = 0.1;
 float eSieieEndcapRangeBottom = 0.011;
 float eSieieEndcapCutStep = (eSieieEndcapRangeTop - eSieieEndcapRangeBottom) / cutAmnt;
 
 
 float eHoeCut = 0.1;
-float eHoeRangeTop = 2.;
+float eHoeRangeTop = .2;
 float eHoeRangeBottom = 0.;
 float eHoeCutStep = (eHoeRangeTop - eHoeRangeBottom) / cutAmnt;
 float eInvMinusPInvCut = -0.04;
 float eInvMinusPInvRangeTop = 0.05;
-float eInvMinusPInvRangeBottom = -0.2;
+float eInvMinusPInvRangeBottom = -0.05;
 float eInvMinusPInvCutStep = (eInvMinusPInvRangeTop - eInvMinusPInvRangeBottom) / cutAmnt;
 float ePromptMVACut = 0.8;
 float ePromptMVARangeTop = 1.;
@@ -175,7 +175,7 @@ float lepJetDeepTagLooseRangeBottom = 0.;
 float lepJetDeepTagLooseCutStep = (lepJetDeepTagLooseRangeTop - lepJetDeepTagLooseRangeBottom) / cutAmnt;
 float lepJetDeepTagMediumCut = 0.3033;
 float lepJetDeepTagMediumRangeTop = 1.;
-float lepJetDeepTagMediumRangeBottom = 0.31;
+float lepJetDeepTagMediumRangeBottom = 0.2;
 float lepJetDeepTagMediumCutStep = (lepJetDeepTagMediumRangeTop - lepJetDeepTagMediumRangeBottom) / cutAmnt;
 
 float mPromptMVACut = 0.85;
@@ -237,7 +237,7 @@ float optLepInvMassRangeBottom = 0.;
 float optLepInvMassCutStep = (optLepInvMassRangeTop - optLepInvMassRangeBottom) / cutAmnt;
 
 float lepIsoCut = 0.35;
-float lepIsoRangeTop = 15.;
+float lepIsoRangeTop = 5.;
 float lepIsoRangeBottom = 0.;
 float lepIsoCutStep = (lepIsoRangeTop - lepIsoRangeBottom) / cutAmnt;
 
@@ -292,6 +292,78 @@ float dRCutRangeTop = 4.;
 float dRCutRangeBottom = 0.;
 float dRCutCutStep = (dRCutRangeTop - dRCutRangeBottom) / cutAmnt;
 
+//Weak cuts V9 06022022 
+
+float dRWeakCut = 0.001;
+
+float jetPTWeakCut = 5.;
+
+float jetEtaDifWeakCut = 2.0;
+
+float jetInvMassWeakCut = 400.;
+
+//Higgs FJ cuts
+
+float hFatJetPTWeakCut = 100.;
+
+
+float hFatJetParticleNetWeakCut = 0.005;
+
+
+
+//Lep cuts
+
+float ePtWeakCut = 7.;
+
+float eEtaWeakCut = 2.5;
+
+float mPtWeakCut = 5.;
+
+float mEtaWeakCut = 2.4;
+
+float invMassWeakCutLow=80.;
+
+float invMassWeakCutHigh=100.;
+
+float ptLeadWeakCut=5.;
+
+float ptTrailingWeakCut=3.;
+
+float fourLepInvMassWeakCut = 100.;
+
+float optLepInvMassWeakCut = 12.;
+
+float lepIsoWeakCut = 4.;
+
+float SIPWeakCut = 8.;
+
+//Semi-Lep cuts
+//fatJetPTWeakCut = 200.;
+
+float fatJetZParticleNetWeakCut = 0.05;
+
+float ZPairPlusHInvMassWeakCut = 1000;
+float ZPairPlusHPtWeakCut = 1000;
+
+
+float lDxyWeakCut = 0.05;
+float lDzWeakCut = 0.1;
+float lMiniPFRelIsoWeakCut = 0.4;
+float eSieieBarrelWeakCut = 0.05;
+float eSieieEndcapWeakCut = 0.070;
+
+float eHoeWeakCut = 0.1;
+float eInvMinusPInvWeakCut = -0.04;
+float ePromptMVAWeakCut = -0.8;
+float lepJetDeepTagLooseWeakCut = 0.3;
+float lepJetDeepTagMediumWeakCut = 0.5;
+float mPromptMVAWeakCut = 0.2;
+
+//unused
+float fatJetZTagWeakCut = 0.1;
+float hFatJetDeepTagWeakCut = 0.1;
+
+/*
 //Ultra Weak cuts V8 06022022 Added new lepton ID, moving back cuts, and added particle net instead of deeptag
 
 float dRWeakCut = 0.001;
@@ -362,7 +434,7 @@ float mPromptMVAWeakCut = 0.2;
 //unused
 float fatJetZTagWeakCut = 0.1;
 float hFatJetDeepTagWeakCut = 0.1;
-
+*/
 /*
 //Weak cuts V8 06022022 Added new lepton ID, moving back cuts, and added particle net instead of deeptag
 
