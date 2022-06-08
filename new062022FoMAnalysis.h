@@ -52,6 +52,7 @@ bool LaraTest = false;
 bool isBackground = false;
 
 bool scratchDown = false;
+bool localTest = true;
 
 //VBF jet pair selection;
 //Defining jet matching cuts;
@@ -292,6 +293,306 @@ float dRCutRangeTop = 4.;
 float dRCutRangeBottom = 0.;
 float dRCutCutStep = (dRCutRangeTop - dRCutRangeBottom) / cutAmnt;
 
+
+
+//Weak cuts V12 06082022 
+
+float dRWeakCut = 0.8;
+
+float jetPTWeakCut = 5.;
+
+float jetEtaDifWeakCut = 2.0;
+
+float jetInvMassWeakCut = 400.;
+
+//Higgs FJ cuts
+
+float hFatJetPTWeakCut = 100.;
+
+
+float hFatJetParticleNetWeakCut = 0.8;
+
+
+
+//Lep cuts
+
+float ePtWeakCut = 7.;
+
+float eEtaWeakCut = 2.5;
+
+float mPtWeakCut = 5.;
+
+float mEtaWeakCut = 2.4;
+
+float invMassWeakCutLow=80.;
+
+float invMassWeakCutHigh=100.;
+
+float ptLeadWeakCut=20.;
+
+float ptTrailingWeakCut=10.;
+
+float fourLepInvMassWeakCut = 100.;
+
+float optLepInvMassWeakCut = 12.;
+
+float lepIsoWeakCut = 4.;
+
+float SIPWeakCut = 4.;
+
+//Semi-Lep cuts
+//fatJetPTWeakCut = 200.;
+
+float fatJetZParticleNetWeakCut = 0.8;
+
+float ZPairPlusHInvMassWeakCut = 1500;
+float ZPairPlusHPtWeakCut = 1000;
+
+
+float lDxyWeakCut = 0.05;
+float lDzWeakCut = 0.1;
+float lMiniPFRelIsoWeakCut = 0.4;
+float eSieieBarrelWeakCut = 0.03;
+float eSieieEndcapWeakCut = 0.011;
+
+float eHoeWeakCut = 0.1;
+float eInvMinusPInvWeakCut = -0.04;
+float ePromptMVAWeakCut = -0.8;
+float lepJetDeepTagLooseWeakCut = 0.3;
+float lepJetDeepTagMediumWeakCut = 0.5;
+float mPromptMVAWeakCut = 0.2;
+
+
+//Messing around with local cuts 06082022 
+
+/*
+
+
+float dRWeakCut = 0.001;
+
+float jetPTWeakCut = 5.;
+
+float jetEtaDifWeakCut = .5;
+
+float jetInvMassWeakCut = 100.;
+
+//Higgs FJ cuts
+
+float hFatJetPTWeakCut = 100.;
+
+
+float hFatJetParticleNetWeakCut = 0.005;
+
+
+
+//Lep cuts
+
+float ePtWeakCut = 7.;
+
+float eEtaWeakCut = 2.5;
+
+float mPtWeakCut = 5.;
+
+float mEtaWeakCut = 2.4;
+
+float invMassWeakCutLow=20.;
+
+float invMassWeakCutHigh=160.;
+
+float ptLeadWeakCut=5.;
+
+float ptTrailingWeakCut=3.;
+
+float fourLepInvMassWeakCut = 30.;
+
+float optLepInvMassWeakCut = 3.;
+
+float lepIsoWeakCut = 10.;
+
+float SIPWeakCut = 8.;
+
+//Semi-Lep cuts
+//fatJetPTWeakCut = 200.;
+
+float fatJetZParticleNetWeakCut = 0.05;
+
+float ZPairPlusHInvMassWeakCut = 500;
+float ZPairPlusHPtWeakCut = 500;
+
+
+float lDxyWeakCut = 0.3;
+float lDzWeakCut = 0.5;
+float lMiniPFRelIsoWeakCut = 10.;
+float eSieieBarrelWeakCut = 0.05;
+float eSieieEndcapWeakCut = 0.070;
+
+float eHoeWeakCut = 1.5;
+float eInvMinusPInvWeakCut = -0.15;
+float ePromptMVAWeakCut = -0.8;
+float lepJetDeepTagLooseWeakCut = 0.3;
+float lepJetDeepTagMediumWeakCut = 0.5;
+float mPromptMVAWeakCut = 0.2;
+*/
+
+/*
+
+float dRWeakCut = 0.8;
+
+float jetPTWeakCut = 0.;
+
+float jetEtaDifWeakCut = 4.0;
+
+float jetInvMassWeakCut = 00.;
+
+//Higgs FJ cuts
+
+float hFatJetPTWeakCut = 00.;
+
+
+float hFatJetParticleNetWeakCut = 0.8;
+
+
+
+//Lep cuts
+
+float ePtWeakCut = 7.;
+
+float eEtaWeakCut = 2.5;
+
+float mPtWeakCut = 5.;
+
+float mEtaWeakCut = 2.4;
+
+float invMassWeakCutLow=60.;
+
+float invMassWeakCutHigh=120.;
+
+float ptLeadWeakCut=20.;
+
+float ptTrailingWeakCut=10.;
+
+float fourLepInvMassWeakCut = 100.;
+
+float optLepInvMassWeakCut = 12.;
+
+float lepIsoWeakCut = 20.;
+
+float SIPWeakCut = 20.;
+
+//Semi-Lep cuts
+//fatJetPTWeakCut = 200.;
+
+float fatJetZParticleNetWeakCut = 0.8;
+
+float ZPairPlusHInvMassWeakCut = 1000;
+float ZPairPlusHPtWeakCut = 1000;
+
+float lDxyWeakCut = 1.3;
+float lDzWeakCut = 1.5;
+float lMiniPFRelIsoWeakCut = 110.;
+float eSieieBarrelWeakCut = 10.05;
+float eSieieEndcapWeakCut = 10.070;
+
+float eHoeWeakCut = 11.5;
+float eInvMinusPInvWeakCut = -10.15;
+float ePromptMVAWeakCut = -1.9;
+float lepJetDeepTagLooseWeakCut = 10.3;
+float lepJetDeepTagMediumWeakCut = 10.5;
+float mPromptMVAWeakCut = -10.2;
+*/
+
+/*
+float lDxyWeakCut = 0.05;
+float lDzWeakCut = 0.1;
+float lMiniPFRelIsoWeakCut = 0.4;
+float eSieieBarrelWeakCut = 0.011;
+float eSieieEndcapWeakCut = 0.030;
+
+float eHoeWeakCut = 0.1;
+float eInvMinusPInvWeakCut = -0.04;
+float ePromptMVAWeakCut = 0.8;
+float lepJetDeepTagLooseWeakCut = 0.0521;
+float lepJetDeepTagMediumWeakCut = 0.3033;
+float mPromptMVAWeakCut = 0.85;
+*/
+//unused
+float fatJetZTagWeakCut = 0.1;
+float hFatJetDeepTagWeakCut = 0.1;
+
+
+/*
+float dRWeakCut = 0.001;
+
+float jetPTWeakCut = 5.;
+
+float jetEtaDifWeakCut = 2.;
+
+float jetInvMassWeakCut = 100.;
+
+//Higgs FJ cuts
+
+float hFatJetPTWeakCut = 100.;
+
+
+float hFatJetParticleNetWeakCut = 0.5;
+
+
+
+//Lep cuts
+
+float ePtWeakCut = 7.;
+
+float eEtaWeakCut = 2.5;
+
+float mPtWeakCut = 5.;
+
+float mEtaWeakCut = 2.4;
+
+float invMassWeakCutLow=80.;
+
+float invMassWeakCutHigh=100.;
+
+float ptLeadWeakCut=5.;
+
+float ptTrailingWeakCut=3.;
+
+float fourLepInvMassWeakCut = 30.;
+
+float optLepInvMassWeakCut = 3.;
+
+float lepIsoWeakCut = 10.;
+
+float SIPWeakCut = 8.;
+
+//Semi-Lep cuts
+//fatJetPTWeakCut = 200.;
+
+float fatJetZParticleNetWeakCut = 0.5;
+
+float ZPairPlusHInvMassWeakCut = 1500;
+float ZPairPlusHPtWeakCut = 1500;
+
+
+float lDxyWeakCut = 0.3;
+float lDzWeakCut = 0.5;
+float lMiniPFRelIsoWeakCut = 10.;
+float eSieieBarrelWeakCut = 0.05;
+float eSieieEndcapWeakCut = 0.070;
+
+float eHoeWeakCut = 1.5;
+float eInvMinusPInvWeakCut = -0.15;
+float ePromptMVAWeakCut = -0.8;
+float lepJetDeepTagLooseWeakCut = 0.3;
+float lepJetDeepTagMediumWeakCut = 0.5;
+float mPromptMVAWeakCut = 0.2;
+
+//unused
+float fatJetZTagWeakCut = 0.1;
+float hFatJetDeepTagWeakCut = 0.1;
+*/
+
+/*
+
 //Weak cuts V11 06082022 
 
 float dRWeakCut = 0.8;
@@ -358,7 +659,8 @@ float ePromptMVAWeakCut = -0.8;
 float lepJetDeepTagLooseWeakCut = 0.3;
 float lepJetDeepTagMediumWeakCut = 0.5;
 float mPromptMVAWeakCut = 0.2;
-
+*/
+/*
 //unused
 float fatJetZTagWeakCut = 0.1;
 float hFatJetDeepTagWeakCut = 0.1;
@@ -366,7 +668,7 @@ float hFatJetDeepTagWeakCut = 0.1;
 
 
 
-/*
+
 //Weak cuts V10 06082022 
 
 float dRWeakCut = 0.8;
