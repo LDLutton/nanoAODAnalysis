@@ -676,7 +676,7 @@ void doHiggsFatJetCut(UInt_t nFatJetLen,float &hFatJet_pt_fromHParticleNet,float
     }
 }
 
-void doSemiLepChanFatJetCut(Int_t &FJInd,Int_t numFatJet,float fatJetPTCut,float fatJetZTagCut,TTreeReaderArray<Float_t> &FatJet_pt,TTreeReaderArray<Float_t> &FatJet_phi,TTreeReaderArray<Float_t> &FatJet_eta,TTreeReaderArray<Float_t> &FatJet_mass,TTreeReaderArray<Float_t> &FatJet_deepTag_ZvsQCD,
+void doSemiLepChanFatJetCut(Int_t &FJInd,Int_t numFatJet,float fatJetPTCut,float fatJetZTagCut,TTreeReaderArray<Float_t> &FatJet_pt,TTreeReaderArray<Float_t> &FatJet_phi,TTreeReaderArray<Float_t> &FatJet_eta,TTreeReaderArray<Float_t> &FatJet_mass,TTreeReaderArray<Float_t> &FatJet_deepTag_ZvsQCD,TTreeReaderArray<Int_t> &FatJet_jetId,
 std::vector<ROOT::Math::PtEtaPhiMVector> &dRCheckVecAr,float dRCut,
 UInt_t &passSemiLepCut,bool &passesCutsBool,bool &passedAsSemiLepBool){
 
@@ -694,10 +694,12 @@ UInt_t &passSemiLepCut,bool &passesCutsBool,bool &passedAsSemiLepBool){
 
             float tmpFatJetPT = FatJet_pt[i];
             float tmpFatJetTag = FatJet_deepTag_ZvsQCD[i];
+            Int_t tmpFatJet_jetId = FatJet_jetId[i];
+                    
             //Trying out tagging instead of pt for choosing final H FJ
             //if (tmpFatJetTag > fatJetZTagCut && tmpFatJetPT > fatJetPTCut && tmpFatJetPT > semiLepFatJetPT){
             //std::cout << "tmpFatJetPT " << tmpFatJetPT << " fatJetPTCut " << fatJetPTCut <<"\n";
-            if (tmpFatJetTag > fatJetZTagCut && tmpFatJetPT > fatJetPTCut && tmpFatJetTag > semiLepFatJetTag){
+            if (tmpFatJetTag > fatJetZTagCut && tmpFatJetPT > fatJetPTCut && tmpFatJetTag > semiLepFatJetTag && tmpFatJet_jetId == 6){
                 //std::cout << "Wow it passed!\n";
                 ROOT::Math::PtEtaPhiMVector tmpFJVec = ROOT::Math::PtEtaPhiMVector(tmpFatJetPT,FatJet_eta[i],FatJet_phi[i],FatJet_mass[i]);
                 bool tmpPassdR = true;
