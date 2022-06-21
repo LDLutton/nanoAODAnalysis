@@ -824,6 +824,12 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     UInt_t genOtherChannelCtr = 0;
     UInt_t genErrorChannelCtr = 0;
 
+    Double_t genLepChannelWeightedCtr = 0;
+    Double_t genSemiLepChannelWeightedCtr = 0;
+    Double_t genHadronicChannelWeightedCtr = 0;
+    Double_t genOtherChannelWeightedCtr = 0;
+    Double_t genErrorChannelWeightedCtr = 0;
+
     
     
     std::cout << "Going into file loop.\n";
@@ -1369,6 +1375,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                         }
                         genChannelL = 4;
                         genErrorChannelCtr += 1;
+                        genErrorChannelWeightedCtr += *genWeight;
 
                     }
                     else{
@@ -1394,6 +1401,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
 
                             genChannelL=2;
                             genHadronicChannelCtr += 1;
+                            genHadronicChannelWeightedCtr += *genWeight;
 
                         }
 
@@ -1401,12 +1409,14 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
 
                             genChannelL=1;
                             genSemiLepChannelCtr += 1;
+                            genSemiLepChannelWeightedCtr += *genWeight;
 
                         }
 
                         else if (ZIsLeptonic) {
                             genChannelL=0;
                             genLepChannelCtr += 1;
+                            genLepChannelWeightedCtr += *genWeight;
 
                             
 
@@ -1414,6 +1424,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                         else {
                             genChannelL=3;
                             genOtherChannelCtr += 1;
+                            genOtherChannelWeightedCtr += *genWeight;
                         }
                         
 
@@ -1691,6 +1702,12 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     std::cout << "sumOfGenWeights: " << sumOfGenWeights << "\n";
 
     if (!isBackground){
+        std::cout << "Gen Lep Channel: " << genLepChannelCtr << " ------------------- " << genLepChannelWeightedCtr<< "\n";
+        std::cout << "Gen SemiLep Channel: " << genSemiLepChannelCtr << " ------------------- " << genSemiLepChannelWeightedCtr<< "\n";
+        std::cout << "Gen Hadronic Channel: " << genHadronicChannelCtr << " ------------------- " << genHadronicChannelWeightedCtr<< "\n";
+        std::cout << "Gen Other Channel: " << genOtherChannelCtr << " ------------------- " << genOtherChannelWeightedCtr<< "\n";
+        std::cout << "Gen Error Channel: " << genErrorChannelCtr << " ------------------- " << genErrorChannelWeightedCtr<< "\n";
+        
         std::cout << "Cross section average before division: " << crossSectionAvg << "\n";
         std::cout << "Cross section counter: " << crossSectionCtr << "\n";
         crossSectionAvg = (crossSectionAvg*hTobbBR) / crossSectionCtr;
