@@ -85,7 +85,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         */
         fileAr.push_back(tmpStrWithPath);
         useLHETree = true;
-        useFJGenMatchTree = true;;
+        useFJGenMatchTree = true;
     }
     else if (SDC2V3MC){
         saveName = "SDC2V3MC";
@@ -100,7 +100,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         */
         fileAr.push_back(tmpStrWithPath);
         useLHETree = true;
-        useFJGenMatchTree = true;;
+        useFJGenMatchTree = true;
         
     }
     else if (MGOSix){
@@ -116,7 +116,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         */
         fileAr.push_back(tmpStrWithPath);
         useLHETree = true;
-        useFJGenMatchTree = true;;
+        useFJGenMatchTree = true;
     }
     else if (MGOSixEtaDifCut){
         saveName = "OSix_EtaDifCut";
@@ -131,7 +131,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         */
         fileAr.push_back(tmpStrWithPath);
         useLHETree = true;
-        useFJGenMatchTree = true;;
+        useFJGenMatchTree = true;
     }
     else if (MGOHBox){
         saveName = "OHBox";
@@ -162,7 +162,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         */
         fileAr.push_back(tmpStrWithPath);
         useLHETree = true;
-        useFJGenMatchTree = true;;
+        useFJGenMatchTree = true;
         
     }
     else if (MGOHDD){
@@ -178,7 +178,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         */
         fileAr.push_back(tmpStrWithPath);
         useLHETree = true;
-        useFJGenMatchTree = true;;
+        useFJGenMatchTree = true;
         
     }
     else if (MGOHDDEtaDifCut){
@@ -194,7 +194,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         */
         fileAr.push_back(tmpStrWithPath);
         useLHETree = true;
-        useFJGenMatchTree = true;;
+        useFJGenMatchTree = true;
         
     }
     else if (MGOHW){
@@ -210,7 +210,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         */
         fileAr.push_back(tmpStrWithPath);
         useLHETree = true;
-        useFJGenMatchTree = true;;
+        useFJGenMatchTree = true;
         
     }
     else if (MGSM){
@@ -226,7 +226,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         */
         fileAr.push_back(tmpStrWithPath);
         useLHETree = true;
-        useFJGenMatchTree = true;;
+        useFJGenMatchTree = true;
         
     }
     else if (ttHToBBBackground){
@@ -715,6 +715,12 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     //
     Float_t fixedGridRhoFastjetAllL;
 
+    //genChannel characterization
+    //0=Leptonic,1=Semi-leptonic,2=Hadronic,3=Other,4=Error
+    UInt_t genChannelL;
+
+    Bool_t HTobbBoolL;
+
 
     TTree *FilteredEventsTree = new TTree("FilteredEventsTree", "FilteredEventsTree");
     //gen weights
@@ -802,9 +808,21 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
 
     //
     FilteredEventsTree->Branch("fixedGridRhoFastjetAllL",&fixedGridRhoFastjetAllL);
+
+    //genChannel characterization
+    //0=Leptonic,1=Semi-leptonic,2=Hadronic,3=Other,4=Error
+    FilteredEventsTree->Branch("genChannelL",&genChannelL,"genChannelL/i");
+
+    FilteredEventsTree->Branch("HTobbBoolL",&HTobbBoolL,"HTobbBoolL/O");
     
 
     Double_t sumOfGenWeights = 0;
+
+    UInt_t genLepChannelCtr = 0;
+    UInt_t genSemiLepChannelCtr = 0;
+    UInt_t genHadronicChannelCtr = 0;
+    UInt_t genOtherChannelCtr = 0;
+    UInt_t genErrorChannelCtr = 0;
 
     
     
@@ -1036,6 +1054,308 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
             evCount += 1;
 
             sumOfGenWeights += *genWeight;
+            genChannelL = 4;
+            HTobbBoolL = false;
+
+
+            //--------------KINEMATICS--------------
+
+            if (isBackground){
+                std::vector<Int_t> HFJ_decaypdgId_FromGenMatch;
+
+                bool ZIsLeptonic = false;
+                bool ZIsSemiLeptonic = false;
+                bool ZIsHadronic = false;
+
+                bool ZOneIsLeptonic = false;
+                bool ZOneIsHadronic = false;
+
+                bool ZTwoIsLeptonic = false;
+                bool ZTwoIsHadronic = false;
+
+                std::vector<std::vector<Int_t>> tmpHAr;
+                std::vector<std::vector<Int_t>> tmpZAr;
+                std::vector<std::vector<Int_t>> tmpZDaughterIndAr;
+                
+                for (UInt_t i=0;i<*nGenPart;i++){
+                    Int_t tmpPDGId = GenPart_pdgId[i];
+                    Int_t tmpMotherID = GenPart_genPartIdxMother[i];
+                    if (debugGenPart) std::cout << "i " << i << " GenPart_pdgId[i] " << tmpPDGId << "\n";
+                    bool isHDecay = false;
+                    if (isInHDecChainVec.size()){
+                        if (std::count(isInHDecChainVec.begin(), isInHDecChainVec.end(), tmpMotherID)) {
+                            isHDecay = true;
+                            isInHDecChainVec.push_back(i);
+
+                        }
+                    }
+
+                    if (tmpHAr.size()){
+                        for (UInt_t tmpHItr=0;tmpHItr<tmpHAr.size();tmpHItr++){
+                            if (debugGenPart) std::cout << "tmpHItr " << tmpHItr << " tmpMotherID " << tmpMotherID << "\n";
+                            if (tmpMotherID == tmpHAr[tmpHItr][0]){
+                                if (tmpPDGId == 25) std::cout <<"ERROR, ERROR, DAUGHTER PARTICLE IS H\n";
+                                else {
+                                    tmpHAr[tmpHItr].push_back(tmpPDGId);
+                                    isHDecay = true;
+                                    isInHDecChainVec.push_back(i);
+                                    if (debugGenPart){
+                                        std::cout << "Checking if pdg id == 23. pdgid " << tmpPDGId << " tmpZAr.size() " << tmpZAr.size() << "\n";
+                                    }
+                                    if (tmpPDGId == 23 && tmpZAr.size() <=1) {
+                                        //HToZIndVec.push_back(i)
+                                        HToZBoolVec[tmpHItr] =true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (GenPart_pdgId[i] == 25){
+                        //std::bitset<sizeof(Int_t)> tmpStatusBitSet;
+                        //bool tmpStatusBin = tmpStatusBitSet(GenPart_statusFlags[i]).test(13);
+                        bool tmpStatusBin = GenPart_statusFlags[i] & (1 << 13);
+                        //tmpStatusBin = bin(GenPart_statusFlags[i]);
+                        if (debugGenPart) std::cout <<"GenPart_statusFlags[i] " << GenPart_statusFlags[i] << " tmpStatusBin " << tmpStatusBin << "\n";
+                        
+                        //tmpIsEnd = tmpStatusBin[-14];
+                        std::vector<Int_t> tmpHFJVec;
+                        tmpHFJVec.push_back(i);                            
+                        if (tmpStatusBin) {
+                            tmpHAr.push_back(tmpHFJVec);
+                            HToZBoolVec.push_back(false);
+                        }
+                    }
+                    
+                    if (tmpZAr.size()){
+                        for (UInt_t tmpZItr=0;tmpZItr<tmpZAr.size();tmpZItr++){
+                            if (debugGenPart) std::cout << "tmpZItr " << tmpZItr << " tmpMotherID " << tmpMotherID << "\n";
+                            if (tmpMotherID == tmpZAr[tmpZItr][0]){
+                                if (tmpPDGId == 23) std::cout <<"ERROR, ERROR, DAUGHTER PARTICLE IS Z\n";
+                                else {
+                                    tmpZAr[tmpZItr].push_back(tmpPDGId);
+                                    tmpZDaughterIndAr[tmpZItr].push_back(i);
+                                }
+                            }
+                        }
+                    }
+                    
+                    if (GenPart_pdgId[i] == 23){
+                        //std::bitset<sizeof(Int_t)> tmpStatusBitSet;
+                        //bool tmpStatusBin = tmpStatusBitSet(GenPart_statusFlags[i]).test(13);
+                        bool tmpStatusBin = GenPart_statusFlags[i] & (1 << 13);
+                        //tmpStatusBin = bin(GenPart_statusFlags[i]);
+                        if (debugGenPart) std::cout <<"GenPart_statusFlags[i] " << GenPart_statusFlags[i] << " tmpStatusBin " << tmpStatusBin << " tmpZAr.size() " << tmpZAr.size() << " isHDecay " << isHDecay << "\n";
+                        
+                        //tmpIsEnd = tmpStatusBin[-14];
+                        std::vector<Int_t> tmpZFJVec;
+                        tmpZFJVec.push_back(i);
+                        std::vector<Int_t> tmpZOneDaughterVec;
+                        
+                        if (tmpZAr.size()<=1 || !isHDecay){
+                            if (tmpStatusBin) {
+                                tmpZAr.push_back(tmpZFJVec);
+                                tmpZDaughterIndAr.push_back(tmpZOneDaughterVec);
+                            }
+                        }
+
+                    }
+                }
+                if (debugGenPart) {
+                    std::cout <<"Finished H,Z Finding. tmpHAr:\n";
+                    if (tmpHAr.size()){
+                        for (UInt_t tmpHItr=0;tmpHItr<tmpHAr.size();tmpHItr++){
+                            for (UInt_t tmpHItrTwo=0;tmpHItrTwo<tmpHAr[tmpHItr].size();tmpHItrTwo++){
+                                std::cout << tmpHAr[tmpHItr][tmpHItrTwo] << ", ";
+                            }
+                            std::cout << "\n";
+                        }
+                    }
+                    std::cout <<"HToZBoolVec:\n";
+                    if (HToZBoolVec.size()){
+                        for (UInt_t tmpHItr=0;tmpHItr<HToZBoolVec.size();tmpHItr++){
+                            std::cout << HToZBoolVec[tmpHItr] << ", ";
+                        }
+                        std::cout << "\n";
+                    }
+                    std::cout <<"tmpZAr:\n";
+                    if (tmpZAr.size()){
+                        for (UInt_t tmpZItr=0;tmpZItr<tmpZAr.size();tmpZItr++){
+                            for (UInt_t tmpZItrTwo=0;tmpZItrTwo<tmpZAr[tmpZItr].size();tmpZItrTwo++){
+                                std::cout << tmpZAr[tmpZItr][tmpZItrTwo] << ", ";
+                            }
+                            std::cout << "\n";
+                        }
+                    }
+                }
+
+                std::vector<Int_t> tmpHFinalAr;
+                Int_t intermediaryH = -1;
+                if (tmpHAr.size() >= 2){
+                    for (UInt_t tmpHItr=0;tmpHItr<tmpHAr.size();tmpHItr++){
+                        if (std::count(tmpHAr[tmpHItr].begin(), tmpHAr[tmpHItr].end(), JOne_pdgId_FromLHERaw)){
+                            if (std::count(tmpHAr[tmpHItr].begin(), tmpHAr[tmpHItr].end(), JTwo_pdgId_FromLHERaw)){
+                                if (tmpHAr[tmpHItr].size() == 3){
+                                    intermediaryH = tmpHItr;
+                                    break;
+                                }
+                            }
+                        }
+                        if (std::count(tmpHAr[tmpHItr].begin(), tmpHAr[tmpHItr].end(), 23) && HToZBoolVec[tmpHItr]){
+                            intermediaryH = tmpHItr;
+                            break;
+                        }
+                    }
+                }
+                std::vector<Int_t> finalHAr;
+
+                if (tmpHAr.size()){
+                    for (UInt_t tmpHItr=0;tmpHItr<tmpHAr.size();tmpHItr++){
+                        if (tmpHItr != intermediaryH) {
+                            finalHAr.push_back(tmpHAr[tmpHItr][0]);
+                            //Looping through array for decay branches
+                            for (UInt_t tmpHDecItr=1;tmpHDecItr<tmpHFJAr[tmpHItr].size();tmpHDecItr++){
+                                HFJ_decaypdgId_FromGenMatch.push_back(tmpHFJAr[tmpHItr][tmpHDecItr]);
+                            }
+                        }
+                    }
+                }
+
+
+                
+                
+                if (finalHAr.size() != 1) {
+                    std::cout <<"ERROR ERROR, MORE OR LESS THAN ONE H,evCount,JOne_pdgId_FromLHERaw,JTwo_pdgId_FromLHERaw " << evCount-1<< " " <<JOne_pdgId_FromLHERaw<< " " <<JTwo_pdgId_FromLHERaw << "\n";
+                    genChannelL = 4;
+                    genErrorChannelCtr += 1;
+                }
+                else{
+                    std::cout <<"H found\n";
+                    if (abs(HFJ_decaypdgId_FromGenMatch[0]) == 5){
+                        HTobbBoolL = true;
+                    }
+                    Int_t intermediaryZ = -1;
+                    
+                    if (tmpZAr.size() >= 3){
+                        //if (evCount -1 == 407) std::cout << "yes\n";
+                        for (UInt_t tmpZItr=0;tmpZItr<tmpZAr.size();tmpZItr++){
+                            //if (evCount -1 == 407) std::cout << "yes\n";
+                            if (std::count(tmpZAr[tmpZItr].begin(), tmpZAr[tmpZItr].end(), JOne_pdgId_FromLHERaw)){
+                                //if (evCount -1 == 407) std::cout << "yes\n";
+                                if (std::count(tmpZAr[tmpZItr].begin(), tmpZAr[tmpZItr].end(), JTwo_pdgId_FromLHERaw)){
+                                    //if (evCount -1 == 407) std::cout << "yes\n";
+                                    if (tmpZAr[tmpZItr].size() == 3){
+                                        //if (evCount -1 == 407) std::cout << "yes\n";
+                                        intermediaryZ = tmpZItr;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    std::vector<Int_t> finalZAr;
+                    std::vector<std::vector<Int_t>> finalZDecAr;
+                    bool ZDecFound = false;
+
+
+                    if (tmpZAr.size()){
+                        for (UInt_t tmpZItr=0;tmpZItr<tmpZAr.size();tmpZItr++){
+                            if (tmpZItr != intermediaryZ){
+                                finalZAr.push_back(tmpZAr[tmpZItr][0]);
+                                //Looping through array for decay branches
+                                
+                                
+                                if (tmpZAr[tmpZItr].size() != 3) {
+                                    std::cout << "ERROR ERROR tmpZAr INTERNAL VEC SIZE NOT == 3. INSTEAD SIZE == " << tmpZAr[tmpZItr].size() << "\n";
+                                    for (UInt_t tmpZDecItr=0;tmpZDecItr<tmpZAr[tmpZItr].size();tmpZDecItr++){
+                                        std::cout << tmpZAr[tmpZItr][tmpZDecItr] << " ";
+                                    }
+                                    std::cout << "\n";
+                                }
+                                else {
+                                    ZDecFound = true;
+                                    std::vector<Int_t> tmpZDecVec;
+                                    tmpZDecVec.push_back(tmpZAr[tmpZItr][1]);
+                                    tmpZDecVec.push_back(tmpZAr[tmpZItr][2]);
+                                    finalZDecAr.push_back(tmpZDecVec);
+
+                                }
+                            }
+                        }
+                    }
+
+                    if (finalZAr.size() != 2){
+                        std::cout <<"ERROR ERROR, MORE OR LESS THAN TWO Zs,evCount,finalZAr.size(),intermediaryZ,JOne_pdgId_FromLHERaw,JTwo_pdgId_FromLHERaw " << evCount-1<< " " << finalZAr.size() << " " << intermediaryZ << " "<<JOne_pdgId_FromLHERaw<< " " <<JTwo_pdgId_FromLHERaw << "\n";
+                        if (tmpZAr.size()){
+                            for (UInt_t tmpZItr=0;tmpZItr<tmpZAr.size();tmpZItr++){
+                                for (UInt_t tmpZItrTwo=0;tmpZItrTwo<tmpZAr[tmpZItr].size();tmpZItrTwo++){
+                                    std::cout <<"tmpZItr " << tmpZItr << " tmpZItrTwo " << tmpZItrTwo << " tmpZAr[tmpZItr][tmpZItrTwo] " << tmpZAr[tmpZItr][tmpZItrTwo] << "\n";
+                                }
+                            }
+                        }
+                        if (finalZAr.size()){
+                            for (UInt_t tmpZItr=0;tmpZItr<finalZAr.size();tmpZItr++){
+                                std::cout << "finalZAr[tmpZItr] " << finalZAr[tmpZItr] << "\n";
+                            }
+                        }
+                        genChannelL = 4;
+                        genErrorChannelCtr += 1;
+
+                    }
+                    else{
+                        
+                        if (ZDecFound) {
+                            if (debugGenPart) std::cout << "finalZDecAr[0][0] " << finalZDecAr[0][0] << " finalZDecAr[0][1] " << finalZDecAr[0][1] << " finalZDecAr[1][0] " << finalZDecAr[1][0] << " finalZDecAr[1][1] " << finalZDecAr[1][1] << "\n";
+                            ZOneIsHadronic = (finalZDecAr[0][0]>-9 && finalZDecAr[0][0]<9 && finalZDecAr[0][1]>-9 && finalZDecAr[0][1]<9);
+                            ZTwoIsHadronic = (finalZDecAr[1][0]>-9 && finalZDecAr[1][0]<9 && finalZDecAr[1][1]>-9 && finalZDecAr[1][1]<9);
+                            ZOneIsLeptonic = ((abs(finalZDecAr[0][0])==11 || abs(finalZDecAr[0][0])==13 || abs(finalZDecAr[0][0])==15) && (abs(finalZDecAr[0][1])==11 || abs(finalZDecAr[0][1])==13 || abs(finalZDecAr[0][1])==15));
+                            ZTwoIsLeptonic = ((abs(finalZDecAr[1][0])==11 || abs(finalZDecAr[1][0])==13 || abs(finalZDecAr[1][0])==15) && (abs(finalZDecAr[1][1])==11 || abs(finalZDecAr[1][1])==13 || abs(finalZDecAr[1][1])==15));
+                            if (ZOneIsLeptonic && ZTwoIsLeptonic) ZIsLeptonic = true;
+                            else if ((ZOneIsLeptonic && ZTwoIsHadronic) || (ZOneIsHadronic && ZTwoIsLeptonic)) ZIsSemiLeptonic = true;
+                            else if (ZOneIsHadronic && ZTwoIsHadronic) ZIsHadronic = true;
+                            
+                            if (debugGenPart) std::cout << "ZIsHadronic " << ZIsHadronic << "ZIsLeptonic" << ZIsLeptonic << "ZIsSemiLeptonic" << ZIsSemiLeptonic << "\n";
+
+
+                            
+                        }
+                        
+
+                        if (ZIsHadronic) {
+
+                            genChannelL=2;
+                            genHadronicChannelCtr += 1;
+
+                        }
+
+                        else if (ZIsSemiLeptonic) {
+
+                            genChannelL=1;
+                            genSemiLepChannelCtr += 1;
+
+                        }
+
+                        else if (ZIsLeptonic) {
+                            genChannelL=0;
+                            genLepChannelCtr += 1;
+
+                            
+
+                        }
+                        else {
+                            genChannelL=3;
+                            genOtherChannelCtr += 1;
+                        }
+                        
+
+                        
+                            
+                    }
+
+
+                }
+
+            }
 
 
 
