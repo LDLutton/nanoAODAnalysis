@@ -1305,7 +1305,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                     genErrorChannelCtr += 1;
                 }
                 else{
-                    std::cout <<"H found\n";
+                    if (debugGenPart) std::cout <<"H found\n";
                     if (abs(HFJ_decaypdgId_FromGenMatch[0]) == 5){
                         HTobbBoolL = true;
                     }
