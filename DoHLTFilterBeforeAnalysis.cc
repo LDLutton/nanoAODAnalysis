@@ -844,7 +844,10 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         //genWeights
         TTreeReaderValue<Float_t> genWeight(myEventsReader, "genWeight");
 
-       
+        //LHE stuff
+        TTreeReaderValue<UInt_t> nLHEPart(myEventsReader, "nLHEPart");
+        TTreeReaderArray<Int_t> LHEPart_pdgId(myEventsReader, "LHEPart_pdgId");
+        TTreeReaderArray<Float_t> LHEPart_pt(myEventsReader, "LHEPart_pt");
 
         //HLT Branches
         TTreeReaderValue<Bool_t> HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02(myEventsReader, "HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02");
@@ -1071,7 +1074,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                 Int_t tmpJCtr = 0;
                 Int_t tmpHInd = -1;
                 std::vector<UInt_t>tmpJAr;
-                tmpPDGId = 0;
+                Int_t tmpPDGId = 0;
                 for (UInt_t LHEItr=0; LHEItr<lenLHEPart;LHEItr++){
                     tmpPDGId = LHEPart_pdgId[LHEItr];
                     if (tmpPDGId == 23){
@@ -1105,6 +1108,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                         JTwo_pdgId_FromLHERaw = LHEPart_pdgId[tmpJAr[0]];
 
                     }
+                }
 
 
 
@@ -1279,8 +1283,8 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                         if (tmpHItr != intermediaryH) {
                             finalHAr.push_back(tmpHAr[tmpHItr][0]);
                             //Looping through array for decay branches
-                            for (UInt_t tmpHDecItr=1;tmpHDecItr<tmpHFJAr[tmpHItr].size();tmpHDecItr++){
-                                HFJ_decaypdgId_FromGenMatch.push_back(tmpHFJAr[tmpHItr][tmpHDecItr]);
+                            for (UInt_t tmpHDecItr=1;tmpHDecItr<tmpHAr[tmpHItr].size();tmpHDecItr++){
+                                HFJ_decaypdgId_FromGenMatch.push_back(tmpHAr[tmpHItr][tmpHDecItr]);
                             }
                         }
                     }
