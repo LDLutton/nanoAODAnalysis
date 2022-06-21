@@ -1069,7 +1069,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
 
             //--------------KINEMATICS--------------
 
-            if (isBackground){
+            if (!isBackground){
 
                 float JOne_pdgId_FromLHERaw;
                 float JTwo_pdgId_FromLHERaw;
