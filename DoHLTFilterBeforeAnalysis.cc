@@ -1061,6 +1061,53 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
             //--------------KINEMATICS--------------
 
             if (isBackground){
+
+                float JOne_pdgId_FromLHERaw;
+                float JTwo_pdgId_FromLHERaw;
+
+                UInt_t lenLHEPart = *nLHEPart;
+                Int_t tmpZCtr = 0;
+                Int_t tmpHCtr = 0;
+                Int_t tmpJCtr = 0;
+                Int_t tmpHInd = -1;
+                std::vector<UInt_t>tmpJAr;
+                tmpPDGId = 0;
+                for (UInt_t LHEItr=0; LHEItr<lenLHEPart;LHEItr++){
+                    tmpPDGId = LHEPart_pdgId[LHEItr];
+                    if (tmpPDGId == 23){
+                        tmpZCtr += 1;
+                        if (tmpZCtr > 2) std::cout << "ERROR MORE THAN 2 Zs IN LHE\n";
+                    }
+                    else if (tmpPDGId == 25){
+                        tmpHCtr += 1;
+                        if (tmpHCtr > 1) std::cout << "ERROR MORE THAN 1 H IN LHE\n";
+                        else tmpHInd = LHEItr;
+                    }
+                    else if (tmpPDGId >= -8 && tmpPDGId <= 8){
+                        tmpJCtr += 1;
+                        if (tmpJCtr > 4) std::cout << "ERROR MORE THAN 4 Qs IN LHE\n";
+                        else if (tmpJCtr > 2) tmpJAr.push_back(LHEItr);
+                    }
+                    else std::cout << "ERROR UNKNOWN PARTICLE " << tmpPDGId << " IN LHE\n";
+                }
+                if (tmpZCtr == 2 && tmpHCtr == 1 && tmpJCtr == 4 && tmpJAr.size() == 2){
+                    
+                    
+                    float tmpLHEPartPtOne = LHEPart_pt[tmpJAr[0]];
+                    float tmpLHEPartPtTwo = LHEPart_pt[tmpJAr[1]];
+
+                    if (tmpLHEPartPtOne >= tmpLHEPartPtTwo) {
+                        JOne_pdgId_FromLHERaw = LHEPart_pdgId[tmpJAr[0]];
+                        JTwo_pdgId_FromLHERaw = LHEPart_pdgId[tmpJAr[1]];
+                    }
+                    else{
+                        JOne_pdgId_FromLHERaw = LHEPart_pdgId[tmpJAr[1]];
+                        JTwo_pdgId_FromLHERaw = LHEPart_pdgId[tmpJAr[0]];
+
+                    }
+
+
+
                 std::vector<Int_t> HFJ_decaypdgId_FromGenMatch;
 
                 bool ZIsLeptonic = false;
@@ -1076,6 +1123,24 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                 std::vector<std::vector<Int_t>> tmpHAr;
                 std::vector<std::vector<Int_t>> tmpZAr;
                 std::vector<std::vector<Int_t>> tmpZDaughterIndAr;
+
+
+                //std::vector<Int_t> tmpZFJAr;
+                //Usually should be straightforward 2Z 1H 2J
+                //however, sometimes there are intermediary particles on the way to that in the gen that aren't in the LHE
+                //Some situations:
+                //Starting with 1Z 2H 0J
+                //Leads to H->JJZ
+                //can also have normal start but H->ZX (X can be gamma or another Z)
+                //check starting particles by looking at what has the status 4481.
+                //These will bounce around with status 257 until they get status 10497 (indicates "isLastCopy" bit)
+                //or with H sometimes status 26881 (includes "isLastCopyBeforeFSR" bit)
+
+
+                bool HFound = false;
+                //std::vector<Int_t> HToZIndVec;
+                std::vector<bool> HToZBoolVec;
+                std::vector<Int_t> isInHDecChainVec;
                 
                 for (UInt_t i=0;i<*nGenPart;i++){
                     Int_t tmpPDGId = GenPart_pdgId[i];

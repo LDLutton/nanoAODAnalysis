@@ -5,6 +5,8 @@ bool endAfter = false;
 int NToStart = 0;
 int NToEnd = 2500;
 
+bool debugGenPart = false;
+
 bool scratchDown = true;
 
 bool testRun = true;
