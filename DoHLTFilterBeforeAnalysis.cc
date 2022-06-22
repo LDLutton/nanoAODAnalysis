@@ -830,6 +830,10 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     Double_t genOtherChannelWeightedCtr = 0;
     Double_t genErrorChannelWeightedCtr = 0;
 
+
+    UInt_t HTobbCtr = 0;
+    Double_t HTobbWeightedCtr = 0;
+
     
     
     std::cout << "Going into file loop.\n";
@@ -1308,6 +1312,8 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                     if (debugGenPart) std::cout <<"H found\n";
                     if (abs(HFJ_decaypdgId_FromGenMatch[0]) == 5){
                         HTobbBoolL = true;
+                        HTobbCtr += 1;
+                        HTobbWeightedCtr += *genWeight;
                     }
                     Int_t intermediaryZ = -1;
                     
@@ -1330,6 +1336,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                     }
                     std::vector<Int_t> finalZAr;
                     std::vector<std::vector<Int_t>> finalZDecAr;
+                    std::vector<std::vector<Int_t>> finalZDecIndAr;
                     bool ZDecFound = false;
 
 
@@ -1353,6 +1360,10 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                     tmpZDecVec.push_back(tmpZAr[tmpZItr][1]);
                                     tmpZDecVec.push_back(tmpZAr[tmpZItr][2]);
                                     finalZDecAr.push_back(tmpZDecVec);
+                                    std::vector<Int_t> tmpZDecIndVec;
+                                    tmpZDecIndVec.push_back(tmpZDaughterIndAr[tmpZItr][0]);
+                                    tmpZDecIndVec.push_back(tmpZDaughterIndAr[tmpZItr][1]);
+                                    finalZDecIndAr.push_back(tmpZDecIndVec);
 
                                 }
                             }
@@ -1381,11 +1392,115 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                     else{
                         
                         if (ZDecFound) {
+                            
+                            if (abs(finalZDecAr[0][0])==15 && abs(finalZDecAr[0][1])==15){
+                                std::vector<Int_t> tauOneAr;
+                                std::vector<Int_t> tauTwoAr;
+                                bool tauOneBool = false;
+                                bool tauTwoBool = false;
+                                UInt_t tauOneDecPDG = 0;
+                                UInt_t tauTwoDecPDG = 0;
+                                tauOneAr.push_back(finalZDecIndAr[0][0]);
+                                tauTwoAr.push_back(finalZDecIndAr[0][1]);
+                                for (UInt_t i=0;i<*nGenPart;i++){
+                                    Int_t tmpPDGId = GenPart_pdgId[i];
+                                    Int_t tmpMotherID = GenPart_genPartIdxMother[i];
+                                    
+                                    std::vector<Int_t> tmpIndAr;
+                                    if (!tauOneBool){
+                                        for (UInt_t j=0;j<tauOneAr.size();j++){
+                                            if (tmpMotherID == tauOneAr[j]){
+                                                if (abs(tmpPDGId) == 15) tmpIndAr.push_back(i);
+                                                else if (abs(tmpPDGId) == 13 || abs(tmpPDGId) == 11) {
+                                                    tauOneBool = true;
+                                                    tauOneDecPDG = abs(tmpPDGId);
+                                                }
+                                            }
+                                        }
+                                        if (tmpIndAr.size()) {
+                                            for (UInt_t j=0;j<tmpIndAr.size();j++){
+                                                tauOneAr.push_back(tmpIndAr[j]);
+                                            }
+                                        }
+                                    }
+                                    if (!tauTwoBool){
+                                        for (UInt_t j=0;j<tauTwoAr.size();j++){
+                                            if (tmpMotherID == tauTwoAr[j]){
+                                                if (abs(tmpPDGId) == 15) tmpIndAr.push_back(i);
+                                                else if (abs(tmpPDGId) == 13 || abs(tmpPDGId) == 11) {
+                                                    tauTwoBool = true;
+                                                    tauTwoDecPDG = abs(tmpPDGId);
+                                                }
+                                            }
+                                        }
+                                        if (tmpIndAr.size()) {
+                                            for (UInt_t j=0;j<tmpIndAr.size();j++){
+                                                tauTwoAr.push_back(tmpIndAr[j]);
+                                            }
+                                        }
+                                    }
+                                }
+                                if (tauOneBool && tauTwoBool && tauOneDecPDG == tauTwoDecPDG) {
+                                    ZTwoIsLeptonic = true;
+                                }
+                            }
+                            if (abs(finalZDecAr[1][0])==15 && abs(finalZDecAr[1][1])==15){
+                                std::vector<Int_t> tauOneAr;
+                                std::vector<Int_t> tauTwoAr;
+                                bool tauOneBool = false;
+                                bool tauTwoBool = false;
+                                UInt_t tauOneDecPDG = 0;
+                                UInt_t tauTwoDecPDG = 0;
+                                tauOneAr.push_back(finalZDecIndAr[1][0]);
+                                tauTwoAr.push_back(finalZDecIndAr[1][1]);
+                                for (UInt_t i=0;i<*nGenPart;i++){
+                                    Int_t tmpPDGId = GenPart_pdgId[i];
+                                    Int_t tmpMotherID = GenPart_genPartIdxMother[i];
+                                    
+                                    std::vector<Int_t> tmpIndAr;
+                                    if (!tauOneBool){
+                                        for (UInt_t j=0;j<tauOneAr.size();j++){
+                                            if (tmpMotherID == tauOneAr[j]){
+                                                if (abs(tmpPDGId) == 15) tmpIndAr.push_back(i);
+                                                else if (abs(tmpPDGId) == 13 || abs(tmpPDGId) == 11) {
+                                                    tauOneBool = true;
+                                                    tauOneDecPDG = abs(tmpPDGId);
+                                                }
+                                            }
+                                        }
+                                        if (tmpIndAr.size()) {
+                                            for (UInt_t j=0;j<tmpIndAr.size();j++){
+                                                tauOneAr.push_back(tmpIndAr[j]);
+                                            }
+                                        }
+                                    }
+                                    if (!tauTwoBool){
+                                        for (UInt_t j=0;j<tauTwoAr.size();j++){
+                                            if (tmpMotherID == tauTwoAr[j]){
+                                                if (abs(tmpPDGId) == 15) tmpIndAr.push_back(i);
+                                                else if (abs(tmpPDGId) == 13 || abs(tmpPDGId) == 11) {
+                                                    tauTwoBool = true;
+                                                    tauTwoDecPDG = abs(tmpPDGId);
+                                                }
+                                            }
+                                        }
+                                        if (tmpIndAr.size()) {
+                                            for (UInt_t j=0;j<tmpIndAr.size();j++){
+                                                tauTwoAr.push_back(tmpIndAr[j]);
+                                            }
+                                        }
+                                    }
+                                }
+                                if (tauOneBool && tauTwoBool && tauOneDecPDG == tauTwoDecPDG) {
+                                    ZTwoIsLeptonic = true;
+                                }
+                            }
+
                             if (debugGenPart) std::cout << "finalZDecAr[0][0] " << finalZDecAr[0][0] << " finalZDecAr[0][1] " << finalZDecAr[0][1] << " finalZDecAr[1][0] " << finalZDecAr[1][0] << " finalZDecAr[1][1] " << finalZDecAr[1][1] << "\n";
                             ZOneIsHadronic = (finalZDecAr[0][0]>-9 && finalZDecAr[0][0]<9 && finalZDecAr[0][1]>-9 && finalZDecAr[0][1]<9);
                             ZTwoIsHadronic = (finalZDecAr[1][0]>-9 && finalZDecAr[1][0]<9 && finalZDecAr[1][1]>-9 && finalZDecAr[1][1]<9);
-                            ZOneIsLeptonic = ((abs(finalZDecAr[0][0])==11 || abs(finalZDecAr[0][0])==13 || abs(finalZDecAr[0][0])==15) && (abs(finalZDecAr[0][1])==11 || abs(finalZDecAr[0][1])==13 || abs(finalZDecAr[0][1])==15));
-                            ZTwoIsLeptonic = ((abs(finalZDecAr[1][0])==11 || abs(finalZDecAr[1][0])==13 || abs(finalZDecAr[1][0])==15) && (abs(finalZDecAr[1][1])==11 || abs(finalZDecAr[1][1])==13 || abs(finalZDecAr[1][1])==15));
+                            if (!ZOneIsLeptonic) ZOneIsLeptonic = ((abs(finalZDecAr[0][0])==11 || abs(finalZDecAr[0][0])==13) && (abs(finalZDecAr[0][1])==11 || abs(finalZDecAr[0][1])==13));
+                            if (!ZTwoIsLeptonic) ZTwoIsLeptonic = ((abs(finalZDecAr[1][0])==11 || abs(finalZDecAr[1][0])==13) && (abs(finalZDecAr[1][1])==11 || abs(finalZDecAr[1][1])==13));
                             if (ZOneIsLeptonic && ZTwoIsLeptonic) ZIsLeptonic = true;
                             else if ((ZOneIsLeptonic && ZTwoIsHadronic) || (ZOneIsHadronic && ZTwoIsLeptonic)) ZIsSemiLeptonic = true;
                             else if (ZOneIsHadronic && ZTwoIsHadronic) ZIsHadronic = true;
@@ -1707,6 +1822,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         std::cout << "Gen Hadronic Channel: " << genHadronicChannelCtr << " ------------------- " << genHadronicChannelWeightedCtr<< "\n";
         std::cout << "Gen Other Channel: " << genOtherChannelCtr << " ------------------- " << genOtherChannelWeightedCtr<< "\n";
         std::cout << "Gen Error Channel: " << genErrorChannelCtr << " ------------------- " << genErrorChannelWeightedCtr<< "\n";
+        std::cout << "HTobb Channel: " << HTobbCtr << " ------------------- " << HTobbWeightedCtr<< "\n";
         
         std::cout << "Cross section average before division: " << crossSectionAvg << "\n";
         std::cout << "Cross section counter: " << crossSectionCtr << "\n";
