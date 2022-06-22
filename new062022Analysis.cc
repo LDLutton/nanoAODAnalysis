@@ -749,48 +749,6 @@ void new062022Analysis(string datasetString){
 
     ////////////////////////////////NO HToBB COUNTERS////////////////////////////////
 
-    ////////////////////////////////NEUTRAL COUNTERS////////////////////////////////
-
-    UInt_t passHiggsFJNoHTobbCtr = 0;
-    UInt_t passHiggsFJLepNoHTobbCtr = 0;
-    UInt_t passHiggsFJSemiLepNoHTobbCtr = 0;
-    UInt_t passHiggsFJHadNoHTobbCtr = 0;
-    UInt_t passChannelNoHTobbCtr = 0;
-    UInt_t passLepOrSemiLepChannelNoHTobbCtr = 0;
-    UInt_t passLepChannelNoHTobbCtr = 0;
-    UInt_t tryingSemiLepChannelNoHTobbCtr = 0;
-    UInt_t passFJInSemiLepChannelNoHTobbCtr = 0;
-    UInt_t passEnoughLepsInSemiLepChannelNoHTobbCtr = 0;
-    UInt_t passLepCutInSemiLepChannelNoHTobbCtr = 0;
-    UInt_t passSemiLepChannelNoHTobbCtr = 0;
-    UInt_t passHadChannelNoHTobbCtr = 0;
-    UInt_t passVBFJetsNoHTobbCtr = 0;
-    UInt_t passAsLepNoHTobbCtr = 0;
-    UInt_t passAsSemiLepNoHTobbCtr = 0;
-    UInt_t passAsHadNoHTobbCtr = 0;
-    
-
-    Double_t passHiggsFJNoHTobbWeightedCtr = 0.;
-    Double_t passHiggsFJWeightedLepNoHTobbCtr = 0.;
-    Double_t passHiggsFJWeightedSemiLepNoHTobbCtr = 0.;
-    Double_t passHiggsFJWeightedHadNoHTobbCtr = 0.;
-    Double_t passChannelNoHTobbWeightedCtr = 0.;
-    Double_t passLepOrSemiLepChannelNoHTobbWeightedCtr = 0.;
-    Double_t passLepChannelNoHTobbWeightedCtr = 0.;
-    Double_t tryingSemiLepChannelNoHTobbWeightedCtr = 0;
-    Double_t passFJInSemiLepChannelNoHTobbWeightedCtr = 0;
-    Double_t passEnoughLepsInSemiLepChannelNoHTobbWeightedCtr = 0;
-    Double_t passLepCutInSemiLepChannelNoHTobbWeightedCtr = 0;
-    Double_t passSemiLepChannelNoHTobbWeightedCtr = 0.;
-    Double_t passHadChannelNoHTobbWeightedCtr = 0.;
-    Double_t passVBFJetsNoHTobbWeightedCtr = 0.;
-    Double_t passAsLepNoHTobbWeightedCtr = 0.;
-    Double_t passAsSemiLepNoHTobbWeightedCtr = 0.;
-    Double_t passAsHadNoHTobbWeightedCtr = 0.;
-
-    UInt_t passSemiLepLepCutNoHTobbCtr = 0;
-    Double_t passSemiLepLepCutNoHTobbWeightedCtr = 0.;
-
     ////////////////////////////////GEN LEP COUNTERS////////////////////////////////
 
     UInt_t passHiggsFJGenLepNoHTobbCtr = 0;
@@ -2413,7 +2371,7 @@ void new062022Analysis(string datasetString){
     
 
     //--------------------HTobbChannel Output--------------
-
+    std::cout << "==============================TOTAL COUNTERS==============================\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "tryingSemiLepChannelCtr = " << tryingSemiLepChannelCtr << "\n";
     std::cout << "Double_t " << saveName << "tryingSemiLepChannelWeightedCtr = " << tryingSemiLepChannelWeightedCtr << "\n";
@@ -2466,6 +2424,10 @@ void new062022Analysis(string datasetString){
     std::cout << "UInt_t " << saveName << "PassAsHadCtr = " << passAsHadCtr << "\n";
     std::cout << "Double_t " << saveName << "PassAsHadWeightedCtr = " << passAsHadWeightedCtr << "\n";
     std::cout << "------------------------\n";
+    std::cout << "\n";
+    std::cout << "==============================HTOBB GEN CHANNEL COUNTERS==============================\n";
+    std::cout << "\n";
+    std::cout << "++++++++++++++++++++++++++++++GEN LEP CHANNEL COUNTERS++++++++++++++++++++++++++++++\n";
 
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "tryingSemiLepChannelGenLepCtr = " << tryingSemiLepChannelGenLepCtr << "\n";
@@ -2520,7 +2482,8 @@ void new062022Analysis(string datasetString){
     std::cout << "Double_t " << saveName << "PassAsHadGenLepWeightedCtr = " << passAsHadGenLepWeightedCtr << "\n";
     std::cout << "------------------------\n";
 
-
+    std::cout << "\n";
+    std::cout << "++++++++++++++++++++++++++++++GEN SEMI LEP CHANNEL COUNTERS++++++++++++++++++++++++++++++\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "tryingSemiLepChannelGenSemiLepCtr = " << tryingSemiLepChannelGenSemiLepCtr << "\n";
     std::cout << "Double_t " << saveName << "tryingSemiLepChannelGenSemiLepWeightedCtr = " << tryingSemiLepChannelGenSemiLepWeightedCtr << "\n";
@@ -2574,7 +2537,8 @@ void new062022Analysis(string datasetString){
     std::cout << "Double_t " << saveName << "PassAsHadGenSemiLepWeightedCtr = " << passAsHadGenSemiLepWeightedCtr << "\n";
     std::cout << "------------------------\n";
 
-
+    std::cout << "\n";
+    std::cout << "++++++++++++++++++++++++++++++GEN HAD CHANNEL COUNTERS++++++++++++++++++++++++++++++\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "tryingSemiLepChannelGenHadCtr = " << tryingSemiLepChannelGenHadCtr << "\n";
     std::cout << "Double_t " << saveName << "tryingSemiLepChannelGenHadWeightedCtr = " << tryingSemiLepChannelGenHadWeightedCtr << "\n";
@@ -2628,7 +2592,8 @@ void new062022Analysis(string datasetString){
     std::cout << "Double_t " << saveName << "PassAsHadGenHadWeightedCtr = " << passAsHadGenHadWeightedCtr << "\n";
     std::cout << "------------------------\n";
 
-
+    std::cout << "\n";
+    std::cout << "++++++++++++++++++++++++++++++GEN OTHER CHANNEL COUNTERS++++++++++++++++++++++++++++++\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "tryingSemiLepChannelGenOtherCtr = " << tryingSemiLepChannelGenOtherCtr << "\n";
     std::cout << "Double_t " << saveName << "tryingSemiLepChannelGenOtherWeightedCtr = " << tryingSemiLepChannelGenOtherWeightedCtr << "\n";
@@ -2685,59 +2650,10 @@ void new062022Analysis(string datasetString){
 
     //---------------------- No HTobbChannel Counters -----------------------
 
-
-    std::cout << "------------------------\n";
-    std::cout << "UInt_t " << saveName << "tryingSemiLepChannelNoHTobbCtr = " << tryingSemiLepChannelNoHTobbCtr << "\n";
-    std::cout << "Double_t " << saveName << "tryingSemiLepChannelNoHTobbWeightedCtr = " << tryingSemiLepChannelNoHTobbWeightedCtr << "\n";
-    std::cout << "------------------------\n";
-    std::cout << "UInt_t " << saveName << "passEnoughLepsInSemiLepChannelNoHTobbCtr = " << passEnoughLepsInSemiLepChannelNoHTobbCtr << "\n";
-    std::cout << "Double_t " << saveName << "passEnoughLepsInSemiLepChannelNoHTobbWeightedCtr = " << passEnoughLepsInSemiLepChannelNoHTobbWeightedCtr << "\n";
-    std::cout << "------------------------\n";
-    std::cout << "UInt_t " << saveName << "passSemiLepLepCutNoHTobbCtr = " << passSemiLepLepCutNoHTobbCtr << "\n";
-    std::cout << "Double_t " << saveName << "passSemiLepLepCutNoHTobbWeightedCtr = " << passSemiLepLepCutNoHTobbWeightedCtr << "\n";
-    std::cout << "------------------------\n";
-    std::cout << "UInt_t " << saveName << "passFJInSemiLepChannelNoHTobbCtr = " << passFJInSemiLepChannelNoHTobbCtr << "\n";
-    std::cout << "Double_t " << saveName << "passFJInSemiLepChannelNoHTobbWeightedCtr = " << passFJInSemiLepChannelNoHTobbWeightedCtr << "\n";
-    std::cout << "------------------------\n";
-    std::cout << "UInt_t " << saveName << "PassChannelNoHTobbCtr = " << passChannelNoHTobbCtr << "\n";
-    std::cout << "Double_t " << saveName << "PassChannelNoHTobbWeightedCtr = " << passChannelNoHTobbWeightedCtr << "\n";
-    std::cout << "------------------------\n";
-    std::cout << "UInt_t " << saveName << "PassLepOrSemiLepChannelNoHTobbCtr = " << passLepOrSemiLepChannelNoHTobbCtr << "\n";
-    std::cout << "Double_t " << saveName << "PassLepOrSemiLepChannelNoHTobbWeightedCtr = " << passLepOrSemiLepChannelNoHTobbWeightedCtr << "\n";
-    std::cout << "------------------------\n";
-    std::cout << "UInt_t " << saveName << "PassLepChannelNoHTobbCtr = " << passLepChannelNoHTobbCtr << "\n";
-    std::cout << "Double_t " << saveName << "PassLepChannelNoHTobbWeightedCtr = " << passLepChannelNoHTobbWeightedCtr << "\n";
-    std::cout << "------------------------\n";
-    std::cout << "UInt_t " << saveName << "PassSemiLepChannelNoHTobbCtr = " << passSemiLepChannelNoHTobbCtr << "\n";
-    std::cout << "Double_t " << saveName << "PassSemiLepChannelNoHTobbWeightedCtr = " << passSemiLepChannelNoHTobbWeightedCtr << "\n";
-    std::cout << "------------------------\n";
-    std::cout << "UInt_t " << saveName << "PassHadChannelNoHTobbCtr = " << passHadChannelNoHTobbCtr << "\n";
-    std::cout << "Double_t " << saveName << "PassHadChannelNoHTobbWeightedCtr = " << passHadChannelNoHTobbWeightedCtr << "\n";
-    std::cout << "------------------------\n";
-    std::cout << "UInt_t " << saveName << "PassHiggsFJNoHTobbCtr = " << passHiggsFJNoHTobbCtr << "\n";
-    std::cout << "Double_t " << saveName << "passHiggsFJNoHTobbWeightedCtr = " << passHiggsFJNoHTobbWeightedCtr << "\n";
-    std::cout << "------------------------\n";
-    std::cout << "UInt_t " << saveName << "PassHiggsFJLepNoHTobbCtr = " << passHiggsFJLepNoHTobbCtr << "\n";
-    std::cout << "Double_t " << saveName << "passHiggsFJWeightedLepNoHTobbCtr = " << passHiggsFJWeightedLepNoHTobbCtr << "\n";
-    std::cout << "------------------------\n";
-    std::cout << "UInt_t " << saveName << "PassHiggsFJSemiLepNoHTobbCtr = " << passHiggsFJSemiLepNoHTobbCtr << "\n";
-    std::cout << "Double_t " << saveName << "passHiggsFJWeightedSemiLepNoHTobbCtr = " << passHiggsFJWeightedSemiLepNoHTobbCtr << "\n";
-    std::cout << "------------------------\n";
-    std::cout << "UInt_t " << saveName << "PassHiggsFJHadNoHTobbCtr = " << passHiggsFJHadNoHTobbCtr << "\n";
-    std::cout << "Double_t " << saveName << "passHiggsFJWeightedHadNoHTobbCtr = " << passHiggsFJWeightedHadNoHTobbCtr << "\n";
-    std::cout << "------------------------\n";
-    std::cout << "UInt_t " << saveName << "PassVBFJetsNoHTobbCtr = " << passVBFJetsNoHTobbCtr << "\n";
-    std::cout << "Double_t " << saveName << "PassVBFJetsNoHTobbWeightedCtr = " << passVBFJetsNoHTobbWeightedCtr << "\n";
-    std::cout << "------------------------\n";
-    std::cout << "UInt_t " << saveName << "PassAsLepNoHTobbCtr = " << passAsLepNoHTobbCtr << "\n";
-    std::cout << "Double_t " << saveName << "PassAsLepNoHTobbWeightedCtr = " << passAsLepNoHTobbWeightedCtr << "\n";
-    std::cout << "------------------------\n";
-    std::cout << "UInt_t " << saveName << "PassAsSemiLepNoHTobbCtr = " << passAsSemiLepNoHTobbCtr << "\n";
-    std::cout << "Double_t " << saveName << "PassAsSemiLepNoHTobbWeightedCtr = " << passAsSemiLepNoHTobbWeightedCtr << "\n";
-    std::cout << "------------------------\n";
-    std::cout << "UInt_t " << saveName << "PassAsHadNoHTobbCtr = " << passAsHadNoHTobbCtr << "\n";
-    std::cout << "Double_t " << saveName << "PassAsHadNoHTobbWeightedCtr = " << passAsHadNoHTobbWeightedCtr << "\n";
-    std::cout << "------------------------\n";
+    std::cout << "\n";
+    std::cout << "==============================NO HTOBB GEN CHANNEL COUNTERS==============================\n";
+    std::cout << "\n";
+    std::cout << "++++++++++++++++++++++++++++++GEN LEP CHANNEL COUNTERS++++++++++++++++++++++++++++++\n";
 
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "tryingSemiLepChannelGenLepNoHTobbCtr = " << tryingSemiLepChannelGenLepNoHTobbCtr << "\n";
@@ -2792,6 +2708,8 @@ void new062022Analysis(string datasetString){
     std::cout << "Double_t " << saveName << "PassAsHadGenLepNoHTobbWeightedCtr = " << passAsHadGenLepNoHTobbWeightedCtr << "\n";
     std::cout << "------------------------\n";
 
+    std::cout << "\n";
+    std::cout << "++++++++++++++++++++++++++++++GEN SEMI LEP CHANNEL COUNTERS++++++++++++++++++++++++++++++\n";
 
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "tryingSemiLepChannelGenSemiLepNoHTobbCtr = " << tryingSemiLepChannelGenSemiLepNoHTobbCtr << "\n";
@@ -2846,6 +2764,8 @@ void new062022Analysis(string datasetString){
     std::cout << "Double_t " << saveName << "PassAsHadGenSemiLepNoHTobbWeightedCtr = " << passAsHadGenSemiLepNoHTobbWeightedCtr << "\n";
     std::cout << "------------------------\n";
 
+    std::cout << "\n";
+    std::cout << "++++++++++++++++++++++++++++++GEN HAD CHANNEL COUNTERS++++++++++++++++++++++++++++++\n";
 
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "tryingSemiLepChannelGenHadNoHTobbCtr = " << tryingSemiLepChannelGenHadNoHTobbCtr << "\n";
@@ -2900,6 +2820,8 @@ void new062022Analysis(string datasetString){
     std::cout << "Double_t " << saveName << "PassAsHadGenHadNoHTobbWeightedCtr = " << passAsHadGenHadNoHTobbWeightedCtr << "\n";
     std::cout << "------------------------\n";
 
+    std::cout << "\n";
+    std::cout << "++++++++++++++++++++++++++++++GEN OTHER CHANNEL COUNTERS++++++++++++++++++++++++++++++\n";
 
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "tryingSemiLepChannelGenOtherNoHTobbCtr = " << tryingSemiLepChannelGenOtherNoHTobbCtr << "\n";
