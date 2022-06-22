@@ -564,6 +564,225 @@ void doVBFJetCut(UInt_t nJetLen,TTreeReaderArray<Float_t> &Jet_pt,TTreeReaderArr
     //debug = false;
 }
 
+void doVBFJetCutEtaDifSelection(UInt_t nJetLen,TTreeReaderArray<Float_t> &Jet_pt,TTreeReaderArray<Int_t> &Jet_jetId,TTreeReaderArray<Float_t> &Jet_eta,TTreeReaderArray<Float_t> &Jet_phi,TTreeReaderArray<Float_t> &Jet_mass,float jetPTCut,float jetEtaDifCut,float jetInvMassCut,float &jetPairInvMass,float &jetLeadPt,float &jetLeadEta,float &jetLeadPhi,float &jetTrailingPt,float &jetTrailingEta,float &jetTrailingPhi,UInt_t &leadJet_1,UInt_t &leadJet_2,std::vector<ROOT::Math::PtEtaPhiMVector> dRCheckVecAr,float dRCut,bool debug){
+    //debug = true;
+    //std::cout << "++++++++ "<< VBFJetdRCut << "\n";
+    float jetEtaDif = 0;
+    for (UInt_t jetIndOne=0; jetIndOne<nJetLen-1;jetIndOne++){
+        float jetPtOne = Jet_pt[jetIndOne];
+        Int_t jetIdOne = Jet_jetId[jetIndOne];
+        if (debug) std::cout << "jetIndOne: " << jetIndOne << " Jet_pt[jetIndOne]: " << Jet_pt[jetIndOne] << " Jet_jetId[jetIndOne]: " << Jet_jetId[jetIndOne] << "\n";
+        //Checking Jetid
+        if (jetPtOne < jetPTCut || !(jetIdOne == 6)) continue;
+        float jetEtaOne = Jet_eta[jetIndOne];
+        float jetPhiOne = Jet_phi[jetIndOne];
+        bool FJdRPass = true;
+        //Checking dR
+        for (UInt_t dRCheckVecInd=0; dRCheckVecInd<dRCheckVecAr.size();dRCheckVecInd++) {
+            float tmpDeltaR = calcDeltaR(jetPhiOne,jetEtaOne,dRCheckVecAr[dRCheckVecInd].Phi(),dRCheckVecAr[dRCheckVecInd].Eta());
+
+            
+
+            if (tmpDeltaR < dRCut){
+                FJdRPass = false;
+                break;
+            }
+
+        }
+        if (!FJdRPass) continue;
+        float jetMassOne = Jet_mass[jetIndOne];
+        ROOT::Math::PtEtaPhiMVector tmpVecOne = ROOT::Math::PtEtaPhiMVector(jetPtOne, jetEtaOne, jetPhiOne, jetMassOne);
+        //second jet loop
+        for (UInt_t jetIndTwo=jetIndOne+1; jetIndTwo<nJetLen; jetIndTwo++){
+            float jetPtTwo = Jet_pt[jetIndTwo];
+            Int_t jetIdTwo = Jet_jetId[jetIndTwo];
+            if (debug) std::cout << "jetIndTwo: " << jetIndTwo << " Jet_pt[jetIndTwo]: " << Jet_pt[jetIndTwo] << " Jet_jetId[jetIndTwo]: " << Jet_jetId[jetIndTwo] << "\n";
+            //Checking second JetID
+            if (jetPtTwo < jetPTCut || !(jetIdTwo == 6)) continue;
+            
+            
+            float jetEtaTwo = Jet_eta[jetIndTwo];
+            if (debug) std::cout << "jetEtaOne: " << jetEtaOne << " jetEtaTwo: " << jetEtaTwo << " jetEtaDifCut: " << jetEtaDifCut << "\n";
+            //Checking jet eta dif
+            float tmpJetEtaDif = abs(jetEtaOne - jetEtaTwo);
+            if (tmpJetEtaDif < jetEtaDifCut || tmpJetEtaDif < jetEtaDif) continue;
+            
+            
+            float jetPhiTwo = Jet_phi[jetIndTwo];
+            FJdRPass = true;
+            //Checking second jet dR
+            for (UInt_t dRCheckVecInd=0; dRCheckVecInd<dRCheckVecAr.size();dRCheckVecInd++) {
+                float tmpDeltaR = calcDeltaR(jetPhiTwo,jetEtaTwo,dRCheckVecAr[dRCheckVecInd].Phi(),dRCheckVecAr[dRCheckVecInd].Eta());
+
+                
+
+                if (tmpDeltaR < dRCut){
+                    FJdRPass = false;
+                    break;
+                }
+
+            }
+            if (!FJdRPass) continue;
+            
+            float jetMassTwo = Jet_mass[jetIndTwo];
+            
+            ROOT::Math::PtEtaPhiMVector tmpVecTwo = ROOT::Math::PtEtaPhiMVector(jetPtTwo, jetEtaTwo, jetPhiTwo, jetMassTwo);
+            ROOT::Math::PtEtaPhiMVector tmpVecSum = tmpVecOne+tmpVecTwo;
+            float tmpJetPairInvMass = tmpVecSum.M();
+
+            if (debug) std::cout << "tmpJetPairInvMass: " << tmpJetPairInvMass << " jetInvMassCut: " << jetInvMassCut << "\n";
+
+            //Checking jet pair inv mass
+            if (tmpJetPairInvMass < jetInvMassCut) continue;
+
+
+
+
+            if (debug) std::cout << "FJdRPass: " << FJdRPass << " FJdRPass: " << FJdRPass << "\n";
+            
+            jetEtaDif = tmpJetEtaDif;
+            jetPairInvMass = tmpJetPairInvMass;
+            if (jetPtOne >= jetPtTwo) {
+                jetLeadPt = jetPtOne;
+                jetLeadEta = jetEtaOne;
+                jetLeadPhi = jetPhiOne;
+                jetTrailingPt = jetPtTwo;
+                jetTrailingEta = jetEtaTwo;
+                jetTrailingPhi = jetPhiTwo;
+                leadJet_1 = jetIndOne;
+                leadJet_2 = jetIndTwo;
+            }
+            else {
+                jetLeadPt = jetPtTwo;
+                jetLeadEta = jetEtaTwo;
+                jetLeadPhi = jetPhiTwo;
+                jetTrailingPt = jetPtOne;
+                jetTrailingEta = jetEtaOne;
+                jetTrailingPhi = jetPhiOne;
+                leadJet_1 = jetIndTwo;
+                leadJet_2 = jetIndOne;
+            }
+                
+            
+        }
+    }
+    //debug = false;
+}
+
+void doVBFJetCutPtSelection(UInt_t nJetLen,TTreeReaderArray<Float_t> &Jet_pt,TTreeReaderArray<Int_t> &Jet_jetId,TTreeReaderArray<Float_t> &Jet_eta,TTreeReaderArray<Float_t> &Jet_phi,TTreeReaderArray<Float_t> &Jet_mass,float jetPTCut,float jetEtaDifCut,float jetInvMassCut,float &jetPairInvMass,float &jetLeadPt,float &jetLeadEta,float &jetLeadPhi,float &jetTrailingPt,float &jetTrailingEta,float &jetTrailingPhi,UInt_t &leadJet_1,UInt_t &leadJet_2,std::vector<ROOT::Math::PtEtaPhiMVector> dRCheckVecAr,float dRCut,bool debug){
+    //debug = true;
+    //std::cout << "++++++++ "<< VBFJetdRCut << "\n";
+    for (UInt_t jetIndOne=0; jetIndOne<nJetLen-1;jetIndOne++){
+        float jetPtOne = Jet_pt[jetIndOne];
+        Int_t jetIdOne = Jet_jetId[jetIndOne];
+        if (debug) std::cout << "jetIndOne: " << jetIndOne << " Jet_pt[jetIndOne]: " << Jet_pt[jetIndOne] << " Jet_jetId[jetIndOne]: " << Jet_jetId[jetIndOne] << "\n";
+        //Checking Jetid
+        if (jetPtOne < jetPTCut || !(jetIdOne == 6)) continue;
+        float jetEtaOne = Jet_eta[jetIndOne];
+        float jetPhiOne = Jet_phi[jetIndOne];
+        bool FJdRPass = true;
+        //Checking dR
+        for (UInt_t dRCheckVecInd=0; dRCheckVecInd<dRCheckVecAr.size();dRCheckVecInd++) {
+            float tmpDeltaR = calcDeltaR(jetPhiOne,jetEtaOne,dRCheckVecAr[dRCheckVecInd].Phi(),dRCheckVecAr[dRCheckVecInd].Eta());
+
+            
+
+            if (tmpDeltaR < dRCut){
+                FJdRPass = false;
+                break;
+            }
+
+        }
+        if (!FJdRPass) continue;
+        float jetMassOne = Jet_mass[jetIndOne];
+        ROOT::Math::PtEtaPhiMVector tmpVecOne = ROOT::Math::PtEtaPhiMVector(jetPtOne, jetEtaOne, jetPhiOne, jetMassOne);
+        //second jet loop
+        for (UInt_t jetIndTwo=jetIndOne+1; jetIndTwo<nJetLen; jetIndTwo++){
+            float jetPtTwo = Jet_pt[jetIndTwo];
+            Int_t jetIdTwo = Jet_jetId[jetIndTwo];
+            if (debug) std::cout << "jetIndTwo: " << jetIndTwo << " Jet_pt[jetIndTwo]: " << Jet_pt[jetIndTwo] << " Jet_jetId[jetIndTwo]: " << Jet_jetId[jetIndTwo] << "\n";
+            //Checking second JetID
+            if (jetPtTwo < jetPTCut || !(jetIdTwo == 6)) continue;
+            
+            
+            float jetEtaTwo = Jet_eta[jetIndTwo];
+            if (debug) std::cout << "jetEtaOne: " << jetEtaOne << " jetEtaTwo: " << jetEtaTwo << " jetEtaDifCut: " << jetEtaDifCut << "\n";
+            //Checking jet eta dif
+            float tmpJetEtaDif = abs(jetEtaOne - jetEtaTwo);
+            if (tmpJetEtaDif < jetEtaDifCut) continue;
+            
+            
+            float jetPhiTwo = Jet_phi[jetIndTwo];
+            FJdRPass = true;
+            //Checking second jet dR
+            for (UInt_t dRCheckVecInd=0; dRCheckVecInd<dRCheckVecAr.size();dRCheckVecInd++) {
+                float tmpDeltaR = calcDeltaR(jetPhiTwo,jetEtaTwo,dRCheckVecAr[dRCheckVecInd].Phi(),dRCheckVecAr[dRCheckVecInd].Eta());
+
+                
+
+                if (tmpDeltaR < dRCut){
+                    FJdRPass = false;
+                    break;
+                }
+
+            }
+            if (!FJdRPass) continue;
+            
+            float jetMassTwo = Jet_mass[jetIndTwo];
+            
+            ROOT::Math::PtEtaPhiMVector tmpVecTwo = ROOT::Math::PtEtaPhiMVector(jetPtTwo, jetEtaTwo, jetPhiTwo, jetMassTwo);
+            ROOT::Math::PtEtaPhiMVector tmpVecSum = tmpVecOne+tmpVecTwo;
+            float tmpJetPairInvMass = tmpVecSum.M();
+
+            if (debug) std::cout << "tmpJetPairInvMass: " << tmpJetPairInvMass << " jetInvMassCut: " << jetInvMassCut << "\n";
+
+            //Checking jet pair inv mass
+            if (tmpJetPairInvMass < jetInvMassCut) continue;
+
+
+
+
+            if (debug) std::cout << "FJdRPass: " << FJdRPass << " FJdRPass: " << FJdRPass << "\n";
+
+            //Checking Pt for jet selection
+            bool passPt = false;
+            if (jetPtOne >= jetPtTwo) {
+                if (jetPtOne > jetLeadPt) {
+                    passPt = true;
+                }
+                else if (jetPtOne == jetLeadPt && jetPtTwo > jetTrailingPt) passPt = true;
+
+            }
+            if (passPt){
+                jetPairInvMass = tmpJetPairInvMass;
+                if (jetPtOne >= jetPtTwo) {
+                    jetLeadPt = jetPtOne;
+                    jetLeadEta = jetEtaOne;
+                    jetLeadPhi = jetPhiOne;
+                    jetTrailingPt = jetPtTwo;
+                    jetTrailingEta = jetEtaTwo;
+                    jetTrailingPhi = jetPhiTwo;
+                    leadJet_1 = jetIndOne;
+                    leadJet_2 = jetIndTwo;
+                }
+                else {
+                    jetLeadPt = jetPtTwo;
+                    jetLeadEta = jetEtaTwo;
+                    jetLeadPhi = jetPhiTwo;
+                    jetTrailingPt = jetPtOne;
+                    jetTrailingEta = jetEtaOne;
+                    jetTrailingPhi = jetPhiOne;
+                    leadJet_1 = jetIndTwo;
+                    leadJet_2 = jetIndOne;
+                }
+            }
+                
+            
+        }
+    }
+    //debug = false;
+}
+
 void debugOutputForVBFJetCut(UInt_t evCount,UInt_t leadJet_1,UInt_t leadJet_2,TTreeReaderArray<Float_t> &Jet_phi,TTreeReaderArray<Float_t> &Jet_eta,bool debug){
     if (debug){
         std::cout << " found jet pairs\n";
