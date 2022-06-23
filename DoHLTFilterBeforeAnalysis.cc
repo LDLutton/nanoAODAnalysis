@@ -582,6 +582,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         fileAr.push_back("./unweighted_eventspphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev10080Seed_0p999cHW100GeVIMJetCut_200.root");
         useLHETree = true;
         useFJGenMatchTree = true;
+        isBackground = false;
         
     }
     else if (LaraTest){
@@ -818,6 +819,8 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
 
     Double_t sumOfGenWeights = 0;
 
+
+    //Ctrs for HTobb
     UInt_t genLepChannelCtr = 0;
     UInt_t genSemiLepChannelCtr = 0;
     UInt_t genHadronicChannelCtr = 0;
@@ -829,6 +832,19 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     Double_t genHadronicChannelWeightedCtr = 0;
     Double_t genOtherChannelWeightedCtr = 0;
     Double_t genErrorChannelWeightedCtr = 0;
+
+    //Ctrs for no HTobb
+    UInt_t genLepChannelNoHTobbCtr = 0;
+    UInt_t genSemiLepChannelNoHTobbCtr = 0;
+    UInt_t genHadronicChannelNoHTobbCtr = 0;
+    UInt_t genOtherChannelNoHTobbCtr = 0;
+    UInt_t genErrorChannelNoHTobbCtr = 0;
+
+    Double_t genLepChannelNoHTobbWeightedCtr = 0;
+    Double_t genSemiLepChannelNoHTobbWeightedCtr = 0;
+    Double_t genHadronicChannelNoHTobbWeightedCtr = 0;
+    Double_t genOtherChannelNoHTobbWeightedCtr = 0;
+    Double_t genErrorChannelNoHTobbWeightedCtr = 0;
 
 
     UInt_t HTobbCtr = 0;
@@ -1385,8 +1401,14 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                             }
                         }
                         genChannelL = 4;
-                        genErrorChannelCtr += 1;
-                        genErrorChannelWeightedCtr += *genWeight;
+                        if (HTobbBoolL){
+                            genErrorChannelCtr += 1;
+                            genErrorChannelWeightedCtr += *genWeight;
+                        }
+                        else{
+                            genErrorChannelNoHTobbCtr += 1;
+                            genErrorChannelNoHTobbWeightedCtr += *genWeight;
+                        }
 
                     }
                     else{
@@ -1515,31 +1537,55 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                         if (ZIsHadronic) {
 
                             genChannelL=2;
-                            genHadronicChannelCtr += 1;
-                            genHadronicChannelWeightedCtr += *genWeight;
+                            if (HTobbBoolL){
+                                genHadronicChannelCtr += 1;
+                                genHadronicChannelWeightedCtr += *genWeight;
+                            }
+                            else{
+                                genHadronicChannelNoHTobbCtr += 1;
+                                genHadronicChannelNoHTobbWeightedCtr += *genWeight;
+                            }
 
                         }
 
                         else if (ZIsSemiLeptonic) {
 
                             genChannelL=1;
-                            genSemiLepChannelCtr += 1;
-                            genSemiLepChannelWeightedCtr += *genWeight;
+                            if (HTobbBoolL){
+                                genSemiLepChannelCtr += 1;
+                                genSemiLepChannelWeightedCtr += *genWeight;
+                            }
+                            else{
+                                genSemiLepChannelNoHTobbCtr += 1;
+                                genSemiLepChannelNoHTobbWeightedCtr += *genWeight;
+                            }
 
                         }
 
                         else if (ZIsLeptonic) {
                             genChannelL=0;
-                            genLepChannelCtr += 1;
-                            genLepChannelWeightedCtr += *genWeight;
+                            if (HTobbBoolL){
+                                genLepChannelCtr += 1;
+                                genLepChannelWeightedCtr += *genWeight;
+                            }
+                            else{
+                                genLepChannelNoHTobbCtr += 1;
+                                genLepChannelNoHTobbWeightedCtr += *genWeight;
+                            }
 
                             
 
                         }
                         else {
                             genChannelL=3;
-                            genOtherChannelCtr += 1;
-                            genOtherChannelWeightedCtr += *genWeight;
+                            if (HTobbBoolL){
+                                genOtherChannelCtr += 1;
+                                genOtherChannelWeightedCtr += *genWeight;
+                            }
+                            else{
+                                genOtherChannelNoHTobbCtr += 1;
+                                genOtherChannelNoHTobbWeightedCtr += *genWeight;
+                            }
                         }
                         
 
@@ -1817,12 +1863,20 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     std::cout << "sumOfGenWeights: " << sumOfGenWeights << "\n";
 
     if (!isBackground){
+        std::cout << "HTobb Channel: " << HTobbCtr << " ------------------- " << HTobbWeightedCtr<< "\n";
+        std::cout << "Channels with HTobb\n";
         std::cout << "Gen Lep Channel: " << genLepChannelCtr << " ------------------- " << genLepChannelWeightedCtr<< "\n";
         std::cout << "Gen SemiLep Channel: " << genSemiLepChannelCtr << " ------------------- " << genSemiLepChannelWeightedCtr<< "\n";
         std::cout << "Gen Hadronic Channel: " << genHadronicChannelCtr << " ------------------- " << genHadronicChannelWeightedCtr<< "\n";
         std::cout << "Gen Other Channel: " << genOtherChannelCtr << " ------------------- " << genOtherChannelWeightedCtr<< "\n";
         std::cout << "Gen Error Channel: " << genErrorChannelCtr << " ------------------- " << genErrorChannelWeightedCtr<< "\n";
-        std::cout << "HTobb Channel: " << HTobbCtr << " ------------------- " << HTobbWeightedCtr<< "\n";
+        std::cout << "Channels with HTobb\n";
+        std::cout << "Gen NoHTobb Lep Channel: " << genLepChannelNoHTobbCtr << " ------------------- " << genLepChannelNoHTobbWeightedCtr<< "\n";
+        std::cout << "Gen NoHTobb SemiLep Channel: " << genSemiLepChannelNoHTobbCtr << " ------------------- " << genSemiLepChannelNoHTobbWeightedCtr<< "\n";
+        std::cout << "Gen NoHTobb Hadronic Channel: " << genHadronicChannelNoHTobbCtr << " ------------------- " << genHadronicChannelNoHTobbWeightedCtr<< "\n";
+        std::cout << "Gen NoHTobb Other Channel: " << genOtherChannelNoHTobbCtr << " ------------------- " << genOtherChannelNoHTobbWeightedCtr<< "\n";
+        std::cout << "Gen NoHTobb Error Channel: " << genErrorChannelNoHTobbCtr << " ------------------- " << genErrorChannelNoHTobbWeightedCtr<< "\n";
+        
         
         std::cout << "Cross section average before division: " << crossSectionAvg << "\n";
         std::cout << "Cross section counter: " << crossSectionCtr << "\n";
