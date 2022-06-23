@@ -537,6 +537,8 @@ void new062022Analysis(string datasetString){
     ////////////////////////////////DEFINING COUNTERS////////////////////////////////
     ////////////////////////////////NEUTRAL COUNTERS////////////////////////////////
 
+    UInt_t startingCtr = 0;
+
     UInt_t passHiggsFJCtr = 0;
     UInt_t passHiggsFJLepCtr = 0;
     UInt_t passHiggsFJSemiLepCtr = 0;
@@ -554,6 +556,8 @@ void new062022Analysis(string datasetString){
     UInt_t passAsLepCtr = 0;
     UInt_t passAsSemiLepCtr = 0;
     UInt_t passAsHadCtr = 0;
+
+    Double_t startingWeightedCtr = 0;
     
 
     Double_t passHiggsFJWeightedCtr = 0.;
@@ -579,6 +583,8 @@ void new062022Analysis(string datasetString){
 
     ////////////////////////////////GEN LEP COUNTERS////////////////////////////////
 
+    UInt_t startingGenLepCtr = 0;
+
     UInt_t passHiggsFJGenLepCtr = 0;
     UInt_t passHiggsFJLepGenLepCtr = 0;
     UInt_t passHiggsFJSemiLepGenLepCtr = 0;
@@ -597,6 +603,7 @@ void new062022Analysis(string datasetString){
     UInt_t passAsSemiLepGenLepCtr = 0;
     UInt_t passAsHadGenLepCtr = 0;
     
+    Double_t startingGenLepWeightedCtr = 0;
 
     Double_t passHiggsFJGenLepWeightedCtr = 0.;
     Double_t passHiggsFJWeightedLepGenLepCtr = 0.;
@@ -621,6 +628,8 @@ void new062022Analysis(string datasetString){
 
     ////////////////////////////////GEN SEMILEP COUNTERS////////////////////////////////
 
+    UInt_t startingGenSemiLepCtr = 0;
+
     UInt_t passHiggsFJGenSemiLepCtr = 0;
     UInt_t passHiggsFJLepGenSemiLepCtr = 0;
     UInt_t passHiggsFJSemiLepGenSemiLepCtr = 0;
@@ -638,8 +647,9 @@ void new062022Analysis(string datasetString){
     UInt_t passAsLepGenSemiLepCtr = 0;
     UInt_t passAsSemiLepGenSemiLepCtr = 0;
     UInt_t passAsHadGenSemiLepCtr = 0;
-    
 
+    Double_t startingGenSemiLepWeightedCtr = 0;
+    
     Double_t passHiggsFJGenSemiLepWeightedCtr = 0.;
     Double_t passHiggsFJWeightedLepGenSemiLepCtr = 0.;
     Double_t passHiggsFJWeightedSemiLepGenSemiLepCtr = 0.;
@@ -664,6 +674,8 @@ void new062022Analysis(string datasetString){
 
     ////////////////////////////////GEN HAD COUNTERS////////////////////////////////
 
+    UInt_t startingGenHadCtr = 0;
+
     UInt_t passHiggsFJGenHadCtr = 0;
     UInt_t passHiggsFJLepGenHadCtr = 0;
     UInt_t passHiggsFJSemiLepGenHadCtr = 0;
@@ -682,6 +694,7 @@ void new062022Analysis(string datasetString){
     UInt_t passAsSemiLepGenHadCtr = 0;
     UInt_t passAsHadGenHadCtr = 0;
     
+    Double_t startingGenHadWeightedCtr = 0;
 
     Double_t passHiggsFJGenHadWeightedCtr = 0.;
     Double_t passHiggsFJWeightedLepGenHadCtr = 0.;
@@ -706,6 +719,8 @@ void new062022Analysis(string datasetString){
 
     ////////////////////////////////GEN OTHER COUNTERS////////////////////////////////
 
+    UInt_t startingGenOtherCtr = 0;
+
     UInt_t passHiggsFJGenOtherCtr = 0;
     UInt_t passHiggsFJLepGenOtherCtr = 0;
     UInt_t passHiggsFJSemiLepGenOtherCtr = 0;
@@ -724,6 +739,7 @@ void new062022Analysis(string datasetString){
     UInt_t passAsSemiLepGenOtherCtr = 0;
     UInt_t passAsHadGenOtherCtr = 0;
     
+    Double_t startingGenOtherWeightedCtr = 0;
 
     Double_t passHiggsFJGenOtherWeightedCtr = 0.;
     Double_t passHiggsFJWeightedLepGenOtherCtr = 0.;
@@ -751,6 +767,8 @@ void new062022Analysis(string datasetString){
 
     ////////////////////////////////GEN LEP COUNTERS////////////////////////////////
 
+    UInt_t startingGenLepNoHTobbCtr = 0;
+
     UInt_t passHiggsFJGenLepNoHTobbCtr = 0;
     UInt_t passHiggsFJLepGenLepNoHTobbCtr = 0;
     UInt_t passHiggsFJSemiLepGenLepNoHTobbCtr = 0;
@@ -769,6 +787,7 @@ void new062022Analysis(string datasetString){
     UInt_t passAsSemiLepGenLepNoHTobbCtr = 0;
     UInt_t passAsHadGenLepNoHTobbCtr = 0;
     
+    Double_t startingGenLepNoHTobbWeightedCtr = 0;
 
     Double_t passHiggsFJGenLepNoHTobbWeightedCtr = 0.;
     Double_t passHiggsFJWeightedLepGenLepNoHTobbCtr = 0.;
@@ -793,6 +812,8 @@ void new062022Analysis(string datasetString){
 
     ////////////////////////////////GEN SEMILEP COUNTERS////////////////////////////////
 
+    UInt_t startingGenSemiLepNoHTobbCtr = 0;
+
     UInt_t passHiggsFJGenSemiLepNoHTobbCtr = 0;
     UInt_t passHiggsFJLepGenSemiLepNoHTobbCtr = 0;
     UInt_t passHiggsFJSemiLepGenSemiLepNoHTobbCtr = 0;
@@ -811,6 +832,7 @@ void new062022Analysis(string datasetString){
     UInt_t passAsSemiLepGenSemiLepNoHTobbCtr = 0;
     UInt_t passAsHadGenSemiLepNoHTobbCtr = 0;
     
+    Double_t startingGenSemiLepNoHTobbWeightedCtr = 0;
 
     Double_t passHiggsFJGenSemiLepNoHTobbWeightedCtr = 0.;
     Double_t passHiggsFJWeightedLepGenSemiLepNoHTobbCtr = 0.;
@@ -836,6 +858,8 @@ void new062022Analysis(string datasetString){
 
     ////////////////////////////////GEN HAD COUNTERS////////////////////////////////
 
+    UInt_t startingGenHadNoHTobbCtr = 0;
+
     UInt_t passHiggsFJGenHadNoHTobbCtr = 0;
     UInt_t passHiggsFJLepGenHadNoHTobbCtr = 0;
     UInt_t passHiggsFJSemiLepGenHadNoHTobbCtr = 0;
@@ -854,6 +878,7 @@ void new062022Analysis(string datasetString){
     UInt_t passAsSemiLepGenHadNoHTobbCtr = 0;
     UInt_t passAsHadGenHadNoHTobbCtr = 0;
     
+    Double_t startingGenHadNoHTobbWeightedCtr = 0;
 
     Double_t passHiggsFJGenHadNoHTobbWeightedCtr = 0.;
     Double_t passHiggsFJWeightedLepGenHadNoHTobbCtr = 0.;
@@ -878,6 +903,8 @@ void new062022Analysis(string datasetString){
 
     ////////////////////////////////GEN OTHER COUNTERS////////////////////////////////
 
+    UInt_t startingGenOtherNoHTobbCtr = 0;
+
     UInt_t passHiggsFJGenOtherNoHTobbCtr = 0;
     UInt_t passHiggsFJLepGenOtherNoHTobbCtr = 0;
     UInt_t passHiggsFJSemiLepGenOtherNoHTobbCtr = 0;
@@ -896,6 +923,7 @@ void new062022Analysis(string datasetString){
     UInt_t passAsSemiLepGenOtherNoHTobbCtr = 0;
     UInt_t passAsHadGenOtherNoHTobbCtr = 0;
     
+    Double_t startingGenOtherNoHTobbWeightedCtr = 0;
 
     Double_t passHiggsFJGenOtherNoHTobbWeightedCtr = 0.;
     Double_t passHiggsFJWeightedLepGenOtherNoHTobbCtr = 0.;
@@ -1243,6 +1271,47 @@ void new062022Analysis(string datasetString){
             eZ2VecPairAr.clear();
             mZ2VecPairAr.clear();
             Double_t tmpGenWeights = *genWeightL;
+            startingCtr += 1;
+            startingWeightedCtr += tmpGenWeights;
+
+            if (!isBackground){
+                if (*HTobbBoolL){
+                    if (*genChannelL == 0) {
+                        startingGenLepCtr += 1;
+                        startingGenLepWeightedCtr += tmpGenWeights;
+                    }
+                    if (*genChannelL == 1) {
+                        startingGenSemiLepCtr += 1;
+                        startingGenSemiLepWeightedCtr += tmpGenWeights;
+                    }
+                    if (*genChannelL == 2) {
+                        startingGenHadCtr += 1;
+                        startingGenHadWeightedCtr += tmpGenWeights;
+                    }
+                    if (*genChannelL == 3) {
+                        startingGenOtherCtr += 1;
+                        startingGenOtherWeightedCtr += tmpGenWeights;
+                    }
+                }
+                else{
+                    if (*genChannelL == 0) {
+                        startingGenLepNoHTobbCtr += 1;
+                        startingGenLepNoHTobbWeightedCtr += tmpGenWeights;
+                    }
+                    if (*genChannelL == 1) {
+                        startingGenSemiLepNoHTobbCtr += 1;
+                        startingGenSemiLepNoHTobbWeightedCtr += tmpGenWeights;
+                    }
+                    if (*genChannelL == 2) {
+                        startingGenHadNoHTobbCtr += 1;
+                        startingGenHadNoHTobbWeightedCtr += tmpGenWeights;
+                    }
+                    if (*genChannelL == 3) {
+                        startingGenOtherNoHTobbCtr += 1;
+                        startingGenOtherNoHTobbWeightedCtr += tmpGenWeights;
+                    }
+                }
+            }
 
 
             bool passesCutsBool = false;
@@ -2373,6 +2442,9 @@ void new062022Analysis(string datasetString){
     //--------------------HTobbChannel Output--------------
     std::cout << "==============================TOTAL COUNTERS==============================\n";
     std::cout << "------------------------\n";
+    std::cout << "UInt_t " << saveName << "startingCtr = " << startingCtr << "\n";
+    std::cout << "Double_t " << saveName << "startingWeightedCtr = " << startingWeightedCtr << "\n";
+    std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "tryingSemiLepChannelCtr = " << tryingSemiLepChannelCtr << "\n";
     std::cout << "Double_t " << saveName << "tryingSemiLepChannelWeightedCtr = " << tryingSemiLepChannelWeightedCtr << "\n";
     std::cout << "------------------------\n";
@@ -2428,7 +2500,9 @@ void new062022Analysis(string datasetString){
     std::cout << "==============================HTOBB GEN CHANNEL COUNTERS==============================\n";
     std::cout << "\n";
     std::cout << "++++++++++++++++++++++++++++++GEN LEP CHANNEL COUNTERS++++++++++++++++++++++++++++++\n";
-
+    std::cout << "------------------------\n";
+    std::cout << "UInt_t " << saveName << "startingGenLepCtr = " << startingGenLepCtr << "\n";
+    std::cout << "Double_t " << saveName << "startingGenLepWeightedCtr = " << startingGenLepWeightedCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "tryingSemiLepChannelGenLepCtr = " << tryingSemiLepChannelGenLepCtr << "\n";
     std::cout << "Double_t " << saveName << "tryingSemiLepChannelGenLepWeightedCtr = " << tryingSemiLepChannelGenLepWeightedCtr << "\n";
@@ -2485,6 +2559,9 @@ void new062022Analysis(string datasetString){
     std::cout << "\n";
     std::cout << "++++++++++++++++++++++++++++++GEN SEMI LEP CHANNEL COUNTERS++++++++++++++++++++++++++++++\n";
     std::cout << "------------------------\n";
+    std::cout << "UInt_t " << saveName << "startingGenSemiLepCtr = " << startingGenSemiLepCtr << "\n";
+    std::cout << "Double_t " << saveName << "startingGenSemiLepWeightedCtr = " << startingGenSemiLepWeightedCtr << "\n";
+    std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "tryingSemiLepChannelGenSemiLepCtr = " << tryingSemiLepChannelGenSemiLepCtr << "\n";
     std::cout << "Double_t " << saveName << "tryingSemiLepChannelGenSemiLepWeightedCtr = " << tryingSemiLepChannelGenSemiLepWeightedCtr << "\n";
     std::cout << "------------------------\n";
@@ -2540,6 +2617,9 @@ void new062022Analysis(string datasetString){
     std::cout << "\n";
     std::cout << "++++++++++++++++++++++++++++++GEN HAD CHANNEL COUNTERS++++++++++++++++++++++++++++++\n";
     std::cout << "------------------------\n";
+    std::cout << "UInt_t " << saveName << "startingGenHadCtr = " << startingGenHadCtr << "\n";
+    std::cout << "Double_t " << saveName << "startingGenHadWeightedCtr = " << startingGenHadWeightedCtr << "\n";
+    std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "tryingSemiLepChannelGenHadCtr = " << tryingSemiLepChannelGenHadCtr << "\n";
     std::cout << "Double_t " << saveName << "tryingSemiLepChannelGenHadWeightedCtr = " << tryingSemiLepChannelGenHadWeightedCtr << "\n";
     std::cout << "------------------------\n";
@@ -2594,6 +2674,9 @@ void new062022Analysis(string datasetString){
 
     std::cout << "\n";
     std::cout << "++++++++++++++++++++++++++++++GEN OTHER CHANNEL COUNTERS++++++++++++++++++++++++++++++\n";
+    std::cout << "------------------------\n";
+    std::cout << "UInt_t " << saveName << "startingGenOtherCtr = " << startingGenOtherCtr << "\n";
+    std::cout << "Double_t " << saveName << "startingGenOtherWeightedCtr = " << startingGenOtherWeightedCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "tryingSemiLepChannelGenOtherCtr = " << tryingSemiLepChannelGenOtherCtr << "\n";
     std::cout << "Double_t " << saveName << "tryingSemiLepChannelGenOtherWeightedCtr = " << tryingSemiLepChannelGenOtherWeightedCtr << "\n";
@@ -2654,7 +2737,9 @@ void new062022Analysis(string datasetString){
     std::cout << "==============================NO HTOBB GEN CHANNEL COUNTERS==============================\n";
     std::cout << "\n";
     std::cout << "++++++++++++++++++++++++++++++GEN LEP CHANNEL COUNTERS++++++++++++++++++++++++++++++\n";
-
+    std::cout << "------------------------\n";
+    std::cout << "UInt_t " << saveName << "startingGenLepNoHTobbCtr = " << startingGenLepNoHTobbCtr << "\n";
+    std::cout << "Double_t " << saveName << "startingGenLepNoHTobbWeightedCtr = " << startingGenLepNoHTobbWeightedCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "tryingSemiLepChannelGenLepNoHTobbCtr = " << tryingSemiLepChannelGenLepNoHTobbCtr << "\n";
     std::cout << "Double_t " << saveName << "tryingSemiLepChannelGenLepNoHTobbWeightedCtr = " << tryingSemiLepChannelGenLepNoHTobbWeightedCtr << "\n";
@@ -2710,6 +2795,9 @@ void new062022Analysis(string datasetString){
 
     std::cout << "\n";
     std::cout << "++++++++++++++++++++++++++++++GEN SEMI LEP CHANNEL COUNTERS++++++++++++++++++++++++++++++\n";
+    std::cout << "------------------------\n";
+    std::cout << "UInt_t " << saveName << "startingGenSemiLepNoHTobbCtr = " << startingGenSemiLepNoHTobbCtr << "\n";
+    std::cout << "Double_t " << saveName << "startingGenSemiLepNoHTobbWeightedCtr = " << startingGenSemiLepNoHTobbWeightedCtr << "\n";
 
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "tryingSemiLepChannelGenSemiLepNoHTobbCtr = " << tryingSemiLepChannelGenSemiLepNoHTobbCtr << "\n";
@@ -2766,7 +2854,9 @@ void new062022Analysis(string datasetString){
 
     std::cout << "\n";
     std::cout << "++++++++++++++++++++++++++++++GEN HAD CHANNEL COUNTERS++++++++++++++++++++++++++++++\n";
-
+    std::cout << "------------------------\n";
+    std::cout << "UInt_t " << saveName << "startingGenHadNoHTobbCtr = " << startingGenHadNoHTobbCtr << "\n";
+    std::cout << "Double_t " << saveName << "startingGenHadNoHTobbWeightedCtr = " << startingGenHadNoHTobbWeightedCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "tryingSemiLepChannelGenHadNoHTobbCtr = " << tryingSemiLepChannelGenHadNoHTobbCtr << "\n";
     std::cout << "Double_t " << saveName << "tryingSemiLepChannelGenHadNoHTobbWeightedCtr = " << tryingSemiLepChannelGenHadNoHTobbWeightedCtr << "\n";
@@ -2822,7 +2912,9 @@ void new062022Analysis(string datasetString){
 
     std::cout << "\n";
     std::cout << "++++++++++++++++++++++++++++++GEN OTHER CHANNEL COUNTERS++++++++++++++++++++++++++++++\n";
-
+    std::cout << "------------------------\n";
+    std::cout << "UInt_t " << saveName << "startingGenOtherNoHTobbCtr = " << startingGenOtherNoHTobbCtr << "\n";
+    std::cout << "Double_t " << saveName << "startingGenOtherNoHTobbWeightedCtr = " << startingGenOtherNoHTobbWeightedCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "tryingSemiLepChannelGenOtherNoHTobbCtr = " << tryingSemiLepChannelGenOtherNoHTobbCtr << "\n";
     std::cout << "Double_t " << saveName << "tryingSemiLepChannelGenOtherNoHTobbWeightedCtr = " << tryingSemiLepChannelGenOtherNoHTobbWeightedCtr << "\n";
