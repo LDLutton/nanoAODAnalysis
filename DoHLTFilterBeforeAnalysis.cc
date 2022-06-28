@@ -626,6 +626,15 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     UInt_t passHLTGenOtherCtr = 0;
     Double_t passHLTGenOtherWeightedCtr = 0;
 
+    UInt_t passHLTGenLepNoHTobbCtr = 0;
+    Double_t passHLTGenLepNoHTobbWeightedCtr = 0;
+    UInt_t passHLTGenSemiLepNoHTobbCtr = 0;
+    Double_t passHLTGenSemiLepNoHTobbWeightedCtr = 0;
+    UInt_t passHLTGenHadNoHTobbCtr = 0;
+    Double_t passHLTGenHadNoHTobbWeightedCtr = 0;
+    UInt_t passHLTGenOtherNoHTobbCtr = 0;
+    Double_t passHLTGenOtherNoHTobbWeightedCtr = 0;
+
     UInt_t passnFJGenLepCtr = 0;
     Double_t passnFJGenLepWeightedCtr = 0;
     UInt_t passnFJGenSemiLepCtr = 0;
@@ -635,6 +644,15 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     UInt_t passnFJGenOtherCtr = 0;
     Double_t passnFJGenOtherWeightedCtr = 0;
 
+    UInt_t passnFJGenLepNoHTobbCtr = 0;
+    Double_t passnFJGenLepNoHTobbWeightedCtr = 0;
+    UInt_t passnFJGenSemiLepNoHTobbCtr = 0;
+    Double_t passnFJGenSemiLepNoHTobbWeightedCtr = 0;
+    UInt_t passnFJGenHadNoHTobbCtr = 0;
+    Double_t passnFJGenHadNoHTobbWeightedCtr = 0;
+    UInt_t passnFJGenOtherNoHTobbCtr = 0;
+    Double_t passnFJGenOtherNoHTobbWeightedCtr = 0;
+
     UInt_t passnVBFGenLepCtr = 0;
     Double_t passnVBFGenLepWeightedCtr = 0;
     UInt_t passnVBFGenSemiLepCtr = 0;
@@ -643,6 +661,15 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     Double_t passnVBFGenHadWeightedCtr = 0;
     UInt_t passnVBFGenOtherCtr = 0;
     Double_t passnVBFGenOtherWeightedCtr = 0;
+
+    UInt_t passnVBFGenLepNoHTobbCtr = 0;
+    Double_t passnVBFGenLepNoHTobbWeightedCtr = 0;
+    UInt_t passnVBFGenSemiLepNoHTobbCtr = 0;
+    Double_t passnVBFGenSemiLepNoHTobbWeightedCtr = 0;
+    UInt_t passnVBFGenHadNoHTobbCtr = 0;
+    Double_t passnVBFGenHadNoHTobbWeightedCtr = 0;
+    UInt_t passnVBFGenOtherNoHTobbCtr = 0;
+    Double_t passnVBFGenOtherNoHTobbWeightedCtr = 0;
 
 
 
@@ -1682,20 +1709,48 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
 
             if (!isBackground){
                 if (ZIsLeptonic) {
-                    passHLTGenLepCtr += 1;
-                    passHLTGenLepWeightedCtr += *genWeight;
+                    if (HTobbBoolL){
+                        passHLTGenLepCtr += 1;
+                        passHLTGenLepWeightedCtr += *genWeight;
+                    }
+                    else {
+                        passHLTGenLepNoHTobbCtr += 1;
+                        passHLTGenLepNoHTobbWeightedCtr += *genWeight;
+
+                    }
                 }
-                elif (ZIsSemiLeptonic) {
-                    passHLTGenSemiLepCtr += 1;
-                    passHLTGenSemiLepWeightedCtr += *genWeight;
+                else if (ZIsSemiLeptonic) {
+                    if (HTobbBoolL){
+                        passHLTGenSemiLepCtr += 1;
+                        passHLTGenSemiLepWeightedCtr += *genWeight;
+                    }
+                    else{
+                        passHLTGenSemiLepNoHTobbCtr += 1;
+                        passHLTGenSemiLepNoHTobbWeightedCtr += *genWeight;
+
+                    }
                 }
-                elif (ZIsHadronic) {
-                    passHLTGenHadCtr += 1;
-                    passHLTGenHadWeightedCtr += *genWeight;
+                else if (ZIsHadronic) {
+                    if (HTobbBoolL){
+                        passHLTGenHadCtr += 1;
+                        passHLTGenHadWeightedCtr += *genWeight;
+                    }
+                    else {
+                        passHLTGenHadNoHTobbCtr += 1;
+                        passHLTGenHadNoHTobbWeightedCtr += *genWeight;
+
+                    }
                 }
                 else {
-                    passHLTGenOtherCtr += 1;
-                    passHLTGenOtherWeightedCtr += *genWeight;
+                    if (HTobbBoolL){
+                        passHLTGenOtherCtr += 1;
+                        passHLTGenOtherWeightedCtr += *genWeight;
+                    }
+                    else {
+                        passHLTGenOtherNoHTobbCtr += 1;
+                        passHLTGenOtherNoHTobbWeightedCtr += *genWeight;
+
+                    }
                 }
             }
 
@@ -1721,20 +1776,48 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
 
             if (!isBackground){
                 if (ZIsLeptonic) {
-                    passnFJGenLepCtr += 1;
-                    passnFJGenLepWeightedCtr += *genWeight;
+                    if (HTobbBoolL){
+                        passnFJGenLepCtr += 1;
+                        passnFJGenLepWeightedCtr += *genWeight;
+                    }
+                    else {
+                        passnFJGenLepNoHTobbCtr += 1;
+                        passnFJGenLepNoHTobbWeightedCtr += *genWeight;
+
+                    }
                 }
-                elif (ZIsSemiLeptonic) {
-                    passnFJGenSemiLepCtr += 1;
-                    passnFJGenSemiLepWeightedCtr += *genWeight;
+                else if (ZIsSemiLeptonic) {
+                    if (HTobbBoolL){
+                        passnFJGenSemiLepCtr += 1;
+                        passnFJGenSemiLepWeightedCtr += *genWeight;
+                    }
+                    else {
+                        passnFJGenSemiLepNoHTobbCtr += 1;
+                        passnFJGenSemiLepNoHTobbWeightedCtr += *genWeight;
+
+                    }
                 }
-                elif (ZIsHadronic) {
-                    passnFJGenHadCtr += 1;
-                    passnFJGenHadWeightedCtr += *genWeight;
+                else if (ZIsHadronic) {
+                    if (HTobbBoolL){
+                        passnFJGenHadCtr += 1;
+                        passnFJGenHadWeightedCtr += *genWeight;
+                    }
+                    else {
+                        passnFJGenHadNoHTobbCtr += 1;
+                        passnFJGenHadNoHTobbWeightedCtr += *genWeight;
+
+                    }
                 }
                 else {
-                    passnFJGenOtherCtr += 1;
-                    passnFJGenOtherWeightedCtr += *genWeight;
+                    if (HTobbBoolL){
+                        passnFJGenOtherCtr += 1;
+                        passnFJGenOtherWeightedCtr += *genWeight;
+                    }
+                    else {
+                        passnFJGenOtherNoHTobbCtr += 1;
+                        passnFJGenOtherNoHTobbWeightedCtr += *genWeight;
+
+                    }
                 }
             }
 
@@ -1751,20 +1834,48 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
 
             if (!isBackground){
                 if (ZIsLeptonic) {
-                    passnVBFGenLepCtr += 1;
-                    passnVBFGenLepWeightedCtr += *genWeight;
+                    if (HTobbBoolL){
+                        passnVBFGenLepCtr += 1;
+                        passnVBFGenLepWeightedCtr += *genWeight;
+                    }
+                    else {
+                        passnVBFGenLepNoHTobbCtr += 1;
+                        passnVBFGenLepNoHTobbWeightedCtr += *genWeight;
+                        
+                    }
                 }
-                elif (ZIsSemiLeptonic) {
-                    passnVBFGenSemiLepCtr += 1;
-                    passnVBFGenSemiLepWeightedCtr += *genWeight;
+                else if (ZIsSemiLeptonic) {
+                    if (HTobbBoolL){
+                        passnVBFGenSemiLepCtr += 1;
+                        passnVBFGenSemiLepWeightedCtr += *genWeight;
+                    }
+                    else {
+                        passnVBFGenSemiLepNoHTobbCtr += 1;
+                        passnVBFGenSemiLepNoHTobbWeightedCtr += *genWeight;
+                        
+                    }
                 }
-                elif (ZIsHadronic) {
-                    passnVBFGenHadCtr += 1;
-                    passnVBFGenHadWeightedCtr += *genWeight;
+                else if (ZIsHadronic) {
+                    if (HTobbBoolL){
+                        passnVBFGenHadCtr += 1;
+                        passnVBFGenHadWeightedCtr += *genWeight;
+                    }
+                    else {
+                        passnVBFGenHadNoHTobbCtr += 1;
+                        passnVBFGenHadNoHTobbWeightedCtr += *genWeight;
+                        
+                    }
                 }
                 else {
-                    passnVBFGenOtherCtr += 1;
-                    passnVBFGenOtherWeightedCtr += *genWeight;
+                    if (HTobbBoolL){
+                        passnVBFGenOtherCtr += 1;
+                        passnVBFGenOtherWeightedCtr += *genWeight;
+                    }
+                    else {
+                        passnVBFGenOtherNoHTobbCtr += 1;
+                        passnVBFGenOtherNoHTobbWeightedCtr += *genWeight;
+
+                    }
                 }
             }
 
@@ -1963,19 +2074,36 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     if (!isBackground){
         std::cout << "gen lep passes HLT cut: " << passHLTGenLepCtr << " ------------------- " << passHLTGenLepWeightedCtr<< "\n";
         std::cout << "gen lep passes nFJ cut: " << passnFJGenLepCtr << " ------------------- " << passnFJGenLepWeightedCtr<< "\n";
-        std::cout << "gen lep passes nVBF cut: " << passnVBFGenLepCtr << " ------------------- " << passnVBGenLepCFWeightedCtr<< "\n";
+        std::cout << "gen lep passes nVBF cut: " << passnVBFGenLepCtr << " ------------------- " << passnVBFGenLepWeightedCtr<< "\n";
 
         std::cout << "gen semi lep passes HLT cut: " << passHLTGenSemiLepCtr << " ------------------- " << passHLTGenSemiLepWeightedCtr<< "\n";
         std::cout << "gen semi lep passes nFJ cut: " << passnFJGenSemiLepCtr << " ------------------- " << passnFJGenSemiLepWeightedCtr<< "\n";
-        std::cout << "gen semi lep passes nVBF cut: " << passnVBFGenSemiLepCtr << " ------------------- " << passnVBGenSemiLepCFWeightedCtr<< "\n";
+        std::cout << "gen semi lep passes nVBF cut: " << passnVBFGenSemiLepCtr << " ------------------- " << passnVBFGenSemiLepWeightedCtr<< "\n";
 
         std::cout << "gen had passes HLT cut: " << passHLTGenHadCtr << " ------------------- " << passHLTGenHadWeightedCtr<< "\n";
         std::cout << "gen had passes nFJ cut: " << passnFJGenHadCtr << " ------------------- " << passnFJGenHadWeightedCtr<< "\n";
-        std::cout << "gen had passes nVBF cut: " << passnVBFGenHadCtr << " ------------------- " << passnVBGenHadCFWeightedCtr<< "\n";
+        std::cout << "gen had passes nVBF cut: " << passnVBFGenHadCtr << " ------------------- " << passnVBFGenHadWeightedCtr<< "\n";
 
         std::cout << "gen other passes HLT cut: " << passHLTGenOtherCtr << " ------------------- " << passHLTGenOtherWeightedCtr<< "\n";
         std::cout << "gen other passes nFJ cut: " << passnFJGenOtherCtr << " ------------------- " << passnFJGenOtherWeightedCtr<< "\n";
-        std::cout << "gen other passes nVBF cut: " << passnVBFGenOtherCtr << " ------------------- " << passnVBGenOtherCFWeightedCtr<< "\n";
+        std::cout << "gen other passes nVBF cut: " << passnVBFGenOtherCtr << " ------------------- " << passnVBFGenOtherWeightedCtr<< "\n";
+
+
+        std::cout << "gen lep NoHTobb passes HLT cut: " << passHLTGenLepNoHTobbCtr << " ------------------- " << passHLTGenLepNoHTobbWeightedCtr<< "\n";
+        std::cout << "gen lep NoHTobb passes nFJ cut: " << passnFJGenLepNoHTobbCtr << " ------------------- " << passnFJGenLepNoHTobbWeightedCtr<< "\n";
+        std::cout << "gen lep NoHTobb passes nVBF cut: " << passnVBFGenLepNoHTobbCtr << " ------------------- " << passnVBFGenLepNoHTobbWeightedCtr<< "\n";
+
+        std::cout << "gen semi lep NoHTobb passes HLT cut: " << passHLTGenSemiLepNoHTobbCtr << " ------------------- " << passHLTGenSemiLepNoHTobbWeightedCtr<< "\n";
+        std::cout << "gen semi lep NoHTobb passes nFJ cut: " << passnFJGenSemiLepNoHTobbCtr << " ------------------- " << passnFJGenSemiLepNoHTobbWeightedCtr<< "\n";
+        std::cout << "gen semi lep NoHTobb passes nVBF cut: " << passnVBFGenSemiLepNoHTobbCtr << " ------------------- " << passnVBFGenSemiLepNoHTobbWeightedCtr<< "\n";
+
+        std::cout << "gen had NoHTobb passes HLT cut: " << passHLTGenHadNoHTobbCtr << " ------------------- " << passHLTGenHadNoHTobbWeightedCtr<< "\n";
+        std::cout << "gen had NoHTobb passes nFJ cut: " << passnFJGenHadNoHTobbCtr << " ------------------- " << passnFJGenHadNoHTobbWeightedCtr<< "\n";
+        std::cout << "gen had NoHTobb passes nVBF cut: " << passnVBFGenHadNoHTobbCtr << " ------------------- " << passnVBFGenHadNoHTobbWeightedCtr<< "\n";
+
+        std::cout << "gen other NoHTobb passes HLT cut: " << passHLTGenOtherNoHTobbCtr << " ------------------- " << passHLTGenOtherNoHTobbWeightedCtr<< "\n";
+        std::cout << "gen other NoHTobb passes nFJ cut: " << passnFJGenOtherNoHTobbCtr << " ------------------- " << passnFJGenOtherNoHTobbWeightedCtr<< "\n";
+        std::cout << "gen other NoHTobb passes nVBF cut: " << passnVBFGenOtherNoHTobbCtr << " ------------------- " << passnVBFGenOtherNoHTobbWeightedCtr<< "\n";
 
 
 
