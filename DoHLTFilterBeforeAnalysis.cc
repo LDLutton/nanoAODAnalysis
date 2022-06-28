@@ -616,6 +616,38 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     UInt_t passnVBFCtr = 0;
     Double_t passnVBFWeightedCtr = 0;
 
+
+    UInt_t passHLTGenLepCtr = 0;
+    Double_t passHLTGenLepWeightedCtr = 0;
+    UInt_t passHLTGenSemiLepCtr = 0;
+    Double_t passHLTGenSemiLepWeightedCtr = 0;
+    UInt_t passHLTGenHadCtr = 0;
+    Double_t passHLTGenHadWeightedCtr = 0;
+    UInt_t passHLTGenOtherCtr = 0;
+    Double_t passHLTGenOtherWeightedCtr = 0;
+
+    UInt_t passnFJGenLepCtr = 0;
+    Double_t passnFJGenLepWeightedCtr = 0;
+    UInt_t passnFJGenSemiLepCtr = 0;
+    Double_t passnFJGenSemiLepWeightedCtr = 0;
+    UInt_t passnFJGenHadCtr = 0;
+    Double_t passnFJGenHadWeightedCtr = 0;
+    UInt_t passnFJGenOtherCtr = 0;
+    Double_t passnFJGenOtherWeightedCtr = 0;
+
+    UInt_t passnVBFGenLepCtr = 0;
+    Double_t passnVBFGenLepWeightedCtr = 0;
+    UInt_t passnVBFGenSemiLepCtr = 0;
+    Double_t passnVBFGenSemiLepWeightedCtr = 0;
+    UInt_t passnVBFGenHadCtr = 0;
+    Double_t passnVBFGenHadWeightedCtr = 0;
+    UInt_t passnVBFGenOtherCtr = 0;
+    Double_t passnVBFGenOtherWeightedCtr = 0;
+
+
+
+
+
     float crossSectionAvg = 0.;
     UInt_t crossSectionCtr = 0;
     float totCrossSectionWeight = 0.;
@@ -1089,6 +1121,10 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
 
             //--------------KINEMATICS--------------
 
+            bool ZIsLeptonic = false;
+            bool ZIsSemiLeptonic = false;
+            bool ZIsHadronic = false;
+
             if (!isBackground){
 
                 float JOne_pdgId_FromLHERaw;
@@ -1140,9 +1176,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
 
                 std::vector<Int_t> HFJ_decaypdgId_FromGenMatch;
 
-                bool ZIsLeptonic = false;
-                bool ZIsSemiLeptonic = false;
-                bool ZIsHadronic = false;
+                
 
                 bool ZOneIsLeptonic = false;
                 bool ZOneIsHadronic = false;
@@ -1645,6 +1679,30 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
             if (!passHLTBool) continue;
             passHLTCtr += 1;
             passHLTWeightedCtr += *genWeight;
+
+            if (!isBackground){
+                if (ZIsLeptonic) {
+                    passHLTGenLepCtr += 1;
+                    passHLTGenLepWeightedCtr += *genWeight;
+                }
+                elif (ZIsSemiLeptonic) {
+                    passHLTGenSemiLepCtr += 1;
+                    passHLTGenSemiLepWeightedCtr += *genWeight;
+                }
+                elif (ZIsHadronic) {
+                    passHLTGenHadCtr += 1;
+                    passHLTGenHadWeightedCtr += *genWeight;
+                }
+                else {
+                    passHLTGenOtherCtr += 1;
+                    passHLTGenOtherWeightedCtr += *genWeight;
+                }
+            }
+
+
+
+
+
             if (debug){
                 std::cout <<"Passed HLT\n";
             }
@@ -1661,6 +1719,25 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
             passnFJCtr += 1;
             passnFJWeightedCtr += *genWeight; 
 
+            if (!isBackground){
+                if (ZIsLeptonic) {
+                    passnFJGenLepCtr += 1;
+                    passnFJGenLepWeightedCtr += *genWeight;
+                }
+                elif (ZIsSemiLeptonic) {
+                    passnFJGenSemiLepCtr += 1;
+                    passnFJGenSemiLepWeightedCtr += *genWeight;
+                }
+                elif (ZIsHadronic) {
+                    passnFJGenHadCtr += 1;
+                    passnFJGenHadWeightedCtr += *genWeight;
+                }
+                else {
+                    passnFJGenOtherCtr += 1;
+                    passnFJGenOtherWeightedCtr += *genWeight;
+                }
+            }
+
             // check if two or more VBF jets in event
             UInt_t tmpnVBFJets = *nJet;
             
@@ -1671,6 +1748,27 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
 
             passnVBFCtr += 1;
             passnVBFWeightedCtr += *genWeight; 
+
+            if (!isBackground){
+                if (ZIsLeptonic) {
+                    passnVBFGenLepCtr += 1;
+                    passnVBFGenLepWeightedCtr += *genWeight;
+                }
+                elif (ZIsSemiLeptonic) {
+                    passnVBFGenSemiLepCtr += 1;
+                    passnVBFGenSemiLepWeightedCtr += *genWeight;
+                }
+                elif (ZIsHadronic) {
+                    passnVBFGenHadCtr += 1;
+                    passnVBFGenHadWeightedCtr += *genWeight;
+                }
+                else {
+                    passnVBFGenOtherCtr += 1;
+                    passnVBFGenOtherWeightedCtr += *genWeight;
+                }
+            }
+
+
             //std::cout << evRunOver-1 << "passed\n";
             if (debug){
                 std::cout <<"Filling Jets\n";
@@ -1863,6 +1961,24 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     std::cout << "sumOfGenWeights: " << sumOfGenWeights << "\n";
 
     if (!isBackground){
+        std::cout << "gen lep passes HLT cut: " << passHLTGenLepCtr << " ------------------- " << passHLTGenLepWeightedCtr<< "\n";
+        std::cout << "gen lep passes nFJ cut: " << passnFJGenLepCtr << " ------------------- " << passnFJGenLepWeightedCtr<< "\n";
+        std::cout << "gen lep passes nVBF cut: " << passnVBFGenLepCtr << " ------------------- " << passnVBGenLepCFWeightedCtr<< "\n";
+
+        std::cout << "gen semi lep passes HLT cut: " << passHLTGenSemiLepCtr << " ------------------- " << passHLTGenSemiLepWeightedCtr<< "\n";
+        std::cout << "gen semi lep passes nFJ cut: " << passnFJGenSemiLepCtr << " ------------------- " << passnFJGenSemiLepWeightedCtr<< "\n";
+        std::cout << "gen semi lep passes nVBF cut: " << passnVBFGenSemiLepCtr << " ------------------- " << passnVBGenSemiLepCFWeightedCtr<< "\n";
+
+        std::cout << "gen had passes HLT cut: " << passHLTGenHadCtr << " ------------------- " << passHLTGenHadWeightedCtr<< "\n";
+        std::cout << "gen had passes nFJ cut: " << passnFJGenHadCtr << " ------------------- " << passnFJGenHadWeightedCtr<< "\n";
+        std::cout << "gen had passes nVBF cut: " << passnVBFGenHadCtr << " ------------------- " << passnVBGenHadCFWeightedCtr<< "\n";
+
+        std::cout << "gen other passes HLT cut: " << passHLTGenOtherCtr << " ------------------- " << passHLTGenOtherWeightedCtr<< "\n";
+        std::cout << "gen other passes nFJ cut: " << passnFJGenOtherCtr << " ------------------- " << passnFJGenOtherWeightedCtr<< "\n";
+        std::cout << "gen other passes nVBF cut: " << passnVBFGenOtherCtr << " ------------------- " << passnVBGenOtherCFWeightedCtr<< "\n";
+
+
+
         std::cout << "HTobb Channel: " << HTobbCtr << " ------------------- " << HTobbWeightedCtr<< "\n";
         std::cout << "Channels with HTobb\n";
         std::cout << "Gen Lep Channel: " << genLepChannelCtr << " ------------------- " << genLepChannelWeightedCtr<< "\n";
@@ -1870,7 +1986,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         std::cout << "Gen Hadronic Channel: " << genHadronicChannelCtr << " ------------------- " << genHadronicChannelWeightedCtr<< "\n";
         std::cout << "Gen Other Channel: " << genOtherChannelCtr << " ------------------- " << genOtherChannelWeightedCtr<< "\n";
         std::cout << "Gen Error Channel: " << genErrorChannelCtr << " ------------------- " << genErrorChannelWeightedCtr<< "\n";
-        std::cout << "Channels with HTobb\n";
+        std::cout << "Channels without HTobb\n";
         std::cout << "Gen NoHTobb Lep Channel: " << genLepChannelNoHTobbCtr << " ------------------- " << genLepChannelNoHTobbWeightedCtr<< "\n";
         std::cout << "Gen NoHTobb SemiLep Channel: " << genSemiLepChannelNoHTobbCtr << " ------------------- " << genSemiLepChannelNoHTobbWeightedCtr<< "\n";
         std::cout << "Gen NoHTobb Hadronic Channel: " << genHadronicChannelNoHTobbCtr << " ------------------- " << genHadronicChannelNoHTobbWeightedCtr<< "\n";
