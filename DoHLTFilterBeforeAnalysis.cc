@@ -781,6 +781,9 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
 
     Bool_t HTobbBoolL;
 
+    
+    
+
 
     TTree *FilteredEventsTree = new TTree("FilteredEventsTree", "FilteredEventsTree");
     //gen weights
@@ -874,6 +877,63 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     FilteredEventsTree->Branch("genChannelL",&genChannelL,"genChannelL/i");
 
     FilteredEventsTree->Branch("HTobbBoolL",&HTobbBoolL,"HTobbBoolL/O");
+
+    /*
+    //Gen dR of H from Z particles
+    Double_t HdRFromLeadZ;
+    Double_t HdRFromTrailingZ;
+
+
+    //Gen dR of H from Z particles
+
+    genHadTree->Branch("HdRFromLeadZ",&HdRFromLeadZ,"HdRFromLeadZ/D");
+    genHadTree->Branch("HdRFromTrailingZ",&HdRFromTrailingZ,"HdRFromTrailingZ/D");
+    */
+
+    //Gen dR of H reco'd (but gen matched) decay products from Z reco'd (but gen matched) decay products
+    //With HTobb
+    //gen lep channel
+    Double_t HGenFJdRFromLeadZLeadLepL;
+    Double_t HGenFJdRFromLeadZTrailingLepL;
+    Double_t HGenFJdRFromTrailingZLeadLepL;
+    Double_t HGenFJdRFromTrailingZTrailingLepL;
+
+    TTree *genLepTree = new TTree("genLepTree", "genLepTree");
+
+    //Gen dR of H reco'd (but gen matched) decay products from Z reco'd (but gen matched) decay products
+    //With HTobb
+    //gen lep channel
+    genLepTree->Branch("HGenFJdRFromLeadZLeadLepL",&HGenFJdRFromLeadZLeadLepL,"HGenFJdRFromLeadZLeadLepL/D");
+    genLepTree->Branch("HGenFJdRFromLeadZTrailingLepL",&HGenFJdRFromLeadZTrailingLepL,"HGenFJdRFromLeadZTrailingLepL/D");
+    genLepTree->Branch("HGenFJdRFromTrailingZLeadLepL",&HGenFJdRFromTrailingZLeadLepL,"HGenFJdRFromTrailingZLeadLepL/D");
+    genLepTree->Branch("HGenFJdRFromTrailingZTrailingLepL",&HGenFJdRFromTrailingZTrailingLepL,"HGenFJdRFromTrailingZTrailingLepL/D");
+
+    //gen Semilep channel
+    Double_t HGenFJdRFromLepZLeadLepL;
+    Double_t HGenFJdRFromLepZTrailingLepL;
+    Double_t HGenFJdRFromHadZFJL;
+
+    TTree *genSemiLepTree = new TTree("genSemiLepTree", "genSemiLepTree");
+
+    //gen Semilep channel
+    genSemiLepTree->Branch("HGenFJdRFromLepZLeadLepL",&HGenFJdRFromLepZLeadLepL,"HGenFJdRFromLepZLeadLepL/D");
+    genSemiLepTree->Branch("HGenFJdRFromLepZTrailingLepL",&HGenFJdRFromLepZTrailingLepL,"HGenFJdRFromLepZTrailingLepL/D");
+    genSemiLepTree->Branch("HGenFJdRFromHadZFJL",&HGenFJdRFromHadZFJL,"HGenFJdRFromHadZFJL/D");
+
+    //gen Had channel
+    Double_t HGenFJdRFromLepZLeadFJL;
+    Double_t HGenFJdRFromLepZTrailingFJL;
+
+    TTree *genHadTree = new TTree("genHadTree", "genHadTree");
+
+
+
+    
+    
+    //gen Had channel
+    genHadTree->Branch("HGenFJdRFromLepZLeadFJL",&HGenFJdRFromLepZLeadFJL,"HGenFJdRFromLepZLeadFJL/D");
+    genHadTree->Branch("HGenFJdRFromLepZTrailingFJL",&HGenFJdRFromLepZTrailingFJL,"HGenFJdRFromLepZTrailingFJL/D");
+    
     
 
     Double_t sumOfGenWeights = 0;
@@ -1148,6 +1208,13 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
 
             //--------------KINEMATICS--------------
 
+            UInt_t tmpnFatJets = *nFatJet;
+            
+            int ZOneDecLeadInd = -1;
+            int ZOneDecTrailingInd = -1;
+            int ZTwoDecLeadInd = -1;
+            int ZTwoDecTrailingInd = -1;
+            
             bool ZIsLeptonic = false;
             bool ZIsSemiLeptonic = false;
             bool ZIsHadronic = false;
@@ -1441,6 +1508,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                     tmpZDecIndVec.push_back(tmpZDaughterIndAr[tmpZItr][0]);
                                     tmpZDecIndVec.push_back(tmpZDaughterIndAr[tmpZItr][1]);
                                     finalZDecIndAr.push_back(tmpZDecIndVec);
+                                    
 
                                 }
                             }
@@ -1475,8 +1543,27 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                     else{
                         
                         if (ZDecFound) {
+                            if (GenPart_pt[finalZDecIndAr[0][0]] > GenPart_pt[finalZDecIndAr[0][1]]){
+                                ZOneDecLeadInd = finalZDecIndAr[0][0];
+                                ZOneDecTrailingInd = finalZDecIndAr[0][1];
+                            }
+                            else{
+                                ZOneDecLeadInd = finalZDecIndAr[0][1];
+                                ZOneDecTrailingInd = finalZDecIndAr[0][0];
+                            }
+                            if (GenPart_pt[finalZDecIndAr[1][0]] > GenPart_pt[finalZDecIndAr[1][1]]){
+                                ZTwoDecLeadInd = finalZDecIndAr[1][0];
+                                ZTwoDecTrailingInd = finalZDecIndAr[1][1];
+                            }
+                            else{
+                                ZTwoDecLeadInd = finalZDecIndAr[1][1];
+                                ZTwoDecTrailingInd = finalZDecIndAr[1][0];
+                            }
+                                
                             
                             if (abs(finalZDecAr[0][0])==15 && abs(finalZDecAr[0][1])==15){
+                                int tmpLepOneInd = -1;
+                                int tmpLepTwoInd = -1;
                                 std::vector<Int_t> tauOneAr;
                                 std::vector<Int_t> tauTwoAr;
                                 bool tauOneBool = false;
@@ -1497,6 +1584,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                                 else if (abs(tmpPDGId) == 13 || abs(tmpPDGId) == 11) {
                                                     tauOneBool = true;
                                                     tauOneDecPDG = abs(tmpPDGId);
+                                                    tmpLepOneInd = i;
                                                 }
                                             }
                                         }
@@ -1513,6 +1601,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                                 else if (abs(tmpPDGId) == 13 || abs(tmpPDGId) == 11) {
                                                     tauTwoBool = true;
                                                     tauTwoDecPDG = abs(tmpPDGId);
+                                                    tmpLepTwoInd = i;
                                                 }
                                             }
                                         }
@@ -1524,10 +1613,20 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                     }
                                 }
                                 if (tauOneBool && tauTwoBool && tauOneDecPDG == tauTwoDecPDG) {
-                                    ZTwoIsLeptonic = true;
+                                    ZOneIsLeptonic = true;
+                                    if (GenPart_pt[tmpLepOneInd] > GenPart_pt[tmpLepTwoInd]){
+                                        ZOneDecLeadInd = tmpLepOneInd;
+                                        ZOneDecTrailingInd = tmpLepTwoInd;
+                                    }
+                                    else {
+                                        ZOneDecLeadInd = tmpLepTwoInd;
+                                        ZOneDecTrailingInd = tmpLepOneInd;
+                                    }
                                 }
                             }
                             if (abs(finalZDecAr[1][0])==15 && abs(finalZDecAr[1][1])==15){
+                                int tmpLepOneInd = -1;
+                                int tmpLepTwoInd = -1;
                                 std::vector<Int_t> tauOneAr;
                                 std::vector<Int_t> tauTwoAr;
                                 bool tauOneBool = false;
@@ -1548,6 +1647,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                                 else if (abs(tmpPDGId) == 13 || abs(tmpPDGId) == 11) {
                                                     tauOneBool = true;
                                                     tauOneDecPDG = abs(tmpPDGId);
+                                                    tmpLepOneInd = i;
                                                 }
                                             }
                                         }
@@ -1564,6 +1664,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                                 else if (abs(tmpPDGId) == 13 || abs(tmpPDGId) == 11) {
                                                     tauTwoBool = true;
                                                     tauTwoDecPDG = abs(tmpPDGId);
+                                                    tmpLepTwoInd = i;
                                                 }
                                             }
                                         }
@@ -1576,6 +1677,14 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                 }
                                 if (tauOneBool && tauTwoBool && tauOneDecPDG == tauTwoDecPDG) {
                                     ZTwoIsLeptonic = true;
+                                    if (GenPart_pt[tmpLepOneInd] > GenPart_pt[tmpLepTwoInd]){
+                                        ZTwoDecLeadInd = tmpLepOneInd;
+                                        ZTwoDecTrailingInd = tmpLepTwoInd;
+                                    }
+                                    else {
+                                        ZTwoDecLeadInd = tmpLepTwoInd;
+                                        ZTwoDecTrailingInd = tmpLepOneInd;
+                                    }
                                 }
                             }
 
@@ -1601,6 +1710,104 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                             if (HTobbBoolL){
                                 genHadronicChannelCtr += 1;
                                 genHadronicChannelWeightedCtr += *genWeight;
+
+
+                                //Finding H FatJet
+                                float tmpHEta = GenPart_eta[finalHAr[0]];
+                                float tmpHPhi = GenPart_phi[finalHAr[0]];
+                                float tmpHToFJMindR = 1000.;
+                                int HFJInd = -1;
+                                float HFJEta = 0;
+                                float HFJPhi = 0;
+
+
+                                for (UInt_t fatJetInd=0;fatJetInd<tmpnFatJets;fatJetInd++){
+                                    float tmpHFJEta = FatJet_eta[fatJetInd];
+                                    float tmpHFJPhi = FatJet_phi[fatJetInd];
+                                    float tmpDeltaR = calcDeltaR(tmpHFJPhi,tmpHFJEta,tmpHPhi,tmpHEta);
+                                    if (tmpDeltaR < tmpHToFJMindR) {
+                                        HFJInd = fatJetInd;
+                                        tmpHToFJMindR = tmpDeltaR;
+                                        HFJEta = tmpHFJEta;
+                                        HFJPhi = tmpHFJPhi;
+                                    }
+                                    
+                                }
+
+                                //Finding ZLead FatJet
+                                int ZLeadInd;
+                                int ZTrailingInd;
+                                float tmpZOnePt = GenPart_pt[finalZAr[0]];
+                                float tmpZTwoPt = GenPart_pt[finalZAr[1]];
+                                if (tmpZOnePt > tmpZTwoPt){
+                                    ZLeadInd = finalZAr[0];
+                                    ZTrailingInd = finalZAr[1];
+                                }
+                                else{
+                                    ZLeadInd = finalZAr[1];
+                                    ZTrailingInd = finalZAr[0];
+                                }
+
+
+                                float tmpZLeadEta = GenPart_eta[ZLeadInd];
+                                float tmpZLeadPhi = GenPart_phi[ZLeadInd];
+                                float tmpZLeadToFJMindR = 1000.;
+                                int ZLeadFJInd = -1;
+                                float ZLeadFJEta = 0;
+                                float ZLeadFJPhi = 0;
+                                float ZLeadFJPt = 0;
+
+                                for (UInt_t fatJetInd=0;fatJetInd<tmpnFatJets;fatJetInd++){
+                                    if (fatJetInd == HFJInd) continue;
+                                    float tmpZFJEta = FatJet_eta[fatJetInd];
+                                    float tmpZFJPhi = FatJet_phi[fatJetInd];
+                                    float tmpDeltaR = calcDeltaR(tmpZFJPhi,tmpZFJEta,tmpZLeadPhi,tmpZLeadEta);
+                                    if (tmpDeltaR < tmpZLeadToFJMindR) {
+                                        ZLeadFJInd = fatJetInd;
+                                        tmpZLeadToFJMindR = tmpDeltaR;
+                                        ZLeadFJEta = tmpZFJEta;
+                                        ZLeadFJPhi = tmpZFJPhi;
+                                    }
+                                    
+                                }
+
+
+
+                                //Finding ZTrailing FatJet
+                                float tmpZTrailingEta = GenPart_eta[ZTrailingInd];
+                                float tmpZTrailingPhi = GenPart_phi[ZTrailingInd];
+                                float tmpZTrailingToFJMindR = 1000.;
+                                int ZTrailingFJInd = -1;
+                                float ZTrailingFJEta = 0;
+                                float ZTrailingFJPhi = 0;
+                                float ZTrailingFJPt = 0;
+
+                                for (UInt_t fatJetInd=0;fatJetInd<tmpnFatJets;fatJetInd++){
+                                    if (fatJetInd == HFJInd || fatJetInd == ZLeadFJInd) continue;
+                                    float tmpZFJEta = FatJet_eta[fatJetInd];
+                                    float tmpZFJPhi = FatJet_phi[fatJetInd];
+                                    float tmpDeltaR = calcDeltaR(tmpZFJPhi,tmpZFJEta,tmpZTrailingPhi,tmpZTrailingEta);
+                                    if (tmpDeltaR < tmpZTrailingToFJMindR) {
+                                        ZTrailingFJInd = fatJetInd;
+                                        tmpZTrailingToFJMindR = tmpDeltaR;
+                                        ZTrailingFJEta = tmpZFJEta;
+                                        ZTrailingFJPhi = tmpZFJPhi;
+                                    }
+                                    
+                                }
+
+                                float tmpHZLeaddR = calcDeltaR(HFJPhi,HFJEta,tmpZLeadPhi,tmpZLeadEta);
+                                float tmpHZTrailingdR = calcDeltaR(HFJPhi,HFJEta,tmpZTrailingPhi,tmpZTrailingEta);
+
+                                HGenFJdRFromLepZLeadFJL = tmpHZLeaddR;
+                                HGenFJdRFromLepZTrailingFJL = tmpHZTrailingdR;
+
+                                genHadTree->Fill();
+
+
+
+
+
                             }
                             else{
                                 genHadronicChannelNoHTobbCtr += 1;
@@ -1615,6 +1822,164 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                             if (HTobbBoolL){
                                 genSemiLepChannelCtr += 1;
                                 genSemiLepChannelWeightedCtr += *genWeight;
+
+
+
+                                //Finding H FatJet
+                                float tmpHEta = GenPart_eta[finalHAr[0]];
+                                float tmpHPhi = GenPart_phi[finalHAr[0]];
+                                float tmpHToFJMindR = 1000.;
+                                int HFJInd = -1;
+                                float HFJEta = 0;
+                                float HFJPhi = 0;
+
+
+                                for (UInt_t fatJetInd=0;fatJetInd<tmpnFatJets;fatJetInd++){
+                                    float tmpHFJEta = FatJet_eta[fatJetInd];
+                                    float tmpHFJPhi = FatJet_phi[fatJetInd];
+                                    float tmpDeltaR = calcDeltaR(tmpHFJPhi,tmpHFJEta,tmpHPhi,tmpHEta);
+                                    if (tmpDeltaR < tmpHToFJMindR) {
+                                        HFJInd = fatJetInd;
+                                        tmpHToFJMindR = tmpDeltaR;
+                                        HFJEta = tmpHFJEta;
+                                        HFJPhi = tmpHFJPhi;
+                                    }
+                                    
+                                }
+
+                                //Finding Z Had FatJet
+                                int ZHadInd;
+                                if (ZOneIsHadronic) {
+                                    ZHadInd = finalZAr[0];
+
+                                }
+                                else if (ZTwoIsHadronic) {
+                                    ZHadInd = finalZAr[1];
+                                }
+
+                                float tmpZHadEta = GenPart_eta[ZHadInd];
+                                float tmpZHadPhi = GenPart_phi[ZHadInd];
+                                float tmpZHadToFJMindR = 1000.;
+                                int ZHadFJInd = -1;
+                                float ZHadFJEta = 0;
+                                float ZHadFJPhi = 0;
+                                float ZHadFJPt = 0;
+
+                                for (UInt_t fatJetInd=0;fatJetInd<tmpnFatJets;fatJetInd++){
+                                    if (fatJetInd == HFJInd) continue;
+                                    float tmpZFJEta = FatJet_eta[fatJetInd];
+                                    float tmpZFJPhi = FatJet_phi[fatJetInd];
+                                    float tmpDeltaR = calcDeltaR(tmpZFJPhi,tmpZFJEta,tmpZHadPhi,tmpZHadEta);
+                                    if (tmpDeltaR < tmpZHadToFJMindR) {
+                                        ZHadFJInd = fatJetInd;
+                                        tmpZHadToFJMindR = tmpDeltaR;
+                                        ZHadFJEta = tmpZFJEta;
+                                        ZHadFJPhi = tmpZFJPhi;
+                                    }
+                                    
+                                }
+
+
+
+                                //Finding Z Lead Lep GenPart
+                                int ZLepDecLeadInd;
+                                int ZLepDecTrailingInd;
+                                if (ZOneIsLeptonic) {
+                                    ZLepDecLeadInd = ZOneDecLeadInd;
+                                    ZLepDecTrailingInd = ZOneDecTrailingInd;
+                                }
+                                else if (ZTwoIsLeptonic) {
+                                    ZLepDecLeadInd = ZTwoDecLeadInd;
+                                    ZLepDecTrailingInd = ZTwoDecTrailingInd;
+                                }
+
+
+
+                                float tmpZLepDecLeadEta = GenPart_eta[ZLepDecLeadInd];
+                                float tmpZLepDecLeadPhi = GenPart_phi[ZLepDecLeadInd];
+                                float tmpZLepDecLeadToFJMindR = 1000.;
+                                int ZLepDecLeadLepInd = -1;
+                                float ZLepDecLeadLepEta = 0;
+                                float ZLepDecLeadLepPhi = 0;
+                                bool ZLepIsMuon = false;
+
+                                for (UInt_t elecInd=0;elecInd<*nElectron;elecInd++){
+                                    float tmpEEta = Electron_eta[elecInd];
+                                    float tmpEPhi = Electron_phi[elecInd];
+                                    float tmpDeltaR = calcDeltaR(tmpZLepDecLeadPhi,tmpZLepDecLeadEta,tmpEPhi,tmpEEta);
+                                    if (tmpDeltaR < tmpZLepDecLeadToFJMindR) {
+                                        ZLepDecLeadLepInd = elecInd;
+                                        tmpZLepDecLeadToFJMindR = tmpDeltaR;
+                                        ZLepDecLeadLepEta = tmpEEta;
+                                        ZLepDecLeadLepPhi = tmpEPhi;
+                                    }
+                                    
+                                }
+                                for (UInt_t muonInd=0;muonInd<*nMuon;muonInd++){
+                                    float tmpMEta = Muon_eta[muonInd];
+                                    float tmpMPhi = Muon_phi[muonInd];
+                                    float tmpDeltaR = calcDeltaR(tmpZLepDecLeadPhi,tmpZLepDecLeadEta,tmpMPhi,tmpMEta);
+                                    if (tmpDeltaR < tmpZLepDecLeadToFJMindR) {
+                                        ZLepDecLeadLepInd = muonInd;
+                                        tmpZLepDecLeadToFJMindR = tmpDeltaR;
+                                        ZLepDecLeadLepEta = tmpMEta;
+                                        ZLepDecLeadLepPhi = tmpMPhi;
+                                        ZLepIsMuon = true;
+                                    }
+                                    
+                                }
+
+                                //Finding Z Trailing Lep GenPart
+
+                                float tmpZLepDecTrailingEta = GenPart_eta[ZLepDecTrailingInd];
+                                float tmpZLepDecTrailingPhi = GenPart_phi[ZLepDecTrailingInd];
+                                float tmpZLepDecTrailingToLepMindR = 1000.;
+                                int ZLepDecTrailingLepInd = -1;
+                                float ZLepDecTrailingLepEta = 0;
+                                float ZLepDecTrailingLepPhi = 0;
+                                
+                                if (!ZLepIsMuon){
+                                    for (UInt_t elecInd=0;elecInd<*nElectron;elecInd++){
+                                        if (ZLepDecLeadLepInd == elecInd) continue;
+                                        float tmpEEta = Electron_eta[elecInd];
+                                        float tmpEPhi = Electron_phi[elecInd];
+                                        float tmpDeltaR = calcDeltaR(tmpZLepDecTrailingPhi,tmpZLepDecTrailingEta,tmpEPhi,tmpEEta);
+                                        if (tmpDeltaR < tmpZLepDecTrailingToLepMindR) {
+                                            ZLepDecTrailingLepInd = elecInd;
+                                            tmpZLepDecTrailingToLepMindR = tmpDeltaR;
+                                            ZLepDecTrailingLepEta = tmpEEta;
+                                            ZLepDecTrailingLepPhi = tmpEPhi;
+                                        }
+                                        
+                                    }
+                                }
+                                else {
+                                    for (UInt_t muonInd=0;muonInd<*nMuon;muonInd++){
+                                        if (ZLepDecLeadLepInd == muonInd) continue;
+                                        float tmpMEta = Muon_eta[muonInd];
+                                        float tmpMPhi = Muon_phi[muonInd];
+                                        float tmpDeltaR = calcDeltaR(tmpZLepDecTrailingPhi,tmpZLepDecTrailingEta,tmpMPhi,tmpMEta);
+                                        if (tmpDeltaR < tmpZLepDecTrailingToLepMindR) {
+                                            ZLepDecTrailingLepInd = muonInd;
+                                            tmpZLepDecTrailingToLepMindR = tmpDeltaR;
+                                            ZLepDecTrailingLepEta = tmpMEta;
+                                            ZLepDecTrailingLepPhi = tmpMPhi;
+                                        }
+                                        
+                                    }
+                                }
+
+                                float tmpHZFJdR = calcDeltaR(HFJPhi,HFJEta,ZHadFJPhi,ZHadFJEta);
+                                float tmpHZLeadLepdR = calcDeltaR(HFJPhi,HFJEta,ZLepDecLeadLepPhi,ZLepDecLeadLepEta);
+                                float tmpHZTrailingLepdR = calcDeltaR(HFJPhi,HFJEta,ZLepDecTrailingLepPhi,ZLepDecTrailingLepEta);
+
+                                HGenFJdRFromLepZLeadLepL = tmpHZLeadLepdR;
+                                HGenFJdRFromLepZTrailingLepL = tmpHZTrailingLepdR;
+                                HGenFJdRFromHadZFJL = tmpHZFJdR;
+
+                                genSemiLepTree->Fill();
+
+
                             }
                             else{
                                 genSemiLepChannelNoHTobbCtr += 1;
@@ -1628,6 +1993,226 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                             if (HTobbBoolL){
                                 genLepChannelCtr += 1;
                                 genLepChannelWeightedCtr += *genWeight;
+
+
+
+                                //Finding H FatJet
+                                float tmpHEta = GenPart_eta[finalHAr[0]];
+                                float tmpHPhi = GenPart_phi[finalHAr[0]];
+                                float tmpHToFJMindR = 1000.;
+                                int HFJInd = -1;
+                                float HFJEta = 0;
+                                float HFJPhi = 0;
+
+
+                                for (UInt_t fatJetInd=0;fatJetInd<tmpnFatJets;fatJetInd++){
+                                    float tmpHFJEta = FatJet_eta[fatJetInd];
+                                    float tmpHFJPhi = FatJet_phi[fatJetInd];
+                                    float tmpDeltaR = calcDeltaR(tmpHFJPhi,tmpHFJEta,tmpHPhi,tmpHEta);
+                                    if (tmpDeltaR < tmpHToFJMindR) {
+                                        HFJInd = fatJetInd;
+                                        tmpHToFJMindR = tmpDeltaR;
+                                        HFJEta = tmpHFJEta;
+                                        HFJPhi = tmpHFJPhi;
+                                    }
+                                    
+                                }
+
+                                //Finding Lead Z Lead Lep GenPart
+                                int ZLeadLepDecLeadInd;
+                                int ZLeadLepDecTrailingInd;
+                                int ZTrailingLepDecLeadInd;
+                                int ZTrailingLepDecTrailingInd;
+                                float tmpZOnePt = GenPart_pt[finalZAr[0]];
+                                float tmpZTwoPt = GenPart_pt[finalZAr[1]];
+                                if (tmpZOnePt > tmpZTwoPt){
+                                    ZLeadLepDecLeadInd = ZOneDecLeadInd;
+                                    ZLeadLepDecTrailingInd = ZOneDecTrailingInd;
+                                    ZTrailingLepDecLeadInd = ZTwoDecLeadInd;
+                                    ZTrailingLepDecTrailingInd = ZTwoDecTrailingInd;
+                                }
+                                else{
+                                    ZLeadLepDecLeadInd = ZTwoDecLeadInd;
+                                    ZLeadLepDecTrailingInd = ZTwoDecTrailingInd;
+                                    ZTrailingLepDecLeadInd = ZOneDecLeadInd;
+                                    ZTrailingLepDecTrailingInd = ZOneDecTrailingInd;
+                                }
+
+
+
+                                float tmpZLeadLepDecLeadEta = GenPart_eta[ZLeadLepDecLeadInd];
+                                float tmpZLeadLepDecLeadPhi = GenPart_phi[ZLeadLepDecLeadInd];
+                                float tmpZLeadLepDecLeadToFJMindR = 1000.;
+                                int ZLeadLepDecLeadLepInd = -1;
+                                float ZLeadLepDecLeadLepEta = 0;
+                                float ZLeadLepDecLeadLepPhi = 0;
+                                bool ZLeadLepIsMuon = false;
+
+                                for (UInt_t elecInd=0;elecInd<*nElectron;elecInd++){
+                                    float tmpEEta = Electron_eta[elecInd];
+                                    float tmpEPhi = Electron_phi[elecInd];
+                                    float tmpDeltaR = calcDeltaR(tmpZLeadLepDecLeadPhi,tmpZLeadLepDecLeadEta,tmpEPhi,tmpEEta);
+                                    if (tmpDeltaR < tmpZLeadLepDecLeadToFJMindR) {
+                                        ZLeadLepDecLeadLepInd = elecInd;
+                                        tmpZLeadLepDecLeadToFJMindR = tmpDeltaR;
+                                        ZLeadLepDecLeadLepEta = tmpEEta;
+                                        ZLeadLepDecLeadLepPhi = tmpEPhi;
+                                    }
+                                    
+                                }
+                                for (UInt_t muonInd=0;muonInd<*nMuon;muonInd++){
+                                    float tmpMEta = Muon_eta[muonInd];
+                                    float tmpMPhi = Muon_phi[muonInd];
+                                    float tmpDeltaR = calcDeltaR(tmpZLeadLepDecLeadPhi,tmpZLeadLepDecLeadEta,tmpMPhi,tmpMEta);
+                                    if (tmpDeltaR < tmpZLeadLepDecLeadToFJMindR) {
+                                        ZLeadLepDecLeadLepInd = muonInd;
+                                        tmpZLeadLepDecLeadToFJMindR = tmpDeltaR;
+                                        ZLeadLepDecLeadLepEta = tmpMEta;
+                                        ZLeadLepDecLeadLepPhi = tmpMPhi;
+                                        ZLeadLepIsMuon = true;
+                                    }
+                                    
+                                }
+
+                                //Finding Z Trailing Lep GenPart
+
+                                float tmpZLeadLepDecTrailingEta = GenPart_eta[ZLeadLepDecTrailingInd];
+                                float tmpZLeadLepDecTrailingPhi = GenPart_phi[ZLeadLepDecTrailingInd];
+                                float tmpZLeadLepDecTrailingToLepMindR = 1000.;
+                                int ZLeadLepDecTrailingLepInd = -1;
+                                float ZLeadLepDecTrailingLepEta = 0;
+                                float ZLeadLepDecTrailingLepPhi = 0;
+                                
+                                if (!ZLeadLepIsMuon){
+                                    for (UInt_t elecInd=0;elecInd<*nElectron;elecInd++){
+                                        if (ZLeadLepDecLeadLepInd == elecInd) continue;
+                                        float tmpEEta = Electron_eta[elecInd];
+                                        float tmpEPhi = Electron_phi[elecInd];
+                                        float tmpDeltaR = calcDeltaR(tmpZLeadLepDecTrailingPhi,tmpZLeadLepDecTrailingEta,tmpEPhi,tmpEEta);
+                                        if (tmpDeltaR < tmpZLeadLepDecTrailingToLepMindR) {
+                                            ZLeadLepDecTrailingLepInd = elecInd;
+                                            tmpZLeadLepDecTrailingToLepMindR = tmpDeltaR;
+                                            ZLeadLepDecTrailingLepEta = tmpEEta;
+                                            ZLeadLepDecTrailingLepPhi = tmpEPhi;
+                                        }
+                                        
+                                    }
+                                }
+                                else {
+                                    for (UInt_t muonInd=0;muonInd<*nMuon;muonInd++){
+                                        if (ZLeadLepDecLeadLepInd == muonInd) continue;
+                                        float tmpMEta = Muon_eta[muonInd];
+                                        float tmpMPhi = Muon_phi[muonInd];
+                                        float tmpDeltaR = calcDeltaR(tmpZLeadLepDecTrailingPhi,tmpZLeadLepDecTrailingEta,tmpMPhi,tmpMEta);
+                                        if (tmpDeltaR < tmpZLeadLepDecTrailingToLepMindR) {
+                                            ZLeadLepDecTrailingLepInd = muonInd;
+                                            tmpZLeadLepDecTrailingToLepMindR = tmpDeltaR;
+                                            ZLeadLepDecTrailingLepEta = tmpMEta;
+                                            ZLeadLepDecTrailingLepPhi = tmpMPhi;
+                                        }
+                                        
+                                    }
+                                }
+
+
+                                
+                                float tmpZTrailingLepDecLeadEta = GenPart_eta[ZTrailingLepDecLeadInd];
+                                float tmpZTrailingLepDecLeadPhi = GenPart_phi[ZTrailingLepDecLeadInd];
+                                float tmpZTrailingLepDecLeadToFJMindR = 1000.;
+                                int ZTrailingLepDecLeadLepInd = -1;
+                                float ZTrailingLepDecLeadLepEta = 0;
+                                float ZTrailingLepDecLeadLepPhi = 0;
+                                bool ZTrailingLepIsMuon = false;
+
+                                for (UInt_t elecInd=0;elecInd<*nElectron;elecInd++){
+                                    if (!ZLeadLepIsMuon && (ZLeadLepDecLeadLepInd == elecInd || ZLeadLepDecTrailingLepInd == elecInd)) continue;
+                                    float tmpEEta = Electron_eta[elecInd];
+                                    float tmpEPhi = Electron_phi[elecInd];
+                                    float tmpDeltaR = calcDeltaR(tmpZTrailingLepDecLeadPhi,tmpZTrailingLepDecLeadEta,tmpEPhi,tmpEEta);
+                                    if (tmpDeltaR < tmpZTrailingLepDecLeadToFJMindR) {
+                                        ZTrailingLepDecLeadLepInd = elecInd;
+                                        tmpZTrailingLepDecLeadToFJMindR = tmpDeltaR;
+                                        ZTrailingLepDecLeadLepEta = tmpEEta;
+                                        ZTrailingLepDecLeadLepPhi = tmpEPhi;
+                                    }
+                                    
+                                }
+                                for (UInt_t muonInd=0;muonInd<*nMuon;muonInd++){
+                                    if (ZLeadLepIsMuon && (ZLeadLepDecLeadLepInd == muonInd || ZLeadLepDecTrailingLepInd == muonInd)) continue;
+                                    float tmpMEta = Muon_eta[muonInd];
+                                    float tmpMPhi = Muon_phi[muonInd];
+                                    float tmpDeltaR = calcDeltaR(tmpZTrailingLepDecLeadPhi,tmpZTrailingLepDecLeadEta,tmpMPhi,tmpMEta);
+                                    if (tmpDeltaR < tmpZTrailingLepDecLeadToFJMindR) {
+                                        ZTrailingLepDecLeadLepInd = muonInd;
+                                        tmpZTrailingLepDecLeadToFJMindR = tmpDeltaR;
+                                        ZTrailingLepDecLeadLepEta = tmpMEta;
+                                        ZTrailingLepDecLeadLepPhi = tmpMPhi;
+                                        ZTrailingLepIsMuon = true;
+                                    }
+                                    
+                                }
+
+                                //Finding Z Trailing Lep GenPart
+
+                                float tmpZTrailingLepDecTrailingEta = GenPart_eta[ZTrailingLepDecTrailingInd];
+                                float tmpZTrailingLepDecTrailingPhi = GenPart_phi[ZTrailingLepDecTrailingInd];
+                                float tmpZTrailingLepDecTrailingToLepMindR = 1000.;
+                                int ZTrailingLepDecTrailingLepInd = -1;
+                                float ZTrailingLepDecTrailingLepEta = 0;
+                                float ZTrailingLepDecTrailingLepPhi = 0;
+                                
+                                if (!ZTrailingLepIsMuon){
+                                    for (UInt_t elecInd=0;elecInd<*nElectron;elecInd++){
+                                        if (!ZLeadLepIsMuon && (ZLeadLepDecLeadLepInd == elecInd || ZLeadLepDecTrailingLepInd == elecInd)) continue;
+                                        if (ZTrailingLepDecLeadLepInd == elecInd) continue;
+                                        float tmpEEta = Electron_eta[elecInd];
+                                        float tmpEPhi = Electron_phi[elecInd];
+                                        float tmpDeltaR = calcDeltaR(tmpZTrailingLepDecTrailingPhi,tmpZTrailingLepDecTrailingEta,tmpEPhi,tmpEEta);
+                                        if (tmpDeltaR < tmpZTrailingLepDecTrailingToLepMindR) {
+                                            ZTrailingLepDecTrailingLepInd = elecInd;
+                                            tmpZTrailingLepDecTrailingToLepMindR = tmpDeltaR;
+                                            ZTrailingLepDecTrailingLepEta = tmpEEta;
+                                            ZTrailingLepDecTrailingLepPhi = tmpEPhi;
+                                        }
+                                        
+                                    }
+                                }
+                                else {
+                                    for (UInt_t muonInd=0;muonInd<*nMuon;muonInd++){
+                                        if (ZLeadLepIsMuon && (ZLeadLepDecLeadLepInd == muonInd || ZLeadLepDecTrailingLepInd == muonInd)) continue;
+                                        if (ZTrailingLepDecLeadLepInd == muonInd) continue;
+                                        float tmpMEta = Muon_eta[muonInd];
+                                        float tmpMPhi = Muon_phi[muonInd];
+                                        float tmpDeltaR = calcDeltaR(tmpZTrailingLepDecTrailingPhi,tmpZTrailingLepDecTrailingEta,tmpMPhi,tmpMEta);
+                                        if (tmpDeltaR < tmpZTrailingLepDecTrailingToLepMindR) {
+                                            ZTrailingLepDecTrailingLepInd = muonInd;
+                                            tmpZTrailingLepDecTrailingToLepMindR = tmpDeltaR;
+                                            ZTrailingLepDecTrailingLepEta = tmpMEta;
+                                            ZTrailingLepDecTrailingLepPhi = tmpMPhi;
+                                        }
+                                        
+                                    }
+                                }
+
+
+                                float tmpHLeadZLeadLepdR = calcDeltaR(HFJPhi,HFJEta,ZLeadLepDecLeadLepPhi,ZLeadLepDecLeadLepEta);
+                                float tmpHLeadZTrailingLepdR = calcDeltaR(HFJPhi,HFJEta,ZLeadLepDecTrailingLepPhi,ZLeadLepDecTrailingLepEta);
+                                
+                                float tmpHTrailingZLeadLepdR = calcDeltaR(HFJPhi,HFJEta,ZTrailingLepDecLeadLepPhi,ZTrailingLepDecLeadLepEta);
+                                float tmpHTrailingZTrailingLepdR = calcDeltaR(HFJPhi,HFJEta,ZTrailingLepDecTrailingLepPhi,ZTrailingLepDecTrailingLepEta);
+
+                                HGenFJdRFromLeadZLeadLepL = tmpHLeadZLeadLepdR;
+                                HGenFJdRFromLeadZTrailingLepL = tmpHLeadZTrailingLepdR;
+                                HGenFJdRFromTrailingZLeadLepL = tmpHTrailingZLeadLepdR;
+                                HGenFJdRFromTrailingZTrailingLepL = tmpHTrailingZTrailingLepdR;
+
+
+                                genLepTree->Fill();
+
+
+
+
+
                             }
                             else{
                                 genLepChannelNoHTobbCtr += 1;
@@ -1766,7 +2351,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
             genWeightL = *genWeight;
 
             //Check if any fat jets in event
-            UInt_t tmpnFatJets = *nFatJet;
+            
             if (tmpnFatJets<=0) continue;
             if (debug){
                 std::cout <<"Passed nFJs\n";
@@ -2143,6 +2728,9 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     outFile->cd();
     evNumTree->Write("",TObject::kOverwrite);
     FilteredEventsTree->Write("",TObject::kOverwrite);
+    genHadTree->Write("",TObject::kOverwrite);
+    genSemiLepTree->Write("",TObject::kOverwrite);
+    genLepTree->Write("",TObject::kOverwrite);
 
     outFile->Close();
 }
