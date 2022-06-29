@@ -921,8 +921,8 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     genSemiLepTree->Branch("HGenFJdRFromHadZFJL",&HGenFJdRFromHadZFJL,"HGenFJdRFromHadZFJL/D");
 
     //gen Had channel
-    Double_t HGenFJdRFromLepZLeadFJL;
-    Double_t HGenFJdRFromLepZTrailingFJL;
+    Double_t HGenFJdRFromZLeadFJL;
+    Double_t HGenFJdRFromZTrailingFJL;
 
     TTree *genHadTree = new TTree("genHadTree", "genHadTree");
 
@@ -931,8 +931,8 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     
     
     //gen Had channel
-    genHadTree->Branch("HGenFJdRFromLepZLeadFJL",&HGenFJdRFromLepZLeadFJL,"HGenFJdRFromLepZLeadFJL/D");
-    genHadTree->Branch("HGenFJdRFromLepZTrailingFJL",&HGenFJdRFromLepZTrailingFJL,"HGenFJdRFromLepZTrailingFJL/D");
+    genHadTree->Branch("HGenFJdRFromZLeadFJL",&HGenFJdRFromZLeadFJL,"HGenFJdRFromZLeadFJL/D");
+    genHadTree->Branch("HGenFJdRFromZTrailingFJL",&HGenFJdRFromZTrailingFJL,"HGenFJdRFromZTrailingFJL/D");
     
     
 
@@ -1795,14 +1795,16 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                     }
                                     
                                 }
+                                if (HFJInd != -1 && ZLeadFJInd != -1 && ZTrailingFJInd != -1){
 
-                                float tmpHZLeaddR = calcDeltaR(HFJPhi,HFJEta,tmpZLeadPhi,tmpZLeadEta);
-                                float tmpHZTrailingdR = calcDeltaR(HFJPhi,HFJEta,tmpZTrailingPhi,tmpZTrailingEta);
+                                    float tmpHZLeaddR = calcDeltaR(HFJPhi,HFJEta,tmpZLeadPhi,tmpZLeadEta);
+                                    float tmpHZTrailingdR = calcDeltaR(HFJPhi,HFJEta,tmpZTrailingPhi,tmpZTrailingEta);
 
-                                HGenFJdRFromLepZLeadFJL = tmpHZLeaddR;
-                                HGenFJdRFromLepZTrailingFJL = tmpHZTrailingdR;
+                                    HGenFJdRFromZLeadFJL = tmpHZLeaddR;
+                                    HGenFJdRFromZTrailingFJL = tmpHZTrailingdR;
 
-                                genHadTree->Fill();
+                                    genHadTree->Fill();
+                                }
 
 
 
@@ -1969,15 +1971,18 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                     }
                                 }
 
-                                float tmpHZFJdR = calcDeltaR(HFJPhi,HFJEta,ZHadFJPhi,ZHadFJEta);
-                                float tmpHZLeadLepdR = calcDeltaR(HFJPhi,HFJEta,ZLepDecLeadLepPhi,ZLepDecLeadLepEta);
-                                float tmpHZTrailingLepdR = calcDeltaR(HFJPhi,HFJEta,ZLepDecTrailingLepPhi,ZLepDecTrailingLepEta);
+                                //was in the middle of fixing this need to add the if statement also  to the lep channel
+                                if (HFJInd != -1 && ZHadFJInd != -1 && ZLepDecLeadLepInd != -1 && ZLepDecTrailingLepInd != -1){
+                                    float tmpHZFJdR = calcDeltaR(HFJPhi,HFJEta,ZHadFJPhi,ZHadFJEta);
+                                    float tmpHZLeadLepdR = calcDeltaR(HFJPhi,HFJEta,ZLepDecLeadLepPhi,ZLepDecLeadLepEta);
+                                    float tmpHZTrailingLepdR = calcDeltaR(HFJPhi,HFJEta,ZLepDecTrailingLepPhi,ZLepDecTrailingLepEta);
 
-                                HGenFJdRFromLepZLeadLepL = tmpHZLeadLepdR;
-                                HGenFJdRFromLepZTrailingLepL = tmpHZTrailingLepdR;
-                                HGenFJdRFromHadZFJL = tmpHZFJdR;
+                                    HGenFJdRFromLepZLeadLepL = tmpHZLeadLepdR;
+                                    HGenFJdRFromLepZTrailingLepL = tmpHZTrailingLepdR;
+                                    HGenFJdRFromHadZFJL = tmpHZFJdR;
 
-                                genSemiLepTree->Fill();
+                                    genSemiLepTree->Fill();
+                                }
 
 
                             }
@@ -2074,7 +2079,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                     
                                 }
 
-                                //Finding Z Trailing Lep GenPart
+                                //Finding Lead Z Trailing Lep GenPart
 
                                 float tmpZLeadLepDecTrailingEta = GenPart_eta[ZLeadLepDecTrailingInd];
                                 float tmpZLeadLepDecTrailingPhi = GenPart_phi[ZLeadLepDecTrailingInd];
@@ -2115,7 +2120,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                 }
 
 
-                                
+                                //Finding trailing Z Lead Lep GenPart
                                 float tmpZTrailingLepDecLeadEta = GenPart_eta[ZTrailingLepDecLeadInd];
                                 float tmpZTrailingLepDecLeadPhi = GenPart_phi[ZTrailingLepDecLeadInd];
                                 float tmpZTrailingLepDecLeadToFJMindR = 1000.;
@@ -2152,7 +2157,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                     
                                 }
 
-                                //Finding Z Trailing Lep GenPart
+                                //Finding trailing Z Trailing Lep GenPart
 
                                 float tmpZTrailingLepDecTrailingEta = GenPart_eta[ZTrailingLepDecTrailingInd];
                                 float tmpZTrailingLepDecTrailingPhi = GenPart_phi[ZTrailingLepDecTrailingInd];
@@ -2194,20 +2199,21 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                     }
                                 }
 
+                                if (HFJInd != -1 && ZLeadLepDecLeadLepInd != -1 && ZLeadLepDecTrailingLepInd != -1 && ZTrailingLepDecLeadLepInd != -1 && ZTrailingLepDecTrailingLepInd != -1){
+                                    float tmpHLeadZLeadLepdR = calcDeltaR(HFJPhi,HFJEta,ZLeadLepDecLeadLepPhi,ZLeadLepDecLeadLepEta);
+                                    float tmpHLeadZTrailingLepdR = calcDeltaR(HFJPhi,HFJEta,ZLeadLepDecTrailingLepPhi,ZLeadLepDecTrailingLepEta);
+                                    
+                                    float tmpHTrailingZLeadLepdR = calcDeltaR(HFJPhi,HFJEta,ZTrailingLepDecLeadLepPhi,ZTrailingLepDecLeadLepEta);
+                                    float tmpHTrailingZTrailingLepdR = calcDeltaR(HFJPhi,HFJEta,ZTrailingLepDecTrailingLepPhi,ZTrailingLepDecTrailingLepEta);
 
-                                float tmpHLeadZLeadLepdR = calcDeltaR(HFJPhi,HFJEta,ZLeadLepDecLeadLepPhi,ZLeadLepDecLeadLepEta);
-                                float tmpHLeadZTrailingLepdR = calcDeltaR(HFJPhi,HFJEta,ZLeadLepDecTrailingLepPhi,ZLeadLepDecTrailingLepEta);
-                                
-                                float tmpHTrailingZLeadLepdR = calcDeltaR(HFJPhi,HFJEta,ZTrailingLepDecLeadLepPhi,ZTrailingLepDecLeadLepEta);
-                                float tmpHTrailingZTrailingLepdR = calcDeltaR(HFJPhi,HFJEta,ZTrailingLepDecTrailingLepPhi,ZTrailingLepDecTrailingLepEta);
-
-                                HGenFJdRFromLeadZLeadLepL = tmpHLeadZLeadLepdR;
-                                HGenFJdRFromLeadZTrailingLepL = tmpHLeadZTrailingLepdR;
-                                HGenFJdRFromTrailingZLeadLepL = tmpHTrailingZLeadLepdR;
-                                HGenFJdRFromTrailingZTrailingLepL = tmpHTrailingZTrailingLepdR;
+                                    HGenFJdRFromLeadZLeadLepL = tmpHLeadZLeadLepdR;
+                                    HGenFJdRFromLeadZTrailingLepL = tmpHLeadZTrailingLepdR;
+                                    HGenFJdRFromTrailingZLeadLepL = tmpHTrailingZLeadLepdR;
+                                    HGenFJdRFromTrailingZTrailingLepL = tmpHTrailingZTrailingLepdR;
 
 
-                                genLepTree->Fill();
+                                    genLepTree->Fill();
+                                }
 
 
 
