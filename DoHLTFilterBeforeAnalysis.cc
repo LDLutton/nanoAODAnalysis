@@ -781,6 +781,9 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
 
     Bool_t HTobbBoolL;
 
+    //Gen dR of H from Z particles
+    Double_t HdRFromLeadZL;
+    Double_t HdRFromTrailingZL;
     
     
 
@@ -878,17 +881,13 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
 
     FilteredEventsTree->Branch("HTobbBoolL",&HTobbBoolL,"HTobbBoolL/O");
 
-    /*
-    //Gen dR of H from Z particles
-    Double_t HdRFromLeadZ;
-    Double_t HdRFromTrailingZ;
-
+    
 
     //Gen dR of H from Z particles
 
-    genHadTree->Branch("HdRFromLeadZ",&HdRFromLeadZ,"HdRFromLeadZ/D");
-    genHadTree->Branch("HdRFromTrailingZ",&HdRFromTrailingZ,"HdRFromTrailingZ/D");
-    */
+    FilteredEventsTree->Branch("HdRFromLeadZL",&HdRFromLeadZL,"HdRFromLeadZL/D");
+    FilteredEventsTree->Branch("HdRFromTrailingZL",&HdRFromTrailingZL,"HdRFromTrailingZL/D");
+    
 
     //Gen dR of H reco'd (but gen matched) decay products from Z reco'd (but gen matched) decay products
     //With HTobb
@@ -1560,7 +1559,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                 ZTwoDecTrailingInd = finalZDecIndAr[1][0];
                             }
                                 
-                            
+                            //std::cout << evCount << " " << finalZDecAr[0][0]<< " " << finalZDecAr[0][1] << " " << finalZDecAr[1][0] << " " << finalZDecAr[1][1] << "\n";
                             if (abs(finalZDecAr[0][0])==15 && abs(finalZDecAr[0][1])==15){
                                 int tmpLepOneInd = -1;
                                 int tmpLepTwoInd = -1;
@@ -1576,11 +1575,11 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                     Int_t tmpPDGId = GenPart_pdgId[i];
                                     Int_t tmpMotherID = GenPart_genPartIdxMother[i];
                                     
-                                    std::vector<Int_t> tmpIndAr;
+                                    std::vector<Int_t> tmpOneIndAr;
                                     if (!tauOneBool){
                                         for (UInt_t j=0;j<tauOneAr.size();j++){
                                             if (tmpMotherID == tauOneAr[j]){
-                                                if (abs(tmpPDGId) == 15) tmpIndAr.push_back(i);
+                                                if (abs(tmpPDGId) == 15) tmpOneIndAr.push_back(i);
                                                 else if (abs(tmpPDGId) == 13 || abs(tmpPDGId) == 11) {
                                                     tauOneBool = true;
                                                     tauOneDecPDG = abs(tmpPDGId);
@@ -1588,16 +1587,17 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                                 }
                                             }
                                         }
-                                        if (tmpIndAr.size()) {
-                                            for (UInt_t j=0;j<tmpIndAr.size();j++){
-                                                tauOneAr.push_back(tmpIndAr[j]);
+                                        if (tmpOneIndAr.size()) {
+                                            for (UInt_t j=0;j<tmpOneIndAr.size();j++){
+                                                tauOneAr.push_back(tmpOneIndAr[j]);
                                             }
                                         }
                                     }
+                                    std::vector<Int_t> tmpTwoIndAr;
                                     if (!tauTwoBool){
                                         for (UInt_t j=0;j<tauTwoAr.size();j++){
                                             if (tmpMotherID == tauTwoAr[j]){
-                                                if (abs(tmpPDGId) == 15) tmpIndAr.push_back(i);
+                                                if (abs(tmpPDGId) == 15) tmpTwoIndAr.push_back(i);
                                                 else if (abs(tmpPDGId) == 13 || abs(tmpPDGId) == 11) {
                                                     tauTwoBool = true;
                                                     tauTwoDecPDG = abs(tmpPDGId);
@@ -1605,9 +1605,9 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                                 }
                                             }
                                         }
-                                        if (tmpIndAr.size()) {
-                                            for (UInt_t j=0;j<tmpIndAr.size();j++){
-                                                tauTwoAr.push_back(tmpIndAr[j]);
+                                        if (tmpTwoIndAr.size()) {
+                                            for (UInt_t j=0;j<tmpTwoIndAr.size();j++){
+                                                tauTwoAr.push_back(tmpTwoIndAr[j]);
                                             }
                                         }
                                     }
@@ -1635,15 +1635,18 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                 UInt_t tauTwoDecPDG = 0;
                                 tauOneAr.push_back(finalZDecIndAr[1][0]);
                                 tauTwoAr.push_back(finalZDecIndAr[1][1]);
+                                //std::cout << "Entering GenPart loop " << tauOneAr[0]<< " " << tauTwoAr[0] << "\n";
                                 for (UInt_t i=0;i<*nGenPart;i++){
                                     Int_t tmpPDGId = GenPart_pdgId[i];
                                     Int_t tmpMotherID = GenPart_genPartIdxMother[i];
                                     
-                                    std::vector<Int_t> tmpIndAr;
+                                    std::vector<Int_t> tmpOneIndAr;
+                                    //std::cout << "i " << i << " " << tmpPDGId<< " " << tmpMotherID << "\n";
                                     if (!tauOneBool){
                                         for (UInt_t j=0;j<tauOneAr.size();j++){
+                                            //std::cout << "t1j " << j << " " << tauOneAr[j]<<"\n";
                                             if (tmpMotherID == tauOneAr[j]){
-                                                if (abs(tmpPDGId) == 15) tmpIndAr.push_back(i);
+                                                if (abs(tmpPDGId) == 15) tmpOneIndAr.push_back(i);
                                                 else if (abs(tmpPDGId) == 13 || abs(tmpPDGId) == 11) {
                                                     tauOneBool = true;
                                                     tauOneDecPDG = abs(tmpPDGId);
@@ -1651,16 +1654,19 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                                 }
                                             }
                                         }
-                                        if (tmpIndAr.size()) {
-                                            for (UInt_t j=0;j<tmpIndAr.size();j++){
-                                                tauOneAr.push_back(tmpIndAr[j]);
+                                        if (tmpOneIndAr.size()) {
+                                            for (UInt_t j=0;j<tmpOneIndAr.size();j++){
+                                                tauOneAr.push_back(tmpOneIndAr[j]);
                                             }
                                         }
                                     }
+                                    std::vector<Int_t> tmpTwoIndAr;
                                     if (!tauTwoBool){
                                         for (UInt_t j=0;j<tauTwoAr.size();j++){
+                                            //std::cout << "t2j " << j << " " << tauTwoAr[j]<<"\n";
                                             if (tmpMotherID == tauTwoAr[j]){
-                                                if (abs(tmpPDGId) == 15) tmpIndAr.push_back(i);
+                                                
+                                                if (abs(tmpPDGId) == 15) tmpTwoIndAr.push_back(i);
                                                 else if (abs(tmpPDGId) == 13 || abs(tmpPDGId) == 11) {
                                                     tauTwoBool = true;
                                                     tauTwoDecPDG = abs(tmpPDGId);
@@ -1668,13 +1674,14 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                                 }
                                             }
                                         }
-                                        if (tmpIndAr.size()) {
-                                            for (UInt_t j=0;j<tmpIndAr.size();j++){
-                                                tauTwoAr.push_back(tmpIndAr[j]);
+                                        if (tmpTwoIndAr.size()) {
+                                            for (UInt_t j=0;j<tmpTwoIndAr.size();j++){
+                                                tauTwoAr.push_back(tmpTwoIndAr[j]);
                                             }
                                         }
                                     }
                                 }
+                                //std::cout << "tbool " << tauOneBool << " " << tauTwoBool <<"\n";
                                 if (tauOneBool && tauTwoBool && tauOneDecPDG == tauTwoDecPDG) {
                                     ZTwoIsLeptonic = true;
                                     if (GenPart_pt[tmpLepOneInd] > GenPart_pt[tmpLepTwoInd]){
@@ -1698,7 +1705,31 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                             else if (ZOneIsHadronic && ZTwoIsHadronic) ZIsHadronic = true;
                             
                             if (debugGenPart) std::cout << "ZIsHadronic " << ZIsHadronic << "ZIsLeptonic" << ZIsLeptonic << "ZIsSemiLeptonic" << ZIsSemiLeptonic << "\n";
+                            float tmpHEtaFordR = GenPart_eta[finalHAr[0]];
+                            float tmpHPhiFordR = GenPart_phi[finalHAr[0]];
+                            float tmpZLeadEtaFordR;
+                            float tmpZLeadPhiFordR;
+                            
+                            float  tmpZTrailingEtaFordR;
+                            float  tmpZTrailingPhiFordR;
+                            //std::cout << finalZAr[0] << " " << finalZAr[1] << "\n";
+                            //std::cout << GenPart_pt[finalZAr[0]] << " " << GenPart_pt[finalZAr[1]] << "\n";
+                            if (GenPart_pt[finalZAr[0]] > GenPart_pt[finalZAr[1]]){
+                                tmpZLeadEtaFordR = GenPart_eta[finalZAr[0]];
+                                tmpZLeadPhiFordR = GenPart_phi[finalZAr[0]];
+                                tmpZTrailingEtaFordR = GenPart_eta[finalZAr[1]];
+                                tmpZTrailingPhiFordR = GenPart_phi[finalZAr[1]];
 
+                            }
+                            else {
+                                tmpZLeadEtaFordR = GenPart_eta[finalZAr[1]];
+                                tmpZLeadPhiFordR = GenPart_phi[finalZAr[1]];
+                                tmpZTrailingEtaFordR = GenPart_eta[finalZAr[0]];
+                                tmpZTrailingPhiFordR = GenPart_phi[finalZAr[0]];
+
+                            }
+                            HdRFromLeadZL = calcDeltaR(tmpHPhiFordR,tmpHEtaFordR,tmpZLeadPhiFordR,tmpZLeadEtaFordR);
+                            HdRFromTrailingZL = calcDeltaR(tmpHPhiFordR,tmpHEtaFordR,tmpZTrailingPhiFordR,tmpZTrailingEtaFordR);
 
                             
                         }
@@ -1797,8 +1828,8 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                 }
                                 if (HFJInd != -1 && ZLeadFJInd != -1 && ZTrailingFJInd != -1){
 
-                                    float tmpHZLeaddR = calcDeltaR(HFJPhi,HFJEta,tmpZLeadPhi,tmpZLeadEta);
-                                    float tmpHZTrailingdR = calcDeltaR(HFJPhi,HFJEta,tmpZTrailingPhi,tmpZTrailingEta);
+                                    float tmpHZLeaddR = calcDeltaR(HFJPhi,HFJEta,ZLeadFJPhi,ZLeadFJEta);
+                                    float tmpHZTrailingdR = calcDeltaR(HFJPhi,HFJEta,ZTrailingFJPhi,ZTrailingFJEta);
 
                                     HGenFJdRFromZLeadFJL = tmpHZLeaddR;
                                     HGenFJdRFromZTrailingFJL = tmpHZTrailingdR;
@@ -1824,6 +1855,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                             if (HTobbBoolL){
                                 genSemiLepChannelCtr += 1;
                                 genSemiLepChannelWeightedCtr += *genWeight;
+                                //std::cout << evCount << "\n";
 
 
 
@@ -1835,11 +1867,12 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                 float HFJEta = 0;
                                 float HFJPhi = 0;
 
-
+                                //std::cout << "HFJ Loop " << tmpHEta << " "<< tmpHPhi << "\n";
                                 for (UInt_t fatJetInd=0;fatJetInd<tmpnFatJets;fatJetInd++){
                                     float tmpHFJEta = FatJet_eta[fatJetInd];
                                     float tmpHFJPhi = FatJet_phi[fatJetInd];
                                     float tmpDeltaR = calcDeltaR(tmpHFJPhi,tmpHFJEta,tmpHPhi,tmpHEta);
+                                    //std::cout << fatJetInd << " " << tmpHFJEta << " " << tmpHFJPhi << " " << tmpDeltaR << "\n";
                                     if (tmpDeltaR < tmpHToFJMindR) {
                                         HFJInd = fatJetInd;
                                         tmpHToFJMindR = tmpDeltaR;
@@ -1858,6 +1891,9 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                 else if (ZTwoIsHadronic) {
                                     ZHadInd = finalZAr[1];
                                 }
+                                else {
+                                    std::cout <<"ERROR ERROR, CHANNEL TYPE MIXUP\n";
+                                }
 
                                 float tmpZHadEta = GenPart_eta[ZHadInd];
                                 float tmpZHadPhi = GenPart_phi[ZHadInd];
@@ -1866,12 +1902,13 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                 float ZHadFJEta = 0;
                                 float ZHadFJPhi = 0;
                                 float ZHadFJPt = 0;
-
+                                //std::cout << "ZFJ Loop " << ZOneIsHadronic << " " <<  tmpZHadEta << " " << tmpZHadPhi << "\n";
                                 for (UInt_t fatJetInd=0;fatJetInd<tmpnFatJets;fatJetInd++){
                                     if (fatJetInd == HFJInd) continue;
                                     float tmpZFJEta = FatJet_eta[fatJetInd];
                                     float tmpZFJPhi = FatJet_phi[fatJetInd];
                                     float tmpDeltaR = calcDeltaR(tmpZFJPhi,tmpZFJEta,tmpZHadPhi,tmpZHadEta);
+                                    //std::cout << fatJetInd << " " << tmpZFJEta << " " << tmpZFJPhi << " " << tmpDeltaR << "\n";
                                     if (tmpDeltaR < tmpZHadToFJMindR) {
                                         ZHadFJInd = fatJetInd;
                                         tmpZHadToFJMindR = tmpDeltaR;
@@ -1894,6 +1931,9 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                     ZLepDecLeadInd = ZTwoDecLeadInd;
                                     ZLepDecTrailingInd = ZTwoDecTrailingInd;
                                 }
+                                else{
+                                    std::cout <<"ERROR ERROR, CHANNEL TYPE MIXUP\n";
+                                }
 
 
 
@@ -1904,11 +1944,12 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                 float ZLepDecLeadLepEta = 0;
                                 float ZLepDecLeadLepPhi = 0;
                                 bool ZLepIsMuon = false;
-
+                                //std::cout << "Z Lead Lep Elec Loop " << ZOneIsLeptonic << " " <<  tmpZLepDecLeadEta << " " << tmpZLepDecLeadPhi << "\n";
                                 for (UInt_t elecInd=0;elecInd<*nElectron;elecInd++){
                                     float tmpEEta = Electron_eta[elecInd];
                                     float tmpEPhi = Electron_phi[elecInd];
                                     float tmpDeltaR = calcDeltaR(tmpZLepDecLeadPhi,tmpZLepDecLeadEta,tmpEPhi,tmpEEta);
+                                    //std::cout << elecInd << " " << tmpEEta << " " << tmpEPhi << " " << tmpDeltaR << "\n";
                                     if (tmpDeltaR < tmpZLepDecLeadToFJMindR) {
                                         ZLepDecLeadLepInd = elecInd;
                                         tmpZLepDecLeadToFJMindR = tmpDeltaR;
@@ -1917,10 +1958,12 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                     }
                                     
                                 }
+                                //std::cout << "Z Lead Lep Muon Loop\n";
                                 for (UInt_t muonInd=0;muonInd<*nMuon;muonInd++){
                                     float tmpMEta = Muon_eta[muonInd];
                                     float tmpMPhi = Muon_phi[muonInd];
                                     float tmpDeltaR = calcDeltaR(tmpZLepDecLeadPhi,tmpZLepDecLeadEta,tmpMPhi,tmpMEta);
+                                    //std::cout << muonInd << " " << tmpMEta << " " << tmpMPhi << " " << tmpDeltaR << "\n";
                                     if (tmpDeltaR < tmpZLepDecLeadToFJMindR) {
                                         ZLepDecLeadLepInd = muonInd;
                                         tmpZLepDecLeadToFJMindR = tmpDeltaR;
@@ -1932,7 +1975,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                 }
 
                                 //Finding Z Trailing Lep GenPart
-
+                                
                                 float tmpZLepDecTrailingEta = GenPart_eta[ZLepDecTrailingInd];
                                 float tmpZLepDecTrailingPhi = GenPart_phi[ZLepDecTrailingInd];
                                 float tmpZLepDecTrailingToLepMindR = 1000.;
@@ -1941,11 +1984,13 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                 float ZLepDecTrailingLepPhi = 0;
                                 
                                 if (!ZLepIsMuon){
+                                    //std::cout << "Z Trailing Lep Elec Loop " <<  tmpZLepDecTrailingEta << " " << tmpZLepDecTrailingPhi << "\n";
                                     for (UInt_t elecInd=0;elecInd<*nElectron;elecInd++){
                                         if (ZLepDecLeadLepInd == elecInd) continue;
                                         float tmpEEta = Electron_eta[elecInd];
                                         float tmpEPhi = Electron_phi[elecInd];
                                         float tmpDeltaR = calcDeltaR(tmpZLepDecTrailingPhi,tmpZLepDecTrailingEta,tmpEPhi,tmpEEta);
+                                        //std::cout << elecInd << " " << tmpEEta << " " << tmpEPhi << " " << tmpDeltaR << "\n";
                                         if (tmpDeltaR < tmpZLepDecTrailingToLepMindR) {
                                             ZLepDecTrailingLepInd = elecInd;
                                             tmpZLepDecTrailingToLepMindR = tmpDeltaR;
@@ -1956,11 +2001,13 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                     }
                                 }
                                 else {
+                                    //std::cout << "Z Trailing Lep Muon Loop\n";
                                     for (UInt_t muonInd=0;muonInd<*nMuon;muonInd++){
                                         if (ZLepDecLeadLepInd == muonInd) continue;
                                         float tmpMEta = Muon_eta[muonInd];
                                         float tmpMPhi = Muon_phi[muonInd];
                                         float tmpDeltaR = calcDeltaR(tmpZLepDecTrailingPhi,tmpZLepDecTrailingEta,tmpMPhi,tmpMEta);
+                                        //std::cout << muonInd << " " << tmpMEta << " " << tmpMPhi << " " << tmpDeltaR << "\n";
                                         if (tmpDeltaR < tmpZLepDecTrailingToLepMindR) {
                                             ZLepDecTrailingLepInd = muonInd;
                                             tmpZLepDecTrailingToLepMindR = tmpDeltaR;
@@ -1970,12 +2017,13 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
                                         
                                     }
                                 }
+                                //std::cout << ZLepIsMuon << " " << HFJInd << " " << ZHadFJInd << " " << ZLepDecLeadLepInd << " " << ZLepDecTrailingLepInd << "\n";
 
-                                //was in the middle of fixing this need to add the if statement also  to the lep channel
                                 if (HFJInd != -1 && ZHadFJInd != -1 && ZLepDecLeadLepInd != -1 && ZLepDecTrailingLepInd != -1){
                                     float tmpHZFJdR = calcDeltaR(HFJPhi,HFJEta,ZHadFJPhi,ZHadFJEta);
                                     float tmpHZLeadLepdR = calcDeltaR(HFJPhi,HFJEta,ZLepDecLeadLepPhi,ZLepDecLeadLepEta);
                                     float tmpHZTrailingLepdR = calcDeltaR(HFJPhi,HFJEta,ZLepDecTrailingLepPhi,ZLepDecTrailingLepEta);
+                                    //std::cout << tmpHZFJdR << " " << tmpHZLeadLepdR << " " << tmpHZTrailingLepdR << "\n";
 
                                     HGenFJdRFromLepZLeadLepL = tmpHZLeadLepdR;
                                     HGenFJdRFromLepZTrailingLepL = tmpHZTrailingLepdR;
@@ -1983,6 +2031,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
 
                                     genSemiLepTree->Fill();
                                 }
+                                //std::cout << "-----------------------------------------------\n";
 
 
                             }
