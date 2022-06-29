@@ -48,6 +48,7 @@ bool WZTo3LNuBackground = false;
 bool LaraTest = false;
 
 float hTobbBR = 0.5772683;
+float maxdRCut = 0.8;
 
 //For calculating DeltaR for two particles from their respective etas and phis
 float calcDeltaR(float phi1,float eta1,float phi2,float eta2){
