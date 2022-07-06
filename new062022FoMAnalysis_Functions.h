@@ -895,6 +895,126 @@ void doHiggsFatJetCut(UInt_t nFatJetLen,float &hFatJet_pt_fromHParticleNet,float
     }
 }
 
+void doHiggsFatJetCutEarlySelection(UInt_t nFatJetLen,float &hFatJet_pt_fromHParticleNet,float &hFatJet_phi_fromHParticleNet,float &hFatJet_eta_fromHParticleNet,float &hFatJet_mass_fromHParticleNet,float &hFatJet_HParticleNet_fromHParticleNet,UInt_t &hFatJet_ind_fromHParticleNet,TTreeReaderArray<Float_t> &FatJet_deepTag_H,float hFatJetDeepTagCut,TTreeReaderArray<Float_t> &FatJet_pt,float hFatJetPTCut,TTreeReaderArray<Int_t> &FatJet_jetId,TTreeReaderArray<Float_t> &FatJet_phi,TTreeReaderArray<Float_t> &FatJet_eta,TTreeReaderArray<Float_t> &FatJet_mass,std::vector<ROOT::Math::PtEtaPhiMVector> &dRCheckVecAr,float dRCut,std::vector<Int_t> &FJIndAr){
+    float tmpFJHParticleNetMax = hFatJetDeepTagCut;
+    ROOT::Math::PtEtaPhiMVector HFJVec;
+    for (UInt_t fatJetInd=0;fatJetInd<nFatJetLen;fatJetInd++){
+        bool sameFJ = false;
+        for (UInt_t FJInd=0;FJInd<FJIndAr.size();FJInd++){
+            if (fatJetInd == FJIndAr[FJInd]) {
+                sameFJ = true;
+                break;
+            }
+        }
+        if (sameFJ) continue;
+        
+        float tmpFatJet_deepTag_H = FatJet_deepTag_H[fatJetInd];
+
+        if (debug) {
+            std::cout << fatJetInd << " +++++++++++++++\n";
+            std::cout << "Fat jet DeepTag_H    " <<  tmpFatJet_deepTag_H << "\n";
+        }
+        
+        if (tmpFatJet_deepTag_H > tmpFJHParticleNetMax){
+            float tmpFatJet_pt = FatJet_pt[fatJetInd];
+
+            if (debug){
+                std::cout << "Fat jet pt    " <<  tmpFatJet_pt << "\n";
+            }
+            
+            if (tmpFatJet_pt > hFatJetPTCut){
+                Int_t tmpFatJet_jetId = FatJet_jetId[fatJetInd];
+
+                if (debug){
+                    std::cout << "Fat jet jetId    " <<  tmpFatJet_jetId << "\n";
+                }
+
+                if (tmpFatJet_jetId == 6){
+                    
+                    
+
+                    if (debug) std::cout << "Passed fatjet cuts\n";
+
+                    if (tmpFatJet_deepTag_H > hFatJet_HParticleNet_fromHParticleNet){
+                        if (debug) std::cout << "HParticleNet greater than previous FJ HParticleNet\n";
+                        float tmpFatJet_phi = FatJet_phi[fatJetInd];
+                        float tmpFatJet_eta = FatJet_eta[fatJetInd];
+                        //ROOT::Math::PtEtaPhiMVector tmpFJVec = ROOT::Math::PtEtaPhiMVector(tmpFatJet_pt,tmpFatJet_eta,tmpFatJet_phi,FatJet_mass[fatJetInd]);
+                        bool tmpPassdR = true;
+                        float tmpZPairPlusHPt = tmpFatJet_pt;
+                        float tmpFatJet_mass = FatJet_mass[fatJetInd];
+                        ROOT::Math::PtEtaPhiMVector tmpFJVec = ROOT::Math::PtEtaPhiMVector(tmpFatJet_pt,tmpFatJet_eta,tmpFatJet_phi,tmpFatJet_mass);
+                        for (UInt_t dRCheckVecInd=0; dRCheckVecInd<dRCheckVecAr.size();dRCheckVecInd++) {
+                            float tmpDeltaR = calcDeltaR(tmpFatJet_phi,tmpFatJet_eta,dRCheckVecAr[dRCheckVecInd].Phi(),dRCheckVecAr[dRCheckVecInd].Eta());
+
+                            
+
+                            if (tmpDeltaR < dRCut){
+                                tmpPassdR = false;
+                                break;
+                            }
+                            tmpZPairPlusHPt += dRCheckVecAr[dRCheckVecInd].Pt();
+                            tmpFJVec += dRCheckVecAr[dRCheckVecInd];
+
+                        }
+                        //std::cout << "tmpPassdR " << tmpPassdR << " tmpFJVec.M() " << tmpFJVec.M() << " ZPairPlusHInvMassCut " << ZPairPlusHInvMassCut<< "\n";
+                        if (tmpPassdR) {
+                                
+                            if (debug){
+                                std::cout << "Fat jet phi    " <<  tmpFatJet_phi << "\n";
+                                std::cout << "Fat jet eta    " <<  tmpFatJet_eta << "\n";
+                            }
+                            
+
+
+
+
+                            hFatJet_HParticleNet_fromHParticleNet = tmpFatJet_deepTag_H;
+                            hFatJet_pt_fromHParticleNet = tmpFatJet_pt;
+                            hFatJet_eta_fromHParticleNet = tmpFatJet_eta;
+                            hFatJet_phi_fromHParticleNet = tmpFatJet_phi;
+                            hFatJet_mass_fromHParticleNet = tmpFatJet_mass;
+                            hFatJet_ind_fromHParticleNet = fatJetInd;
+                            tmpFJHParticleNetMax = tmpFatJet_deepTag_H;
+                            HFJVec = tmpFJVec;
+                        
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+    if (hFatJet_pt_fromHParticleNet != 0) {
+        FJIndAr.push_back(hFatJet_ind_fromHParticleNet);
+        dRCheckVecAr.push_back(HFJVec);
+    }
+}
+
+void doHiggsFatJetCutST(std::vector<ROOT::Math::PtEtaPhiMVector> &dRCheckVecAr,float ZPairPlusHInvMassCut,float ZPairPlusHPtCut,bool &passesSTCutBool){
+
+    float tmpZPairPlusHPt = 0.;
+    ROOT::Math::PtEtaPhiMVector tmpFJVec;
+    for (UInt_t dRCheckVecInd=0; dRCheckVecInd<dRCheckVecAr.size();dRCheckVecInd++) {
+
+        if (dRCheckVecInd == 0){
+            tmpFJVec = dRCheckVecAr[dRCheckVecInd];
+        }
+        else {
+            tmpFJVec += dRCheckVecAr[dRCheckVecInd];
+        }
+        tmpZPairPlusHPt += dRCheckVecAr[dRCheckVecInd].Pt();
+        
+
+    }
+    //std::cout << "tmpPassdR " << tmpPassdR << " tmpFJVec.M() " << tmpFJVec.M() << " ZPairPlusHInvMassCut " << ZPairPlusHInvMassCut<< "\n";
+    if (tmpFJVec.M() > ZPairPlusHInvMassCut) {
+        if (tmpZPairPlusHPt > ZPairPlusHPtCut){
+            passesSTCutBool = true;
+        }
+    }
+}
+
 void doSemiLepChanFatJetCut(Int_t &FJInd,Int_t numFatJet,float fatJetPTCut,float fatJetZTagCut,TTreeReaderArray<Float_t> &FatJet_pt,TTreeReaderArray<Float_t> &FatJet_phi,TTreeReaderArray<Float_t> &FatJet_eta,TTreeReaderArray<Float_t> &FatJet_mass,TTreeReaderArray<Float_t> &FatJet_deepTag_ZvsQCD,TTreeReaderArray<Int_t> &FatJet_jetId,
 std::vector<ROOT::Math::PtEtaPhiMVector> &dRCheckVecAr,float dRCut,
 UInt_t &passSemiLepCut,bool &passesCutsBool,bool &passedAsSemiLepBool){
