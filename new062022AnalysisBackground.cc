@@ -114,6 +114,12 @@ void new062022AnalysisBackground(string datasetString){
     if (datasetString == "ZZTo2Q2Nu") ZZTo2Q2NuBackground = true;
     if (datasetString == "WWTo2L2Nu") WWTo2L2NuBackground = true;
     if (datasetString == "WZTo3LNu") WZTo3LNuBackground = true;
+    if (datasetString == "ZZ") ZZBackground = true;
+    if (datasetString == "WW") WWBackground = true;
+    if (datasetString == "WZ") WZBackground = true;
+    if (datasetString == "TTbb_TTToHadronic") TTbb_TTToHadronicBackground = true;
+    if (datasetString == "TTbb_TTToSemiLeptonic") TTbb_TTToSemiLeptonicBackground = true;
+    if (datasetString == "TTbb_TTTo2L2Nu") TTbb_TTTo2L2NuBackground = true;
 
     if (datasetString == "LaraTest") LaraTest = true;
 
