@@ -784,11 +784,6 @@ void DoHLTFilterBeforeAnalysisBackground(UInt_t fileInd){
         //genWeights
         TTreeReaderValue<Float_t> genWeight(myEventsReader, "genWeight");
 
-        //LHE stuff
-        TTreeReaderValue<UInt_t> nLHEPart(myEventsReader, "nLHEPart");
-        TTreeReaderArray<Int_t> LHEPart_pdgId(myEventsReader, "LHEPart_pdgId");
-        TTreeReaderArray<Float_t> LHEPart_pt(myEventsReader, "LHEPart_pt");
-
         //HLT Branches
         TTreeReaderValue<Bool_t> HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02(myEventsReader, "HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02");
         TTreeReaderValue<Bool_t> HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np2(myEventsReader, "HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np2");
