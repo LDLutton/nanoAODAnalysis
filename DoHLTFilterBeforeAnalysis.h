@@ -45,6 +45,14 @@ bool ZZTo2Q2NuBackground = false;
 bool WWTo2L2NuBackground = false;
 bool WZTo3LNuBackground = false;
 
+bool ZZBackground = false;
+bool WWBackground = false;
+bool WZBackground = false;
+
+bool TTbb_TTToHadronicBackground = false;
+bool TTbb_TTTo2L2NuBackground = false;
+bool TTbb_TTToSemiLeptonicBackground = false;
+
 bool LaraTest = false;
 
 float hTobbBR = 0.5772683;
