@@ -557,6 +557,10 @@ void new062022Analysis(string datasetString){
     UInt_t passLepCutInSemiLepChannelCtr = 0;
     UInt_t passSemiLepChannelCtr = 0;
     UInt_t passHadChannelCtr = 0;
+    UInt_t passVBFJetBVetoCtr = 0;
+    UInt_t passVBFJetBVetoLepCtr = 0;
+    UInt_t passVBFJetBVetoSemiLepCtr = 0;
+    UInt_t passVBFJetBVetoHadCtr = 0;
     UInt_t passVBFJetsCtr = 0;
     UInt_t passAsLepCtr = 0;
     UInt_t passAsSemiLepCtr = 0;
@@ -583,6 +587,10 @@ void new062022Analysis(string datasetString){
     Double_t passLepCutInSemiLepChannelWeightedCtr = 0;
     Double_t passSemiLepChannelWeightedCtr = 0.;
     Double_t passHadChannelWeightedCtr = 0.;
+    Double_t passVBFJetBVetoWeightedCtr = 0;
+    Double_t passVBFJetBVetoWeightedLepCtr = 0.;
+    Double_t passVBFJetBVetoWeightedSemiLepCtr = 0.;
+    Double_t passVBFJetBVetoWeightedHadCtr = 0.;
     Double_t passVBFJetsWeightedCtr = 0.;
     Double_t passAsLepWeightedCtr = 0.;
     Double_t passAsSemiLepWeightedCtr = 0.;
@@ -613,6 +621,10 @@ void new062022Analysis(string datasetString){
     UInt_t passLepCutInSemiLepChannelGenLepCtr = 0;
     UInt_t passSemiLepChannelGenLepCtr = 0;
     UInt_t passHadChannelGenLepCtr = 0;
+    UInt_t passVBFJetBVetoGenLepCtr = 0;
+    UInt_t passVBFJetBVetoLepGenLepCtr = 0;
+    UInt_t passVBFJetBVetoSemiLepGenLepCtr = 0;
+    UInt_t passVBFJetBVetoHadGenLepCtr = 0;
     UInt_t passVBFJetsGenLepCtr = 0;
     UInt_t passAsLepGenLepCtr = 0;
     UInt_t passAsSemiLepGenLepCtr = 0;
@@ -638,6 +650,10 @@ void new062022Analysis(string datasetString){
     Double_t passLepCutInSemiLepChannelGenLepWeightedCtr = 0;
     Double_t passSemiLepChannelGenLepWeightedCtr = 0.;
     Double_t passHadChannelGenLepWeightedCtr = 0.;
+    Double_t passVBFJetBVetoGenLepWeightedCtr = 0;
+    Double_t passVBFJetBVetoWeightedLepGenLepCtr = 0.;
+    Double_t passVBFJetBVetoWeightedSemiLepGenLepCtr = 0.;
+    Double_t passVBFJetBVetoWeightedHadGenLepCtr = 0.;
     Double_t passVBFJetsGenLepWeightedCtr = 0.;
     Double_t passAsLepGenLepWeightedCtr = 0.;
     Double_t passAsSemiLepGenLepWeightedCtr = 0.;
@@ -668,6 +684,10 @@ void new062022Analysis(string datasetString){
     UInt_t passLepCutInSemiLepChannelGenSemiLepCtr = 0;
     UInt_t passSemiLepChannelGenSemiLepCtr = 0;
     UInt_t passHadChannelGenSemiLepCtr = 0;
+    UInt_t passVBFJetBVetoGenSemiLepCtr = 0;
+    UInt_t passVBFJetBVetoLepGenSemiLepCtr = 0;
+    UInt_t passVBFJetBVetoSemiLepGenSemiLepCtr = 0;
+    UInt_t passVBFJetBVetoHadGenSemiLepCtr = 0;
     UInt_t passVBFJetsGenSemiLepCtr = 0;
     UInt_t passAsLepGenSemiLepCtr = 0;
     UInt_t passAsSemiLepGenSemiLepCtr = 0;
@@ -693,6 +713,10 @@ void new062022Analysis(string datasetString){
     Double_t passLepCutInSemiLepChannelGenSemiLepWeightedCtr = 0;
     Double_t passSemiLepChannelGenSemiLepWeightedCtr = 0.;
     Double_t passHadChannelGenSemiLepWeightedCtr = 0.;
+    Double_t passVBFJetBVetoGenSemiLepWeightedCtr = 0;
+    Double_t passVBFJetBVetoWeightedLepGenSemiLepCtr = 0.;
+    Double_t passVBFJetBVetoWeightedSemiLepGenSemiLepCtr = 0.;
+    Double_t passVBFJetBVetoWeightedHadGenSemiLepCtr = 0.;
     Double_t passVBFJetsGenSemiLepWeightedCtr = 0.;
     Double_t passAsLepGenSemiLepWeightedCtr = 0.;
     Double_t passAsSemiLepGenSemiLepWeightedCtr = 0.;
@@ -724,6 +748,10 @@ void new062022Analysis(string datasetString){
     UInt_t passLepCutInSemiLepChannelGenHadCtr = 0;
     UInt_t passSemiLepChannelGenHadCtr = 0;
     UInt_t passHadChannelGenHadCtr = 0;
+    UInt_t passVBFJetBVetoGenHadCtr = 0;
+    UInt_t passVBFJetBVetoLepGenHadCtr = 0;
+    UInt_t passVBFJetBVetoSemiLepGenHadCtr = 0;
+    UInt_t passVBFJetBVetoHadGenHadCtr = 0;
     UInt_t passVBFJetsGenHadCtr = 0;
     UInt_t passAsLepGenHadCtr = 0;
     UInt_t passAsSemiLepGenHadCtr = 0;
@@ -749,6 +777,10 @@ void new062022Analysis(string datasetString){
     Double_t passLepCutInSemiLepChannelGenHadWeightedCtr = 0;
     Double_t passSemiLepChannelGenHadWeightedCtr = 0.;
     Double_t passHadChannelGenHadWeightedCtr = 0.;
+    Double_t passVBFJetBVetoGenHadWeightedCtr = 0;
+    Double_t passVBFJetBVetoWeightedLepGenHadCtr = 0.;
+    Double_t passVBFJetBVetoWeightedSemiLepGenHadCtr = 0.;
+    Double_t passVBFJetBVetoWeightedHadGenHadCtr = 0.;
     Double_t passVBFJetsGenHadWeightedCtr = 0.;
     Double_t passAsLepGenHadWeightedCtr = 0.;
     Double_t passAsSemiLepGenHadWeightedCtr = 0.;
@@ -779,6 +811,10 @@ void new062022Analysis(string datasetString){
     UInt_t passLepCutInSemiLepChannelGenOtherCtr = 0;
     UInt_t passSemiLepChannelGenOtherCtr = 0;
     UInt_t passHadChannelGenOtherCtr = 0;
+    UInt_t passVBFJetBVetoGenOtherCtr = 0;
+    UInt_t passVBFJetBVetoLepGenOtherCtr = 0;
+    UInt_t passVBFJetBVetoSemiLepGenOtherCtr = 0;
+    UInt_t passVBFJetBVetoHadGenOtherCtr = 0;
     UInt_t passVBFJetsGenOtherCtr = 0;
     UInt_t passAsLepGenOtherCtr = 0;
     UInt_t passAsSemiLepGenOtherCtr = 0;
@@ -804,6 +840,10 @@ void new062022Analysis(string datasetString){
     Double_t passLepCutInSemiLepChannelGenOtherWeightedCtr = 0;
     Double_t passSemiLepChannelGenOtherWeightedCtr = 0.;
     Double_t passHadChannelGenOtherWeightedCtr = 0.;
+    Double_t passVBFJetBVetoGenOtherWeightedCtr = 0;
+    Double_t passVBFJetBVetoWeightedLepGenOtherCtr = 0.;
+    Double_t passVBFJetBVetoWeightedSemiLepGenOtherCtr = 0.;
+    Double_t passVBFJetBVetoWeightedHadGenOtherCtr = 0.;
     Double_t passVBFJetsGenOtherWeightedCtr = 0.;
     Double_t passAsLepGenOtherWeightedCtr = 0.;
     Double_t passAsSemiLepGenOtherWeightedCtr = 0.;
@@ -837,6 +877,10 @@ void new062022Analysis(string datasetString){
     UInt_t passLepCutInSemiLepChannelGenLepNoHTobbCtr = 0;
     UInt_t passSemiLepChannelGenLepNoHTobbCtr = 0;
     UInt_t passHadChannelGenLepNoHTobbCtr = 0;
+    UInt_t passVBFJetBVetoGenLepNoHTobbCtr = 0;
+    UInt_t passVBFJetBVetoLepGenLepNoHTobbCtr = 0;
+    UInt_t passVBFJetBVetoSemiLepGenLepNoHTobbCtr = 0;
+    UInt_t passVBFJetBVetoHadGenLepNoHTobbCtr = 0;
     UInt_t passVBFJetsGenLepNoHTobbCtr = 0;
     UInt_t passAsLepGenLepNoHTobbCtr = 0;
     UInt_t passAsSemiLepGenLepNoHTobbCtr = 0;
@@ -862,6 +906,10 @@ void new062022Analysis(string datasetString){
     Double_t passLepCutInSemiLepChannelGenLepNoHTobbWeightedCtr = 0;
     Double_t passSemiLepChannelGenLepNoHTobbWeightedCtr = 0.;
     Double_t passHadChannelGenLepNoHTobbWeightedCtr = 0.;
+    Double_t passVBFJetBVetoGenLepNoHTobbWeightedCtr = 0;
+    Double_t passVBFJetBVetoWeightedLepGenLepNoHTobbCtr = 0.;
+    Double_t passVBFJetBVetoWeightedSemiLepGenLepNoHTobbCtr = 0.;
+    Double_t passVBFJetBVetoWeightedHadGenLepNoHTobbCtr = 0.;
     Double_t passVBFJetsGenLepNoHTobbWeightedCtr = 0.;
     Double_t passAsLepGenLepNoHTobbWeightedCtr = 0.;
     Double_t passAsSemiLepGenLepNoHTobbWeightedCtr = 0.;
@@ -892,6 +940,10 @@ void new062022Analysis(string datasetString){
     UInt_t passLepCutInSemiLepChannelGenSemiLepNoHTobbCtr = 0;
     UInt_t passSemiLepChannelGenSemiLepNoHTobbCtr = 0;
     UInt_t passHadChannelGenSemiLepNoHTobbCtr = 0;
+    UInt_t passVBFJetBVetoGenSemiLepNoHTobbCtr = 0;
+    UInt_t passVBFJetBVetoLepGenSemiLepNoHTobbCtr = 0;
+    UInt_t passVBFJetBVetoSemiLepGenSemiLepNoHTobbCtr = 0;
+    UInt_t passVBFJetBVetoHadGenSemiLepNoHTobbCtr = 0;
     UInt_t passVBFJetsGenSemiLepNoHTobbCtr = 0;
     UInt_t passAsLepGenSemiLepNoHTobbCtr = 0;
     UInt_t passAsSemiLepGenSemiLepNoHTobbCtr = 0;
@@ -917,6 +969,10 @@ void new062022Analysis(string datasetString){
     Double_t passLepCutInSemiLepChannelGenSemiLepNoHTobbWeightedCtr = 0;
     Double_t passSemiLepChannelGenSemiLepNoHTobbWeightedCtr = 0.;
     Double_t passHadChannelGenSemiLepNoHTobbWeightedCtr = 0.;
+    Double_t passVBFJetBVetoGenSemiLepNoHTobbWeightedCtr = 0;
+    Double_t passVBFJetBVetoWeightedLepGenSemiLepNoHTobbCtr = 0.;
+    Double_t passVBFJetBVetoWeightedSemiLepGenSemiLepNoHTobbCtr = 0.;
+    Double_t passVBFJetBVetoWeightedHadGenSemiLepNoHTobbCtr = 0.;
     Double_t passVBFJetsGenSemiLepNoHTobbWeightedCtr = 0.;
     Double_t passAsLepGenSemiLepNoHTobbWeightedCtr = 0.;
     Double_t passAsSemiLepGenSemiLepNoHTobbWeightedCtr = 0.;
@@ -948,6 +1004,10 @@ void new062022Analysis(string datasetString){
     UInt_t passLepCutInSemiLepChannelGenHadNoHTobbCtr = 0;
     UInt_t passSemiLepChannelGenHadNoHTobbCtr = 0;
     UInt_t passHadChannelGenHadNoHTobbCtr = 0;
+    UInt_t passVBFJetBVetoGenHadNoHTobbCtr = 0;
+    UInt_t passVBFJetBVetoLepGenHadNoHTobbCtr = 0;
+    UInt_t passVBFJetBVetoSemiLepGenHadNoHTobbCtr = 0;
+    UInt_t passVBFJetBVetoHadGenHadNoHTobbCtr = 0;
     UInt_t passVBFJetsGenHadNoHTobbCtr = 0;
     UInt_t passAsLepGenHadNoHTobbCtr = 0;
     UInt_t passAsSemiLepGenHadNoHTobbCtr = 0;
@@ -973,6 +1033,10 @@ void new062022Analysis(string datasetString){
     Double_t passLepCutInSemiLepChannelGenHadNoHTobbWeightedCtr = 0;
     Double_t passSemiLepChannelGenHadNoHTobbWeightedCtr = 0.;
     Double_t passHadChannelGenHadNoHTobbWeightedCtr = 0.;
+    Double_t passVBFJetBVetoGenHadNoHTobbWeightedCtr = 0;
+    Double_t passVBFJetBVetoWeightedLepGenHadNoHTobbCtr = 0.;
+    Double_t passVBFJetBVetoWeightedSemiLepGenHadNoHTobbCtr = 0.;
+    Double_t passVBFJetBVetoWeightedHadGenHadNoHTobbCtr = 0.;
     Double_t passVBFJetsGenHadNoHTobbWeightedCtr = 0.;
     Double_t passAsLepGenHadNoHTobbWeightedCtr = 0.;
     Double_t passAsSemiLepGenHadNoHTobbWeightedCtr = 0.;
@@ -1003,6 +1067,10 @@ void new062022Analysis(string datasetString){
     UInt_t passLepCutInSemiLepChannelGenOtherNoHTobbCtr = 0;
     UInt_t passSemiLepChannelGenOtherNoHTobbCtr = 0;
     UInt_t passHadChannelGenOtherNoHTobbCtr = 0;
+    UInt_t passVBFJetBVetoGenOtherNoHTobbCtr = 0;
+    UInt_t passVBFJetBVetoLepGenOtherNoHTobbCtr = 0;
+    UInt_t passVBFJetBVetoSemiLepGenOtherNoHTobbCtr = 0;
+    UInt_t passVBFJetBVetoHadGenOtherNoHTobbCtr = 0;
     UInt_t passVBFJetsGenOtherNoHTobbCtr = 0;
     UInt_t passAsLepGenOtherNoHTobbCtr = 0;
     UInt_t passAsSemiLepGenOtherNoHTobbCtr = 0;
@@ -1028,6 +1096,10 @@ void new062022Analysis(string datasetString){
     Double_t passLepCutInSemiLepChannelGenOtherNoHTobbWeightedCtr = 0;
     Double_t passSemiLepChannelGenOtherNoHTobbWeightedCtr = 0.;
     Double_t passHadChannelGenOtherNoHTobbWeightedCtr = 0.;
+    Double_t passVBFJetBVetoGenOtherNoHTobbWeightedCtr = 0;
+    Double_t passVBFJetBVetoWeightedLepGenOtherNoHTobbCtr = 0.;
+    Double_t passVBFJetBVetoWeightedSemiLepGenOtherNoHTobbCtr = 0.;
+    Double_t passVBFJetBVetoWeightedHadGenOtherNoHTobbCtr = 0.;
     Double_t passVBFJetsGenOtherNoHTobbWeightedCtr = 0.;
     Double_t passAsLepGenOtherNoHTobbWeightedCtr = 0.;
     Double_t passAsSemiLepGenOtherNoHTobbWeightedCtr = 0.;
@@ -2497,6 +2569,182 @@ void new062022Analysis(string datasetString){
             float jetTrailingPhi = 0;
             float jetLeadEta     = 0;
             float jetTrailingEta = 0;
+
+            //B jet veto
+            bool passBJetVeto = true;
+            doBJetVeto(nJetLen,Jet_ptL,Jet_etaL,Jet_phiL,Jet_btagDeepFlavBL,hFatJet_phi_fromHTag,hFatJet_eta_fromHTag,dRCut,passBJetVeto,debug);
+            if (!passBJetVeto) continue;
+
+            passVBFJetBVetoCtr += 1;
+            passVBFJetBVetoWeightedCtr += tmpGenWeights;
+            if (!isBackground){ 
+                if (*HTobbBoolL){
+                    if (*genChannelL == 0) {
+                        passVBFJetBVetoGenLepCtr += 1;
+                        passVBFJetBVetoGenLepWeightedCtr += tmpGenWeights;
+                    }
+                    if (*genChannelL == 1) {
+                        passVBFJetBVetoGenSemiLepCtr += 1;
+                        passVBFJetBVetoGenSemiLepWeightedCtr += tmpGenWeights;
+                    }
+                    if (*genChannelL == 2) {
+                        passVBFJetBVetoGenHadCtr += 1;
+                        passVBFJetBVetoGenHadWeightedCtr += tmpGenWeights;
+                    }
+                    if (*genChannelL == 3) {
+                        passVBFJetBVetoGenOtherCtr += 1;
+                        passVBFJetBVetoGenOtherWeightedCtr += tmpGenWeights;
+                    }
+                }
+                else {
+                    if (*genChannelL == 0) {
+                        passVBFJetBVetoGenLepNoHTobbCtr += 1;
+                        passVBFJetBVetoGenLepNoHTobbWeightedCtr += tmpGenWeights;
+                    }
+                    if (*genChannelL == 1) {
+                        passVBFJetBVetoGenSemiLepNoHTobbCtr += 1;
+                        passVBFJetBVetoGenSemiLepNoHTobbWeightedCtr += tmpGenWeights;
+                    }
+                    if (*genChannelL == 2) {
+                        passVBFJetBVetoGenHadNoHTobbCtr += 1;
+                        passVBFJetBVetoGenHadNoHTobbWeightedCtr += tmpGenWeights;
+                    }
+                    if (*genChannelL == 3) {
+                        passVBFJetBVetoGenOtherNoHTobbCtr += 1;
+                        passVBFJetBVetoGenOtherNoHTobbWeightedCtr += tmpGenWeights;
+                    }
+                }
+            }
+
+            if (passedAsLepBool) {
+                passVBFJetBVetoLepCtr += 1;
+                passVBFJetBVetoWeightedLepCtr += tmpGenWeights;
+                if (!isBackground){ 
+                    if (*HTobbBoolL){
+                        if (*genChannelL == 0) {
+                            passVBFJetBVetoLepGenLepCtr += 1;
+                            passVBFJetBVetoWeightedLepGenLepCtr += tmpGenWeights;
+                        }
+                        if (*genChannelL == 1) {
+                            passVBFJetBVetoLepGenSemiLepCtr += 1;
+                            passVBFJetBVetoWeightedLepGenSemiLepCtr += tmpGenWeights;
+                        }
+                        if (*genChannelL == 2) {
+                            passVBFJetBVetoLepGenHadCtr += 1;
+                            passVBFJetBVetoWeightedLepGenHadCtr += tmpGenWeights;
+                        }
+                        if (*genChannelL == 3) {
+                            passVBFJetBVetoLepGenOtherCtr += 1;
+                            passVBFJetBVetoWeightedLepGenOtherCtr += tmpGenWeights;
+                        }
+                    }
+                    else {
+                        if (*genChannelL == 0) {
+                            passVBFJetBVetoLepGenLepNoHTobbCtr += 1;
+                            passVBFJetBVetoWeightedLepGenLepNoHTobbCtr += tmpGenWeights;
+                        }
+                        if (*genChannelL == 1) {
+                            passVBFJetBVetoLepGenSemiLepNoHTobbCtr += 1;
+                            passVBFJetBVetoWeightedLepGenSemiLepNoHTobbCtr += tmpGenWeights;
+                        }
+                        if (*genChannelL == 2) {
+                            passVBFJetBVetoLepGenHadNoHTobbCtr += 1;
+                            passVBFJetBVetoWeightedLepGenHadNoHTobbCtr += tmpGenWeights;
+                        }
+                        if (*genChannelL == 3) {
+                            passVBFJetBVetoLepGenOtherNoHTobbCtr += 1;
+                            passVBFJetBVetoWeightedLepGenOtherNoHTobbCtr += tmpGenWeights;
+                        }
+                    }
+                }
+            }
+            else if (passedAsSemiLepBool) {
+                passVBFJetBVetoSemiLepCtr += 1;
+                passVBFJetBVetoWeightedSemiLepCtr += tmpGenWeights;
+                if (!isBackground){ 
+                    if (*HTobbBoolL){
+                        if (*genChannelL == 0) {
+                            passVBFJetBVetoSemiLepGenLepCtr += 1;
+                            passVBFJetBVetoWeightedSemiLepGenLepCtr += tmpGenWeights;
+                        }
+                        if (*genChannelL == 1) {
+                            passVBFJetBVetoSemiLepGenSemiLepCtr += 1;
+                            passVBFJetBVetoWeightedSemiLepGenSemiLepCtr += tmpGenWeights;
+                        }
+                        if (*genChannelL == 2) {
+                            passVBFJetBVetoSemiLepGenHadCtr += 1;
+                            passVBFJetBVetoWeightedSemiLepGenHadCtr += tmpGenWeights;
+                        }
+                        if (*genChannelL == 3) {
+                            passVBFJetBVetoSemiLepGenOtherCtr += 1;
+                            passVBFJetBVetoWeightedSemiLepGenOtherCtr += tmpGenWeights;
+                        }
+                    }
+                    else {
+                        if (*genChannelL == 0) {
+                            passVBFJetBVetoSemiLepGenLepNoHTobbCtr += 1;
+                            passVBFJetBVetoWeightedSemiLepGenLepNoHTobbCtr += tmpGenWeights;
+                        }
+                        if (*genChannelL == 1) {
+                            passVBFJetBVetoSemiLepGenSemiLepNoHTobbCtr += 1;
+                            passVBFJetBVetoWeightedSemiLepGenSemiLepNoHTobbCtr += tmpGenWeights;
+                        }
+                        if (*genChannelL == 2) {
+                            passVBFJetBVetoSemiLepGenHadNoHTobbCtr += 1;
+                            passVBFJetBVetoWeightedSemiLepGenHadNoHTobbCtr += tmpGenWeights;
+                        }
+                        if (*genChannelL == 3) {
+                            passVBFJetBVetoSemiLepGenOtherNoHTobbCtr += 1;
+                            passVBFJetBVetoWeightedSemiLepGenOtherNoHTobbCtr += tmpGenWeights;
+                        }
+                    }
+                }
+            }
+            else if (passedAsHadBool) {
+                passVBFJetBVetoHadCtr += 1;
+                passVBFJetBVetoWeightedHadCtr += tmpGenWeights;
+                if (!isBackground){ 
+                    if (*HTobbBoolL){
+                        if (*genChannelL == 0) {
+                            passVBFJetBVetoHadGenLepCtr += 1;
+                            passVBFJetBVetoWeightedHadGenLepCtr += tmpGenWeights;
+                        }
+                        if (*genChannelL == 1) {
+                            passVBFJetBVetoHadGenSemiLepCtr += 1;
+                            passVBFJetBVetoWeightedHadGenSemiLepCtr += tmpGenWeights;
+                        }
+                        if (*genChannelL == 2) {
+                            passVBFJetBVetoHadGenHadCtr += 1;
+                            passVBFJetBVetoWeightedHadGenHadCtr += tmpGenWeights;
+                        }
+                        if (*genChannelL == 3) {
+                            passVBFJetBVetoHadGenOtherCtr += 1;
+                            passVBFJetBVetoWeightedHadGenOtherCtr += tmpGenWeights;
+                        }
+                    }
+                    else {
+                        if (*genChannelL == 0) {
+                            passVBFJetBVetoHadGenLepNoHTobbCtr += 1;
+                            passVBFJetBVetoWeightedHadGenLepNoHTobbCtr += tmpGenWeights;
+                        }
+                        if (*genChannelL == 1) {
+                            passVBFJetBVetoHadGenSemiLepNoHTobbCtr += 1;
+                            passVBFJetBVetoWeightedHadGenSemiLepNoHTobbCtr += tmpGenWeights;
+                        }
+                        if (*genChannelL == 2) {
+                            passVBFJetBVetoHadGenHadNoHTobbCtr += 1;
+                            passVBFJetBVetoWeightedHadGenHadNoHTobbCtr += tmpGenWeights;
+                        }
+                        if (*genChannelL == 3) {
+                            passVBFJetBVetoHadGenOtherNoHTobbCtr += 1;
+                            passVBFJetBVetoWeightedHadGenOtherNoHTobbCtr += tmpGenWeights;
+                        }
+                    }
+                }
+            }
+
+
+
             if (debug) std::cout << "Entering jet loop. Len: " << nJetLen << "\n";
             doVBFJetCutPtSelection(nJetLen,Jet_ptL,Jet_jetIdL,Jet_etaL,Jet_phiL,Jet_massL,jetPTCut,jetEtaDifCut,jetInvMassCut,jetPairInvMass,jetLeadPt,jetLeadEta,jetLeadPhi,jetTrailingPt,jetTrailingEta,jetTrailingPhi,leadJet_1,leadJet_2,dRCheckVecAr,dRCut,debug);
             //std::cout << jetLeadPt << endl;
@@ -2765,6 +3013,18 @@ void new062022Analysis(string datasetString){
     std::cout << "UInt_t " << saveName << "PassHiggsFJHadCtr = " << passHiggsFJHadCtr << "\n";
     std::cout << "Double_t " << saveName << "passHiggsFJWeightedHadCtr = " << passHiggsFJWeightedHadCtr << "\n";
     std::cout << "------------------------\n";
+    std::cout << "UInt_t " << saveName << "PassVBFJetBVetoCtr = " << passVBFJetBVetoCtr << "\n";
+    std::cout << "Double_t " << saveName << "PassVBFJetBVetoWeightedCtr = " << passVBFJetBVetoWeightedCtr << "\n";
+    std::cout << "------------------------\n";
+    std::cout << "UInt_t " << saveName << "PassVBFJetBVetoLepCtr = " << passVBFJetBVetoLepCtr << "\n";
+    std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedLepCtr = " << passVBFJetBVetoWeightedLepCtr << "\n";
+    std::cout << "------------------------\n";
+    std::cout << "UInt_t " << saveName << "PassVBFJetBVetoSemiLepCtr = " << passVBFJetBVetoSemiLepCtr << "\n";
+    std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedSemiLepCtr = " << passVBFJetBVetoWeightedSemiLepCtr << "\n";
+    std::cout << "------------------------\n";
+    std::cout << "UInt_t " << saveName << "PassVBFJetBVetoHadCtr = " << passVBFJetBVetoHadCtr << "\n";
+    std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedHadCtr = " << passVBFJetBVetoWeightedHadCtr << "\n";
+    std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "PassVBFJetsCtr = " << passVBFJetsCtr << "\n";
     std::cout << "Double_t " << saveName << "PassVBFJetsWeightedCtr = " << passVBFJetsWeightedCtr << "\n";
     std::cout << "------------------------\n";
@@ -2837,6 +3097,18 @@ void new062022Analysis(string datasetString){
         std::cout << "UInt_t " << saveName << "PassHiggsFJHadGenLepCtr = " << passHiggsFJHadGenLepCtr << "\n";
         std::cout << "Double_t " << saveName << "passHiggsFJWeightedHadGenLepCtr = " << passHiggsFJWeightedHadGenLepCtr << "\n";
         std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoGenLepCtr = " << passVBFJetBVetoGenLepCtr << "\n";
+        std::cout << "Double_t " << saveName << "PassVBFJetBVetoGenLepWeightedCtr = " << passVBFJetBVetoGenLepWeightedCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoLepGenLepCtr = " << passVBFJetBVetoLepGenLepCtr << "\n";
+        std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedLepGenLepCtr = " << passVBFJetBVetoWeightedLepGenLepCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoSemiLepGenLepCtr = " << passVBFJetBVetoSemiLepGenLepCtr << "\n";
+        std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedSemiLepGenLepCtr = " << passVBFJetBVetoWeightedSemiLepGenLepCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoHadGenLepCtr = " << passVBFJetBVetoHadGenLepCtr << "\n";
+        std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedHadGenLepCtr = " << passVBFJetBVetoWeightedHadGenLepCtr << "\n";
+        std::cout << "------------------------\n";
         std::cout << "UInt_t " << saveName << "PassVBFJetsGenLepCtr = " << passVBFJetsGenLepCtr << "\n";
         std::cout << "Double_t " << saveName << "PassVBFJetsGenLepWeightedCtr = " << passVBFJetsGenLepWeightedCtr << "\n";
         std::cout << "------------------------\n";
@@ -2906,6 +3178,18 @@ void new062022Analysis(string datasetString){
         std::cout << "------------------------\n";
         std::cout << "UInt_t " << saveName << "PassHiggsFJHadGenSemiLepCtr = " << passHiggsFJHadGenSemiLepCtr << "\n";
         std::cout << "Double_t " << saveName << "passHiggsFJWeightedHadGenSemiLepCtr = " << passHiggsFJWeightedHadGenSemiLepCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoGenSemiLepCtr = " << passVBFJetBVetoGenSemiLepCtr << "\n";
+        std::cout << "Double_t " << saveName << "PassVBFJetBVetoGenSemiLepWeightedCtr = " << passVBFJetBVetoGenSemiLepWeightedCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoLepGenSemiLepCtr = " << passVBFJetBVetoLepGenSemiLepCtr << "\n";
+        std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedLepGenSemiLepCtr = " << passVBFJetBVetoWeightedLepGenSemiLepCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoSemiLepGenSemiLepCtr = " << passVBFJetBVetoSemiLepGenSemiLepCtr << "\n";
+        std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedSemiLepGenSemiLepCtr = " << passVBFJetBVetoWeightedSemiLepGenSemiLepCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoHadGenSemiLepCtr = " << passVBFJetBVetoHadGenSemiLepCtr << "\n";
+        std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedHadGenSemiLepCtr = " << passVBFJetBVetoWeightedHadGenSemiLepCtr << "\n";
         std::cout << "------------------------\n";
         std::cout << "UInt_t " << saveName << "PassVBFJetsGenSemiLepCtr = " << passVBFJetsGenSemiLepCtr << "\n";
         std::cout << "Double_t " << saveName << "PassVBFJetsGenSemiLepWeightedCtr = " << passVBFJetsGenSemiLepWeightedCtr << "\n";
@@ -2977,6 +3261,18 @@ void new062022Analysis(string datasetString){
         std::cout << "UInt_t " << saveName << "PassHiggsFJHadGenHadCtr = " << passHiggsFJHadGenHadCtr << "\n";
         std::cout << "Double_t " << saveName << "passHiggsFJWeightedHadGenHadCtr = " << passHiggsFJWeightedHadGenHadCtr << "\n";
         std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoGenHadCtr = " << passVBFJetBVetoGenHadCtr << "\n";
+        std::cout << "Double_t " << saveName << "PassVBFJetBVetoGenHadWeightedCtr = " << passVBFJetBVetoGenHadWeightedCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoLepGenHadCtr = " << passVBFJetBVetoLepGenHadCtr << "\n";
+        std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedLepGenHadCtr = " << passVBFJetBVetoWeightedLepGenHadCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoSemiLepGenHadCtr = " << passVBFJetBVetoSemiLepGenHadCtr << "\n";
+        std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedSemiLepGenHadCtr = " << passVBFJetBVetoWeightedSemiLepGenHadCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoHadGenHadCtr = " << passVBFJetBVetoHadGenHadCtr << "\n";
+        std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedHadGenHadCtr = " << passVBFJetBVetoWeightedHadGenHadCtr << "\n";
+        std::cout << "------------------------\n";
         std::cout << "UInt_t " << saveName << "PassVBFJetsGenHadCtr = " << passVBFJetsGenHadCtr << "\n";
         std::cout << "Double_t " << saveName << "PassVBFJetsGenHadWeightedCtr = " << passVBFJetsGenHadWeightedCtr << "\n";
         std::cout << "------------------------\n";
@@ -3046,6 +3342,18 @@ void new062022Analysis(string datasetString){
         std::cout << "------------------------\n";
         std::cout << "UInt_t " << saveName << "PassHiggsFJHadGenOtherCtr = " << passHiggsFJHadGenOtherCtr << "\n";
         std::cout << "Double_t " << saveName << "passHiggsFJWeightedHadGenOtherCtr = " << passHiggsFJWeightedHadGenOtherCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoGenOtherCtr = " << passVBFJetBVetoGenOtherCtr << "\n";
+        std::cout << "Double_t " << saveName << "PassVBFJetBVetoGenOtherWeightedCtr = " << passVBFJetBVetoGenOtherWeightedCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoLepGenOtherCtr = " << passVBFJetBVetoLepGenOtherCtr << "\n";
+        std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedLepGenOtherCtr = " << passVBFJetBVetoWeightedLepGenOtherCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoSemiLepGenOtherCtr = " << passVBFJetBVetoSemiLepGenOtherCtr << "\n";
+        std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedSemiLepGenOtherCtr = " << passVBFJetBVetoWeightedSemiLepGenOtherCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoHadGenOtherCtr = " << passVBFJetBVetoHadGenOtherCtr << "\n";
+        std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedHadGenOtherCtr = " << passVBFJetBVetoWeightedHadGenOtherCtr << "\n";
         std::cout << "------------------------\n";
         std::cout << "UInt_t " << saveName << "PassVBFJetsGenOtherCtr = " << passVBFJetsGenOtherCtr << "\n";
         std::cout << "Double_t " << saveName << "PassVBFJetsGenOtherWeightedCtr = " << passVBFJetsGenOtherWeightedCtr << "\n";
@@ -3122,6 +3430,18 @@ void new062022Analysis(string datasetString){
         std::cout << "UInt_t " << saveName << "PassHiggsFJHadGenLepNoHTobbCtr = " << passHiggsFJHadGenLepNoHTobbCtr << "\n";
         std::cout << "Double_t " << saveName << "passHiggsFJWeightedHadGenLepNoHTobbCtr = " << passHiggsFJWeightedHadGenLepNoHTobbCtr << "\n";
         std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoGenLepNoHTobbCtr = " << passVBFJetBVetoGenLepNoHTobbCtr << "\n";
+        std::cout << "Double_t " << saveName << "PassVBFJetBVetoGenLepNoHTobbWeightedCtr = " << passVBFJetBVetoGenLepNoHTobbWeightedCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoLepGenLepNoHTobbCtr = " << passVBFJetBVetoLepGenLepNoHTobbCtr << "\n";
+        std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedLepGenLepNoHTobbCtr = " << passVBFJetBVetoWeightedLepGenLepNoHTobbCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoSemiLepGenLepNoHTobbCtr = " << passVBFJetBVetoSemiLepGenLepNoHTobbCtr << "\n";
+        std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedSemiLepGenLepNoHTobbCtr = " << passVBFJetBVetoWeightedSemiLepGenLepNoHTobbCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoHadGenLepNoHTobbCtr = " << passVBFJetBVetoHadGenLepNoHTobbCtr << "\n";
+        std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedHadGenLepNoHTobbCtr = " << passVBFJetBVetoWeightedHadGenLepNoHTobbCtr << "\n";
+        std::cout << "------------------------\n";
         std::cout << "UInt_t " << saveName << "PassVBFJetsGenLepNoHTobbCtr = " << passVBFJetsGenLepNoHTobbCtr << "\n";
         std::cout << "Double_t " << saveName << "PassVBFJetsGenLepNoHTobbWeightedCtr = " << passVBFJetsGenLepNoHTobbWeightedCtr << "\n";
         std::cout << "------------------------\n";
@@ -3193,6 +3513,18 @@ void new062022Analysis(string datasetString){
         std::cout << "UInt_t " << saveName << "PassHiggsFJHadGenSemiLepNoHTobbCtr = " << passHiggsFJHadGenSemiLepNoHTobbCtr << "\n";
         std::cout << "Double_t " << saveName << "passHiggsFJWeightedHadGenSemiLepNoHTobbCtr = " << passHiggsFJWeightedHadGenSemiLepNoHTobbCtr << "\n";
         std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoGenSemiLepNoHTobbCtr = " << passVBFJetBVetoGenSemiLepNoHTobbCtr << "\n";
+        std::cout << "Double_t " << saveName << "PassVBFJetBVetoGenSemiLepNoHTobbWeightedCtr = " << passVBFJetBVetoGenSemiLepNoHTobbWeightedCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoLepGenSemiLepNoHTobbCtr = " << passVBFJetBVetoLepGenSemiLepNoHTobbCtr << "\n";
+        std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedLepGenSemiLepNoHTobbCtr = " << passVBFJetBVetoWeightedLepGenSemiLepNoHTobbCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoSemiLepGenSemiLepNoHTobbCtr = " << passVBFJetBVetoSemiLepGenSemiLepNoHTobbCtr << "\n";
+        std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedSemiLepGenSemiLepNoHTobbCtr = " << passVBFJetBVetoWeightedSemiLepGenSemiLepNoHTobbCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoHadGenSemiLepNoHTobbCtr = " << passVBFJetBVetoHadGenSemiLepNoHTobbCtr << "\n";
+        std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedHadGenSemiLepNoHTobbCtr = " << passVBFJetBVetoWeightedHadGenSemiLepNoHTobbCtr << "\n";
+        std::cout << "------------------------\n";
         std::cout << "UInt_t " << saveName << "PassVBFJetsGenSemiLepNoHTobbCtr = " << passVBFJetsGenSemiLepNoHTobbCtr << "\n";
         std::cout << "Double_t " << saveName << "PassVBFJetsGenSemiLepNoHTobbWeightedCtr = " << passVBFJetsGenSemiLepNoHTobbWeightedCtr << "\n";
         std::cout << "------------------------\n";
@@ -3263,6 +3595,18 @@ void new062022Analysis(string datasetString){
         std::cout << "UInt_t " << saveName << "PassHiggsFJHadGenHadNoHTobbCtr = " << passHiggsFJHadGenHadNoHTobbCtr << "\n";
         std::cout << "Double_t " << saveName << "passHiggsFJWeightedHadGenHadNoHTobbCtr = " << passHiggsFJWeightedHadGenHadNoHTobbCtr << "\n";
         std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoGenHadNoHTobbCtr = " << passVBFJetBVetoGenHadNoHTobbCtr << "\n";
+        std::cout << "Double_t " << saveName << "PassVBFJetBVetoGenHadNoHTobbWeightedCtr = " << passVBFJetBVetoGenHadNoHTobbWeightedCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoLepGenHadNoHTobbCtr = " << passVBFJetBVetoLepGenHadNoHTobbCtr << "\n";
+        std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedLepGenHadNoHTobbCtr = " << passVBFJetBVetoWeightedLepGenHadNoHTobbCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoSemiLepGenHadNoHTobbCtr = " << passVBFJetBVetoSemiLepGenHadNoHTobbCtr << "\n";
+        std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedSemiLepGenHadNoHTobbCtr = " << passVBFJetBVetoWeightedSemiLepGenHadNoHTobbCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoHadGenHadNoHTobbCtr = " << passVBFJetBVetoHadGenHadNoHTobbCtr << "\n";
+        std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedHadGenHadNoHTobbCtr = " << passVBFJetBVetoWeightedHadGenHadNoHTobbCtr << "\n";
+        std::cout << "------------------------\n";
         std::cout << "UInt_t " << saveName << "PassVBFJetsGenHadNoHTobbCtr = " << passVBFJetsGenHadNoHTobbCtr << "\n";
         std::cout << "Double_t " << saveName << "PassVBFJetsGenHadNoHTobbWeightedCtr = " << passVBFJetsGenHadNoHTobbWeightedCtr << "\n";
         std::cout << "------------------------\n";
@@ -3332,6 +3676,18 @@ void new062022Analysis(string datasetString){
         std::cout << "------------------------\n";
         std::cout << "UInt_t " << saveName << "PassHiggsFJHadGenOtherNoHTobbCtr = " << passHiggsFJHadGenOtherNoHTobbCtr << "\n";
         std::cout << "Double_t " << saveName << "passHiggsFJWeightedHadGenOtherNoHTobbCtr = " << passHiggsFJWeightedHadGenOtherNoHTobbCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoGenOtherNoHTobbCtr = " << passVBFJetBVetoGenOtherNoHTobbCtr << "\n";
+        std::cout << "Double_t " << saveName << "PassVBFJetBVetoGenOtherNoHTobbWeightedCtr = " << passVBFJetBVetoGenOtherNoHTobbWeightedCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoLepGenOtherNoHTobbCtr = " << passVBFJetBVetoLepGenOtherNoHTobbCtr << "\n";
+        std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedLepGenOtherNoHTobbCtr = " << passVBFJetBVetoWeightedLepGenOtherNoHTobbCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoSemiLepGenOtherNoHTobbCtr = " << passVBFJetBVetoSemiLepGenOtherNoHTobbCtr << "\n";
+        std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedSemiLepGenOtherNoHTobbCtr = " << passVBFJetBVetoWeightedSemiLepGenOtherNoHTobbCtr << "\n";
+        std::cout << "------------------------\n";
+        std::cout << "UInt_t " << saveName << "PassVBFJetBVetoHadGenOtherNoHTobbCtr = " << passVBFJetBVetoHadGenOtherNoHTobbCtr << "\n";
+        std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedHadGenOtherNoHTobbCtr = " << passVBFJetBVetoWeightedHadGenOtherNoHTobbCtr << "\n";
         std::cout << "------------------------\n";
         std::cout << "UInt_t " << saveName << "PassVBFJetsGenOtherNoHTobbCtr = " << passVBFJetsGenOtherNoHTobbCtr << "\n";
         std::cout << "Double_t " << saveName << "PassVBFJetsGenOtherNoHTobbWeightedCtr = " << passVBFJetsGenOtherNoHTobbWeightedCtr << "\n";

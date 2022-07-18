@@ -564,6 +564,27 @@ void doVBFJetCut(UInt_t nJetLen,TTreeReaderArray<Float_t> &Jet_pt,TTreeReaderArr
     //debug = false;
 }
 
+void doBJetVeto(UInt_t nJetLen,TTreeReaderArray<Float_t> &Jet_pt,TTreeReaderArray<Float_t> &Jet_eta,TTreeReaderArray<Float_t> &Jet_phi,TTreeReaderArray<Float_t> &Jet_btagDeepFlavB,float &hFatJet_phi_fromHParticleNet,float &hFatJet_eta_fromHParticleNet,float dRCut,bool &passesCut,bool debug){
+    //debug = true;
+    //std::cout << "++++++++ "<< VBFJetdRCut << "\n";
+    passesCut = true;
+    for (UInt_t jetIndOne=0; jetIndOne<nJetLen-1;jetIndOne++){
+        float jetPtOne = Jet_pt[jetIndOne];
+        if (jetPtOne >= 30){
+            float jetEtaOne = Jet_eta[jetIndOne];
+            if (abs(jetEtaOne) <= 2.5){
+                float jetPhiOne = Jet_phi[jetIndOne];
+                float tmpDeltaR = calcDeltaR(jetPhiOne,jetEtaOne,hFatJet_phi_fromHParticleNet,hFatJet_eta_fromHParticleNet);
+                if (tmpDeltaR < dRCut) {
+                    float tmpJetBTag = Jet_btagDeepFlavB[jetIndOne];
+                    if (tmpJetBTag > 0.7100) passesCut = false;
+                }
+            }
+        }   
+    }
+}
+
+
 void doVBFJetCutEtaDifSelection(UInt_t nJetLen,TTreeReaderArray<Float_t> &Jet_pt,TTreeReaderArray<Int_t> &Jet_jetId,TTreeReaderArray<Float_t> &Jet_eta,TTreeReaderArray<Float_t> &Jet_phi,TTreeReaderArray<Float_t> &Jet_mass,float jetPTCut,float jetEtaDifCut,float jetInvMassCut,float &jetPairInvMass,float &jetLeadPt,float &jetLeadEta,float &jetLeadPhi,float &jetTrailingPt,float &jetTrailingEta,float &jetTrailingPhi,UInt_t &leadJet_1,UInt_t &leadJet_2,std::vector<ROOT::Math::PtEtaPhiMVector> dRCheckVecAr,float dRCut,bool debug){
     //debug = true;
     //std::cout << "++++++++ "<< VBFJetdRCut << "\n";
