@@ -568,16 +568,19 @@ void doBJetVeto(UInt_t nJetLen,TTreeReaderArray<Float_t> &Jet_pt,TTreeReaderArra
     //debug = true;
     //std::cout << "++++++++ "<< VBFJetdRCut << "\n";
     passesCut = true;
-    for (UInt_t jetIndOne=0; jetIndOne<nJetLen-1;jetIndOne++){
-        float jetPtOne = Jet_pt[jetIndOne];
-        if (jetPtOne >= 30){
-            float jetEtaOne = Jet_eta[jetIndOne];
-            if (abs(jetEtaOne) <= 2.5){
-                float jetPhiOne = Jet_phi[jetIndOne];
-                float tmpDeltaR = calcDeltaR(jetPhiOne,jetEtaOne,hFatJet_phi_fromHParticleNet,hFatJet_eta_fromHParticleNet);
-                if (tmpDeltaR < dRCut) {
-                    float tmpJetBTag = Jet_btagDeepFlavB[jetIndOne];
-                    if (tmpJetBTag > 0.7100) passesCut = false;
+    for (UInt_t jetInd=0; jetInd<nJetLen-1;jetInd++){
+        float jetPt = Jet_pt[jetInd];
+        if (jetPt >= 30){
+            float jetEta = Jet_eta[jetInd];
+            if (abs(jetEta) <= 2.5){
+                float jetPhi = Jet_phi[jetInd];
+                float tmpDeltaR = calcDeltaR(jetPhi,jetEta,hFatJet_phi_fromHParticleNet,hFatJet_eta_fromHParticleNet);
+                if (tmpDeltaR > dRCut) {
+                    float tmpJetBTag = Jet_btagDeepFlavB[jetInd];
+                    if (tmpJetBTag > 0.7100) {
+                        passesCut = false;
+                        break;
+                    }
                 }
             }
         }   
