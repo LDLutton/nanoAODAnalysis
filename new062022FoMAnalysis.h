@@ -53,7 +53,11 @@ bool TTbb_TTToHadronicBackground = false;
 bool TTbb_TTTo2L2NuBackground = false;
 bool TTbb_TTToSemiLeptonicBackground = false;
 
+bool BDTSignalGenChannelMatched = false;
+
 bool weakCuts = true;
+
+bool BDTCuts = true;
 
 bool LaraTest = false;
 
@@ -300,6 +304,73 @@ float dRCut = 0.4;
 float dRCutRangeTop = 4.;
 float dRCutRangeBottom = 0.;
 float dRCutCutStep = (dRCutRangeTop - dRCutRangeBottom) / cutAmnt;
+
+// BDT Cuts 07212022 #For now jus the same as the weak cuts
+
+float dRBDTCut = 0.8;
+
+float jetPTBDTCut = 20.;
+
+float jetEtaDifBDTCut = 2.0;
+
+float jetInvMassBDTCut = 400.;
+
+//Higgs FJ cuts
+
+float hFatJetPTBDTCut = 250.;
+
+
+float hFatJetParticleNetBDTCut = 0.8;
+
+
+
+//Lep cuts
+
+float ePtBDTCut = 7.;
+
+float eEtaBDTCut = 2.5;
+
+float mPtBDTCut = 5.;
+
+float mEtaBDTCut = 2.4;
+
+float invMassBDTCutLow=80.;
+
+float invMassBDTCutHigh=100.;
+
+float ptLeadBDTCut=20.;
+
+float ptTrailingBDTCut=10.;
+
+float fourLepInvMassBDTCut = 100.;
+
+float optLepInvMassBDTCut = 12.;
+
+float lepIsoBDTCut = 4.;
+
+float SIPBDTCut = 4.;
+
+//Semi-Lep cuts
+//fatJetPTBDTCut = 200.;
+
+float fatJetZParticleNetBDTCut = 0.8;
+
+float ZPairPlusHInvMassBDTCut = 1500;
+float ZPairPlusHPtBDTCut = 1000;
+
+
+float lDxyBDTCut = 0.05;
+float lDzBDTCut = 0.1;
+float lMiniPFRelIsoBDTCut = 0.4;
+float eSieieBarrelBDTCut = 0.03;
+float eSieieEndcapBDTCut = 0.011;
+
+float eHoeBDTCut = 0.1;
+float eInvMinusPInvBDTCut = -0.04;
+float ePromptMVABDTCut = -0.8;
+float lepJetDeepTagLooseBDTCut = 0.3;
+float lepJetDeepTagMediumBDTCut = 0.5;
+float mPromptMVABDTCut = 0.2;
 
 //Weak cuts V16 07052022
 
@@ -594,6 +665,8 @@ float mPromptMVAWeakCut = 0.85;
 //unused
 float fatJetZTagWeakCut = 0.1;
 float hFatJetDeepTagWeakCut = 0.1;
+float fatJetZTagBDTCut = 0.1;
+float hFatJetDeepTagBDTCut = 0.1;
 
 
 /*
