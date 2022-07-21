@@ -101,6 +101,11 @@ float jetInvMassRangeTop = 4000.;
 float jetInvMassRangeBottom = 0.;
 float jetInvMassCutStep = (jetInvMassRangeTop - jetInvMassRangeBottom) / cutAmnt;
 
+float bTagCut = 0.7100;
+float bTagRangeTop = 1.;
+float bTagRangeBottom = 0.;
+float bTagCutStep = (bTagRangeTop - bTagRangeBottom) / cutAmnt;
+
 //Defining fat jet matching cuts;
 float fatJetPTCut = 200.;
 float fatJetPTRangeTop = 4000.;
@@ -305,7 +310,7 @@ float dRCutRangeTop = 4.;
 float dRCutRangeBottom = 0.;
 float dRCutCutStep = (dRCutRangeTop - dRCutRangeBottom) / cutAmnt;
 
-// BDT Cuts 07212022 #For now jus the same as the weak cuts
+// V1 BDT Cuts 07212022 #Lowering everything
 
 float dRBDTCut = 0.8;
 
@@ -313,14 +318,16 @@ float jetPTBDTCut = 20.;
 
 float jetEtaDifBDTCut = 2.0;
 
-float jetInvMassBDTCut = 400.;
+float jetInvMassBDTCut = 200.;
+
+float bTagBDTCut = 0.9;
 
 //Higgs FJ cuts
 
-float hFatJetPTBDTCut = 250.;
+float hFatJetPTBDTCut = 200.;
 
 
-float hFatJetParticleNetBDTCut = 0.8;
+float hFatJetParticleNetBDTCut = 0.1;
 
 
 
@@ -334,9 +341,9 @@ float mPtBDTCut = 5.;
 
 float mEtaBDTCut = 2.4;
 
-float invMassBDTCutLow=80.;
+float invMassBDTCutLow=60.;
 
-float invMassBDTCutHigh=100.;
+float invMassBDTCutHigh=120.;
 
 float ptLeadBDTCut=20.;
 
@@ -353,10 +360,10 @@ float SIPBDTCut = 4.;
 //Semi-Lep cuts
 //fatJetPTBDTCut = 200.;
 
-float fatJetZParticleNetBDTCut = 0.8;
+float fatJetZParticleNetBDTCut = 0.2;
 
-float ZPairPlusHInvMassBDTCut = 1500;
-float ZPairPlusHPtBDTCut = 1000;
+float ZPairPlusHInvMassBDTCut = 500;
+float ZPairPlusHPtBDTCut = 500;
 
 
 float lDxyBDTCut = 0.05;
@@ -371,6 +378,9 @@ float ePromptMVABDTCut = -0.8;
 float lepJetDeepTagLooseBDTCut = 0.3;
 float lepJetDeepTagMediumBDTCut = 0.5;
 float mPromptMVABDTCut = 0.2;
+
+
+///////////////////////////////////////////////////
 
 //Weak cuts V16 07052022
 

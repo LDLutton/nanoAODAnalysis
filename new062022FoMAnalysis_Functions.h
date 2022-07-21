@@ -564,7 +564,7 @@ void doVBFJetCut(UInt_t nJetLen,TTreeReaderArray<Float_t> &Jet_pt,TTreeReaderArr
     //debug = false;
 }
 
-void doBJetVeto(UInt_t nJetLen,TTreeReaderArray<Float_t> &Jet_pt,TTreeReaderArray<Float_t> &Jet_eta,TTreeReaderArray<Float_t> &Jet_phi,TTreeReaderArray<Float_t> &Jet_btagDeepFlavB,float &hFatJet_phi_fromHParticleNet,float &hFatJet_eta_fromHParticleNet,float dRCut,bool &passesCut,bool debug){
+void doBJetVeto(UInt_t nJetLen,TTreeReaderArray<Float_t> &Jet_pt,TTreeReaderArray<Float_t> &Jet_eta,TTreeReaderArray<Float_t> &Jet_phi,TTreeReaderArray<Float_t> &Jet_btagDeepFlavB,float &hFatJet_phi_fromHParticleNet,float &hFatJet_eta_fromHParticleNet,float dRCut,float bTagCut,bool &passesCut,bool debug){
     //debug = true;
     //std::cout << "++++++++ "<< VBFJetdRCut << "\n";
     passesCut = true;
@@ -575,9 +575,9 @@ void doBJetVeto(UInt_t nJetLen,TTreeReaderArray<Float_t> &Jet_pt,TTreeReaderArra
             if (abs(jetEta) <= 2.5){
                 float jetPhi = Jet_phi[jetInd];
                 float tmpDeltaR = calcDeltaR(jetPhi,jetEta,hFatJet_phi_fromHParticleNet,hFatJet_eta_fromHParticleNet);
-                if (tmpDeltaR > dRCut) {
+                if (tmpDeltaR > 0.8) {
                     float tmpJetBTag = Jet_btagDeepFlavB[jetInd];
-                    if (tmpJetBTag > 0.7100) {
+                    if (tmpJetBTag > bTagCut) {
                         passesCut = false;
                         break;
                     }

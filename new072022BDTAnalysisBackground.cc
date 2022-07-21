@@ -244,7 +244,8 @@ void new072022BDTAnalysisBackground(string datasetString){
         //saveName = "QCDPT2400to3200";
         
         crossSection = 0.005242;
-        totWeight = 2931000;
+        //totWeight = 2931000;
+        totWeight = 2847000.0;
 
         saveName = "QCDPT2400to3200";
         
@@ -325,8 +326,8 @@ void new072022BDTAnalysisBackground(string datasetString){
         //saveName = "QCDPT3200toInf";
         
         crossSection = 69.09;
-        totWeight = 6014529940;
-
+        //totWeight = 6014529940;
+        totWeight = 6114949140.0
         saveName = "ST_t_ChannelAntiTop";
         
         isBackground = true;
@@ -502,6 +503,7 @@ void new072022BDTAnalysisBackground(string datasetString){
     UInt_t tryingSemiLepChannelCtr = 0;
     UInt_t passFJInSemiLepChannelCtr = 0;
     UInt_t passEnoughLepsInSemiLepChannelCtr = 0;
+    UInt_t passEnoughFJsInSemiLepChannelCtr = 0;
     UInt_t passLepCutInSemiLepChannelCtr = 0;
     UInt_t passSemiLepChannelCtr = 0;
     UInt_t passHadChannelCtr = 0;
@@ -532,6 +534,7 @@ void new072022BDTAnalysisBackground(string datasetString){
     Double_t tryingSemiLepChannelWeightedCtr = 0.;
     Double_t passFJInSemiLepChannelWeightedCtr = 0.;
     Double_t passEnoughLepsInSemiLepChannelWeightedCtr = 0.;
+    Double_t passEnoughFJsInSemiLepChannelWeightedCtr = 0.;
     Double_t passLepCutInSemiLepChannelWeightedCtr = 0.;
     Double_t passSemiLepChannelWeightedCtr = 0.;
     Double_t passHadChannelWeightedCtr = 0.;
@@ -587,6 +590,8 @@ void new072022BDTAnalysisBackground(string datasetString){
         jetEtaDifCut = jetEtaDifBDTCut;
 
         jetInvMassCut = jetInvMassBDTCut;
+
+        bTagCut = bTagBDTCut;
 
         //Higgs FJ cuts
 
@@ -649,6 +654,8 @@ void new072022BDTAnalysisBackground(string datasetString){
     //PASSING EV TREE FOR BDT IN LEP CHANNEL
     Double_t passingEvGenWeight_L_L;
 
+    Double_t passingEvFullWeight_L_L;
+
     Float_t selectedHiggsFJ_pt_L_L;
 
     Float_t selectedLeadVBFJet_pt_L_L;
@@ -680,6 +687,8 @@ void new072022BDTAnalysisBackground(string datasetString){
     TTree *passingEvLepTree = new TTree("passingEvLepTree", "passingEvLepTree");
     
     passingEvLepTree->Branch("passingEvGenWeight_L_L",&passingEvGenWeight_L_L,"passingEvGenWeight_L_L/D");
+
+    passingEvLepTree->Branch("passingEvFullWeight_L_L",&passingEvFullWeight_L_L,"passingEvFullWeight_L_L/D");
 
     passingEvLepTree->Branch("selectedHiggsFJ_pt_L_L",&selectedHiggsFJ_pt_L_L,"selectedHiggsFJ_pt_L_L/F");
 
@@ -716,6 +725,8 @@ void new072022BDTAnalysisBackground(string datasetString){
     //PASSING EV TREE FOR BDT IN SEMILEP CHANNEL
     Double_t passingEvGenWeight_SL_L;
 
+    Double_t passingEvFullWeight_SL_L;
+
     Float_t selectedHiggsFJ_pt_SL_L;
     Float_t selectedZFJ_pt_SL_L;
 
@@ -739,6 +750,8 @@ void new072022BDTAnalysisBackground(string datasetString){
     TTree *passingEvSemiLepTree = new TTree("passingEvSemiLepTree", "passingEvSemiLepTree");
     
     passingEvSemiLepTree->Branch("passingEvGenWeight_SL_L",&passingEvGenWeight_SL_L,"passingEvGenWeight_SL_L/D");
+
+    passingEvSemiLepTree->Branch("passingEvFullWeight_SL_L",&passingEvFullWeight_SL_L,"passingEvFullWeight_SL_L/D");
 
     passingEvSemiLepTree->Branch("selectedHiggsFJ_pt_SL_L",&selectedHiggsFJ_pt_SL_L,"selectedHiggsFJ_pt_SL_L/F");
     passingEvSemiLepTree->Branch("selectedZFJ_pt_SL_L",&selectedZFJ_pt_SL_L,"selectedZFJ_pt_SL_L/F");
@@ -1075,56 +1088,64 @@ void new072022BDTAnalysisBackground(string datasetString){
                 tryingSemiLepChannelWeightedCtr += tmpGenWeights;
                 
                 tryingSemiLepCtr += 1;
-                
-                enoughLepCands = false;
-                doSemiLepCutWithTreeWithBDTVars(enoughElecCands,negElecCands,posElecCands,totElecCands,Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut,
-                 enoughMuonCands,negMuonCands,posMuonCands,totMuonCands,Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,nmLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut,
-                 enoughLepCands,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,Z1Cand,difFromZMassOne,Z1LeadItr,Z1TrailingItr,Z1LeadPt,Z1TrailingPt,Z1IsMuon,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,
-                 Electron_dr03EcalRecHitSumEtL,Electron_dr03TkSumPtL,Electron_dr03HcalDepth1TowerSumEtL,Electron_pfRelIso03_allL,
-                 Z1LeadIso,Muon_pfRelIso03_allL,Z1TrailingIso,lepIsoCut,
-                 SemiLepInvMass,
-                 Electron_mvaFall17V2noIso_WPLL,Muon_mediumIdL,
-                 Electron_sip3dL,Muon_sip3dL,Z1LeadSIP,Z1TrailingSIP,
-                 dRCheckVecAr,
-                 passedAsSemiLepLepCutBool,
-                 selectedLeptons_InvMass,
-                 debug);
-                if (enoughLepCands){
-                    passEnoughLepsInSemiLepChannelCtr += 1;
-                    passEnoughLepsInSemiLepChannelWeightedCtr += tmpGenWeights;
-                    
-                    
-                }
 
-                if (passedAsSemiLepLepCutBool){
-                    if (debug) std::cout << "Passed semi lep lep cut\n";
-                    passSemiLepLepCutCtr += 1;
-                    passSemiLepLepCutWeightedCtr += tmpGenWeights;
-                    
-                    
-                }
-
-
-                
-                Int_t FJInd;
-
-                FJInd = -1;
+                //Checking that there are enough FJs for both the Z and the H
                 UInt_t numFatJet = *nFatJetL;
-                if (debug){
-                    std::cout << "Pre FJC dRCheckVecAr.size() " << dRCheckVecAr.size() << "\n";
-                }
-                doSemiLepChanFatJetCut(FJInd,numFatJet,fatJetPTCut,fatJetZParticleNetCut,FatJet_ptL,FatJet_phiL,FatJet_etaL,FatJet_massL,FatJet_particleNet_ZvsQCDL,FatJet_jetIdL,dRCheckVecAr,dRCut,passSemiLepCut,passesCutsBool,passedAsSemiLepBool);
-                if (debug){
-                    std::cout << "Post FJC dRCheckVecAr.size() " << dRCheckVecAr.size() << " FJInd "<< FJInd <<"\n";
-                }
-                if (FJInd >= 0){
-                    passFJInSemiLepChannelCtr += 1;
-                    passFJInSemiLepChannelWeightedCtr += tmpGenWeights;
-                    
-                   FJIndAr.push_back(FJInd);
-                   
-                }
 
+                if (numFatJet >=2){
+                    passEnoughFJsInSemiLepChannelCtr += 1;
+                    passEnoughFJsInSemiLepChannelWeightedCtr += tmpGenWeights;
+                    
+                    enoughLepCands = false;
+                    doSemiLepCutWithTreeWithBDTVars(enoughElecCands,negElecCands,posElecCands,totElecCands,Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut,
+                    enoughMuonCands,negMuonCands,posMuonCands,totMuonCands,Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,nmLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut,
+                    enoughLepCands,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,Z1Cand,difFromZMassOne,Z1LeadItr,Z1TrailingItr,Z1LeadPt,Z1TrailingPt,Z1IsMuon,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,
+                    Electron_dr03EcalRecHitSumEtL,Electron_dr03TkSumPtL,Electron_dr03HcalDepth1TowerSumEtL,Electron_pfRelIso03_allL,
+                    Z1LeadIso,Muon_pfRelIso03_allL,Z1TrailingIso,lepIsoCut,
+                    SemiLepInvMass,
+                    Electron_mvaFall17V2noIso_WPLL,Muon_mediumIdL,
+                    Electron_sip3dL,Muon_sip3dL,Z1LeadSIP,Z1TrailingSIP,
+                    dRCheckVecAr,
+                    passedAsSemiLepLepCutBool,
+                    selectedLeptons_InvMass,
+                    debug);
+                    if (enoughLepCands){
+                        passEnoughLepsInSemiLepChannelCtr += 1;
+                        passEnoughLepsInSemiLepChannelWeightedCtr += tmpGenWeights;
+                        
+                        
+                    }
+
+                    if (passedAsSemiLepLepCutBool){
+                        if (debug) std::cout << "Passed semi lep lep cut\n";
+                        passSemiLepLepCutCtr += 1;
+                        passSemiLepLepCutWeightedCtr += tmpGenWeights;
+                        
+                        
+                    }
+
+
+                    
+                    Int_t FJInd;
+
+                    FJInd = -1;
+                    UInt_t numFatJet = *nFatJetL;
+                    if (debug){
+                        std::cout << "Pre FJC dRCheckVecAr.size() " << dRCheckVecAr.size() << "\n";
+                    }
+                    doSemiLepChanFatJetCut(FJInd,numFatJet,fatJetPTCut,fatJetZParticleNetCut,FatJet_ptL,FatJet_phiL,FatJet_etaL,FatJet_massL,FatJet_particleNet_ZvsQCDL,FatJet_jetIdL,dRCheckVecAr,dRCut,passSemiLepCut,passesCutsBool,passedAsSemiLepBool);
+                    if (debug){
+                        std::cout << "Post FJC dRCheckVecAr.size() " << dRCheckVecAr.size() << " FJInd "<< FJInd <<"\n";
+                    }
+                    if (FJInd >= 0){
+                        passFJInSemiLepChannelCtr += 1;
+                        passFJInSemiLepChannelWeightedCtr += tmpGenWeights;
+                        
+                    FJIndAr.push_back(FJInd);
+                    
+                    }
+
+                }
                 
                 if (passesCutsBool){
                     passChannelCtr += 1;
@@ -1272,7 +1293,7 @@ void new072022BDTAnalysisBackground(string datasetString){
 
             //B jet veto
             bool passBJetVeto = true;
-            doBJetVeto(nJetLen,Jet_ptL,Jet_etaL,Jet_phiL,Jet_btagDeepFlavBL,hFatJet_phi_fromHTag,hFatJet_eta_fromHTag,dRCut,passBJetVeto,debug);
+            doBJetVeto(nJetLen,Jet_ptL,Jet_etaL,Jet_phiL,Jet_btagDeepFlavBL,hFatJet_phi_fromHTag,hFatJet_eta_fromHTag,dRCut,bTagCut,passBJetVeto,debug);
             if (!passBJetVeto) continue;
 
             passVBFJetBVetoCtr += 1;
@@ -1317,6 +1338,8 @@ void new072022BDTAnalysisBackground(string datasetString){
 
                     //Fill BDT Lep Tree
                     passingEvGenWeight_L_L = tmpGenWeights;
+
+                    passingEvFullWeight_L_L = tmpGenWeights*crossSection*Run2Lumi/totWeight;
 
                     selectedHiggsFJ_pt_L_L = hFatJet_pt_fromHTag;
 
@@ -1363,6 +1386,8 @@ void new072022BDTAnalysisBackground(string datasetString){
                     //Fill BDT SemiLep Tree
 
                     passingEvGenWeight_SL_L = tmpGenWeights;
+
+                    passingEvFullWeight_SL_L = tmpGenWeights*crossSection*Run2Lumi/totWeight;
 
                     selectedHiggsFJ_pt_SL_L = hFatJet_pt_fromHTag;
                     selectedZFJ_pt_SL_L = dRCheckVecAr[2].Pt();
@@ -1418,6 +1443,9 @@ void new072022BDTAnalysisBackground(string datasetString){
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "tryingSemiLepChannelCtr = " << tryingSemiLepChannelCtr << "\n";
     std::cout << "Double_t " << saveName << "tryingSemiLepChannelWeightedCtr = " << tryingSemiLepChannelWeightedCtr << "\n";
+    std::cout << "------------------------\n";
+    std::cout << "UInt_t " << saveName << "passEnoughFJsInSemiLepChannelCtr = " << passEnoughFJsInSemiLepChannelCtr << "\n";
+    std::cout << "Double_t " << saveName << "passEnoughFJsInSemiLepChannelWeightedCtr = " << passEnoughFJsInSemiLepChannelWeightedCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "passEnoughLepsInSemiLepChannelCtr = " << passEnoughLepsInSemiLepChannelCtr << "\n";
     std::cout << "Double_t " << saveName << "passEnoughLepsInSemiLepChannelWeightedCtr = " << passEnoughLepsInSemiLepChannelWeightedCtr << "\n";
