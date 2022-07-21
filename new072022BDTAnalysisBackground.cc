@@ -327,7 +327,7 @@ void new072022BDTAnalysisBackground(string datasetString){
         
         crossSection = 69.09;
         //totWeight = 6014529940;
-        totWeight = 6114949140.0
+        totWeight = 6114949140.0;
         saveName = "ST_t_ChannelAntiTop";
         
         isBackground = true;
