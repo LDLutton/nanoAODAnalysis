@@ -926,14 +926,20 @@ void new072022BDTAnalysis(string datasetString){
     Double_t passingEvFullWeight_L_L;
 
     Float_t selectedHiggsFJ_pt_L_L;
+    Float_t selectedHiggsFJ_eta_L_L;
+    Float_t selectedHiggsFJ_ParticleNet_HbbvsQCD_L_L;
 
     Float_t selectedLeadVBFJet_pt_L_L;
     Float_t selectedTrailingVBFJet_pt_L_L;
+    Float_t selectedLeadVBFJet_eta_L_L;
+    Float_t selectedTrailingVBFJet_eta_L_L;
     Float_t selectedVBFJets_EtaSep_L_L;
     Float_t selectedVBFJets_InvMass_L_L;
 
     Float_t selectedZOneLeadLepton_pt_L_L;
     Float_t selectedZOneTrailingLepton_pt_L_L;
+    Float_t selectedZOneLeadLepton_eta_L_L;
+    Float_t selectedZOneTrailingLepton_eta_L_L;
     Float_t selectedZOneLeadLepton_SIP3D_L_L;
     Float_t selectedZOneTrailingLepton_SIP3D_L_L;
     Float_t selectedLeptons_MaxRelIso_L_L;
@@ -942,6 +948,8 @@ void new072022BDTAnalysis(string datasetString){
 
     Float_t selectedZTwoLeadLepton_pt_L_L;
     Float_t selectedZTwoTrailingLepton_pt_L_L;
+    Float_t selectedZTwoLeadLepton_eta_L_L;
+    Float_t selectedZTwoTrailingLepton_eta_L_L;
     Float_t selectedZTwoLeadLepton_SIP3D_L_L;
     Float_t selectedZTwoTrailingLepton_SIP3D_L_L;
     Float_t selectedZTwoLeptons_InvMass_L_L;
@@ -960,14 +968,20 @@ void new072022BDTAnalysis(string datasetString){
     passingEvLepTree->Branch("passingEvFullWeight_L_L",&passingEvFullWeight_L_L,"passingEvFullWeight_L_L/D");
 
     passingEvLepTree->Branch("selectedHiggsFJ_pt_L_L",&selectedHiggsFJ_pt_L_L,"selectedHiggsFJ_pt_L_L/F");
+    passingEvLepTree->Branch("selectedHiggsFJ_eta_L_L",&selectedHiggsFJ_eta_L_L,"selectedHiggsFJ_eta_L_L/F");
+    passingEvLepTree->Branch("selectedHiggsFJ_ParticleNet_HbbvsQCD_L_L",&selectedHiggsFJ_ParticleNet_HbbvsQCD_L_L,"selectedHiggsFJ_ParticleNet_HbbvsQCD_L_L/F");
 
     passingEvLepTree->Branch("selectedLeadVBFJet_pt_L_L",&selectedLeadVBFJet_pt_L_L,"selectedLeadVBFJet_pt_L_L/F");
     passingEvLepTree->Branch("selectedTrailingVBFJet_pt_L_L",&selectedTrailingVBFJet_pt_L_L,"selectedTrailingVBFJet_pt_L_L/F");
+    passingEvLepTree->Branch("selectedLeadVBFJet_eta_L_L",&selectedLeadVBFJet_eta_L_L,"selectedLeadVBFJet_eta_L_L/F");
+    passingEvLepTree->Branch("selectedTrailingVBFJet_eta_L_L",&selectedTrailingVBFJet_eta_L_L,"selectedTrailingVBFJet_eta_L_L/F");
     passingEvLepTree->Branch("selectedVBFJets_EtaSep_L_L",&selectedVBFJets_EtaSep_L_L,"selectedVBFJets_EtaSep_L_L/F");
     passingEvLepTree->Branch("selectedVBFJets_InvMass_L_L",&selectedVBFJets_InvMass_L_L,"selectedVBFJets_InvMass_L_L/F");
 
     passingEvLepTree->Branch("selectedZOneLeadLepton_pt_L_L",&selectedZOneLeadLepton_pt_L_L,"selectedZOneLeadLepton_pt_L_L/F");
     passingEvLepTree->Branch("selectedZOneTrailingLepton_pt_L_L",&selectedZOneTrailingLepton_pt_L_L,"selectedZOneTrailingLepton_pt_L_L/F");
+    passingEvLepTree->Branch("selectedZOneLeadLepton_eta_L_L",&selectedZOneLeadLepton_eta_L_L,"selectedZOneLeadLepton_eta_L_L/F");
+    passingEvLepTree->Branch("selectedZOneTrailingLepton_eta_L_L",&selectedZOneTrailingLepton_eta_L_L,"selectedZOneTrailingLepton_eta_L_L/F");
     passingEvLepTree->Branch("selectedZOneLeadLepton_SIP3D_L_L",&selectedZOneLeadLepton_SIP3D_L_L,"selectedZOneLeadLepton_SIP3D_L_L/F");
     passingEvLepTree->Branch("selectedZOneTrailingLepton_SIP3D_L_L",&selectedZOneTrailingLepton_SIP3D_L_L,"selectedZOneTrailingLepton_SIP3D_L_L/F");
     
@@ -976,6 +990,8 @@ void new072022BDTAnalysis(string datasetString){
 
     passingEvLepTree->Branch("selectedZTwoLeadLepton_pt_L_L",&selectedZTwoLeadLepton_pt_L_L,"selectedZTwoLeadLepton_pt_L_L/F");
     passingEvLepTree->Branch("selectedZTwoTrailingLepton_pt_L_L",&selectedZTwoTrailingLepton_pt_L_L,"selectedZTwoTrailingLepton_pt_L_L/F");
+    passingEvLepTree->Branch("selectedZTwoLeadLepton_eta_L_L",&selectedZTwoLeadLepton_eta_L_L,"selectedZTwoLeadLepton_eta_L_L/F");
+    passingEvLepTree->Branch("selectedZTwoTrailingLepton_eta_L_L",&selectedZTwoTrailingLepton_eta_L_L,"selectedZTwoTrailingLepton_eta_L_L/F");
     passingEvLepTree->Branch("selectedZTwoLeadLepton_SIP3D_L_L",&selectedZTwoLeadLepton_SIP3D_L_L,"selectedZTwoLeadLepton_SIP3D_L_L/F");
     passingEvLepTree->Branch("selectedZTwoTrailingLepton_SIP3D_L_L",&selectedZTwoTrailingLepton_SIP3D_L_L,"selectedZTwoTrailingLepton_SIP3D_L_L/F");
 
@@ -997,15 +1013,23 @@ void new072022BDTAnalysis(string datasetString){
     Double_t passingEvFullWeight_SL_L;
 
     Float_t selectedHiggsFJ_pt_SL_L;
+    Float_t selectedHiggsFJ_eta_SL_L;
+    Float_t selectedHiggsFJ_ParticleNet_HbbvsQCD_SL_L;
     Float_t selectedZFJ_pt_SL_L;
+    Float_t selectedZFJ_eta_SL_L;
+    Float_t selectedZFJ_ParticleNet_ZvsQCD_SL_L;
 
     Float_t selectedLeadVBFJet_pt_SL_L;
     Float_t selectedTrailingVBFJet_pt_SL_L;
+    Float_t selectedLeadVBFJet_eta_SL_L;
+    Float_t selectedTrailingVBFJet_eta_SL_L;
     Float_t selectedVBFJets_EtaSep_SL_L;
     Float_t selectedVBFJets_InvMass_SL_L;
 
     Float_t selectedLeadLepton_pt_SL_L;
     Float_t selectedTrailingLepton_pt_SL_L;
+    Float_t selectedLeadLepton_eta_SL_L;
+    Float_t selectedTrailingLepton_eta_SL_L;
     Float_t selectedLeadLepton_SIP3D_SL_L;
     Float_t selectedTrailingLepton_SIP3D_SL_L;
     Float_t selectedLeptons_RelIso_SL_L;
@@ -1023,15 +1047,23 @@ void new072022BDTAnalysis(string datasetString){
     passingEvSemiLepTree->Branch("passingEvFullWeight_SL_L",&passingEvFullWeight_SL_L,"passingEvFullWeight_SL_L/D");
 
     passingEvSemiLepTree->Branch("selectedHiggsFJ_pt_SL_L",&selectedHiggsFJ_pt_SL_L,"selectedHiggsFJ_pt_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedHiggsFJ_eta_SL_L",&selectedHiggsFJ_eta_SL_L,"selectedHiggsFJ_eta_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedHiggsFJ_ParticleNet_HbbvsQCD_SL_L",&selectedHiggsFJ_ParticleNet_HbbvsQCD_SL_L,"selectedHiggsFJ_ParticleNet_HbbvsQCD_SL_L/F");
     passingEvSemiLepTree->Branch("selectedZFJ_pt_SL_L",&selectedZFJ_pt_SL_L,"selectedZFJ_pt_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedZFJ_eta_SL_L",&selectedZFJ_eta_SL_L,"selectedZFJ_eta_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedZFJ_ParticleNet_ZvsQCD_SL_L",&selectedZFJ_ParticleNet_ZvsQCD_SL_L,"selectedZFJ_ParticleNet_ZvsQCD_SL_L/F");
 
     passingEvSemiLepTree->Branch("selectedLeadVBFJet_pt_SL_L",&selectedLeadVBFJet_pt_SL_L,"selectedLeadVBFJet_pt_SL_L/F");
     passingEvSemiLepTree->Branch("selectedTrailingVBFJet_pt_SL_L",&selectedTrailingVBFJet_pt_SL_L,"selectedTrailingVBFJet_pt_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedLeadVBFJet_eta_SL_L",&selectedLeadVBFJet_eta_SL_L,"selectedLeadVBFJet_eta_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedTrailingVBFJet_eta_SL_L",&selectedTrailingVBFJet_eta_SL_L,"selectedTrailingVBFJet_eta_SL_L/F");
     passingEvSemiLepTree->Branch("selectedVBFJets_EtaSep_SL_L",&selectedVBFJets_EtaSep_SL_L,"selectedVBFJets_EtaSep_SL_L/F");
     passingEvSemiLepTree->Branch("selectedVBFJets_InvMass_SL_L",&selectedVBFJets_InvMass_SL_L,"selectedVBFJets_InvMass_SL_L/F");
 
     passingEvSemiLepTree->Branch("selectedLeadLepton_pt_SL_L",&selectedLeadLepton_pt_SL_L,"selectedLeadLepton_pt_SL_L/F");
     passingEvSemiLepTree->Branch("selectedTrailingLepton_pt_SL_L",&selectedTrailingLepton_pt_SL_L,"selectedTrailingLepton_pt_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedLeadLepton_eta_SL_L",&selectedLeadLepton_eta_SL_L,"selectedLeadLepton_eta_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedTrailingLepton_eta_SL_L",&selectedTrailingLepton_eta_SL_L,"selectedTrailingLepton_eta_SL_L/F");
     passingEvSemiLepTree->Branch("selectedLeadLepton_SIP3D_SL_L",&selectedLeadLepton_SIP3D_SL_L,"selectedLeadLepton_SIP3D_SL_L/F");
     passingEvSemiLepTree->Branch("selectedTrailingLepton_SIP3D_SL_L",&selectedTrailingLepton_SIP3D_SL_L,"selectedTrailingLepton_SIP3D_SL_L/F");
     passingEvSemiLepTree->Branch("selectedLeptons_RelIso_SL_L",&selectedLeptons_RelIso_SL_L,"selectedLeptons_RelIso_SL_L/F");
@@ -2608,14 +2640,20 @@ void new072022BDTAnalysis(string datasetString){
                         passingEvFullWeight_L_L = tmpGenWeights*XS*Run2Lumi/totWeight;
 
                         selectedHiggsFJ_pt_L_L = hFatJet_pt_fromHTag;
+                        selectedHiggsFJ_eta_L_L = hFatJet_eta_fromHTag;
+                        selectedHiggsFJ_ParticleNet_HbbvsQCD_L_L = hFatJet_HTag_fromHTag;
 
                         selectedLeadVBFJet_pt_L_L = jetLeadPt;
                         selectedTrailingVBFJet_pt_L_L = jetTrailingPt;
+                        selectedLeadVBFJet_eta_L_L = jetLeadEta;
+                        selectedTrailingVBFJet_eta_L_L = jetTrailingEta;
                         selectedVBFJets_EtaSep_L_L = abs(jetLeadEta - jetTrailingEta);
                         selectedVBFJets_InvMass_L_L = jetPairInvMass;
 
                         selectedZOneLeadLepton_pt_L_L = Z1LeadPt;
                         selectedZOneTrailingLepton_pt_L_L = Z1TrailingPt;
+                        selectedZOneLeadLepton_eta_L_L = dRCheckVecAr[0].Eta();
+                        selectedZOneTrailingLepton_eta_L_L = dRCheckVecAr[1].Eta();
                         selectedZOneLeadLepton_SIP3D_L_L = Z1LeadSIP;
                         selectedZOneTrailingLepton_SIP3D_L_L = Z1TrailingSIP;
 
@@ -2624,6 +2662,8 @@ void new072022BDTAnalysis(string datasetString){
 
                         selectedZTwoLeadLepton_pt_L_L = tmpTopZ2LeadPt;
                         selectedZTwoTrailingLepton_pt_L_L = tmpTopZ2TrailingPt;
+                        selectedZTwoLeadLepton_eta_L_L = dRCheckVecAr[2].Eta();
+                        selectedZTwoTrailingLepton_eta_L_L = dRCheckVecAr[3].Eta();
                         selectedZTwoLeadLepton_SIP3D_L_L = Z2LeadSIP;
                         selectedZTwoTrailingLepton_SIP3D_L_L = Z2TrailingSIP;
 
@@ -2654,14 +2694,20 @@ void new072022BDTAnalysis(string datasetString){
                                 passingEvFullWeight_L_L = tmpGenWeights*XS*Run2Lumi/totWeight;
 
                                 selectedHiggsFJ_pt_L_L = hFatJet_pt_fromHTag;
+                                selectedHiggsFJ_eta_L_L = hFatJet_eta_fromHTag;
+                                selectedHiggsFJ_ParticleNet_HbbvsQCD_L_L = hFatJet_HTag_fromHTag;
 
                                 selectedLeadVBFJet_pt_L_L = jetLeadPt;
                                 selectedTrailingVBFJet_pt_L_L = jetTrailingPt;
+                                selectedLeadVBFJet_eta_L_L = jetLeadEta;
+                                selectedTrailingVBFJet_eta_L_L = jetTrailingEta;
                                 selectedVBFJets_EtaSep_L_L = abs(jetLeadEta - jetTrailingEta);
                                 selectedVBFJets_InvMass_L_L = jetPairInvMass;
 
                                 selectedZOneLeadLepton_pt_L_L = Z1LeadPt;
                                 selectedZOneTrailingLepton_pt_L_L = Z1TrailingPt;
+                                selectedZOneLeadLepton_eta_L_L = dRCheckVecAr[0].Eta();
+                                selectedZOneTrailingLepton_eta_L_L = dRCheckVecAr[1].Eta();
                                 selectedZOneLeadLepton_SIP3D_L_L = Z1LeadSIP;
                                 selectedZOneTrailingLepton_SIP3D_L_L = Z1TrailingSIP;
 
@@ -2670,6 +2716,8 @@ void new072022BDTAnalysis(string datasetString){
 
                                 selectedZTwoLeadLepton_pt_L_L = tmpTopZ2LeadPt;
                                 selectedZTwoTrailingLepton_pt_L_L = tmpTopZ2TrailingPt;
+                                selectedZTwoLeadLepton_eta_L_L = dRCheckVecAr[2].Eta();
+                                selectedZTwoTrailingLepton_eta_L_L = dRCheckVecAr[3].Eta();
                                 selectedZTwoLeadLepton_SIP3D_L_L = Z2LeadSIP;
                                 selectedZTwoTrailingLepton_SIP3D_L_L = Z2TrailingSIP;
 
@@ -2740,14 +2788,22 @@ void new072022BDTAnalysis(string datasetString){
 
                         selectedHiggsFJ_pt_SL_L = hFatJet_pt_fromHTag;
                         selectedZFJ_pt_SL_L = dRCheckVecAr[2].Pt();
+                        selectedHiggsFJ_eta_SL_L = hFatJet_eta_fromHTag;
+                        selectedZFJ_eta_SL_L = dRCheckVecAr[2].Eta();
+                        selectedHiggsFJ_ParticleNet_HbbvsQCD_SL_L = hFatJet_HTag_fromHTag;
+                        selectedZFJ_ParticleNet_ZvsQCD_SL_L = FatJet_particleNet_ZvsQCDL[FJIndAr[0]];
 
                         selectedLeadVBFJet_pt_SL_L = jetLeadPt;
                         selectedTrailingVBFJet_pt_SL_L = jetTrailingPt;
+                        selectedLeadVBFJet_eta_SL_L = jetLeadEta;
+                        selectedTrailingVBFJet_eta_SL_L = jetTrailingEta;
                         selectedVBFJets_EtaSep_SL_L = abs(jetLeadEta - jetTrailingEta);
                         selectedVBFJets_InvMass_SL_L = jetPairInvMass;
 
                         selectedLeadLepton_pt_SL_L = Z1LeadPt;
                         selectedTrailingLepton_pt_SL_L = Z1TrailingPt;
+                        selectedLeadLepton_eta_SL_L = dRCheckVecAr[0].Eta();
+                        selectedTrailingLepton_eta_SL_L = dRCheckVecAr[1].Eta();
                         selectedLeadLepton_SIP3D_SL_L = Z1LeadSIP;
                         selectedTrailingLepton_SIP3D_SL_L = Z1TrailingSIP;
                         selectedLeptons_RelIso_SL_L = Z1LeadIso+Z1TrailingIso;
@@ -2780,14 +2836,22 @@ void new072022BDTAnalysis(string datasetString){
 
                                 selectedHiggsFJ_pt_SL_L = hFatJet_pt_fromHTag;
                                 selectedZFJ_pt_SL_L = dRCheckVecAr[2].Pt();
+                                selectedHiggsFJ_eta_SL_L = hFatJet_eta_fromHTag;
+                                selectedZFJ_eta_SL_L = dRCheckVecAr[2].Eta();
+                                selectedHiggsFJ_ParticleNet_HbbvsQCD_SL_L = hFatJet_HTag_fromHTag;
+                                selectedZFJ_ParticleNet_ZvsQCD_SL_L = FatJet_particleNet_ZvsQCDL[FJIndAr[0]];
 
                                 selectedLeadVBFJet_pt_SL_L = jetLeadPt;
                                 selectedTrailingVBFJet_pt_SL_L = jetTrailingPt;
+                                selectedLeadVBFJet_eta_SL_L = jetLeadEta;
+                                selectedTrailingVBFJet_eta_SL_L = jetTrailingEta;
                                 selectedVBFJets_EtaSep_SL_L = abs(jetLeadEta - jetTrailingEta);
                                 selectedVBFJets_InvMass_SL_L = jetPairInvMass;
 
                                 selectedLeadLepton_pt_SL_L = Z1LeadPt;
                                 selectedTrailingLepton_pt_SL_L = Z1TrailingPt;
+                                selectedLeadLepton_eta_SL_L = dRCheckVecAr[0].Eta();
+                                selectedTrailingLepton_eta_SL_L = dRCheckVecAr[1].Eta();
                                 selectedLeadLepton_SIP3D_SL_L = Z1LeadSIP;
                                 selectedTrailingLepton_SIP3D_SL_L = Z1TrailingSIP;
                                 selectedLeptons_RelIso_SL_L = Z1LeadIso+Z1TrailingIso;
