@@ -1594,8 +1594,13 @@ void new072022BDTAnalysis(string datasetString){
                 tryingSemiLepCtr += 1;
                 //Checking that there are enough FJs for both the Z and the H
                 UInt_t numFatJet = *nFatJetL;
+                UInt_t nPassingJetIdFJs = 0;
+                for (UInt_t fatJetInd=0;fatJetInd<numFatJet;fatJetInd++){
+                    if (FatJet_jetIdL[fatJetInd] == 6) nPassingJetIdFJs += 1;
 
-                if (numFatJet >=2){
+                }
+
+                if (nPassingJetIdFJs >=2){
                     passEnoughFJsInSemiLepChannelCtr += 1;
                     passEnoughFJsInSemiLepChannelWeightedCtr += tmpGenWeights;
                     if (*HTobbBoolL){
