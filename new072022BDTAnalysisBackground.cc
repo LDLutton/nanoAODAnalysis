@@ -393,7 +393,7 @@ void new072022BDTAnalysisBackground(string datasetString){
         saveName = "TTbb_TTTo2L2Nu";
         
         isBackground = true;
-        datasetType = 7;
+        datasetType = 8;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisTTbb_TTTo2L2Nu.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -406,7 +406,7 @@ void new072022BDTAnalysisBackground(string datasetString){
         saveName = "TTbb_TTToSemiLeptonic";
         
         isBackground = true;
-        datasetType = 8;
+        datasetType = 7;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisTTbb_TTToSemiLeptonic.root";
         fileAr.push_back(tmpStrWithPath);
     }
