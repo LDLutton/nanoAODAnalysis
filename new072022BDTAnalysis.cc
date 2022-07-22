@@ -90,6 +90,8 @@ void new072022BDTAnalysis(string datasetString){
     //precalculate this
     double XS = 1;
 
+    UInt_t datasetType = 0;
+
 
     if (MGC2VEtaDifCut){
         saveName = "C2VEtaDifCut";
@@ -103,6 +105,7 @@ void new072022BDTAnalysis(string datasetString){
         saveName = "SDC2V3MC";
         totWeight = 1845.172;
         XS = 0.0029534660375063228;
+        datasetType = 0;
         isBackground = false;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSDC2V3MC.root";
         fileAr.push_back(tmpStrWithPath);
@@ -190,6 +193,7 @@ void new072022BDTAnalysis(string datasetString){
         isBackground = false;
         totWeight = 11.713886530000012;
         XS = 8.37711e-05*0.5772683;
+        datasetType = 1;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSM.root";
         fileAr.push_back(tmpStrWithPath);
         
@@ -925,6 +929,8 @@ void new072022BDTAnalysis(string datasetString){
 
     Double_t passingEvFullWeight_L_L;
 
+    UInt_t datasetType_L_L;
+
     Float_t selectedHiggsFJ_pt_L_L;
     Float_t selectedHiggsFJ_eta_L_L;
     Float_t selectedHiggsFJ_ParticleNet_HbbvsQCD_L_L;
@@ -966,6 +972,8 @@ void new072022BDTAnalysis(string datasetString){
     passingEvLepTree->Branch("passingEvGenWeight_L_L",&passingEvGenWeight_L_L,"passingEvGenWeight_L_L/D");
 
     passingEvLepTree->Branch("passingEvFullWeight_L_L",&passingEvFullWeight_L_L,"passingEvFullWeight_L_L/D");
+
+    passingEvLepTree->Branch("datasetType_L_L",&datasetType_L_L,"datasetType_L_L/i");
 
     passingEvLepTree->Branch("selectedHiggsFJ_pt_L_L",&selectedHiggsFJ_pt_L_L,"selectedHiggsFJ_pt_L_L/F");
     passingEvLepTree->Branch("selectedHiggsFJ_eta_L_L",&selectedHiggsFJ_eta_L_L,"selectedHiggsFJ_eta_L_L/F");
@@ -1012,6 +1020,8 @@ void new072022BDTAnalysis(string datasetString){
 
     Double_t passingEvFullWeight_SL_L;
 
+    UInt_t datasetType_SL_L;
+
     Float_t selectedHiggsFJ_pt_SL_L;
     Float_t selectedHiggsFJ_eta_SL_L;
     Float_t selectedHiggsFJ_ParticleNet_HbbvsQCD_SL_L;
@@ -1045,6 +1055,8 @@ void new072022BDTAnalysis(string datasetString){
     passingEvSemiLepTree->Branch("passingEvGenWeight_SL_L",&passingEvGenWeight_SL_L,"passingEvGenWeight_SL_L/D");
 
     passingEvSemiLepTree->Branch("passingEvFullWeight_SL_L",&passingEvFullWeight_SL_L,"passingEvFullWeight_SL_L/D");
+
+    passingEvSemiLepTree->Branch("datasetType_SL_L",&datasetType_SL_L,"datasetType_SL_L/i");
 
     passingEvSemiLepTree->Branch("selectedHiggsFJ_pt_SL_L",&selectedHiggsFJ_pt_SL_L,"selectedHiggsFJ_pt_SL_L/F");
     passingEvSemiLepTree->Branch("selectedHiggsFJ_eta_SL_L",&selectedHiggsFJ_eta_SL_L,"selectedHiggsFJ_eta_SL_L/F");
@@ -2644,6 +2656,8 @@ void new072022BDTAnalysis(string datasetString){
 
                         passingEvFullWeight_L_L = tmpGenWeights*XS*Run2Lumi/totWeight;
 
+                        datasetType_L_L = datasetType;
+
                         selectedHiggsFJ_pt_L_L = hFatJet_pt_fromHTag;
                         selectedHiggsFJ_eta_L_L = hFatJet_eta_fromHTag;
                         selectedHiggsFJ_ParticleNet_HbbvsQCD_L_L = hFatJet_HTag_fromHTag;
@@ -2697,6 +2711,8 @@ void new072022BDTAnalysis(string datasetString){
                                 passingEvGenWeight_L_L = tmpGenWeights;
 
                                 passingEvFullWeight_L_L = tmpGenWeights*XS*Run2Lumi/totWeight;
+
+                                datasetType_L_L = datasetType;
 
                                 selectedHiggsFJ_pt_L_L = hFatJet_pt_fromHTag;
                                 selectedHiggsFJ_eta_L_L = hFatJet_eta_fromHTag;
@@ -2791,6 +2807,8 @@ void new072022BDTAnalysis(string datasetString){
 
                         passingEvFullWeight_SL_L = tmpGenWeights*XS*Run2Lumi/totWeight;
 
+                        datasetType_SL_L = datasetType;
+
                         selectedHiggsFJ_pt_SL_L = hFatJet_pt_fromHTag;
                         selectedZFJ_pt_SL_L = dRCheckVecAr[2].Pt();
                         selectedHiggsFJ_eta_SL_L = hFatJet_eta_fromHTag;
@@ -2838,6 +2856,8 @@ void new072022BDTAnalysis(string datasetString){
                                 passingEvGenWeight_SL_L = tmpGenWeights;
 
                                 passingEvFullWeight_SL_L = tmpGenWeights*XS*Run2Lumi/totWeight;
+
+                                datasetType_SL_L = datasetType;
 
                                 selectedHiggsFJ_pt_SL_L = hFatJet_pt_fromHTag;
                                 selectedZFJ_pt_SL_L = dRCheckVecAr[2].Pt();

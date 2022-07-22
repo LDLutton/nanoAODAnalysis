@@ -111,6 +111,8 @@ void new072022BDTAnalysisBackground(string datasetString){
 
     float totWeight = 1;
 
+    UInt_t datasetType = 0;
+
     if (ttHToBBBackground){
         //saveName = "ttHToBB";
         crossSection = 0.5071*0.582;
@@ -118,6 +120,7 @@ void new072022BDTAnalysisBackground(string datasetString){
         saveName = "ttHToBB";
         
         isBackground = true;
+        datasetType = 2;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisttHToBB.root";
         fileAr.push_back(tmpStrWithPath);
         
@@ -129,6 +132,7 @@ void new072022BDTAnalysisBackground(string datasetString){
         saveName = "ttZJets";
         isBackground = true;
         totWeight = 32793821;
+        datasetType = 3;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisttZJets.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -140,6 +144,7 @@ void new072022BDTAnalysisBackground(string datasetString){
         saveName = "DY";
 
         isBackground = true;
+        datasetType = 4;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisDY.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -152,6 +157,7 @@ void new072022BDTAnalysisBackground(string datasetString){
         saveName = "QCDPT170to300";
         
         isBackground = true;
+        datasetType = 15;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT170to300.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -164,6 +170,7 @@ void new072022BDTAnalysisBackground(string datasetString){
         saveName = "QCDPT300to470";
         
         isBackground = true;
+        datasetType = 16;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT300to470.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -176,6 +183,7 @@ void new072022BDTAnalysisBackground(string datasetString){
         saveName = "QCDPT470to600";
 
         isBackground = true;
+        datasetType = 17;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT470to600.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -188,6 +196,7 @@ void new072022BDTAnalysisBackground(string datasetString){
         saveName = "QCDPT600to800";
         
         isBackground = true;
+        datasetType = 18;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT600to800.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -200,6 +209,7 @@ void new072022BDTAnalysisBackground(string datasetString){
         saveName = "QCDPT800to1000";
         
         isBackground = true;
+        datasetType = 19;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT800to1000.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -213,6 +223,7 @@ void new072022BDTAnalysisBackground(string datasetString){
         saveName = "QCDPT1000to1400";
         
         isBackground = true;
+        datasetType = 20;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT1000to1400.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -225,6 +236,7 @@ void new072022BDTAnalysisBackground(string datasetString){
         saveName = "QCDPT1400to1800";
         
         isBackground = true;
+        datasetType = 21;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT1400to1800.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -237,6 +249,7 @@ void new072022BDTAnalysisBackground(string datasetString){
         saveName = "QCDPT1800to2400";
         
         isBackground = true;
+        datasetType = 22;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT1800to2400.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -250,6 +263,7 @@ void new072022BDTAnalysisBackground(string datasetString){
         saveName = "QCDPT2400to3200";
         
         isBackground = true;
+        datasetType = 23;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT2400to3200.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -262,6 +276,7 @@ void new072022BDTAnalysisBackground(string datasetString){
         saveName = "QCDPT3200toInf";
         
         isBackground = true;
+        datasetType = 24;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT3200toInf.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -274,40 +289,8 @@ void new072022BDTAnalysisBackground(string datasetString){
         saveName = "TTJets";
         
         isBackground = true;
+        datasetType = 5;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisTTJets.root";
-        fileAr.push_back(tmpStrWithPath);
-    }
-    else if (TTToHadronicBackground){
-        //saveName = "QCDPT3200toInf";
-        
-        crossSection = 377.96;
-
-        saveName = "TTToHadronic";
-        
-        isBackground = true;
-        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisTTToHadronic.root";
-        fileAr.push_back(tmpStrWithPath);
-    }
-    else if (TTTo2L2NuBackground){
-        //saveName = "QCDPT3200toInf";
-        
-        crossSection = 88.29;
-
-        saveName = "TTTo2L2Nu";
-        
-        isBackground = true;
-        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisTTTo2L2Nu.root";
-        fileAr.push_back(tmpStrWithPath);
-    }
-    else if (TTToSemiLeptonicBackground){
-        //saveName = "QCDPT3200toInf";
-        
-        crossSection = 365.34;
-
-        saveName = "TTToSemiLeptonic";
-        
-        isBackground = true;
-        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisTTToSemiLeptonic.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (ST_s_ChannelBackground){
@@ -319,6 +302,7 @@ void new072022BDTAnalysisBackground(string datasetString){
         saveName = "ST_s_Channel";
         
         isBackground = true;
+        datasetType = 9;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisST_s_Channel.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -331,6 +315,7 @@ void new072022BDTAnalysisBackground(string datasetString){
         saveName = "ST_t_ChannelAntiTop";
         
         isBackground = true;
+        datasetType = 10;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisST_t_ChannelAntiTop.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -343,43 +328,8 @@ void new072022BDTAnalysisBackground(string datasetString){
         saveName = "ST_t_ChannelTop";
         
         isBackground = true;
+        datasetType = 11;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisST_t_ChannelTop.root";
-        fileAr.push_back(tmpStrWithPath);
-    }
-    else if (ZZTo2Q2NuBackground){
-        //saveName = "QCDPT3200toInf";
-        
-        crossSection = 4.561;
-        totWeight = 137620470.60000002;
-
-        saveName = "ZZTo2Q2Nu";
-        
-        isBackground = true;
-        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisZZTo2Q2Nu.root";
-        fileAr.push_back(tmpStrWithPath);
-    }
-    else if (WWTo2L2NuBackground){
-        //saveName = "QCDPT3200toInf";
-        
-        crossSection = 10.48;
-        totWeight = 110795338.10000001;
-
-        saveName = "WWTo2L2Nu";
-        
-        isBackground = true;
-        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisWWTo2L2Nu.root";
-        fileAr.push_back(tmpStrWithPath);
-    }
-    else if (WZTo3LNuBackground){
-        //saveName = "QCDPT3200toInf";
-        
-        crossSection = 5.052;
-        totWeight = 83145925.5;
-
-        saveName = "WZTo3LNu";
-        
-        isBackground = true;
-        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisWZTo3LNu.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (ZZBackground){
@@ -391,6 +341,7 @@ void new072022BDTAnalysisBackground(string datasetString){
         saveName = "ZZ";
         
         isBackground = true;
+        datasetType = 12;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisZZ.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -403,6 +354,7 @@ void new072022BDTAnalysisBackground(string datasetString){
         saveName = "WW";
         
         isBackground = true;
+        datasetType = 13;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisWW.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -415,6 +367,7 @@ void new072022BDTAnalysisBackground(string datasetString){
         saveName = "WZ";
         
         isBackground = true;
+        datasetType = 14;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisWZ.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -427,6 +380,7 @@ void new072022BDTAnalysisBackground(string datasetString){
         saveName = "TTbb_TTToHadronic";
         
         isBackground = true;
+        datasetType = 6;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisTTbb_TTToHadronic.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -439,6 +393,7 @@ void new072022BDTAnalysisBackground(string datasetString){
         saveName = "TTbb_TTTo2L2Nu";
         
         isBackground = true;
+        datasetType = 7;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisTTbb_TTTo2L2Nu.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -451,6 +406,7 @@ void new072022BDTAnalysisBackground(string datasetString){
         saveName = "TTbb_TTToSemiLeptonic";
         
         isBackground = true;
+        datasetType = 8;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisTTbb_TTToSemiLeptonic.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -656,6 +612,8 @@ void new072022BDTAnalysisBackground(string datasetString){
 
     Double_t passingEvFullWeight_L_L;
 
+    UInt_t datasetType_L_L;
+
     Float_t selectedHiggsFJ_pt_L_L;
     Float_t selectedHiggsFJ_eta_L_L;
     Float_t selectedHiggsFJ_ParticleNet_HbbvsQCD_L_L;
@@ -697,6 +655,8 @@ void new072022BDTAnalysisBackground(string datasetString){
     passingEvLepTree->Branch("passingEvGenWeight_L_L",&passingEvGenWeight_L_L,"passingEvGenWeight_L_L/D");
 
     passingEvLepTree->Branch("passingEvFullWeight_L_L",&passingEvFullWeight_L_L,"passingEvFullWeight_L_L/D");
+
+    passingEvLepTree->Branch("datasetType_L_L",&datasetType_L_L,"datasetType_L_L/i");
 
     passingEvLepTree->Branch("selectedHiggsFJ_pt_L_L",&selectedHiggsFJ_pt_L_L,"selectedHiggsFJ_pt_L_L/F");
     passingEvLepTree->Branch("selectedHiggsFJ_eta_L_L",&selectedHiggsFJ_eta_L_L,"selectedHiggsFJ_eta_L_L/F");
@@ -744,6 +704,8 @@ void new072022BDTAnalysisBackground(string datasetString){
 
     Double_t passingEvFullWeight_SL_L;
 
+    UInt_t datasetType_SL_L;
+
     Float_t selectedHiggsFJ_pt_SL_L;
     Float_t selectedHiggsFJ_eta_SL_L;
     Float_t selectedHiggsFJ_ParticleNet_HbbvsQCD_SL_L;
@@ -777,6 +739,8 @@ void new072022BDTAnalysisBackground(string datasetString){
     passingEvSemiLepTree->Branch("passingEvGenWeight_SL_L",&passingEvGenWeight_SL_L,"passingEvGenWeight_SL_L/D");
 
     passingEvSemiLepTree->Branch("passingEvFullWeight_SL_L",&passingEvFullWeight_SL_L,"passingEvFullWeight_SL_L/D");
+
+    passingEvSemiLepTree->Branch("datasetType_SL_L",&datasetType_SL_L,"datasetType_SL_L/i");
 
     passingEvSemiLepTree->Branch("selectedHiggsFJ_pt_SL_L",&selectedHiggsFJ_pt_SL_L,"selectedHiggsFJ_pt_SL_L/F");
     passingEvSemiLepTree->Branch("selectedHiggsFJ_eta_SL_L",&selectedHiggsFJ_eta_SL_L,"selectedHiggsFJ_eta_SL_L/F");
@@ -1380,6 +1344,8 @@ void new072022BDTAnalysisBackground(string datasetString){
 
                     passingEvFullWeight_L_L = tmpGenWeights*crossSection*Run2Lumi/totWeight;
 
+                    datasetType_L_L = datasetType;
+
                     selectedHiggsFJ_pt_L_L = hFatJet_pt_fromHTag;
                     selectedHiggsFJ_eta_L_L = hFatJet_eta_fromHTag;
                     selectedHiggsFJ_ParticleNet_HbbvsQCD_L_L = hFatJet_HTag_fromHTag;
@@ -1435,6 +1401,8 @@ void new072022BDTAnalysisBackground(string datasetString){
                     passingEvGenWeight_SL_L = tmpGenWeights;
 
                     passingEvFullWeight_SL_L = tmpGenWeights*crossSection*Run2Lumi/totWeight;
+
+                    datasetType_SL_L = datasetType;
 
                     selectedHiggsFJ_pt_SL_L = hFatJet_pt_fromHTag;
                     selectedZFJ_pt_SL_L = dRCheckVecAr[2].Pt();
