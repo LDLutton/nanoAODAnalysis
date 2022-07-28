@@ -965,6 +965,8 @@ void new072022BDTAnalysis(string datasetString){
 
     Float_t selectedZPairPlusHiggsFJ_InvMass_L_L;
     Float_t selectedZPairPlusHiggsFJ_pt_L_L;
+
+    Float_t selectedVBFJets_MaxBTag_L_L;
     
 
     TTree *passingEvLepTree = new TTree("passingEvLepTree", "passingEvLepTree");
@@ -1012,6 +1014,8 @@ void new072022BDTAnalysis(string datasetString){
     passingEvLepTree->Branch("selectedZPairPlusHiggsFJ_InvMass_L_L",&selectedZPairPlusHiggsFJ_InvMass_L_L,"selectedZPairPlusHiggsFJ_InvMass_L_L/F");
     passingEvLepTree->Branch("selectedZPairPlusHiggsFJ_pt_L_L",&selectedZPairPlusHiggsFJ_pt_L_L,"selectedZPairPlusHiggsFJ_pt_L_L/F");
 
+    passingEvLepTree->Branch("selectedVBFJets_MaxBTag_L_L",&selectedVBFJets_MaxBTag_L_L,"selectedVBFJets_MaxBTag_L_L/F");
+
 
 
 
@@ -1048,6 +1052,8 @@ void new072022BDTAnalysis(string datasetString){
 
     Float_t selectedZPairPlusHiggsFJ_InvMass_SL_L;
     Float_t selectedZPairPlusHiggsFJ_pt_SL_L;
+
+    Float_t selectedVBFJets_MaxBTag_SL_L;
     
 
     TTree *passingEvSemiLepTree = new TTree("passingEvSemiLepTree", "passingEvSemiLepTree");
@@ -1085,7 +1091,7 @@ void new072022BDTAnalysis(string datasetString){
     passingEvSemiLepTree->Branch("selectedZPairPlusHiggsFJ_InvMass_SL_L",&selectedZPairPlusHiggsFJ_InvMass_SL_L,"selectedZPairPlusHiggsFJ_InvMass_SL_L/F");
     passingEvSemiLepTree->Branch("selectedZPairPlusHiggsFJ_pt_SL_L",&selectedZPairPlusHiggsFJ_pt_SL_L,"selectedZPairPlusHiggsFJ_pt_SL_L/F");
 
-
+    passingEvSemiLepTree->Branch("selectedVBFJets_MaxBTag_SL_L",&selectedVBFJets_MaxBTag_SL_L,"selectedVBFJets_MaxBTag_SL_L/F");
 
 
 
@@ -2428,7 +2434,8 @@ void new072022BDTAnalysis(string datasetString){
 
             //B jet veto
             bool passBJetVeto = true;
-            doBJetVeto(nJetLen,Jet_ptL,Jet_etaL,Jet_phiL,Jet_btagDeepFlavBL,hFatJet_phi_fromHTag,hFatJet_eta_fromHTag,dRCut,bTagCut,passBJetVeto,debug);
+            float maxPassingBTag = 0;
+            doBJetVeto_WithBDTVariables(nJetLen,Jet_ptL,Jet_etaL,Jet_phiL,Jet_btagDeepFlavBL,hFatJet_phi_fromHTag,hFatJet_eta_fromHTag,dRCut,bTagCut,passBJetVeto,maxPassingBTag,debug);
             if (!passBJetVeto) continue;
 
             passVBFJetBVetoCtr += 1;
@@ -2696,6 +2703,8 @@ void new072022BDTAnalysis(string datasetString){
                         selectedZPairPlusHiggsFJ_InvMass_L_L = ZPairPlusHInvMass;
                         selectedZPairPlusHiggsFJ_pt_L_L = ZPairPlusHPt;
 
+                        selectedVBFJets_MaxBTag_L_L = maxPassingBTag;
+
                         passingEvLepTree->Fill();
                     }
 
@@ -2751,6 +2760,8 @@ void new072022BDTAnalysis(string datasetString){
 
                                 selectedZPairPlusHiggsFJ_InvMass_L_L = ZPairPlusHInvMass;
                                 selectedZPairPlusHiggsFJ_pt_L_L = ZPairPlusHPt;
+
+                                selectedVBFJets_MaxBTag_L_L = maxPassingBTag;
 
                                 passingEvLepTree->Fill();
                             }
@@ -2836,6 +2847,8 @@ void new072022BDTAnalysis(string datasetString){
                         selectedZPairPlusHiggsFJ_InvMass_SL_L = ZPairPlusHInvMass;
                         selectedZPairPlusHiggsFJ_pt_SL_L = ZPairPlusHPt;
 
+                        selectedVBFJets_MaxBTag_SL_L = maxPassingBTag;
+
                         passingEvSemiLepTree->Fill();
                     }
 
@@ -2885,6 +2898,8 @@ void new072022BDTAnalysis(string datasetString){
 
                                 selectedZPairPlusHiggsFJ_InvMass_SL_L = ZPairPlusHInvMass;
                                 selectedZPairPlusHiggsFJ_pt_SL_L = ZPairPlusHPt;
+
+                                selectedVBFJets_MaxBTag_SL_L = maxPassingBTag;
 
                                 passingEvSemiLepTree->Fill();
                             }
