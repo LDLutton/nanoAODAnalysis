@@ -1704,17 +1704,52 @@ bool debug
                         passedAsLepBool = true;
                         dRCheckVecAr.push_back(Z1LeadVec);
                         dRCheckVecAr.push_back(Z1TrailingVec);
+                        
+                        if (!Z1IsMuon){
+                            Z1LeadSIP = Electron_sip3dL[elecCandIndAr[Z1LeadItr]];
+                            Z1TrailingSIP = Electron_sip3dL[elecCandIndAr[Z1TrailingItr]];
+                        }
+                        else {
+                            Z1LeadSIP = Muon_sip3dL[muonCandIndAr[Z1LeadItr]];
+                            Z1TrailingSIP = Muon_sip3dL[muonCandIndAr[Z1TrailingItr]];
+                        }
+                        
                         ROOT::Math::PtEtaPhiMVector tmpZ2LeadVec;
                         ROOT::Math::PtEtaPhiMVector tmpZ2TrailingVec;
                         if (Z2IsMuon){
                             dRCheckVecAr.push_back(mZ2VecPairAr[tmpZ2Ind][0]);
                             dRCheckVecAr.push_back(mZ2VecPairAr[tmpZ2Ind][1]);
+                            Z2LeadSIP = Muon_sip3dL[muonCandIndAr[muonPassesZ2CutsFinalAr[tmpZ2Ind][0]]];
+                            Z2TrailingSIP = Muon_sip3dL[muonCandIndAr[muonPassesZ2CutsFinalAr[tmpZ2Ind][1]]];
+                            
+                            
 
                         }
                         else {
                             dRCheckVecAr.push_back(eZ2VecPairAr[tmpZ2Ind][0]);
                             dRCheckVecAr.push_back(eZ2VecPairAr[tmpZ2Ind][1]);
+                            
+                            Z2LeadSIP = Electron_sip3dL[elecCandIndAr[elecPassesZ2CutsFinalAr[tmpZ2Ind][0]]];
+                            Z2TrailingSIP = Electron_sip3dL[elecCandIndAr[elecPassesZ2CutsFinalAr[tmpZ2Ind][1]]];
                         }
+                        /*
+                        if (Z2LeadSIP > 4 || Z2TrailingSIP > 4){
+                            std::cout << "Z2IsMuon " << Z2IsMuon << " tmpZ2Ind " << tmpZ2Ind << " elecPassesZ2CutsFinalAr.size() " << elecPassesZ2CutsFinalAr.size() << " muonPassesZ2CutsFinalAr.size() " << muonPassesZ2CutsFinalAr.size() << "\n";
+                            
+                            std::cout << "Z2LeadSIP " << Z2LeadSIP << " Z2TrailingSIP " << Z2TrailingSIP << "\n";
+                            if (!Z2IsMuon){
+                                std::cout << "elecPassesZ2CutsFinalAr[tmpZ2Ind][0] " << elecPassesZ2CutsFinalAr[tmpZ2Ind][0] << "elecPassesZ2CutsFinalAr[tmpZ2Ind][1] " << elecPassesZ2CutsFinalAr[tmpZ2Ind][1] <<"\n";
+                                std::cout << "Electron_ptL[elecCandIndAr[elecPassesZ2CutsFinalAr[tmpZ2Ind][0]]] " << Electron_ptL[elecCandIndAr[elecPassesZ2CutsFinalAr[tmpZ2Ind][0]]] << " Electron_ptL[elecCandIndAr[elecPassesZ2CutsFinalAr[tmpZ2Ind][1]]] " << Electron_ptL[elecCandIndAr[elecPassesZ2CutsFinalAr[tmpZ2Ind][1]]];
+                                std::cout << " dRCheckVecAr[dRCheckVecAr.size()-2].Pt() " << dRCheckVecAr[dRCheckVecAr.size()-2].Pt() << " dRCheckVecAr[dRCheckVecAr.size()-1].Pt() " << dRCheckVecAr[dRCheckVecAr.size()-1].Pt() << "\n";
+                            }
+                            else {
+                                std::cout << "muonPassesZ2CutsFinalAr[tmpZ2Ind][0] " << muonPassesZ2CutsFinalAr[tmpZ2Ind][0] <<"muonPassesZ2CutsFinalAr[tmpZ2Ind][1] " << muonPassesZ2CutsFinalAr[tmpZ2Ind][1] <<"\n";
+                                std::cout << "Muon_ptL[muonCandIndAr[muonPassesZ2CutsFinalAr[tmpZ2Ind][0]]] " << Muon_ptL[muonCandIndAr[muonPassesZ2CutsFinalAr[tmpZ2Ind][0]]]<< " Muon_ptL[muonCandIndAr[muonPassesZ2CutsFinalAr[tmpZ2Ind][1]]] " << Muon_ptL[muonCandIndAr[muonPassesZ2CutsFinalAr[tmpZ2Ind][1]]];
+                                std::cout << " dRCheckVecAr[dRCheckVecAr.size()-2].Pt() " << dRCheckVecAr[dRCheckVecAr.size()-2].Pt() << " dRCheckVecAr[dRCheckVecAr.size()-1].Pt() " << dRCheckVecAr[dRCheckVecAr.size()-1].Pt() << "\n";
+                            }
+                            std::cout << "------------------\n";
+                        }
+                        */
                     
                     }
 
