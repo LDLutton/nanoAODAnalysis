@@ -310,7 +310,7 @@ float dRCutRangeTop = 4.;
 float dRCutRangeBottom = 0.;
 float dRCutCutStep = (dRCutRangeTop - dRCutRangeBottom) / cutAmnt;
 
-// V2 BDT Cuts 07282022 #moving the particle net cuts to 0
+// V2 BDT Cuts 07282022 #moving the particle net cuts to 0 and the BTag to 1
 
 float dRBDTCut = 0.8;
 
@@ -320,7 +320,7 @@ float jetEtaDifBDTCut = 2.0;
 
 float jetInvMassBDTCut = 200.;
 
-float bTagBDTCut = 0.9;
+float bTagBDTCut = 1.0;
 
 //Higgs FJ cuts
 
