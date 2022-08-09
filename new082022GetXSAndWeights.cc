@@ -103,6 +103,15 @@ void new082022GetXSAndWeights(UInt_t fileInd){
         useFJGenMatchTree = true;
         
     }
+    else if (SDC2V3MCWZHAr){
+        saveName = "SDC2V3MCWZH";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V3MCWZHAr)/sizeof(SDC2V3MCWZHAr[0]);
+        std::string tmpStrWithPath = SDC2V3MCWZHAr[fileInd];
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+    }
     else if (MGOSix){
         saveName = "OSix";
         isBackground = false;
