@@ -396,6 +396,8 @@ void new082022KinematicsAnalysis(UInt_t fileInd){
     Double_t ZTrailingPtL;
     Double_t JetLeadPtL;
     Double_t JetTrailingPtL;
+    Double_t JetLeadEtaL;
+    Double_t JetTrailingEtaL;
     Double_t JetPairDEtaL;
     Int_t JetLeadPDGIdL;
     Int_t JetTrailingPDGIdL;
@@ -411,6 +413,8 @@ void new082022KinematicsAnalysis(UInt_t fileInd){
     LHEEventsTree->Branch("ZTrailingPtL",&ZTrailingPtL,"ZTrailingPtL/D");
     LHEEventsTree->Branch("JetLeadPtL",&JetLeadPtL,"JetLeadPtL/D");
     LHEEventsTree->Branch("JetTrailingPtL",&JetTrailingPtL,"JetTrailingPtL/D");
+    LHEEventsTree->Branch("JetLeadEtaL",&JetLeadEtaL,"JetLeadEtaL/D");
+    LHEEventsTree->Branch("JetTrailingEtaL",&JetTrailingEtaL,"JetTrailingEtaL/D");
     LHEEventsTree->Branch("JetPairDEtaL",&JetPairDEtaL,"JetPairDEtaL/D");
     LHEEventsTree->Branch("JetLeadPDGIdL",&JetLeadPDGIdL,"JetLeadPDGIdL/I");
     LHEEventsTree->Branch("JetTrailingPDGIdL",&JetTrailingPDGIdL,"JetTrailingPDGIdL/I");
@@ -567,6 +571,8 @@ void new082022KinematicsAnalysis(UInt_t fileInd){
                 if (tmpLHEPartPtOne >= tmpLHEPartPtTwo) {
                     JetLeadPtL = tmpLHEPartPtOne;
                     JetTrailingPtL = tmpLHEPartPtTwo;
+                    JetLeadEtaL = tmpLHEPartEtaOne;
+                    JetTrailingEtaL = tmpLHEPartEtaTwo;
                     JetLeadPDGIdL = LHEPart_pdgId[tmpJAr[0]];
                     JetTrailingPDGIdL = LHEPart_pdgId[tmpJAr[1]];
 
@@ -574,6 +580,8 @@ void new082022KinematicsAnalysis(UInt_t fileInd){
                 else{
                     JetLeadPtL = tmpLHEPartPtTwo;
                     JetTrailingPtL = tmpLHEPartPtOne;
+                    JetLeadEtaL = tmpLHEPartEtaTwo;
+                    JetTrailingEtaL = tmpLHEPartEtaOne;
                     JetLeadPDGIdL = LHEPart_pdgId[tmpJAr[1]];
                     JetTrailingPDGIdL = LHEPart_pdgId[tmpJAr[0]];
 
