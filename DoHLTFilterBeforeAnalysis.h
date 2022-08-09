@@ -11,6 +11,10 @@ bool scratchDown = true;
 
 bool testRun = true;
 bool SDC2V3MC = false;
+bool SDC2V0MC = false;
+bool SDC2V1MC = false;
+bool SDC2V4MC = false;
+bool SDC2V4p5MC = false;
 bool MGC2VEtaDifCut = false;
 bool MGOSix = false;
 bool MGOSixEtaDifCut = false;
