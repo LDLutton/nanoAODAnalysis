@@ -11,6 +11,9 @@ bool scratchDown = true;
 
 bool testRun = true;
 bool SDC2V3MC = false;
+bool SDC2Vm2p5MC = false;
+bool SDC2Vm2MC = false;
+bool SDC2Vm1MC = false;
 bool SDC2V0MC = false;
 bool SDC2V1MC = false;
 bool SDC2V4MC = false;

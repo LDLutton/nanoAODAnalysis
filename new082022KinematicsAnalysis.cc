@@ -103,6 +103,54 @@ void new082022KinematicsAnalysis(UInt_t fileInd){
         useFJGenMatchTree = true;
         
     }
+    else if (SDC2Vm2p5MC){
+        saveName = "SDC2Vm2p5MC";
+        isBackground = false;
+        int arrSize = sizeof(SDC2Vm2p5MCAr)/sizeof(SDC2Vm2p5MCAr[0]);
+        std::string tmpStrWithPath = SDC2Vm2p5MCAr[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2Vm2p5MCAr[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2Vm2MC){
+        saveName = "SDC2Vm2MC";
+        isBackground = false;
+        int arrSize = sizeof(SDC2Vm2MCAr)/sizeof(SDC2Vm2MCAr[0]);
+        std::string tmpStrWithPath = SDC2Vm2MCAr[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2Vm2MCAr[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2Vm1MC){
+        saveName = "SDC2Vm1MC";
+        isBackground = false;
+        int arrSize = sizeof(SDC2Vm1MCAr)/sizeof(SDC2Vm1MCAr[0]);
+        std::string tmpStrWithPath = SDC2Vm1MCAr[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2Vm1MCAr[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
     else if (SDC2V0MC){
         saveName = "SDC2V0MC";
         isBackground = false;
