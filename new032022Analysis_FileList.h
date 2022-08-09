@@ -9897,6 +9897,27 @@ std::string SDC2V4p5MCAr[17] = {"root://redirector.t2.ucsd.edu:1095//store/user/
 
 
 
+std::string SDC2V3MCWZHAr[17] = {"root://redirector.t2.ucsd.edu:1095//store/user/phchang/VBSVVHSignalSamples/RunIISummer20UL18_VBSWZH_incl_C2V_3_Azure_v1/merged/merged_0.root",
+"root://redirector.t2.ucsd.edu:1095//store/user/phchang/VBSVVHSignalSamples/RunIISummer20UL18_VBSWZH_incl_C2V_3_Azure_v1/merged/merged_1.root",
+"root://redirector.t2.ucsd.edu:1095//store/user/phchang/VBSVVHSignalSamples/RunIISummer20UL18_VBSWZH_incl_C2V_3_Azure_v1/merged/merged_10.root",
+"root://redirector.t2.ucsd.edu:1095//store/user/phchang/VBSVVHSignalSamples/RunIISummer20UL18_VBSWZH_incl_C2V_3_Azure_v1/merged/merged_11.root",
+"root://redirector.t2.ucsd.edu:1095//store/user/phchang/VBSVVHSignalSamples/RunIISummer20UL18_VBSWZH_incl_C2V_3_Azure_v1/merged/merged_12.root",
+"root://redirector.t2.ucsd.edu:1095//store/user/phchang/VBSVVHSignalSamples/RunIISummer20UL18_VBSWZH_incl_C2V_3_Azure_v1/merged/merged_13.root",
+"root://redirector.t2.ucsd.edu:1095//store/user/phchang/VBSVVHSignalSamples/RunIISummer20UL18_VBSWZH_incl_C2V_3_Azure_v1/merged/merged_14.root",
+"root://redirector.t2.ucsd.edu:1095//store/user/phchang/VBSVVHSignalSamples/RunIISummer20UL18_VBSWZH_incl_C2V_3_Azure_v1/merged/merged_15.root",
+"root://redirector.t2.ucsd.edu:1095//store/user/phchang/VBSVVHSignalSamples/RunIISummer20UL18_VBSWZH_incl_C2V_3_Azure_v1/merged/merged_16.root",
+"root://redirector.t2.ucsd.edu:1095//store/user/phchang/VBSVVHSignalSamples/RunIISummer20UL18_VBSWZH_incl_C2V_3_Azure_v1/merged/merged_2.root",
+"root://redirector.t2.ucsd.edu:1095//store/user/phchang/VBSVVHSignalSamples/RunIISummer20UL18_VBSWZH_incl_C2V_3_Azure_v1/merged/merged_3.root",
+"root://redirector.t2.ucsd.edu:1095//store/user/phchang/VBSVVHSignalSamples/RunIISummer20UL18_VBSWZH_incl_C2V_3_Azure_v1/merged/merged_4.root",
+"root://redirector.t2.ucsd.edu:1095//store/user/phchang/VBSVVHSignalSamples/RunIISummer20UL18_VBSWZH_incl_C2V_3_Azure_v1/merged/merged_5.root",
+"root://redirector.t2.ucsd.edu:1095//store/user/phchang/VBSVVHSignalSamples/RunIISummer20UL18_VBSWZH_incl_C2V_3_Azure_v1/merged/merged_6.root",
+"root://redirector.t2.ucsd.edu:1095//store/user/phchang/VBSVVHSignalSamples/RunIISummer20UL18_VBSWZH_incl_C2V_3_Azure_v1/merged/merged_7.root",
+"root://redirector.t2.ucsd.edu:1095//store/user/phchang/VBSVVHSignalSamples/RunIISummer20UL18_VBSWZH_incl_C2V_3_Azure_v1/merged/merged_8.root",
+"root://redirector.t2.ucsd.edu:1095//store/user/phchang/VBSVVHSignalSamples/RunIISummer20UL18_VBSWZH_incl_C2V_3_Azure_v1/merged/merged_9.root"}; 
+
+
+
+
 /*
 std::string SDC2V3MCAr[2568] = {"root://cmsxrootd.fnal.gov///store/user/phchang/VBSHWWSignalGeneration/RunIISummer20UL18_VBSZZH_incl_C2V_3_Azure_v1/output_NANOAOD_00DHPhK5rx.root",
 "root://cmsxrootd.fnal.gov///store/user/phchang/VBSHWWSignalGeneration/RunIISummer20UL18_VBSZZH_incl_C2V_3_Azure_v1/output_NANOAOD_00tYhfI218.root",
