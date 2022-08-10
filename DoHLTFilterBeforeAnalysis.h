@@ -10,6 +10,7 @@ bool debugGenPart = false;
 bool scratchDown = true;
 
 bool testRun = true;
+bool SDC2V3MCWZH = false;
 bool SDC2V3MC = false;
 bool SDC2Vm2p5MC = false;
 bool SDC2Vm2MC = false;
