@@ -119,14 +119,14 @@ void new082022GetXSAndWeights(UInt_t fileInd){
         useFJGenMatchTree = true;
         
     }
-    else if (SDC2Vm2MC){
-        saveName = "SDC2Vm2MC";
+    else if (SDC2Vm3MC){
+        saveName = "SDC2Vm3MC";
         isBackground = false;
-        int arrSize = sizeof(SDC2Vm2MCAr)/sizeof(SDC2Vm2MCAr[0]);
-        std::string tmpStrWithPath = SDC2Vm2MCAr[fileInd];
+        int arrSize = sizeof(SDC2Vm3MCAr)/sizeof(SDC2Vm3MCAr[0]);
+        std::string tmpStrWithPath = SDC2Vm3MCAr[fileInd];
         /*
         for (int i=0; i<arrSize; i++){
-            std::string tmpStrWithPath = SDC2Vm2MCAr[i];
+            std::string tmpStrWithPath = SDC2Vm3MCAr[i];
             fileAr.push_back(tmpStrWithPath);
         }
         */
