@@ -989,7 +989,7 @@ void doHiggsFatJetCutEarlySelection(UInt_t nFatJetLen,float &hFatJet_pt_fromHPar
                         float tmpFatJet_eta = FatJet_eta[fatJetInd];
                         //ROOT::Math::PtEtaPhiMVector tmpFJVec = ROOT::Math::PtEtaPhiMVector(tmpFatJet_pt,tmpFatJet_eta,tmpFatJet_phi,FatJet_mass[fatJetInd]);
                         bool tmpPassdR = true;
-                        float tmpZPairPlusHPt = tmpFatJet_pt;
+                        //float tmpZPairPlusHPt = tmpFatJet_pt;
                         float tmpFatJet_mass = FatJet_mass[fatJetInd];
                         ROOT::Math::PtEtaPhiMVector tmpFJVec = ROOT::Math::PtEtaPhiMVector(tmpFatJet_pt,tmpFatJet_eta,tmpFatJet_phi,tmpFatJet_mass);
                         for (UInt_t dRCheckVecInd=0; dRCheckVecInd<dRCheckVecAr.size();dRCheckVecInd++) {
@@ -1001,8 +1001,8 @@ void doHiggsFatJetCutEarlySelection(UInt_t nFatJetLen,float &hFatJet_pt_fromHPar
                                 tmpPassdR = false;
                                 break;
                             }
-                            tmpZPairPlusHPt += dRCheckVecAr[dRCheckVecInd].Pt();
-                            tmpFJVec += dRCheckVecAr[dRCheckVecInd];
+                            //tmpZPairPlusHPt += dRCheckVecAr[dRCheckVecInd].Pt();
+                            //tmpFJVec += dRCheckVecAr[dRCheckVecInd];
 
                         }
                         //std::cout << "tmpPassdR " << tmpPassdR << " tmpFJVec.M() " << tmpFJVec.M() << " ZPairPlusHInvMassCut " << ZPairPlusHInvMassCut<< "\n";
