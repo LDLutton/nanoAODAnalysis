@@ -119,14 +119,14 @@ void new082022GetXSAndWeights(UInt_t fileInd){
         useFJGenMatchTree = true;
         
     }
-    else if (SDC2Vm3MC){
-        saveName = "SDC2Vm3MC";
+    else if (SDC2Vm2MC){
+        saveName = "SDC2Vm2MC";
         isBackground = false;
-        int arrSize = sizeof(SDC2Vm3MCAr)/sizeof(SDC2Vm3MCAr[0]);
-        std::string tmpStrWithPath = SDC2Vm3MCAr[fileInd];
+        int arrSize = sizeof(SDC2Vm2MCAr)/sizeof(SDC2Vm2MCAr[0]);
+        std::string tmpStrWithPath = SDC2Vm2MCAr[fileInd];
         /*
         for (int i=0; i<arrSize; i++){
-            std::string tmpStrWithPath = SDC2Vm3MCAr[i];
+            std::string tmpStrWithPath = SDC2Vm2MCAr[i];
             fileAr.push_back(tmpStrWithPath);
         }
         */
@@ -233,11 +233,11 @@ void new082022GetXSAndWeights(UInt_t fileInd){
         useLHETree = true;
         useFJGenMatchTree = true;
     }
-    else if (SDC2Vm2MCWZH){
-        saveName = "SDC2Vm2MCWZH";
+    else if (SDC2Vm3MCWZH){
+        saveName = "SDC2Vm3MCWZH";
         isBackground = false;
-        int arrSize = sizeof(SDC2Vm2MCWZHAr)/sizeof(SDC2Vm2MCWZHAr[0]);
-        std::string tmpStrWithPath = SDC2Vm2MCWZHAr[fileInd];
+        int arrSize = sizeof(SDC2Vm3MCWZHAr)/sizeof(SDC2Vm3MCWZHAr[0]);
+        std::string tmpStrWithPath = SDC2Vm3MCWZHAr[fileInd];
         fileAr.push_back(tmpStrWithPath);
         useLHETree = true;
         useFJGenMatchTree = true;
