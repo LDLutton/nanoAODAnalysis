@@ -1249,6 +1249,74 @@ void new062022Analysis(string datasetString){
     AfterCutSemiLepInvMassTree->Branch("nFJL",&nFJL,"nFJL/i");
     AfterCutSemiLepInvMassTree->Branch("nJL",&nJL,"nJL/i");
 
+
+    Double_t genWeightLL;
+
+    Float_t ZOneLep_massLL;
+    Float_t ZTwoLep_massLL;
+    Float_t H_ptLL;
+
+    //ParticleNet
+    Float_t FatJet_particleNet_WvsQCDLL;
+
+
+    Bool_t HTobbBoolLL;
+
+    
+    
+    
+
+
+    TTree *PassingLepEventsTree = new TTree("PassingLepEventsTree", "PassingLepEventsTree");
+    //gen weights
+    PassingLepEventsTree->Branch("genWeightLL",&genWeightLL,"genWeightLL/D");
+
+    PassingLepEventsTree->Branch("H_ptLL",&H_ptLL,"H_ptLL/F");
+
+
+    PassingLepEventsTree->Branch("ZOneLep_massLL",&ZOneLep_massLL,"ZOneLep_massLL/F");
+    PassingLepEventsTree->Branch("ZTwoLep_massLL",&ZTwoLep_massLL,"ZTwoLep_massLL/F");
+    PassingLepEventsTree->Branch("FatJet_particleNet_WvsQCDLL",&FatJet_particleNet_WvsQCDLL,"FatJet_particleNet_WvsQCDLL/F");
+
+
+
+    PassingLepEventsTree->Branch("HTobbBoolLL",&HTobbBoolLL,"HTobbBoolLL/O");
+
+
+
+    Double_t genWeightSLL;
+
+    Float_t ZOneLep_massSLL;
+    Float_t H_ptSLL;
+
+    //ParticleNet
+    Float_t FatJet_particleNet_WvsQCDSLL;
+
+
+    Bool_t HTobbBoolSLL;
+
+    
+    
+    
+
+
+    TTree *PassingSemiLepEventsTree = new TTree("PassingSemiLepEventsTree", "PassingSemiLepEventsTree");
+    //gen weights
+    PassingSemiLepEventsTree->Branch("genWeightSLL",&genWeightSLL,"genWeightSLL/D");
+
+    PassingSemiLepEventsTree->Branch("H_ptSLL",&H_ptSLL,"H_ptSLL/F");
+
+
+    PassingSemiLepEventsTree->Branch("ZOneLep_massSLL",&ZOneLep_massSLL,"ZOneLep_massSLL/F");
+    PassingSemiLepEventsTree->Branch("FatJet_particleNet_WvsQCDSLL",&FatJet_particleNet_WvsQCDSLL,"FatJet_particleNet_WvsQCDSLL/F");
+
+
+
+    PassingSemiLepEventsTree->Branch("HTobbBoolSLL",&HTobbBoolSLL,"HTobbBoolSLL/O");
+
+
+
+
     
 
     std::cout << "Going into file loop.\n";
@@ -2572,7 +2640,7 @@ void new062022Analysis(string datasetString){
 
             //B jet veto
             bool passBJetVeto = true;
-            doBJetVeto(nJetLen,Jet_ptL,Jet_etaL,Jet_phiL,Jet_btagDeepFlavBL,hFatJet_phi_fromHTag,hFatJet_eta_fromHTag,dRCut,passBJetVeto,debug);
+            doBJetVeto(nJetLen,Jet_ptL,Jet_etaL,Jet_phiL,Jet_btagDeepFlavBL,hFatJet_phi_fromHTag,hFatJet_eta_fromHTag,dRCut,bTagCut,passBJetVeto,debug);
             if (!passBJetVeto) continue;
 
             passVBFJetBVetoCtr += 1;
@@ -2837,6 +2905,25 @@ void new062022Analysis(string datasetString){
                             }
                         }
                     }
+
+                    ROOT::Math::PtEtaPhiMVector tmpZLepOneVec = dRCheckVecAr[0];
+                    ROOT::Math::PtEtaPhiMVector tmpZLepTwoVec = dRCheckVecAr[1];
+                    ROOT::Math::PtEtaPhiMVector tmpZTwoLepOneVec = dRCheckVecAr[2];
+                    ROOT::Math::PtEtaPhiMVector tmpZTwoLepTwoVec = dRCheckVecAr[3];
+                    ROOT::Math::PtEtaPhiMVector tmpZOneLepVecPair = tmpZLepOneVec + tmpZLepTwoVec;
+                    ROOT::Math::PtEtaPhiMVector tmpZTwoLepVecPair = tmpZTwoLepOneVec + tmpZTwoLepTwoVec;
+
+                    genWeightLL = tmpGenWeights;
+
+                    ZOneLep_massLL = tmpZOneLepVecPair.M();
+                    ZTwoLep_massLL = tmpZTwoLepVecPair.M();
+                    H_ptLL = dRCheckVecAr[4].Pt();
+
+                    FatJet_particleNet_WvsQCDLL = 0;
+
+
+                    HTobbBoolLL = *HTobbBoolL;
+                    PassingLepEventsTree->Fill();
                     
                     
                 }
@@ -2888,6 +2975,21 @@ void new062022Analysis(string datasetString){
                     nJL = *nJetL;
                     AfterCutGenSemiLepWeightL = *genWeightL;
                     AfterCutSemiLepInvMassTree->Fill();
+
+                    ROOT::Math::PtEtaPhiMVector tmpZLepOneVec = dRCheckVecAr[0];
+                    ROOT::Math::PtEtaPhiMVector tmpZLepTwoVec = dRCheckVecAr[1];
+                    ROOT::Math::PtEtaPhiMVector tmpZLepVecPair = tmpZLepOneVec + tmpZLepTwoVec;
+
+                    genWeightSLL = tmpGenWeights;
+
+                    ZOneLep_massSLL = tmpZLepVecPair.M();
+                    H_ptSLL = dRCheckVecAr[3].Pt();
+
+                    FatJet_particleNet_WvsQCDSLL = 0;
+
+
+                    HTobbBoolSLL = *HTobbBoolL;
+                    PassingSemiLepEventsTree->Fill();
                     
 
                 }
@@ -3709,6 +3811,8 @@ void new062022Analysis(string datasetString){
     BeforeCutLepInvMassTree->Write("",TObject::kOverwrite);
     BeforeCutSemiLepInvMassTree->Write("",TObject::kOverwrite);
     AfterCutSemiLepInvMassTree->Write("",TObject::kOverwrite);
+    PassingLepEventsTree->Write("",TObject::kOverwrite);
+    PassingSemiLepEventsTree->Write("",TObject::kOverwrite);
 
     outFile->Close();
 
