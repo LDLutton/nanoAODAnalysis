@@ -640,7 +640,7 @@ void new062022AnalysisBackground(string datasetString){
     UInt_t passAsSemiLepCtr = 0;
     UInt_t passAsHadCtr = 0;
 
-    Double_t startingWeightedCtr = 0;
+    Double_t startingWeightedCtr = 0.;
     
 
     Double_t passHiggsFJPreSTWeightedCtr = 0.;
@@ -655,16 +655,16 @@ void new062022AnalysisBackground(string datasetString){
     Double_t passChannelWeightedCtr = 0.;
     Double_t passLepOrSemiLepChannelWeightedCtr = 0.;
     Double_t passLepChannelWeightedCtr = 0.;
-    Double_t tryingSemiLepChannelWeightedCtr = 0;
-    Double_t passFJInSemiLepChannelWeightedCtr = 0;
-    Double_t passEnoughLepsInSemiLepChannelWeightedCtr = 0;
-    Double_t passLepCutInSemiLepChannelWeightedCtr = 0;
+    Double_t tryingSemiLepChannelWeightedCtr = 0.;
+    Double_t passFJInSemiLepChannelWeightedCtr = 0.;
+    Double_t passEnoughLepsInSemiLepChannelWeightedCtr = 0.;
+    Double_t passLepCutInSemiLepChannelWeightedCtr = 0.;
     Double_t passSemiLepChannelWeightedCtr = 0.;
     Double_t passHadChannelWeightedCtr = 0.;
     Double_t passVBFJetBVetoWeightedCtr = 0.;
-    Double_t passVBFJetBVetoWeightedLepCtr = 0;
-    Double_t passVBFJetBVetoWeightedSemiLepCtr = 0;
-    Double_t passVBFJetBVetoWeightedHadCtr = 0;
+    Double_t passVBFJetBVetoWeightedLepCtr = 0.;
+    Double_t passVBFJetBVetoWeightedSemiLepCtr = 0.;
+    Double_t passVBFJetBVetoWeightedHadCtr = 0.;
     Double_t passVBFJetsWeightedCtr = 0.;
     Double_t passAsLepWeightedCtr = 0.;
     Double_t passAsSemiLepWeightedCtr = 0.;
@@ -701,7 +701,7 @@ void new062022AnalysisBackground(string datasetString){
     UInt_t passAsSemiLepGenLepCtr = 0;
     UInt_t passAsHadGenLepCtr = 0;
     
-    Double_t startingGenLepWeightedCtr = 0;
+    Double_t startingGenLepWeightedCtr = 0.;
 
     Double_t passHiggsFJPreSTGenLepWeightedCtr = 0.;
     Double_t passHiggsFJPreSTWeightedLepGenLepCtr = 0.;
@@ -715,10 +715,10 @@ void new062022AnalysisBackground(string datasetString){
     Double_t passChannelGenLepWeightedCtr = 0.;
     Double_t passLepOrSemiLepChannelGenLepWeightedCtr = 0.;
     Double_t passLepChannelGenLepWeightedCtr = 0.;
-    Double_t tryingSemiLepChannelGenLepWeightedCtr = 0;
-    Double_t passFJInSemiLepChannelGenLepWeightedCtr = 0;
-    Double_t passEnoughLepsInSemiLepChannelGenLepWeightedCtr = 0;
-    Double_t passLepCutInSemiLepChannelGenLepWeightedCtr = 0;
+    Double_t tryingSemiLepChannelGenLepWeightedCtr = 0.;
+    Double_t passFJInSemiLepChannelGenLepWeightedCtr = 0.;
+    Double_t passEnoughLepsInSemiLepChannelGenLepWeightedCtr = 0.;
+    Double_t passLepCutInSemiLepChannelGenLepWeightedCtr = 0.;
     Double_t passSemiLepChannelGenLepWeightedCtr = 0.;
     Double_t passHadChannelGenLepWeightedCtr = 0.;
     Double_t passVBFJetBVetoGenLepWeightedCtr = 0.;
@@ -758,7 +758,7 @@ void new062022AnalysisBackground(string datasetString){
     UInt_t passAsSemiLepGenSemiLepCtr = 0;
     UInt_t passAsHadGenSemiLepCtr = 0;
 
-    Double_t startingGenSemiLepWeightedCtr = 0;
+    Double_t startingGenSemiLepWeightedCtr = 0.;
 
     Double_t passHiggsFJPreSTGenSemiLepWeightedCtr = 0.;
     Double_t passHiggsFJPreSTWeightedLepGenSemiLepCtr = 0.;
@@ -772,10 +772,10 @@ void new062022AnalysisBackground(string datasetString){
     Double_t passChannelGenSemiLepWeightedCtr = 0.;
     Double_t passLepOrSemiLepChannelGenSemiLepWeightedCtr = 0.;
     Double_t passLepChannelGenSemiLepWeightedCtr = 0.;
-    Double_t tryingSemiLepChannelGenSemiLepWeightedCtr = 0;
-    Double_t passFJInSemiLepChannelGenSemiLepWeightedCtr = 0;
-    Double_t passEnoughLepsInSemiLepChannelGenSemiLepWeightedCtr = 0;
-    Double_t passLepCutInSemiLepChannelGenSemiLepWeightedCtr = 0;
+    Double_t tryingSemiLepChannelGenSemiLepWeightedCtr = 0.;
+    Double_t passFJInSemiLepChannelGenSemiLepWeightedCtr = 0.;
+    Double_t passEnoughLepsInSemiLepChannelGenSemiLepWeightedCtr = 0.;
+    Double_t passLepCutInSemiLepChannelGenSemiLepWeightedCtr = 0.;
     Double_t passSemiLepChannelGenSemiLepWeightedCtr = 0.;
     Double_t passHadChannelGenSemiLepWeightedCtr = 0.;
     Double_t passVBFJetBVetoGenSemiLepWeightedCtr = 0.;
@@ -816,7 +816,7 @@ void new062022AnalysisBackground(string datasetString){
     UInt_t passAsSemiLepGenHadCtr = 0;
     UInt_t passAsHadGenHadCtr = 0;
     
-    Double_t startingGenHadWeightedCtr = 0;
+    Double_t startingGenHadWeightedCtr = 0.;
 
     Double_t passHiggsFJPreSTGenHadWeightedCtr = 0.;
     Double_t passHiggsFJPreSTWeightedLepGenHadCtr = 0.;
@@ -830,10 +830,10 @@ void new062022AnalysisBackground(string datasetString){
     Double_t passChannelGenHadWeightedCtr = 0.;
     Double_t passLepOrSemiLepChannelGenHadWeightedCtr = 0.;
     Double_t passLepChannelGenHadWeightedCtr = 0.;
-    Double_t tryingSemiLepChannelGenHadWeightedCtr = 0;
-    Double_t passFJInSemiLepChannelGenHadWeightedCtr = 0;
-    Double_t passEnoughLepsInSemiLepChannelGenHadWeightedCtr = 0;
-    Double_t passLepCutInSemiLepChannelGenHadWeightedCtr = 0;
+    Double_t tryingSemiLepChannelGenHadWeightedCtr = 0.;
+    Double_t passFJInSemiLepChannelGenHadWeightedCtr = 0.;
+    Double_t passEnoughLepsInSemiLepChannelGenHadWeightedCtr = 0.;
+    Double_t passLepCutInSemiLepChannelGenHadWeightedCtr = 0.;
     Double_t passSemiLepChannelGenHadWeightedCtr = 0.;
     Double_t passHadChannelGenHadWeightedCtr = 0.;
     Double_t passVBFJetBVetoGenHadWeightedCtr = 0.;
@@ -873,7 +873,7 @@ void new062022AnalysisBackground(string datasetString){
     UInt_t passAsSemiLepGenOtherCtr = 0;
     UInt_t passAsHadGenOtherCtr = 0;
     
-    Double_t startingGenOtherWeightedCtr = 0;
+    Double_t startingGenOtherWeightedCtr = 0.;
 
     Double_t passHiggsFJPreSTGenOtherWeightedCtr = 0.;
     Double_t passHiggsFJPreSTWeightedLepGenOtherCtr = 0.;
@@ -887,10 +887,10 @@ void new062022AnalysisBackground(string datasetString){
     Double_t passChannelGenOtherWeightedCtr = 0.;
     Double_t passLepOrSemiLepChannelGenOtherWeightedCtr = 0.;
     Double_t passLepChannelGenOtherWeightedCtr = 0.;
-    Double_t tryingSemiLepChannelGenOtherWeightedCtr = 0;
-    Double_t passFJInSemiLepChannelGenOtherWeightedCtr = 0;
-    Double_t passEnoughLepsInSemiLepChannelGenOtherWeightedCtr = 0;
-    Double_t passLepCutInSemiLepChannelGenOtherWeightedCtr = 0;
+    Double_t tryingSemiLepChannelGenOtherWeightedCtr = 0.;
+    Double_t passFJInSemiLepChannelGenOtherWeightedCtr = 0.;
+    Double_t passEnoughLepsInSemiLepChannelGenOtherWeightedCtr = 0.;
+    Double_t passLepCutInSemiLepChannelGenOtherWeightedCtr = 0.;
     Double_t passSemiLepChannelGenOtherWeightedCtr = 0.;
     Double_t passHadChannelGenOtherWeightedCtr = 0.;
     Double_t passVBFJetBVetoGenOtherWeightedCtr = 0.;
@@ -933,7 +933,7 @@ void new062022AnalysisBackground(string datasetString){
     UInt_t passAsSemiLepGenLepNoHTobbCtr = 0;
     UInt_t passAsHadGenLepNoHTobbCtr = 0;
     
-    Double_t startingGenLepNoHTobbWeightedCtr = 0;
+    Double_t startingGenLepNoHTobbWeightedCtr = 0.;
 
     Double_t passHiggsFJPreSTGenLepNoHTobbWeightedCtr = 0.;
     Double_t passHiggsFJPreSTWeightedLepGenLepNoHTobbCtr = 0.;
@@ -947,10 +947,10 @@ void new062022AnalysisBackground(string datasetString){
     Double_t passChannelGenLepNoHTobbWeightedCtr = 0.;
     Double_t passLepOrSemiLepChannelGenLepNoHTobbWeightedCtr = 0.;
     Double_t passLepChannelGenLepNoHTobbWeightedCtr = 0.;
-    Double_t tryingSemiLepChannelGenLepNoHTobbWeightedCtr = 0;
-    Double_t passFJInSemiLepChannelGenLepNoHTobbWeightedCtr = 0;
-    Double_t passEnoughLepsInSemiLepChannelGenLepNoHTobbWeightedCtr = 0;
-    Double_t passLepCutInSemiLepChannelGenLepNoHTobbWeightedCtr = 0;
+    Double_t tryingSemiLepChannelGenLepNoHTobbWeightedCtr = 0.;
+    Double_t passFJInSemiLepChannelGenLepNoHTobbWeightedCtr = 0.;
+    Double_t passEnoughLepsInSemiLepChannelGenLepNoHTobbWeightedCtr = 0.;
+    Double_t passLepCutInSemiLepChannelGenLepNoHTobbWeightedCtr = 0.;
     Double_t passSemiLepChannelGenLepNoHTobbWeightedCtr = 0.;
     Double_t passHadChannelGenLepNoHTobbWeightedCtr = 0.;
     Double_t passVBFJetBVetoGenLepNoHTobbWeightedCtr = 0.;
@@ -990,7 +990,7 @@ void new062022AnalysisBackground(string datasetString){
     UInt_t passAsSemiLepGenSemiLepNoHTobbCtr = 0;
     UInt_t passAsHadGenSemiLepNoHTobbCtr = 0;
     
-    Double_t startingGenSemiLepNoHTobbWeightedCtr = 0;
+    Double_t startingGenSemiLepNoHTobbWeightedCtr = 0.;
 
     Double_t passHiggsFJPreSTGenSemiLepNoHTobbWeightedCtr = 0.;
     Double_t passHiggsFJPreSTWeightedLepGenSemiLepNoHTobbCtr = 0.;
@@ -1004,10 +1004,10 @@ void new062022AnalysisBackground(string datasetString){
     Double_t passChannelGenSemiLepNoHTobbWeightedCtr = 0.;
     Double_t passLepOrSemiLepChannelGenSemiLepNoHTobbWeightedCtr = 0.;
     Double_t passLepChannelGenSemiLepNoHTobbWeightedCtr = 0.;
-    Double_t tryingSemiLepChannelGenSemiLepNoHTobbWeightedCtr = 0;
-    Double_t passFJInSemiLepChannelGenSemiLepNoHTobbWeightedCtr = 0;
-    Double_t passEnoughLepsInSemiLepChannelGenSemiLepNoHTobbWeightedCtr = 0;
-    Double_t passLepCutInSemiLepChannelGenSemiLepNoHTobbWeightedCtr = 0;
+    Double_t tryingSemiLepChannelGenSemiLepNoHTobbWeightedCtr = 0.;
+    Double_t passFJInSemiLepChannelGenSemiLepNoHTobbWeightedCtr = 0.;
+    Double_t passEnoughLepsInSemiLepChannelGenSemiLepNoHTobbWeightedCtr = 0.;
+    Double_t passLepCutInSemiLepChannelGenSemiLepNoHTobbWeightedCtr = 0.;
     Double_t passSemiLepChannelGenSemiLepNoHTobbWeightedCtr = 0.;
     Double_t passHadChannelGenSemiLepNoHTobbWeightedCtr = 0.;
     Double_t passVBFJetBVetoGenSemiLepNoHTobbWeightedCtr = 0.;
@@ -1048,7 +1048,7 @@ void new062022AnalysisBackground(string datasetString){
     UInt_t passAsSemiLepGenHadNoHTobbCtr = 0;
     UInt_t passAsHadGenHadNoHTobbCtr = 0;
     
-    Double_t startingGenHadNoHTobbWeightedCtr = 0;
+    Double_t startingGenHadNoHTobbWeightedCtr = 0.;
 
     Double_t passHiggsFJPreSTGenHadNoHTobbWeightedCtr = 0.;
     Double_t passHiggsFJPreSTWeightedLepGenHadNoHTobbCtr = 0.;
@@ -1062,10 +1062,10 @@ void new062022AnalysisBackground(string datasetString){
     Double_t passChannelGenHadNoHTobbWeightedCtr = 0.;
     Double_t passLepOrSemiLepChannelGenHadNoHTobbWeightedCtr = 0.;
     Double_t passLepChannelGenHadNoHTobbWeightedCtr = 0.;
-    Double_t tryingSemiLepChannelGenHadNoHTobbWeightedCtr = 0;
-    Double_t passFJInSemiLepChannelGenHadNoHTobbWeightedCtr = 0;
-    Double_t passEnoughLepsInSemiLepChannelGenHadNoHTobbWeightedCtr = 0;
-    Double_t passLepCutInSemiLepChannelGenHadNoHTobbWeightedCtr = 0;
+    Double_t tryingSemiLepChannelGenHadNoHTobbWeightedCtr = 0.;
+    Double_t passFJInSemiLepChannelGenHadNoHTobbWeightedCtr = 0.;
+    Double_t passEnoughLepsInSemiLepChannelGenHadNoHTobbWeightedCtr = 0.;
+    Double_t passLepCutInSemiLepChannelGenHadNoHTobbWeightedCtr = 0.;
     Double_t passSemiLepChannelGenHadNoHTobbWeightedCtr = 0.;
     Double_t passHadChannelGenHadNoHTobbWeightedCtr = 0.;
     Double_t passVBFJetBVetoGenHadNoHTobbWeightedCtr = 0.;
@@ -1105,7 +1105,7 @@ void new062022AnalysisBackground(string datasetString){
     UInt_t passAsSemiLepGenOtherNoHTobbCtr = 0;
     UInt_t passAsHadGenOtherNoHTobbCtr = 0;
     
-    Double_t startingGenOtherNoHTobbWeightedCtr = 0;
+    Double_t startingGenOtherNoHTobbWeightedCtr = 0.;
 
     Double_t passHiggsFJPreSTGenOtherNoHTobbWeightedCtr = 0.;
     Double_t passHiggsFJPreSTWeightedLepGenOtherNoHTobbCtr = 0.;
@@ -1119,10 +1119,10 @@ void new062022AnalysisBackground(string datasetString){
     Double_t passChannelGenOtherNoHTobbWeightedCtr = 0.;
     Double_t passLepOrSemiLepChannelGenOtherNoHTobbWeightedCtr = 0.;
     Double_t passLepChannelGenOtherNoHTobbWeightedCtr = 0.;
-    Double_t tryingSemiLepChannelGenOtherNoHTobbWeightedCtr = 0;
-    Double_t passFJInSemiLepChannelGenOtherNoHTobbWeightedCtr = 0;
-    Double_t passEnoughLepsInSemiLepChannelGenOtherNoHTobbWeightedCtr = 0;
-    Double_t passLepCutInSemiLepChannelGenOtherNoHTobbWeightedCtr = 0;
+    Double_t tryingSemiLepChannelGenOtherNoHTobbWeightedCtr = 0.;
+    Double_t passFJInSemiLepChannelGenOtherNoHTobbWeightedCtr = 0.;
+    Double_t passEnoughLepsInSemiLepChannelGenOtherNoHTobbWeightedCtr = 0.;
+    Double_t passLepCutInSemiLepChannelGenOtherNoHTobbWeightedCtr = 0.;
     Double_t passSemiLepChannelGenOtherNoHTobbWeightedCtr = 0.;
     Double_t passHadChannelGenOtherNoHTobbWeightedCtr = 0.;
     Double_t passVBFJetBVetoGenOtherNoHTobbWeightedCtr = 0.;
@@ -1274,6 +1274,65 @@ void new062022AnalysisBackground(string datasetString){
     AfterCutSemiLepInvMassTree->Branch("AfterCutGenSemiLepWeightL",&AfterCutGenSemiLepWeightL,"AfterCutGenSemiLepWeightL/D");
     AfterCutSemiLepInvMassTree->Branch("nFJL",&nFJL,"nFJL/i");
     AfterCutSemiLepInvMassTree->Branch("nJL",&nJL,"nJL/i");
+
+
+
+    Double_t genWeightLL;
+
+    Float_t ZOneLep_massLL;
+    Float_t ZTwoLep_massLL;
+    Float_t H_ptLL;
+
+    //ParticleNet
+    Float_t FatJet_particleNet_WvsQCDLL;
+
+
+
+    
+    
+    
+
+
+    TTree *PassingLepEventsTree = new TTree("PassingLepEventsTree", "PassingLepEventsTree");
+    //gen weights
+    PassingLepEventsTree->Branch("genWeightLL",&genWeightLL,"genWeightLL/D");
+
+    PassingLepEventsTree->Branch("H_ptLL",&H_ptLL,"H_ptLL/F");
+
+
+    PassingLepEventsTree->Branch("ZOneLep_massLL",&ZOneLep_massLL,"ZOneLep_massLL/F");
+    PassingLepEventsTree->Branch("ZTwoLep_massLL",&ZTwoLep_massLL,"ZTwoLep_massLL/F");
+    PassingLepEventsTree->Branch("FatJet_particleNet_WvsQCDLL",&FatJet_particleNet_WvsQCDLL,"FatJet_particleNet_WvsQCDLL/F");
+
+
+
+    Double_t genWeightSLL;
+
+    Float_t ZOneLep_massSLL;
+    Float_t H_ptSLL;
+
+    //ParticleNet
+    Float_t FatJet_particleNet_WvsQCDSLL;
+
+
+    
+    
+    
+
+
+    TTree *PassingSemiLepEventsTree = new TTree("PassingSemiLepEventsTree", "PassingSemiLepEventsTree");
+    //gen weights
+    PassingSemiLepEventsTree->Branch("genWeightSLL",&genWeightSLL,"genWeightSLL/D");
+
+    PassingSemiLepEventsTree->Branch("H_ptSLL",&H_ptSLL,"H_ptSLL/F");
+
+
+    PassingSemiLepEventsTree->Branch("ZOneLep_massSLL",&ZOneLep_massSLL,"ZOneLep_massSLL/F");
+    PassingSemiLepEventsTree->Branch("FatJet_particleNet_WvsQCDSLL",&FatJet_particleNet_WvsQCDSLL,"FatJet_particleNet_WvsQCDSLL/F");
+
+
+
+
 
     
 
@@ -1812,7 +1871,7 @@ void new062022AnalysisBackground(string datasetString){
 
             //B jet veto
             bool passBJetVeto = true;
-            doBJetVeto(nJetLen,Jet_ptL,Jet_etaL,Jet_phiL,Jet_btagDeepFlavBL,hFatJet_phi_fromHTag,hFatJet_eta_fromHTag,dRCut,passBJetVeto,debug);
+            doBJetVeto(nJetLen,Jet_ptL,Jet_etaL,Jet_phiL,Jet_btagDeepFlavBL,hFatJet_phi_fromHTag,hFatJet_eta_fromHTag,dRCut,bTagCut,passBJetVeto,debug);
             if (!passBJetVeto) continue;
 
             passVBFJetBVetoCtr += 1;
@@ -1854,6 +1913,23 @@ void new062022AnalysisBackground(string datasetString){
 
                     passAsLepCtr += 1;
                     passAsLepWeightedCtr += tmpGenWeights;
+
+                    ROOT::Math::PtEtaPhiMVector tmpZLepOneVec = dRCheckVecAr[0];
+                    ROOT::Math::PtEtaPhiMVector tmpZLepTwoVec = dRCheckVecAr[1];
+                    ROOT::Math::PtEtaPhiMVector tmpZTwoLepOneVec = dRCheckVecAr[2];
+                    ROOT::Math::PtEtaPhiMVector tmpZTwoLepTwoVec = dRCheckVecAr[3];
+                    ROOT::Math::PtEtaPhiMVector tmpZOneLepVecPair = tmpZLepOneVec + tmpZLepTwoVec;
+                    ROOT::Math::PtEtaPhiMVector tmpZTwoLepVecPair = tmpZTwoLepOneVec + tmpZTwoLepTwoVec;
+
+                    genWeightLL = tmpGenWeights;
+
+                    ZOneLep_massLL = tmpZOneLepVecPair.M();
+                    ZTwoLep_massLL = tmpZTwoLepVecPair.M();
+                    H_ptLL = dRCheckVecAr[4].Pt();
+
+                    FatJet_particleNet_WvsQCDLL = 0;
+
+                    PassingLepEventsTree->Fill();
                     
                     
                     
@@ -1869,6 +1945,20 @@ void new062022AnalysisBackground(string datasetString){
                     nJL = *nJetL;
                     AfterCutGenSemiLepWeightL = *genWeightL;
                     AfterCutSemiLepInvMassTree->Fill();
+
+                    ROOT::Math::PtEtaPhiMVector tmpZLepOneVec = dRCheckVecAr[0];
+                    ROOT::Math::PtEtaPhiMVector tmpZLepTwoVec = dRCheckVecAr[1];
+                    ROOT::Math::PtEtaPhiMVector tmpZLepVecPair = tmpZLepOneVec + tmpZLepTwoVec;
+
+                    genWeightSLL = tmpGenWeights;
+
+                    ZOneLep_massSLL = tmpZLepVecPair.M();
+                    H_ptSLL = dRCheckVecAr[3].Pt();
+
+                    FatJet_particleNet_WvsQCDSLL = 0;
+
+
+                    PassingSemiLepEventsTree->Fill();
                     
 
                 }
@@ -1984,6 +2074,8 @@ void new062022AnalysisBackground(string datasetString){
     BeforeCutLepInvMassTree->Write("",TObject::kOverwrite);
     BeforeCutSemiLepInvMassTree->Write("",TObject::kOverwrite);
     AfterCutSemiLepInvMassTree->Write("",TObject::kOverwrite);
+    PassingLepEventsTree->Write("",TObject::kOverwrite);
+    PassingSemiLepEventsTree->Write("",TObject::kOverwrite);
 
     outFile->Close();
 
