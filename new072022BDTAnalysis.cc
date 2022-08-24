@@ -967,6 +967,11 @@ void new072022BDTAnalysis(string datasetString){
     Float_t selectedZPairPlusHiggsFJ_pt_L_L;
 
     Float_t selectedVBFJets_MaxBTag_L_L;
+
+    Float_t selectedZPairPlusHiggsFJPlusVBFJets_PtVecSum_L_L;
+    Float_t selectedZPairPlusHiggsFJPlusVBFJets_PtScalarSum_L_L;
+
+    Float_t selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_L_L;
     
 
     TTree *passingEvLepTree = new TTree("passingEvLepTree", "passingEvLepTree");
@@ -1016,6 +1021,12 @@ void new072022BDTAnalysis(string datasetString){
 
     passingEvLepTree->Branch("selectedVBFJets_MaxBTag_L_L",&selectedVBFJets_MaxBTag_L_L,"selectedVBFJets_MaxBTag_L_L/F");
 
+    passingEvLepTree->Branch("selectedZPairPlusHiggsFJPlusVBFJets_PtVecSum_L_L",&selectedZPairPlusHiggsFJPlusVBFJets_PtVecSum_L_L,"selectedZPairPlusHiggsFJPlusVBFJets_PtVecSum_L_L/F");
+    passingEvLepTree->Branch("selectedZPairPlusHiggsFJPlusVBFJets_PtScalarSum_L_L",&selectedZPairPlusHiggsFJPlusVBFJets_PtScalarSum_L_L,"selectedZPairPlusHiggsFJPlusVBFJets_PtScalarSum_L_L/F");
+    passingEvLepTree->Branch("selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_L_L",&selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_L_L,"selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_L_L/F");
+
+
+
 
 
 
@@ -1054,6 +1065,11 @@ void new072022BDTAnalysis(string datasetString){
     Float_t selectedZPairPlusHiggsFJ_pt_SL_L;
 
     Float_t selectedVBFJets_MaxBTag_SL_L;
+
+    Float_t selectedZPairPlusHiggsFJPlusVBFJets_PtVecSum_SL_L;
+    Float_t selectedZPairPlusHiggsFJPlusVBFJets_PtScalarSum_SL_L;
+
+    Float_t selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_SL_L;
     
 
     TTree *passingEvSemiLepTree = new TTree("passingEvSemiLepTree", "passingEvSemiLepTree");
@@ -1093,6 +1109,9 @@ void new072022BDTAnalysis(string datasetString){
 
     passingEvSemiLepTree->Branch("selectedVBFJets_MaxBTag_SL_L",&selectedVBFJets_MaxBTag_SL_L,"selectedVBFJets_MaxBTag_SL_L/F");
 
+    passingEvSemiLepTree->Branch("selectedZPairPlusHiggsFJPlusVBFJets_PtVecSum_SL_L",&selectedZPairPlusHiggsFJPlusVBFJets_PtVecSum_SL_L,"selectedZPairPlusHiggsFJPlusVBFJets_PtVecSum_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedZPairPlusHiggsFJPlusVBFJets_PtScalarSum_SL_L",&selectedZPairPlusHiggsFJPlusVBFJets_PtScalarSum_SL_L,"selectedZPairPlusHiggsFJPlusVBFJets_PtScalarSum_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_SL_L",&selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_SL_L,"selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_SL_L/F");
 
 
 
@@ -2431,6 +2450,8 @@ void new072022BDTAnalysis(string datasetString){
             float jetTrailingPhi = 0;
             float jetLeadEta     = 0;
             float jetTrailingEta = 0;
+            float jetLeadMass    = 0;
+            float jetTrailingMass    = 0;
 
             //B jet veto
             bool passBJetVeto = true;
@@ -2605,11 +2626,22 @@ void new072022BDTAnalysis(string datasetString){
 
 
             if (debug) std::cout << "Entering jet loop. Len: " << nJetLen << "\n";
-            doVBFJetCutPtSelection(nJetLen,Jet_ptL,Jet_jetIdL,Jet_etaL,Jet_phiL,Jet_massL,jetPTCut,jetEtaDifCut,jetInvMassCut,jetPairInvMass,jetLeadPt,jetLeadEta,jetLeadPhi,jetTrailingPt,jetTrailingEta,jetTrailingPhi,leadJet_1,leadJet_2,dRCheckVecAr,dRCut,debug);
+            doVBFJetCutPtSelectionWithBDTVars(nJetLen,Jet_ptL,Jet_jetIdL,Jet_etaL,Jet_phiL,Jet_massL,jetPTCut,jetEtaDifCut,jetInvMassCut,jetPairInvMass,jetLeadPt,jetLeadEta,jetLeadPhi,jetLeadMass,jetTrailingPt,jetTrailingEta,jetTrailingPhi,jetTrailingMass,leadJet_1,leadJet_2,dRCheckVecAr,dRCut,debug);
             //std::cout << jetLeadPt << endl;
             if (jetLeadPt == 0) continue;
             debugOutputForVBFJetCut(evCount,leadJet_1,leadJet_2,Jet_phiL,Jet_etaL,debug);
             passVBFJets += 1;
+
+            ROOT::Math::PtEtaPhiMVector tmpLeadJetVec = ROOT::Math::PtEtaPhiMVector(jetLeadPt, jetLeadEta, jetLeadPhi, jetLeadMass);
+            ROOT::Math::PtEtaPhiMVector tmpTrailingJetVec = ROOT::Math::PtEtaPhiMVector(jetTrailingPt, jetTrailingEta, jetTrailingPhi, jetTrailingMass);
+
+            ROOT::Math::PtEtaPhiMVector tmpPtVecSumVec = tmpLeadJetVec + tmpTrailingJetVec;
+            float tmpPtScalarSum = tmpLeadJetVec.Pt() + tmpTrailingJetVec.Pt();
+
+            for (UInt_t dRCheckVecInd=0; dRCheckVecInd<dRCheckVecAr.size();dRCheckVecInd++) {
+                tmpPtVecSumVec += dRCheckVecAr[dRCheckVecInd];
+                tmpPtScalarSum += dRCheckVecAr[dRCheckVecInd].Pt();
+            }
 
             if (passesCutsBool){
                 passVBFJetsCtr += 1;
@@ -2705,6 +2737,10 @@ void new072022BDTAnalysis(string datasetString){
 
                         selectedVBFJets_MaxBTag_L_L = maxPassingBTag;
 
+                        selectedZPairPlusHiggsFJPlusVBFJets_PtVecSum_L_L = tmpPtVecSumVec.Pt();
+                        selectedZPairPlusHiggsFJPlusVBFJets_PtScalarSum_L_L = tmpPtScalarSum;
+                        selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_L_L = tmpPtVecSumVec.Pt()/tmpPtScalarSum;
+
                         passingEvLepTree->Fill();
                     }
 
@@ -2762,6 +2798,10 @@ void new072022BDTAnalysis(string datasetString){
                                 selectedZPairPlusHiggsFJ_pt_L_L = ZPairPlusHPt;
 
                                 selectedVBFJets_MaxBTag_L_L = maxPassingBTag;
+
+                                selectedZPairPlusHiggsFJPlusVBFJets_PtVecSum_L_L = tmpPtVecSumVec.Pt();
+                                selectedZPairPlusHiggsFJPlusVBFJets_PtScalarSum_L_L = tmpPtScalarSum;
+                                selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_L_L = tmpPtVecSumVec.Pt()/tmpPtScalarSum;
 
                                 passingEvLepTree->Fill();
                             }
@@ -2849,6 +2889,10 @@ void new072022BDTAnalysis(string datasetString){
 
                         selectedVBFJets_MaxBTag_SL_L = maxPassingBTag;
 
+                        selectedZPairPlusHiggsFJPlusVBFJets_PtVecSum_SL_L = tmpPtVecSumVec.Pt();
+                        selectedZPairPlusHiggsFJPlusVBFJets_PtScalarSum_SL_L = tmpPtScalarSum;
+                        selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_SL_L = tmpPtVecSumVec.Pt()/tmpPtScalarSum;
+
                         passingEvSemiLepTree->Fill();
                     }
 
@@ -2900,6 +2944,10 @@ void new072022BDTAnalysis(string datasetString){
                                 selectedZPairPlusHiggsFJ_pt_SL_L = ZPairPlusHPt;
 
                                 selectedVBFJets_MaxBTag_SL_L = maxPassingBTag;
+
+                                selectedZPairPlusHiggsFJPlusVBFJets_PtVecSum_SL_L = tmpPtVecSumVec.Pt();
+                                selectedZPairPlusHiggsFJPlusVBFJets_PtScalarSum_SL_L = tmpPtScalarSum;
+                                selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_SL_L = tmpPtVecSumVec.Pt()/tmpPtScalarSum;
 
                                 passingEvSemiLepTree->Fill();
                             }
