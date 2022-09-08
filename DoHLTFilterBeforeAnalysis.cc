@@ -103,6 +103,118 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         useFJGenMatchTree = true;
         
     }
+    else if (SDC2Vm2p5MC){
+        saveName = "SDC2Vm2p5MC";
+        isBackground = false;
+        int arrSize = sizeof(SDC2Vm2p5MCAr)/sizeof(SDC2Vm2p5MCAr[0]);
+        std::string tmpStrWithPath = SDC2Vm2p5MCAr[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2Vm2p5MCAr[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2Vm2MC){
+        saveName = "SDC2Vm2MC";
+        isBackground = false;
+        int arrSize = sizeof(SDC2Vm2MCAr)/sizeof(SDC2Vm2MCAr[0]);
+        std::string tmpStrWithPath = SDC2Vm2MCAr[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2Vm2MCAr[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2Vm1MC){
+        saveName = "SDC2Vm1MC";
+        isBackground = false;
+        int arrSize = sizeof(SDC2Vm1MCAr)/sizeof(SDC2Vm1MCAr[0]);
+        std::string tmpStrWithPath = SDC2Vm1MCAr[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2Vm1MCAr[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V0MC){
+        saveName = "SDC2V0MC";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V0MCAr)/sizeof(SDC2V0MCAr[0]);
+        std::string tmpStrWithPath = SDC2V0MCAr[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V0MCAr[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V1MC){
+        saveName = "SDC2V1MC";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V1MCAr)/sizeof(SDC2V1MCAr[0]);
+        std::string tmpStrWithPath = SDC2V1MCAr[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V1MCAr[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V4MC){
+        saveName = "SDC2V4MC";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V4MCAr)/sizeof(SDC2V4MCAr[0]);
+        std::string tmpStrWithPath = SDC2V4MCAr[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V4MCAr[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V4p5MC){
+        saveName = "SDC2V4p5MC";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V4p5MCAr)/sizeof(SDC2V4p5MCAr[0]);
+        std::string tmpStrWithPath = SDC2V4p5MCAr[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V4p5MCAr[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
     else if (MGOSix){
         saveName = "OSix";
         isBackground = false;
@@ -433,22 +545,6 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         */
         fileAr.push_back(QCDPT3200toInfBackgroundAr[fileInd]);
     }
-    else if (TTbb_TTToHadronicBackground){
-        //saveName = "QCDPT3200toInf";
-        
-        crossSection = 377.96;
-
-        saveName = "TTbb_TTToHadronic";
-        
-        isBackground = true;
-        int arrSize = sizeof(TTbb_TTToHadronicBackgroundAr)/sizeof(TTbb_TTToHadronicBackgroundAr[0]);
-        /*
-        for (int i=0; i<arrSize; i++){
-            fileAr.push_back(TTbb_TTToHadronicBackgroundAr[i]);
-        }
-        */
-        fileAr.push_back(TTbb_TTToHadronicBackgroundAr[fileInd]);
-    }
     else if (TTJetsBackground){
         //saveName = "";
         
@@ -464,22 +560,6 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         }
         */
         fileAr.push_back(TTJetsBackgroundAr[fileInd]);
-    }
-    else if (TTbb_TTTo2L2NuBackground){
-        //saveName = "";
-        
-        crossSection = 88.29;
-
-        saveName = "TTbb_TTTo2L2Nu";
-        
-        isBackground = true;
-        int arrSize = sizeof(TTbb_TTTo2L2NuBackgroundAr)/sizeof(TTbb_TTTo2L2NuBackgroundAr[0]);
-        /*
-        for (int i=0; i<arrSize; i++){
-            fileAr.push_back(TTbb_TTTo2L2NuBackgroundAr[i]);
-        }
-        */
-        fileAr.push_back(TTbb_TTTo2L2NuBackgroundAr[fileInd]);
     }
     else if (ST_s_ChannelBackground){
         //saveName = "";
