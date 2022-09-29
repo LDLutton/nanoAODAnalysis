@@ -651,6 +651,12 @@ void new082022KinematicsAnalysis(UInt_t fileInd){
     Double_t HPtL;
     Double_t ZLeadPtL;
     Double_t ZTrailingPtL;
+    Double_t HPlusBosonsPtL;
+    Double_t HPlusBosonsPlusVBFPtL;
+    Double_t HPlusBosonsPlusVBFVecPtL;
+    Double_t HPlusBosonsPlusVBFVecOverScalarPtL;
+    Double_t HPlusBosonsVecSumPtL;
+    Double_t HPlusBosonsInvMassL;
     Double_t JetLeadPtL;
     Double_t JetTrailingPtL;
     Double_t JetLeadEtaL;
@@ -668,6 +674,11 @@ void new082022KinematicsAnalysis(UInt_t fileInd){
     LHEEventsTree->Branch("HPtL",&HPtL,"HPtL/D");
     LHEEventsTree->Branch("ZLeadPtL",&ZLeadPtL,"ZLeadPtL/D");
     LHEEventsTree->Branch("ZTrailingPtL",&ZTrailingPtL,"ZTrailingPtL/D");
+    LHEEventsTree->Branch("HPlusBosonsPtL",&HPlusBosonsPtL,"HPlusBosonsPtL/D");
+    LHEEventsTree->Branch("HPlusBosonsInvMassL",&HPlusBosonsInvMassL,"HPlusBosonsInvMassL/D");
+    LHEEventsTree->Branch("HPlusBosonsPlusVBFPtL",&HPlusBosonsPlusVBFPtL,"HPlusBosonsPlusVBFPtL/D");
+    LHEEventsTree->Branch("HPlusBosonsPlusVBFVecPtL",&HPlusBosonsPlusVBFVecPtL,"HPlusBosonsPlusVBFVecPtL/D");
+    LHEEventsTree->Branch("HPlusBosonsPlusVBFVecOverScalarPtL",&HPlusBosonsPlusVBFVecOverScalarPtL,"HPlusBosonsPlusVBFVecOverScalarPtL/D");
     LHEEventsTree->Branch("JetLeadPtL",&JetLeadPtL,"JetLeadPtL/D");
     LHEEventsTree->Branch("JetTrailingPtL",&JetTrailingPtL,"JetTrailingPtL/D");
     LHEEventsTree->Branch("JetLeadEtaL",&JetLeadEtaL,"JetLeadEtaL/D");
@@ -701,6 +712,8 @@ void new082022KinematicsAnalysis(UInt_t fileInd){
         TTreeReaderArray<Int_t> LHEPart_pdgId(myEventsReader, "LHEPart_pdgId");
         TTreeReaderArray<Float_t> LHEPart_pt(myEventsReader, "LHEPart_pt");
         TTreeReaderArray<Float_t> LHEPart_eta(myEventsReader, "LHEPart_eta");
+        TTreeReaderArray<Float_t> LHEPart_phi(myEventsReader, "LHEPart_phi");
+        TTreeReaderArray<Float_t> LHEPart_mass(myEventsReader, "LHEPart_mass");
 
 
         TTreeReader myRunsReader("Runs", tmpfile);
@@ -802,9 +815,29 @@ void new082022KinematicsAnalysis(UInt_t fileInd){
 
                 float tmpZLHEPartPtOne = LHEPart_pt[tmpZAr[0]];
                 float tmpZLHEPartPtTwo = LHEPart_pt[tmpZAr[1]];
-
                 float tmpZLHEPartEtaOne = LHEPart_eta[tmpZAr[0]];
                 float tmpZLHEPartEtaTwo = LHEPart_eta[tmpZAr[1]];
+                HPlusBosonsPtL = HPtL+tmpZLHEPartPtOne+tmpZLHEPartPtTwo;
+                ROOT::Math::PtEtaPhiMVector HVec = ROOT::Math::PtEtaPhiMVector(HPtL, LHEPart_eta[tmpHInd], LHEPart_phi[tmpHInd], LHEPart_mass[tmpHInd]);
+                ROOT::Math::PtEtaPhiMVector ZOneVec = ROOT::Math::PtEtaPhiMVector(tmpZLHEPartPtOne, tmpZLHEPartEtaOne, LHEPart_phi[tmpZAr[0]], LHEPart_mass[tmpZAr[0]]);
+                ROOT::Math::PtEtaPhiMVector ZTwoVec = ROOT::Math::PtEtaPhiMVector(tmpZLHEPartPtTwo, tmpZLHEPartEtaTwo, LHEPart_phi[tmpZAr[1]], LHEPart_mass[tmpZAr[1]]);
+
+                ROOT::Math::PtEtaPhiMVector sumVec =HVec+ZOneVec+ZTwoVec;
+                HPlusBosonsInvMassL = sumVec.M();
+                ROOT::Math::PtEtaPhiMVector jetOneVec = ROOT::Math::PtEtaPhiMVector(LHEPart_pt[tmpJAr[0]], LHEPart_eta[tmpJAr[0]], LHEPart_phi[tmpJAr[0]], LHEPart_mass[tmpJAr[0]]);
+                ROOT::Math::PtEtaPhiMVector jetTwoVec = ROOT::Math::PtEtaPhiMVector(LHEPart_pt[tmpJAr[1]], LHEPart_eta[tmpJAr[1]], LHEPart_phi[tmpJAr[1]], LHEPart_mass[tmpJAr[1]]);
+
+                ROOT::Math::PtEtaPhiMVector sumPlusVBFJetsVec = HVec+ZOneVec+ZTwoVec+jetOneVec+jetTwoVec;
+
+                HPlusBosonsPlusVBFPtL = HPtL+tmpZLHEPartPtOne+tmpZLHEPartPtTwo+LHEPart_pt[tmpJAr[0]]+LHEPart_pt[tmpJAr[1]];
+                HPlusBosonsPlusVBFVecPtL = sumPlusVBFJetsVec.Pt();
+                if (HPlusBosonsPlusVBFPtL != 0){
+                    HPlusBosonsPlusVBFVecOverScalarPtL = HPlusBosonsPlusVBFVecPtL / HPlusBosonsPlusVBFPtL;
+                }
+                else {
+                    HPlusBosonsPlusVBFVecOverScalarPtL = 0;
+                }
+
 
                 if (tmpZLHEPartPtOne >= tmpZLHEPartPtTwo) {
                     ZLeadPtL = tmpZLHEPartPtOne;
