@@ -33,16 +33,18 @@ bool SDC2Vm2MCV2 = false;
 bool SDC2Vm1MCV2 = false;
 bool SDC2V0MCV2 = false;
 bool SDC2V1MCV2 = false;
+bool SDC2V3MCV2 = false;
 bool SDC2V4MCV2 = false;
 bool SDC2V4p5MCV2 = false;
 
-bool SDC2Vm2p5MCWZHV2V2 = false;
-bool SDC2Vm3MCWZHV2V2 = false;
-bool SDC2Vm1MCWZHV2V2 = false;
-bool SDC2V0MCWZHV2V2 = false;
-bool SDC2V1MCWZHV2V2 = false;
-bool SDC2V4MCWZHV2V2 = false;
-bool SDC2V5MCWZHV2V2 = false;
+bool SDC2Vm2p5MCWZHV2 = false;
+bool SDC2Vm3MCWZHV2 = false;
+bool SDC2Vm1MCWZHV2 = false;
+bool SDC2V0MCWZHV2 = false;
+bool SDC2V1MCWZHV2 = false;
+bool SDC2V3MCWZHV2 = false;
+bool SDC2V4MCWZHV2 = false;
+bool SDC2V5MCWZHV2 = false;
 
 
 bool MGC2VEtaDifCut = false;
