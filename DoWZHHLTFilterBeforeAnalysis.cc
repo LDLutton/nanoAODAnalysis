@@ -399,7 +399,12 @@ void DoWZHHLTFilterBeforeAnalysis(UInt_t fileInd){
     ////////////////////////////////DEFINING TREES////////////////////////////////
 
 
-
+    UInt_t passHLTCtr = 0;
+    Double_t passHLTWeightedCtr = 0;
+    UInt_t passnFJCtr = 0;
+    Double_t passnFJWeightedCtr = 0;
+    UInt_t passnVBFCtr = 0;
+    Double_t passnVBFWeightedCtr = 0;
 
 
 
@@ -450,7 +455,219 @@ void DoWZHHLTFilterBeforeAnalysis(UInt_t fileInd){
     UInt_t HTobbCtr = 0;
     Double_t HTobbWeightedCtr = 0;
 
+
+
+    UInt_t nEvPass;
     
+
+    TTree *evNumTree = new TTree("evNumTree","evNumTree");
+
+    evNumTree->Branch("nEv",&nEv,"nEv/i");
+    evNumTree->Branch("nEvPass",&nEvPass,"nEvPass/i");
+
+    //EventWeights
+    //Float_t genWeightL;
+    Double_t genWeightL;
+
+    //Jets
+    UInt_t nJetL;
+    std::vector<Float_t> Jet_etaL;
+    std::vector<Float_t> Jet_ptL;
+    std::vector<Float_t> Jet_phiL;
+    std::vector<Float_t> Jet_massL;
+    std::vector<Int_t> Jet_jetIdL;
+
+    //Fat jets
+
+    UInt_t nFatJetL;
+    std::vector<Float_t> FatJet_etaL;
+    std::vector<Float_t> FatJet_ptL;
+    std::vector<Float_t> FatJet_phiL;
+    std::vector<Float_t> FatJet_massL;
+    std::vector<Int_t> FatJet_jetIdL;
+    std::vector<Float_t> FatJet_deepTag_HL;
+    std::vector<Float_t> FatJet_deepTag_ZvsQCDL;
+
+    //Electrons
+    UInt_t nElectronL;
+    std::vector<Float_t> Electron_etaL;
+    std::vector<Float_t> Electron_massL;
+    std::vector<Int_t> Electron_chargeL;
+    std::vector<Float_t> Electron_phiL;
+    std::vector<Float_t> Electron_ptL;
+    std::vector<Float_t> Electron_dr03EcalRecHitSumEtL;
+    std::vector<Float_t> Electron_dr03TkSumPtL;
+    std::vector<Float_t> Electron_dr03HcalDepth1TowerSumEtL;
+    std::vector<Float_t> Electron_pfRelIso03_allL;
+    std::vector<Float_t> Electron_sip3dL;
+    std::vector<Int_t> Electron_cutBasedL;
+    std::vector<Bool_t> Electron_mvaFall17V2Iso_WP80L;
+    std::vector<Bool_t> Electron_mvaFall17V2Iso_WP90L;
+    std::vector<Bool_t> Electron_mvaFall17V2Iso_WPLL;
+    std::vector<Bool_t> Electron_mvaFall17V2noIso_WP80L;
+    std::vector<Bool_t> Electron_mvaFall17V2noIso_WP90L;
+    std::vector<Bool_t> Electron_mvaFall17V2noIso_WPLL;
+
+    std::vector<Float_t> Electron_dxyL;
+    std::vector<Float_t> Electron_dzL;
+    std::vector<Float_t> Electron_miniPFRelIso_allL;
+    std::vector<Float_t> Electron_sieieL;
+    std::vector<Float_t> Electron_hoeL;
+    std::vector<Float_t> Electron_eInvMinusPInvL;
+    std::vector<Bool_t> Electron_convVetoL;
+    std::vector<UChar_t> Electron_lostHitsL;
+    std::vector<Int_t> Electron_jetIdxL;
+    std::vector<Float_t> Electron_jetRelIsoL;
+    std::vector<Float_t> Electron_mvaTTHL;
+
+    //Muons
+    UInt_t nMuonL;
+    std::vector<Float_t> Muon_etaL;
+    std::vector<Float_t> Muon_massL;
+    std::vector<Int_t> Muon_chargeL;
+    std::vector<Float_t> Muon_phiL;
+    std::vector<Float_t> Muon_ptL;
+    std::vector<Float_t> Muon_pfRelIso03_allL;
+    std::vector<Float_t> Muon_sip3dL;
+    std::vector<Bool_t> Muon_tightIdL;
+    std::vector<Bool_t> Muon_mediumIdL;
+    std::vector<Bool_t> Muon_looseIdL;
+
+    std::vector<Float_t> Muon_dxyL;
+    std::vector<Float_t> Muon_dzL;
+    std::vector<Float_t> Muon_miniPFRelIso_allL;
+    std::vector<Int_t> Muon_jetIdxL;
+    std::vector<Float_t> Muon_jetRelIsoL;
+    std::vector<Float_t> Muon_mvaTTHL;
+
+    std::vector<Float_t> Jet_btagDeepFlavBL;
+
+    //ParticleNet
+    std::vector<Float_t> FatJet_particleNet_HbbvsQCDL;
+    std::vector<Float_t> FatJet_particleNet_ZvsQCDL;
+
+    //
+    Float_t fixedGridRhoFastjetAllL;
+
+    //genChannel characterization
+    //0=Leptonic,1=Semi-leptonic,2=Hadronic,3=Other,4=Error
+    UInt_t genChannelL;
+
+    Bool_t HTobbBoolL;
+
+    
+    
+    
+
+
+    TTree *FilteredEventsTree = new TTree("FilteredEventsTree", "FilteredEventsTree");
+    //gen weights
+    FilteredEventsTree->Branch("genWeightL",&genWeightL,"genWeightL/D");
+
+    //Jets    
+    FilteredEventsTree->Branch("nJetL",&nJetL,"nJetL/i");
+    FilteredEventsTree->Branch("Jet_etaL",&Jet_etaL);
+    FilteredEventsTree->Branch("Jet_ptL",&Jet_ptL);
+    FilteredEventsTree->Branch("Jet_phiL",&Jet_phiL);
+    FilteredEventsTree->Branch("Jet_massL",&Jet_massL);
+    FilteredEventsTree->Branch("Jet_jetIdL",&Jet_jetIdL);
+
+    //Fat jets
+
+    FilteredEventsTree->Branch("nFatJetL",&nFatJetL,"nFatJetL/i");
+    FilteredEventsTree->Branch("FatJet_etaL",&FatJet_etaL);
+    FilteredEventsTree->Branch("FatJet_ptL",&FatJet_ptL);
+    FilteredEventsTree->Branch("FatJet_phiL",&FatJet_phiL);
+    FilteredEventsTree->Branch("FatJet_massL",&FatJet_massL);
+    FilteredEventsTree->Branch("FatJet_jetIdL",&FatJet_jetIdL);
+    FilteredEventsTree->Branch("FatJet_deepTag_HL",&FatJet_deepTag_HL);
+    FilteredEventsTree->Branch("FatJet_deepTag_ZvsQCDL",&FatJet_deepTag_ZvsQCDL);
+
+    //Electrons
+    FilteredEventsTree->Branch("nElectronL",&nElectronL,"nElectronL/i");
+    FilteredEventsTree->Branch("Electron_etaL",&Electron_etaL);
+    FilteredEventsTree->Branch("Electron_massL",&Electron_massL);
+    FilteredEventsTree->Branch("Electron_chargeL",&Electron_chargeL);
+    FilteredEventsTree->Branch("Electron_phiL",&Electron_phiL);
+    FilteredEventsTree->Branch("Electron_ptL",&Electron_ptL);
+    FilteredEventsTree->Branch("Electron_dr03EcalRecHitSumEtL",&Electron_dr03EcalRecHitSumEtL);
+    FilteredEventsTree->Branch("Electron_dr03TkSumPtL",&Electron_dr03TkSumPtL);
+    FilteredEventsTree->Branch("Electron_dr03HcalDepth1TowerSumEtL",&Electron_dr03HcalDepth1TowerSumEtL);
+    FilteredEventsTree->Branch("Electron_pfRelIso03_allL",&Electron_pfRelIso03_allL);
+    FilteredEventsTree->Branch("Electron_sip3dL",&Electron_sip3dL);
+    FilteredEventsTree->Branch("Electron_cutBasedL",&Electron_cutBasedL);
+    FilteredEventsTree->Branch("Electron_mvaFall17V2Iso_WP80L",&Electron_mvaFall17V2Iso_WP80L);
+    FilteredEventsTree->Branch("Electron_mvaFall17V2Iso_WP90L",&Electron_mvaFall17V2Iso_WP90L);
+    FilteredEventsTree->Branch("Electron_mvaFall17V2Iso_WPLL",&Electron_mvaFall17V2Iso_WPLL);
+    FilteredEventsTree->Branch("Electron_mvaFall17V2noIso_WP80L",&Electron_mvaFall17V2noIso_WP80L);
+    FilteredEventsTree->Branch("Electron_mvaFall17V2noIso_WP90L",&Electron_mvaFall17V2noIso_WP90L);
+    FilteredEventsTree->Branch("Electron_mvaFall17V2noIso_WPLL",&Electron_mvaFall17V2noIso_WPLL);
+
+
+    //Muons
+    FilteredEventsTree->Branch("nMuonL",&nMuonL,"nMuonL/i");
+    FilteredEventsTree->Branch("Muon_etaL",&Muon_etaL);
+    FilteredEventsTree->Branch("Muon_massL",&Muon_massL);
+    FilteredEventsTree->Branch("Muon_chargeL",&Muon_chargeL);
+    FilteredEventsTree->Branch("Muon_phiL",&Muon_phiL);
+    FilteredEventsTree->Branch("Muon_ptL",&Muon_ptL);
+    FilteredEventsTree->Branch("Muon_pfRelIso03_allL",&Muon_pfRelIso03_allL);
+    FilteredEventsTree->Branch("Muon_sip3dL",&Muon_sip3dL);
+    FilteredEventsTree->Branch("Muon_tightIdL",&Muon_tightIdL);
+    FilteredEventsTree->Branch("Muon_mediumIdL",&Muon_mediumIdL);
+    FilteredEventsTree->Branch("Muon_looseIdL",&Muon_looseIdL);
+
+
+    //For LepID
+    FilteredEventsTree->Branch("Electron_dxyL",&Electron_dxyL);
+    FilteredEventsTree->Branch("Electron_dzL",&Electron_dzL);
+    FilteredEventsTree->Branch("Electron_miniPFRelIso_allL",&Electron_miniPFRelIso_allL);
+    FilteredEventsTree->Branch("Electron_sieieL",&Electron_sieieL);
+    FilteredEventsTree->Branch("Electron_hoeL",&Electron_hoeL);
+    FilteredEventsTree->Branch("Electron_eInvMinusPInvL",&Electron_eInvMinusPInvL);
+    FilteredEventsTree->Branch("Electron_convVetoL",&Electron_convVetoL);
+    FilteredEventsTree->Branch("Electron_lostHitsL",&Electron_lostHitsL);
+    FilteredEventsTree->Branch("Electron_jetIdxL",&Electron_jetIdxL);
+    FilteredEventsTree->Branch("Electron_jetRelIsoL",&Electron_jetRelIsoL);
+    FilteredEventsTree->Branch("Electron_mvaTTHL",&Electron_mvaTTHL);
+
+    FilteredEventsTree->Branch("Muon_dxyL",&Muon_dxyL);
+    FilteredEventsTree->Branch("Muon_dzL",&Muon_dzL);
+    FilteredEventsTree->Branch("Muon_miniPFRelIso_allL",&Muon_miniPFRelIso_allL);
+    FilteredEventsTree->Branch("Muon_jetIdxL",&Muon_jetIdxL);
+    FilteredEventsTree->Branch("Muon_jetRelIsoL",&Muon_jetRelIsoL);
+    FilteredEventsTree->Branch("Muon_mvaTTHL",&Muon_mvaTTHL);
+
+    FilteredEventsTree->Branch("Jet_btagDeepFlavBL",&Jet_btagDeepFlavBL);
+
+    //ParticleNet
+    FilteredEventsTree->Branch("FatJet_particleNet_HbbvsQCDL",&FatJet_particleNet_HbbvsQCDL);
+    FilteredEventsTree->Branch("FatJet_particleNet_ZvsQCDL",&FatJet_particleNet_ZvsQCDL);
+
+    //
+    FilteredEventsTree->Branch("fixedGridRhoFastjetAllL",&fixedGridRhoFastjetAllL);
+
+    //genChannel characterization
+    //0=Leptonic,1=Semi-leptonic,2=Hadronic,3=Other,4=Error
+    FilteredEventsTree->Branch("genChannelL",&genChannelL,"genChannelL/i");
+
+    FilteredEventsTree->Branch("HTobbBoolL",&HTobbBoolL,"HTobbBoolL/O");
+
+
+    //Gen dR of H from Bosons
+    Double_t HdRFromZL;
+    Double_t HdRFromWL;
+    Double_t ZdRFromWL;
+
+    TTree *genTree = new TTree("genTree", "genTree");
+
+    //Gen dR of H from Z particles
+
+    genTree->Branch("HdRFromZL",&HdRFromZL,"HdRFromZL/D");
+    genTree->Branch("HdRFromWL",&HdRFromWL,"HdRFromWL/D");
+    genTree->Branch("ZdRFromWL",&ZdRFromWL,"ZdRFromWL/D");
+
+
     
     std::cout << "Going into file loop.\n";
 
@@ -1434,6 +1651,225 @@ void DoWZHHLTFilterBeforeAnalysis(UInt_t fileInd){
             }
 
 
+            bool passHLTBool = (*HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02 || *HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np2 || *HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np4 || *HLT_PFHT1050 || *HLT_AK8PFJet500 || *HLT_AK8PFJet360_TrimMass30 || *HLT_AK8PFHT750_TrimMass50 || *HLT_AK8PFJet380_TrimMass30 ||
+            *HLT_AK8PFJet400_TrimMass30 || *HLT_AK8PFJet420_TrimMass30 || *HLT_AK8PFHT800_TrimMass50 || *HLT_AK8PFHT850_TrimMass50 || *HLT_AK8PFHT900_TrimMass50 ||*HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL || *HLT_DoubleEle25_CaloIdL_MW || *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ || *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL ||  *HLT_DiEle27_WPTightCaloOnly_L1DoubleEG || 
+            *HLT_DoubleEle33_CaloIdL_MW || *HLT_DoubleEle25_CaloIdL_MW || *HLT_DoubleEle27_CaloIdL_MW || *HLT_DoublePhoton70 || *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8 || *HLT_TripleMu_10_5_5_DZ || *HLT_TripleMu_12_10_5 || *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8 || *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8 || 
+            *HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL_DZ_Mass3p8 || *HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL_DZ_Mass8 || *HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL || *HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ || *HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ || *HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ || 
+            *HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL || *HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL || *HLT_Ele32_WPTight_Gsf || *HLT_Ele115_CaloIdVT_GsfTrkIdT || *HLT_Ele27_WPTight_Gsf || *HLT_Ele28_WPTight_Gsf || 
+            *HLT_Ele35_WPTight_Gsf || *HLT_Ele38_WPTight_Gsf || *HLT_Ele40_WPTight_Gsf || *HLT_Ele32_WPTight_Gsf_L1DoubleEG || *HLT_Photon200 || *HLT_IsoMu24 || *HLT_IsoMu27 || *HLT_IsoMu30 || *HLT_Mu50);
+            //std::cout << testPassHLTBool << " " << passHLTBool << "\n";
+            if (!passHLTBool) continue;
+            passHLTCtr += 1;
+            passHLTWeightedCtr += *genWeight;
+
+            
+
+
+
+
+
+            if (debug){
+                std::cout <<"Passed HLT\n";
+            }
+            
+
+            genWeightL = *genWeight;
+
+            //Check if any fat jets in event
+            
+            if (tmpnFatJets<=0) continue;
+            if (debug){
+                std::cout <<"Passed nFJs\n";
+            }
+            passnFJCtr += 1;
+            passnFJWeightedCtr += *genWeight; 
+
+            
+
+            // check if two or more VBF jets in event
+            UInt_t tmpnVBFJets = *nJet;
+            
+            if (tmpnVBFJets < 2) continue;
+            if (debug){
+                std::cout <<"Passed nJs\n";
+            }
+
+            passnVBFCtr += 1;
+            passnVBFWeightedCtr += *genWeight; 
+
+            
+
+
+            //std::cout << evRunOver-1 << "passed\n";
+            if (debug){
+                std::cout <<"Filling Jets\n";
+            }
+            nJetL = tmpnVBFJets;
+            for (UInt_t nJetItr=0; nJetItr<nJetL;nJetItr++){
+                Jet_etaL.push_back(Jet_eta[nJetItr]);
+                Jet_ptL.push_back(Jet_pt[nJetItr]);
+                Jet_phiL.push_back(Jet_phi[nJetItr]);
+                Jet_massL.push_back(Jet_mass[nJetItr]);
+                Jet_jetIdL.push_back(Jet_jetId[nJetItr]);
+                Jet_btagDeepFlavBL.push_back(Jet_btagDeepFlavB[nJetItr]);
+            }
+
+            //Fat jets
+            if (debug){
+                std::cout <<"Filling FJs\n";
+            }
+            nFatJetL = tmpnFatJets;
+            for (UInt_t nFatJetItr=0; nFatJetItr<nFatJetL;nFatJetItr++){
+                FatJet_etaL.push_back(FatJet_eta[nFatJetItr]);
+                FatJet_ptL.push_back(FatJet_pt[nFatJetItr]);
+                FatJet_phiL.push_back(FatJet_phi[nFatJetItr]);
+                FatJet_massL.push_back(FatJet_mass[nFatJetItr]);
+                FatJet_jetIdL.push_back(FatJet_jetId[nFatJetItr]);
+                FatJet_deepTag_HL.push_back(FatJet_deepTag_H[nFatJetItr]);
+                FatJet_deepTag_ZvsQCDL.push_back(FatJet_deepTag_ZvsQCD[nFatJetItr]);
+                FatJet_particleNet_HbbvsQCDL.push_back(FatJet_particleNet_HbbvsQCD[nFatJetItr]);
+                FatJet_particleNet_ZvsQCDL.push_back(FatJet_particleNet_ZvsQCD[nFatJetItr]);
+            }
+
+            //Electrons
+            if (debug){
+                std::cout <<"Filling Electrons\n";
+            }
+            nElectronL = *nElectron;
+            for (UInt_t nElectronItr=0; nElectronItr<nElectronL;nElectronItr++){
+                Electron_etaL.push_back(Electron_eta[nElectronItr]);
+                Electron_massL.push_back(Electron_mass[nElectronItr]);
+                Electron_chargeL.push_back(Electron_charge[nElectronItr]);
+                Electron_phiL.push_back(Electron_phi[nElectronItr]);
+                Electron_ptL.push_back(Electron_pt[nElectronItr]);
+                Electron_dr03EcalRecHitSumEtL.push_back(Electron_dr03EcalRecHitSumEt[nElectronItr]);
+                Electron_dr03TkSumPtL.push_back(Electron_dr03TkSumPt[nElectronItr]);
+                Electron_dr03HcalDepth1TowerSumEtL.push_back(Electron_dr03HcalDepth1TowerSumEt[nElectronItr]);
+                Electron_pfRelIso03_allL.push_back(Electron_pfRelIso03_all[nElectronItr]);
+                Electron_sip3dL.push_back(Electron_sip3d[nElectronItr]);
+                Electron_cutBasedL.push_back(Electron_cutBased[nElectronItr]);
+                Electron_mvaFall17V2Iso_WP80L.push_back(Electron_mvaFall17V2Iso_WP80[nElectronItr]);
+                Electron_mvaFall17V2Iso_WP90L.push_back(Electron_mvaFall17V2Iso_WP90[nElectronItr]);
+                Electron_mvaFall17V2Iso_WPLL.push_back(Electron_mvaFall17V2Iso_WPL[nElectronItr]);
+                Electron_mvaFall17V2noIso_WP80L.push_back(Electron_mvaFall17V2noIso_WP80[nElectronItr]);
+                Electron_mvaFall17V2noIso_WP90L.push_back(Electron_mvaFall17V2noIso_WP90[nElectronItr]);
+                Electron_mvaFall17V2noIso_WPLL.push_back(Electron_mvaFall17V2noIso_WPL[nElectronItr]);
+
+                Electron_dxyL.push_back(Electron_dxy[nElectronItr]);
+                Electron_dzL.push_back(Electron_dz[nElectronItr]);
+                Electron_miniPFRelIso_allL.push_back(Electron_miniPFRelIso_all[nElectronItr]);
+                Electron_sieieL.push_back(Electron_sieie[nElectronItr]);
+                Electron_hoeL.push_back(Electron_hoe[nElectronItr]);
+                Electron_eInvMinusPInvL.push_back(Electron_eInvMinusPInv[nElectronItr]);
+                Electron_convVetoL.push_back(Electron_convVeto[nElectronItr]);
+                Electron_lostHitsL.push_back(Electron_lostHits[nElectronItr]);
+                Electron_jetIdxL.push_back(Electron_jetIdx[nElectronItr]);
+                Electron_jetRelIsoL.push_back(Electron_jetRelIso[nElectronItr]);
+                Electron_mvaTTHL.push_back(Electron_mvaTTH[nElectronItr]);
+                
+
+
+
+            }
+
+            //Muons
+            nMuonL = *nMuon;
+            for (UInt_t nMuonItr=0; nMuonItr<nMuonL;nMuonItr++){
+                Muon_etaL.push_back(Muon_eta[nMuonItr]);
+                Muon_massL.push_back(Muon_mass[nMuonItr]);
+                Muon_chargeL.push_back(Muon_charge[nMuonItr]);
+                Muon_phiL.push_back(Muon_phi[nMuonItr]);
+                Muon_ptL.push_back(Muon_pt[nMuonItr]);
+                Muon_pfRelIso03_allL.push_back(Muon_pfRelIso03_all[nMuonItr]);
+                Muon_sip3dL.push_back(Muon_sip3d[nMuonItr]);
+                Muon_tightIdL.push_back(Muon_tightId[nMuonItr]);
+                Muon_mediumIdL.push_back(Muon_mediumId[nMuonItr]);
+                Muon_looseIdL.push_back(Muon_looseId[nMuonItr]);
+
+                Muon_dxyL.push_back(Muon_dxy[nMuonItr]);
+                Muon_dzL.push_back(Muon_dz[nMuonItr]);
+                Muon_miniPFRelIso_allL.push_back(Muon_miniPFRelIso_all[nMuonItr]);
+                Muon_jetIdxL.push_back(Muon_jetIdx[nMuonItr]);
+                Muon_jetRelIsoL.push_back(Muon_jetRelIso[nMuonItr]);
+                Muon_mvaTTHL.push_back(Muon_mvaTTH[nMuonItr]);
+            }
+
+            fixedGridRhoFastjetAllL = *fixedGridRhoFastjetAll;
+
+            FilteredEventsTree->Fill();
+
+            Jet_etaL.clear();
+            Jet_ptL.clear();
+            Jet_phiL.clear();
+            Jet_massL.clear();
+            Jet_jetIdL.clear();
+            Jet_btagDeepFlavBL.clear();
+            
+
+            FatJet_etaL.clear();
+            FatJet_ptL.clear();
+            FatJet_phiL.clear();
+            FatJet_massL.clear();
+            FatJet_jetIdL.clear();
+            FatJet_deepTag_HL.clear();
+            FatJet_deepTag_ZvsQCDL.clear();
+            
+
+            Electron_etaL.clear();
+            Electron_massL.clear();
+            Electron_chargeL.clear();
+            Electron_phiL.clear();
+            Electron_ptL.clear();
+            Electron_dr03EcalRecHitSumEtL.clear();
+            Electron_dr03TkSumPtL.clear();
+            Electron_dr03HcalDepth1TowerSumEtL.clear();
+            Electron_pfRelIso03_allL.clear();
+            Electron_sip3dL.clear();
+            Electron_cutBasedL.clear();
+            Electron_mvaFall17V2Iso_WP80L.clear();
+            Electron_mvaFall17V2Iso_WP90L.clear();
+            Electron_mvaFall17V2Iso_WPLL.clear();
+            Electron_mvaFall17V2noIso_WP80L.clear();
+            Electron_mvaFall17V2noIso_WP90L.clear();
+            Electron_mvaFall17V2noIso_WPLL.clear();
+
+            Electron_dxyL.clear();
+            Electron_dzL.clear();
+            Electron_miniPFRelIso_allL.clear();
+            Electron_sieieL.clear();
+            Electron_hoeL.clear();
+            Electron_eInvMinusPInvL.clear();
+            Electron_convVetoL.clear();
+            Electron_lostHitsL.clear();
+            Electron_jetIdxL.clear();
+            Electron_jetRelIsoL.clear();
+            Electron_mvaTTHL.clear();
+
+            Muon_dxyL.clear();
+            Muon_dzL.clear();
+            Muon_miniPFRelIso_allL.clear();
+            Muon_jetIdxL.clear();
+            Muon_jetRelIsoL.clear();
+            Muon_mvaTTHL.clear();
+
+            
+            
+
+            Muon_etaL.clear();
+            Muon_massL.clear();
+            Muon_chargeL.clear();
+            Muon_phiL.clear();
+            Muon_ptL.clear();
+            Muon_pfRelIso03_allL.clear();
+            Muon_sip3dL.clear();
+            Muon_tightIdL.clear();
+            Muon_mediumIdL.clear();
+            Muon_looseIdL.clear();
+
+            FatJet_particleNet_HbbvsQCDL.clear();
+            FatJet_particleNet_ZvsQCDL.clear();
+
+
 
         }
     }
@@ -1446,8 +1882,14 @@ void DoWZHHLTFilterBeforeAnalysis(UInt_t fileInd){
     std::cout << "Finished file loop. " << "time: " << time_spent << "\n";
 
     nEv = evRunOver;
+    nEvPass = passHLTCtr;
+    evNumTree->Fill();
 
     std::cout << "evRunOver: " << evRunOver << " -------------------\n";
+    std::cout << "passes HLT cut: " << passHLTCtr << " ------------------- " << passHLTWeightedCtr<< "\n";
+    std::cout << "passes nFJ cut: " << passnFJCtr << " ------------------- " << passnFJWeightedCtr<< "\n";
+    std::cout << "passes nVBF cut: " << passnVBFCtr << " ------------------- " << passnVBFWeightedCtr<< "\n";
+
     std::cout << "sumOfGenWeights: " << sumOfGenWeights << "\n";
 
     std::cout << "HTobb Channel: " << HTobbCtr << " ------------------- " << HTobbWeightedCtr<< "\n";
@@ -1485,5 +1927,11 @@ void DoWZHHLTFilterBeforeAnalysis(UInt_t fileInd){
     std::cout << "Tot XS Count: " << totCrossSectionEvCount <<"\n";
     float crossSectionAvgAlt = totCrossSectionWeight/totCrossSectionEvCount;
     std::cout << "(Tot Weight*hTobbBR)/Tot XS Count: " << crossSectionAvgAlt*hTobbBR <<"\n";
+
+    outFile->cd();
+    evNumTree->Write("",TObject::kOverwrite);
+    FilteredEventsTree->Write("",TObject::kOverwrite);
+
+    outFile->Close();
 
 }
