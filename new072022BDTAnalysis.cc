@@ -71,6 +71,25 @@ void new072022BDTAnalysis(string datasetString){
     if (datasetString == "SDC2V1MC") SDC2V1MC = true;
     if (datasetString == "SDC2V4MC") SDC2V4MC = true;
     if (datasetString == "SDC2V4p5MC") SDC2V4p5MC = true;
+    
+    if (datasetString == "SDC2V3MCV2") SDC2V3MCV2 = true;
+    if (datasetString == "SDC2Vm2p5MCV2") SDC2Vm2p5MCV2 = true;
+    if (datasetString == "SDC2Vm2MCV2") SDC2Vm2MCV2 = true;
+    if (datasetString == "SDC2Vm1MCV2") SDC2Vm1MCV2 = true;
+    if (datasetString == "SDC2V0MCV2") SDC2V0MCV2 = true;
+    if (datasetString == "SDC2V1MCV2") SDC2V1MCV2 = true;
+    if (datasetString == "SDC2V4MCV2") SDC2V4MCV2 = true;
+    if (datasetString == "SDC2V4p5MCV2") SDC2V4p5MCV2 = true;
+
+    if (datasetString == "SDC2V3MCWZHV2") SDC2V3MCWZHV2 = true;
+    if (datasetString == "SDC2Vm2p5MCWZHV2") SDC2Vm2p5MCWZHV2 = true;
+    if (datasetString == "SDC2Vm3MCWZHV2") SDC2Vm3MCWZHV2 = true;
+    if (datasetString == "SDC2Vm1MCWZHV2") SDC2Vm1MCWZHV2 = true;
+    if (datasetString == "SDC2V0MCWZHV2") SDC2V0MCWZHV2 = true;
+    if (datasetString == "SDC2V1MCWZHV2") SDC2V1MCWZHV2 = true;
+    if (datasetString == "SDC2V4MCWZHV2") SDC2V4MCWZHV2 = true;
+    if (datasetString == "SDC2V5MCWZHV2") SDC2V5MCWZHV2 = true;
+
 
     if (datasetString == "C2VEtaDifCut") MGC2VEtaDifCut = true;
     if (datasetString == "OSix") MGOSix = true;
