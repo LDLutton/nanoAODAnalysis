@@ -203,7 +203,8 @@ void new072022BDTAnalysis(string datasetString){
     else if (SDC2V3MCV2){
         saveName = "SDC2V3MCV2";
         totWeight = 1896.1953;
-        XS = 0.0029535844348424762;
+        XS = 4.24E-3;
+        //XS = 0.0029535844348424762;
         datasetType = 0;
         isBackground = false;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSDC2V3MCV2.root";
@@ -212,7 +213,8 @@ void new072022BDTAnalysis(string datasetString){
     else if (SDC2Vm2p5MCV2){
         saveName = "SDC2Vm2p5MCV2";
         totWeight = 5467.7935;
-        XS = 0.008265774802040217;
+        XS = 1.242E-2;
+        //XS = 0.008265774802040217;
         datasetType = 0;
         isBackground = false;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSDC2Vm2p5MCV2.root";
@@ -221,7 +223,8 @@ void new072022BDTAnalysis(string datasetString){
     else if (SDC2Vm2MCV2){
         saveName = "SDC2Vm2MCV2";
         totWeight = 3869.629;
-        XS = 0.006398746254638295;
+        XS = 9.16E-3;
+        //XS = 0.006398746254638295;
         datasetType = 0;
         isBackground = false;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSDC2Vm2MCV2.root";
@@ -230,7 +233,8 @@ void new072022BDTAnalysis(string datasetString){
     else if (SDC2Vm1MCV2){
         saveName = "SDC2Vm1MCV2";
         totWeight = 1856.9267999999995;
-        XS = 0.002893536112193221;
+        XS = 4.13E-3;
+        //XS = 0.002893536112193221;
         datasetType = 0;
         isBackground = false;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSDC2Vm1MCV2.root";
@@ -239,7 +243,8 @@ void new072022BDTAnalysis(string datasetString){
     else if (SDC2V0MCV2){
         saveName = "SDC2V0MCV2";
         totWeight = 510.37219999999996;
-        XS = 0.0007918885958107059;
+        XS = 1.13E-3;
+        //XS = 0.0007918885958107059;
         datasetType = 0;
         isBackground = false;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSDC2V0MCV2.root";
@@ -248,7 +253,8 @@ void new072022BDTAnalysis(string datasetString){
     else if (SDC2V1MCV2){
         saveName = "SDC2V1MCV2";
         totWeight = 64.988248;
-        XS = 0.00010118839704165045;
+        XS = 1.5E-4;
+        //XS = 0.00010118839704165045;
         datasetType = 0;
         isBackground = false;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSDC2V1MCV2.root";
@@ -257,7 +263,8 @@ void new072022BDTAnalysis(string datasetString){
     else if (SDC2V4MCV2){
         saveName = "SDC2V4MCV2";
         totWeight = 3956.4910000000004;
-        XS = 0.006526170721649485;
+        XS = 9.32E-3;
+        //XS = 0.006526170721649485;
         datasetType = 0;
         isBackground = false;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSDC2V4MCV2.root";
@@ -266,7 +273,8 @@ void new072022BDTAnalysis(string datasetString){
     else if (SDC2V4p5MCV2){
         saveName = "SDC2V4p5MCV2";
         totWeight = 5698.066000000001;
-        XS = 0.00882395044521874;
+        XS = 1.261E-2;
+        //XS = 0.00882395044521874;
         datasetType = 0;
         isBackground = false;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSDC2V4p5MCV2.root";
@@ -275,8 +283,9 @@ void new072022BDTAnalysis(string datasetString){
     else if (SDC2V3MCWZHV2){
         saveName = "SDC2V3MCWZHV2";
         totWeight = 2307.0611;
-        XS = 0.0035740683191324554;
-        datasetType = 0;
+        XS = 5.37E-3;
+        //XS = 0.0035740683191324554;
+        datasetType = 25;
         isBackground = false;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSDC2V3MCWZHV2.root";
         fileAr.push_back(tmpStrWithPath);
@@ -284,8 +293,9 @@ void new072022BDTAnalysis(string datasetString){
     else if (SDC2Vm2p5MCWZHV2){
         saveName = "SDC2Vm2p5MCWZHV2";
         totWeight = 6336.808999999999;
-        XS = 0.009874264121542655;
-        datasetType = 0;
+        XS = 1.451E-2;
+        //XS = 0.009874264121542655;
+        datasetType = 25;
         isBackground = false;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSDC2Vm2p5MCWZHV2.root";
         fileAr.push_back(tmpStrWithPath);
@@ -293,8 +303,9 @@ void new072022BDTAnalysis(string datasetString){
     else if (SDC2Vm3MCWZHV2){
         saveName = "SDC2Vm3MCWZHV2";
         totWeight = 7799.2880000000005;
-        XS = 0.012859502061005772;
-        datasetType = 0;
+        XS = 1.881E-2;
+        //XS = 0.012859502061005772;
+        datasetType = 25;
         isBackground = false;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSDC2Vm3MCWZHV2.root";
         fileAr.push_back(tmpStrWithPath);
@@ -302,8 +313,9 @@ void new072022BDTAnalysis(string datasetString){
     else if (SDC2Vm1MCWZHV2){
         saveName = "SDC2Vm1MCWZHV2";
         totWeight = 2203.4332000000004;
-        XS = 0.0034321549789173476;
-        datasetType = 0;
+        XS = 5.08E-3;
+        //XS = 0.0034321549789173476;
+        datasetType = 25;
         isBackground = false;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSDC2Vm1MCWZHV2.root";
         fileAr.push_back(tmpStrWithPath);
@@ -311,8 +323,9 @@ void new072022BDTAnalysis(string datasetString){
     else if (SDC2V0MCWZHV2){
         saveName = "SDC2V0MCWZHV2";
         totWeight = 672.6487999999999;
-        XS = 0.0011072408230452674;
-        datasetType = 0;
+        XS = 1.68E-3;
+        //XS = 0.0011072408230452674;
+        datasetType = 25;
         isBackground = false;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSDC2V0MCWZHV2.root";
         fileAr.push_back(tmpStrWithPath);
@@ -320,8 +333,9 @@ void new072022BDTAnalysis(string datasetString){
     else if (SDC2V1MCWZHV2){
         saveName = "SDC2V1MCWZHV2";
         totWeight = 237.60372;
-        XS = 0.0003700992523364486;
-        datasetType = 0;
+        XS = 6.0E-4;
+        //XS = 0.0003700992523364486;
+        datasetType = 25;
         isBackground = false;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSDC2V1MCWZHV2.root";
         fileAr.push_back(tmpStrWithPath);
@@ -329,8 +343,9 @@ void new072022BDTAnalysis(string datasetString){
     else if (SDC2V4MCWZHV2){
         saveName = "SDC2V4MCWZHV2";
         totWeight = 4890.388999999999;
-        XS = 0.0076115240825652365;
-        datasetType = 0;
+        XS = 1.123E-2;
+        //XS = 0.0076115240825652365;
+        datasetType = 25;
         isBackground = false;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSDC2V4MCWZHV2.root";
         fileAr.push_back(tmpStrWithPath);
@@ -338,8 +353,9 @@ void new072022BDTAnalysis(string datasetString){
     else if (SDC2V5MCWZHV2){
         saveName = "SDC2V5MCWZHV2";
         totWeight = 8465.52;
-        XS = 0.013140136810456827;
-        datasetType = 0;
+        XS = 1.940E-2;
+        //XS = 0.013140136810456827;
+        datasetType = 25;
         isBackground = false;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSDC2V5MCWZHV2.root";
         fileAr.push_back(tmpStrWithPath);
