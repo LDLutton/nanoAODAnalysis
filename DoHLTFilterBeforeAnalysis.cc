@@ -1818,13 +1818,33 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     ////////////////////////////////DEFINING TREES////////////////////////////////
     ////////////////////////////////DEFINING TREES////////////////////////////////
 
-
+    UInt_t passFlagCtr = 0;
+    Double_t passFlagWeightedCtr = 0;
     UInt_t passHLTCtr = 0;
     Double_t passHLTWeightedCtr = 0;
     UInt_t passnFJCtr = 0;
     Double_t passnFJWeightedCtr = 0;
     UInt_t passnVBFCtr = 0;
     Double_t passnVBFWeightedCtr = 0;
+
+
+    UInt_t passFlagGenLepCtr = 0;
+    Double_t passFlagGenLepWeightedCtr = 0;
+    UInt_t passFlagGenSemiLepCtr = 0;
+    Double_t passFlagGenSemiLepWeightedCtr = 0;
+    UInt_t passFlagGenHadCtr = 0;
+    Double_t passFlagGenHadWeightedCtr = 0;
+    UInt_t passFlagGenOtherCtr = 0;
+    Double_t passFlagGenOtherWeightedCtr = 0;
+
+    UInt_t passFlagGenLepNoHTobbCtr = 0;
+    Double_t passFlagGenLepNoHTobbWeightedCtr = 0;
+    UInt_t passFlagGenSemiLepNoHTobbCtr = 0;
+    Double_t passFlagGenSemiLepNoHTobbWeightedCtr = 0;
+    UInt_t passFlagGenHadNoHTobbCtr = 0;
+    Double_t passFlagGenHadNoHTobbWeightedCtr = 0;
+    UInt_t passFlagGenOtherNoHTobbCtr = 0;
+    Double_t passFlagGenOtherNoHTobbWeightedCtr = 0;
 
 
     UInt_t passHLTGenLepCtr = 0;
@@ -2254,6 +2274,19 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         TTreeReaderValue<UInt_t> nLHEPart(myEventsReader, "nLHEPart");
         TTreeReaderArray<Int_t> LHEPart_pdgId(myEventsReader, "LHEPart_pdgId");
         TTreeReaderArray<Float_t> LHEPart_pt(myEventsReader, "LHEPart_pt");
+
+        //Flag branches
+
+        TTreeReaderValue<Bool_t> Flag_goodVertices(myEventsReader, "Flag_goodVertices");
+        TTreeReaderValue<Bool_t> Flag_globalSuperTightHalo2016Filter(myEventsReader, "Flag_globalSuperTightHalo2016Filter");
+        TTreeReaderValue<Bool_t> Flag_HBHENoiseFilter(myEventsReader, "Flag_HBHENoiseFilter");
+        TTreeReaderValue<Bool_t> Flag_HBHENoiseIsoFilter(myEventsReader, "Flag_HBHENoiseIsoFilter");
+        TTreeReaderValue<Bool_t> Flag_EcalDeadCellTriggerPrimitiveFilter(myEventsReader, "Flag_EcalDeadCellTriggerPrimitiveFilter");
+        TTreeReaderValue<Bool_t> Flag_BadPFMuonFilter(myEventsReader, "Flag_BadPFMuonFilter");
+        TTreeReaderValue<Bool_t> Flag_BadPFMuonDzFilter(myEventsReader, "Flag_BadPFMuonDzFilter");
+        TTreeReaderValue<Bool_t> Flag_eeBadScFilter(myEventsReader, "Flag_eeBadScFilter");
+        TTreeReaderValue<Bool_t> Flag_ecalBadCalibFilter(myEventsReader, "Flag_ecalBadCalibFilter");
+
 
         //HLT Branches
         TTreeReaderValue<Bool_t> HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02(myEventsReader, "HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02");
@@ -3703,11 +3736,79 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
 
             //bool passHLTBool = hbbTag || hadHLT || doubleElecHLT || doubleMuonHLT || muonEGHLT || elecHLT || muonHLT;
             */
-            bool passHLTBool = (*HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02 || *HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np2 || *HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np4 || *HLT_PFHT1050 || *HLT_AK8PFJet500 || *HLT_AK8PFJet360_TrimMass30 || *HLT_AK8PFHT750_TrimMass50 || *HLT_AK8PFJet380_TrimMass30 ||
-            *HLT_AK8PFJet400_TrimMass30 || *HLT_AK8PFJet420_TrimMass30 || *HLT_AK8PFHT800_TrimMass50 || *HLT_AK8PFHT850_TrimMass50 || *HLT_AK8PFHT900_TrimMass50 ||*HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL || *HLT_DoubleEle25_CaloIdL_MW || *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ || *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL ||  *HLT_DiEle27_WPTightCaloOnly_L1DoubleEG || 
-            *HLT_DoubleEle33_CaloIdL_MW || *HLT_DoubleEle25_CaloIdL_MW || *HLT_DoubleEle27_CaloIdL_MW || *HLT_DoublePhoton70 || *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8 || *HLT_TripleMu_10_5_5_DZ || *HLT_TripleMu_12_10_5 || *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8 || *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8 || 
-            *HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL_DZ_Mass3p8 || *HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL_DZ_Mass8 || *HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL || *HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ || *HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ || *HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ || 
-            *HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL || *HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL || *HLT_Ele32_WPTight_Gsf || *HLT_Ele115_CaloIdVT_GsfTrkIdT || *HLT_Ele27_WPTight_Gsf || *HLT_Ele28_WPTight_Gsf || 
+            bool passFlagBool = *Flag_goodVertices && *Flag_globalSuperTightHalo2016Filter && *Flag_HBHENoiseFilter && *Flag_HBHENoiseIsoFilter && *Flag_EcalDeadCellTriggerPrimitiveFilter && *Flag_BadPFMuonFilter && *Flag_BadPFMuonDzFilter && *Flag_eeBadScFilter && *Flag_ecalBadCalibFilter;
+
+            if (!passFlagBool) continue;
+            passFlagCtr += 1;
+            passFlagWeightedCtr += *genWeight;
+
+            if (!isBackground){
+                if (ZIsLeptonic) {
+                    if (HTobbBoolL){
+                        passFlagGenLepCtr += 1;
+                        passFlagGenLepWeightedCtr += *genWeight;
+                    }
+                    else {
+                        passFlagGenLepNoHTobbCtr += 1;
+                        passFlagGenLepNoHTobbWeightedCtr += *genWeight;
+
+                    }
+                }
+                else if (ZIsSemiLeptonic) {
+                    if (HTobbBoolL){
+                        passFlagGenSemiLepCtr += 1;
+                        passFlagGenSemiLepWeightedCtr += *genWeight;
+                    }
+                    else{
+                        passFlagGenSemiLepNoHTobbCtr += 1;
+                        passFlagGenSemiLepNoHTobbWeightedCtr += *genWeight;
+
+                    }
+                }
+                else if (ZIsHadronic) {
+                    if (HTobbBoolL){
+                        passFlagGenHadCtr += 1;
+                        passFlagGenHadWeightedCtr += *genWeight;
+                    }
+                    else {
+                        passFlagGenHadNoHTobbCtr += 1;
+                        passFlagGenHadNoHTobbWeightedCtr += *genWeight;
+
+                    }
+                }
+                else {
+                    if (HTobbBoolL){
+                        passFlagGenOtherCtr += 1;
+                        passFlagGenOtherWeightedCtr += *genWeight;
+                    }
+                    else {
+                        passFlagGenOtherNoHTobbCtr += 1;
+                        passFlagGenOtherNoHTobbWeightedCtr += *genWeight;
+
+                    }
+                }
+            }
+
+
+
+
+
+            if (debug){
+                std::cout <<"Passed HLT\n";
+            }
+
+
+            bool passHLTBool = (*HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02 || *HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np2 || *HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np4 ||
+            *HLT_PFHT1050 || *HLT_AK8PFJet500 || *HLT_AK8PFJet360_TrimMass30 || *HLT_AK8PFHT750_TrimMass50 || *HLT_AK8PFJet380_TrimMass30 ||
+            *HLT_AK8PFJet400_TrimMass30 || *HLT_AK8PFJet420_TrimMass30 || *HLT_AK8PFHT800_TrimMass50 || *HLT_AK8PFHT850_TrimMass50 || *HLT_AK8PFHT900_TrimMass50 ||
+            *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL || *HLT_DoubleEle25_CaloIdL_MW || *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ || *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL ||
+            *HLT_DiEle27_WPTightCaloOnly_L1DoubleEG || 
+            *HLT_DoubleEle33_CaloIdL_MW || *HLT_DoubleEle25_CaloIdL_MW || *HLT_DoubleEle27_CaloIdL_MW || *HLT_DoublePhoton70 || *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8 || *HLT_TripleMu_10_5_5_DZ ||
+            *HLT_TripleMu_12_10_5 || *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8 || *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8 || 
+            *HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL_DZ_Mass3p8 || *HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL_DZ_Mass8 || *HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL ||
+            *HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ || *HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ || *HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ || 
+            *HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL || *HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL || *HLT_Ele32_WPTight_Gsf || *HLT_Ele115_CaloIdVT_GsfTrkIdT ||
+            *HLT_Ele27_WPTight_Gsf || *HLT_Ele28_WPTight_Gsf || 
             *HLT_Ele35_WPTight_Gsf || *HLT_Ele38_WPTight_Gsf || *HLT_Ele40_WPTight_Gsf || *HLT_Ele32_WPTight_Gsf_L1DoubleEG || *HLT_Photon200 || *HLT_IsoMu24 || *HLT_IsoMu27 || *HLT_IsoMu30 || *HLT_Mu50);
             //std::cout << testPassHLTBool << " " << passHLTBool << "\n";
             if (!passHLTBool) continue;
@@ -4071,6 +4172,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     evNumTree->Fill();
 
     std::cout << "evRunOver: " << evRunOver << " -------------------\n";
+    std::cout << "passes Flag cut: " << passFlagCtr << " ------------------- " << passFlagWeightedCtr<< "\n";
     std::cout << "passes HLT cut: " << passHLTCtr << " ------------------- " << passHLTWeightedCtr<< "\n";
     std::cout << "passes nFJ cut: " << passnFJCtr << " ------------------- " << passnFJWeightedCtr<< "\n";
     std::cout << "passes nVBF cut: " << passnVBFCtr << " ------------------- " << passnVBFWeightedCtr<< "\n";
@@ -4079,35 +4181,42 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     std::cout << "sumOfGenWeights: " << sumOfGenWeights << "\n";
 
     if (!isBackground){
+        std::cout << "gen lep passes Flag cut: " << passFlagGenLepCtr << " ------------------- " << passFlagGenLepWeightedCtr<< "\n";
         std::cout << "gen lep passes HLT cut: " << passHLTGenLepCtr << " ------------------- " << passHLTGenLepWeightedCtr<< "\n";
         std::cout << "gen lep passes nFJ cut: " << passnFJGenLepCtr << " ------------------- " << passnFJGenLepWeightedCtr<< "\n";
         std::cout << "gen lep passes nVBF cut: " << passnVBFGenLepCtr << " ------------------- " << passnVBFGenLepWeightedCtr<< "\n";
 
+        std::cout << "gen semi lep passes Flag cut: " << passFlagGenSemiLepCtr << " ------------------- " << passFlagGenSemiLepWeightedCtr<< "\n";
         std::cout << "gen semi lep passes HLT cut: " << passHLTGenSemiLepCtr << " ------------------- " << passHLTGenSemiLepWeightedCtr<< "\n";
         std::cout << "gen semi lep passes nFJ cut: " << passnFJGenSemiLepCtr << " ------------------- " << passnFJGenSemiLepWeightedCtr<< "\n";
         std::cout << "gen semi lep passes nVBF cut: " << passnVBFGenSemiLepCtr << " ------------------- " << passnVBFGenSemiLepWeightedCtr<< "\n";
 
+        std::cout << "gen had passes Flag cut: " << passFlagGenHadCtr << " ------------------- " << passFlagGenHadWeightedCtr<< "\n";
         std::cout << "gen had passes HLT cut: " << passHLTGenHadCtr << " ------------------- " << passHLTGenHadWeightedCtr<< "\n";
         std::cout << "gen had passes nFJ cut: " << passnFJGenHadCtr << " ------------------- " << passnFJGenHadWeightedCtr<< "\n";
         std::cout << "gen had passes nVBF cut: " << passnVBFGenHadCtr << " ------------------- " << passnVBFGenHadWeightedCtr<< "\n";
 
+        std::cout << "gen other passes Flag cut: " << passFlagGenOtherCtr << " ------------------- " << passFlagGenOtherWeightedCtr<< "\n";
         std::cout << "gen other passes HLT cut: " << passHLTGenOtherCtr << " ------------------- " << passHLTGenOtherWeightedCtr<< "\n";
         std::cout << "gen other passes nFJ cut: " << passnFJGenOtherCtr << " ------------------- " << passnFJGenOtherWeightedCtr<< "\n";
         std::cout << "gen other passes nVBF cut: " << passnVBFGenOtherCtr << " ------------------- " << passnVBFGenOtherWeightedCtr<< "\n";
 
-
+        std::cout << "gen lep NoHTobb passes Flag cut: " << passFlagGenLepNoHTobbCtr << " ------------------- " << passFlagGenLepNoHTobbWeightedCtr<< "\n";
         std::cout << "gen lep NoHTobb passes HLT cut: " << passHLTGenLepNoHTobbCtr << " ------------------- " << passHLTGenLepNoHTobbWeightedCtr<< "\n";
         std::cout << "gen lep NoHTobb passes nFJ cut: " << passnFJGenLepNoHTobbCtr << " ------------------- " << passnFJGenLepNoHTobbWeightedCtr<< "\n";
         std::cout << "gen lep NoHTobb passes nVBF cut: " << passnVBFGenLepNoHTobbCtr << " ------------------- " << passnVBFGenLepNoHTobbWeightedCtr<< "\n";
 
+        std::cout << "gen semi lep NoHTobb passes Flag cut: " << passFlagGenSemiLepNoHTobbCtr << " ------------------- " << passFlagGenSemiLepNoHTobbWeightedCtr<< "\n";
         std::cout << "gen semi lep NoHTobb passes HLT cut: " << passHLTGenSemiLepNoHTobbCtr << " ------------------- " << passHLTGenSemiLepNoHTobbWeightedCtr<< "\n";
         std::cout << "gen semi lep NoHTobb passes nFJ cut: " << passnFJGenSemiLepNoHTobbCtr << " ------------------- " << passnFJGenSemiLepNoHTobbWeightedCtr<< "\n";
         std::cout << "gen semi lep NoHTobb passes nVBF cut: " << passnVBFGenSemiLepNoHTobbCtr << " ------------------- " << passnVBFGenSemiLepNoHTobbWeightedCtr<< "\n";
 
+        std::cout << "gen had NoHTobb passes Flag cut: " << passFlagGenHadNoHTobbCtr << " ------------------- " << passFlagGenHadNoHTobbWeightedCtr<< "\n";
         std::cout << "gen had NoHTobb passes HLT cut: " << passHLTGenHadNoHTobbCtr << " ------------------- " << passHLTGenHadNoHTobbWeightedCtr<< "\n";
         std::cout << "gen had NoHTobb passes nFJ cut: " << passnFJGenHadNoHTobbCtr << " ------------------- " << passnFJGenHadNoHTobbWeightedCtr<< "\n";
         std::cout << "gen had NoHTobb passes nVBF cut: " << passnVBFGenHadNoHTobbCtr << " ------------------- " << passnVBFGenHadNoHTobbWeightedCtr<< "\n";
 
+        std::cout << "gen other NoHTobb passes Flag cut: " << passFlagGenOtherNoHTobbCtr << " ------------------- " << passFlagGenOtherNoHTobbWeightedCtr<< "\n";
         std::cout << "gen other NoHTobb passes HLT cut: " << passHLTGenOtherNoHTobbCtr << " ------------------- " << passHLTGenOtherNoHTobbWeightedCtr<< "\n";
         std::cout << "gen other NoHTobb passes nFJ cut: " << passnFJGenOtherNoHTobbCtr << " ------------------- " << passnFJGenOtherNoHTobbWeightedCtr<< "\n";
         std::cout << "gen other NoHTobb passes nVBF cut: " << passnVBFGenOtherNoHTobbCtr << " ------------------- " << passnVBFGenOtherNoHTobbWeightedCtr<< "\n";
