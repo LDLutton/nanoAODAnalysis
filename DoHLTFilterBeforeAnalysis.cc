@@ -472,6 +472,783 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
         useFJGenMatchTree = true;
         
     }
+
+    else if (SDC2V3MC2017V2){
+        saveName = "SDC2V3MC2017V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V3MC2017V2Ar)/sizeof(SDC2V3MC2017V2Ar[0]);
+        std::string tmpStrWithPath = SDC2V3MC2017V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V3MC2017V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2Vm2p5MC2017V2){
+        saveName = "SDC2Vm2p5MC2017V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2Vm2p5MC2017V2Ar)/sizeof(SDC2Vm2p5MC2017V2Ar[0]);
+        std::string tmpStrWithPath = SDC2Vm2p5MC2017V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2Vm2p5MC2017V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2Vm2MC2017V2){
+        saveName = "SDC2Vm2MC2017V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2Vm2MC2017V2Ar)/sizeof(SDC2Vm2MC2017V2Ar[0]);
+        std::string tmpStrWithPath = SDC2Vm2MC2017V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2Vm2MC2017V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2Vm1MC2017V2){
+        saveName = "SDC2Vm1MC2017V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2Vm1MC2017V2Ar)/sizeof(SDC2Vm1MC2017V2Ar[0]);
+        std::string tmpStrWithPath = SDC2Vm1MC2017V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2Vm1MC2017V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V0MC2017V2){
+        saveName = "SDC2V0MC2017V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V0MC2017V2Ar)/sizeof(SDC2V0MC2017V2Ar[0]);
+        std::string tmpStrWithPath = SDC2V0MC2017V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V0MC2017V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V1MC2017V2){
+        saveName = "SDC2V1MC2017V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V1MC2017V2Ar)/sizeof(SDC2V1MC2017V2Ar[0]);
+        std::string tmpStrWithPath = SDC2V1MC2017V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V1MC2017V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V4MC2017V2){
+        saveName = "SDC2V4MC2017V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V4MC2017V2Ar)/sizeof(SDC2V4MC2017V2Ar[0]);
+        std::string tmpStrWithPath = SDC2V4MC2017V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V4MC2017V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V4p5MC2017V2){
+        saveName = "SDC2V4p5MC2017V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V4p5MC2017V2Ar)/sizeof(SDC2V4p5MC2017V2Ar[0]);
+        std::string tmpStrWithPath = SDC2V4p5MC2017V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V4p5MC2017V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+
+    else if (SDC2V3MCWZH2017V2){
+        saveName = "SDC2V3MCWZH2017V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V3MCWZH2017V2Ar)/sizeof(SDC2V3MCWZH2017V2Ar[0]);
+        std::string tmpStrWithPath = SDC2V3MCWZH2017V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V3MCWZH2017V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2Vm2p5MCWZH2017V2){
+        saveName = "SDC2Vm2p5MCWZH2017V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2Vm2p5MCWZH2017V2Ar)/sizeof(SDC2Vm2p5MCWZH2017V2Ar[0]);
+        std::string tmpStrWithPath = SDC2Vm2p5MCWZH2017V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2Vm2p5MCWZH2017V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2Vm3MCWZH2017V2){
+        saveName = "SDC2Vm3MCWZH2017V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2Vm3MCWZH2017V2Ar)/sizeof(SDC2Vm3MCWZH2017V2Ar[0]);
+        std::string tmpStrWithPath = SDC2Vm3MCWZH2017V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2Vm3MCWZH2017V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2Vm1MCWZH2017V2){
+        saveName = "SDC2Vm1MCWZH2017V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2Vm1MCWZH2017V2Ar)/sizeof(SDC2Vm1MCWZH2017V2Ar[0]);
+        std::string tmpStrWithPath = SDC2Vm1MCWZH2017V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2Vm1MCWZH2017V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V0MCWZH2017V2){
+        saveName = "SDC2V0MCWZH2017V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V0MCWZH2017V2Ar)/sizeof(SDC2V0MCWZH2017V2Ar[0]);
+        std::string tmpStrWithPath = SDC2V0MCWZH2017V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V0MCWZH2017V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V1MCWZH2017V2){
+        saveName = "SDC2V1MCWZH2017V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V1MCWZH2017V2Ar)/sizeof(SDC2V1MCWZH2017V2Ar[0]);
+        std::string tmpStrWithPath = SDC2V1MCWZH2017V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V1MCWZH2017V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V4MCWZH2017V2){
+        saveName = "SDC2V4MCWZH2017V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V4MCWZH2017V2Ar)/sizeof(SDC2V4MCWZH2017V2Ar[0]);
+        std::string tmpStrWithPath = SDC2V4MCWZH2017V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V4MCWZH2017V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V5MCWZH2017V2){
+        saveName = "SDC2V5MCWZH2017V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V5MCWZH2017V2Ar)/sizeof(SDC2V5MCWZH2017V2Ar[0]);
+        std::string tmpStrWithPath = SDC2V5MCWZH2017V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V5MCWZH2017V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+
+
+    else if (SDC2V3MC2016V2){
+        saveName = "SDC2V3MC2016V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V3MC2016V2Ar)/sizeof(SDC2V3MC2016V2Ar[0]);
+        std::string tmpStrWithPath = SDC2V3MC2016V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V3MC2016V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2Vm2p5MC2016V2){
+        saveName = "SDC2Vm2p5MC2016V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2Vm2p5MC2016V2Ar)/sizeof(SDC2Vm2p5MC2016V2Ar[0]);
+        std::string tmpStrWithPath = SDC2Vm2p5MC2016V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2Vm2p5MC2016V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2Vm2MC2016V2){
+        saveName = "SDC2Vm2MC2016V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2Vm2MC2016V2Ar)/sizeof(SDC2Vm2MC2016V2Ar[0]);
+        std::string tmpStrWithPath = SDC2Vm2MC2016V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2Vm2MC2016V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2Vm1MC2016V2){
+        saveName = "SDC2Vm1MC2016V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2Vm1MC2016V2Ar)/sizeof(SDC2Vm1MC2016V2Ar[0]);
+        std::string tmpStrWithPath = SDC2Vm1MC2016V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2Vm1MC2016V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V0MC2016V2){
+        saveName = "SDC2V0MC2016V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V0MC2016V2Ar)/sizeof(SDC2V0MC2016V2Ar[0]);
+        std::string tmpStrWithPath = SDC2V0MC2016V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V0MC2016V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V1MC2016V2){
+        saveName = "SDC2V1MC2016V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V1MC2016V2Ar)/sizeof(SDC2V1MC2016V2Ar[0]);
+        std::string tmpStrWithPath = SDC2V1MC2016V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V1MC2016V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V4MC2016V2){
+        saveName = "SDC2V4MC2016V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V4MC2016V2Ar)/sizeof(SDC2V4MC2016V2Ar[0]);
+        std::string tmpStrWithPath = SDC2V4MC2016V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V4MC2016V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V4p5MC2016V2){
+        saveName = "SDC2V4p5MC2016V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V4p5MC2016V2Ar)/sizeof(SDC2V4p5MC2016V2Ar[0]);
+        std::string tmpStrWithPath = SDC2V4p5MC2016V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V4p5MC2016V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+
+    else if (SDC2V3MCWZH2016V2){
+        saveName = "SDC2V3MCWZH2016V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V3MCWZH2016V2Ar)/sizeof(SDC2V3MCWZH2016V2Ar[0]);
+        std::string tmpStrWithPath = SDC2V3MCWZH2016V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V3MCWZH2016V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2Vm2p5MCWZH2016V2){
+        saveName = "SDC2Vm2p5MCWZH2016V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2Vm2p5MCWZH2016V2Ar)/sizeof(SDC2Vm2p5MCWZH2016V2Ar[0]);
+        std::string tmpStrWithPath = SDC2Vm2p5MCWZH2016V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2Vm2p5MCWZH2016V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2Vm3MCWZH2016V2){
+        saveName = "SDC2Vm3MCWZH2016V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2Vm3MCWZH2016V2Ar)/sizeof(SDC2Vm3MCWZH2016V2Ar[0]);
+        std::string tmpStrWithPath = SDC2Vm3MCWZH2016V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2Vm3MCWZH2016V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2Vm1MCWZH2016V2){
+        saveName = "SDC2Vm1MCWZH2016V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2Vm1MCWZH2016V2Ar)/sizeof(SDC2Vm1MCWZH2016V2Ar[0]);
+        std::string tmpStrWithPath = SDC2Vm1MCWZH2016V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2Vm1MCWZH2016V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V0MCWZH2016V2){
+        saveName = "SDC2V0MCWZH2016V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V0MCWZH2016V2Ar)/sizeof(SDC2V0MCWZH2016V2Ar[0]);
+        std::string tmpStrWithPath = SDC2V0MCWZH2016V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V0MCWZH2016V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V1MCWZH2016V2){
+        saveName = "SDC2V1MCWZH2016V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V1MCWZH2016V2Ar)/sizeof(SDC2V1MCWZH2016V2Ar[0]);
+        std::string tmpStrWithPath = SDC2V1MCWZH2016V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V1MCWZH2016V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V4MCWZH2016V2){
+        saveName = "SDC2V4MCWZH2016V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V4MCWZH2016V2Ar)/sizeof(SDC2V4MCWZH2016V2Ar[0]);
+        std::string tmpStrWithPath = SDC2V4MCWZH2016V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V4MCWZH2016V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V5MCWZH2016V2){
+        saveName = "SDC2V5MCWZH2016V2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V5MCWZH2016V2Ar)/sizeof(SDC2V5MCWZH2016V2Ar[0]);
+        std::string tmpStrWithPath = SDC2V5MCWZH2016V2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V5MCWZH2016V2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+
+
+    else if (SDC2V3MC2016APVV2){
+        saveName = "SDC2V3MC2016APVV2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V3MC2016APVV2Ar)/sizeof(SDC2V3MC2016APVV2Ar[0]);
+        std::string tmpStrWithPath = SDC2V3MC2016APVV2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V3MC2016APVV2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2Vm2p5MC2016APVV2){
+        saveName = "SDC2Vm2p5MC2016APVV2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2Vm2p5MC2016APVV2Ar)/sizeof(SDC2Vm2p5MC2016APVV2Ar[0]);
+        std::string tmpStrWithPath = SDC2Vm2p5MC2016APVV2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2Vm2p5MC2016APVV2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2Vm2MC2016APVV2){
+        saveName = "SDC2Vm2MC2016APVV2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2Vm2MC2016APVV2Ar)/sizeof(SDC2Vm2MC2016APVV2Ar[0]);
+        std::string tmpStrWithPath = SDC2Vm2MC2016APVV2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2Vm2MC2016APVV2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2Vm1MC2016APVV2){
+        saveName = "SDC2Vm1MC2016APVV2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2Vm1MC2016APVV2Ar)/sizeof(SDC2Vm1MC2016APVV2Ar[0]);
+        std::string tmpStrWithPath = SDC2Vm1MC2016APVV2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2Vm1MC2016APVV2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V0MC2016APVV2){
+        saveName = "SDC2V0MC2016APVV2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V0MC2016APVV2Ar)/sizeof(SDC2V0MC2016APVV2Ar[0]);
+        std::string tmpStrWithPath = SDC2V0MC2016APVV2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V0MC2016APVV2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V1MC2016APVV2){
+        saveName = "SDC2V1MC2016APVV2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V1MC2016APVV2Ar)/sizeof(SDC2V1MC2016APVV2Ar[0]);
+        std::string tmpStrWithPath = SDC2V1MC2016APVV2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V1MC2016APVV2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V4MC2016APVV2){
+        saveName = "SDC2V4MC2016APVV2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V4MC2016APVV2Ar)/sizeof(SDC2V4MC2016APVV2Ar[0]);
+        std::string tmpStrWithPath = SDC2V4MC2016APVV2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V4MC2016APVV2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V4p5MC2016APVV2){
+        saveName = "SDC2V4p5MC2016APVV2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V4p5MC2016APVV2Ar)/sizeof(SDC2V4p5MC2016APVV2Ar[0]);
+        std::string tmpStrWithPath = SDC2V4p5MC2016APVV2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V4p5MC2016APVV2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+
+    else if (SDC2V3MCWZH2016APVV2){
+        saveName = "SDC2V3MCWZH2016APVV2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V3MCWZH2016APVV2Ar)/sizeof(SDC2V3MCWZH2016APVV2Ar[0]);
+        std::string tmpStrWithPath = SDC2V3MCWZH2016APVV2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V3MCWZH2016APVV2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2Vm2p5MCWZH2016APVV2){
+        saveName = "SDC2Vm2p5MCWZH2016APVV2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2Vm2p5MCWZH2016APVV2Ar)/sizeof(SDC2Vm2p5MCWZH2016APVV2Ar[0]);
+        std::string tmpStrWithPath = SDC2Vm2p5MCWZH2016APVV2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2Vm2p5MCWZH2016APVV2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2Vm3MCWZH2016APVV2){
+        saveName = "SDC2Vm3MCWZH2016APVV2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2Vm3MCWZH2016APVV2Ar)/sizeof(SDC2Vm3MCWZH2016APVV2Ar[0]);
+        std::string tmpStrWithPath = SDC2Vm3MCWZH2016APVV2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2Vm3MCWZH2016APVV2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2Vm1MCWZH2016APVV2){
+        saveName = "SDC2Vm1MCWZH2016APVV2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2Vm1MCWZH2016APVV2Ar)/sizeof(SDC2Vm1MCWZH2016APVV2Ar[0]);
+        std::string tmpStrWithPath = SDC2Vm1MCWZH2016APVV2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2Vm1MCWZH2016APVV2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V0MCWZH2016APVV2){
+        saveName = "SDC2V0MCWZH2016APVV2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V0MCWZH2016APVV2Ar)/sizeof(SDC2V0MCWZH2016APVV2Ar[0]);
+        std::string tmpStrWithPath = SDC2V0MCWZH2016APVV2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V0MCWZH2016APVV2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V1MCWZH2016APVV2){
+        saveName = "SDC2V1MCWZH2016APVV2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V1MCWZH2016APVV2Ar)/sizeof(SDC2V1MCWZH2016APVV2Ar[0]);
+        std::string tmpStrWithPath = SDC2V1MCWZH2016APVV2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V1MCWZH2016APVV2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V4MCWZH2016APVV2){
+        saveName = "SDC2V4MCWZH2016APVV2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V4MCWZH2016APVV2Ar)/sizeof(SDC2V4MCWZH2016APVV2Ar[0]);
+        std::string tmpStrWithPath = SDC2V4MCWZH2016APVV2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V4MCWZH2016APVV2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V5MCWZH2016APVV2){
+        saveName = "SDC2V5MCWZH2016APVV2";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V5MCWZH2016APVV2Ar)/sizeof(SDC2V5MCWZH2016APVV2Ar[0]);
+        std::string tmpStrWithPath = SDC2V5MCWZH2016APVV2Ar[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V5MCWZH2016APVV2Ar[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+
     else if (MGOSix){
         saveName = "OSix";
         isBackground = false;
