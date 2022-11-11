@@ -47,7 +47,7 @@
 ////////////////////////////////START OF MAIN FUNCTION////////////////////////////////
 
 
-void DoHLTFilter2017BeforeAnalysis(UInt_t fileInd){
+void DoHLTFilter2016BeforeAnalysis(UInt_t fileInd){
     // Open the file. Note that the name of your file outside this class
     // will probably NOT be experiment.root.
     std::cout << "start\n";
