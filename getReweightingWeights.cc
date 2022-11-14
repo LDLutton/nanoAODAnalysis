@@ -1891,10 +1891,20 @@ void getReweightingWeights(UInt_t fileInd){
             //Increment event count
             evRunOver += 1;
             evCount += 1;
+            bool overOneHundred = false;
 
             nLHEReweightingWeightL = *nLHEReweightingWeight;
             for (UInt_t reweightItr=0; reweightItr<*nLHEReweightingWeight;reweightItr++){
                 LHEReweightingWeightL.push_back(LHEReweightingWeight[reweightItr]);
+                if (LHEReweightingWeight[reweightItr] >=100) overOneHundred = true;
+            }
+
+            if (overOneHundred) {
+                std::cout <<"High weight at ev " << evCount-1 << "\n";
+                for (UInt_t reweightItr=0; reweightItr<*nLHEReweightingWeight;reweightItr++){
+                    std::cout << reweightItr << " " << LHEReweightingWeight[reweightItr] << " ";
+                }
+                std::cout << "\n";
             }
 
             reweightTree->Fill();
