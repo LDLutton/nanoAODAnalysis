@@ -86,6 +86,8 @@ bool SDC2V1MC2016APVV2 = false;
 bool SDC2V4MC2016APVV2 = false;
 bool SDC2V4p5MC2016APVV2 = false;
 
+bool SDC2V2MCZZHReweight = false;
+
 
 bool MGC2VEtaDifCut = false;
 bool MGOSix = false;
