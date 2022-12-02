@@ -2729,11 +2729,12 @@ void DoHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
         if (loopItr == C2VNameAr.size() - 1) {
             std::cout << "(" << C2VNameAr[loopItr] << "," << passFlagWeightedCtrAr[0][loopItr + 1] << ")\n";
         }
-        std::cout << "(" << C2VNameAr[loopItr] << "," << passFlagWeightedCtrAr[0][loopItr + 1] << "),";
+        else std::cout << "(" << C2VNameAr[loopItr] << "," << passFlagWeightedCtrAr[0][loopItr + 1] << "),";
         if (loopItr == 27) {
             std::cout << "(2.0," << passFlagWeightedCtrAr[0][0] << "),";
         }
     }
+
 
 
     std::cout << "passes HLT cut: " << passHLTCtr << " -------------------\n";
@@ -2742,7 +2743,7 @@ void DoHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
         if (loopItr == C2VNameAr.size() - 1) {
             std::cout << "(" << C2VNameAr[loopItr] << "," << passHLTWeightedCtrAr[0][loopItr + 1] << ")\n";
         }
-        std::cout << "(" << C2VNameAr[loopItr] << "," << passHLTWeightedCtrAr[0][loopItr + 1] << "),";
+        else std::cout << "(" << C2VNameAr[loopItr] << "," << passHLTWeightedCtrAr[0][loopItr + 1] << "),";
         if (loopItr == 27) {
             std::cout << "(2.0," << passHLTWeightedCtrAr[0][0] << "),";
         }
@@ -2755,7 +2756,7 @@ void DoHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
         if (loopItr == C2VNameAr.size() - 1) {
             std::cout << "(" << C2VNameAr[loopItr] << "," << passnFJWeightedCtrAr[0][loopItr + 1] << ")\n";
         }
-        std::cout << "(" << C2VNameAr[loopItr] << "," << passnFJWeightedCtrAr[0][loopItr + 1] << "),";
+        else std::cout << "(" << C2VNameAr[loopItr] << "," << passnFJWeightedCtrAr[0][loopItr + 1] << "),";
         if (loopItr == 27) {
             std::cout << "(2.0," << passnFJWeightedCtrAr[0][0] << "),";
         }
@@ -2768,7 +2769,7 @@ void DoHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
         if (loopItr == C2VNameAr.size() - 1) {
             std::cout << "(" << C2VNameAr[loopItr] << "," << passnVBFWeightedCtrAr[0][loopItr + 1] << ")\n";
         }
-        std::cout << "(" << C2VNameAr[loopItr] << "," << passnVBFWeightedCtrAr[0][loopItr + 1] << "),";
+        else std::cout << "(" << C2VNameAr[loopItr] << "," << passnVBFWeightedCtrAr[0][loopItr + 1] << "),";
         if (loopItr == 27) {
             std::cout << "(2.0," << passnVBFWeightedCtrAr[0][0] << "),";
         }
@@ -2811,7 +2812,7 @@ void DoHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
             for (unsigned int cutItr = 0; cutItr < genHTobbAr[HTobbItr].size(); cutItr++){
                 std::cout << "passes " << genCutStrAr[cutItr] << " cut\n";
                 for (unsigned int typeItr = 0; typeItr < genHTobbAr[HTobbItr][cutItr].size(); typeItr++){
-                    std::cout << genDecayStrAr[typeItr] << " " << genDecayStrAr[typeItr] << " ";
+                    std::cout << genDecayStrAr[typeItr] << " " << genHTobbAr[HTobbItr][cutItr][typeItr] << " ";
                 }
                 std::cout << "\n";
             }
@@ -2828,7 +2829,7 @@ void DoHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
                 if (loopItr == C2VNameAr.size() - 1) {
                     std::cout << "(" << C2VNameAr[loopItr] << "," << passFlagWeightedCtrAr[typeItr+1][loopItr + 1] << ")\n";
                 }
-                std::cout << "(" << C2VNameAr[loopItr] << "," << passFlagWeightedCtrAr[typeItr+1][loopItr + 1] << "),";
+                else std::cout << "(" << C2VNameAr[loopItr] << "," << passFlagWeightedCtrAr[typeItr+1][loopItr + 1] << "),";
                 if (loopItr == 27) {
                     std::cout << "(2.0," << passFlagWeightedCtrAr[typeItr+1][0] << "),";
                 }
@@ -2841,7 +2842,7 @@ void DoHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
                 if (loopItr == C2VNameAr.size() - 1) {
                     std::cout << "(" << C2VNameAr[loopItr] << "," << passHLTWeightedCtrAr[typeItr+1][loopItr + 1] << ")\n";
                 }
-                std::cout << "(" << C2VNameAr[loopItr] << "," << passHLTWeightedCtrAr[typeItr+1][loopItr + 1] << "),";
+                else std::cout << "(" << C2VNameAr[loopItr] << "," << passHLTWeightedCtrAr[typeItr+1][loopItr + 1] << "),";
                 if (loopItr == 27) {
                     std::cout << "(2.0," << passHLTWeightedCtrAr[typeItr+1][0] << "),";
                 }
@@ -2854,7 +2855,7 @@ void DoHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
                 if (loopItr == C2VNameAr.size() - 1) {
                     std::cout << "(" << C2VNameAr[loopItr] << "," << passnFJWeightedCtrAr[typeItr+1][loopItr + 1] << ")\n";
                 }
-                std::cout << "(" << C2VNameAr[loopItr] << "," << passnFJWeightedCtrAr[typeItr+1][loopItr + 1] << "),";
+                else std::cout << "(" << C2VNameAr[loopItr] << "," << passnFJWeightedCtrAr[typeItr+1][loopItr + 1] << "),";
                 if (loopItr == 27) {
                     std::cout << "(2.0," << passnFJWeightedCtrAr[typeItr+1][0] << "),";
                 }
@@ -2867,7 +2868,7 @@ void DoHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
                 if (loopItr == C2VNameAr.size() - 1) {
                     std::cout << "(" << C2VNameAr[loopItr] << "," << passnVBFWeightedCtrAr[typeItr+1][loopItr + 1] << ")\n";
                 }
-                std::cout << "(" << C2VNameAr[loopItr] << "," << passnVBFWeightedCtrAr[typeItr+1][loopItr + 1] << "),";
+                else std::cout << "(" << C2VNameAr[loopItr] << "," << passnVBFWeightedCtrAr[typeItr+1][loopItr + 1] << "),";
                 if (loopItr == 27) {
                     std::cout << "(2.0," << passnVBFWeightedCtrAr[typeItr+1][0] << "),";
                 }
@@ -2901,7 +2902,7 @@ void DoHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
                 if (loopItr == C2VNameAr.size() - 1) {
                     std::cout << "(" << C2VNameAr[loopItr] << "," << genChannelWeightedCtrAr[typeItr][loopItr + 1] << ")\n";
                 }
-                std::cout << "(" << C2VNameAr[loopItr] << "," << genChannelWeightedCtrAr[typeItr][loopItr + 1] << "),";
+                else std::cout << "(" << C2VNameAr[loopItr] << "," << genChannelWeightedCtrAr[typeItr][loopItr + 1] << "),";
                 if (loopItr == 27) {
                     std::cout << "(2.0," << genChannelWeightedCtrAr[typeItr][0] << "),";
                 }
