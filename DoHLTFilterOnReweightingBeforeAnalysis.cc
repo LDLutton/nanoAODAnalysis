@@ -655,7 +655,7 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
     Double_t sumOfGenWeights = 0;
 
 
-    std::vector<std::vector<Double_t>> genChannelWeightedCtrAr(11,zeroVec)
+    std::vector<std::vector<Double_t>> genChannelWeightedCtrAr(11,zeroVec);
 
     
     //Ctrs for HTobb
@@ -943,8 +943,8 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
             sumOfGenWeights += *genWeight;
             genChannelL = 4;
             HTobbBoolL = false;
-            std::vector<Bool_t> evWeightedCtrMask(9,false);
-            evWeightedCtrMask[0] = true;
+            std::vector<Bool_t> evWeightedCtrMaskOne(9,false);
+            evWeightedCtrMaskOne[0] = true;
             std::vector<Bool_t> evWeightedCtrMaskTwo(11,false);
 
             //--------------KINEMATICS--------------
@@ -2249,8 +2249,8 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
             //passFlagWeightedCtr += *genWeight;
 
             if (!isBackground){
-                for (unsigned int maskInt = 0; maskInt < evWeightedCtrMask.size(); maskInt++){
-                    if (evWeightedCtrMask[maskInt]){
+                for (unsigned int maskInt = 0; maskInt < evWeightedCtrMaskOne.size(); maskInt++){
+                    if (evWeightedCtrMaskOne[maskInt]){
                         passFlagWeightedCtrAr[maskInt][0] += *genWeight;
                         for (unsigned int C2VCtr = 1; C2VCtr < passFlagWeightedCtrAr[maskInt].size(); C2VCtr++){
                             passFlagWeightedCtrAr[maskInt][C2VCtr] += *genWeight*(LHEReweightingWeight[C2VCtr-1]);
@@ -2330,8 +2330,8 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
             //passHLTWeightedCtr += *genWeight;
 
             if (!isBackground){
-                for (unsigned int maskInt = 0; maskInt < evWeightedCtrMask.size(); maskInt++){
-                    if (evWeightedCtrMask[maskInt]){
+                for (unsigned int maskInt = 0; maskInt < evWeightedCtrMaskOne.size(); maskInt++){
+                    if (evWeightedCtrMaskOne[maskInt]){
                         passHLTWeightedCtrAr[maskInt][0] += *genWeight;
                         for (unsigned int C2VCtr = 1; C2VCtr < passHLTWeightedCtrAr[maskInt].size(); C2VCtr++){
                             passHLTWeightedCtrAr[maskInt][C2VCtr] += *genWeight*(LHEReweightingWeight[C2VCtr-1]);
@@ -2406,8 +2406,8 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
             //passnFJWeightedCtr += *genWeight; 
 
             if (!isBackground){
-                for (unsigned int maskInt = 0; maskInt < evWeightedCtrMask.size(); maskInt++){
-                    if (evWeightedCtrMask[maskInt]){
+                for (unsigned int maskInt = 0; maskInt < evWeightedCtrMaskOne.size(); maskInt++){
+                    if (evWeightedCtrMaskOne[maskInt]){
                         passnFJWeightedCtrAr[maskInt][0] += *genWeight;
                         for (unsigned int C2VCtr = 1; C2VCtr < passnFJWeightedCtrAr[maskInt].size(); C2VCtr++){
                             passnFJWeightedCtrAr[maskInt][C2VCtr] += *genWeight*(LHEReweightingWeight[C2VCtr-1]);
@@ -2472,8 +2472,8 @@ void DoHLTFilterBeforeAnalysis(UInt_t fileInd){
             //passnVBFWeightedCtr += *genWeight; 
 
             if (!isBackground){
-                for (unsigned int maskInt = 0; maskInt < evWeightedCtrMask.size(); maskInt++){
-                    if (evWeightedCtrMask[maskInt]){
+                for (unsigned int maskInt = 0; maskInt < evWeightedCtrMaskOne.size(); maskInt++){
+                    if (evWeightedCtrMaskOne[maskInt]){
                         passnVBFWeightedCtrAr[maskInt][0] += *genWeight;
                         for (unsigned int C2VCtr = 1; C2VCtr < passnVBFWeightedCtrAr[maskInt].size(); C2VCtr++){
                             passnVBFWeightedCtrAr[maskInt][C2VCtr] += *genWeight*(LHEReweightingWeight[C2VCtr-1]);
