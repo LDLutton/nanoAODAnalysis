@@ -136,7 +136,7 @@ void DoHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
         useFJGenMatchTree = true;
         
     }
-    if (SDC2V2MCWZHReweight){
+    else if (SDC2V2MCWZHReweight){
         saveName = "SDC2V2MCWZHReweight";
         isBackground = false;
         int arrSize = sizeof(SDC2V2MCWZHReweightAr)/sizeof(SDC2V2MCWZHReweightAr[0]);
