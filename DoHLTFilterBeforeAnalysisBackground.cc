@@ -277,22 +277,6 @@ void DoHLTFilterBeforeAnalysisBackground(UInt_t fileInd){
         */
         fileAr.push_back(QCDPT3200toInfBackgroundAr[fileInd]);
     }
-    else if (TTbb_TTToHadronicBackground){
-        //saveName = "QCDPT3200toInf";
-        
-        crossSection = 377.96;
-
-        saveName = "TTbb_TTToHadronic";
-        
-        isBackground = true;
-        int arrSize = sizeof(TTbb_TTToHadronicBackgroundAr)/sizeof(TTbb_TTToHadronicBackgroundAr[0]);
-        /*
-        for (int i=0; i<arrSize; i++){
-            fileAr.push_back(TTbb_TTToHadronicBackgroundAr[i]);
-        }
-        */
-        fileAr.push_back(TTbb_TTToHadronicBackgroundAr[fileInd]);
-    }
     else if (TTJetsBackground){
         //saveName = "";
         
@@ -308,22 +292,6 @@ void DoHLTFilterBeforeAnalysisBackground(UInt_t fileInd){
         }
         */
         fileAr.push_back(TTJetsBackgroundAr[fileInd]);
-    }
-    else if (TTbb_TTTo2L2NuBackground){
-        //saveName = "";
-        
-        crossSection = 88.29;
-
-        saveName = "TTbb_TTTo2L2Nu";
-        
-        isBackground = true;
-        int arrSize = sizeof(TTbb_TTTo2L2NuBackgroundAr)/sizeof(TTbb_TTTo2L2NuBackgroundAr[0]);
-        /*
-        for (int i=0; i<arrSize; i++){
-            fileAr.push_back(TTbb_TTTo2L2NuBackgroundAr[i]);
-        }
-        */
-        fileAr.push_back(TTbb_TTTo2L2NuBackgroundAr[fileInd]);
     }
     else if (ST_s_ChannelBackground){
         //saveName = "";
