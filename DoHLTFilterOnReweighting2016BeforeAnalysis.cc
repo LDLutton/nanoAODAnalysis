@@ -202,7 +202,7 @@ void DoHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd){
     }
     else if (testRun){
         saveName = "testRun";
-        fileAr.push_back("./unweighted_eventspphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev10080Seed_0p999cHW100GeVIMJetCut_200.root");
+        fileAr.push_back("./merged16.root");
         useLHETree = true;
         useFJGenMatchTree = true;
         isBackground = false;
@@ -545,6 +545,12 @@ void DoHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd){
     FilteredEventsTree->Branch("HTobbBoolL",&HTobbBoolL,"HTobbBoolL/O");
 
 
+    //GenTree
+
+    //EventReweighting
+    UInt_t nLHEReweightingWeightGenL;
+    std::vector<Float_t> LHEReweightingWeightGenL;
+
     //Gen dR of H from Z particles
     Double_t HdRFromLeadZL;
     Double_t HdRFromTrailingZL;
@@ -554,10 +560,19 @@ void DoHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd){
 
     //Gen dR of H from Z particles
 
+    genTree->Branch("nLHEReweightingWeightGenL",&nLHEReweightingWeightGenL,"nLHEReweightingWeightGenL/i");
+    genTree->Branch("LHEReweightingWeightGenL",&LHEReweightingWeightGenL);
     genTree->Branch("HdRFromLeadZL",&HdRFromLeadZL,"HdRFromLeadZL/D");
     genTree->Branch("HdRFromTrailingZL",&HdRFromTrailingZL,"HdRFromTrailingZL/D");
     genTree->Branch("LeadZdRFromTrailingZL",&LeadZdRFromTrailingZL,"LeadZdRFromTrailingZL/D");
     
+
+    /////////////
+    //GenLepFJTree
+
+    //EventReweighting
+    UInt_t nLHEReweightingWeightGenLepFJL;
+    std::vector<Float_t> LHEReweightingWeightGenLepFJL;
 
     //Gen dR of H reco'd (but gen matched) decay products from Z reco'd (but gen matched) decay products
     //With HTobb
@@ -572,10 +587,20 @@ void DoHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd){
     //Gen dR of H reco'd (but gen matched) decay products from Z reco'd (but gen matched) decay products
     //With HTobb
     //gen lep channel
+    genLepFJTree->Branch("nLHEReweightingWeightGenLepFJL",&nLHEReweightingWeightGenLepFJL,"nLHEReweightingWeightGenLepFJL/i");
+    genLepFJTree->Branch("LHEReweightingWeightGenLepFJL",&LHEReweightingWeightGenLepFJL);
     genLepFJTree->Branch("HGenFJdRFromLeadZLeadLepL",&HGenFJdRFromLeadZLeadLepL,"HGenFJdRFromLeadZLeadLepL/D");
     genLepFJTree->Branch("HGenFJdRFromLeadZTrailingLepL",&HGenFJdRFromLeadZTrailingLepL,"HGenFJdRFromLeadZTrailingLepL/D");
     genLepFJTree->Branch("HGenFJdRFromTrailingZLeadLepL",&HGenFJdRFromTrailingZLeadLepL,"HGenFJdRFromTrailingZLeadLepL/D");
     genLepFJTree->Branch("HGenFJdRFromTrailingZTrailingLepL",&HGenFJdRFromTrailingZTrailingLepL,"HGenFJdRFromTrailingZTrailingLepL/D");
+
+
+    //GenSemiLepFJTree
+
+
+    //EventReweighting
+    UInt_t nLHEReweightingWeightGenSemiLepFJL;
+    std::vector<Float_t> LHEReweightingWeightGenSemiLepFJL;
 
     //gen Semilep channel
     Double_t HGenFJdRFromLepZLeadLepL;
@@ -585,9 +610,18 @@ void DoHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd){
     TTree *genSemiLepFJTree = new TTree("genSemiLepFJTree", "genSemiLepFJTree");
 
     //gen Semilep channel
+    genSemiLepFJTree->Branch("nLHEReweightingWeightGenSemiLepFJL",&nLHEReweightingWeightGenSemiLepFJL,"nLHEReweightingWeightGenSemiLepFJL/i");
+    genSemiLepFJTree->Branch("LHEReweightingWeightGenSemiLepFJL",&LHEReweightingWeightGenSemiLepFJL);
     genSemiLepFJTree->Branch("HGenFJdRFromLepZLeadLepL",&HGenFJdRFromLepZLeadLepL,"HGenFJdRFromLepZLeadLepL/D");
     genSemiLepFJTree->Branch("HGenFJdRFromLepZTrailingLepL",&HGenFJdRFromLepZTrailingLepL,"HGenFJdRFromLepZTrailingLepL/D");
     genSemiLepFJTree->Branch("HGenFJdRFromHadZFJL",&HGenFJdRFromHadZFJL,"HGenFJdRFromHadZFJL/D");
+
+
+    //GenHadFJTree
+
+    //EventReweighting
+    UInt_t nLHEReweightingWeightGenHadFJL;
+    std::vector<Float_t> LHEReweightingWeightGenHadFJL;
 
     //gen Had channel
     Double_t HGenFJdRFromZLeadFJL;
@@ -600,10 +634,18 @@ void DoHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd){
     
     
     //gen Had channel
+    genHadFJTree->Branch("nLHEReweightingWeightGenHadFJL",&nLHEReweightingWeightGenHadFJL,"nLHEReweightingWeightGenHadFJL/i");
+    genHadFJTree->Branch("LHEReweightingWeightGenHadFJL",&LHEReweightingWeightGenHadFJL);
     genHadFJTree->Branch("HGenFJdRFromZLeadFJL",&HGenFJdRFromZLeadFJL,"HGenFJdRFromZLeadFJL/D");
     genHadFJTree->Branch("HGenFJdRFromZTrailingFJL",&HGenFJdRFromZTrailingFJL,"HGenFJdRFromZTrailingFJL/D");
 
 
+
+    //GenLepTree
+
+    //EventReweighting
+    UInt_t nLHEReweightingWeightGenLepL;
+    std::vector<Float_t> LHEReweightingWeightGenLepL;
 
 
     //Gen dR of H reco'd (but gen matched) decay products from Z reco'd (but gen matched) decay products
@@ -619,10 +661,21 @@ void DoHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd){
     //Gen dR of H reco'd (but gen matched) decay products from Z reco'd (but gen matched) decay products
     //With HTobb
     //gen lep channel
+    genLepTree->Branch("nLHEReweightingWeightGenLepL",&nLHEReweightingWeightGenLepL,"nLHEReweightingWeightGenLepL/i");
+    genLepTree->Branch("LHEReweightingWeightGenLepL",&LHEReweightingWeightGenLepL);
     genLepTree->Branch("HGendRFromLeadZLeadLepL",&HGendRFromLeadZLeadLepL,"HGendRFromLeadZLeadLepL/D");
     genLepTree->Branch("HGendRFromLeadZTrailingLepL",&HGendRFromLeadZTrailingLepL,"HGendRFromLeadZTrailingLepL/D");
     genLepTree->Branch("HGendRFromTrailingZLeadLepL",&HGendRFromTrailingZLeadLepL,"HGendRFromTrailingZLeadLepL/D");
     genLepTree->Branch("HGendRFromTrailingZTrailingLepL",&HGendRFromTrailingZTrailingLepL,"HGendRFromTrailingZTrailingLepL/D");
+
+
+
+    //GenSemiLepTree
+
+    //EventReweighting
+    UInt_t nLHEReweightingWeightGenSemiLepL;
+    std::vector<Float_t> LHEReweightingWeightGenSemiLepL;
+
 
     //gen Semilep channel
     Double_t HGendRFromLepZLeadLepL;
@@ -632,9 +685,18 @@ void DoHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd){
     TTree *genSemiLepTree = new TTree("genSemiLepTree", "genSemiLepTree");
 
     //gen Semilep channel
+    genSemiLepTree->Branch("nLHEReweightingWeightGenSemiLepL",&nLHEReweightingWeightGenSemiLepL,"nLHEReweightingWeightGenSemiLepL/i");
+    genSemiLepTree->Branch("LHEReweightingWeightGenSemiLepL",&LHEReweightingWeightGenSemiLepL);
     genSemiLepTree->Branch("HGendRFromLepZLeadLepL",&HGendRFromLepZLeadLepL,"HGendRFromLepZLeadLepL/D");
     genSemiLepTree->Branch("HGendRFromLepZTrailingLepL",&HGendRFromLepZTrailingLepL,"HGendRFromLepZTrailingLepL/D");
     genSemiLepTree->Branch("HGendRFromHadZL",&HGendRFromHadZL,"HGendRFromHadZL/D");
+
+
+    //GenHadTree
+
+    //EventReweighting
+    UInt_t nLHEReweightingWeightGenHadL;
+    std::vector<Float_t> LHEReweightingWeightGenHadL;
 
     //gen Had channel
     Double_t HGendRFromZLeadL;
@@ -647,9 +709,10 @@ void DoHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd){
     
     
     //gen Had channel
+    genHadTree->Branch("nLHEReweightingWeightGenHadL",&nLHEReweightingWeightGenHadL,"nLHEReweightingWeightGenHadL/i");
+    genHadTree->Branch("LHEReweightingWeightGenHadL",&LHEReweightingWeightGenHadL);
     genHadTree->Branch("HGendRFromZLeadL",&HGendRFromZLeadL,"HGendRFromZLeadL/D");
     genHadTree->Branch("HGendRFromZTrailingL",&HGendRFromZTrailingL,"HGendRFromZTrailingL/D");
-    
     
 
     Double_t sumOfGenWeights = 0;
@@ -1452,7 +1515,15 @@ void DoHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd){
                             HdRFromTrailingZL = calcDeltaR(tmpHPhiFordR,tmpHEtaFordR,tmpZTrailingPhiFordR,tmpZTrailingEtaFordR);
                             LeadZdRFromTrailingZL = calcDeltaR(tmpZLeadPhiFordR,tmpZLeadEtaFordR,tmpZTrailingPhiFordR,tmpZTrailingEtaFordR);
 
+                            
+                            nLHEReweightingWeightGenL = *nLHEReweightingWeight;
+                            for (UInt_t nReweightItr=0; nReweightItr<nLHEReweightingWeightGenL;nReweightItr++){
+                                LHEReweightingWeightGenL.push_back(LHEReweightingWeight[nReweightItr]);
+                            }
+
                             genTree->Fill();
+
+                            LHEReweightingWeightGenL.clear();
 
 
 
@@ -1501,7 +1572,15 @@ void DoHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd){
 
                                 HGendRFromZLeadL = tmpHZLeaddR;
                                 HGendRFromZTrailingL = tmpHZTrailingdR;
+
+                                nLHEReweightingWeightGenHadL = *nLHEReweightingWeight;
+                                for (UInt_t nReweightItr=0; nReweightItr<nLHEReweightingWeightGenHadL;nReweightItr++){
+                                    LHEReweightingWeightGenHadL.push_back(LHEReweightingWeight[nReweightItr]);
+                                }
+
                                 genHadTree->Fill();
+
+                                LHEReweightingWeightGenHadL.clear();
 
 
                                 
@@ -1598,7 +1677,16 @@ void DoHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd){
                                     HGenFJdRFromZLeadFJL = tmpHZLeaddR;
                                     HGenFJdRFromZTrailingFJL = tmpHZTrailingdR;
 
+
+                                    nLHEReweightingWeightGenHadFJL = *nLHEReweightingWeight;
+                                    for (UInt_t nReweightItr=0; nReweightItr<nLHEReweightingWeightGenHadFJL;nReweightItr++){
+                                        LHEReweightingWeightGenHadFJL.push_back(LHEReweightingWeight[nReweightItr]);
+                                    }
+
                                     genHadFJTree->Fill();
+
+
+                                    LHEReweightingWeightGenHadFJL.clear();
                                 }
                                 //std::cout << "------------------------------------------------\n";
 
@@ -1675,7 +1763,15 @@ void DoHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd){
                                 HGendRFromLepZTrailingLepL = tmpHZTrailingLepdR;
                                 HGendRFromHadZL = tmpHZdR;
 
+                                nLHEReweightingWeightGenSemiLepL = *nLHEReweightingWeight;
+                                for (UInt_t nReweightItr=0; nReweightItr<nLHEReweightingWeightGenSemiLepL;nReweightItr++){
+                                    LHEReweightingWeightGenSemiLepL.push_back(LHEReweightingWeight[nReweightItr]);
+                                }
+
                                 genSemiLepTree->Fill();
+
+
+                                LHEReweightingWeightGenSemiLepL.clear();
 
 
 
@@ -1823,7 +1919,15 @@ void DoHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd){
                                     HGenFJdRFromLepZTrailingLepL = tmpHZTrailingLepdR;
                                     HGenFJdRFromHadZFJL = tmpHZFJdR;
 
+
+                                    nLHEReweightingWeightGenSemiLepFJL = *nLHEReweightingWeight;
+                                    for (UInt_t nReweightItr=0; nReweightItr<nLHEReweightingWeightGenSemiLepFJL;nReweightItr++){
+                                        LHEReweightingWeightGenSemiLepFJL.push_back(LHEReweightingWeight[nReweightItr]);
+                                    }
+
                                     genSemiLepFJTree->Fill();
+
+                                    LHEReweightingWeightGenSemiLepFJL.clear();
                                 }
                                 //std::cout << "-----------------------------------------------\n";
 
@@ -1894,7 +1998,15 @@ void DoHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd){
                                 HGendRFromTrailingZTrailingLepL = tmpHTrailingZTrailingLepdR;
 
 
+                                nLHEReweightingWeightGenLepL = *nLHEReweightingWeight;
+                                for (UInt_t nReweightItr=0; nReweightItr<nLHEReweightingWeightGenLepL;nReweightItr++){
+                                    LHEReweightingWeightGenLepL.push_back(LHEReweightingWeight[nReweightItr]);
+                                }
+
+
                                 genLepTree->Fill();
+
+                                LHEReweightingWeightGenLepL.clear();
                                 
 
 
@@ -2086,7 +2198,15 @@ void DoHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd){
                                     HGenFJdRFromTrailingZTrailingLepL = tmpHTrailingZTrailingLepdR;
 
 
+                                    nLHEReweightingWeightGenLepFJL = *nLHEReweightingWeight;
+                                    for (UInt_t nReweightItr=0; nReweightItr<nLHEReweightingWeightGenLepFJL;nReweightItr++){
+                                        LHEReweightingWeightGenLepFJL.push_back(LHEReweightingWeight[nReweightItr]);
+                                    }
+
+
                                     genLepFJTree->Fill();
+
+                                    LHEReweightingWeightGenLepFJL.clear();
                                 }
 
 
@@ -2604,6 +2724,8 @@ void DoHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd){
             fixedGridRhoFastjetAllL = *fixedGridRhoFastjetAll;
 
             FilteredEventsTree->Fill();
+
+            LHEReweightingWeightL.clear();
 
             Jet_etaL.clear();
             Jet_ptL.clear();
