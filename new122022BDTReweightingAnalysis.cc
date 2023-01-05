@@ -140,7 +140,7 @@ void new122022BDTReweightingAnalysis(string datasetString){
     std::cout << "Doing " << saveName << "\n";
     //Setting up outfile with variables for BDT
     
-    std::string outFileStr = "new072022BDTAnalysis"+saveName+".root";
+    std::string outFileStr = "new122022BDTAnalysis"+saveName+".root";
     std::cout << "OutFile: " << outFileStr << "\n";
     TFile *outFile = new TFile(outFileStr.c_str(),"RECREATE");
     
