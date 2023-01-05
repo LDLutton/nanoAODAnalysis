@@ -9,6 +9,11 @@ bool useTighterCut = false;
 
 bool FoMOnHiggsCut = true;
 
+bool SDC2V2MCZZHReweight = false;
+bool SDC2V2MCZZH17Reweight = false;
+bool SDC2V2MCZZH16Reweight = false;
+bool SDC2V2MCZZH16APVReweight = false;
+
 bool testRun = false;
 bool SDC2V3MC = false;
 bool SDC2V3MCWZH = false;
