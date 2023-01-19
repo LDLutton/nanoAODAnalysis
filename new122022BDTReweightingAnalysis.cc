@@ -623,6 +623,11 @@ void new122022BDTReweightingAnalysis(string datasetString){
     
 
     //PASSING EV TREE FOR BDT IN LEP CHANNEL
+
+    //EventReweighting
+    UInt_t nLHEReweightingWeight_L_L;
+    std::vector<Float_t> LHEReweightingWeight_L_L;
+
     Double_t passingEvGenWeight_L_L;
 
     //Double_t passingEvFullWeight_L_L;
@@ -673,6 +678,9 @@ void new122022BDTReweightingAnalysis(string datasetString){
     
 
     TTree *passingEvLepTree = new TTree("passingEvLepTree", "passingEvLepTree");
+
+    passingEvLepTree->Branch("nLHEReweightingWeight_L_L",&nLHEReweightingWeight_L_L,"nLHEReweightingWeight_L_L/i");
+    passingEvLepTree->Branch("LHEReweightingWeight_L_L",&LHEReweightingWeight_L_L,"LHEReweightingWeight_L_L/F");
     
     passingEvLepTree->Branch("passingEvGenWeight_L_L",&passingEvGenWeight_L_L,"passingEvGenWeight_L_L/D");
 
@@ -729,6 +737,11 @@ void new122022BDTReweightingAnalysis(string datasetString){
 
 
     //PASSING EV TREE FOR BDT IN SEMILEP CHANNEL
+
+    //EventReweighting
+    UInt_t nLHEReweightingWeight_SL_L;
+    std::vector<Float_t> LHEReweightingWeight_SL_L;
+
     Double_t passingEvGenWeight_SL_L;
 
     //Double_t passingEvFullWeight_SL_L;
@@ -771,6 +784,9 @@ void new122022BDTReweightingAnalysis(string datasetString){
     
 
     TTree *passingEvSemiLepTree = new TTree("passingEvSemiLepTree", "passingEvSemiLepTree");
+
+    passingEvSemiLepTree->Branch("nLHEReweightingWeight_L_L",&nLHEReweightingWeight_L_L,"nLHEReweightingWeight_L_L/i");
+    passingEvSemiLepTree->Branch("LHEReweightingWeight_L_L",&LHEReweightingWeight_L_L,"LHEReweightingWeight_L_L/F");
     
     passingEvSemiLepTree->Branch("passingEvGenWeight_SL_L",&passingEvGenWeight_SL_L,"passingEvGenWeight_SL_L/D");
 
@@ -2722,6 +2738,12 @@ void new122022BDTReweightingAnalysis(string datasetString){
 
                     if (!BDTSignalGenChannelMatched){
                         //Fill BDT Lep Tree
+
+                        nLHEReweightingWeight_L_L = *nLHEReweightingWeightL;
+                        for (UInt_t nReweightItr=0; nReweightItr<nLHEReweightingWeight_L_L;nReweightItr++){
+                            LHEReweightingWeight_L_L.push_back(LHEReweightingWeightL[nReweightItr]);
+                        }
+
                         passingEvGenWeight_L_L = tmpGenWeights;
 
                         //passingEvFullWeight_L_L = tmpGenWeights*XS*Run2Lumi/totWeight;
@@ -2786,6 +2808,13 @@ void new122022BDTReweightingAnalysis(string datasetString){
 
 
                                 //Fill BDT Lep Tree
+
+                                nLHEReweightingWeight_L_L = *nLHEReweightingWeightL;
+                                for (UInt_t nReweightItr=0; nReweightItr<nLHEReweightingWeight_L_L;nReweightItr++){
+                                    LHEReweightingWeight_L_L.push_back(LHEReweightingWeightL[nReweightItr]);
+                                }
+
+
                                 passingEvGenWeight_L_L = tmpGenWeights;
 
                                 //passingEvFullWeight_L_L = tmpGenWeights*XS*Run2Lumi/totWeight;
@@ -2897,6 +2926,10 @@ void new122022BDTReweightingAnalysis(string datasetString){
 
 
                     if (!BDTSignalGenChannelMatched){
+                        nLHEReweightingWeight_SL_L = *nLHEReweightingWeightL;
+                        for (UInt_t nReweightItr=0; nReweightItr<nLHEReweightingWeight_SL_L;nReweightItr++){
+                            LHEReweightingWeight_SL_L.push_back(LHEReweightingWeightL[nReweightItr]);
+                        }
                         passingEvGenWeight_SL_L = tmpGenWeights;
 
                         //passingEvFullWeight_SL_L = tmpGenWeights*XS*Run2Lumi/totWeight;
@@ -2956,6 +2989,12 @@ void new122022BDTReweightingAnalysis(string datasetString){
                                 passingEvGenWeight_SL_L = tmpGenWeights;
 
                                 //passingEvFullWeight_SL_L = tmpGenWeights*XS*Run2Lumi/totWeight;
+
+                                nLHEReweightingWeight_SL_L = *nLHEReweightingWeightL;
+                                for (UInt_t nReweightItr=0; nReweightItr<nLHEReweightingWeight_SL_L;nReweightItr++){
+                                    LHEReweightingWeight_SL_L.push_back(LHEReweightingWeightL[nReweightItr]);
+                                }
+                                passingEvGenWeight_SL_L = tmpGenWeights;
 
                                 datasetType_SL_L = datasetType;
 
