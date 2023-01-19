@@ -785,8 +785,8 @@ void new122022BDTReweightingAnalysis(string datasetString){
 
     TTree *passingEvSemiLepTree = new TTree("passingEvSemiLepTree", "passingEvSemiLepTree");
 
-    passingEvSemiLepTree->Branch("nLHEReweightingWeight_L_L",&nLHEReweightingWeight_L_L,"nLHEReweightingWeight_L_L/i");
-    passingEvSemiLepTree->Branch("LHEReweightingWeight_L_L",&LHEReweightingWeight_L_L,"LHEReweightingWeight_L_L/F");
+    passingEvSemiLepTree->Branch("nLHEReweightingWeight_SL_L",&nLHEReweightingWeight_SL_L,"nLHEReweightingWeight_SL_L/i");
+    passingEvSemiLepTree->Branch("LHEReweightingWeight_SL_L",&LHEReweightingWeight_SL_L,"LHEReweightingWeight_SL_L/F");
     
     passingEvSemiLepTree->Branch("passingEvGenWeight_SL_L",&passingEvGenWeight_SL_L,"passingEvGenWeight_SL_L/D");
 
