@@ -2795,6 +2795,9 @@ void new122022BDTReweightingAnalysis(string datasetString){
                         selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_L_L = tmpPtVecSumVec.Pt()/tmpPtScalarSum;
 
                         passingEvLepTree->Fill();
+
+                        LHEReweightingWeight_L_L.clear();
+
                     }
 
                     if (*HTobbBoolL){
@@ -2866,6 +2869,8 @@ void new122022BDTReweightingAnalysis(string datasetString){
                                 selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_L_L = tmpPtVecSumVec.Pt()/tmpPtScalarSum;
 
                                 passingEvLepTree->Fill();
+
+                                LHEReweightingWeight_L_L.clear();
                             }
 
 
@@ -2970,6 +2975,9 @@ void new122022BDTReweightingAnalysis(string datasetString){
                         selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_SL_L = tmpPtVecSumVec.Pt()/tmpPtScalarSum;
 
                         passingEvSemiLepTree->Fill();
+
+                        LHEReweightingWeight_SL_L.clear();
+
                     }
 
 
@@ -3032,6 +3040,9 @@ void new122022BDTReweightingAnalysis(string datasetString){
                                 selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_SL_L = tmpPtVecSumVec.Pt()/tmpPtScalarSum;
 
                                 passingEvSemiLepTree->Fill();
+
+                                LHEReweightingWeight_SL_L.clear();
+                                
                             }
 
 
