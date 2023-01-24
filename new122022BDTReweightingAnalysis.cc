@@ -680,7 +680,7 @@ void new122022BDTReweightingAnalysis(string datasetString){
     TTree *passingEvLepTree = new TTree("passingEvLepTree", "passingEvLepTree");
 
     passingEvLepTree->Branch("nLHEReweightingWeight_L_L",&nLHEReweightingWeight_L_L,"nLHEReweightingWeight_L_L/i");
-    passingEvLepTree->Branch("LHEReweightingWeight_L_L",&LHEReweightingWeight_L_L,"LHEReweightingWeight_L_L/F");
+    passingEvLepTree->Branch("LHEReweightingWeight_L_L",&LHEReweightingWeight_L_L);
     
     passingEvLepTree->Branch("passingEvGenWeight_L_L",&passingEvGenWeight_L_L,"passingEvGenWeight_L_L/D");
 
@@ -786,7 +786,7 @@ void new122022BDTReweightingAnalysis(string datasetString){
     TTree *passingEvSemiLepTree = new TTree("passingEvSemiLepTree", "passingEvSemiLepTree");
 
     passingEvSemiLepTree->Branch("nLHEReweightingWeight_SL_L",&nLHEReweightingWeight_SL_L,"nLHEReweightingWeight_SL_L/i");
-    passingEvSemiLepTree->Branch("LHEReweightingWeight_SL_L",&LHEReweightingWeight_SL_L,"LHEReweightingWeight_SL_L/F");
+    passingEvSemiLepTree->Branch("LHEReweightingWeight_SL_L",&LHEReweightingWeight_SL_L);
     
     passingEvSemiLepTree->Branch("passingEvGenWeight_SL_L",&passingEvGenWeight_SL_L,"passingEvGenWeight_SL_L/D");
 
@@ -3042,7 +3042,7 @@ void new122022BDTReweightingAnalysis(string datasetString){
                                 passingEvSemiLepTree->Fill();
 
                                 LHEReweightingWeight_SL_L.clear();
-                                
+
                             }
 
 
