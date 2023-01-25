@@ -3357,13 +3357,13 @@ void new122022BDTReweightingAnalysis(string datasetString){
 
 
     std::vector<std::vector<std::vector<std::vector<Double_t>>>> allWeightedCtrAr {startingWeightedCtrAr,
-passHiggsFJPreSTWeightedCtrAr,passHiggsFJPreSTWeightedLepCtr,passHiggsFJPreSTWeightedSemiLepCtr,passHiggsFJPreSTWeightedHadCtr,
-passHiggsFJWeightedCtrAr,passHiggsFJWeightedLepCtr,passHiggsFJWeightedSemiLepCtr,passHiggsFJWeightedHadCtr,
-passChannelWeightedCtrAr,passLepOrSemiLepChannelWeightedCtrAr,
-passLepChannelWeightedCtrAr,tryingSemiLepChannelWeightedCtrAr,passFJInSemiLepChannelWeightedCtrAr,passEnoughLepsInSemiLepChannelWeightedCtrAr,
-passEnoughFJsInSemiLepChannelWeightedCtrAr,passSemiLepLepCutWeightedCtrAr,passSemiLepChannelWeightedCtrAr,passHadChannelWeightedCtrAr,
-passVBFJetBVetoWeightedCtr,passVBFJetBVetoWeightedLepCtr,passVBFJetBVetoWeightedSemiLepCtr,passVBFJetBVetoWeightedHadCtr,
-passAsLepWeightedCtr,passAsSemiLepWeightedCtr,passAsHadWeightedCtr,passSemiLepLepCutWeightedCtr};
+    passHiggsFJPreSTWeightedCtrAr,passHiggsFJPreSTWeightedLepCtr,passHiggsFJPreSTWeightedSemiLepCtr,passHiggsFJPreSTWeightedHadCtr,
+    passHiggsFJWeightedCtrAr,passHiggsFJWeightedLepCtr,passHiggsFJWeightedSemiLepCtr,passHiggsFJWeightedHadCtr,
+    passChannelWeightedCtrAr,passLepOrSemiLepChannelWeightedCtrAr,
+    passLepChannelWeightedCtrAr,tryingSemiLepChannelWeightedCtrAr,passFJInSemiLepChannelWeightedCtrAr,passEnoughLepsInSemiLepChannelWeightedCtrAr,
+    passEnoughFJsInSemiLepChannelWeightedCtrAr,passSemiLepLepCutWeightedCtrAr,passSemiLepChannelWeightedCtrAr,passHadChannelWeightedCtrAr,
+    passVBFJetBVetoWeightedCtr,passVBFJetBVetoWeightedLepCtr,passVBFJetBVetoWeightedSemiLepCtr,passVBFJetBVetoWeightedHadCtr,
+    passAsLepWeightedCtr,passAsSemiLepWeightedCtr,passAsHadWeightedCtr,passSemiLepLepCutWeightedCtr};
 
     std::vector<string> allWeightedNameAr {"startingWeightedCtrAr",
     "passHiggsFJPreSTWeightedCtrAr","passHiggsFJPreSTWeightedLepCtr","passHiggsFJPreSTWeightedSemiLepCtr","passHiggsFJPreSTWeightedHadCtr",
@@ -3382,11 +3382,11 @@ passAsLepWeightedCtr,passAsSemiLepWeightedCtr,passAsHadWeightedCtr,passSemiLepLe
                 std::cout << htobbNameAr[htobbItr] << " " << typeNameAr[typeItr] << "\n"; //" ctr " << startingHTobbCtrAr[htobbItr][typeItr] << " ";
                 for (unsigned int loopItr = 0; loopItr < C2VNameAr.size(); loopItr++){
                     if (loopItr == C2VNameAr.size() - 1) {
-                        std::cout << "(" << C2VNameAr[loopItr] << "," << startingWeightedCtrAr[htobbItr][typeItr][loopItr + 1] << ")\n";
+                        std::cout << "(" << C2VNameAr[loopItr] << "," << allWeightedCtrAr[allItr][htobbItr][typeItr][loopItr + 1] << ")\n";
                     }
-                    else std::cout << "(" << C2VNameAr[loopItr] << "," << startingWeightedCtrAr[htobbItr][typeItr][loopItr + 1] << "),";
+                    else std::cout << "(" << C2VNameAr[loopItr] << "," << allWeightedCtrAr[allItr][htobbItr][typeItr][loopItr + 1] << "),";
                     if (loopItr == 27) {
-                        std::cout << "(2.0," << startingWeightedCtrAr[htobbItr][typeItr][0] << "),";
+                        std::cout << "(2.0," << allWeightedCtrAr[allItr][htobbItr][typeItr][0] << "),";
                     }
                 }
             }
