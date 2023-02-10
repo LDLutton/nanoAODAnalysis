@@ -14,6 +14,11 @@ bool SDC2V2MCZZH17Reweight = false;
 bool SDC2V2MCZZH16Reweight = false;
 bool SDC2V2MCZZH16APVReweight = false;
 
+bool SDC2V2MCWZHReweight = false;
+bool SDC2V2MCWZH17Reweight = false;
+bool SDC2V2MCWZH16Reweight = false;
+bool SDC2V2MCWZH16APVReweight = false;
+
 bool testRun = false;
 bool SDC2V3MC = false;
 bool SDC2V3MCWZH = false;
