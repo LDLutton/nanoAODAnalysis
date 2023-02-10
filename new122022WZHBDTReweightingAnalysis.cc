@@ -197,7 +197,14 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
     std::vector<std::vector<Double_t>> startingWeightedCtrAr(2,zeroC2VVec);
 
     std::vector<std::vector<Double_t>> passHiggsFJPreSTWeightedCtrAr(2,zeroC2VVec);
+    std::vector<std::vector<Double_t>> passHiggsFJPreSTWeightedLepCtr(2,zeroC2VVec);
+    std::vector<std::vector<Double_t>> passHiggsFJPreSTWeightedSemiLepCtr(2,zeroC2VVec);
+    std::vector<std::vector<Double_t>> passHiggsFJPreSTWeightedHadCtr(2,zeroC2VVec);
+
     std::vector<std::vector<Double_t>> passHiggsFJWeightedCtrAr(2,zeroC2VVec);
+    std::vector<std::vector<Double_t>> passHiggsFJWeightedLepCtr(2,zeroC2VVec);
+    std::vector<std::vector<Double_t>> passHiggsFJWeightedSemiLepCtr(2,zeroC2VVec);
+    std::vector<std::vector<Double_t>> passHiggsFJWeightedHadCtr(2,zeroC2VVec);
     
     std::vector<std::vector<Double_t>> passChannelWeightedCtrAr(2,zeroC2VVec);
     std::vector<std::vector<Double_t>> passLepOrSemiLepChannelWeightedCtrAr(2,zeroC2VVec);
@@ -213,6 +220,10 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
     std::vector<std::vector<Double_t>> passHadChannelWeightedCtrAr(2,zeroC2VVec);
 
     std::vector<std::vector<Double_t>> passVBFJetBVetoWeightedCtr(2,zeroC2VVec);
+    std::vector<std::vector<Double_t>> passVBFJetBVetoWeightedLepCtr(2,zeroC2VVec);
+    std::vector<std::vector<Double_t>> passVBFJetBVetoWeightedSemiLepCtr(2,zeroC2VVec);
+    std::vector<std::vector<Double_t>> passVBFJetBVetoWeightedHadCtr(2,zeroC2VVec);
+    
     std::vector<std::vector<Double_t>> passVBFJetsWeightedCtr(2,zeroC2VVec);
 
     std::vector<std::vector<Double_t>> passAsLepWeightedCtr(2,zeroC2VVec);
