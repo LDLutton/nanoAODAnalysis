@@ -848,7 +848,7 @@ void DoWZHHLTFilterOnReweighting2017BeforeAnalysis(UInt_t fileInd){
                 }
                 if (evCount > NToEnd) break;
             }
-            if (evCount % 100000 == 0) std::cout << "Event: " << evCount << "\n";
+            if (evCount % 5000 == 0) std::cout << "Event: " << evCount << "\n";
             if (debug){
                 std::cout << "-------------------------\n";
                 std::cout << evCount+1 << " starting jets loop\n";
@@ -1215,7 +1215,7 @@ void DoWZHHLTFilterOnReweighting2017BeforeAnalysis(UInt_t fileInd){
                                 //if (evCount -1 == 407) std::cout << "yes\n";
                                 if (std::count(tmpZAr[tmpZItr].begin(), tmpZAr[tmpZItr].end(), JTwo_pdgId_FromLHERaw)){
                                     //if (evCount -1 == 407) std::cout << "yes\n";
-                                    if (tmpZAr[tmpZItr].size() == 3){
+                                    if (tmpZAr[tmpZItr].size() == 3 || tmpZAr[tmpZItr].size() == 4){
                                         //if (evCount -1 == 407) std::cout << "yes\n";
                                         intermediaryZ = tmpZItr;
                                         break;
