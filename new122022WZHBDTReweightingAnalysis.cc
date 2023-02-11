@@ -746,6 +746,11 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
             eZ2VecPairAr.clear();
             mZ2VecPairAr.clear();
 
+            if (*nLHEReweightingWeightL == 0) {
+                std::cout << "Event " << evCount << " nLHEReweightingWeightL == 0\n";
+                continue;
+            }
+
             Bool_t falseHtobbMask = false;
 
             //std::vector<Bool_t> falseTypeMask(5,false);
