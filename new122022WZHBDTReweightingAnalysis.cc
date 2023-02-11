@@ -85,7 +85,7 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
     //precalculate this
     double XS = 1;
 
-    UInt_t datasetType = 0;
+    UInt_t datasetType = 25;
 
 
     
