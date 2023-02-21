@@ -139,8 +139,10 @@ void new072022BDTAnalysisBackground(string datasetString){
     else if (DYBackground){
         //saveName = "DY";
         
-        crossSection = 5364;
-        totWeight = 96233326;
+        //crossSection = 5364;
+        crossSection = 6424;
+        //totWeight = 96233326;
+        totWeight = 3323478039000;
         saveName = "DY";
 
         isBackground = true;
