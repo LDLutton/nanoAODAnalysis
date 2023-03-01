@@ -430,6 +430,10 @@ void DoHLTFilterOnReweighting2017BeforeAnalysis(UInt_t fileInd){
     //ParticleNet
     std::vector<Float_t> FatJet_particleNet_HbbvsQCDL;
     std::vector<Float_t> FatJet_particleNet_ZvsQCDL;
+    std::vector<Float_t> FatJet_particleNetMD_QCDL;
+    std::vector<Float_t> FatJet_particleNetMD_XbbL;
+    std::vector<Float_t> FatJet_particleNetMD_XccL;
+    std::vector<Float_t> FatJet_particleNetMD_XqqL;
 
     //
     Float_t fixedGridRhoFastjetAllL;
@@ -534,6 +538,10 @@ void DoHLTFilterOnReweighting2017BeforeAnalysis(UInt_t fileInd){
     //ParticleNet
     FilteredEventsTree->Branch("FatJet_particleNet_HbbvsQCDL",&FatJet_particleNet_HbbvsQCDL);
     FilteredEventsTree->Branch("FatJet_particleNet_ZvsQCDL",&FatJet_particleNet_ZvsQCDL);
+    FilteredEventsTree->Branch("FatJet_particleNetMD_QCDL", &FatJet_particleNetMD_QCDL);
+    FilteredEventsTree->Branch("FatJet_particleNetMD_XbbL", &FatJet_particleNetMD_XbbL);
+    FilteredEventsTree->Branch("FatJet_particleNetMD_XccL", &FatJet_particleNetMD_XccL);
+    FilteredEventsTree->Branch("FatJet_particleNetMD_XqqL", &FatJet_particleNetMD_XqqL);
 
     //
     FilteredEventsTree->Branch("fixedGridRhoFastjetAllL",&fixedGridRhoFastjetAllL);
@@ -939,6 +947,11 @@ void DoHLTFilterOnReweighting2017BeforeAnalysis(UInt_t fileInd){
         //ParticleNet
         TTreeReaderArray<Float_t> FatJet_particleNet_HbbvsQCD(myEventsReader, "FatJet_particleNet_HbbvsQCD");
         TTreeReaderArray<Float_t> FatJet_particleNet_ZvsQCD(myEventsReader, "FatJet_particleNet_ZvsQCD");
+        TTreeReaderArray<Float_t> FatJet_particleNetMD_QCD(myEventsReader, "FatJet_particleNetMD_QCD");
+        TTreeReaderArray<Float_t> FatJet_particleNetMD_Xbb(myEventsReader, "FatJet_particleNetMD_Xbb");
+        TTreeReaderArray<Float_t> FatJet_particleNetMD_Xcc(myEventsReader, "FatJet_particleNetMD_Xcc");
+        TTreeReaderArray<Float_t> FatJet_particleNetMD_Xqq(myEventsReader, "FatJet_particleNetMD_Xqq");
+
 
         //
 
@@ -2679,6 +2692,10 @@ void DoHLTFilterOnReweighting2017BeforeAnalysis(UInt_t fileInd){
                 FatJet_deepTag_ZvsQCDL.push_back(FatJet_deepTag_ZvsQCD[nFatJetItr]);
                 FatJet_particleNet_HbbvsQCDL.push_back(FatJet_particleNet_HbbvsQCD[nFatJetItr]);
                 FatJet_particleNet_ZvsQCDL.push_back(FatJet_particleNet_ZvsQCD[nFatJetItr]);
+                FatJet_particleNetMD_QCDL.push_back(FatJet_particleNetMD_QCD[nFatJetItr]);
+                FatJet_particleNetMD_XbbL.push_back(FatJet_particleNetMD_Xbb[nFatJetItr]);
+                FatJet_particleNetMD_XccL.push_back(FatJet_particleNetMD_Xcc[nFatJetItr]);
+                FatJet_particleNetMD_XqqL.push_back(FatJet_particleNetMD_Xqq[nFatJetItr]);
             }
 
             //Electrons
@@ -2820,6 +2837,10 @@ void DoHLTFilterOnReweighting2017BeforeAnalysis(UInt_t fileInd){
 
             FatJet_particleNet_HbbvsQCDL.clear();
             FatJet_particleNet_ZvsQCDL.clear();
+            FatJet_particleNetMD_QCDL.clear();
+            FatJet_particleNetMD_XbbL.clear();
+            FatJet_particleNetMD_XccL.clear();
+            FatJet_particleNetMD_XqqL.clear();
 
         }
     }
