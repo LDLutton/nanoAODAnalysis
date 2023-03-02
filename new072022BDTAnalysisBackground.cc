@@ -620,6 +620,11 @@ void new072022BDTAnalysisBackground(string datasetString){
     Float_t selectedHiggsFJ_eta_L_L;
     Float_t selectedHiggsFJ_ParticleNet_HbbvsQCD_L_L;
 
+    Float_t selectedHiggsFJ_ParticleNetMD_QCD_L_L;
+    Float_t selectedHiggsFJ_ParticleNetMD_Xbb_L_L;
+    Float_t selectedHiggsFJ_ParticleNetMD_Xcc_L_L;
+    Float_t selectedHiggsFJ_ParticleNetMD_Xqq_L_L;
+
     Float_t selectedLeadVBFJet_pt_L_L;
     Float_t selectedTrailingVBFJet_pt_L_L;
     Float_t selectedLeadVBFJet_eta_L_L;
@@ -670,6 +675,11 @@ void new072022BDTAnalysisBackground(string datasetString){
     passingEvLepTree->Branch("selectedHiggsFJ_pt_L_L",&selectedHiggsFJ_pt_L_L,"selectedHiggsFJ_pt_L_L/F");
     passingEvLepTree->Branch("selectedHiggsFJ_eta_L_L",&selectedHiggsFJ_eta_L_L,"selectedHiggsFJ_eta_L_L/F");
     passingEvLepTree->Branch("selectedHiggsFJ_ParticleNet_HbbvsQCD_L_L",&selectedHiggsFJ_ParticleNet_HbbvsQCD_L_L,"selectedHiggsFJ_ParticleNet_HbbvsQCD_L_L/F");
+
+    passingEvLepTree->Branch("selectedHiggsFJ_ParticleNetMD_QCD_L_L", &selectedHiggsFJ_ParticleNetMD_QCD_L_L);
+    passingEvLepTree->Branch("selectedHiggsFJ_ParticleNetMD_Xbb_L_L", &selectedHiggsFJ_ParticleNetMD_Xbb_L_L);
+    passingEvLepTree->Branch("selectedHiggsFJ_ParticleNetMD_Xcc_L_L", &selectedHiggsFJ_ParticleNetMD_Xcc_L_L);
+    passingEvLepTree->Branch("selectedHiggsFJ_ParticleNetMD_Xqq_L_L", &selectedHiggsFJ_ParticleNetMD_Xqq_L_L);
 
     passingEvLepTree->Branch("selectedLeadVBFJet_pt_L_L",&selectedLeadVBFJet_pt_L_L,"selectedLeadVBFJet_pt_L_L/F");
     passingEvLepTree->Branch("selectedTrailingVBFJet_pt_L_L",&selectedTrailingVBFJet_pt_L_L,"selectedTrailingVBFJet_pt_L_L/F");
@@ -728,6 +738,11 @@ void new072022BDTAnalysisBackground(string datasetString){
     Float_t selectedZFJ_eta_SL_L;
     Float_t selectedZFJ_ParticleNet_ZvsQCD_SL_L;
 
+    Float_t selectedHiggsFJ_ParticleNetMD_QCD_SL_L;
+    Float_t selectedHiggsFJ_ParticleNetMD_Xbb_SL_L;
+    Float_t selectedHiggsFJ_ParticleNetMD_Xcc_SL_L;
+    Float_t selectedHiggsFJ_ParticleNetMD_Xqq_SL_L;
+
     Float_t selectedLeadVBFJet_pt_SL_L;
     Float_t selectedTrailingVBFJet_pt_SL_L;
     Float_t selectedLeadVBFJet_eta_SL_L;
@@ -770,6 +785,11 @@ void new072022BDTAnalysisBackground(string datasetString){
     passingEvSemiLepTree->Branch("selectedZFJ_pt_SL_L",&selectedZFJ_pt_SL_L,"selectedZFJ_pt_SL_L/F");
     passingEvSemiLepTree->Branch("selectedZFJ_eta_SL_L",&selectedZFJ_eta_SL_L,"selectedZFJ_eta_SL_L/F");
     passingEvSemiLepTree->Branch("selectedZFJ_ParticleNet_ZvsQCD_SL_L",&selectedZFJ_ParticleNet_ZvsQCD_SL_L,"selectedZFJ_ParticleNet_ZvsQCD_SL_L/F");
+
+    passingEvSemiLepTree->Branch("selectedHiggsFJ_ParticleNetMD_QCD_SL_L", &selectedHiggsFJ_ParticleNetMD_QCD_SL_L);
+    passingEvSemiLepTree->Branch("selectedHiggsFJ_ParticleNetMD_Xbb_SL_L", &selectedHiggsFJ_ParticleNetMD_Xbb_SL_L);
+    passingEvSemiLepTree->Branch("selectedHiggsFJ_ParticleNetMD_Xcc_SL_L", &selectedHiggsFJ_ParticleNetMD_Xcc_SL_L);
+    passingEvSemiLepTree->Branch("selectedHiggsFJ_ParticleNetMD_Xqq_SL_L", &selectedHiggsFJ_ParticleNetMD_Xqq_SL_L);
 
     passingEvSemiLepTree->Branch("selectedLeadVBFJet_pt_SL_L",&selectedLeadVBFJet_pt_SL_L,"selectedLeadVBFJet_pt_SL_L/F");
     passingEvSemiLepTree->Branch("selectedTrailingVBFJet_pt_SL_L",&selectedTrailingVBFJet_pt_SL_L,"selectedTrailingVBFJet_pt_SL_L/F");
@@ -1391,6 +1411,11 @@ void new072022BDTAnalysisBackground(string datasetString){
                     selectedHiggsFJ_eta_L_L = hFatJet_eta_fromHTag;
                     selectedHiggsFJ_ParticleNet_HbbvsQCD_L_L = hFatJet_HTag_fromHTag;
 
+                    selectedHiggsFJ_ParticleNetMD_QCD_L_L = FatJet_particleNetMD_QCDL[FJIndAr[0]];
+                    selectedHiggsFJ_ParticleNetMD_Xbb_L_L = FatJet_particleNetMD_XbbL[FJIndAr[0]];
+                    selectedHiggsFJ_ParticleNetMD_Xcc_L_L = FatJet_particleNetMD_XccL[FJIndAr[0]];
+                    selectedHiggsFJ_ParticleNetMD_Xqq_L_L = FatJet_particleNetMD_XqqL[FJIndAr[0]];
+
                     selectedLeadVBFJet_pt_L_L = jetLeadPt;
                     selectedTrailingVBFJet_pt_L_L = jetTrailingPt;
                     selectedLeadVBFJet_eta_L_L = jetLeadEta;
@@ -1458,6 +1483,11 @@ void new072022BDTAnalysisBackground(string datasetString){
                     selectedZFJ_eta_SL_L = dRCheckVecAr[2].Eta();
                     selectedHiggsFJ_ParticleNet_HbbvsQCD_SL_L = hFatJet_HTag_fromHTag;
                     selectedZFJ_ParticleNet_ZvsQCD_SL_L = FatJet_particleNet_ZvsQCDL[FJIndAr[0]];
+
+                    selectedHiggsFJ_ParticleNetMD_QCD_SL_L = FatJet_particleNetMD_QCDL[FJIndAr[1]];
+                    selectedHiggsFJ_ParticleNetMD_Xbb_SL_L = FatJet_particleNetMD_XbbL[FJIndAr[1]];
+                    selectedHiggsFJ_ParticleNetMD_Xcc_SL_L = FatJet_particleNetMD_XccL[FJIndAr[1]];
+                    selectedHiggsFJ_ParticleNetMD_Xqq_SL_L = FatJet_particleNetMD_XqqL[FJIndAr[1]];
 
                     selectedLeadVBFJet_pt_SL_L = jetLeadPt;
                     selectedTrailingVBFJet_pt_SL_L = jetTrailingPt;
