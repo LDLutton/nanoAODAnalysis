@@ -772,6 +772,11 @@ void new122022BDTReweightingAnalysis(string datasetString){
     Float_t selectedHiggsFJ_ParticleNetMD_Xcc_SL_L;
     Float_t selectedHiggsFJ_ParticleNetMD_Xqq_SL_L;
 
+    Float_t selectedZFJ_ParticleNetMD_QCD_SL_L;
+    Float_t selectedZFJ_ParticleNetMD_Xbb_SL_L;
+    Float_t selectedZFJ_ParticleNetMD_Xcc_SL_L;
+    Float_t selectedZFJ_ParticleNetMD_Xqq_SL_L;
+
     Float_t selectedLeadVBFJet_pt_SL_L;
     Float_t selectedTrailingVBFJet_pt_SL_L;
     Float_t selectedLeadVBFJet_eta_SL_L;
@@ -822,6 +827,11 @@ void new122022BDTReweightingAnalysis(string datasetString){
     passingEvSemiLepTree->Branch("selectedHiggsFJ_ParticleNetMD_Xbb_SL_L", &selectedHiggsFJ_ParticleNetMD_Xbb_SL_L);
     passingEvSemiLepTree->Branch("selectedHiggsFJ_ParticleNetMD_Xcc_SL_L", &selectedHiggsFJ_ParticleNetMD_Xcc_SL_L);
     passingEvSemiLepTree->Branch("selectedHiggsFJ_ParticleNetMD_Xqq_SL_L", &selectedHiggsFJ_ParticleNetMD_Xqq_SL_L);
+
+    passingEvSemiLepTree->Branch("selectedZFJ_ParticleNetMD_QCD_SL_L", &selectedZFJ_ParticleNetMD_QCD_SL_L);
+    passingEvSemiLepTree->Branch("selectedZFJ_ParticleNetMD_Xbb_SL_L", &selectedZFJ_ParticleNetMD_Xbb_SL_L);
+    passingEvSemiLepTree->Branch("selectedZFJ_ParticleNetMD_Xcc_SL_L", &selectedZFJ_ParticleNetMD_Xcc_SL_L);
+    passingEvSemiLepTree->Branch("selectedZFJ_ParticleNetMD_Xqq_SL_L", &selectedZFJ_ParticleNetMD_Xqq_SL_L);
 
 
     passingEvSemiLepTree->Branch("selectedLeadVBFJet_pt_SL_L",&selectedLeadVBFJet_pt_SL_L,"selectedLeadVBFJet_pt_SL_L/F");
@@ -2991,6 +3001,11 @@ void new122022BDTReweightingAnalysis(string datasetString){
                         selectedHiggsFJ_ParticleNetMD_Xcc_SL_L = FatJet_particleNetMD_XccL[FJIndAr[1]];
                         selectedHiggsFJ_ParticleNetMD_Xqq_SL_L = FatJet_particleNetMD_XqqL[FJIndAr[1]];
 
+                        selectedZFJ_ParticleNetMD_QCD_SL_L = FatJet_particleNetMD_QCDL[FJIndAr[0]];
+                        selectedZFJ_ParticleNetMD_Xbb_SL_L = FatJet_particleNetMD_XbbL[FJIndAr[0]];
+                        selectedZFJ_ParticleNetMD_Xcc_SL_L = FatJet_particleNetMD_XccL[FJIndAr[0]];
+                        selectedZFJ_ParticleNetMD_Xqq_SL_L = FatJet_particleNetMD_XqqL[FJIndAr[0]];
+
                         selectedLeadVBFJet_pt_SL_L = jetLeadPt;
                         selectedTrailingVBFJet_pt_SL_L = jetTrailingPt;
                         selectedLeadVBFJet_eta_SL_L = jetLeadEta;
@@ -3060,6 +3075,11 @@ void new122022BDTReweightingAnalysis(string datasetString){
                                 selectedHiggsFJ_ParticleNetMD_Xbb_SL_L = FatJet_particleNetMD_XbbL[FJIndAr[1]];
                                 selectedHiggsFJ_ParticleNetMD_Xcc_SL_L = FatJet_particleNetMD_XccL[FJIndAr[1]];
                                 selectedHiggsFJ_ParticleNetMD_Xqq_SL_L = FatJet_particleNetMD_XqqL[FJIndAr[1]];
+
+                                selectedZFJ_ParticleNetMD_QCD_SL_L = FatJet_particleNetMD_QCDL[FJIndAr[0]];
+                                selectedZFJ_ParticleNetMD_Xbb_SL_L = FatJet_particleNetMD_XbbL[FJIndAr[0]];
+                                selectedZFJ_ParticleNetMD_Xcc_SL_L = FatJet_particleNetMD_XccL[FJIndAr[0]];
+                                selectedZFJ_ParticleNetMD_Xqq_SL_L = FatJet_particleNetMD_XqqL[FJIndAr[0]];
 
                                 selectedLeadVBFJet_pt_SL_L = jetLeadPt;
                                 selectedTrailingVBFJet_pt_SL_L = jetTrailingPt;
