@@ -766,6 +766,9 @@ void new122022BDTReweightingAnalysis(string datasetString){
     Float_t selectedZFJ_pt_SL_L;
     Float_t selectedZFJ_eta_SL_L;
     Float_t selectedZFJ_ParticleNet_ZvsQCD_SL_L;
+
+    Float_t selectedZFJ_InvMass_SL_L;
+    Float_t selectedHiggsFJ_InvMass_SL_L;
     
     Float_t selectedHiggsFJ_ParticleNetMD_QCD_SL_L;
     Float_t selectedHiggsFJ_ParticleNetMD_Xbb_SL_L;
@@ -822,6 +825,9 @@ void new122022BDTReweightingAnalysis(string datasetString){
     passingEvSemiLepTree->Branch("selectedZFJ_pt_SL_L",&selectedZFJ_pt_SL_L,"selectedZFJ_pt_SL_L/F");
     passingEvSemiLepTree->Branch("selectedZFJ_eta_SL_L",&selectedZFJ_eta_SL_L,"selectedZFJ_eta_SL_L/F");
     passingEvSemiLepTree->Branch("selectedZFJ_ParticleNet_ZvsQCD_SL_L",&selectedZFJ_ParticleNet_ZvsQCD_SL_L,"selectedZFJ_ParticleNet_ZvsQCD_SL_L/F");
+
+    passingEvSemiLepTree->Branch("selectedZFJ_InvMass_SL_L",&selectedZFJ_InvMass_SL_L,"selectedZFJ_InvMass_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMass_SL_L",&selectedHiggsFJ_InvMass_SL_L,"selectedHiggsFJ_InvMass_SL_L/F");
 
     passingEvSemiLepTree->Branch("selectedHiggsFJ_ParticleNetMD_QCD_SL_L", &selectedHiggsFJ_ParticleNetMD_QCD_SL_L);
     passingEvSemiLepTree->Branch("selectedHiggsFJ_ParticleNetMD_Xbb_SL_L", &selectedHiggsFJ_ParticleNetMD_Xbb_SL_L);
@@ -2993,6 +2999,11 @@ void new122022BDTReweightingAnalysis(string datasetString){
                         selectedZFJ_pt_SL_L = dRCheckVecAr[2].Pt();
                         selectedHiggsFJ_eta_SL_L = hFatJet_eta_fromHTag;
                         selectedZFJ_eta_SL_L = dRCheckVecAr[2].Eta();
+                        
+                        selectedZFJ_InvMass_SL_L = dRCheckVecAr[2].M();
+                        selectedHiggsFJ_InvMass_SL_L = dRCheckVecAr[3].M();
+
+
                         selectedHiggsFJ_ParticleNet_HbbvsQCD_SL_L = hFatJet_HTag_fromHTag;
                         selectedZFJ_ParticleNet_ZvsQCD_SL_L = FatJet_particleNet_ZvsQCDL[FJIndAr[0]];
 
@@ -3068,6 +3079,10 @@ void new122022BDTReweightingAnalysis(string datasetString){
                                 selectedZFJ_pt_SL_L = dRCheckVecAr[2].Pt();
                                 selectedHiggsFJ_eta_SL_L = hFatJet_eta_fromHTag;
                                 selectedZFJ_eta_SL_L = dRCheckVecAr[2].Eta();
+
+                                selectedZFJ_InvMass_SL_L = dRCheckVecAr[2].M();
+                                selectedHiggsFJ_InvMass_SL_L = dRCheckVecAr[3].M();
+                                
                                 selectedHiggsFJ_ParticleNet_HbbvsQCD_SL_L = hFatJet_HTag_fromHTag;
                                 selectedZFJ_ParticleNet_ZvsQCD_SL_L = FatJet_particleNet_ZvsQCDL[FJIndAr[0]];
 
