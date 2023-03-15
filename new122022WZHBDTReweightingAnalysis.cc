@@ -484,6 +484,9 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
     Float_t selectedZFJ_InvMass_SL_L;
     Float_t selectedHiggsFJ_InvMass_SL_L;
 
+    Float_t selectedZFJ_InvMassSoftDrop_SL_L;
+    Float_t selectedHiggsFJ_InvMassSoftDrop_SL_L;
+
     Float_t selectedHiggsFJ_ParticleNetMD_QCD_SL_L;
     Float_t selectedHiggsFJ_ParticleNetMD_Xbb_SL_L;
     Float_t selectedHiggsFJ_ParticleNetMD_Xcc_SL_L;
@@ -542,6 +545,9 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
 
     passingEvSemiLepTree->Branch("selectedZFJ_InvMass_SL_L",&selectedZFJ_InvMass_SL_L,"selectedZFJ_InvMass_SL_L/F");
     passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMass_SL_L",&selectedHiggsFJ_InvMass_SL_L,"selectedHiggsFJ_InvMass_SL_L/F");
+
+    passingEvSemiLepTree->Branch("selectedZFJ_InvMassSoftDrop_SL_L",&selectedZFJ_InvMassSoftDrop_SL_L,"selectedZFJ_InvMassSoftDrop_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMassSoftDrop_SL_L",&selectedHiggsFJ_InvMassSoftDrop_SL_L,"selectedHiggsFJ_InvMassSoftDrop_SL_L/F");
 
     passingEvSemiLepTree->Branch("selectedHiggsFJ_ParticleNetMD_QCD_SL_L", &selectedHiggsFJ_ParticleNetMD_QCD_SL_L);
     passingEvSemiLepTree->Branch("selectedHiggsFJ_ParticleNetMD_Xbb_SL_L", &selectedHiggsFJ_ParticleNetMD_Xbb_SL_L);
@@ -619,6 +625,7 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
         TTreeReaderArray<Int_t> FatJet_jetIdL(myEventsReader, "FatJet_jetIdL");
         //TTreeReaderArray<Float_t> FatJet_deepTag_HL(myEventsReader, "FatJet_deepTag_HL");
         //TTreeReaderArray<Float_t> FatJet_deepTag_ZvsQCDL(myEventsReader, "FatJet_deepTag_ZvsQCDL");
+        TTreeReaderArray<Float_t> FatJet_msoftdropL(myEventsReader, "FatJet_msoftdropL");
 
         //Electrons
         TTreeReaderValue<UInt_t> nElectronL(myEventsReader, "nElectronL");
@@ -1730,6 +1737,9 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
 
                     selectedZFJ_InvMass_SL_L = dRCheckVecAr[2].M();
                     selectedHiggsFJ_InvMass_SL_L = dRCheckVecAr[3].M();
+
+                    selectedZFJ_InvMassSoftDrop_SL_L = FatJet_msoftdropL[FJIndAr[0]];
+                    selectedHiggsFJ_InvMassSoftDrop_SL_L = FatJet_msoftdropL[FJIndAr[1]];
                     
                     selectedHiggsFJ_ParticleNet_HbbvsQCD_SL_L = hFatJet_HTag_fromHTag;
                     selectedZFJ_ParticleNet_ZvsQCD_SL_L = FatJet_particleNet_ZvsQCDL[FJIndAr[0]];
