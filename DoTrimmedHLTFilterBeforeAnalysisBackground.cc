@@ -503,7 +503,7 @@ void DoTrimmedHLTFilterBeforeAnalysisBackground(UInt_t fileInd){
 
     std::cout << "Doing " << saveName << "\n";
     //Setting up outfile for tree
-    std::string outFileStr = "HLTFilteredForAnalysis"+saveName+"_"+std::to_string(fileInd)+".root";
+    std::string outFileStr = "HLTTrimmedFilteredForAnalysis"+saveName+"_"+std::to_string(fileInd)+".root";
     std::cout << "OutFile: " << outFileStr << "\n";
     TFile *outFile = new TFile(outFileStr.c_str(),"RECREATE");
     bool checkChannelSplits;
