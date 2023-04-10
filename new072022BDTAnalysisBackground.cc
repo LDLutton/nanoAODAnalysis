@@ -412,6 +412,305 @@ void new072022BDTAnalysisBackground(string datasetString){
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisTTbb_TTToSemiLeptonic.root";
         fileAr.push_back(tmpStrWithPath);
     }
+    else if (ttHToBBTrimmedBackground){
+        //saveName = "TrimmedttHToBB";
+        crossSection = 0.5071*0.582;
+        totWeight = 4834432.8;
+        saveName = "TrimmedttHToBB";
+        
+        isBackground = true;
+        datasetType = 2;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisttHToBB.root";
+        fileAr.push_back(tmpStrWithPath);
+        
+    }
+    else if (ttZJetsTrimmedBackground){
+        //saveName = "TrimmedttZJets";
+        
+        crossSection = 0.5407;
+        saveName = "TrimmedttZJets";
+        isBackground = true;
+        totWeight = 32793821;
+        datasetType = 3;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisttZJets.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (DYTrimmedBackground){
+        //saveName = "TrimmedDY";
+        
+        //crossSection = 5364;
+        crossSection = 6424;
+        //totWeight = 96233326;
+        totWeight = 3323478039000;
+        saveName = "TrimmedDY";
+
+        isBackground = true;
+        datasetType = 4;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDY.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT170to300TrimmedBackground){
+        //saveName = "TrimmedQCDPT170to300";
+        
+        crossSection = 103300.0;
+        totWeight = 29478000;
+
+        saveName = "TrimmedQCDPT170to300";
+        
+        isBackground = true;
+        datasetType = 15;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisQCDPT170to300.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT300to470TrimmedBackground){
+        //saveName = "TrimmedQCDPT300to470";
+        
+        crossSection = 6826.0;
+        totWeight = 57868000;
+
+        saveName = "TrimmedQCDPT300to470";
+        
+        isBackground = true;
+        datasetType = 16;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisQCDPT300to470.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT470to600TrimmedBackground){
+        //saveName = "TrimmedQCDPT470to600";
+        
+        crossSection = 552.6;
+        totWeight = 51062083.800000004;
+        
+        saveName = "TrimmedQCDPT470to600";
+
+        isBackground = true;
+        datasetType = 17;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisQCDPT470to600.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT600to800TrimmedBackground){
+        //saveName = "TrimmedQCDPT600to800";
+        
+        crossSection = 156.6;
+        totWeight = 66914000;
+
+        saveName = "TrimmedQCDPT600to800";
+        
+        isBackground = true;
+        datasetType = 18;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisQCDPT600to800.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT800to1000TrimmedBackground){
+        //saveName = "TrimmedQCDPT800to1000";
+        
+        crossSection = 26.32;
+        totWeight = 36830000;
+
+        saveName = "TrimmedQCDPT800to1000";
+        
+        isBackground = true;
+        datasetType = 19;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisQCDPT800to1000.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT1000to1400TrimmedBackground){
+        //saveName = "TrimmedQCDPT1000to1400";
+        
+        crossSection = 7.5;
+        totWeight = 19664000;
+
+
+        saveName = "TrimmedQCDPT1000to1400";
+        
+        isBackground = true;
+        datasetType = 20;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisQCDPT1000to1400.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT1400to1800TrimmedBackground){
+        //saveName = "TrimmedQCDPT1400to1800";
+        
+        crossSection = 0.6479;
+        totWeight = 10982000;
+
+        saveName = "TrimmedQCDPT1400to1800";
+        
+        isBackground = true;
+        datasetType = 21;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisQCDPT1400to1800.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT1800to2400TrimmedBackground){
+        //saveName = "TrimmedQCDPT1800to2400";
+        
+        crossSection = 0.08715;
+        totWeight = 5491000;
+
+        saveName = "TrimmedQCDPT1800to2400";
+        
+        isBackground = true;
+        datasetType = 22;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisQCDPT1800to2400.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT2400to3200TrimmedBackground){
+        //saveName = "TrimmedQCDPT2400to3200";
+        
+        crossSection = 0.005242;
+        //totWeight = 2931000;
+        totWeight = 2847000.0;
+
+        saveName = "TrimmedQCDPT2400to3200";
+        
+        isBackground = true;
+        datasetType = 23;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisQCDPT2400to3200.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT3200toInfTrimmedBackground){
+        //saveName = "TrimmedQCDPT3200toInf";
+        
+        crossSection = 0.0001349;
+        totWeight = 1000000;
+
+        saveName = "TrimmedQCDPT3200toInf";
+        
+        isBackground = true;
+        datasetType = 24;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisQCDPT3200toInf.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (TTJetsTrimmedBackground){
+        //saveName = "TrimmedQCDPT3200toInf";
+        
+        crossSection = 722.8;
+        totWeight = 610815599000;
+
+        saveName = "TrimmedTTJets";
+        
+        isBackground = true;
+        datasetType = 5;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisTTJets.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ST_s_ChannelTrimmedBackground){
+        //saveName = "TrimmedQCDPT3200toInf";
+        
+        crossSection = 3.74;
+        totWeight = 68767088;
+
+        saveName = "TrimmedST_s_Channel";
+        
+        isBackground = true;
+        datasetType = 9;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisST_s_Channel.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ST_t_ChannelAntiTopTrimmedBackground){
+        //saveName = "TrimmedQCDPT3200toInf";
+        
+        crossSection = 69.09;
+        //totWeight = 6014529940;
+        totWeight = 6114949140.0;
+        saveName = "TrimmedST_t_ChannelAntiTop";
+        
+        isBackground = true;
+        datasetType = 10;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisST_t_ChannelAntiTop.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ST_t_ChannelTopTrimmedBackground){
+        //saveName = "TrimmedQCDPT3200toInf";
+        
+        crossSection = 115.3;
+        totWeight = 18955976000;
+
+        saveName = "TrimmedST_t_ChannelTop";
+        
+        isBackground = true;
+        datasetType = 11;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisST_t_ChannelTop.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ZZTrimmedBackground){
+        //saveName = "Trimmed";
+        
+        crossSection = 12.17;
+        totWeight = 3526000.0;
+
+        saveName = "TrimmedZZ";
+        
+        isBackground = true;
+        datasetType = 12;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisZZ.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (WWTrimmedBackground){
+        //saveName = "Trimmed";
+        
+        crossSection = 75.95;
+        totWeight = 15679125.299999999;
+
+        saveName = "TrimmedWW";
+        
+        isBackground = true;
+        datasetType = 13;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisWW.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (WZTrimmedBackground){
+        //saveName = "Trimmed";
+        
+        crossSection = 27.59;
+        totWeight = 7940000.0;
+
+        saveName = "TrimmedWZ";
+        
+        isBackground = true;
+        datasetType = 14;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisWZ.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (TTbb_TTToHadronicTrimmedBackground){
+        //saveName = "TrimmedQCDPT3200toInf";
+        
+        crossSection = 5.5;
+        totWeight = 160749330.0;
+
+        saveName = "TrimmedTTbb_TTToHadronic";
+        
+        isBackground = true;
+        datasetType = 6;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisTTbb_TTToHadronic.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (TTbb_TTTo2L2NuTrimmedBackground){
+        //saveName = "Trimmed";
+        
+        crossSection = 2.9;
+        totWeight = 21986500.0;
+
+        saveName = "TrimmedTTbb_TTTo2L2Nu";
+        
+        isBackground = true;
+        datasetType = 8;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisTTbb_TTTo2L2Nu.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (TTbb_TTToSemiLeptonicTrimmedBackground){
+        //saveName = "Trimmed";
+        
+        crossSection = 4.7;
+        totWeight = 233964864.0;
+
+        saveName = "TrimmedTTbb_TTToSemiLeptonic";
+        
+        isBackground = true;
+        datasetType = 7;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisTTbb_TTToSemiLeptonic.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
     else if (testRun){
         saveName = "testRun";
         fileAr.push_back("./HLTFilteredForAnalysistestRun_0.root");

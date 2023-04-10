@@ -19,6 +19,16 @@ bool SDC2V2MCWZH17Reweight = false;
 bool SDC2V2MCWZH16Reweight = false;
 bool SDC2V2MCWZH16APVReweight = false;
 
+bool SDC2V2MCZZHReweightTrimmed = false;
+bool SDC2V2MCZZH17ReweightTrimmed = false;
+bool SDC2V2MCZZH16ReweightTrimmed = false;
+bool SDC2V2MCZZH16APVReweightTrimmed = false;
+
+bool SDC2V2MCWZHReweightTrimmed = false;
+bool SDC2V2MCWZH17ReweightTrimmed = false;
+bool SDC2V2MCWZH16ReweightTrimmed = false;
+bool SDC2V2MCWZH16APVReweightTrimmed = false;
+
 bool testRun = false;
 bool SDC2V3MC = false;
 bool SDC2V3MCWZH = false;
@@ -56,6 +66,14 @@ bool SDC2V3MCWZHV2 = false;
 bool SDC2V4MCWZHV2 = false;
 bool SDC2V5MCWZHV2 = false;
 
+bool ZZTo2Q2NuBackground = false;
+bool WWTo2L2NuBackground = false;
+bool WZTo3LNuBackground = false;
+
+bool TTToHadronicBackground = false;
+bool TTTo2L2NuBackground = false;
+bool TTToSemiLeptonicBackground = false;
+
 
 bool MGC2VEtaDifCut = false;
 bool MGOSix = false;
@@ -81,15 +99,11 @@ bool QCDPT2400to3200Background = false;
 bool QCDPT3200toInfBackground = false;
 
 bool TTJetsBackground = false;
-bool TTToHadronicBackground = false;
-bool TTTo2L2NuBackground = false;
-bool TTToSemiLeptonicBackground = false;
+
 bool ST_s_ChannelBackground = false;
 bool ST_t_ChannelAntiTopBackground = false;
 bool ST_t_ChannelTopBackground = false;
-bool ZZTo2Q2NuBackground = false;
-bool WWTo2L2NuBackground = false;
-bool WZTo3LNuBackground = false;
+
 
 bool ZZBackground = false;
 bool WWBackground = false;
@@ -98,6 +112,36 @@ bool WZBackground = false;
 bool TTbb_TTToHadronicBackground = false;
 bool TTbb_TTTo2L2NuBackground = false;
 bool TTbb_TTToSemiLeptonicBackground = false;
+
+
+bool ttHToBBTrimmedBackground = false;
+bool ttZJetsTrimmedBackground = false;
+bool DYTrimmedBackground = false;
+bool QCDPT170to300TrimmedBackground = false;
+bool QCDPT300to470TrimmedBackground = false;
+bool QCDPT470to600TrimmedBackground = false;
+bool QCDPT600to800TrimmedBackground = false;
+bool QCDPT800to1000TrimmedBackground = false;
+bool QCDPT1000to1400TrimmedBackground = false;
+bool QCDPT1400to1800TrimmedBackground = false;
+bool QCDPT1800to2400TrimmedBackground = false;
+bool QCDPT2400to3200TrimmedBackground = false;
+bool QCDPT3200toInfTrimmedBackground = false;
+
+bool TTJetsTrimmedBackground = false;
+
+bool ST_s_ChannelTrimmedBackground = false;
+bool ST_t_ChannelAntiTopTrimmedBackground = false;
+bool ST_t_ChannelTopTrimmedBackground = false;
+
+
+bool ZZTrimmedBackground = false;
+bool WWTrimmedBackground = false;
+bool WZTrimmedBackground = false;
+
+bool TTbb_TTToHadronicTrimmedBackground = false;
+bool TTbb_TTTo2L2NuTrimmedBackground = false;
+bool TTbb_TTToSemiLeptonicTrimmedBackground = false;
 
 bool BDTSignalGenChannelMatched = false;
 

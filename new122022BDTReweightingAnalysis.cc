@@ -67,6 +67,10 @@ void new122022BDTReweightingAnalysis(string datasetString){
     if (datasetString == "SDC2V2MCZZH17Reweight") SDC2V2MCZZH17Reweight = true;
     if (datasetString == "SDC2V2MCZZH16Reweight") SDC2V2MCZZH16Reweight = true;
     if (datasetString == "SDC2V2MCZZH16APVReweight") SDC2V2MCZZH16APVReweight = true;
+    if (datasetString == "SDC2V2MCZZHReweightTrimmed") SDC2V2MCZZHReweightTrimmed = true;
+    if (datasetString == "SDC2V2MCZZH17ReweightTrimmed") SDC2V2MCZZH17ReweightTrimmed = true;
+    if (datasetString == "SDC2V2MCZZH16ReweightTrimmed") SDC2V2MCZZH16ReweightTrimmed = true;
+    if (datasetString == "SDC2V2MCZZH16APVReweightTrimmed") SDC2V2MCZZH16APVReweightTrimmed = true;
 
     if (datasetString == "LaraTest") LaraTest = true;
 
@@ -118,6 +122,38 @@ void new122022BDTReweightingAnalysis(string datasetString){
         //XS = ;
         isBackground = false;
         std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSDC2V2MCZZH16APVReweight_0.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (SDC2V2MCZZHReweightTrimmed){
+        saveName = "SDC2V2MCZZHReweightTrimmed";
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweight_0.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (SDC2V2MCZZH17ReweightTrimmed){
+        saveName = "SDC2V2MCZZH17ReweightTrimmed";
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH17Reweight_0.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (SDC2V2MCZZH16ReweightTrimmed){
+        saveName = "SDC2V2MCZZH16ReweightTrimmed";
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16Reweight_0.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (SDC2V2MCZZH16APVReweightTrimmed){
+        saveName = "SDC2V2MCZZH16APVReweightTrimmed";
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16APVReweight_0.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (testRun){
