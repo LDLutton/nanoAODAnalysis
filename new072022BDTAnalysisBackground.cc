@@ -97,6 +97,37 @@ void new072022BDTAnalysisBackground(string datasetString){
     if (datasetString == "TTbb_TTToSemiLeptonic") TTbb_TTToSemiLeptonicBackground = true;
     if (datasetString == "TTbb_TTTo2L2Nu") TTbb_TTTo2L2NuBackground = true;
 
+    if (datasetString == "ttHToBBTrimmed") ttHToBBTrimmedBackground = true;
+    if (datasetString == "ttZJetsTrimmed") ttZJetsTrimmedBackground = true;
+    if (datasetString == "DYTrimmed") DYTrimmedBackground = true;
+    if (datasetString == "QCDPT170to300Trimmed") QCDPT170to300TrimmedBackground = true;
+    if (datasetString == "QCDPT300to470Trimmed") QCDPT300to470TrimmedBackground = true;
+    if (datasetString == "QCDPT470to600Trimmed") QCDPT470to600TrimmedBackground = true;
+    if (datasetString == "QCDPT600to800Trimmed") QCDPT600to800TrimmedBackground = true;
+    if (datasetString == "QCDPT800to1000Trimmed") QCDPT800to1000TrimmedBackground = true;
+    if (datasetString == "QCDPT1000to1400Trimmed") QCDPT1000to1400TrimmedBackground = true;
+    if (datasetString == "QCDPT1400to1800Trimmed") QCDPT1400to1800TrimmedBackground = true;
+    if (datasetString == "QCDPT1800to2400Trimmed") QCDPT1800to2400TrimmedBackground = true;
+    if (datasetString == "QCDPT2400to3200Trimmed") QCDPT2400to3200TrimmedBackground = true;
+    if (datasetString == "QCDPT3200toInfTrimmed") QCDPT3200toInfTrimmedBackground = true;
+
+    if (datasetString == "TTJetsTrimmed") TTJetsTrimmedBackground = true;
+    if (datasetString == "TTToHadronicTrimmed") TTToHadronicTrimmedBackground = true;
+    if (datasetString == "TTTo2L2NuTrimmed") TTTo2L2NuTrimmedBackground = true;
+    if (datasetString == "TTToSemiLeptonicTrimmed") TTToSemiLeptonicTrimmedBackground = true;
+    if (datasetString == "ST_s_ChannelTrimmed") ST_s_ChannelTrimmedBackground = true;
+    if (datasetString == "ST_t_ChannelAntiTopTrimmed") ST_t_ChannelAntiTopTrimmedBackground = true;
+    if (datasetString == "ST_t_ChannelTopTrimmed") ST_t_ChannelTopTrimmedBackground = true;
+    if (datasetString == "ZZTo2Q2NuTrimmed") ZZTo2Q2NuTrimmedBackground = true;
+    if (datasetString == "WWTo2L2NuTrimmed") WWTo2L2NuTrimmedBackground = true;
+    if (datasetString == "WZTo3LNuTrimmed") WZTo3LNuTrimmedBackground = true;
+    if (datasetString == "ZZTrimmed") ZZTrimmedBackground = true;
+    if (datasetString == "WWTrimmed") WWTrimmedBackground = true;
+    if (datasetString == "WZTrimmed") WZTrimmedBackground = true;
+    if (datasetString == "TTbb_TTToHadronicTrimmed") TTbb_TTToHadronicTrimmedBackground = true;
+    if (datasetString == "TTbb_TTToSemiLeptonicTrimmed") TTbb_TTToSemiLeptonicTrimmedBackground = true;
+    if (datasetString == "TTbb_TTTo2L2NuTrimmed") TTbb_TTTo2L2NuTrimmedBackground = true;
+
     if (datasetString == "LaraTest") LaraTest = true;
 
     ////////////////////////////////GETTING DATASET////////////////////////////////
