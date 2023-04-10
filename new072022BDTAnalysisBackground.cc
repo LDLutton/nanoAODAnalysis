@@ -112,15 +112,9 @@ void new072022BDTAnalysisBackground(string datasetString){
     if (datasetString == "QCDPT3200toInfTrimmed") QCDPT3200toInfTrimmedBackground = true;
 
     if (datasetString == "TTJetsTrimmed") TTJetsTrimmedBackground = true;
-    if (datasetString == "TTToHadronicTrimmed") TTToHadronicTrimmedBackground = true;
-    if (datasetString == "TTTo2L2NuTrimmed") TTTo2L2NuTrimmedBackground = true;
-    if (datasetString == "TTToSemiLeptonicTrimmed") TTToSemiLeptonicTrimmedBackground = true;
     if (datasetString == "ST_s_ChannelTrimmed") ST_s_ChannelTrimmedBackground = true;
     if (datasetString == "ST_t_ChannelAntiTopTrimmed") ST_t_ChannelAntiTopTrimmedBackground = true;
     if (datasetString == "ST_t_ChannelTopTrimmed") ST_t_ChannelTopTrimmedBackground = true;
-    if (datasetString == "ZZTo2Q2NuTrimmed") ZZTo2Q2NuTrimmedBackground = true;
-    if (datasetString == "WWTo2L2NuTrimmed") WWTo2L2NuTrimmedBackground = true;
-    if (datasetString == "WZTo3LNuTrimmed") WZTo3LNuTrimmedBackground = true;
     if (datasetString == "ZZTrimmed") ZZTrimmedBackground = true;
     if (datasetString == "WWTrimmed") WWTrimmedBackground = true;
     if (datasetString == "WZTrimmed") WZTrimmedBackground = true;
