@@ -500,18 +500,6 @@ void DoTrimmedHLTFilter2016BeforeAnalysisData(string datasetString,UInt_t fileIn
         TTreeReaderArray<Float_t> FatJet_deepTag_ZvsQCD(myEventsReader, "FatJet_deepTag_ZvsQCD");
         TTreeReaderArray<Float_t> FatJet_msoftdrop(myEventsReader, "FatJet_msoftdrop");
 
-        //Gen part stuff
-
-        TTreeReaderValue<UInt_t> nGenPart(myEventsReader, "nGenPart");
-        TTreeReaderArray<Float_t> GenPart_eta(myEventsReader, "GenPart_eta");
-        TTreeReaderArray<Float_t> GenPart_mass(myEventsReader, "GenPart_mass");
-        TTreeReaderArray<Float_t> GenPart_phi(myEventsReader, "GenPart_phi");
-        TTreeReaderArray<Float_t> GenPart_pt(myEventsReader, "GenPart_pt");
-        TTreeReaderArray<Int_t> GenPart_genPartIdxMother(myEventsReader, "GenPart_genPartIdxMother");
-        TTreeReaderArray<Int_t> GenPart_pdgId(myEventsReader, "GenPart_pdgId");
-        TTreeReaderArray<Int_t> GenPart_status(myEventsReader, "GenPart_status");
-        TTreeReaderArray<Int_t> GenPart_statusFlags(myEventsReader, "GenPart_statusFlags");
-        
         //Electrons
         TTreeReaderValue<UInt_t> nElectron(myEventsReader, "nElectron");
         TTreeReaderArray<Float_t> Electron_eta(myEventsReader, "Electron_eta");
