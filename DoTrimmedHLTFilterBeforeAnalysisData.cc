@@ -191,7 +191,7 @@ void DoTrimmedHLTFilterBeforeAnalysisData(string datasetString,UInt_t fileInd){
     ////////////////////////////////DEFINING TREES////////////////////////////////
     ////////////////////////////////DEFINING TREES////////////////////////////////
 
-
+    UInt_t passFlagCtr = 0;
     UInt_t passHLTCtr = 0;
     UInt_t passnFJCtr = 0;
     UInt_t passnVBFCtr = 0;
@@ -425,6 +425,16 @@ void DoTrimmedHLTFilterBeforeAnalysisData(string datasetString,UInt_t fileInd){
         TTreeReaderValue<unsigned long long> event(myEventsReader, "event");
         TTreeReaderValue<UInt_t> run(myEventsReader, "run");
 
+        //Flag branches
+
+        TTreeReaderValue<Bool_t> Flag_goodVertices(myEventsReader, "Flag_goodVertices");
+        TTreeReaderValue<Bool_t> Flag_globalSuperTightHalo2016Filter(myEventsReader, "Flag_globalSuperTightHalo2016Filter");
+        TTreeReaderValue<Bool_t> Flag_HBHENoiseFilter(myEventsReader, "Flag_HBHENoiseFilter");
+        TTreeReaderValue<Bool_t> Flag_HBHENoiseIsoFilter(myEventsReader, "Flag_HBHENoiseIsoFilter");
+        TTreeReaderValue<Bool_t> Flag_EcalDeadCellTriggerPrimitiveFilter(myEventsReader, "Flag_EcalDeadCellTriggerPrimitiveFilter");
+        TTreeReaderValue<Bool_t> Flag_BadPFMuonFilter(myEventsReader, "Flag_BadPFMuonFilter");
+        TTreeReaderValue<Bool_t> Flag_eeBadScFilter(myEventsReader, "Flag_eeBadScFilter");
+        TTreeReaderValue<Bool_t> Flag_ecalBadCalibFilter(myEventsReader, "Flag_ecalBadCalibFilter");
 
         //HLT Branches
 
@@ -570,6 +580,11 @@ void DoTrimmedHLTFilterBeforeAnalysisData(string datasetString,UInt_t fileInd){
             //--------------KINEMATICS--------------
 
             UInt_t tmpnFatJets = *nFatJet;
+
+            bool passFlagBool = *Flag_goodVertices && *Flag_globalSuperTightHalo2016Filter && *Flag_HBHENoiseFilter && *Flag_HBHENoiseIsoFilter && *Flag_EcalDeadCellTriggerPrimitiveFilter && *Flag_BadPFMuonFilter && *Flag_eeBadScFilter && *Flag_ecalBadCalibFilter;
+
+            if (!passFlagBool) continue;
+            passFlagCtr += 1;
             
 
 
@@ -810,6 +825,7 @@ void DoTrimmedHLTFilterBeforeAnalysisData(string datasetString,UInt_t fileInd){
     evNumTree->Fill();
 
     std::cout << "evRunOver: " << evRunOver << " -------------------\n";
+    std::cout << "passes Flag cut: " << passFlagCtr << " ------------------- "<< "\n";
     std::cout << "passes HLT cut: " << passHLTCtr << " ------------------- "<< "\n";
     std::cout << "passes nFJ cut: " << passnFJCtr << " ------------------- " << "\n";
     std::cout << "passes nVBF cut: " << passnVBFCtr << " ------------------- " << "\n";

@@ -1286,7 +1286,7 @@ void DoTrimmedHLTFilterBeforeAnalysisBackground(string datasetString,UInt_t file
     evNumTree->Fill();
 
     std::cout << "evRunOver: " << evRunOver << " -------------------\n";
-    std::cout << "passes HLT cut: " << passFlagCtr << " ------------------- " << passFlagWeightedCtr<< "\n";
+    std::cout << "passes Flag cut: " << passFlagCtr << " ------------------- " << passFlagWeightedCtr<< "\n";
     std::cout << "passes HLT cut: " << passHLTCtr << " ------------------- " << passHLTWeightedCtr<< "\n";
     std::cout << "passes nFJ cut: " << passnFJCtr << " ------------------- " << passnFJWeightedCtr<< "\n";
     std::cout << "passes nVBF cut: " << passnVBFCtr << " ------------------- " << passnVBFWeightedCtr<< "\n";
