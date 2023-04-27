@@ -47,7 +47,7 @@
 ////////////////////////////////START OF MAIN FUNCTION////////////////////////////////
 
 
-void DoTrimmedHLTFilterBeforeAnalysisData(UInt_t fileInd){
+void DoTrimmedHLTFilterBeforeAnalysisData(string datasetString,UInt_t fileInd){
     // Open the file. Note that the name of your file outside this class
     // will probably NOT be experiment.root.
     std::cout << "start\n";
@@ -57,6 +57,19 @@ void DoTrimmedHLTFilterBeforeAnalysisData(UInt_t fileInd){
     std::vector<std::string> fileAr;
 
     std::string saveName;
+
+    if (datasetString == "BTagMuData") BTagMuData = true;
+    if (datasetString == "CharmoniumData") CharmoniumData = true;
+    if (datasetString == "DisplacedJetData") DisplacedJetData = true;
+    if (datasetString == "DoubleMuonData") DoubleMuonData = true;
+    if (datasetString == "DoubleMuonLowMassData") DoubleMuonLowMassData = true;
+    if (datasetString == "EGammaData") EGammaData = true;
+    if (datasetString == "JetHTData") JetHTData = true;
+    if (datasetString == "METData") METData = true;
+    if (datasetString == "MuOniaData") MuOniaData = true;
+    if (datasetString == "MuonEGData") MuonEGData = true;
+    if (datasetString == "SingleMuonData") SingleMuonData = true;
+    if (datasetString == "TauData") TauData = true;
 
     ////////////////////////////////GETTING DATASET////////////////////////////////
     ////////////////////////////////GETTING DATASET////////////////////////////////
@@ -68,166 +81,89 @@ void DoTrimmedHLTFilterBeforeAnalysisData(UInt_t fileInd){
     else strAdd ="/scratch365";
 
     uint datasetType;
-    if (BTagCSV17Data){
-        datasetType = 26;
-        saveName = "BTagCSV17Data";
-        
-        int arrSize = sizeof(BTagCSV17DataAr)/sizeof(BTagCSV17DataAr[0]);
-        fileAr.push_back(BTagCSV17DataAr[fileInd]);
-    }
-    else if (BTagMu17Data){
+    if (BTagMuData){
         datasetType = 27;
-        saveName = "BTagMu17Data";
+        saveName = "BTagMuData";
         
-        int arrSize = sizeof(BTagMu17DataAr)/sizeof(BTagMu17DataAr[0]);
-        fileAr.push_back(BTagMu17DataAr[fileInd]);
+        int arrSize = sizeof(BTagMuDataAr)/sizeof(BTagMuDataAr[0]);
+        fileAr.push_back(BTagMuDataAr[fileInd]);
     }
-    else if (Charmonium17Data){
+    else if (CharmoniumData){
         datasetType = 28;
-        saveName = "Charmonium17Data";
+        saveName = "CharmoniumData";
         
-        int arrSize = sizeof(Charmonium17DataAr)/sizeof(Charmonium17DataAr[0]);
-        fileAr.push_back(Charmonium17DataAr[fileInd]);
+        int arrSize = sizeof(CharmoniumDataAr)/sizeof(CharmoniumDataAr[0]);
+        fileAr.push_back(CharmoniumDataAr[fileInd]);
     }
-    else if (DisplacedJet17Data){
+    else if (DisplacedJetData){
         datasetType = 29;
-        saveName = "DisplacedJet17Data";
+        saveName = "DisplacedJetData";
         
-        int arrSize = sizeof(DisplacedJet17DataAr)/sizeof(DisplacedJet17DataAr[0]);
-        fileAr.push_back(DisplacedJet17DataAr[fileInd]);
+        int arrSize = sizeof(DisplacedJetDataAr)/sizeof(DisplacedJetDataAr[0]);
+        fileAr.push_back(DisplacedJetDataAr[fileInd]);
     }
-    else if (DoubleEG17Data){
-        datasetType = 30;
-        saveName = "DoubleEG17Data";
-        
-        int arrSize = sizeof(DoubleEG17DataAr)/sizeof(DoubleEG17DataAr[0]);
-        fileAr.push_back(DoubleEG17DataAr[fileInd]);
-    }
-    else if (DoubleMuon17Data){
+    else if (DoubleMuonData){
         datasetType = 31;
-        saveName = "DoubleMuon17Data";
+        saveName = "DoubleMuonData";
         
-        int arrSize = sizeof(DoubleMuon17DataAr)/sizeof(DoubleMuon17DataAr[0]);
-        fileAr.push_back(DoubleMuon17DataAr[fileInd]);
+        int arrSize = sizeof(DoubleMuonDataAr)/sizeof(DoubleMuonDataAr[0]);
+        fileAr.push_back(DoubleMuonDataAr[fileInd]);
     }
-    else if (DoubleMuonLowMass17Data){
+    else if (DoubleMuonLowMassData){
         datasetType = 32;
-        saveName = "DoubleMuonLowMass17Data";
+        saveName = "DoubleMuonLowMassData";
         
-        int arrSize = sizeof(DoubleMuonLowMass17DataAr)/sizeof(DoubleMuonLowMass17DataAr[0]);
-        fileAr.push_back(DoubleMuonLowMass17DataAr[fileInd]);
+        int arrSize = sizeof(DoubleMuonLowMassDataAr)/sizeof(DoubleMuonLowMassDataAr[0]);
+        fileAr.push_back(DoubleMuonLowMassDataAr[fileInd]);
     }
-    else if (FSQJet117Data){
-        datasetType = 34;
-        saveName = "FSQJet117Data";
+    else if (EGammaData){
+        datasetType = 33;
+        saveName = "EGammaData";
         
-        int arrSize = sizeof(FSQJet117DataAr)/sizeof(FSQJet117DataAr[0]);
-        fileAr.push_back(FSQJet117DataAr[fileInd]);
+        int arrSize = sizeof(EGammaDataAr)/sizeof(EGammaDataAr[0]);
+        fileAr.push_back(EGammaDataAr[fileInd]);
     }
-    else if (FSQJet217Data){
-        datasetType = 35;
-        saveName = "FSQJet217Data";
-        
-        int arrSize = sizeof(FSQJet217DataAr)/sizeof(FSQJet217DataAr[0]);
-        fileAr.push_back(FSQJet217DataAr[fileInd]);
-    }
-    else if (HTMHT17Data){
-        datasetType = 36;
-        saveName = "HTMHT17Data";
-        
-        int arrSize = sizeof(HTMHT17DataAr)/sizeof(HTMHT17DataAr[0]);
-        fileAr.push_back(HTMHT17DataAr[fileInd]);
-    }
-    else if (HeavyFlavor17Data){
-        datasetType = 37;
-        saveName = "HeavyFlavor17Data";
-        
-        int arrSize = sizeof(HeavyFlavor17DataAr)/sizeof(HeavyFlavor17DataAr[0]);
-        fileAr.push_back(HeavyFlavor17DataAr[fileInd]);
-    }
-    else if (HighEGJet17Data){
-        datasetType = 38;
-        saveName = "HighEGJet17Data";
-        
-        int arrSize = sizeof(HighEGJet17DataAr)/sizeof(HighEGJet17DataAr[0]);
-        fileAr.push_back(HighEGJet17DataAr[fileInd]);
-    }
-    else if (HighPtLowerPhotons17Data){
-        datasetType = 39;
-        saveName = "HighPtLowerPhotons17Data";
-        
-        int arrSize = sizeof(HighPtLowerPhotons17DataAr)/sizeof(HighPtLowerPhotons17DataAr[0]);
-        fileAr.push_back(HighPtLowerPhotons17DataAr[fileInd]);
-    }
-    else if (HighPtPhoton30AndZ17Data){
-        datasetType = 40;
-        saveName = "HighPtPhoton30AndZ17Data";
-        
-        int arrSize = sizeof(HighPtPhoton30AndZ17DataAr)/sizeof(HighPtPhoton30AndZ17DataAr[0]);
-        fileAr.push_back(HighPtPhoton30AndZ17DataAr[fileInd]);
-    }
-    else if (JetHT17Data){
+    else if (JetHTData){
         datasetType = 41;
-        saveName = "JetHT17Data";
+        saveName = "JetHTData";
         
-        int arrSize = sizeof(JetHT17DataAr)/sizeof(JetHT17DataAr[0]);
-        fileAr.push_back(JetHT17DataAr[fileInd]);
+        int arrSize = sizeof(JetHTDataAr)/sizeof(JetHTDataAr[0]);
+        fileAr.push_back(JetHTDataAr[fileInd]);
     }
-    else if (LowEGJet17Data){
-        datasetType = 42;
-        saveName = "LowEGJet17Data";
-        
-        int arrSize = sizeof(LowEGJet17DataAr)/sizeof(LowEGJet17DataAr[0]);
-        fileAr.push_back(LowEGJet17DataAr[fileInd]);
-    }
-    else if (MET17Data){
+    else if (METData){
         datasetType = 43;
-        saveName = "MET17Data";
+        saveName = "METData";
         
-        int arrSize = sizeof(MET17DataAr)/sizeof(MET17DataAr[0]);
-        fileAr.push_back(MET17DataAr[fileInd]);
+        int arrSize = sizeof(METDataAr)/sizeof(METDataAr[0]);
+        fileAr.push_back(METDataAr[fileInd]);
     }
-    else if (MuOnia17Data){
+    else if (MuOniaData){
         datasetType = 44;
-        saveName = "MuOnia17Data";
+        saveName = "MuOniaData";
         
-        int arrSize = sizeof(MuOnia17DataAr)/sizeof(MuOnia17DataAr[0]);
-        fileAr.push_back(MuOnia17DataAr[fileInd]);
+        int arrSize = sizeof(MuOniaDataAr)/sizeof(MuOniaDataAr[0]);
+        fileAr.push_back(MuOniaDataAr[fileInd]);
     }
-    else if (MuonEG17Data){
+    else if (MuonEGData){
         datasetType = 45;
-        saveName = "MuonEG17Data";
+        saveName = "MuonEGData";
         
-        int arrSize = sizeof(MuonEG17DataAr)/sizeof(MuonEG17DataAr[0]);
-        fileAr.push_back(MuonEG17DataAr[fileInd]);
+        int arrSize = sizeof(MuonEGDataAr)/sizeof(MuonEGDataAr[0]);
+        fileAr.push_back(MuonEGDataAr[fileInd]);
     }
-    else if (SingleElectron17Data){
-        datasetType = 46;
-        saveName = "SingleElectron17Data";
-        
-        int arrSize = sizeof(SingleElectron17DataAr)/sizeof(SingleElectron17DataAr[0]);
-        fileAr.push_back(SingleElectron17DataAr[fileInd]);
-    }
-    else if (SingleMuon17Data){
+    else if (SingleMuonData){
         datasetType = 47;
-        saveName = "SingleMuon17Data";
+        saveName = "SingleMuonData";
         
-        int arrSize = sizeof(SingleMuon17DataAr)/sizeof(SingleMuon17DataAr[0]);
-        fileAr.push_back(SingleMuon17DataAr[fileInd]);
+        int arrSize = sizeof(SingleMuonDataAr)/sizeof(SingleMuonDataAr[0]);
+        fileAr.push_back(SingleMuonDataAr[fileInd]);
     }
-    else if (SinglePhoton17Data){
-        datasetType = 48;
-        saveName = "SinglePhoton17Data";
-        
-        int arrSize = sizeof(SinglePhoton17DataAr)/sizeof(SinglePhoton17DataAr[0]);
-        fileAr.push_back(SinglePhoton17DataAr[fileInd]);
-    }
-    else if (Tau17Data){
+    else if (TauData){
         datasetType = 49;
-        saveName = "Tau17Data";
+        saveName = "TauData";
         
-        int arrSize = sizeof(Tau17DataAr)/sizeof(Tau17DataAr[0]);
-        fileAr.push_back(Tau17DataAr[fileInd]);
+        int arrSize = sizeof(TauDataAr)/sizeof(TauDataAr[0]);
+        fileAr.push_back(TauDataAr[fileInd]);
     }
     
     else if (testRun){
@@ -275,6 +211,8 @@ void DoTrimmedHLTFilterBeforeAnalysisData(UInt_t fileInd){
 
     UInt_t runL;
     UInt_t eventL;
+
+    UInt_t datasetTypeL;
 
 
     //Jets
@@ -372,6 +310,7 @@ void DoTrimmedHLTFilterBeforeAnalysisData(UInt_t fileInd){
 
     FilteredEventsTree->Branch("runL",&runL,"runL/i");
     FilteredEventsTree->Branch("eventL",&eventL,"eventL/i");
+    FilteredEventsTree->Branch("datasetTypeL",&datasetTypeL,"datasetTypeL/i");
 
     //Jets    
     FilteredEventsTree->Branch("nJetL",&nJetL,"nJetL/i");
@@ -675,6 +614,7 @@ void DoTrimmedHLTFilterBeforeAnalysisData(UInt_t fileInd){
             
             runL = *run;
             eventL = *event;
+            datasetTypeL = datasetType;
             //std::cout << evRunOver-1 << "passed\n";
             if (debug){
                 std::cout <<"Filling Jets\n";
