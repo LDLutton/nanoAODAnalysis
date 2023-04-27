@@ -63,30 +63,30 @@ void DoTrimmedHLTFilterBeforeAnalysisBackground(string datasetString,UInt_t file
     bool useFJGenMatchTree = false;
     bool useJGenMatchTree = false;
 
-    if (datasetString == "ttHToBBBackground") ttHToBBBackground = true;
-    if (datasetString == "ttZJetsBackground") ttZJetsBackground = true;
-    if (datasetString == "DYBackground") DYBackground = true;
-    if (datasetString == "TTJetsBackground") TTJetsBackground = true;
-    if (datasetString == "ST_s_ChannelBackground") ST_s_ChannelBackground = true;
-    if (datasetString == "ST_t_ChannelAntiTopBackground") ST_t_ChannelAntiTopBackground = true;
-    if (datasetString == "ST_t_ChannelTopBackground") ST_t_ChannelTopBackground = true;
-    if (datasetString == "ZZBackground") ZZBackground = true;
-    if (datasetString == "WWBackground") WWBackground = true;
-    if (datasetString == "WZBackground") WZBackground = true;
-    if (datasetString == "TTbb_TTToHadronicBackground") TTbb_TTToHadronicBackground = true;
-    if (datasetString == "TTbb_TTTo2L2NuBackground") TTbb_TTTo2L2NuBackground = true;
-    if (datasetString == "TTbb_TTToSemiLeptonicBackground") TTbb_TTToSemiLeptonicBackground = true;
+    if (datasetString == "ttHToBB") ttHToBBBackground = true;
+    if (datasetString == "ttZJets") ttZJetsBackground = true;
+    if (datasetString == "DY") DYBackground = true;
+    if (datasetString == "TTJets") TTJetsBackground = true;
+    if (datasetString == "ST_s_Channel") ST_s_ChannelBackground = true;
+    if (datasetString == "ST_t_ChannelAntiTop") ST_t_ChannelAntiTopBackground = true;
+    if (datasetString == "ST_t_ChannelTop") ST_t_ChannelTopBackground = true;
+    if (datasetString == "ZZ") ZZBackground = true;
+    if (datasetString == "WW") WWBackground = true;
+    if (datasetString == "WZ") WZBackground = true;
+    if (datasetString == "TTbb_TTToHadronic") TTbb_TTToHadronicBackground = true;
+    if (datasetString == "TTbb_TTTo2L2Nu") TTbb_TTTo2L2NuBackground = true;
+    if (datasetString == "TTbb_TTToSemiLeptonic") TTbb_TTToSemiLeptonicBackground = true;
 
-    if (datasetString == "QCDPT170to300Background") QCDPT170to300Background = true;
-    if (datasetString == "QCDPT300to470Background") QCDPT300to470Background = true;
-    if (datasetString == "QCDPT470to600Background") QCDPT470to600Background = true;
-    if (datasetString == "QCDPT600to800Background") QCDPT600to800Background = true;
-    if (datasetString == "QCDPT800to1000Background") QCDPT800to1000Background = true;
-    if (datasetString == "QCDPT1000to1400Background") QCDPT1000to1400Background = true;
-    if (datasetString == "QCDPT1400to1800Background") QCDPT1400to1800Background = true;
-    if (datasetString == "QCDPT1800to2400Background") QCDPT1800to2400Background = true;
-    if (datasetString == "QCDPT2400to3200Background") QCDPT2400to3200Background = true;
-    if (datasetString == "QCDPT3200toInfBackground") QCDPT3200toInfBackground = true;
+    if (datasetString == "QCDPT170to300") QCDPT170to300Background = true;
+    if (datasetString == "QCDPT300to470") QCDPT300to470Background = true;
+    if (datasetString == "QCDPT470to600") QCDPT470to600Background = true;
+    if (datasetString == "QCDPT600to800") QCDPT600to800Background = true;
+    if (datasetString == "QCDPT800to1000") QCDPT800to1000Background = true;
+    if (datasetString == "QCDPT1000to1400") QCDPT1000to1400Background = true;
+    if (datasetString == "QCDPT1400to1800") QCDPT1400to1800Background = true;
+    if (datasetString == "QCDPT1800to2400") QCDPT1800to2400Background = true;
+    if (datasetString == "QCDPT2400to3200") QCDPT2400to3200Background = true;
+    if (datasetString == "QCDPT3200toInf") QCDPT3200toInfBackground = true;
 
     ////////////////////////////////GETTING DATASET////////////////////////////////
     ////////////////////////////////GETTING DATASET////////////////////////////////
