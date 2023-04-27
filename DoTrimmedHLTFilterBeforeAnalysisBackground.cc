@@ -47,7 +47,7 @@
 ////////////////////////////////START OF MAIN FUNCTION////////////////////////////////
 
 
-void DoTrimmedHLTFilterBeforeAnalysisBackground(UInt_t fileInd){
+void DoTrimmedHLTFilterBeforeAnalysisBackground(string datasetString,UInt_t fileInd){
     // Open the file. Note that the name of your file outside this class
     // will probably NOT be experiment.root.
     std::cout << "start\n";
@@ -62,6 +62,31 @@ void DoTrimmedHLTFilterBeforeAnalysisBackground(UInt_t fileInd){
     bool useLHETree = false;
     bool useFJGenMatchTree = false;
     bool useJGenMatchTree = false;
+
+    if (datasetString == "ttHToBBBackground") ttHToBBBackground = true;
+    if (datasetString == "ttZJetsBackground") ttZJetsBackground = true;
+    if (datasetString == "DYBackground") DYBackground = true;
+    if (datasetString == "TTJetsBackground") TTJetsBackground = true;
+    if (datasetString == "ST_s_ChannelBackground") ST_s_ChannelBackground = true;
+    if (datasetString == "ST_t_ChannelAntiTopBackground") ST_t_ChannelAntiTopBackground = true;
+    if (datasetString == "ST_t_ChannelTopBackground") ST_t_ChannelTopBackground = true;
+    if (datasetString == "ZZBackground") ZZBackground = true;
+    if (datasetString == "WWBackground") WWBackground = true;
+    if (datasetString == "WZBackground") WZBackground = true;
+    if (datasetString == "TTbb_TTToHadronicBackground") TTbb_TTToHadronicBackground = true;
+    if (datasetString == "TTbb_TTTo2L2NuBackground") TTbb_TTTo2L2NuBackground = true;
+    if (datasetString == "TTbb_TTToSemiLeptonicBackground") TTbb_TTToSemiLeptonicBackground = true;
+
+    if (datasetString == "QCDPT170to300Background") QCDPT170to300Background = true;
+    if (datasetString == "QCDPT300to470Background") QCDPT300to470Background = true;
+    if (datasetString == "QCDPT470to600Background") QCDPT470to600Background = true;
+    if (datasetString == "QCDPT600to800Background") QCDPT600to800Background = true;
+    if (datasetString == "QCDPT800to1000Background") QCDPT800to1000Background = true;
+    if (datasetString == "QCDPT1000to1400Background") QCDPT1000to1400Background = true;
+    if (datasetString == "QCDPT1400to1800Background") QCDPT1400to1800Background = true;
+    if (datasetString == "QCDPT1800to2400Background") QCDPT1800to2400Background = true;
+    if (datasetString == "QCDPT2400to3200Background") QCDPT2400to3200Background = true;
+    if (datasetString == "QCDPT3200toInfBackground") QCDPT3200toInfBackground = true;
 
     ////////////////////////////////GETTING DATASET////////////////////////////////
     ////////////////////////////////GETTING DATASET////////////////////////////////
@@ -516,7 +541,8 @@ void DoTrimmedHLTFilterBeforeAnalysisBackground(UInt_t fileInd){
     ////////////////////////////////DEFINING TREES////////////////////////////////
     ////////////////////////////////DEFINING TREES////////////////////////////////
 
-
+    UInt_t passFlagCtr = 0;
+    UInt_t passFlagWeightedCtr = 0;
     UInt_t passHLTCtr = 0;
     Double_t passHLTWeightedCtr = 0;
     UInt_t passnFJCtr = 0;
@@ -763,6 +789,17 @@ void DoTrimmedHLTFilterBeforeAnalysisBackground(UInt_t fileInd){
         //genWeights
         TTreeReaderValue<Float_t> genWeight(myEventsReader, "genWeight");
 
+        //Flag branches
+
+        TTreeReaderValue<Bool_t> Flag_goodVertices(myEventsReader, "Flag_goodVertices");
+        TTreeReaderValue<Bool_t> Flag_globalSuperTightHalo2016Filter(myEventsReader, "Flag_globalSuperTightHalo2016Filter");
+        TTreeReaderValue<Bool_t> Flag_HBHENoiseFilter(myEventsReader, "Flag_HBHENoiseFilter");
+        TTreeReaderValue<Bool_t> Flag_HBHENoiseIsoFilter(myEventsReader, "Flag_HBHENoiseIsoFilter");
+        TTreeReaderValue<Bool_t> Flag_EcalDeadCellTriggerPrimitiveFilter(myEventsReader, "Flag_EcalDeadCellTriggerPrimitiveFilter");
+        TTreeReaderValue<Bool_t> Flag_BadPFMuonFilter(myEventsReader, "Flag_BadPFMuonFilter");
+        TTreeReaderValue<Bool_t> Flag_eeBadScFilter(myEventsReader, "Flag_eeBadScFilter");
+        TTreeReaderValue<Bool_t> Flag_ecalBadCalibFilter(myEventsReader, "Flag_ecalBadCalibFilter");
+
         //HLT Branches
         TTreeReaderValue<Bool_t> HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02(myEventsReader, "HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02");
         TTreeReaderValue<Bool_t> HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np2(myEventsReader, "HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np2");
@@ -999,6 +1036,14 @@ void DoTrimmedHLTFilterBeforeAnalysisBackground(UInt_t fileInd){
 
             //bool passHLTBool = hbbTag || hadHLT || doubleElecHLT || doubleMuonHLT || muonEGHLT || elecHLT || muonHLT;
             */
+
+            bool passFlagBool = *Flag_goodVertices && *Flag_globalSuperTightHalo2016Filter && *Flag_HBHENoiseFilter && *Flag_HBHENoiseIsoFilter && *Flag_EcalDeadCellTriggerPrimitiveFilter && *Flag_BadPFMuonFilter && *Flag_eeBadScFilter && *Flag_ecalBadCalibFilter;
+
+            if (!passFlagBool) continue;
+            passFlagCtr += 1;
+            passFlagWeightedCtr += *genWeight;
+
+
             bool passHLTBool = (*HLT_Ele32_WPTight_Gsf_L1DoubleEG || *HLT_Photon200 || *HLT_Ele115_CaloIdVT_GsfTrkIdT || 
             *HLT_IsoMu27 || *HLT_Mu50 || 
             *HLT_DoubleEle33_CaloIdL_MW || *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ || *HLT_DiEle27_WPTightCaloOnly_L1DoubleEG || *HLT_DoublePhoton70 || 
@@ -1241,6 +1286,7 @@ void DoTrimmedHLTFilterBeforeAnalysisBackground(UInt_t fileInd){
     evNumTree->Fill();
 
     std::cout << "evRunOver: " << evRunOver << " -------------------\n";
+    std::cout << "passes HLT cut: " << passFlagCtr << " ------------------- " << passFlagWeightedCtr<< "\n";
     std::cout << "passes HLT cut: " << passHLTCtr << " ------------------- " << passHLTWeightedCtr<< "\n";
     std::cout << "passes nFJ cut: " << passnFJCtr << " ------------------- " << passnFJWeightedCtr<< "\n";
     std::cout << "passes nVBF cut: " << passnVBFCtr << " ------------------- " << passnVBFWeightedCtr<< "\n";
