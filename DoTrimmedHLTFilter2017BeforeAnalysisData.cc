@@ -510,7 +510,7 @@ void DoTrimmedHLTFilter2017BeforeAnalysisData(string datasetString,UInt_t fileIn
         outFile->cd();
         TTreeReader myEventsReader("Events", tmpfile);
 
-        TTreeReaderValue<UInt_t> event(myEventsReader, "event");
+        TTreeReaderValue<unsigned long long> event(myEventsReader, "event");
         TTreeReaderValue<UInt_t> run(myEventsReader, "run");
 
         //Flag branches
