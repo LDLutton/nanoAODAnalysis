@@ -149,6 +149,67 @@ bool weakCuts = true;
 
 bool BDTCuts = true;
 
+
+///////DATA BELOW HERE///////
+bool BTagMuData = false;
+bool CharmoniumData = false;
+bool DisplacedJetData = false;
+bool DoubleMuonData = false;
+bool DoubleMuonLowMassData = false;
+bool EGammaData = false;
+bool JetHTData = false;
+bool METData = false;
+bool MuOniaData = false;
+bool MuonEGData = false;
+bool SingleMuonData = false;
+bool TauData = false;
+
+//2017
+
+bool BTagCSV17Data = false;
+bool BTagMu17Data = false;
+bool Charmonium17Data = false;
+bool DisplacedJet17Data = false;
+bool DoubleEG17Data = false;
+bool DoubleMuon17Data = false;
+bool DoubleMuonLowMass17Data = false;
+bool FSQJet117Data = false;
+bool FSQJet217Data = false;
+bool HTMHT17Data = false;
+bool HeavyFlavor17Data = false;
+bool HighEGJet17Data = false;
+bool HighPtLowerPhotons17Data = false;
+bool HighPtPhoton30AndZ17Data = false;
+bool JetHT17Data = false;
+bool LowEGJet17Data = false;
+bool MET17Data = false;
+bool MuOnia17Data = false;
+bool MuonEG17Data = false;
+bool SingleElectron17Data = false;
+bool SingleMuon17Data = false;
+bool SinglePhoton17Data = false;
+bool Tau17Data = false;
+
+//2016
+
+bool BTagCSV16Data = false;
+bool BTagMu16Data = false;
+bool Charmonium16Data = false;
+bool DisplacedJet16Data = false;
+bool DoubleEG16Data = false;
+bool DoubleMuon16Data = false;
+bool DoubleMuonLowMass16Data = false;
+bool HTMHT16Data = false;
+bool JetHT16Data = false;
+bool MET16Data = false;
+bool MuOnia16Data = false;
+bool MuonEG16Data = false;
+bool SingleElectron16Data = false;
+bool SingleMuon16Data = false;
+bool SinglePhoton16Data = false;
+bool Tau16Data = false;
+
+
 bool LaraTest = false;
 
 bool isBackground = false;
