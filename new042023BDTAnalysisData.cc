@@ -135,84 +135,84 @@ void new042023BDTAnalysisData(string datasetString){
         datasetType = 27;
         saveName = "BTagMuData";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisBTagMu.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisBTagMuData.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (CharmoniumData){
         datasetType = 28;
         saveName = "CharmoniumData";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCharmonium.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCharmoniumData.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DisplacedJetData){
         datasetType = 29;
         saveName = "DisplacedJetData";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDisplacedJet.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDisplacedJetData.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DoubleMuonData){
         datasetType = 31;
         saveName = "DoubleMuonData";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDoubleMuon.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDoubleMuonData.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DoubleMuonLowMassData){
         datasetType = 32;
         saveName = "DoubleMuonLowMassData";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDoubleMuonLowMass.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDoubleMuonLowMassData.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (EGammaData){
         datasetType = 33;
         saveName = "EGammaData";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisEGamma.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisEGammaData.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (JetHTData){
         datasetType = 41;
         saveName = "JetHTData";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisJetHT.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisJetHTData.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (METData){
         datasetType = 43;
         saveName = "METData";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMET.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMETData.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (MuOniaData){
         datasetType = 44;
         saveName = "MuOniaData";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMuOnia.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMuOniaData.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (MuonEGData){
         datasetType = 45;
         saveName = "MuonEGData";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMuonEG.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMuonEGData.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SingleMuonData){
         datasetType = 47;
         saveName = "SingleMuonData";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSingleMuon.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSingleMuonData.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (TauData){
         datasetType = 49;
         saveName = "TauData";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisTau.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisTauData.root";
         fileAr.push_back(tmpStrWithPath);
     }
 
@@ -220,273 +220,273 @@ void new042023BDTAnalysisData(string datasetString){
         datasetType = 26;
         saveName = "BTagCSV17Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisBTagCSV17.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisBTagCSV17Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (BTagMu17Data){
         datasetType = 27;
         saveName = "BTagMu17Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisBTagMu17.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisBTagMu17Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (Charmonium17Data){
         datasetType = 28;
         saveName = "Charmonium17Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCharmonium17.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCharmonium17Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DisplacedJet17Data){
         datasetType = 29;
         saveName = "DisplacedJet17Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDisplacedJet17.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDisplacedJet17Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DoubleEG17Data){
         datasetType = 30;
         saveName = "DoubleEG17Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDoubleEG17.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDoubleEG17Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DoubleMuon17Data){
         datasetType = 31;
         saveName = "DoubleMuon17Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDoubleMuon17.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDoubleMuon17Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DoubleMuonLowMass17Data){
         datasetType = 32;
         saveName = "DoubleMuonLowMass17Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDoubleMuonLowMass17.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDoubleMuonLowMass17Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (FSQJet117Data){
         datasetType = 34;
         saveName = "FSQJet117Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisFSQJet117.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisFSQJet117Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (FSQJet217Data){
         datasetType = 35;
         saveName = "FSQJet217Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisFSQJet217.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisFSQJet217Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (HTMHT17Data){
         datasetType = 36;
         saveName = "HTMHT17Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisHTMHT17.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisHTMHT17Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (HeavyFlavor17Data){
         datasetType = 37;
         saveName = "HeavyFlavor17Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisHeavyFlavor17.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisHeavyFlavor17Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (HighEGJet17Data){
         datasetType = 38;
         saveName = "HighEGJet17Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisHighEGJet17.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisHighEGJet17Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (HighPtLowerPhotons17Data){
         datasetType = 39;
         saveName = "HighPtLowerPhotons17Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisHighPtLowerPhotons17.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisHighPtLowerPhotons17Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (HighPtPhoton30AndZ17Data){
         datasetType = 40;
         saveName = "HighPtPhoton30AndZ17Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisHighPtPhoton30AndZ17.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisHighPtPhoton30AndZ17Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (JetHT17Data){
         datasetType = 41;
         saveName = "JetHT17Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisJetHT17.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisJetHT17Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (LowEGJet17Data){
         datasetType = 42;
         saveName = "LowEGJet17Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisLowEGJet17.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisLowEGJet17Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (MET17Data){
         datasetType = 43;
         saveName = "MET17Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMET17.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMET17Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (MuOnia17Data){
         datasetType = 44;
         saveName = "MuOnia17Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMuOnia17.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMuOnia17Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (MuonEG17Data){
         datasetType = 45;
         saveName = "MuonEG17Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMuonEG17.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMuonEG17Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SingleElectron17Data){
         datasetType = 46;
         saveName = "SingleElectron17Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSingleElectron17.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSingleElectron17Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SingleMuon17Data){
         datasetType = 47;
         saveName = "SingleMuon17Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSingleMuon17.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSingleMuon17Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SinglePhoton17Data){
         datasetType = 48;
         saveName = "SinglePhoton17Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSinglePhoton17.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSinglePhoton17Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (Tau17Data){
         datasetType = 49;
         saveName = "Tau17Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisTau17.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisTau17Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (BTagCSV16Data){
         datasetType = 26;
         saveName = "BTagCSV16Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisBTagCSV16.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisBTagCSV16Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (BTagMu16Data){
         datasetType = 27;
         saveName = "BTagMu16Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisBTagMu16.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisBTagMu16Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (Charmonium16Data){
         datasetType = 28;
         saveName = "Charmonium16Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCharmonium16.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCharmonium16Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DisplacedJet16Data){
         datasetType = 29;
         saveName = "DisplacedJet16Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDisplacedJet16.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDisplacedJet16Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DoubleEG16Data){
         datasetType = 30;
         saveName = "DoubleEG16Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDoubleEG16.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDoubleEG16Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DoubleMuon16Data){
         datasetType = 31;
         saveName = "DoubleMuon16Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDoubleMuon16.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDoubleMuon16Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DoubleMuonLowMass16Data){
         datasetType = 32;
         saveName = "DoubleMuonLowMass16Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDoubleMuonLowMass16.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDoubleMuonLowMass16Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (HTMHT16Data){
         datasetType = 36;
         saveName = "HTMHT16Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisHTMHT16.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisHTMHT16Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (JetHT16Data){
         datasetType = 41;
         saveName = "JetHT16Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisJetHT16.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisJetHT16Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (MET16Data){
         datasetType = 43;
         saveName = "MET16Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMET16.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMET16Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (MuOnia16Data){
         datasetType = 44;
         saveName = "MuOnia16Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMuOnia16.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMuOnia16Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (MuonEG16Data){
         datasetType = 45;
         saveName = "MuonEG16Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMuonEG16.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMuonEG16Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SingleElectron16Data){
         datasetType = 46;
         saveName = "SingleElectron16Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSingleElectron16.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSingleElectron16Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SingleMuon16Data){
         datasetType = 47;
         saveName = "SingleMuon16Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSingleMuon16.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSingleMuon16Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SinglePhoton16Data){
         datasetType = 48;
         saveName = "SinglePhoton16Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSinglePhoton16.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSinglePhoton16Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (Tau16Data){
         datasetType = 49;
         saveName = "Tau16Data";
         
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisTau16.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisTau16Data.root";
         fileAr.push_back(tmpStrWithPath);
     }
 
