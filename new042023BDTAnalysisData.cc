@@ -1437,8 +1437,8 @@ void new042023BDTAnalysisData(string datasetString){
 
                     //Fill BDT Lep Tree
 
-                    run_L_L = *runL
-                    event_L_L = *eventL
+                    run_L_L = *runL;
+                    event_L_L = *eventL;
 
                     datasetType_L_L = datasetType;
 
@@ -1505,8 +1505,8 @@ void new042023BDTAnalysisData(string datasetString){
 
                     //Fill BDT SemiLep Tree
 
-                    run_SL_L = *runL
-                    event_SL_L = *eventL
+                    run_SL_L = *runL;
+                    event_SL_L = *eventL;
 
                     datasetType_SL_L = datasetType;
 
