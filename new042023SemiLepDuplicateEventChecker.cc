@@ -122,7 +122,7 @@ void new042023SemiLepDuplicateEventChecker(){
     ////////////////////////////////GETTING DATASET////////////////////////////////
 
     std::string strAdd;
-    strAdd ="/scratch365/dlutton/042023BDTAnalysisFiles/";
+    strAdd ="/scratch365/dlutton/new042023BDTAnalysisFiles/";
     if (localTest) strAdd = "";
     for (UInt_t i = 0; i < nDataSets; i++){
         fileAr.push_back(strAdd+datasetStrAr[i]);
