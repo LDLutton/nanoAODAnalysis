@@ -329,7 +329,7 @@ void new042023SemiLepDuplicateEventChecker(){
         TTreeReaderValue<Float_t> selectedTrailingLepton_SIP3D_SL_L(myEventsReader,  "selectedTrailingLepton_SIP3D_SL_L");
         TTreeReaderValue<Float_t> selectedLeptons_RelIso_SL_L(myEventsReader,  "selectedLeptons_RelIso_SL_L");
         TTreeReaderValue<Float_t> selectedLeptons_InvMass_SL_L(myEventsReader,  "selectedLeptons_InvMass_SL_L");
-        TTreeReaderValue<Bool_t> selectedLeptons_IsMuon_SL_L(myEventsReader,  "selectedLeptons_IsMuon_SL_L/O");
+        TTreeReaderValue<Bool_t> selectedLeptons_IsMuon_SL_L(myEventsReader,  "selectedLeptons_IsMuon_SL_L");
 
         TTreeReaderValue<Float_t> selectedZPairPlusHiggsFJ_InvMass_SL_L(myEventsReader,  "selectedZPairPlusHiggsFJ_InvMass_SL_L");
         TTreeReaderValue<Float_t> selectedZPairPlusHiggsFJ_pt_SL_L(myEventsReader,  "selectedZPairPlusHiggsFJ_pt_SL_L");
