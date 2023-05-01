@@ -366,7 +366,7 @@ void new042023SemiLepDuplicateEventChecker(){
                 std::cout << evCount+1 << " starting jets loop\n";
             }
             
-            
+            evCount += 1;
             allCtr += 1;
 
             bool isUnique = true;
