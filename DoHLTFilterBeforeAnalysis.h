@@ -108,6 +108,7 @@ bool MGOHW = false;
 bool MGSM = false;
 bool ttHToBBBackground = false;
 bool ttZJetsBackground = false;
+bool ttWJetsBackground = false;
 bool DYBackground = false;
 bool QCDPT170to300Background = false;
 bool QCDPT300to470Background = false;
