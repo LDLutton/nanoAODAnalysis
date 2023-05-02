@@ -65,6 +65,7 @@ void DoTrimmedHLTFilterBeforeAnalysisBackground(string datasetString,UInt_t file
 
     if (datasetString == "ttHToBB") ttHToBBBackground = true;
     if (datasetString == "ttZJets") ttZJetsBackground = true;
+    if (datasetString == "ttWJets") ttWJetsBackground = true;
     if (datasetString == "DY") DYBackground = true;
     if (datasetString == "TTJets") TTJetsBackground = true;
     if (datasetString == "ST_s_Channel") ST_s_ChannelBackground = true;
@@ -126,6 +127,14 @@ void DoTrimmedHLTFilterBeforeAnalysisBackground(string datasetString,UInt_t file
         }
         */
         fileAr.push_back(ttZJetsBackgroundAr[fileInd]);
+    }
+    else if (ttWJetsBackground){
+        
+        crossSection = 0.4611;
+        saveName = "ttWJets";
+        isBackground = true;
+        int arrSize = sizeof(ttWJetsBackgroundAr)/sizeof(ttWJetsBackgroundAr[0]);
+        fileAr.push_back(ttWJetsBackgroundAr[fileInd]);
     }
     else if (DYBackground){
         //saveName = "DY";
