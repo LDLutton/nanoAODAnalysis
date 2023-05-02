@@ -99,6 +99,7 @@ void new072022BDTAnalysisBackground(string datasetString){
 
     if (datasetString == "ttHToBBTrimmed") ttHToBBTrimmedBackground = true;
     if (datasetString == "ttZJetsTrimmed") ttZJetsTrimmedBackground = true;
+    if (datasetString == "ttWJetsTrimmed") ttWJetsTrimmedBackground = true;
     if (datasetString == "DYTrimmed") DYTrimmedBackground = true;
     if (datasetString == "QCDPT170to300Trimmed") QCDPT170to300TrimmedBackground = true;
     if (datasetString == "QCDPT300to470Trimmed") QCDPT300to470TrimmedBackground = true;
@@ -458,6 +459,16 @@ void new072022BDTAnalysisBackground(string datasetString){
         totWeight = 32793821;
         datasetType = 3;
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisttZJets.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ttWJetsTrimmedBackground){
+        
+        crossSection = 0.4611;
+        saveName = "TrimmedttWJets";
+        isBackground = true;
+        totWeight = 27686862;
+        datasetType = 50;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisttWJets.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DYTrimmedBackground){
