@@ -140,6 +140,33 @@ bool TTbb_TTToHadronicBackground = false;
 bool TTbb_TTTo2L2NuBackground = false;
 bool TTbb_TTToSemiLeptonicBackground = false;
 
+/////////NEW MC///////
+
+bool DYM10To50Background = false;
+bool ST_tW_antitopBackground = false;
+bool ST_tW_topBackground = false;
+bool EWKWMinus2Jets_WToLNuBackground = false;
+bool EWKWMinus2Jets_WToQQBackground = false;
+bool EWKWPlus2Jets_WToLNuBackground = false;
+bool EWKWPlus2Jets_WToQQBackground = false;
+bool VHToNonbbBackground = false;
+bool WminusH_HToBB_WToLNuBackground = false;
+bool WminusH_HToBB_WToQQBackground = false;
+bool WplusH_HToBB_WToLNuBackground = false;
+bool WplusH_HToBB_WToQQBackground = false;
+bool WJetsToLNuBackground = false;
+bool WWWBackground = false;
+bool WWZBackground = false;
+bool WZZBackground = false;
+bool ZH_HToBB_ZToLLBackground = false;
+bool ZH_HToBB_ZToQQBackground = false;
+bool ggZH_HToBB_ZToLLBackground = false;
+bool ggZH_HToBB_ZToQQBackground = false;
+bool EWKZ2Jets_ZToLLBackground = false;
+bool EWKZ2Jets_ZToNuNuBackground = false;
+bool EWKZ2Jets_ZToQQBackground = false;
+bool ZZZBackground = false;
+
 
 
 
