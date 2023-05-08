@@ -116,6 +116,7 @@ bool TTbb_TTToSemiLeptonicBackground = false;
 
 bool ttHToBBTrimmedBackground = false;
 bool ttZJetsTrimmedBackground = false;
+bool ttWJetsTrimmedBackground = false;
 bool DYTrimmedBackground = false;
 bool QCDPT170to300TrimmedBackground = false;
 bool QCDPT300to470TrimmedBackground = false;
@@ -142,6 +143,34 @@ bool WZTrimmedBackground = false;
 bool TTbb_TTToHadronicTrimmedBackground = false;
 bool TTbb_TTTo2L2NuTrimmedBackground = false;
 bool TTbb_TTToSemiLeptonicTrimmedBackground = false;
+
+bool ttWJetsTrimmedBackground = false;
+bool DYM10To50TrimmedBackground = false;
+bool ST_tW_antitopTrimmedBackground = false;
+bool ST_tW_topTrimmedBackground = false;
+bool EWKWMinus2Jets_WToLNuTrimmedBackground = false;
+bool EWKWMinus2Jets_WToQQTrimmedBackground = false;
+bool EWKWPlus2Jets_WToLNuTrimmedBackground = false;
+bool EWKWPlus2Jets_WToQQTrimmedBackground = false;
+bool VHToNonbbTrimmedBackground = false;
+bool WminusH_HToBB_WToLNuTrimmedBackground = false;
+bool WminusH_HToBB_WToQQTrimmedBackground = false;
+bool WplusH_HToBB_WToLNuTrimmedBackground = false;
+bool WplusH_HToBB_WToQQTrimmedBackground = false;
+bool WJetsToLNuTrimmedBackground = false;
+bool WWWTrimmedBackground = false;
+bool WWZTrimmedBackground = false;
+bool WZZTrimmedBackground = false;
+bool ZH_HToBB_ZToLLTrimmedBackground = false;
+bool ZH_HToBB_ZToQQTrimmedBackground = false;
+bool ggZH_HToBB_ZToLLTrimmedBackground = false;
+bool ggZH_HToBB_ZToQQTrimmedBackground = false;
+bool EWKZ2Jets_ZToLLTrimmedBackground = false;
+bool EWKZ2Jets_ZToNuNuTrimmedBackground = false;
+bool EWKZ2Jets_ZToQQTrimmedBackground = false;
+bool ZZZTrimmedBackground = false;
+
+
 
 bool BDTSignalGenChannelMatched = false;
 

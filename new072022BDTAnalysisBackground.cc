@@ -123,6 +123,32 @@ void new072022BDTAnalysisBackground(string datasetString){
     if (datasetString == "TTbb_TTToSemiLeptonicTrimmed") TTbb_TTToSemiLeptonicTrimmedBackground = true;
     if (datasetString == "TTbb_TTTo2L2NuTrimmed") TTbb_TTTo2L2NuTrimmedBackground = true;
 
+    if (datasetString == "ttWJetsTrimmed") ttWJetsTrimmedBackground = true;
+    if (datasetString == "DYM10To50Trimmed") DYM10To50TrimmedBackground = true;
+    if (datasetString == "ST_tW_antitopTrimmed") ST_tW_antitopTrimmedBackground = true;
+    if (datasetString == "ST_tW_topTrimmed") ST_tW_topTrimmedBackground = true;
+    if (datasetString == "EWKWMinus2Jets_WToLNuTrimmed") EWKWMinus2Jets_WToLNuTrimmedBackground = true;
+    if (datasetString == "EWKWMinus2Jets_WToQQTrimmed") EWKWMinus2Jets_WToQQTrimmedBackground = true;
+    if (datasetString == "EWKWPlus2Jets_WToLNuTrimmed") EWKWPlus2Jets_WToLNuTrimmedBackground = true;
+    if (datasetString == "EWKWPlus2Jets_WToQQTrimmed") EWKWPlus2Jets_WToQQTrimmedBackground = true;
+    if (datasetString == "VHToNonbbTrimmed") VHToNonbbTrimmedBackground = true;
+    if (datasetString == "WminusH_HToBB_WToLNuTrimmed") WminusH_HToBB_WToLNuTrimmedBackground = true;
+    if (datasetString == "WminusH_HToBB_WToQQTrimmed") WminusH_HToBB_WToQQTrimmedBackground = true;
+    if (datasetString == "WplusH_HToBB_WToLNuTrimmed") WplusH_HToBB_WToLNuTrimmedBackground = true;
+    if (datasetString == "WplusH_HToBB_WToQQTrimmed") WplusH_HToBB_WToQQTrimmedBackground = true;
+    if (datasetString == "WJetsToLNuTrimmed") WJetsToLNuTrimmedBackground = true;
+    if (datasetString == "WWWTrimmed") WWWTrimmedBackground = true;
+    if (datasetString == "WWZTrimmed") WWZTrimmedBackground = true;
+    if (datasetString == "WZZTrimmed") WZZTrimmedBackground = true;
+    if (datasetString == "ZH_HToBB_ZToLLTrimmed") ZH_HToBB_ZToLLTrimmedBackground = true;
+    if (datasetString == "ZH_HToBB_ZToQQTrimmed") ZH_HToBB_ZToQQTrimmedBackground = true;
+    if (datasetString == "ggZH_HToBB_ZToLLTrimmed") ggZH_HToBB_ZToLLTrimmedBackground = true;
+    if (datasetString == "ggZH_HToBB_ZToQQTrimmed") ggZH_HToBB_ZToQQTrimmedBackground = true;
+    if (datasetString == "EWKZ2Jets_ZToLLTrimmed") EWKZ2Jets_ZToLLTrimmedBackground = true;
+    if (datasetString == "EWKZ2Jets_ZToNuNuTrimmed") EWKZ2Jets_ZToNuNuTrimmedBackground = true;
+    if (datasetString == "EWKZ2Jets_ZToQQTrimmed") EWKZ2Jets_ZToQQTrimmedBackground = true;
+    if (datasetString == "ZZZTrimmed") ZZZTrimmedBackground = true;
+
     if (datasetString == "LaraTest") LaraTest = true;
 
     ////////////////////////////////GETTING DATASET////////////////////////////////
@@ -745,6 +771,331 @@ void new072022BDTAnalysisBackground(string datasetString){
         isBackground = true;
         datasetType = 7;
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisTTbb_TTToSemiLeptonic.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ttWJetsTrimmedBackground){
+
+        crossSection = 0.4611;
+        totWeight = 27686858.0;
+        
+        saveName = "TrimmedttWJets";
+
+        isBackground = true;
+        datasetType = 50;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisttWJets.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (DYM10To50TrimmedBackground){
+
+        crossSection = 20490.0;
+        totWeight = 3351537100000.0;
+        
+        saveName = "TrimmedDYM10To50";
+
+        isBackground = true;
+        datasetType = 51;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDYM10To50.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ST_tW_antitopTrimmedBackground){
+
+        crossSection = 32.51;
+        totWeight = 251902108.0;
+        
+        saveName = "TrimmedST_tW_antitop";
+
+        isBackground = true;
+        datasetType = 52;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisST_tW_antitop.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ST_tW_topTrimmedBackground){
+
+        crossSection = 32.45;
+        totWeight = 258137399.49999997;
+        
+        saveName = "TrimmedST_tW_top";
+
+        isBackground = true;
+        datasetType = 53;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisST_tW_top.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (EWKWMinus2Jets_WToLNuTrimmedBackground){
+
+        crossSection = 32.05;
+        totWeight = 4479000.0;
+        
+        saveName = "TrimmedEWKWMinus2Jets_WToLNu";
+
+        isBackground = true;
+        datasetType = 54;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisEWKWMinus2Jets_WToLNu.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (EWKWMinus2Jets_WToQQTrimmedBackground){
+
+        crossSection = 19.19;
+        totWeight = 9655000.0;
+        
+        saveName = "TrimmedEWKWMinus2Jets_WToQQ";
+
+        isBackground = true;
+        datasetType = 55;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisEWKWMinus2Jets_WToQQ.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (EWKWPlus2Jets_WToLNuTrimmedBackground){
+
+        crossSection = 39.13;
+        totWeight = 4488000.0;
+        
+        saveName = "TrimmedEWKWPlus2Jets_WToLNu";
+
+        isBackground = true;
+        datasetType = 56;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisEWKWPlus2Jets_WToLNu.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (EWKWPlus2Jets_WToQQTrimmedBackground){
+
+        crossSection = 28.71;
+        totWeight = 9991000.0;
+        
+        saveName = "TrimmedEWKWPlus2Jets_WToQQ";
+
+        isBackground = true;
+        datasetType = 57;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisEWKWPlus2Jets_WToQQ.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (VHToNonbbTrimmedBackground){
+
+        crossSection = 2.605;
+        totWeight = 7023767.399999999;
+        
+        saveName = "TrimmedVHToNonbb";
+
+        isBackground = true;
+        datasetType = 58;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisVHToNonbb.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (WminusH_HToBB_WToLNuTrimmedBackground){
+
+        crossSection = 0.177;
+        totWeight = 862915.6844999999;
+        
+        saveName = "TrimmedWminusH_HToBB_WToLNu";
+
+        isBackground = true;
+        datasetType = 59;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisWminusH_HToBB_WToLNu.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (WminusH_HToBB_WToQQTrimmedBackground){
+
+        crossSection = 0.3675;
+        totWeight = 3676316.52;
+        
+        saveName = "TrimmedWminusH_HToBB_WToQQ";
+
+        isBackground = true;
+        datasetType = 60;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisWminusH_HToBB_WToQQ.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (WplusH_HToBB_WToLNuTrimmedBackground){
+
+        crossSection = 0.2832;
+        totWeight = 1377078.4579999999;
+        
+        saveName = "TrimmedWplusH_HToBB_WToLNu";
+
+        isBackground = true;
+        datasetType = 61;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisWplusH_HToBB_WToLNu.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (WplusH_HToBB_WToQQTrimmedBackground){
+
+        crossSection = 0.589;
+        totWeight = 5600077.850000001;
+        
+        saveName = "TrimmedWplusH_HToBB_WToQQ";
+
+        isBackground = true;
+        datasetType = 62;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisWplusH_HToBB_WToQQ.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (WJetsToLNuTrimmedBackground){
+
+        crossSection = 66680.0;
+        totWeight = 5018114340000.0;
+        
+        saveName = "TrimmedWJetsToLNu";
+
+        isBackground = true;
+        datasetType = 63;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisWJetsToLNu.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (WWWTrimmedBackground){
+
+        crossSection = 0.2158;
+        totWeight = 1990163.1290000002;
+        
+        saveName = "TrimmedWWW";
+
+        isBackground = true;
+        datasetType = 64;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisWWW.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (WWZTrimmedBackground){
+
+        crossSection = 0.1707;
+        totWeight = 1572221.3969999996;
+        
+        saveName = "TrimmedWWZ";
+
+        isBackground = true;
+        datasetType = 65;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisWWZ.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (WZZTrimmedBackground){
+
+        crossSection = 0.05709;
+        totWeight = 571468.732;
+        
+        saveName = "TrimmedWZZ";
+
+        isBackground = true;
+        datasetType = 66;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisWZZ.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ZH_HToBB_ZToLLTrimmedBackground){
+
+        crossSection = 0.07977;
+        totWeight = 389609.654;
+        
+        saveName = "TrimmedZH_HToBB_ZToLL";
+
+        isBackground = true;
+        datasetType = 67;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisZH_HToBB_ZToLL.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ZH_HToBB_ZToQQTrimmedBackground){
+
+        crossSection = 0.5612;
+        totWeight = 5611321.760000001;
+        
+        saveName = "TrimmedZH_HToBB_ZToQQ";
+
+        isBackground = true;
+        datasetType = 68;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisZH_HToBB_ZToQQ.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ggZH_HToBB_ZToLLTrimmedBackground){
+
+        crossSection = 0.006185;
+        totWeight = 30249.126999999997;
+        
+        saveName = "TrimmedggZH_HToBB_ZToLL";
+
+        isBackground = true;
+        datasetType = 69;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisggZH_HToBB_ZToLL.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ggZH_HToBB_ZToQQTrimmedBackground){
+
+        crossSection = 0.04319;
+        totWeight = 212862.332;
+        
+        saveName = "TrimmedggZH_HToBB_ZToQQ";
+
+        isBackground = true;
+        datasetType = 70;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisggZH_HToBB_ZToQQ.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (EWKZ2Jets_ZToLLTrimmedBackground){
+
+        crossSection = 6.214;
+        totWeight = 1000000.0;
+        
+        saveName = "TrimmedEWKZ2Jets_ZToLL";
+
+        isBackground = true;
+        datasetType = 71;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisEWKZ2Jets_ZToLL.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (EWKZ2Jets_ZToNuNuTrimmedBackground){
+
+        crossSection = 10.68;
+        totWeight = 2969000.0;
+        
+        saveName = "TrimmedEWKZ2Jets_ZToNuNu";
+
+        isBackground = true;
+        datasetType = 72;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisEWKZ2Jets_ZToNuNu.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (EWKZ2Jets_ZToQQTrimmedBackground){
+
+        crossSection = 9.778;
+        totWeight = 9985000.0;
+        
+        saveName = "TrimmedEWKZ2Jets_ZToQQ";
+
+        isBackground = true;
+        datasetType = 73;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisEWKZ2Jets_ZToQQ.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ZZZTrimmedBackground){
+
+        crossSection = 0.01476;
+        totWeight = 146027.43779999996;
+        
+        saveName = "TrimmedZZZ";
+
+        isBackground = true;
+        datasetType = 74;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisZZZ.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (testRun){
