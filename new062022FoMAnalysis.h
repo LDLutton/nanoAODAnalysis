@@ -116,7 +116,6 @@ bool TTbb_TTToSemiLeptonicBackground = false;
 
 bool ttHToBBTrimmedBackground = false;
 bool ttZJetsTrimmedBackground = false;
-bool ttWJetsTrimmedBackground = false;
 bool DYTrimmedBackground = false;
 bool QCDPT170to300TrimmedBackground = false;
 bool QCDPT300to470TrimmedBackground = false;
