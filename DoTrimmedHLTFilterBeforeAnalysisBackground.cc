@@ -401,54 +401,6 @@ void DoTrimmedHLTFilterBeforeAnalysisBackground(string datasetString,UInt_t file
         */
         fileAr.push_back(ST_t_ChannelTopBackgroundAr[fileInd]);
     }
-    else if (ZZTo2Q2NuBackground){
-        //saveName = "";
-        
-        crossSection = 4.561;
-
-        saveName = "ZZTo2Q2Nu";
-        
-        isBackground = true;
-        int arrSize = sizeof(ZZTo2Q2NuBackgroundAr)/sizeof(ZZTo2Q2NuBackgroundAr[0]);
-        /*
-        for (int i=0; i<arrSize; i++){
-            fileAr.push_back(ZZTo2Q2NuBackgroundAr[i]);
-        }
-        */
-        fileAr.push_back(ZZTo2Q2NuBackgroundAr[fileInd]);
-    }
-    else if (WWTo2L2NuBackground){
-        //saveName = "";
-        
-        crossSection = 10.48;
-
-        saveName = "WWTo2L2Nu";
-        
-        isBackground = true;
-        int arrSize = sizeof(WWTo2L2NuBackgroundAr)/sizeof(WWTo2L2NuBackgroundAr[0]);
-        /*
-        for (int i=0; i<arrSize; i++){
-            fileAr.push_back(WWTo2L2NuBackgroundAr[i]);
-        }
-        */
-        fileAr.push_back(WWTo2L2NuBackgroundAr[fileInd]);
-    }
-    else if (WZTo3LNuBackground){
-        //saveName = "";
-        
-        crossSection = 5.052;
-
-        saveName = "WZTo3LNu";
-        
-        isBackground = true;
-        int arrSize = sizeof(WZTo3LNuBackgroundAr)/sizeof(WZTo3LNuBackgroundAr[0]);
-        /*
-        for (int i=0; i<arrSize; i++){
-            fileAr.push_back(WZTo3LNuBackgroundAr[i]);
-        }
-        */
-        fileAr.push_back(WZTo3LNuBackgroundAr[fileInd]);
-    }
     else if (ZZBackground){
         //saveName = "";
         
