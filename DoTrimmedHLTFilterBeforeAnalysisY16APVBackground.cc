@@ -126,592 +126,544 @@ void DoTrimmedHLTFilterBeforeAnalysisBackground(string datasetString,UInt_t file
 
     
     if (ttHToBBBackground){
-        //saveName = "ttHToBB";
+        //saveName = "ttHToBBY16APV";
         crossSection = 0.5071*0.582;
 
-        saveName = "ttHToBB";
+        saveName = "ttHToBBY16APV";
         
         isBackground = true;
-        int arrSize = sizeof(ttHToBBBackgroundAr)/sizeof(ttHToBBBackgroundAr[0]);
+        int arrSize = sizeof(ttHToBBY16APVBackgroundAr)/sizeof(ttHToBBY16APVBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(ttHToBBBackgroundAr[i]);
+            fileAr.push_back(ttHToBBY16APVBackgroundAr[i]);
         }
         */
-        fileAr.push_back(ttHToBBBackgroundAr[fileInd]);
+        fileAr.push_back(ttHToBBY16APVBackgroundAr[fileInd]);
     }
     else if (ttZJetsBackground){
-        //saveName = "ttZJets";
+        //saveName = "ttZJetsY16APV";
         
         crossSection = 0.5407;
-        saveName = "ttZJets";
+        saveName = "ttZJetsY16APV";
         isBackground = true;
-        int arrSize = sizeof(ttZJetsBackgroundAr)/sizeof(ttZJetsBackgroundAr[0]);
+        int arrSize = sizeof(ttZJetsY16APVBackgroundAr)/sizeof(ttZJetsY16APVBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(ttZJetsBackgroundAr[i]);
+            fileAr.push_back(ttZJetsY16APVBackgroundAr[i]);
         }
         */
-        fileAr.push_back(ttZJetsBackgroundAr[fileInd]);
+        fileAr.push_back(ttZJetsY16APVBackgroundAr[fileInd]);
     }
     else if (ttWJetsBackground){
         
         crossSection = 0.4611;
-        saveName = "ttWJets";
+        saveName = "ttWJetsY16APV";
         isBackground = true;
-        int arrSize = sizeof(ttWJetsBackgroundAr)/sizeof(ttWJetsBackgroundAr[0]);
-        fileAr.push_back(ttWJetsBackgroundAr[fileInd]);
+        int arrSize = sizeof(ttWJetsY16APVBackgroundAr)/sizeof(ttWJetsY16APVBackgroundAr[0]);
+        fileAr.push_back(ttWJetsY16APVBackgroundAr[fileInd]);
     }
     else if (DYBackground){
-        //saveName = "DY";
+        //saveName = "DYY16APV";
         
         crossSection = 5364;
-        saveName = "DY";
+        saveName = "DYY16APV";
 
         isBackground = true;
-        int arrSize = sizeof(DYBackgroundAr)/sizeof(DYBackgroundAr[0]);
+        int arrSize = sizeof(DYY16APVBackgroundAr)/sizeof(DYY16APVBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(DYBackgroundAr[i]);
+            fileAr.push_back(DYY16APVBackgroundAr[i]);
         }
         */
-        fileAr.push_back(DYBackgroundAr[fileInd]);
+        fileAr.push_back(DYY16APVBackgroundAr[fileInd]);
     }
     else if (QCDPT170to300Background){
-        //saveName = "QCDPT170to300";
+        //saveName = "QCDPT170to300Y16APV";
         
         crossSection = 103300.0;
 
-        saveName = "QCDPT170to300";
+        saveName = "QCDPT170to300Y16APV";
         
         isBackground = true;
-        int arrSize = sizeof(QCDPT170to300BackgroundAr)/sizeof(QCDPT170to300BackgroundAr[0]);
+        int arrSize = sizeof(QCDPT170to300Y16APVBackgroundAr)/sizeof(QCDPT170to300Y16APVBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(QCDPT170to300BackgroundAr[i]);
+            fileAr.push_back(QCDPT170to300Y16APVBackgroundAr[i]);
         }
         */
-        fileAr.push_back(QCDPT170to300BackgroundAr[fileInd]);
+        fileAr.push_back(QCDPT170to300Y16APVBackgroundAr[fileInd]);
     }
     else if (QCDPT300to470Background){
-        //saveName = "QCDPT300to470";
+        //saveName = "QCDPT300to470Y16APV";
         
         crossSection = 6826.0;
 
-        saveName = "QCDPT300to470";
+        saveName = "QCDPT300to470Y16APV";
         
         isBackground = true;
-        int arrSize = sizeof(QCDPT300to470BackgroundAr)/sizeof(QCDPT300to470BackgroundAr[0]);
+        int arrSize = sizeof(QCDPT300to470Y16APVBackgroundAr)/sizeof(QCDPT300to470Y16APVBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(QCDPT300to470BackgroundAr[i]);
+            fileAr.push_back(QCDPT300to470Y16APVBackgroundAr[i]);
         }
         */
-        fileAr.push_back(QCDPT300to470BackgroundAr[fileInd]);
+        fileAr.push_back(QCDPT300to470Y16APVBackgroundAr[fileInd]);
     }
     else if (QCDPT470to600Background){
-        //saveName = "QCDPT470to600";
+        //saveName = "QCDPT470to600Y16APV";
         
         crossSection = 552.6;
         
-        saveName = "QCDPT470to600";
+        saveName = "QCDPT470to600Y16APV";
 
         isBackground = true;
-        int arrSize = sizeof(QCDPT470to600BackgroundAr)/sizeof(QCDPT470to600BackgroundAr[0]);
+        int arrSize = sizeof(QCDPT470to600Y16APVBackgroundAr)/sizeof(QCDPT470to600Y16APVBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(QCDPT470to600BackgroundAr[i]);
+            fileAr.push_back(QCDPT470to600Y16APVBackgroundAr[i]);
         }
         */
-        fileAr.push_back(QCDPT470to600BackgroundAr[fileInd]);
+        fileAr.push_back(QCDPT470to600Y16APVBackgroundAr[fileInd]);
     }
     else if (QCDPT600to800Background){
-        //saveName = "QCDPT600to800";
+        //saveName = "QCDPT600to800Y16APV";
         
         crossSection = 156.6;
 
-        saveName = "QCDPT600to800";
+        saveName = "QCDPT600to800Y16APV";
         
         isBackground = true;
-        int arrSize = sizeof(QCDPT600to800BackgroundAr)/sizeof(QCDPT600to800BackgroundAr[0]);
+        int arrSize = sizeof(QCDPT600to800Y16APVBackgroundAr)/sizeof(QCDPT600to800Y16APVBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(QCDPT600to800BackgroundAr[i]);
+            fileAr.push_back(QCDPT600to800Y16APVBackgroundAr[i]);
         }
         */
-        fileAr.push_back(QCDPT600to800BackgroundAr[fileInd]);
+        fileAr.push_back(QCDPT600to800Y16APVBackgroundAr[fileInd]);
     }
     else if (QCDPT800to1000Background){
-        //saveName = "QCDPT800to1000";
+        //saveName = "QCDPT800to1000Y16APV";
         
         crossSection = 26.32;
 
-        saveName = "QCDPT800to1000";
+        saveName = "QCDPT800to1000Y16APV";
         
         isBackground = true;
-        int arrSize = sizeof(QCDPT800to1000BackgroundAr)/sizeof(QCDPT800to1000BackgroundAr[0]);
+        int arrSize = sizeof(QCDPT800to1000Y16APVBackgroundAr)/sizeof(QCDPT800to1000Y16APVBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(QCDPT800to1000BackgroundAr[i]);
+            fileAr.push_back(QCDPT800to1000Y16APVBackgroundAr[i]);
         }
         */
-        fileAr.push_back(QCDPT800to1000BackgroundAr[fileInd]);
+        fileAr.push_back(QCDPT800to1000Y16APVBackgroundAr[fileInd]);
     }
     else if (QCDPT1000to1400Background){
-        //saveName = "QCDPT1000to1400";
+        //saveName = "QCDPT1000to1400Y16APV";
         
         crossSection = 7.5;
 
-        saveName = "QCDPT1000to1400";
+        saveName = "QCDPT1000to1400Y16APV";
         
         isBackground = true;
-        int arrSize = sizeof(QCDPT1000to1400BackgroundAr)/sizeof(QCDPT1000to1400BackgroundAr[0]);
+        int arrSize = sizeof(QCDPT1000to1400Y16APVBackgroundAr)/sizeof(QCDPT1000to1400Y16APVBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(QCDPT1000to1400BackgroundAr[i]);
+            fileAr.push_back(QCDPT1000to1400Y16APVBackgroundAr[i]);
         }
         */
-        fileAr.push_back(QCDPT1000to1400BackgroundAr[fileInd]);
+        fileAr.push_back(QCDPT1000to1400Y16APVBackgroundAr[fileInd]);
     }
     else if (QCDPT1400to1800Background){
-        //saveName = "QCDPT1400to1800";
+        //saveName = "QCDPT1400to1800Y16APV";
         
         crossSection = 0.6479;
 
-        saveName = "QCDPT1400to1800";
+        saveName = "QCDPT1400to1800Y16APV";
         
         isBackground = true;
-        int arrSize = sizeof(QCDPT1400to1800BackgroundAr)/sizeof(QCDPT1400to1800BackgroundAr[0]);
+        int arrSize = sizeof(QCDPT1400to1800Y16APVBackgroundAr)/sizeof(QCDPT1400to1800Y16APVBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(QCDPT1400to1800BackgroundAr[i]);
+            fileAr.push_back(QCDPT1400to1800Y16APVBackgroundAr[i]);
         }
         */
-        fileAr.push_back(QCDPT1400to1800BackgroundAr[fileInd]);
+        fileAr.push_back(QCDPT1400to1800Y16APVBackgroundAr[fileInd]);
     }
     else if (QCDPT1800to2400Background){
-        //saveName = "QCDPT1800to2400";
+        //saveName = "QCDPT1800to2400Y16APV";
         
         crossSection = 0.08715;
 
-        saveName = "QCDPT1800to2400";
+        saveName = "QCDPT1800to2400Y16APV";
         
         isBackground = true;
-        int arrSize = sizeof(QCDPT1800to2400BackgroundAr)/sizeof(QCDPT1800to2400BackgroundAr[0]);
+        int arrSize = sizeof(QCDPT1800to2400Y16APVBackgroundAr)/sizeof(QCDPT1800to2400Y16APVBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(QCDPT1800to2400BackgroundAr[i]);
+            fileAr.push_back(QCDPT1800to2400Y16APVBackgroundAr[i]);
         }
         */
-        fileAr.push_back(QCDPT1800to2400BackgroundAr[fileInd]);
+        fileAr.push_back(QCDPT1800to2400Y16APVBackgroundAr[fileInd]);
     }
     else if (QCDPT2400to3200Background){
-        //saveName = "QCDPT2400to3200";
+        //saveName = "QCDPT2400to3200Y16APV";
         
         crossSection = 0.005242;
 
-        saveName = "QCDPT2400to3200";
+        saveName = "QCDPT2400to3200Y16APV";
         
         isBackground = true;
-        int arrSize = sizeof(QCDPT2400to3200BackgroundAr)/sizeof(QCDPT2400to3200BackgroundAr[0]);
+        int arrSize = sizeof(QCDPT2400to3200Y16APVBackgroundAr)/sizeof(QCDPT2400to3200Y16APVBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(QCDPT2400to3200BackgroundAr[i]);
+            fileAr.push_back(QCDPT2400to3200Y16APVBackgroundAr[i]);
         }
         */
-        fileAr.push_back(QCDPT2400to3200BackgroundAr[fileInd]);
+        fileAr.push_back(QCDPT2400to3200Y16APVBackgroundAr[fileInd]);
     }
     else if (QCDPT3200toInfBackground){
-        //saveName = "QCDPT3200toInf";
+        //saveName = "QCDPT3200toInfY16APV";
         
         crossSection = 0.0001349;
 
-        saveName = "QCDPT3200toInf";
+        saveName = "QCDPT3200toInfY16APV";
         
         isBackground = true;
-        int arrSize = sizeof(QCDPT3200toInfBackgroundAr)/sizeof(QCDPT3200toInfBackgroundAr[0]);
+        int arrSize = sizeof(QCDPT3200toInfY16APVBackgroundAr)/sizeof(QCDPT3200toInfY16APVBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(QCDPT3200toInfBackgroundAr[i]);
+            fileAr.push_back(QCDPT3200toInfY16APVBackgroundAr[i]);
         }
         */
-        fileAr.push_back(QCDPT3200toInfBackgroundAr[fileInd]);
+        fileAr.push_back(QCDPT3200toInfY16APVBackgroundAr[fileInd]);
     }
     else if (TTJetsBackground){
-        //saveName = "";
+        //saveName = "Y16APV";
         
         crossSection = 722.8;
 
-        saveName = "TTJets";
+        saveName = "TTJetsY16APV";
         
         isBackground = true;
-        int arrSize = sizeof(TTJetsBackgroundAr)/sizeof(TTJetsBackgroundAr[0]);
+        int arrSize = sizeof(TTJetsY16APVBackgroundAr)/sizeof(TTJetsY16APVBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(TTJetsBackgroundAr[i]);
+            fileAr.push_back(TTJetsY16APVBackgroundAr[i]);
         }
         */
-        fileAr.push_back(TTJetsBackgroundAr[fileInd]);
+        fileAr.push_back(TTJetsY16APVBackgroundAr[fileInd]);
     }
     else if (ST_s_ChannelBackground){
-        //saveName = "";
+        //saveName = "Y16APV";
         
         crossSection = 3.74;
 
-        saveName = "ST_s_Channel";
+        saveName = "ST_s_ChannelY16APV";
         
         isBackground = true;
-        int arrSize = sizeof(ST_s_ChannelBackgroundAr)/sizeof(ST_s_ChannelBackgroundAr[0]);
+        int arrSize = sizeof(ST_s_ChannelY16APVBackgroundAr)/sizeof(ST_s_ChannelY16APVBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(ST_s_ChannelBackgroundAr[i]);
+            fileAr.push_back(ST_s_ChannelY16APVBackgroundAr[i]);
         }
         */
-        fileAr.push_back(ST_s_ChannelBackgroundAr[fileInd]);
+        fileAr.push_back(ST_s_ChannelY16APVBackgroundAr[fileInd]);
     }
     else if (ST_t_ChannelAntiTopBackground){
-        //saveName = "";
+        //saveName = "Y16APV";
         
         crossSection = 69.09;
 
-        saveName = "ST_t_ChannelAntiTop";
+        saveName = "ST_t_ChannelAntiTopY16APV";
         
         isBackground = true;
-        int arrSize = sizeof(ST_t_ChannelAntiTopBackgroundAr)/sizeof(ST_t_ChannelAntiTopBackgroundAr[0]);
+        int arrSize = sizeof(ST_t_ChannelAntiTopY16APVBackgroundAr)/sizeof(ST_t_ChannelAntiTopY16APVBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(ST_t_ChannelAntiTopBackgroundAr[i]);
+            fileAr.push_back(ST_t_ChannelAntiTopY16APVBackgroundAr[i]);
         }
         */
-        fileAr.push_back(ST_t_ChannelAntiTopBackgroundAr[fileInd]);
+        fileAr.push_back(ST_t_ChannelAntiTopY16APVBackgroundAr[fileInd]);
     }
     else if (ST_t_ChannelTopBackground){
-        //saveName = "";
+        //saveName = "Y16APV";
         
         crossSection = 115.3;
 
-        saveName = "ST_t_ChannelTop";
+        saveName = "ST_t_ChannelTopY16APV";
         
         isBackground = true;
-        int arrSize = sizeof(ST_t_ChannelTopBackgroundAr)/sizeof(ST_t_ChannelTopBackgroundAr[0]);
+        int arrSize = sizeof(ST_t_ChannelTopY16APVBackgroundAr)/sizeof(ST_t_ChannelTopY16APVBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(ST_t_ChannelTopBackgroundAr[i]);
+            fileAr.push_back(ST_t_ChannelTopY16APVBackgroundAr[i]);
         }
         */
-        fileAr.push_back(ST_t_ChannelTopBackgroundAr[fileInd]);
-    }
-    else if (ZZTo2Q2NuBackground){
-        //saveName = "";
-        
-        crossSection = 4.561;
-
-        saveName = "ZZTo2Q2Nu";
-        
-        isBackground = true;
-        int arrSize = sizeof(ZZTo2Q2NuBackgroundAr)/sizeof(ZZTo2Q2NuBackgroundAr[0]);
-        /*
-        for (int i=0; i<arrSize; i++){
-            fileAr.push_back(ZZTo2Q2NuBackgroundAr[i]);
-        }
-        */
-        fileAr.push_back(ZZTo2Q2NuBackgroundAr[fileInd]);
-    }
-    else if (WWTo2L2NuBackground){
-        //saveName = "";
-        
-        crossSection = 10.48;
-
-        saveName = "WWTo2L2Nu";
-        
-        isBackground = true;
-        int arrSize = sizeof(WWTo2L2NuBackgroundAr)/sizeof(WWTo2L2NuBackgroundAr[0]);
-        /*
-        for (int i=0; i<arrSize; i++){
-            fileAr.push_back(WWTo2L2NuBackgroundAr[i]);
-        }
-        */
-        fileAr.push_back(WWTo2L2NuBackgroundAr[fileInd]);
-    }
-    else if (WZTo3LNuBackground){
-        //saveName = "";
-        
-        crossSection = 5.052;
-
-        saveName = "WZTo3LNu";
-        
-        isBackground = true;
-        int arrSize = sizeof(WZTo3LNuBackgroundAr)/sizeof(WZTo3LNuBackgroundAr[0]);
-        /*
-        for (int i=0; i<arrSize; i++){
-            fileAr.push_back(WZTo3LNuBackgroundAr[i]);
-        }
-        */
-        fileAr.push_back(WZTo3LNuBackgroundAr[fileInd]);
+        fileAr.push_back(ST_t_ChannelTopY16APVBackgroundAr[fileInd]);
     }
     else if (ZZBackground){
-        //saveName = "";
+        //saveName = "Y16APV";
         
         crossSection = 12.17;
 
-        saveName = "ZZ";
+        saveName = "ZZY16APV";
         
         isBackground = true;
-        int arrSize = sizeof(ZZBackgroundAr)/sizeof(ZZBackgroundAr[0]);
+        int arrSize = sizeof(ZZY16APVBackgroundAr)/sizeof(ZZY16APVBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(ZZBackgroundAr[i]);
+            fileAr.push_back(ZZY16APVBackgroundAr[i]);
         }
         */
-        fileAr.push_back(ZZBackgroundAr[fileInd]);
+        fileAr.push_back(ZZY16APVBackgroundAr[fileInd]);
     }
     else if (WWBackground){
-        //saveName = "";
+        //saveName = "Y16APV";
         
         crossSection = 75.95;
 
-        saveName = "WW";
+        saveName = "WWY16APV";
         
         isBackground = true;
-        int arrSize = sizeof(WWBackgroundAr)/sizeof(WWBackgroundAr[0]);
+        int arrSize = sizeof(WWY16APVBackgroundAr)/sizeof(WWY16APVBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(WWBackgroundAr[i]);
+            fileAr.push_back(WWY16APVBackgroundAr[i]);
         }
         */
-        fileAr.push_back(WWBackgroundAr[fileInd]);
+        fileAr.push_back(WWY16APVBackgroundAr[fileInd]);
     }
     else if (WZBackground){
-        //saveName = "";
+        //saveName = "Y16APV";
         
         crossSection = 27.59;
 
-        saveName = "WZ";
+        saveName = "WZY16APV";
         
         isBackground = true;
-        int arrSize = sizeof(WZBackgroundAr)/sizeof(WZBackgroundAr[0]);
+        int arrSize = sizeof(WZY16APVBackgroundAr)/sizeof(WZY16APVBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(WZBackgroundAr[i]);
+            fileAr.push_back(WZY16APVBackgroundAr[i]);
         }
         */
-        fileAr.push_back(WZBackgroundAr[fileInd]);
+        fileAr.push_back(WZY16APVBackgroundAr[fileInd]);
     }
     else if (TTbb_TTToHadronicBackground){
-        //saveName = "QCDPT3200toInf";
+        //saveName = "QCDPT3200toInfY16APV";
         
         crossSection = 5.5;
 
-        saveName = "TTbb_TTToHadronic";
+        saveName = "TTbb_TTToHadronicY16APV";
         
         isBackground = true;
-        int arrSize = sizeof(TTbb_TTToHadronicBackgroundAr)/sizeof(TTbb_TTToHadronicBackgroundAr[0]);
+        int arrSize = sizeof(TTbb_TTToHadronicY16APVBackgroundAr)/sizeof(TTbb_TTToHadronicY16APVBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(TTbb_TTToHadronicBackgroundAr[i]);
+            fileAr.push_back(TTbb_TTToHadronicY16APVBackgroundAr[i]);
         }
         */
-        fileAr.push_back(TTbb_TTToHadronicBackgroundAr[fileInd]);
+        fileAr.push_back(TTbb_TTToHadronicY16APVBackgroundAr[fileInd]);
     }
     else if (TTbb_TTTo2L2NuBackground){
-        //saveName = "";
+        //saveName = "Y16APV";
         
         crossSection = 2.9;
 
-        saveName = "TTbb_TTTo2L2Nu";
+        saveName = "TTbb_TTTo2L2NuY16APV";
         
         isBackground = true;
-        int arrSize = sizeof(TTbb_TTTo2L2NuBackgroundAr)/sizeof(TTbb_TTTo2L2NuBackgroundAr[0]);
+        int arrSize = sizeof(TTbb_TTTo2L2NuY16APVBackgroundAr)/sizeof(TTbb_TTTo2L2NuY16APVBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(TTbb_TTTo2L2NuBackgroundAr[i]);
+            fileAr.push_back(TTbb_TTTo2L2NuY16APVBackgroundAr[i]);
         }
         */
-        fileAr.push_back(TTbb_TTTo2L2NuBackgroundAr[fileInd]);
+        fileAr.push_back(TTbb_TTTo2L2NuY16APVBackgroundAr[fileInd]);
     }
     else if (TTbb_TTToSemiLeptonicBackground){
-        //saveName = "";
+        //saveName = "Y16APV";
         
         crossSection = 4.7;
 
-        saveName = "TTbb_TTToSemiLeptonic";
+        saveName = "TTbb_TTToSemiLeptonicY16APV";
         
         isBackground = true;
-        int arrSize = sizeof(TTbb_TTToSemiLeptonicBackgroundAr)/sizeof(TTbb_TTToSemiLeptonicBackgroundAr[0]);
+        int arrSize = sizeof(TTbb_TTToSemiLeptonicY16APVBackgroundAr)/sizeof(TTbb_TTToSemiLeptonicY16APVBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(TTbb_TTToSemiLeptonicBackgroundAr[i]);
+            fileAr.push_back(TTbb_TTToSemiLeptonicY16APVBackgroundAr[i]);
         }
         */
-        fileAr.push_back(TTbb_TTToSemiLeptonicBackgroundAr[fileInd]);
+        fileAr.push_back(TTbb_TTToSemiLeptonicY16APVBackgroundAr[fileInd]);
     }
     else if (DYM10To50Background){
         //datasetType = 50;
-        saveName = "DYM10To50";
+        saveName = "DYM10To50Y16APV";
         
-        int arrSize = sizeof(DYM10To50BackgroundAr)/sizeof(DYM10To50BackgroundAr[0]);
-        fileAr.push_back(DYM10To50BackgroundAr[fileInd]);
+        int arrSize = sizeof(DYM10To50Y16APVBackgroundAr)/sizeof(DYM10To50Y16APVBackgroundAr[0]);
+        fileAr.push_back(DYM10To50Y16APVBackgroundAr[fileInd]);
     }
     else if (ST_tW_antitopBackground){
         //datasetType = 51;
-        saveName = "ST_tW_antitop";
+        saveName = "ST_tW_antitopY16APV";
         
-        int arrSize = sizeof(ST_tW_antitopBackgroundAr)/sizeof(ST_tW_antitopBackgroundAr[0]);
-        fileAr.push_back(ST_tW_antitopBackgroundAr[fileInd]);
+        int arrSize = sizeof(ST_tW_antitopY16APVBackgroundAr)/sizeof(ST_tW_antitopY16APVBackgroundAr[0]);
+        fileAr.push_back(ST_tW_antitopY16APVBackgroundAr[fileInd]);
     }
     else if (ST_tW_topBackground){
         //datasetType = 52;
-        saveName = "ST_tW_top";
+        saveName = "ST_tW_topY16APV";
         
-        int arrSize = sizeof(ST_tW_topBackgroundAr)/sizeof(ST_tW_topBackgroundAr[0]);
-        fileAr.push_back(ST_tW_topBackgroundAr[fileInd]);
+        int arrSize = sizeof(ST_tW_topY16APVBackgroundAr)/sizeof(ST_tW_topY16APVBackgroundAr[0]);
+        fileAr.push_back(ST_tW_topY16APVBackgroundAr[fileInd]);
     }
     else if (EWKWMinus2Jets_WToLNuBackground){
         //datasetType = 53;
-        saveName = "EWKWMinus2Jets_WToLNu";
+        saveName = "EWKWMinus2Jets_WToLNuY16APV";
         
-        int arrSize = sizeof(EWKWMinus2Jets_WToLNuBackgroundAr)/sizeof(EWKWMinus2Jets_WToLNuBackgroundAr[0]);
-        fileAr.push_back(EWKWMinus2Jets_WToLNuBackgroundAr[fileInd]);
+        int arrSize = sizeof(EWKWMinus2Jets_WToLNuY16APVBackgroundAr)/sizeof(EWKWMinus2Jets_WToLNuY16APVBackgroundAr[0]);
+        fileAr.push_back(EWKWMinus2Jets_WToLNuY16APVBackgroundAr[fileInd]);
     }
     else if (EWKWMinus2Jets_WToQQBackground){
         //datasetType = 54;
-        saveName = "EWKWMinus2Jets_WToQQ";
+        saveName = "EWKWMinus2Jets_WToQQY16APV";
         
-        int arrSize = sizeof(EWKWMinus2Jets_WToQQBackgroundAr)/sizeof(EWKWMinus2Jets_WToQQBackgroundAr[0]);
-        fileAr.push_back(EWKWMinus2Jets_WToQQBackgroundAr[fileInd]);
+        int arrSize = sizeof(EWKWMinus2Jets_WToQQY16APVBackgroundAr)/sizeof(EWKWMinus2Jets_WToQQY16APVBackgroundAr[0]);
+        fileAr.push_back(EWKWMinus2Jets_WToQQY16APVBackgroundAr[fileInd]);
     }
     else if (EWKWPlus2Jets_WToLNuBackground){
         //datasetType = 55;
-        saveName = "EWKWPlus2Jets_WToLNu";
+        saveName = "EWKWPlus2Jets_WToLNuY16APV";
         
-        int arrSize = sizeof(EWKWPlus2Jets_WToLNuBackgroundAr)/sizeof(EWKWPlus2Jets_WToLNuBackgroundAr[0]);
-        fileAr.push_back(EWKWPlus2Jets_WToLNuBackgroundAr[fileInd]);
+        int arrSize = sizeof(EWKWPlus2Jets_WToLNuY16APVBackgroundAr)/sizeof(EWKWPlus2Jets_WToLNuY16APVBackgroundAr[0]);
+        fileAr.push_back(EWKWPlus2Jets_WToLNuY16APVBackgroundAr[fileInd]);
     }
     else if (EWKWPlus2Jets_WToQQBackground){
         //datasetType = 56;
-        saveName = "EWKWPlus2Jets_WToQQ";
+        saveName = "EWKWPlus2Jets_WToQQY16APV";
         
-        int arrSize = sizeof(EWKWPlus2Jets_WToQQBackgroundAr)/sizeof(EWKWPlus2Jets_WToQQBackgroundAr[0]);
-        fileAr.push_back(EWKWPlus2Jets_WToQQBackgroundAr[fileInd]);
+        int arrSize = sizeof(EWKWPlus2Jets_WToQQY16APVBackgroundAr)/sizeof(EWKWPlus2Jets_WToQQY16APVBackgroundAr[0]);
+        fileAr.push_back(EWKWPlus2Jets_WToQQY16APVBackgroundAr[fileInd]);
     }
     else if (VHToNonbbBackground){
         //datasetType = 57;
-        saveName = "VHToNonbb";
+        saveName = "VHToNonbbY16APV";
         
-        int arrSize = sizeof(VHToNonbbBackgroundAr)/sizeof(VHToNonbbBackgroundAr[0]);
-        fileAr.push_back(VHToNonbbBackgroundAr[fileInd]);
+        int arrSize = sizeof(VHToNonbbY16APVBackgroundAr)/sizeof(VHToNonbbY16APVBackgroundAr[0]);
+        fileAr.push_back(VHToNonbbY16APVBackgroundAr[fileInd]);
     }
     else if (WminusH_HToBB_WToLNuBackground){
         //datasetType = 58;
-        saveName = "WminusH_HToBB_WToLNu";
+        saveName = "WminusH_HToBB_WToLNuY16APV";
         
-        int arrSize = sizeof(WminusH_HToBB_WToLNuBackgroundAr)/sizeof(WminusH_HToBB_WToLNuBackgroundAr[0]);
-        fileAr.push_back(WminusH_HToBB_WToLNuBackgroundAr[fileInd]);
+        int arrSize = sizeof(WminusH_HToBB_WToLNuY16APVBackgroundAr)/sizeof(WminusH_HToBB_WToLNuY16APVBackgroundAr[0]);
+        fileAr.push_back(WminusH_HToBB_WToLNuY16APVBackgroundAr[fileInd]);
     }
     else if (WminusH_HToBB_WToQQBackground){
         //datasetType = 59;
-        saveName = "WminusH_HToBB_WToQQ";
+        saveName = "WminusH_HToBB_WToQQY16APV";
         
-        int arrSize = sizeof(WminusH_HToBB_WToQQBackgroundAr)/sizeof(WminusH_HToBB_WToQQBackgroundAr[0]);
-        fileAr.push_back(WminusH_HToBB_WToQQBackgroundAr[fileInd]);
+        int arrSize = sizeof(WminusH_HToBB_WToQQY16APVBackgroundAr)/sizeof(WminusH_HToBB_WToQQY16APVBackgroundAr[0]);
+        fileAr.push_back(WminusH_HToBB_WToQQY16APVBackgroundAr[fileInd]);
     }
     else if (WplusH_HToBB_WToLNuBackground){
         //datasetType = 60;
-        saveName = "WplusH_HToBB_WToLNu";
+        saveName = "WplusH_HToBB_WToLNuY16APV";
         
-        int arrSize = sizeof(WplusH_HToBB_WToLNuBackgroundAr)/sizeof(WplusH_HToBB_WToLNuBackgroundAr[0]);
-        fileAr.push_back(WplusH_HToBB_WToLNuBackgroundAr[fileInd]);
+        int arrSize = sizeof(WplusH_HToBB_WToLNuY16APVBackgroundAr)/sizeof(WplusH_HToBB_WToLNuY16APVBackgroundAr[0]);
+        fileAr.push_back(WplusH_HToBB_WToLNuY16APVBackgroundAr[fileInd]);
     }
     else if (WplusH_HToBB_WToQQBackground){
         //datasetType = 61;
-        saveName = "WplusH_HToBB_WToQQ";
+        saveName = "WplusH_HToBB_WToQQY16APV";
         
-        int arrSize = sizeof(WplusH_HToBB_WToQQBackgroundAr)/sizeof(WplusH_HToBB_WToQQBackgroundAr[0]);
-        fileAr.push_back(WplusH_HToBB_WToQQBackgroundAr[fileInd]);
+        int arrSize = sizeof(WplusH_HToBB_WToQQY16APVBackgroundAr)/sizeof(WplusH_HToBB_WToQQY16APVBackgroundAr[0]);
+        fileAr.push_back(WplusH_HToBB_WToQQY16APVBackgroundAr[fileInd]);
     }
     else if (WJetsToLNuBackground){
         //datasetType = 62;
-        saveName = "WJetsToLNu";
+        saveName = "WJetsToLNuY16APV";
         
-        int arrSize = sizeof(WJetsToLNuBackgroundAr)/sizeof(WJetsToLNuBackgroundAr[0]);
-        fileAr.push_back(WJetsToLNuBackgroundAr[fileInd]);
+        int arrSize = sizeof(WJetsToLNuY16APVBackgroundAr)/sizeof(WJetsToLNuY16APVBackgroundAr[0]);
+        fileAr.push_back(WJetsToLNuY16APVBackgroundAr[fileInd]);
     }
     else if (WWWBackground){
         //datasetType = 63;
-        saveName = "WWW";
+        saveName = "WWWY16APV";
         
-        int arrSize = sizeof(WWWBackgroundAr)/sizeof(WWWBackgroundAr[0]);
-        fileAr.push_back(WWWBackgroundAr[fileInd]);
+        int arrSize = sizeof(WWWY16APVBackgroundAr)/sizeof(WWWY16APVBackgroundAr[0]);
+        fileAr.push_back(WWWY16APVBackgroundAr[fileInd]);
     }
     else if (WWZBackground){
         //datasetType = 64;
-        saveName = "WWZ";
+        saveName = "WWZY16APV";
         
-        int arrSize = sizeof(WWZBackgroundAr)/sizeof(WWZBackgroundAr[0]);
-        fileAr.push_back(WWZBackgroundAr[fileInd]);
+        int arrSize = sizeof(WWZY16APVBackgroundAr)/sizeof(WWZY16APVBackgroundAr[0]);
+        fileAr.push_back(WWZY16APVBackgroundAr[fileInd]);
     }
     else if (WZZBackground){
         //datasetType = 65;
-        saveName = "WZZ";
+        saveName = "WZZY16APV";
         
-        int arrSize = sizeof(WZZBackgroundAr)/sizeof(WZZBackgroundAr[0]);
-        fileAr.push_back(WZZBackgroundAr[fileInd]);
+        int arrSize = sizeof(WZZY16APVBackgroundAr)/sizeof(WZZY16APVBackgroundAr[0]);
+        fileAr.push_back(WZZY16APVBackgroundAr[fileInd]);
     }
     else if (ZH_HToBB_ZToLLBackground){
         //datasetType = 66;
-        saveName = "ZH_HToBB_ZToLL";
+        saveName = "ZH_HToBB_ZToLLY16APV";
         
-        int arrSize = sizeof(ZH_HToBB_ZToLLBackgroundAr)/sizeof(ZH_HToBB_ZToLLBackgroundAr[0]);
-        fileAr.push_back(ZH_HToBB_ZToLLBackgroundAr[fileInd]);
+        int arrSize = sizeof(ZH_HToBB_ZToLLY16APVBackgroundAr)/sizeof(ZH_HToBB_ZToLLY16APVBackgroundAr[0]);
+        fileAr.push_back(ZH_HToBB_ZToLLY16APVBackgroundAr[fileInd]);
     }
     else if (ZH_HToBB_ZToQQBackground){
         //datasetType = 67;
-        saveName = "ZH_HToBB_ZToQQ";
+        saveName = "ZH_HToBB_ZToQQY16APV";
         
-        int arrSize = sizeof(ZH_HToBB_ZToQQBackgroundAr)/sizeof(ZH_HToBB_ZToQQBackgroundAr[0]);
-        fileAr.push_back(ZH_HToBB_ZToQQBackgroundAr[fileInd]);
+        int arrSize = sizeof(ZH_HToBB_ZToQQY16APVBackgroundAr)/sizeof(ZH_HToBB_ZToQQY16APVBackgroundAr[0]);
+        fileAr.push_back(ZH_HToBB_ZToQQY16APVBackgroundAr[fileInd]);
     }
     else if (ggZH_HToBB_ZToLLBackground){
         //datasetType = 68;
-        saveName = "ggZH_HToBB_ZToLL";
+        saveName = "ggZH_HToBB_ZToLLY16APV";
         
-        int arrSize = sizeof(ggZH_HToBB_ZToLLBackgroundAr)/sizeof(ggZH_HToBB_ZToLLBackgroundAr[0]);
-        fileAr.push_back(ggZH_HToBB_ZToLLBackgroundAr[fileInd]);
+        int arrSize = sizeof(ggZH_HToBB_ZToLLY16APVBackgroundAr)/sizeof(ggZH_HToBB_ZToLLY16APVBackgroundAr[0]);
+        fileAr.push_back(ggZH_HToBB_ZToLLY16APVBackgroundAr[fileInd]);
     }
     else if (ggZH_HToBB_ZToQQBackground){
         //datasetType = 69;
-        saveName = "ggZH_HToBB_ZToQQ";
+        saveName = "ggZH_HToBB_ZToQQY16APV";
         
-        int arrSize = sizeof(ggZH_HToBB_ZToQQBackgroundAr)/sizeof(ggZH_HToBB_ZToQQBackgroundAr[0]);
-        fileAr.push_back(ggZH_HToBB_ZToQQBackgroundAr[fileInd]);
+        int arrSize = sizeof(ggZH_HToBB_ZToQQY16APVBackgroundAr)/sizeof(ggZH_HToBB_ZToQQY16APVBackgroundAr[0]);
+        fileAr.push_back(ggZH_HToBB_ZToQQY16APVBackgroundAr[fileInd]);
     }
     else if (EWKZ2Jets_ZToLLBackground){
         //datasetType = 70;
-        saveName = "EWKZ2Jets_ZToLL";
+        saveName = "EWKZ2Jets_ZToLLY16APV";
         
-        int arrSize = sizeof(EWKZ2Jets_ZToLLBackgroundAr)/sizeof(EWKZ2Jets_ZToLLBackgroundAr[0]);
-        fileAr.push_back(EWKZ2Jets_ZToLLBackgroundAr[fileInd]);
+        int arrSize = sizeof(EWKZ2Jets_ZToLLY16APVBackgroundAr)/sizeof(EWKZ2Jets_ZToLLY16APVBackgroundAr[0]);
+        fileAr.push_back(EWKZ2Jets_ZToLLY16APVBackgroundAr[fileInd]);
     }
     else if (EWKZ2Jets_ZToNuNuBackground){
         //datasetType = 71;
-        saveName = "EWKZ2Jets_ZToNuNu";
+        saveName = "EWKZ2Jets_ZToNuNuY16APV";
         
-        int arrSize = sizeof(EWKZ2Jets_ZToNuNuBackgroundAr)/sizeof(EWKZ2Jets_ZToNuNuBackgroundAr[0]);
-        fileAr.push_back(EWKZ2Jets_ZToNuNuBackgroundAr[fileInd]);
+        int arrSize = sizeof(EWKZ2Jets_ZToNuNuY16APVBackgroundAr)/sizeof(EWKZ2Jets_ZToNuNuY16APVBackgroundAr[0]);
+        fileAr.push_back(EWKZ2Jets_ZToNuNuY16APVBackgroundAr[fileInd]);
     }
     else if (EWKZ2Jets_ZToQQBackground){
         //datasetType = 72;
-        saveName = "EWKZ2Jets_ZToQQ";
+        saveName = "EWKZ2Jets_ZToQQY16APV";
         
-        int arrSize = sizeof(EWKZ2Jets_ZToQQBackgroundAr)/sizeof(EWKZ2Jets_ZToQQBackgroundAr[0]);
-        fileAr.push_back(EWKZ2Jets_ZToQQBackgroundAr[fileInd]);
+        int arrSize = sizeof(EWKZ2Jets_ZToQQY16APVBackgroundAr)/sizeof(EWKZ2Jets_ZToQQY16APVBackgroundAr[0]);
+        fileAr.push_back(EWKZ2Jets_ZToQQY16APVBackgroundAr[fileInd]);
     }
     else if (ZZZBackground){
         //datasetType = 73;
-        saveName = "ZZZ";
+        saveName = "ZZZY16APV";
         
-        int arrSize = sizeof(ZZZBackgroundAr)/sizeof(ZZZBackgroundAr[0]);
-        fileAr.push_back(ZZZBackgroundAr[fileInd]);
+        int arrSize = sizeof(ZZZY16APVBackgroundAr)/sizeof(ZZZY16APVBackgroundAr[0]);
+        fileAr.push_back(ZZZY16APVBackgroundAr[fileInd]);
     }
     else if (testRun){
         saveName = "testRun";
@@ -1001,61 +953,18 @@ void DoTrimmedHLTFilterBeforeAnalysisBackground(string datasetString,UInt_t file
         TTreeReaderValue<Bool_t> Flag_EcalDeadCellTriggerPrimitiveFilter(myEventsReader, "Flag_EcalDeadCellTriggerPrimitiveFilter");
         TTreeReaderValue<Bool_t> Flag_BadPFMuonFilter(myEventsReader, "Flag_BadPFMuonFilter");
         TTreeReaderValue<Bool_t> Flag_eeBadScFilter(myEventsReader, "Flag_eeBadScFilter");
-        TTreeReaderValue<Bool_t> Flag_ecalBadCalibFilter(myEventsReader, "Flag_ecalBadCalibFilter");
+
 
         //HLT Branches
-        TTreeReaderValue<Bool_t> HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02(myEventsReader, "HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02");
-        TTreeReaderValue<Bool_t> HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np2(myEventsReader, "HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np2");
-        TTreeReaderValue<Bool_t> HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np4(myEventsReader, "HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np4");
-        TTreeReaderValue<Bool_t> HLT_TripleMu_10_5_5_DZ(myEventsReader, "HLT_TripleMu_10_5_5_DZ");
-        TTreeReaderValue<Bool_t> HLT_TripleMu_12_10_5(myEventsReader, "HLT_TripleMu_12_10_5");
-
-
-        TTreeReaderValue<Bool_t> HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ(myEventsReader, "HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ");
-        TTreeReaderValue<Bool_t> HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL(myEventsReader, "HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL");
-        TTreeReaderValue<Bool_t> HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ(myEventsReader, "HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ");
-        TTreeReaderValue<Bool_t> HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL(myEventsReader, "HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL");
-        TTreeReaderValue<Bool_t> HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ(myEventsReader, "HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ");
-        TTreeReaderValue<Bool_t> HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL(myEventsReader, "HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL");
-
-        TTreeReaderValue<Bool_t> HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8(myEventsReader, "HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8");
-        TTreeReaderValue<Bool_t> HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8(myEventsReader, "HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8");
-        TTreeReaderValue<Bool_t> HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL_DZ_Mass3p8(myEventsReader, "HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL_DZ_Mass3p8");
-        TTreeReaderValue<Bool_t> HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL_DZ_Mass8(myEventsReader, "HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL_DZ_Mass8");
+        TTreeReaderValue<Bool_t> HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ(myEventsReader, "HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ");
 
         TTreeReaderValue<Bool_t> HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ(myEventsReader, "HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ");
-        TTreeReaderValue<Bool_t> HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL(myEventsReader, "HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL");
-        TTreeReaderValue<Bool_t> HLT_DiEle27_WPTightCaloOnly_L1DoubleEG(myEventsReader, "HLT_DiEle27_WPTightCaloOnly_L1DoubleEG");
-        TTreeReaderValue<Bool_t> HLT_DoubleEle33_CaloIdL_MW(myEventsReader, "HLT_DoubleEle33_CaloIdL_MW");
-        TTreeReaderValue<Bool_t> HLT_DoubleEle25_CaloIdL_MW(myEventsReader, "HLT_DoubleEle25_CaloIdL_MW");
-        TTreeReaderValue<Bool_t> HLT_DoubleEle27_CaloIdL_MW(myEventsReader, "HLT_DoubleEle27_CaloIdL_MW");
-        TTreeReaderValue<Bool_t> HLT_DoublePhoton70(myEventsReader, "HLT_DoublePhoton70");
 
-        TTreeReaderValue<Bool_t> HLT_IsoMu24(myEventsReader, "HLT_IsoMu24");
         TTreeReaderValue<Bool_t> HLT_IsoMu27(myEventsReader, "HLT_IsoMu27");
-        TTreeReaderValue<Bool_t> HLT_IsoMu30(myEventsReader, "HLT_IsoMu30");
         TTreeReaderValue<Bool_t> HLT_Mu50(myEventsReader, "HLT_Mu50");
 
         TTreeReaderValue<Bool_t> HLT_Ele115_CaloIdVT_GsfTrkIdT(myEventsReader, "HLT_Ele115_CaloIdVT_GsfTrkIdT");
         TTreeReaderValue<Bool_t> HLT_Ele27_WPTight_Gsf(myEventsReader, "HLT_Ele27_WPTight_Gsf");
-        TTreeReaderValue<Bool_t> HLT_Ele28_WPTight_Gsf(myEventsReader, "HLT_Ele28_WPTight_Gsf");
-        TTreeReaderValue<Bool_t> HLT_Ele32_WPTight_Gsf(myEventsReader, "HLT_Ele32_WPTight_Gsf");
-        TTreeReaderValue<Bool_t> HLT_Ele35_WPTight_Gsf(myEventsReader, "HLT_Ele35_WPTight_Gsf");
-        TTreeReaderValue<Bool_t> HLT_Ele38_WPTight_Gsf(myEventsReader, "HLT_Ele38_WPTight_Gsf");
-        TTreeReaderValue<Bool_t> HLT_Ele40_WPTight_Gsf(myEventsReader, "HLT_Ele40_WPTight_Gsf");
-        TTreeReaderValue<Bool_t> HLT_Ele32_WPTight_Gsf_L1DoubleEG(myEventsReader, "HLT_Ele32_WPTight_Gsf_L1DoubleEG");
-        TTreeReaderValue<Bool_t> HLT_Photon200(myEventsReader, "HLT_Photon200");
-
-        TTreeReaderValue<Bool_t> HLT_AK8PFJet500(myEventsReader, "HLT_AK8PFJet500");
-        TTreeReaderValue<Bool_t> HLT_AK8PFJet360_TrimMass30(myEventsReader, "HLT_AK8PFJet360_TrimMass30");
-        TTreeReaderValue<Bool_t> HLT_AK8PFJet380_TrimMass30(myEventsReader, "HLT_AK8PFJet380_TrimMass30");
-        TTreeReaderValue<Bool_t> HLT_AK8PFJet400_TrimMass30(myEventsReader, "HLT_AK8PFJet400_TrimMass30");
-        TTreeReaderValue<Bool_t> HLT_AK8PFJet420_TrimMass30(myEventsReader, "HLT_AK8PFJet420_TrimMass30");
-        TTreeReaderValue<Bool_t> HLT_AK8PFHT750_TrimMass50(myEventsReader, "HLT_AK8PFHT750_TrimMass50");
-        TTreeReaderValue<Bool_t> HLT_AK8PFHT800_TrimMass50(myEventsReader, "HLT_AK8PFHT800_TrimMass50");
-        TTreeReaderValue<Bool_t> HLT_AK8PFHT850_TrimMass50(myEventsReader, "HLT_AK8PFHT850_TrimMass50");
-        TTreeReaderValue<Bool_t> HLT_AK8PFHT900_TrimMass50(myEventsReader, "HLT_AK8PFHT900_TrimMass50");
-        TTreeReaderValue<Bool_t> HLT_PFHT1050(myEventsReader, "HLT_PFHT1050");
 
         //jets
 
@@ -1078,18 +987,6 @@ void DoTrimmedHLTFilterBeforeAnalysisBackground(string datasetString,UInt_t file
         TTreeReaderArray<Float_t> FatJet_deepTag_ZvsQCD(myEventsReader, "FatJet_deepTag_ZvsQCD");
         TTreeReaderArray<Float_t> FatJet_msoftdrop(myEventsReader, "FatJet_msoftdrop");
 
-        //Gen part stuff
-
-        TTreeReaderValue<UInt_t> nGenPart(myEventsReader, "nGenPart");
-        TTreeReaderArray<Float_t> GenPart_eta(myEventsReader, "GenPart_eta");
-        TTreeReaderArray<Float_t> GenPart_mass(myEventsReader, "GenPart_mass");
-        TTreeReaderArray<Float_t> GenPart_phi(myEventsReader, "GenPart_phi");
-        TTreeReaderArray<Float_t> GenPart_pt(myEventsReader, "GenPart_pt");
-        TTreeReaderArray<Int_t> GenPart_genPartIdxMother(myEventsReader, "GenPart_genPartIdxMother");
-        TTreeReaderArray<Int_t> GenPart_pdgId(myEventsReader, "GenPart_pdgId");
-        TTreeReaderArray<Int_t> GenPart_status(myEventsReader, "GenPart_status");
-        TTreeReaderArray<Int_t> GenPart_statusFlags(myEventsReader, "GenPart_statusFlags");
-        
         //Electrons
         TTreeReaderValue<UInt_t> nElectron(myEventsReader, "nElectron");
         TTreeReaderArray<Float_t> Electron_eta(myEventsReader, "Electron_eta");
@@ -1240,17 +1137,17 @@ void DoTrimmedHLTFilterBeforeAnalysisBackground(string datasetString,UInt_t file
             //bool passHLTBool = hbbTag || hadHLT || doubleElecHLT || doubleMuonHLT || muonEGHLT || elecHLT || muonHLT;
             */
 
-            bool passFlagBool = *Flag_goodVertices && *Flag_globalSuperTightHalo2016Filter && *Flag_HBHENoiseFilter && *Flag_HBHENoiseIsoFilter && *Flag_EcalDeadCellTriggerPrimitiveFilter && *Flag_BadPFMuonFilter && *Flag_eeBadScFilter && *Flag_ecalBadCalibFilter;
+            bool passFlagBool = *Flag_goodVertices && *Flag_globalSuperTightHalo2016Filter && *Flag_HBHENoiseFilter && *Flag_HBHENoiseIsoFilter && *Flag_EcalDeadCellTriggerPrimitiveFilter && *Flag_BadPFMuonFilter && *Flag_eeBadScFilter;
 
             if (!passFlagBool) continue;
             passFlagCtr += 1;
             passFlagWeightedCtr += *genWeight;
 
 
-            bool passHLTBool = (*HLT_Ele32_WPTight_Gsf_L1DoubleEG || *HLT_Photon200 || *HLT_Ele115_CaloIdVT_GsfTrkIdT || 
+            bool passHLTBool = (*HLT_Ele27_WPTight_Gsf || *HLT_Ele115_CaloIdVT_GsfTrkIdT || 
             *HLT_IsoMu27 || *HLT_Mu50 || 
-            *HLT_DoubleEle33_CaloIdL_MW || *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ || *HLT_DiEle27_WPTightCaloOnly_L1DoubleEG || *HLT_DoublePhoton70 || 
-            *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8);
+            *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ || 
+            *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ);
             //std::cout << testPassHLTBool << " " << passHLTBool << "\n";
             if (!passHLTBool) continue;
             passHLTCtr += 1;
@@ -1462,7 +1359,7 @@ void DoTrimmedHLTFilterBeforeAnalysisBackground(string datasetString,UInt_t file
             Muon_ptL.clear();
             Muon_pfRelIso03_allL.clear();
             Muon_sip3dL.clear();
-            Muon_tightIdL.clear();
+            Muon_tightIdL.clear(); 
             Muon_mediumIdL.clear();
             Muon_looseIdL.clear();
 
