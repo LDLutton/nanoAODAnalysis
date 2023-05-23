@@ -106,8 +106,12 @@ void DoTrimmedHLTFilterBeforeAnalysisY16Background(string datasetString,UInt_t f
     if (datasetString == "WWW") WWWBackground = true;
     if (datasetString == "WWZ") WWZBackground = true;
     if (datasetString == "WZZ") WZZBackground = true;
+    if (datasetString == "ZH_HToBB_ZToBB") ZH_HToBB_ZToBBBackground = true;
+    if (datasetString == "ZH_HToBB_ZToNuNu") ZH_HToBB_ZToNuNuBackground = true;
     if (datasetString == "ZH_HToBB_ZToLL") ZH_HToBB_ZToLLBackground = true;
     if (datasetString == "ZH_HToBB_ZToQQ") ZH_HToBB_ZToQQBackground = true;
+    if (datasetString == "ggZH_HToBB_ZToBB") ggZH_HToBB_ZToBBBackground = true;
+    if (datasetString == "ggZH_HToBB_ZToNuNu") ggZH_HToBB_ZToNuNuBackground = true;
     if (datasetString == "ggZH_HToBB_ZToLL") ggZH_HToBB_ZToLLBackground = true;
     if (datasetString == "ggZH_HToBB_ZToQQ") ggZH_HToBB_ZToQQBackground = true;
     if (datasetString == "EWKZ2Jets_ZToLL") EWKZ2Jets_ZToLLBackground = true;
@@ -609,33 +613,61 @@ void DoTrimmedHLTFilterBeforeAnalysisY16Background(string datasetString,UInt_t f
         int arrSize = sizeof(WZZY16BackgroundAr)/sizeof(WZZY16BackgroundAr[0]);
         fileAr.push_back(WZZY16BackgroundAr[fileInd]);
     }
+    else if (ZH_HToBB_ZToBBBackground){
+        //datasetType = 66;
+        saveName = "ZH_HToBB_ZToBB16";
+        
+        int arrSize = sizeof(ZH_HToBB_ZToBB16BackgroundAr)/sizeof(ZH_HToBB_ZToBB16BackgroundAr[0]);
+        fileAr.push_back(ZH_HToBB_ZToBB16BackgroundAr[fileInd]);
+    }
+    else if (ZH_HToBB_ZToNuNuBackground){
+        //datasetType = 66;
+        saveName = "ZH_HToBB_ZToNuNu16";
+        
+        int arrSize = sizeof(ZH_HToBB_ZToNuNu16BackgroundAr)/sizeof(ZH_HToBB_ZToNuNu16BackgroundAr[0]);
+        fileAr.push_back(ZH_HToBB_ZToNuNu16BackgroundAr[fileInd]);
+    }
     else if (ZH_HToBB_ZToLLBackground){
         //datasetType = 66;
-        saveName = "ZH_HToBB_ZToLLY16";
+        saveName = "ZH_HToBB_ZToLL16";
         
-        int arrSize = sizeof(ZH_HToBB_ZToLLY16BackgroundAr)/sizeof(ZH_HToBB_ZToLLY16BackgroundAr[0]);
-        fileAr.push_back(ZH_HToBB_ZToLLY16BackgroundAr[fileInd]);
+        int arrSize = sizeof(ZH_HToBB_ZToLL16BackgroundAr)/sizeof(ZH_HToBB_ZToLL16BackgroundAr[0]);
+        fileAr.push_back(ZH_HToBB_ZToLL16BackgroundAr[fileInd]);
     }
     else if (ZH_HToBB_ZToQQBackground){
         //datasetType = 67;
-        saveName = "ZH_HToBB_ZToQQY16";
+        saveName = "ZH_HToBB_ZToQQ16";
         
-        int arrSize = sizeof(ZH_HToBB_ZToQQY16BackgroundAr)/sizeof(ZH_HToBB_ZToQQY16BackgroundAr[0]);
-        fileAr.push_back(ZH_HToBB_ZToQQY16BackgroundAr[fileInd]);
+        int arrSize = sizeof(ZH_HToBB_ZToQQ16BackgroundAr)/sizeof(ZH_HToBB_ZToQQ16BackgroundAr[0]);
+        fileAr.push_back(ZH_HToBB_ZToQQ16BackgroundAr[fileInd]);
+    }
+    else if (ggZH_HToBB_ZToBBBackground){
+        //datasetType = 68;
+        saveName = "ggZH_HToBB_ZToBB16";
+        
+        int arrSize = sizeof(ggZH_HToBB_ZToBB16BackgroundAr)/sizeof(ggZH_HToBB_ZToBB16BackgroundAr[0]);
+        fileAr.push_back(ggZH_HToBB_ZToBB16BackgroundAr[fileInd]);
+    }
+    else if (ggZH_HToBB_ZToNuNuBackground){
+        //datasetType = 68;
+        saveName = "ggZH_HToBB_ZToNuNu16";
+        
+        int arrSize = sizeof(ggZH_HToBB_ZToNuNu16BackgroundAr)/sizeof(ggZH_HToBB_ZToNuNu16BackgroundAr[0]);
+        fileAr.push_back(ggZH_HToBB_ZToNuNu16BackgroundAr[fileInd]);
     }
     else if (ggZH_HToBB_ZToLLBackground){
         //datasetType = 68;
-        saveName = "ggZH_HToBB_ZToLLY16";
+        saveName = "ggZH_HToBB_ZToLL16";
         
-        int arrSize = sizeof(ggZH_HToBB_ZToLLY16BackgroundAr)/sizeof(ggZH_HToBB_ZToLLY16BackgroundAr[0]);
-        fileAr.push_back(ggZH_HToBB_ZToLLY16BackgroundAr[fileInd]);
+        int arrSize = sizeof(ggZH_HToBB_ZToLL16BackgroundAr)/sizeof(ggZH_HToBB_ZToLL16BackgroundAr[0]);
+        fileAr.push_back(ggZH_HToBB_ZToLL16BackgroundAr[fileInd]);
     }
     else if (ggZH_HToBB_ZToQQBackground){
         //datasetType = 69;
-        saveName = "ggZH_HToBB_ZToQQY16";
+        saveName = "ggZH_HToBB_ZToQQ16";
         
-        int arrSize = sizeof(ggZH_HToBB_ZToQQY16BackgroundAr)/sizeof(ggZH_HToBB_ZToQQY16BackgroundAr[0]);
-        fileAr.push_back(ggZH_HToBB_ZToQQY16BackgroundAr[fileInd]);
+        int arrSize = sizeof(ggZH_HToBB_ZToQQ16BackgroundAr)/sizeof(ggZH_HToBB_ZToQQ16BackgroundAr[0]);
+        fileAr.push_back(ggZH_HToBB_ZToQQ16BackgroundAr[fileInd]);
     }
     else if (EWKZ2Jets_ZToLLBackground){
         //datasetType = 70;
