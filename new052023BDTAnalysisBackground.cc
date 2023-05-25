@@ -2828,6 +2828,7 @@ void new052023BDTAnalysisBackground(string datasetString,string yearString){
                     passingEvFullWeight_SL_L = tmpGenWeights*crossSection*Run2Lumi/totWeight;
 
                     yearType_SL_L = yearType;
+                    datasetType_SL_L = datasetType;
 
                     selectedHiggsFJ_pt_SL_L = hFatJet_pt_fromHTag;
                     selectedZFJ_pt_SL_L = dRCheckVecAr[2].Pt();
