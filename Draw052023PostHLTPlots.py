@@ -289,18 +289,6 @@ def makeNiceTHStack(histo,xTitle,yTitle,noX=True):
   #print("testAlt5")
   histo.GetYaxis().SetLabelSize(0.055)
 
-signalOnly = False
-backgroundOnly = False
-onlyLookingAtBool = False
-allIncludingData = False
-dataOnly = False
-passFailPlotsBool = False
-
-doSplitUpDataMCPlots = False
-
-QCDBool = False
-
-
 C2V2XS = 0.00106719 #ZZH C2V=2 XS
 C2V2WZHXS = 0.00155167 #WZH C2V=2 XS
 
@@ -416,7 +404,7 @@ totWeightAr = [[2315362.9999999995,2470819.7700000005,3919780.398000001,4843451.
 
 
 
-colorAr = [2,0,7,4,8,
+colorAr = [3,5,7,4,8,
                9,0,0,6,0,41,0,
               42,46,49,
               38,
@@ -505,7 +493,7 @@ for k,fileA in enumerate(fileBackgroundAr):
         tmpWeightCoef = crossSectionAr[k]*Run2LumiByYearAr[i]/totWeightAr[k][i]
         #LOOP OVER EVENTS IN FILE k
         for j,ev in enumerate(tmpTree):
-            if breakEvEarly and evCtr >= breakEvAt:
+            if breakEvEarly and evInFileCtr >= breakEvAt:
                 break
             if evCtr % 100000 == 0:
                 print("ev:",evCtr)
@@ -514,6 +502,7 @@ for k,fileA in enumerate(fileBackgroundAr):
             for FJInd in range(tmpnFJ):
                 tmpFJ_pt = ev.FatJet_ptL[FJInd]
                 backgroundHistAr[k].Fill(tmpFJ_pt,tmpEvWeight)
+            evInFileCtr += 1
             evCtr += 1
                 
     
