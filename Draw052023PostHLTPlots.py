@@ -534,10 +534,11 @@ for k,fileA in enumerate(fileBackgroundAr):
             for FJInd in range(tmpnFJ):
                 tmpFJ_pt = ev.FatJet_ptL[FJInd]
                 backgroundHistAr[k].Fill(tmpFJ_pt,tmpEvWeight)
+            evCtr += 1
                 
     
 
-        evCtr += 1
+        
 
 ##################MAIN LOOP##################
 for k,fileA in enumerate(fileSignalAr):
@@ -557,10 +558,11 @@ for k,fileA in enumerate(fileSignalAr):
             for FJInd in range(tmpnFJ):
                 tmpFJ_pt = ev.FatJet_ptL[FJInd]
                 signalHist.Fill(tmpFJ_pt,tmpEvWeight)
+            evCtr += 1
                 
     
 
-        evCtr += 1
+        
     
     
 print("evCtr",evCtr,"skipCtr",skipCtr,"cutCtr",cutCtr)
