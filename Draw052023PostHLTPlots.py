@@ -463,7 +463,7 @@ featPermFinerBinsAr = [[[100,0,1],[100,0,10]],
                 [[100,0,10],[100,0,4000]]]
 
 genBackgroundFileString = "/scratch365/dlutton/HLTFilteredFiles/HLTTrimmedFilteredForAnalysis{0}{1}.root"
-genSignalFileString = "/scratch365/dlutton/HLTFilteredFiles/HLTTrimmedFilteredForAnalysisSD{0}{1}Reweight.root"
+genSignalFileString = "/scratch365/dlutton/HLTFilteredFiles/HLTTrimmedFilteredForAnalysisSD{0}{1}Reweight_0.root"
 fileSignalAr = []
 fileBackgroundAr = []
 for datasetInd,datasetStr in enumerate(datasetSignalAr):
@@ -521,7 +521,7 @@ for k,fileA in enumerate(fileBackgroundAr):
     for i,fileStr in enumerate(fileA):
         tmpFile = TFile.Open(fileBackgroundAr[k][i])
         tmpTree = tmpFile.FilteredEventsTree
-        print("Looping over events")
+        print("Looping over {0}{1} events".format(datasetAr[k],datasetYearStrAr))
         tmpWeightCoef = crossSectionAr[k]*Run2LumiByYearAr[i]/totWeightAr[k][i]
         #LOOP OVER EVENTS IN FILE k
         for j,ev in enumerate(tmpTree):
@@ -546,7 +546,7 @@ for k,fileA in enumerate(fileSignalAr):
         evInFileCtr = 0
         tmpFile = TFile.Open(fileSignalAr[k][i])
         tmpTree = tmpFile.FilteredEventsTree
-        print("Looping over events")
+        print("Looping over {0}{1} events".format(datasetSignalAr[k],datasetYearStrAr))
         tmpWeightCoef = C2VXSAr[k]*Run2LumiByYearAr[i]/C2VTotWeightAr[k][i]
         #LOOP OVER EVENTS IN FILE k
         for j,ev in enumerate(tmpTree):
