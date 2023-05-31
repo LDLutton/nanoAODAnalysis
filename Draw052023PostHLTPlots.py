@@ -435,7 +435,7 @@ colorAr = [2,0,7,4,8,
             43]
 datasetYearStrAr = ["Y16APV","Y16","Y17",""]
 
-datasetSignalAr = ["C2VMCZZH","C2VMCWZH"]
+datasetSignalAr = ["C2V2MCZZH","C2V2MCWZH"]
 
 
 
@@ -521,7 +521,7 @@ for k,fileA in enumerate(fileBackgroundAr):
     for i,fileStr in enumerate(fileA):
         tmpFile = TFile.Open(fileBackgroundAr[k][i])
         tmpTree = tmpFile.FilteredEventsTree
-        print("Looping over {0}{1} events".format(datasetAr[k],datasetYearStrAr))
+        print("Looping over {0}{1} events".format(datasetAr[k],datasetYearStrAr[i]))
         tmpWeightCoef = crossSectionAr[k]*Run2LumiByYearAr[i]/totWeightAr[k][i]
         #LOOP OVER EVENTS IN FILE k
         for j,ev in enumerate(tmpTree):
@@ -546,7 +546,7 @@ for k,fileA in enumerate(fileSignalAr):
         evInFileCtr = 0
         tmpFile = TFile.Open(fileSignalAr[k][i])
         tmpTree = tmpFile.FilteredEventsTree
-        print("Looping over {0}{1} events".format(datasetSignalAr[k],datasetYearStrAr))
+        print("Looping over {0}{1} events".format(datasetSignalAr[k],datasetYearStrAr[i]))
         tmpWeightCoef = C2VXSAr[k]*Run2LumiByYearAr[i]/C2VTotWeightAr[k][i]
         #LOOP OVER EVENTS IN FILE k
         for j,ev in enumerate(tmpTree):
