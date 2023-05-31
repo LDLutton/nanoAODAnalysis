@@ -701,5 +701,5 @@ backgroundLeg.AddEntry(signalHist,"C2V","l")
 
 FJSecondCan = TCanvas("FJSecondCan","FJSecondCan",3600,2400)
 
-backgroundHistStack.SetMinimum(minVal-abs(minVal*0.1),maxVal+abs(maxVal*0.1))
+backgroundHistStack.SetMinimum(minVal-abs(minVal*0.1))
 makeStackedPlotsWithSignal(FJSecondCan,backgroundHistStack,backgroundLeg,"AK8JetPt",backgroundHistSum,"AK8 Jet Pt",signalHist)
