@@ -161,7 +161,7 @@ def makeStackedPlotsWithSignal(histCan,histStack,histLeg,histSaveStr,histSum,his
     histStack.GetYaxis().CenterTitle()
     histStack.GetYaxis().SetTitleSize(0.068)
     histStack.GetYaxis().SetTitleOffset(0.6)
-    histSignal.Draw("SAME")
+    histSignal.Draw("SAME hist")
     histLeg.Draw()
     histCan.Draw()
     histCan.cd()
@@ -683,7 +683,7 @@ backgroundHistQCDSum.SetFillColorAlpha(5,1)
 backgroundLeg.AddEntry(backgroundHistQCDSum,"QCD","f")
 backgroundHistStack.Add(backgroundHistQCDSum)
 
-backgroundHistVHSum.SetFillColorAlpha(31,1)
+backgroundHistVHSum.SetFillColorAlpha(20,1)
 backgroundLeg.AddEntry(backgroundHistVHSum,"VH","f")
 backgroundHistStack.Add(backgroundHistVHSum)
 
@@ -691,7 +691,7 @@ backgroundHistDYSum.SetFillColorAlpha(8,1)
 backgroundLeg.AddEntry(backgroundHistDYSum,"DY","f")
 backgroundHistStack.Add(backgroundHistDYSum)
 
-backgroundHistV2JetsSum.SetFillColorAlpha(5,1)
+backgroundHistV2JetsSum.SetFillColorAlpha(25,1)
 backgroundLeg.AddEntry(backgroundHistV2JetsSum,"V2Jets","f")
 backgroundHistStack.Add(backgroundHistV2JetsSum)
 
