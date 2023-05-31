@@ -513,7 +513,7 @@ backgroundHistQCDSum = TH1D("backgroundHistQCDSum","backgroundHistQCDSum", 20,0,
 
 skipCtr = 0
 cutCtr = 0
-evFullCtr = 0
+evCtr = 0
 
 
 ##################MAIN LOOP##################
@@ -527,7 +527,7 @@ for k,fileA in enumerate(fileBackgroundAr):
         for j,ev in enumerate(tmpTree):
             if breakEvEarly and evCtr >= breakEvAt:
                 break
-            if evCtr % 10000 == 0:
+            if evCtr % 100000 == 0:
                 print("ev:",evCtr)
             tmpEvWeight = tmpWeightCoef*ev.genWeightL
             tmpnFJ = ev.nFatJet
@@ -538,7 +538,6 @@ for k,fileA in enumerate(fileBackgroundAr):
     
 
         evCtr += 1
-        evFullCtr += 1
 
 ##################MAIN LOOP##################
 for k,fileA in enumerate(fileSignalAr):
@@ -551,7 +550,7 @@ for k,fileA in enumerate(fileSignalAr):
         for j,ev in enumerate(tmpTree):
             if breakEvEarly and evCtr >= breakEvAt:
                 break
-            if evCtr % 10000 == 0:
+            if evCtr % 100000 == 0:
                 print("ev:",evCtr)
             tmpEvWeight = tmpWeightCoef*ev.genWeightL
             tmpnFJ = ev.nFatJet
@@ -562,10 +561,9 @@ for k,fileA in enumerate(fileSignalAr):
     
 
         evCtr += 1
-        evFullCtr += 1
     
     
-print("evCtr",evCtr,"evFullCtr",evFullCtr,"skipCtr",skipCtr,"cutCtr",cutCtr)
+print("evCtr",evCtr,"skipCtr",skipCtr,"cutCtr",cutCtr)
 
 ##################END MAIN LOOP##################
 print("Finished main loop")
