@@ -440,28 +440,7 @@ datasetSignalAr = ["C2V2MCZZH","C2V2MCWZH"]
 
 
 
-
-
-datasetSaveNameAr = []
-fileAr = []
-XSAr = []
-totalEvents = []
-fileAr = []
-useLHEAr = []
 gStyle.SetOptStat(0)
-features = ["bdt",
-            "selectedVBFJets_EtaSep_SL_L",
-            "selectedVBFJets_InvMass_SL_L"]
-featPermAr = ["bdtXVBFEtaSep",
-            "bdtXVBFInvMass",
-            "VBFEtaSepXVBFInvMass"]
-featPermBinsAr = [[[10,0,1],[10,0,10]],
-                [[10,0,1],[10,0,4000]],
-                [[10,0,10],[10,0,4000]]]
-
-featPermFinerBinsAr = [[[100,0,1],[100,0,10]],
-                [[100,0,1],[100,0,4000]],
-                [[100,0,10],[100,0,4000]]]
 
 genBackgroundFileString = "/scratch365/dlutton/HLTFilteredFiles/HLTTrimmedFilteredForAnalysis{0}{1}.root"
 genSignalFileString = "/scratch365/dlutton/HLTFilteredFiles/HLTTrimmedFilteredForAnalysisSD{0}{1}Reweight_0.root"
@@ -573,35 +552,34 @@ print("evCtr",evCtr,"skipCtr",skipCtr,"cutCtr",cutCtr)
 ##################END MAIN LOOP##################
 print("Finished main loop")
 
-maxAr = [0,0,0,0,0]
-minAr = [100000,100000,100000,100000,100000]
+maxVal = 0
+minVal = 100000
 
 ###################BDT and IM and PN Hists###################
 
 for datasetItr in range(len(datasetAr)):
     tmpMax = backgroundHistAr[datasetItr].GetMaximum()
-    if tmpMax > maxAr[4]:
-        maxAr[4] = tmpMax
+    if tmpMax > maxVal:
+        maxVal = tmpMax
     tmpMin = backgroundHistAr[datasetItr].GetMinimum()
-    if tmpMin < minAr[4]:
-        minAr[4] = tmpMin
+    if tmpMin < minVal:
+        minVal = tmpMin
 
 tmpMax = signalHist.GetMaximum()
-if tmpMax > maxAr[4]:
-    maxAr[4] = tmpMax
+if tmpMax > maxVal:
+    maxVal = tmpMax
 tmpMin = signalHist.GetMinimum()
-if tmpMin < minAr[4]:
-    minAr[4] = tmpMin
+if tmpMin < minVal:
+    minVal = tmpMin
 
 
 
-print(minAr,maxAr)
+print(minVal,maxVal)
 
-for i,minA in enumerate(minAr):
-    if minA <= 0:
-        minAr[i] = 1
+if minVal <= 0:
+    minVal = 1
 
-print(minAr)
+print(minVal)
 
 legAr = []
 legAr.append(TLegend(.75,.4,.99,.99))
@@ -616,7 +594,7 @@ makeNiceHistos(backgroundHistAr[0],"background Value","",False)
 backgroundHistAr[0].SetLineWidth(4)
 backgroundHistAr[0].SetLineColorAlpha(colorAr[0],1)
 
-backgroundHistAr[0].GetYaxis().SetRangeUser(minAr[0]-abs(minAr[0]*0.1),maxAr[0]+abs(maxAr[0]*0.1))
+backgroundHistAr[0].GetYaxis().SetRangeUser(minVal-abs(minVal*0.1),maxVal+abs(maxVal*0.1))
 backgroundHistAr[0].Draw()
 
 legAr[-1].AddEntry(backgroundHistAr[0],datasetAr[0],"l")
