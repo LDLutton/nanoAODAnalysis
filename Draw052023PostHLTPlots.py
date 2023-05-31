@@ -530,9 +530,9 @@ for k,fileA in enumerate(fileBackgroundAr):
             if evCtr % 100000 == 0:
                 print("ev:",evCtr)
             tmpEvWeight = tmpWeightCoef*ev.genWeightL
-            tmpnFJ = ev.nFatJet
+            tmpnFJ = ev.nFatJetL
             for FJInd in range(tmpnFJ):
-                tmpFJ_pt = ev.FatJet_pt[FJInd]
+                tmpFJ_pt = ev.FatJet_ptL[FJInd]
                 backgroundHistAr[k].Fill(tmpFJ_pt,tmpEvWeight)
                 
     
@@ -553,9 +553,9 @@ for k,fileA in enumerate(fileSignalAr):
             if evCtr % 100000 == 0:
                 print("ev:",evCtr)
             tmpEvWeight = tmpWeightCoef*ev.genWeightL
-            tmpnFJ = ev.nFatJet
+            tmpnFJ = ev.nFatJetL
             for FJInd in range(tmpnFJ):
-                tmpFJ_pt = ev.FatJet_pt[FJInd]
+                tmpFJ_pt = ev.FatJet_ptL[FJInd]
                 signalHist.Fill(tmpFJ_pt,tmpEvWeight)
                 
     
