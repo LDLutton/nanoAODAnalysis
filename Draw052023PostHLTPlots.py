@@ -520,7 +520,7 @@ evFullCtr = 0
 for k,fileA in enumerate(fileBackgroundAr):
     for i,fileStr in enumerate(fileA):
         tmpFile = TFile.Open(fileBackgroundAr[k][i])
-        tmpTree = tmpFile.passingEvSemiLepTree
+        tmpTree = tmpFile.FilteredEventsTree
         print("Looping over events")
         tmpWeightCoef = crossSectionAr[k]*Run2LumiByYearAr[i]/totWeightAr[k][i]
         #LOOP OVER EVENTS IN FILE k
@@ -544,7 +544,7 @@ for k,fileA in enumerate(fileBackgroundAr):
 for k,fileA in enumerate(fileSignalAr):
     for i,fileStr in enumerate(fileA):
         tmpFile = TFile.Open(fileSignalAr[k][i])
-        tmpTree = tmpFile.passingEvSemiLepTree
+        tmpTree = tmpFile.FilteredEventsTree
         print("Looping over events")
         tmpWeightCoef = C2VXSAr[k]*Run2LumiByYearAr[i]/C2VTotWeightAr[k][i]
         #LOOP OVER EVENTS IN FILE k
