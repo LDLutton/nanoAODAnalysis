@@ -626,9 +626,6 @@ backgroundLeg.SetTextSize(0.036)
 backgroundLeg.SetTextFont(42)
 
 for histItr in range(len(backgroundHistAr)):
-    if not backgroundOnly:
-        if histItr == 0:
-            continue
     if backgroundHistAr[histItr].GetMaximum()== 0 and backgroundHistAr[histItr].GetMinimum()== 0:
         continue
     ######
