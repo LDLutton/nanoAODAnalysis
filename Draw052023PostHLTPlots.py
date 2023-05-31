@@ -631,7 +631,7 @@ FJCan.Draw()
 FJCan.SaveAs("FJPt_PostHLT_LogPlot_AllYears_{0}.png".format("{0:02}".format(today.month)+"{0:02}".format(today.day)+"{0:04}".format(today.year)))
 
 
-backgroundLeg = TLegend(.71,.55,.85,.999 )
+backgroundLeg = TLegend(.80,.55,.99,.999 )
 backgroundLeg.SetTextSize(0.036)
 backgroundLeg.SetTextFont(42)
 
@@ -697,5 +697,9 @@ backgroundHistStack.Add(backgroundHistV2JetsSum)
 
 backgroundLeg.AddEntry(signalHist,"C2V","l")
 
+
+
 FJSecondCan = TCanvas("FJSecondCan","FJSecondCan",3600,2400)
+
+backgroundHistStack.GetYaxis().SetRangeUser(minVal-abs(minVal*0.1),maxVal+abs(maxVal*0.1))
 makeStackedPlotsWithSignal(FJSecondCan,backgroundHistStack,backgroundLeg,"AK8JetPt",backgroundHistSum,"AK8 Jet Pt",signalHist)
