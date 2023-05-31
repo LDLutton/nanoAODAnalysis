@@ -300,14 +300,7 @@ C2VTotWeightAr = [C2V2TotWeightByYearAr,C2V2WZHTotWeightByYearAr]
 
 Run2LumiByYearAr = [59830,41480,16810,19520]
 
-toSumHistsSTAr = [13,14,15,25,26]
 
-toSumHistsVVVAr = [37,38,39,51]
-
-toSumHistsVVAr = [17,18,19]
-
-toSumHistsTTbbAr = [20,21,22]
-toSumHistsQCDAr = [3,4,5,6,7,8,9,10,11,12]
 
 
 
@@ -332,6 +325,18 @@ datasetAr = ["ttHToBB","ttZJets","DY", #2
             "ggZH_HToBB_ZToBB","ggZH_HToBB_ZToLL","ggZH_HToBB_ZToNuNu","ggZH_HToBB_ZToQQ",
             "EWKZ2Jets_ZToLL","EWKZ2Jets_ZToNuNu","EWKZ2Jets_ZToQQ", #50
             "ZZZ"]
+
+toSumHistsSTAr = [13,14,15,25,26]
+
+toSumHistsVVVAr = [37,38,39,51]
+
+toSumHistsVVAr = [17,18,19]
+
+toSumHistsTTbbAr = [20,21,22]
+toSumHistsQCDAr = [3,4,5,6,7,8,9,10,11,12]
+toSumHistsVHAr = [31,32,33,34,35,40,41,42,43,44,45,46,47]
+toSumHistsDYAr = [2,24]
+toSumHistsV2JetsAr = [27,28,29,30,48,49,50]
 
 #datasetYearStrAr = ["","Y17","Y16","Y16APV"]
 datasetYearStrAr = ["Y16APV","Y16","Y17",""]
@@ -404,27 +409,27 @@ totWeightAr = [[2315362.9999999995,2470819.7700000005,3919780.398000001,4843451.
 
 
 
-colorAr = [7,4,8,
-            0,0,0,0,0,0,
-            0,0,0,0,
-            0,0,0,
-            9,
-            0,0,0,
-            0,0,0,
-            38,
-            8,
-            0,0,
-            11,12,
-            13,14,
-            20,
-            15,16,
-            17,18,
-            19,
-            0,0,0,
-            25,26,27,28,
-            29,30,31,32,
-            33,34,35,
-            43]
+colorAr = [7,4,0, #2
+            0,0,0,0,0,0, #8
+            0,0,0,0, #12
+            0,0,0, #15
+            9,      #16
+            0,0,0,  #19
+            0,0,0,  #22
+            38,     #23
+            0,      #24
+            0,0,    #26
+            0,0,  #28
+            0,0,  #30
+            0,     #31
+            0,0,  #33
+            0,0,  #35
+            19,     #36
+            0,0,0,  #39
+            0,0,0,0,  #43
+            0,0,0,0,  #47
+            0,0,0,     #50
+            0]           #51
 datasetYearStrAr = ["Y16APV","Y16","Y17",""]
 datasetSignalYearStrAr = ["16APV","16","17",""]
 
@@ -451,32 +456,43 @@ for datasetInd,datasetStr in enumerate(datasetAr):
 
 print("Initializing hists")
 
-signalHist = TH1D("signalHist","signalHist", 20,0,2000)
+signalHist = TH1D("signalHist","signalHist", 20,0,1500)
 
-backgroundHistAr = [TH1D("backgroundHist{0}".format(datasetName),"backgroundHist{0}".format(datasetName), 20,0,2000) for datasetName in datasetAr]
+backgroundHistAr = [TH1D("backgroundHist{0}".format(datasetName),"backgroundHist{0}".format(datasetName), 20,0,1500) for datasetName in datasetAr]
 
 ########THStacks
 
 backgroundHistStack = THStack("backgroundHistStack","background")
 
 ########THSum
-backgroundHistSum = TH1D("backgroundHistSum","backgroundHistSum", 20,0,2000)
+backgroundHistSum = TH1D("backgroundHistSum","backgroundHistSum", 20,0,1500)
 
 #ST Sum
-backgroundHistSTSum = TH1D("backgroundHistSTSum","backgroundHistSTSum", 20,0,2000)
+backgroundHistSTSum = TH1D("backgroundHistSTSum","backgroundHistSTSum", 20,0,1500)
 
 #VVV Sum
-backgroundHistVVVSum = TH1D("backgroundHistVVVSum","backgroundHistVVVSum", 20,0,2000)
+backgroundHistVVVSum = TH1D("backgroundHistVVVSum","backgroundHistVVVSum", 20,0,1500)
 
 #VV Sum
-backgroundHistVVSum = TH1D("backgroundHistVVSum","backgroundHistVVSum", 20,0,2000)
+backgroundHistVVSum = TH1D("backgroundHistVVSum","backgroundHistVVSum", 20,0,1500)
 
 
 #TTbb Sum
-backgroundHistTTbbSum = TH1D("backgroundHistTTbbSum","backgroundHistTTbbSum", 20,0,2000)
+backgroundHistTTbbSum = TH1D("backgroundHistTTbbSum","backgroundHistTTbbSum", 20,0,1500)
 
 #QCD Sum
-backgroundHistQCDSum = TH1D("backgroundHistQCDSum","backgroundHistQCDSum", 20,0,2000)
+backgroundHistQCDSum = TH1D("backgroundHistQCDSum","backgroundHistQCDSum", 20,0,1500)
+
+
+
+#VH Sum
+backgroundHistVHSum = TH1D("backgroundHistVHSum","backgroundHistVHSum", 20,0,1500)
+
+#DY Sum
+backgroundHistDYSum = TH1D("backgroundHistDYSum","backgroundHistDYSum", 20,0,1500)
+
+#V2Jets Sum
+backgroundHistV2JetsSum = TH1D("backgroundHistV2JetsSum","backgroundHistV2JetsSum", 20,0,1500)
 
 
 
@@ -635,6 +651,12 @@ for histItr in range(len(backgroundHistAr)):
         backgroundHistTTbbSum.Add(backgroundHistAr[histItr])
     elif histItr in toSumHistsQCDAr:
         backgroundHistQCDSum.Add(backgroundHistAr[histItr])
+    elif histItr in toSumHistsVHAr:
+        backgroundHistVHSum.Add(backgroundHistAr[histItr])
+    elif histItr in toSumHistsDYAr:
+        backgroundHistDYSum.Add(backgroundHistAr[histItr])
+    elif histItr in toSumHistsV2JetsAr:
+        backgroundHistV2JetsSum.Add(backgroundHistAr[histItr])
     else:
         backgroundLeg.AddEntry(backgroundHistAr[histItr],datasetAr[histItr],"f")
         backgroundHistStack.Add(backgroundHistAr[histItr])
@@ -660,6 +682,18 @@ backgroundHistStack.Add(backgroundHistTTbbSum)
 backgroundHistQCDSum.SetFillColorAlpha(5,1)
 backgroundLeg.AddEntry(backgroundHistQCDSum,"QCD","f")
 backgroundHistStack.Add(backgroundHistQCDSum)
+
+backgroundHistVHSum.SetFillColorAlpha(31,1)
+backgroundLeg.AddEntry(backgroundHistVHSum,"VH","f")
+backgroundHistStack.Add(backgroundHistVHSum)
+
+backgroundHistDYSum.SetFillColorAlpha(8,1)
+backgroundLeg.AddEntry(backgroundHistDYSum,"DY","f")
+backgroundHistStack.Add(backgroundHistDYSum)
+
+backgroundHistV2JetsSum.SetFillColorAlpha(5,1)
+backgroundLeg.AddEntry(backgroundHistV2JetsSum,"V2Jets","f")
+backgroundHistStack.Add(backgroundHistV2JetsSum)
 
 backgroundLeg.AddEntry(signalHist,"C2V","l")
 
