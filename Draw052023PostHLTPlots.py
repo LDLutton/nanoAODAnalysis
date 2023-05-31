@@ -543,13 +543,14 @@ for k,fileA in enumerate(fileBackgroundAr):
 ##################MAIN LOOP##################
 for k,fileA in enumerate(fileSignalAr):
     for i,fileStr in enumerate(fileA):
+        evInFileCtr = 0
         tmpFile = TFile.Open(fileSignalAr[k][i])
         tmpTree = tmpFile.FilteredEventsTree
         print("Looping over events")
         tmpWeightCoef = C2VXSAr[k]*Run2LumiByYearAr[i]/C2VTotWeightAr[k][i]
         #LOOP OVER EVENTS IN FILE k
         for j,ev in enumerate(tmpTree):
-            if breakEvEarly and evCtr >= breakEvAt:
+            if breakEvEarly and evInFileCtr >= breakEvAt:
                 break
             if evCtr % 100000 == 0:
                 print("ev:",evCtr)
@@ -558,6 +559,7 @@ for k,fileA in enumerate(fileSignalAr):
             for FJInd in range(tmpnFJ):
                 tmpFJ_pt = ev.FatJet_ptL[FJInd]
                 signalHist.Fill(tmpFJ_pt,tmpEvWeight)
+            evInFileCtr += 1
             evCtr += 1
                 
     
