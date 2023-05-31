@@ -434,6 +434,7 @@ colorAr = [2,0,7,4,8,
             28,1,1,#0,0,
             43]
 datasetYearStrAr = ["Y16APV","Y16","Y17",""]
+datasetSignalYearStrAr = ["16APV","16","17",""]
 
 datasetSignalAr = ["C2V2MCZZH","C2V2MCWZH"]
 
@@ -468,7 +469,7 @@ fileSignalAr = []
 fileBackgroundAr = []
 for datasetInd,datasetStr in enumerate(datasetSignalAr):
     fileSignalAr.append([])
-    for yearInd,yearStr in enumerate(datasetYearStrAr):
+    for yearInd,yearStr in enumerate(datasetSignalYearStrAr):
         fileSignalAr[-1].append(genSignalFileString.format(datasetStr,yearStr))
 
 for datasetInd,datasetStr in enumerate(datasetAr):
@@ -546,7 +547,7 @@ for k,fileA in enumerate(fileSignalAr):
         evInFileCtr = 0
         tmpFile = TFile.Open(fileSignalAr[k][i])
         tmpTree = tmpFile.FilteredEventsTree
-        print("Looping over {0}{1} events".format(datasetSignalAr[k],datasetYearStrAr[i]))
+        print("Looping over {0}{1} events".format(datasetSignalAr[k],datasetSignalYearStrAr[i]))
         tmpWeightCoef = C2VXSAr[k]*Run2LumiByYearAr[i]/C2VTotWeightAr[k][i]
         #LOOP OVER EVENTS IN FILE k
         for j,ev in enumerate(tmpTree):
