@@ -487,6 +487,7 @@ evCtr = 0
 ##################MAIN LOOP##################
 for k,fileA in enumerate(fileBackgroundAr):
     for i,fileStr in enumerate(fileA):
+        evInFileCtr = 0
         tmpFile = TFile.Open(fileBackgroundAr[k][i])
         tmpTree = tmpFile.FilteredEventsTree
         print("Looping over {0}{1} events".format(datasetAr[k],datasetYearStrAr[i]))
