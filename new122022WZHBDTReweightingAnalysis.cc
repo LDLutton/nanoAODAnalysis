@@ -90,6 +90,7 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
     double XS = 1;
 
     UInt_t datasetType = 25;
+    UInt_t yearType = 0;
 
 
     
@@ -103,6 +104,7 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
     }
     else if (SDC2V2MCWZH17Reweight){
         saveName = "SDC2V2MCWZH17Reweight";
+        yearType = 1;
         //totWeight = ;
         //XS = ;
         isBackground = false;
@@ -111,6 +113,7 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
     }
     else if (SDC2V2MCWZH16Reweight){
         saveName = "SDC2V2MCWZH16Reweight";
+        yearType = 2;
         //totWeight = ;
         //XS = ;
         isBackground = false;
@@ -119,6 +122,7 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
     }
     else if (SDC2V2MCWZH16APVReweight){
         saveName = "SDC2V2MCWZH16APVReweight";
+        yearType = 3;
         //totWeight = ;
         //XS = ;
         isBackground = false;
@@ -135,6 +139,7 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
     }
     else if (SDC2V2MCWZH17ReweightTrimmed){
         saveName = "SDC2V2MCWZH17ReweightTrimmed";
+        yearType = 1;
         //totWeight = ;
         //XS = ;
         isBackground = false;
@@ -143,6 +148,7 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
     }
     else if (SDC2V2MCWZH16ReweightTrimmed){
         saveName = "SDC2V2MCWZH16ReweightTrimmed";
+        yearType = 2;
         //totWeight = ;
         //XS = ;
         isBackground = false;
@@ -151,6 +157,7 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
     }
     else if (SDC2V2MCWZH16APVReweightTrimmed){
         saveName = "SDC2V2MCWZH16APVReweightTrimmed";
+        yearType = 3;
         //totWeight = ;
         //XS = ;
         isBackground = false;
@@ -385,6 +392,7 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
     //Double_t passingEvFullWeight_L_L;
 
     UInt_t datasetType_L_L;
+    UInt_t yearType_L_L;
 
     Float_t selectedHiggsFJ_pt_L_L;
     Float_t selectedHiggsFJ_eta_L_L;
@@ -444,6 +452,7 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
     //passingEvLepTree->Branch("passingEvFullWeight_L_L",&passingEvFullWeight_L_L,"passingEvFullWeight_L_L/D");
 
     passingEvLepTree->Branch("datasetType_L_L",&datasetType_L_L,"datasetType_L_L/i");
+    passingEvLepTree->Branch("yearType_L_L",&yearType_L_L,"yearType_L_L/i");
 
     passingEvLepTree->Branch("selectedHiggsFJ_pt_L_L",&selectedHiggsFJ_pt_L_L,"selectedHiggsFJ_pt_L_L/F");
     passingEvLepTree->Branch("selectedHiggsFJ_eta_L_L",&selectedHiggsFJ_eta_L_L,"selectedHiggsFJ_eta_L_L/F");
@@ -509,6 +518,7 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
     //Double_t passingEvFullWeight_SL_L;
 
     UInt_t datasetType_SL_L;
+    UInt_t yearType_SL_L;
 
     Float_t selectedHiggsFJ_pt_SL_L;
     Float_t selectedHiggsFJ_eta_SL_L;
@@ -571,6 +581,7 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
     //passingEvSemiLepTree->Branch("passingEvFullWeight_SL_L",&passingEvFullWeight_SL_L,"passingEvFullWeight_SL_L/D");
 
     passingEvSemiLepTree->Branch("datasetType_SL_L",&datasetType_SL_L,"datasetType_SL_L/i");
+    passingEvSemiLepTree->Branch("yearType_SL_L",&yearType_SL_L,"yearType_SL_L/i");
 
     passingEvSemiLepTree->Branch("selectedHiggsFJ_pt_SL_L",&selectedHiggsFJ_pt_SL_L,"selectedHiggsFJ_pt_SL_L/F");
     passingEvSemiLepTree->Branch("selectedHiggsFJ_eta_SL_L",&selectedHiggsFJ_eta_SL_L,"selectedHiggsFJ_eta_SL_L/F");
@@ -1676,6 +1687,7 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
                     passingEvGenWeight_L_L = tmpGenWeights;
 
                     datasetType_L_L = datasetType;
+                    yearType_L_L = yearType;
 
                     selectedHiggsFJ_pt_L_L = hFatJet_pt_fromHTag;
                     selectedHiggsFJ_eta_L_L = hFatJet_eta_fromHTag;
@@ -1765,6 +1777,7 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
                     //passingEvFullWeight_SL_L = tmpGenWeights*XS*Run2Lumi/totWeight;
 
                     datasetType_SL_L = datasetType;
+                    yearType_SL_L = yearType;
 
                     selectedHiggsFJ_pt_SL_L = hFatJet_pt_fromHTag;
                     selectedZFJ_pt_SL_L = dRCheckVecAr[2].Pt();
