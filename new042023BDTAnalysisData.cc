@@ -125,7 +125,7 @@ void new042023BDTAnalysisData(string datasetString){
 
     std::string strAdd;
     if (scratchDown) strAdd ="/afs/crc.nd.edu/user/d/dlutton/Public/condorStuff/NanoAODToHistos/tmpHoldForNanoAODWithoutScratch/";
-    else strAdd ="/scratch365/dlutton/HLTFilteredFiles/dataFiles";
+    else strAdd ="/scratch365/dlutton/HLTFilteredFiles/dataFiles/";
     if (localTest) strAdd = "";
 
 
