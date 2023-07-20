@@ -677,6 +677,11 @@ void new122022BDTReweightingAnalysis(string datasetString){
     UInt_t datasetType_L_L;
     UInt_t yearType_L_L;
 
+    UInt_t eventNAK4Jets_L_L;
+    UInt_t eventNAK8Jets_L_L;
+    UInt_t eventNMuons_L_L;
+    UInt_t eventNElectrons_L_L;
+
     Float_t selectedHiggsFJ_pt_L_L;
     Float_t selectedHiggsFJ_eta_L_L;
     Float_t selectedHiggsFJ_ParticleNet_HbbvsQCD_L_L;
@@ -736,6 +741,11 @@ void new122022BDTReweightingAnalysis(string datasetString){
 
     passingEvLepTree->Branch("datasetType_L_L",&datasetType_L_L,"datasetType_L_L/i");
     passingEvLepTree->Branch("yearType_L_L",&yearType_L_L,"yearType_L_L/i");
+
+    passingEvLepTree->Branch("eventNAK4Jets_L_L",&eventNAK4Jets_L_L,"eventNAK4Jets_L_L/i");
+    passingEvLepTree->Branch("eventNAK8Jets_L_L",&eventNAK8Jets_L_L,"eventNAK8Jets_L_L/i");
+    passingEvLepTree->Branch("eventNMuons_L_L",&eventNMuons_L_L,"eventNMuons_L_L/i");
+    passingEvLepTree->Branch("eventNElectrons_L_L",&eventNElectrons_L_L,"eventNElectrons_L_L/i");
 
     passingEvLepTree->Branch("selectedHiggsFJ_pt_L_L",&selectedHiggsFJ_pt_L_L,"selectedHiggsFJ_pt_L_L/F");
     passingEvLepTree->Branch("selectedHiggsFJ_eta_L_L",&selectedHiggsFJ_eta_L_L,"selectedHiggsFJ_eta_L_L/F");
@@ -805,6 +815,11 @@ void new122022BDTReweightingAnalysis(string datasetString){
     UInt_t datasetType_SL_L;
     UInt_t yearType_SL_L;
 
+    UInt_t eventNAK4Jets_SL_L;
+    UInt_t eventNAK8Jets_SL_L;
+    UInt_t eventNMuons_SL_L;
+    UInt_t eventNElectrons_SL_L;
+
     Float_t selectedHiggsFJ_pt_SL_L;
     Float_t selectedHiggsFJ_eta_SL_L;
     Float_t selectedHiggsFJ_ParticleNet_HbbvsQCD_SL_L;
@@ -867,6 +882,11 @@ void new122022BDTReweightingAnalysis(string datasetString){
 
     passingEvSemiLepTree->Branch("datasetType_SL_L",&datasetType_SL_L,"datasetType_SL_L/i");
     passingEvSemiLepTree->Branch("yearType_SL_L",&yearType_SL_L,"yearType_SL_L/i");
+
+    passingEvSemiLepTree->Branch("eventNAK4Jets_SL_L",&eventNAK4Jets_SL_L,"eventNAK4Jets_SL_L/i");
+    passingEvSemiLepTree->Branch("eventNAK8Jets_SL_L",&eventNAK8Jets_SL_L,"eventNAK8Jets_SL_L/i");
+    passingEvSemiLepTree->Branch("eventNMuons_SL_L",&eventNMuons_SL_L,"eventNMuons_SL_L/i");
+    passingEvSemiLepTree->Branch("eventNElectrons_SL_L",&eventNElectrons_SL_L,"eventNElectrons_SL_L/i");
 
     passingEvSemiLepTree->Branch("selectedHiggsFJ_pt_SL_L",&selectedHiggsFJ_pt_SL_L,"selectedHiggsFJ_pt_SL_L/F");
     passingEvSemiLepTree->Branch("selectedHiggsFJ_eta_SL_L",&selectedHiggsFJ_eta_SL_L,"selectedHiggsFJ_eta_SL_L/F");
@@ -2848,6 +2868,11 @@ void new122022BDTReweightingAnalysis(string datasetString){
                         datasetType_L_L = datasetType;
                         yearType_L_L = yearType;
 
+                        eventNAK4Jets_L_L = nJetLen;
+                        eventNAK8Jets_L_L = nFatJetLen;
+                        eventNMuons_L_L = nmLep;
+                        eventNElectrons_L_L = neLep;
+
                         selectedHiggsFJ_pt_L_L = hFatJet_pt_fromHTag;
                         selectedHiggsFJ_eta_L_L = hFatJet_eta_fromHTag;
                         selectedHiggsFJ_ParticleNet_HbbvsQCD_L_L = hFatJet_HTag_fromHTag;
@@ -2927,6 +2952,11 @@ void new122022BDTReweightingAnalysis(string datasetString){
 
                                 datasetType_L_L = datasetType;
                                 yearType_L_L = yearType;
+
+                                eventNAK4Jets_L_L = nJetLen;
+                                eventNAK8Jets_L_L = nFatJetLen;
+                                eventNMuons_L_L = nmLep;
+                                eventNElectrons_L_L = neLep;
 
                                 selectedHiggsFJ_pt_L_L = hFatJet_pt_fromHTag;
                                 selectedHiggsFJ_eta_L_L = hFatJet_eta_fromHTag;
@@ -3051,6 +3081,11 @@ void new122022BDTReweightingAnalysis(string datasetString){
                         datasetType_SL_L = datasetType;
                         yearType_SL_L = yearType;
 
+                        eventNAK4Jets_SL_L = nJetLen;
+                        eventNAK8Jets_SL_L = nFatJetLen;
+                        eventNMuons_SL_L = nmLep;
+                        eventNElectrons_SL_L = neLep;
+
                         selectedHiggsFJ_pt_SL_L = hFatJet_pt_fromHTag;
                         selectedZFJ_pt_SL_L = dRCheckVecAr[2].Pt();
                         selectedHiggsFJ_eta_SL_L = hFatJet_eta_fromHTag;
@@ -3134,6 +3169,11 @@ void new122022BDTReweightingAnalysis(string datasetString){
 
                                 datasetType_SL_L = datasetType;
                                 yearType_SL_L = yearType;
+
+                                eventNAK4Jets_SL_L = nJetLen;
+                                eventNAK8Jets_SL_L = nFatJetLen;
+                                eventNMuons_SL_L = nmLep;
+                                eventNElectrons_SL_L = neLep;
 
                                 selectedHiggsFJ_pt_SL_L = hFatJet_pt_fromHTag;
                                 selectedZFJ_pt_SL_L = dRCheckVecAr[2].Pt();

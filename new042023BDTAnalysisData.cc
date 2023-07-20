@@ -131,6 +131,8 @@ void new042023BDTAnalysisData(string datasetString){
 
     UInt_t datasetType = 0;
 
+    UInt_t yearType = 0;
+
     if (BTagMuData){
         datasetType = 27;
         saveName = "BTagMuData";
@@ -218,6 +220,7 @@ void new042023BDTAnalysisData(string datasetString){
 
     else if (BTagCSV17Data){
         datasetType = 26;
+        yearType = 1;
         saveName = "BTagCSV17Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisBTagCSV17Data.root";
@@ -225,6 +228,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (BTagMu17Data){
         datasetType = 27;
+        yearType = 1;
         saveName = "BTagMu17Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisBTagMu17Data.root";
@@ -232,6 +236,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (Charmonium17Data){
         datasetType = 28;
+        yearType = 1;
         saveName = "Charmonium17Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCharmonium17Data.root";
@@ -239,6 +244,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (DisplacedJet17Data){
         datasetType = 29;
+        yearType = 1;
         saveName = "DisplacedJet17Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDisplacedJet17Data.root";
@@ -246,6 +252,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (DoubleEG17Data){
         datasetType = 30;
+        yearType = 1;
         saveName = "DoubleEG17Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDoubleEG17Data.root";
@@ -253,6 +260,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (DoubleMuon17Data){
         datasetType = 31;
+        yearType = 1;
         saveName = "DoubleMuon17Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDoubleMuon17Data.root";
@@ -260,6 +268,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (DoubleMuonLowMass17Data){
         datasetType = 32;
+        yearType = 1;
         saveName = "DoubleMuonLowMass17Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDoubleMuonLowMass17Data.root";
@@ -267,6 +276,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (FSQJet117Data){
         datasetType = 34;
+        yearType = 1;
         saveName = "FSQJet117Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisFSQJet117Data.root";
@@ -274,6 +284,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (FSQJet217Data){
         datasetType = 35;
+        yearType = 1;
         saveName = "FSQJet217Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisFSQJet217Data.root";
@@ -281,6 +292,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (HTMHT17Data){
         datasetType = 36;
+        yearType = 1;
         saveName = "HTMHT17Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisHTMHT17Data.root";
@@ -288,6 +300,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (HeavyFlavor17Data){
         datasetType = 37;
+        yearType = 1;
         saveName = "HeavyFlavor17Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisHeavyFlavor17Data.root";
@@ -295,6 +308,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (HighEGJet17Data){
         datasetType = 38;
+        yearType = 1;
         saveName = "HighEGJet17Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisHighEGJet17Data.root";
@@ -302,6 +316,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (HighPtLowerPhotons17Data){
         datasetType = 39;
+        yearType = 1;
         saveName = "HighPtLowerPhotons17Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisHighPtLowerPhotons17Data.root";
@@ -309,6 +324,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (HighPtPhoton30AndZ17Data){
         datasetType = 40;
+        yearType = 1;
         saveName = "HighPtPhoton30AndZ17Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisHighPtPhoton30AndZ17Data.root";
@@ -316,6 +332,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (JetHT17Data){
         datasetType = 41;
+        yearType = 1;
         saveName = "JetHT17Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisJetHT17Data.root";
@@ -323,6 +340,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (LowEGJet17Data){
         datasetType = 42;
+        yearType = 1;
         saveName = "LowEGJet17Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisLowEGJet17Data.root";
@@ -330,6 +348,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (MET17Data){
         datasetType = 43;
+        yearType = 1;
         saveName = "MET17Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMET17Data.root";
@@ -337,6 +356,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (MuOnia17Data){
         datasetType = 44;
+        yearType = 1;
         saveName = "MuOnia17Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMuOnia17Data.root";
@@ -344,6 +364,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (MuonEG17Data){
         datasetType = 45;
+        yearType = 1;
         saveName = "MuonEG17Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMuonEG17Data.root";
@@ -351,6 +372,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (SingleElectron17Data){
         datasetType = 46;
+        yearType = 1;
         saveName = "SingleElectron17Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSingleElectron17Data.root";
@@ -358,6 +380,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (SingleMuon17Data){
         datasetType = 47;
+        yearType = 1;
         saveName = "SingleMuon17Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSingleMuon17Data.root";
@@ -365,6 +388,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (SinglePhoton17Data){
         datasetType = 48;
+        yearType = 1;
         saveName = "SinglePhoton17Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSinglePhoton17Data.root";
@@ -372,6 +396,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (Tau17Data){
         datasetType = 49;
+        yearType = 1;
         saveName = "Tau17Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisTau17Data.root";
@@ -379,6 +404,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (BTagCSV16Data){
         datasetType = 26;
+        yearType = 2;
         saveName = "BTagCSV16Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisBTagCSV16Data.root";
@@ -386,6 +412,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (BTagMu16Data){
         datasetType = 27;
+        yearType = 2;
         saveName = "BTagMu16Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisBTagMu16Data.root";
@@ -393,6 +420,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (Charmonium16Data){
         datasetType = 28;
+        yearType = 2;
         saveName = "Charmonium16Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCharmonium16Data.root";
@@ -400,6 +428,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (DisplacedJet16Data){
         datasetType = 29;
+        yearType = 2;
         saveName = "DisplacedJet16Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDisplacedJet16Data.root";
@@ -407,6 +436,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (DoubleEG16Data){
         datasetType = 30;
+        yearType = 2;
         saveName = "DoubleEG16Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDoubleEG16Data.root";
@@ -414,6 +444,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (DoubleMuon16Data){
         datasetType = 31;
+        yearType = 2;
         saveName = "DoubleMuon16Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDoubleMuon16Data.root";
@@ -421,6 +452,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (DoubleMuonLowMass16Data){
         datasetType = 32;
+        yearType = 2;
         saveName = "DoubleMuonLowMass16Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDoubleMuonLowMass16Data.root";
@@ -428,6 +460,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (HTMHT16Data){
         datasetType = 36;
+        yearType = 2;
         saveName = "HTMHT16Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisHTMHT16Data.root";
@@ -435,6 +468,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (JetHT16Data){
         datasetType = 41;
+        yearType = 2;
         saveName = "JetHT16Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisJetHT16Data.root";
@@ -442,6 +476,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (MET16Data){
         datasetType = 43;
+        yearType = 2;
         saveName = "MET16Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMET16Data.root";
@@ -449,6 +484,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (MuOnia16Data){
         datasetType = 44;
+        yearType = 2;
         saveName = "MuOnia16Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMuOnia16Data.root";
@@ -456,6 +492,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (MuonEG16Data){
         datasetType = 45;
+        yearType = 2;
         saveName = "MuonEG16Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMuonEG16Data.root";
@@ -463,6 +500,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (SingleElectron16Data){
         datasetType = 46;
+        yearType = 2;
         saveName = "SingleElectron16Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSingleElectron16Data.root";
@@ -470,6 +508,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (SingleMuon16Data){
         datasetType = 47;
+        yearType = 2;
         saveName = "SingleMuon16Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSingleMuon16Data.root";
@@ -477,6 +516,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (SinglePhoton16Data){
         datasetType = 48;
+        yearType = 2;
         saveName = "SinglePhoton16Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSinglePhoton16Data.root";
@@ -484,6 +524,7 @@ void new042023BDTAnalysisData(string datasetString){
     }
     else if (Tau16Data){
         datasetType = 49;
+        yearType = 2;
         saveName = "Tau16Data";
         
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisTau16Data.root";
@@ -654,6 +695,12 @@ void new042023BDTAnalysisData(string datasetString){
     UInt_t run_L_L;
     UInt_t event_L_L;
     UInt_t datasetType_L_L;
+    UInt_t yearType_L_L;
+
+    UInt_t eventNAK4Jets_L_L;
+    UInt_t eventNAK8Jets_L_L;
+    UInt_t eventNMuons_L_L;
+    UInt_t eventNElectrons_L_L;
 
     Float_t selectedHiggsFJ_pt_L_L;
     Float_t selectedHiggsFJ_eta_L_L;
@@ -708,6 +755,12 @@ void new042023BDTAnalysisData(string datasetString){
     passingEvLepTree->Branch("run_L_L",&run_L_L,"run_L_L/i");
     passingEvLepTree->Branch("event_L_L",&event_L_L,"event_L_L/i");
     passingEvLepTree->Branch("datasetType_L_L",&datasetType_L_L,"datasetType_L_L/i");
+    passingEvLepTree->Branch("yearType_L_L",&yearType_L_L,"yearType_L_L/i");
+
+    passingEvLepTree->Branch("eventNAK4Jets_L_L",&eventNAK4Jets_L_L,"eventNAK4Jets_L_L/i");
+    passingEvLepTree->Branch("eventNAK8Jets_L_L",&eventNAK8Jets_L_L,"eventNAK8Jets_L_L/i");
+    passingEvLepTree->Branch("eventNMuons_L_L",&eventNMuons_L_L,"eventNMuons_L_L/i");
+    passingEvLepTree->Branch("eventNElectrons_L_L",&eventNElectrons_L_L,"eventNElectrons_L_L/i");
 
     passingEvLepTree->Branch("selectedHiggsFJ_pt_L_L",&selectedHiggsFJ_pt_L_L,"selectedHiggsFJ_pt_L_L/F");
     passingEvLepTree->Branch("selectedHiggsFJ_eta_L_L",&selectedHiggsFJ_eta_L_L,"selectedHiggsFJ_eta_L_L/F");
@@ -765,6 +818,12 @@ void new042023BDTAnalysisData(string datasetString){
     UInt_t run_SL_L;
     UInt_t event_SL_L;
     UInt_t datasetType_SL_L;
+    UInt_t yearType_SL_L;
+
+    UInt_t eventNAK4Jets_SL_L;
+    UInt_t eventNAK8Jets_SL_L;
+    UInt_t eventNMuons_SL_L;
+    UInt_t eventNElectrons_SL_L;
 
     Float_t selectedHiggsFJ_pt_SL_L;
     Float_t selectedHiggsFJ_eta_SL_L;
@@ -823,6 +882,12 @@ void new042023BDTAnalysisData(string datasetString){
     passingEvSemiLepTree->Branch("event_SL_L",&event_SL_L,"event_SL_L/i");
 
     passingEvSemiLepTree->Branch("datasetType_SL_L",&datasetType_SL_L,"datasetType_SL_L/i");
+    passingEvSemiLepTree->Branch("yearType_SL_L",&yearType_SL_L,"yearType_SL_L/i");
+
+    passingEvSemiLepTree->Branch("eventNAK4Jets_SL_L",&eventNAK4Jets_SL_L,"eventNAK4Jets_SL_L/i");
+    passingEvSemiLepTree->Branch("eventNAK8Jets_SL_L",&eventNAK8Jets_SL_L,"eventNAK8Jets_SL_L/i");
+    passingEvSemiLepTree->Branch("eventNMuons_SL_L",&eventNMuons_SL_L,"eventNMuons_SL_L/i");
+    passingEvSemiLepTree->Branch("eventNElectrons_SL_L",&eventNElectrons_SL_L,"eventNElectrons_SL_L/i");
 
     passingEvSemiLepTree->Branch("selectedHiggsFJ_pt_SL_L",&selectedHiggsFJ_pt_SL_L,"selectedHiggsFJ_pt_SL_L/F");
     passingEvSemiLepTree->Branch("selectedHiggsFJ_eta_SL_L",&selectedHiggsFJ_eta_SL_L,"selectedHiggsFJ_eta_SL_L/F");
@@ -1441,6 +1506,12 @@ void new042023BDTAnalysisData(string datasetString){
                     event_L_L = *eventL;
 
                     datasetType_L_L = datasetType;
+                    yearType_L_L = yearType;
+
+                    eventNAK4Jets_L_L = nJetLen;
+                    eventNAK8Jets_L_L = nFatJetLen;
+                    eventNMuons_L_L = nmLep;
+                    eventNElectrons_L_L = neLep;
 
                     selectedHiggsFJ_pt_L_L = hFatJet_pt_fromHTag;
                     selectedHiggsFJ_eta_L_L = hFatJet_eta_fromHTag;
@@ -1509,6 +1580,12 @@ void new042023BDTAnalysisData(string datasetString){
                     event_SL_L = *eventL;
 
                     datasetType_SL_L = datasetType;
+                    yearType_SL_L = yearType;
+
+                    eventNAK4Jets_SL_L = nJetLen;
+                    eventNAK8Jets_SL_L = nFatJetLen;
+                    eventNMuons_SL_L = nmLep;
+                    eventNElectrons_SL_L = neLep;
 
                     selectedHiggsFJ_pt_SL_L = hFatJet_pt_fromHTag;
                     selectedZFJ_pt_SL_L = dRCheckVecAr[2].Pt();
