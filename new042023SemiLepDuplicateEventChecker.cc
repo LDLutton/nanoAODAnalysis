@@ -160,6 +160,13 @@ void new042023SemiLepDuplicateEventChecker(){
     UInt_t event_SLU_L;
     UInt_t datasetType_SLU_L;
 
+    UInt_t yearType_SLU_L;
+
+    UInt_t eventNAK4Jets_SLU_L;
+    UInt_t eventNAK8Jets_SLU_L;
+    UInt_t eventNMuons_SLU_L;
+    UInt_t eventNElectrons_SLU_L;
+
     Float_t selectedHiggsFJ_pt_SLU_L;
     Float_t selectedHiggsFJ_eta_SLU_L;
     Float_t selectedHiggsFJ_ParticleNet_HbbvsQCD_SLU_L;
@@ -217,6 +224,13 @@ void new042023SemiLepDuplicateEventChecker(){
     passingEvSemiLepUniqueTree->Branch("event_SLU_L",&event_SLU_L,"event_SLU_L/i");
 
     passingEvSemiLepUniqueTree->Branch("datasetType_SLU_L",&datasetType_SLU_L,"datasetType_SLU_L/i");
+
+    passingEvSemiLepUniqueTree->Branch("yearType_SLU_L",&yearType_SLU_L,"yearType_SLU_L/i");
+
+    passingEvSemiLepUniqueTree->Branch("eventNAK4Jets_SLU_L",&eventNAK4Jets_SLU_L,"eventNAK4Jets_SLU_L/i");
+    passingEvSemiLepUniqueTree->Branch("eventNAK8Jets_SLU_L",&eventNAK8Jets_SLU_L,"eventNAK8Jets_SLU_L/i");
+    passingEvSemiLepUniqueTree->Branch("eventNMuons_SLU_L",&eventNMuons_SLU_L,"eventNMuons_SLU_L/i");
+    passingEvSemiLepUniqueTree->Branch("eventNElectrons_SLU_L",&eventNElectrons_SLU_L,"eventNElectrons_SLU_L/i");
 
     passingEvSemiLepUniqueTree->Branch("selectedHiggsFJ_pt_SLU_L",&selectedHiggsFJ_pt_SLU_L,"selectedHiggsFJ_pt_SLU_L/F");
     passingEvSemiLepUniqueTree->Branch("selectedHiggsFJ_eta_SLU_L",&selectedHiggsFJ_eta_SLU_L,"selectedHiggsFJ_eta_SLU_L/F");
@@ -290,6 +304,15 @@ void new042023SemiLepDuplicateEventChecker(){
         TTreeReaderValue<UInt_t> event_SL_L(myEventsReader,  "event_SL_L");
 
         TTreeReaderValue<UInt_t> datasetType_SL_L(myEventsReader,  "datasetType_SL_L");
+
+        TTreeReaderValue<UInt_t> yearType_SL_L(myEventsReader,  "yearType_SL_L");
+
+
+        TTreeReaderValue<UInt_t> eventNAK4Jets_SL_L(myEventsReader, "eventNAK4Jets_SL_L");
+        TTreeReaderValue<UInt_t> eventNAK8Jets_SL_L(myEventsReader,  "eventNAK8Jets_SL_L");
+        TTreeReaderValue<UInt_t> eventNMuons_SL_L(myEventsReader, "eventNMuons_SL_L");
+        TTreeReaderValue<UInt_t> eventNElectrons_SL_L(myEventsReader,  "eventNElectrons_SL_L");
+
 
         TTreeReaderValue<Float_t> selectedHiggsFJ_pt_SL_L(myEventsReader,  "selectedHiggsFJ_pt_SL_L");
         TTreeReaderValue<Float_t> selectedHiggsFJ_eta_SL_L(myEventsReader,  "selectedHiggsFJ_eta_SL_L");
@@ -392,6 +415,13 @@ void new042023SemiLepDuplicateEventChecker(){
                 event_SLU_L = *event_SL_L;
 
                 datasetType_SLU_L = *datasetType_SL_L;
+                
+                yearType_SLU_L = *yearType_SL_L;
+
+                eventNAK4Jets_SLU_L = *eventNAK4Jets_SL_L;
+                eventNAK8Jets_SLU_L = *eventNAK8Jets_SL_L;
+                eventNMuons_SLU_L = *eventNMuons_SL_L;
+                eventNElectrons_SLU_L = *eventNElectrons_SL_L;
 
                 selectedHiggsFJ_pt_SLU_L = *selectedHiggsFJ_pt_SL_L;
                 selectedZFJ_pt_SLU_L = *selectedZFJ_pt_SL_L;
