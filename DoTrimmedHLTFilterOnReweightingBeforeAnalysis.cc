@@ -570,6 +570,8 @@ void DoTrimmedHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
     Double_t HdRFromLeadZL;
     Double_t HdRFromTrailingZL;
     Double_t LeadZdRFromTrailingZL;
+    
+    
 
     TTree *genTree = new TTree("genTree", "genTree");
 
@@ -696,6 +698,7 @@ void DoTrimmedHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
     Double_t HGendRFromLepZLeadLepL;
     Double_t HGendRFromLepZTrailingLepL;
     Double_t HGendRFromHadZL;
+    Double_t LeadLepdRFromTrailingLepL;
 
     TTree *genSemiLepTree = new TTree("genSemiLepTree", "genSemiLepTree");
 
@@ -705,7 +708,8 @@ void DoTrimmedHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
     genSemiLepTree->Branch("HGendRFromLepZLeadLepL",&HGendRFromLepZLeadLepL,"HGendRFromLepZLeadLepL/D");
     genSemiLepTree->Branch("HGendRFromLepZTrailingLepL",&HGendRFromLepZTrailingLepL,"HGendRFromLepZTrailingLepL/D");
     genSemiLepTree->Branch("HGendRFromHadZL",&HGendRFromHadZL,"HGendRFromHadZL/D");
-
+    genSemiLepTree->Branch("LeadLepdRFromTrailingLepL",&LeadLepdRFromTrailingLepL,"LeadLepdRFromTrailingLepL/D");
+    
 
     //GenHadTree
 
@@ -1806,9 +1810,12 @@ void DoTrimmedHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
                                 float tmpHZLeadLepdR = calcDeltaR(tmpHPhi,tmpHEta,tmpZLepDecLeadPhi,tmpZLepDecLeadEta);
                                 float tmpHZTrailingLepdR = calcDeltaR(tmpHPhi,tmpHEta,tmpZLepDecTrailingPhi,tmpZLepDecTrailingEta);
 
+                                float tmpZLepDecLeadTrailingdR = calcDeltaR(tmpZLepDecLeadPhi,tmpZLepDecLeadEta,tmpZLepDecTrailingPhi,tmpZLepDecTrailingEta);
+
                                 HGendRFromLepZLeadLepL = tmpHZLeadLepdR;
                                 HGendRFromLepZTrailingLepL = tmpHZTrailingLepdR;
                                 HGendRFromHadZL = tmpHZdR;
+                                LeadLepdRFromTrailingLepL = tmpZLepDecLeadTrailingdR;
 
                                 nLHEReweightingWeightGenSemiLepL = *nLHEReweightingWeight;
                                 for (UInt_t nReweightItr=0; nReweightItr<nLHEReweightingWeightGenSemiLepL;nReweightItr++){
