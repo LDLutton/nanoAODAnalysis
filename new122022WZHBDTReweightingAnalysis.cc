@@ -781,6 +781,7 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
         TTreeReaderArray<Float_t> Muon_sip3dL(myEventsReader, "Muon_sip3dL");
         //TTreeReaderArray<Bool_t> Muon_tightIdL(myEventsReader, "Muon_tightIdL");
         TTreeReaderArray<Bool_t> Muon_mediumIdL(myEventsReader, "Muon_mediumIdL");
+        TTreeReaderArray<Bool_t> Muon_looseIdL(myEventsReader, "Muon_looseIdL");
 
 
         //For LepID

@@ -167,6 +167,20 @@ void new042023SemiLepDuplicateEventChecker(){
     UInt_t eventNMuons_SLU_L;
     UInt_t eventNElectrons_SLU_L;
 
+    std::vector<Float_t> Jet_eta_SLU_L;
+    std::vector<Float_t> Jet_pt_SLU_L;
+    std::vector<Float_t> Jet_phi_SLU_L;
+    std::vector<Float_t> Jet_mass_SLU_L;
+    std::vector<Int_t> Jet_jetId_SLU_L;
+    std::vector<Float_t> Jet_btagDeepFlavB_SLU_L;
+
+    UInt_t eventNAK4JetsPassingCuts_SLU_L;
+
+    UInt_t eventNLooseElectrons_SLU_L;
+    UInt_t eventNTightElectrons_SLU_L;
+    UInt_t eventNLooseMuons_SLU_L;
+    UInt_t eventNTightMuons_SLU_L;
+
     Float_t selectedHiggsFJ_pt_SLU_L;
     Float_t selectedHiggsFJ_eta_SLU_L;
     Float_t selectedHiggsFJ_ParticleNet_HbbvsQCD_SLU_L;
@@ -231,6 +245,22 @@ void new042023SemiLepDuplicateEventChecker(){
     passingEvSemiLepUniqueTree->Branch("eventNAK8Jets_SLU_L",&eventNAK8Jets_SLU_L,"eventNAK8Jets_SLU_L/i");
     passingEvSemiLepUniqueTree->Branch("eventNMuons_SLU_L",&eventNMuons_SLU_L,"eventNMuons_SLU_L/i");
     passingEvSemiLepUniqueTree->Branch("eventNElectrons_SLU_L",&eventNElectrons_SLU_L,"eventNElectrons_SLU_L/i");
+
+    passingEvSemiLepTree->Branch("Jet_eta_SLU_L",&Jet_eta_SLU_L);
+    passingEvSemiLepTree->Branch("Jet_pt_SLU_L",&Jet_pt_SLU_L);
+    passingEvSemiLepTree->Branch("Jet_phi_SLU_L",&Jet_phi_SLU_L);
+    passingEvSemiLepTree->Branch("Jet_mass_SLU_L",&Jet_mass_SLU_L);
+    passingEvSemiLepTree->Branch("Jet_jetId_SLU_L",&Jet_jetId_SLU_L);
+    passingEvSemiLepTree->Branch("Jet_btagDeepFlavB_SLU_L",&Jet_btagDeepFlavB_SLU_L);
+    
+
+    passingEvSemiLepTree->Branch("eventNAK4JetsPassingCuts_SLU_L",&eventNAK4JetsPassingCuts_SLU_L,"eventNAK4JetsPassingCuts_SLU_L/i");
+
+    passingEvSemiLepTree->Branch("eventNLooseElectrons_SLU_L",&eventNLooseElectrons_SLU_L,"eventNLooseElectrons_SLU_L/i");
+    passingEvSemiLepTree->Branch("eventNTightElectrons_SLU_L",&eventNTightElectrons_SLU_L,"eventNTightElectrons_SLU_L/i");
+
+    passingEvSemiLepTree->Branch("eventNLooseMuons_SLU_L",&eventNLooseMuons_SLU_L,"eventNLooseMuons_SLU_L/i");
+    passingEvSemiLepTree->Branch("eventNTightMuons_SLU_L",&eventNTightMuons_SLU_L,"eventNTightMuons_SLU_L/i");
 
     passingEvSemiLepUniqueTree->Branch("selectedHiggsFJ_pt_SLU_L",&selectedHiggsFJ_pt_SLU_L,"selectedHiggsFJ_pt_SLU_L/F");
     passingEvSemiLepUniqueTree->Branch("selectedHiggsFJ_eta_SLU_L",&selectedHiggsFJ_eta_SLU_L,"selectedHiggsFJ_eta_SLU_L/F");
@@ -423,6 +453,25 @@ void new042023SemiLepDuplicateEventChecker(){
                 eventNMuons_SLU_L = *eventNMuons_SL_L;
                 eventNElectrons_SLU_L = *eventNElectrons_SL_L;
 
+                for (UInt_t nJetItr=0; nJetItr<*eventNAK4Jets_SL_L;nJetItr++){
+                    Jet_eta_SLU_L.push_back(Jet_eta_SL_L[nJetItr]);
+                    Jet_pt_SLU_L.push_back(Jet_pt_SL_L[nJetItr]);
+                    Jet_phi_SLU_L.push_back(Jet_phi_SL_L[nJetItr]);
+                    Jet_mass_SLU_L.push_back(Jet_mass_SL_L[nJetItr]);
+                    Jet_jetId_SLU_L.push_back(Jet_jetId_SL_L[nJetItr]);
+                    Jet_btagDeepFlavB_SLU_L.push_back(Jet_btagDeepFlavB_SL_L[nJetItr]);
+                }
+
+                eventNAK4JetsPassingCuts_SLU_L = *eventNAK4JetsPassingCuts_SL_L;
+
+                eventNLooseElectrons_SLU_L = *eventNLooseElectrons_SL_L;
+                eventNTightElectrons_SLU_L = *eventNTightElectrons_SL_L;
+
+                eventNLooseMuons_SLU_L = *eventNLooseMuons_SL_L;
+                eventNTightMuons_SLU_L = *eventNTightMuons_SL_L;
+
+                
+
                 selectedHiggsFJ_pt_SLU_L = *selectedHiggsFJ_pt_SL_L;
                 selectedZFJ_pt_SLU_L = *selectedZFJ_pt_SL_L;
                 selectedHiggsFJ_eta_SLU_L = *selectedHiggsFJ_eta_SL_L;
@@ -474,6 +523,13 @@ void new042023SemiLepDuplicateEventChecker(){
 
 
                 passingEvSemiLepUniqueTree->Fill();
+
+                Jet_eta_SLU_L.clear();
+                Jet_pt_SLU_L.clear();
+                Jet_phi_SLU_L.clear();
+                Jet_mass_SLU_L.clear();
+                Jet_jetId_SLU_L.clear();
+                Jet_btagDeepFlavB_SLU_L.clear();
                 
 
 
