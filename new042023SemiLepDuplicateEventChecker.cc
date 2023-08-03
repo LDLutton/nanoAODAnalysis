@@ -246,21 +246,21 @@ void new042023SemiLepDuplicateEventChecker(){
     passingEvSemiLepUniqueTree->Branch("eventNMuons_SLU_L",&eventNMuons_SLU_L,"eventNMuons_SLU_L/i");
     passingEvSemiLepUniqueTree->Branch("eventNElectrons_SLU_L",&eventNElectrons_SLU_L,"eventNElectrons_SLU_L/i");
 
-    passingEvSemiLepTree->Branch("Jet_eta_SLU_L",&Jet_eta_SLU_L);
-    passingEvSemiLepTree->Branch("Jet_pt_SLU_L",&Jet_pt_SLU_L);
-    passingEvSemiLepTree->Branch("Jet_phi_SLU_L",&Jet_phi_SLU_L);
-    passingEvSemiLepTree->Branch("Jet_mass_SLU_L",&Jet_mass_SLU_L);
-    passingEvSemiLepTree->Branch("Jet_jetId_SLU_L",&Jet_jetId_SLU_L);
-    passingEvSemiLepTree->Branch("Jet_btagDeepFlavB_SLU_L",&Jet_btagDeepFlavB_SLU_L);
+    passingEvSemiLepUniqueTree->Branch("Jet_eta_SLU_L",&Jet_eta_SLU_L);
+    passingEvSemiLepUniqueTree->Branch("Jet_pt_SLU_L",&Jet_pt_SLU_L);
+    passingEvSemiLepUniqueTree->Branch("Jet_phi_SLU_L",&Jet_phi_SLU_L);
+    passingEvSemiLepUniqueTree->Branch("Jet_mass_SLU_L",&Jet_mass_SLU_L);
+    passingEvSemiLepUniqueTree->Branch("Jet_jetId_SLU_L",&Jet_jetId_SLU_L);
+    passingEvSemiLepUniqueTree->Branch("Jet_btagDeepFlavB_SLU_L",&Jet_btagDeepFlavB_SLU_L);
     
 
-    passingEvSemiLepTree->Branch("eventNAK4JetsPassingCuts_SLU_L",&eventNAK4JetsPassingCuts_SLU_L,"eventNAK4JetsPassingCuts_SLU_L/i");
+    passingEvSemiLepUniqueTree->Branch("eventNAK4JetsPassingCuts_SLU_L",&eventNAK4JetsPassingCuts_SLU_L,"eventNAK4JetsPassingCuts_SLU_L/i");
 
-    passingEvSemiLepTree->Branch("eventNLooseElectrons_SLU_L",&eventNLooseElectrons_SLU_L,"eventNLooseElectrons_SLU_L/i");
-    passingEvSemiLepTree->Branch("eventNTightElectrons_SLU_L",&eventNTightElectrons_SLU_L,"eventNTightElectrons_SLU_L/i");
+    passingEvSemiLepUniqueTree->Branch("eventNLooseElectrons_SLU_L",&eventNLooseElectrons_SLU_L,"eventNLooseElectrons_SLU_L/i");
+    passingEvSemiLepUniqueTree->Branch("eventNTightElectrons_SLU_L",&eventNTightElectrons_SLU_L,"eventNTightElectrons_SLU_L/i");
 
-    passingEvSemiLepTree->Branch("eventNLooseMuons_SLU_L",&eventNLooseMuons_SLU_L,"eventNLooseMuons_SLU_L/i");
-    passingEvSemiLepTree->Branch("eventNTightMuons_SLU_L",&eventNTightMuons_SLU_L,"eventNTightMuons_SLU_L/i");
+    passingEvSemiLepUniqueTree->Branch("eventNLooseMuons_SLU_L",&eventNLooseMuons_SLU_L,"eventNLooseMuons_SLU_L/i");
+    passingEvSemiLepUniqueTree->Branch("eventNTightMuons_SLU_L",&eventNTightMuons_SLU_L,"eventNTightMuons_SLU_L/i");
 
     passingEvSemiLepUniqueTree->Branch("selectedHiggsFJ_pt_SLU_L",&selectedHiggsFJ_pt_SLU_L,"selectedHiggsFJ_pt_SLU_L/F");
     passingEvSemiLepUniqueTree->Branch("selectedHiggsFJ_eta_SLU_L",&selectedHiggsFJ_eta_SLU_L,"selectedHiggsFJ_eta_SLU_L/F");
@@ -343,6 +343,18 @@ void new042023SemiLepDuplicateEventChecker(){
         TTreeReaderValue<UInt_t> eventNMuons_SL_L(myEventsReader, "eventNMuons_SL_L");
         TTreeReaderValue<UInt_t> eventNElectrons_SL_L(myEventsReader,  "eventNElectrons_SL_L");
 
+        TTreeReaderArray<Float_t> Jet_eta_SL_L(myEventsReader, "Jet_eta_SL_L");
+        TTreeReaderArray<Float_t> Jet_pt_SL_L(myEventsReader, "Jet_pt_SL_L");
+        TTreeReaderArray<Float_t> Jet_phi_SL_L(myEventsReader, "Jet_phi_SL_L");
+        TTreeReaderArray<Float_t> Jet_mass_SL_L(myEventsReader, "Jet_mass_SL_L");
+        TTreeReaderArray<Int_t> Jet_jetId_SL_L(myEventsReader, "Jet_jetId_SL_L");
+        TTreeReaderArray<Float_t> Jet_btagDeepFlavB_SL_L(myEventsReader, "Jet_btagDeepFlavB_SL_L");
+
+        TTreeReaderArray<UInt_t> eventNLooseElectrons_SL_L(myEventsReader, "eventNLooseElectrons_SL_L");
+        TTreeReaderArray<UInt_t> eventNTightElectrons_SL_L(myEventsReader, "eventNTightElectrons_SL_L");
+        TTreeReaderArray<UInt_t> eventNLooseMuons_SL_L(myEventsReader, "eventNLooseMuons_SL_L");
+        TTreeReaderArray<UInt_t> eventNTightMuons_SL_L(myEventsReader, "eventNTightMuons_SL_L");
+        TTreeReaderArray<UInt_t> eventNAK4JetsPassingCuts_SL_L(myEventsReader, "eventNAK4JetsPassingCuts_SL_L");
 
         TTreeReaderValue<Float_t> selectedHiggsFJ_pt_SL_L(myEventsReader,  "selectedHiggsFJ_pt_SL_L");
         TTreeReaderValue<Float_t> selectedHiggsFJ_eta_SL_L(myEventsReader,  "selectedHiggsFJ_eta_SL_L");
