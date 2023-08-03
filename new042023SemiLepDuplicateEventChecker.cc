@@ -350,11 +350,11 @@ void new042023SemiLepDuplicateEventChecker(){
         TTreeReaderArray<Int_t> Jet_jetId_SL_L(myEventsReader, "Jet_jetId_SL_L");
         TTreeReaderArray<Float_t> Jet_btagDeepFlavB_SL_L(myEventsReader, "Jet_btagDeepFlavB_SL_L");
 
-        TTreeReaderArray<UInt_t> eventNLooseElectrons_SL_L(myEventsReader, "eventNLooseElectrons_SL_L");
-        TTreeReaderArray<UInt_t> eventNTightElectrons_SL_L(myEventsReader, "eventNTightElectrons_SL_L");
-        TTreeReaderArray<UInt_t> eventNLooseMuons_SL_L(myEventsReader, "eventNLooseMuons_SL_L");
-        TTreeReaderArray<UInt_t> eventNTightMuons_SL_L(myEventsReader, "eventNTightMuons_SL_L");
-        TTreeReaderArray<UInt_t> eventNAK4JetsPassingCuts_SL_L(myEventsReader, "eventNAK4JetsPassingCuts_SL_L");
+        TTreeReaderValue<UInt_t> eventNLooseElectrons_SL_L(myEventsReader, "eventNLooseElectrons_SL_L");
+        TTreeReaderValue<UInt_t> eventNTightElectrons_SL_L(myEventsReader, "eventNTightElectrons_SL_L");
+        TTreeReaderValue<UInt_t> eventNLooseMuons_SL_L(myEventsReader, "eventNLooseMuons_SL_L");
+        TTreeReaderValue<UInt_t> eventNTightMuons_SL_L(myEventsReader, "eventNTightMuons_SL_L");
+        TTreeReaderValue<UInt_t> eventNAK4JetsPassingCuts_SL_L(myEventsReader, "eventNAK4JetsPassingCuts_SL_L");
 
         TTreeReaderValue<Float_t> selectedHiggsFJ_pt_SL_L(myEventsReader,  "selectedHiggsFJ_pt_SL_L");
         TTreeReaderValue<Float_t> selectedHiggsFJ_eta_SL_L(myEventsReader,  "selectedHiggsFJ_eta_SL_L");
