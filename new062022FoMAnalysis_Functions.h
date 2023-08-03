@@ -31,6 +31,213 @@ Int_t getInitialMother(TTreeReaderArray<Int_t> &GenPart_genPartIdxMother,TTreeRe
 
 
 
+void getNTightAndLooseElectrons(TTreeReaderArray<Bool_t> &Lep_IdL,TTreeReaderArray<Float_t> &Lep_eta,TTreeReaderArray<Float_t> &Lep_pt,TTreeReaderArray<Float_t> &Lep_Dxy,TTreeReaderArray<Float_t> &Lep_Dz,TTreeReaderArray<Float_t> &Lep_sip3d,TTreeReaderArray<Float_t> &Lep_MiniPFRelIso,TTreeReaderArray<Float_t> &Electron_sieie,TTreeReaderArray<Float_t> &Electron_hoe,TTreeReaderArray<Float_t> &Electron_eInvMinusPInv,TTreeReaderArray<Bool_t> &Electron_convVeto,TTreeReaderArray<UChar_t> &Electron_lostHits,TTreeReaderArray<Int_t> &Lep_jetIdx,TTreeReaderArray<Float_t> &Jet_btagDeepFlavB,TTreeReaderArray<Float_t> &Lep_mvaTTH,UInt_t nlLep,float lPtTightCut,float lPtLooseCut,float lEtaCut,float lDxyCut,float lDzCut,float lMiniPFRelIsoCut,float eSieieBarrelCut,float eSieieEndcapCut,float eHoeCut,float eInvMinusPInvCut,UInt_t eLostHitsCut,float lepJetDeepTagLooseCut,float lepJetDeepTagMediumCut,float lPromptMVACut,float lSIP3DCut,UInt_t &eTightCount,UInt_t &eLooseCount,bool debug){
+    for (UInt_t lItr=0; lItr < nlLep; lItr++){
+        
+        if (debug) std::cout << "lItr " << lItr<< "Lep_IdL[lItr]" << Lep_IdL[lItr] << "\n";
+        if (debug) std::cout << "eTightCount " << eTightCount<< " eLooseCount " << eLooseCount << "\n";
+        bool lepPassTight = false;
+        bool lepPassLoose = false;
+        if (!Lep_IdL[lItr]){
+            continue;
+        }
+        float tmpEta = Lep_eta[lItr];
+
+        if (debug) std::cout << "lItr " << lItr << " tmpEta " <<tmpEta << "\n";
+        if (abs(tmpEta) < lEtaCut){
+            if (debug) std::cout << "passed eta cut\n";
+            float tmpDxy = Lep_Dxy[lItr];
+            if (abs(tmpDxy) < lDxyCut) {
+                if (debug) std::cout << "passed Dxy cut\n";
+                float tmpDz = Lep_Dz[lItr];
+                if (abs(tmpDz) < lDzCut) {
+                    if (debug) std::cout << "passed Dz cut\n";
+                    float tmpLepSIP3D = Lep_sip3d[lItr];
+                    if (tmpLepSIP3D < lSIP3DCut) {
+                        if (debug) std::cout << "passed LepSIP3D cut\n";
+                        float tmpLep_MiniPFRelIso = Lep_MiniPFRelIso[lItr];
+                        float tmpPt = Lep_pt[lItr];
+                        if (tmpLep_MiniPFRelIso < lMiniPFRelIsoCut*tmpPt) {
+                            if (debug) std::cout << "passed Lep Iso cut\n";
+                            //Now Trying to pass the loose cuts
+                            UChar_t tmpLostHits =  Electron_lostHits[lItr];
+                            if (tmpLostHits <= eLostHitsCut) {
+                                if (debug) std::cout << "passed loose elec misshits cut\n";
+                                
+                                if (tmpPt > lPtLooseCut){
+                                    if (debug) std::cout << "passed loose pt cut and all loose cuts\n";
+                                    lepPassLoose = true;
+                                    //Now trying tight cuts
+                                    if (tmpLostHits <= eLostHitsTightCut) {
+                                        if (debug) std::cout << "passed tight elec misshits cut\n";
+                                        if (tmpPt > lPtTightCut){
+                                            if (debug) std::cout << "passed tight pt cut\n";
+
+                                            float tmpLepMVA = Lep_mvaTTH[lItr];
+                                            if (tmpLepMVA > lPromptMVACut) {
+                                                if (debug) std::cout << "passed Lep ttH MVA cut\n";
+                                                //Now trying to pass the tight cuts
+                                                
+
+                                                if (debug) std::cout << "tmpPt " << tmpPt << "\n";
+                                                Int_t tmpJetId = Lep_jetIdx[lItr];
+                                                if (debug) std::cout << "tmpJetId " << tmpJetId << "\n";
+                                                float tmpJetbTag;
+                                                if (tmpJetId <0) {
+                                                    tmpJetbTag = 0;
+                                                }
+                                                else {
+                                                    tmpJetbTag = Jet_btagDeepFlavB[tmpJetId];
+                                                }
+                                                float tmpJetbTagCut = lepJetDeepTagLooseCut;
+                                                /*
+                                                if (tmpPt < 20){
+                                                    tmpJetbTagCut = lepJetDeepTagMediumCut;
+                                                }
+                                                else if (tmpPt <45){
+                                                    tmpJetbTagCut = lepJetDeepTagLooseCut+(((tmpPt-20)/25)*(lepJetDeepTagMediumCut-lepJetDeepTagLooseCut));
+                                                }
+                                                */
+                                                tmpJetbTagCut = lepJetDeepTagMediumCut;
+                                                if (tmpJetbTag < tmpJetbTagCut){
+                                                    if (debug) std::cout << "passed Lep nearest jet btag cut\n";
+                                                
+                                                    float tmpSieieCut = eSieieBarrelCut;
+                                                    if (tmpEta > 1.5){
+                                                        tmpSieieCut = eSieieEndcapCut;
+                                                    }
+                                                    float tmpSieie = Electron_sieie[lItr];
+                                                    if (tmpSieie < eSieieBarrelCut) {
+                                                        if (debug) std::cout << "passed Lep Sieie cut\n";
+                                                        float tmpHoe = Electron_hoe[lItr];
+                                                        if (tmpHoe < eHoeCut) {
+                                                            if (debug) std::cout << "passed Lep Hoe cut\n";
+                                                            float tmpInvEInvP = Electron_eInvMinusPInv[lItr];
+                                                            if (tmpInvEInvP > eInvMinusPInvCut) {
+                                                                if (debug) std::cout << "passed Lep eInvMinusPInv cut\n";
+                                                                if (Electron_convVeto[lItr]) {
+                                                                    if (debug) std::cout << "passed Elec Conv cut and all tight cuts\n";
+                                                                    lepPassTight = true;
+                                                                }
+                                                            }
+                                                        }
+                                                        
+                                                    }
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                }
+                
+                
+            }
+        }
+        if (lepPassTight){
+            eTightCount += 1;
+        }
+        else if (lepPassLoose){
+            eLooseCount += 1;
+        }
+    }
+}
+
+void getNTightAndLooseMuons(TTreeReaderArray<Bool_t> &Lep_LooseIdL,TTreeReaderArray<Bool_t> &Lep_MediumIdL,TTreeReaderArray<Float_t> &Lep_eta,TTreeReaderArray<Float_t> &Lep_pt,TTreeReaderArray<Float_t> &Lep_Dxy,TTreeReaderArray<Float_t> &Lep_Dz,TTreeReaderArray<Float_t> &Lep_sip3d,TTreeReaderArray<Float_t> &Lep_MiniPFRelIso,TTreeReaderArray<Int_t> &Lep_jetIdx,TTreeReaderArray<Float_t> &Jet_btagDeepFlavB,TTreeReaderArray<Float_t> &Lep_mvaTTH,UInt_t nlLep,float lPtTightCut,float lPtLooseCut,float lEtaCut,float lDxyCut,float lDzCut,float lMiniPFRelIsoCut,float lepJetDeepTagLooseCut,float lepJetDeepTagMediumCut,float lPromptMVACut,float lSIP3DCut,UInt_t &muTightCount,UInt_t &muLooseCount,bool debug){
+    for (UInt_t lItr=0; lItr < nlLep; lItr++){
+        if (debug) std::cout << "lItr " << lItr<< "\n";
+        bool lepPassTight = false;
+        bool lepPassLoose = false;
+        
+        float tmpEta = Lep_eta[lItr];
+
+        if (debug) std::cout << "lItr " << lItr << " tmpEta " <<tmpEta << "\n";
+        if (abs(tmpEta) < lEtaCut){
+            if (debug) std::cout << "passed eta cut\n";
+            float tmpDxy = Lep_Dxy[lItr];
+            if (abs(tmpDxy) < lDxyCut) {
+                if (debug) std::cout << "passed Dxy cut\n";
+                float tmpDz = Lep_Dz[lItr];
+                if (abs(tmpDz) < lDzCut) {
+                    if (debug) std::cout << "passed Dz cut\n";
+                    float tmpLepSIP3D = Lep_sip3d[lItr];
+                    if (tmpLepSIP3D < lSIP3DCut) {
+                        if (debug) std::cout << "passed LepSIP3D cut\n";
+                        float tmpLep_MiniPFRelIso = Lep_MiniPFRelIso[lItr];
+                        float tmpPt = Lep_pt[lItr];
+                        if (tmpLep_MiniPFRelIso < lMiniPFRelIsoCut*tmpPt) {
+                            if (debug) std::cout << "passed Lep Iso cut\n";
+                            //Now Trying to pass the loose cuts
+                            if (Lep_LooseIdL[lItr]){
+                                if (debug) std::cout << "passed loose muon ID\n";
+                                
+                                if (tmpPt > lPtLooseCut){
+                                    if (debug) std::cout << "passed loose pt cut and all loose cuts\n";
+                                    lepPassLoose = true;
+                                    //Now trying tight cuts
+                                    if (Lep_MediumIdL[lItr]){
+                                        if (debug) std::cout << "passed tight muon ID\n";
+                                        if (tmpPt > lPtTightCut){
+                                            if (debug) std::cout << "passed tight pt cut\n";
+
+                                            float tmpLepMVA = Lep_mvaTTH[lItr];
+                                            if (tmpLepMVA > lPromptMVACut) {
+                                                if (debug) std::cout << "passed Lep ttH MVA cut\n";
+                                                //Now trying to pass the tight cuts
+                                                
+
+                                                if (debug) std::cout << "tmpPt " << tmpPt << "\n";
+                                                Int_t tmpJetId = Lep_jetIdx[lItr];
+                                                if (debug) std::cout << "tmpJetId " << tmpJetId << "\n";
+                                                float tmpJetbTag;
+                                                if (tmpJetId <0) {
+                                                    tmpJetbTag = 0;
+                                                }
+                                                else {
+                                                    tmpJetbTag = Jet_btagDeepFlavB[tmpJetId];
+                                                }
+                                                float tmpJetbTagCut = lepJetDeepTagLooseCut;
+                                                /*
+                                                if (tmpPt < 20){
+                                                    tmpJetbTagCut = lepJetDeepTagMediumCut;
+                                                }
+                                                else if (tmpPt <45){
+                                                    tmpJetbTagCut = lepJetDeepTagLooseCut+(((tmpPt-20)/25)*(lepJetDeepTagMediumCut-lepJetDeepTagLooseCut));
+                                                }*/
+                                                tmpJetbTagCut = lepJetDeepTagMediumCut;
+                                                if (tmpJetbTag < tmpJetbTagCut){
+                                                    if (debug) std::cout << "passed Lep nearest jet btag cut\n";
+                                                    lepPassTight = true;
+                                                
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                }
+                
+                
+            }
+        }
+        if (lepPassTight){
+            muTightCount += 1;
+        }
+        else if (lepPassLoose){
+            muLooseCount += 1;
+        }
+    }
+}
+
+
 void dolCandCutWithID(TTreeReaderArray<Bool_t> &Lep_IdL,TTreeReaderArray<Float_t> &Lep_eta,TTreeReaderArray<Float_t> &Lep_mass,TTreeReaderArray<Int_t> &Lep_charge,TTreeReaderArray<Float_t> &Lep_phi,TTreeReaderArray<Float_t> &Lep_pt,TTreeReaderArray<Float_t> &Lep_Dxy,TTreeReaderArray<Float_t> &Lep_Dz,TTreeReaderArray<Float_t> &Lep_sip3d,TTreeReaderArray<Float_t> &Lep_MiniPFRelIso,TTreeReaderArray<Float_t> &Electron_sieie,TTreeReaderArray<Float_t> &Electron_hoe,TTreeReaderArray<Float_t> &Electron_eInvMinusPInv,TTreeReaderArray<Bool_t> &Electron_convVeto,TTreeReaderArray<UChar_t> &Electron_lostHits,TTreeReaderArray<Int_t> &Lep_jetIdx,TTreeReaderArray<Float_t> &Jet_btagDeepFlavB,TTreeReaderArray<Float_t> &Lep_mvaTTH,UInt_t nlLep,std::vector<UInt_t> &lepCandIndAr,std::vector<ROOT::Math::PtEtaPhiMVector> &lepCandVecAr,std::vector<Int_t> &lepCandChargeAr,float lPtCut,float lEtaCut,float lDxyCut,float lDzCut,float lMiniPFRelIsoCut,float eSieieBarrelCut,float eSieieEndcapCut,float eHoeCut,float eInvMinusPInvCut,UInt_t eLostHitsCut,float lepJetDeepTagLooseCut,float lepJetDeepTagMediumCut,float lPromptMVACut,float lSIP3DCut,bool isMuon,bool debug){
     for (UInt_t lItr=0; lItr < nlLep; lItr++){
         if (debug) std::cout << "lItr " << lItr<< "Lep_IdL[lItr]" << Lep_IdL[lItr] << "\n";
@@ -68,12 +275,13 @@ void dolCandCutWithID(TTreeReaderArray<Bool_t> &Lep_IdL,TTreeReaderArray<Float_t
                                     tmpJetbTag = Jet_btagDeepFlavB[tmpJetId];
                                 }
                                 float tmpJetbTagCut = lepJetDeepTagLooseCut;
-                                if (tmpPt < 20){
+                                /*if (tmpPt < 20){
                                     tmpJetbTagCut = lepJetDeepTagMediumCut;
                                 }
                                 else if (tmpPt <45){
                                     tmpJetbTagCut = lepJetDeepTagLooseCut+(((tmpPt-20)/25)*(lepJetDeepTagMediumCut-lepJetDeepTagLooseCut));
-                                }
+                                }*/
+                                tmpJetbTagCut = lepJetDeepTagMediumCut;
                                 if (tmpJetbTag < tmpJetbTagCut){
                                     if (debug) std::cout << "passed Lep nearest jet btag cut\n";
                                     float tmpLepMVA = Lep_mvaTTH[lItr];

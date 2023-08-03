@@ -702,6 +702,20 @@ void new042023BDTAnalysisData(string datasetString){
     UInt_t eventNMuons_L_L;
     UInt_t eventNElectrons_L_L;
 
+    std::vector<Float_t> Jet_eta_L_L;
+    std::vector<Float_t> Jet_pt_L_L;
+    std::vector<Float_t> Jet_phi_L_L;
+    std::vector<Float_t> Jet_mass_L_L;
+    std::vector<Int_t> Jet_jetId_L_L;
+    std::vector<Float_t> Jet_btagDeepFlavB_L_L;
+
+    UInt_t eventNAK4JetsPassingCuts_L_L;
+
+    UInt_t eventNLooseElectrons_L_L;
+    UInt_t eventNTightElectrons_L_L;
+    UInt_t eventNLooseMuons_L_L;
+    UInt_t eventNTightMuons_L_L;
+
     Float_t selectedHiggsFJ_pt_L_L;
     Float_t selectedHiggsFJ_eta_L_L;
     Float_t selectedHiggsFJ_ParticleNet_HbbvsQCD_L_L;
@@ -761,6 +775,24 @@ void new042023BDTAnalysisData(string datasetString){
     passingEvLepTree->Branch("eventNAK8Jets_L_L",&eventNAK8Jets_L_L,"eventNAK8Jets_L_L/i");
     passingEvLepTree->Branch("eventNMuons_L_L",&eventNMuons_L_L,"eventNMuons_L_L/i");
     passingEvLepTree->Branch("eventNElectrons_L_L",&eventNElectrons_L_L,"eventNElectrons_L_L/i");
+
+    //Jets    
+    passingEvLepTree->Branch("Jet_eta_L_L",&Jet_eta_L_L);
+    passingEvLepTree->Branch("Jet_pt_L_L",&Jet_pt_L_L);
+    passingEvLepTree->Branch("Jet_phi_L_L",&Jet_phi_L_L);
+    passingEvLepTree->Branch("Jet_mass_L_L",&Jet_mass_L_L);
+    passingEvLepTree->Branch("Jet_jetId_L_L",&Jet_jetId_L_L);
+    passingEvLepTree->Branch("Jet_btagDeepFlavB_L_L",&Jet_btagDeepFlavB_L_L);
+    
+
+    passingEvLepTree->Branch("eventNAK4JetsPassingCuts_L_L",&eventNAK4JetsPassingCuts_L_L,"eventNAK4JetsPassingCuts_L_L/i");
+
+    passingEvLepTree->Branch("eventNLooseElectrons_L_L",&eventNLooseElectrons_L_L,"eventNLooseElectrons_L_L/i");
+    passingEvLepTree->Branch("eventNTightElectrons_L_L",&eventNTightElectrons_L_L,"eventNTightElectrons_L_L/i");
+
+    passingEvLepTree->Branch("eventNLooseMuons_L_L",&eventNLooseMuons_L_L,"eventNLooseMuons_L_L/i");
+    passingEvLepTree->Branch("eventNTightMuons_L_L",&eventNTightMuons_L_L,"eventNTightMuons_L_L/i");
+
 
     passingEvLepTree->Branch("selectedHiggsFJ_pt_L_L",&selectedHiggsFJ_pt_L_L,"selectedHiggsFJ_pt_L_L/F");
     passingEvLepTree->Branch("selectedHiggsFJ_eta_L_L",&selectedHiggsFJ_eta_L_L,"selectedHiggsFJ_eta_L_L/F");
@@ -825,6 +857,20 @@ void new042023BDTAnalysisData(string datasetString){
     UInt_t eventNMuons_SL_L;
     UInt_t eventNElectrons_SL_L;
 
+    std::vector<Float_t> Jet_eta_SL_L;
+    std::vector<Float_t> Jet_pt_SL_L;
+    std::vector<Float_t> Jet_phi_SL_L;
+    std::vector<Float_t> Jet_mass_SL_L;
+    std::vector<Int_t> Jet_jetId_SL_L;
+    std::vector<Float_t> Jet_btagDeepFlavB_SL_L;
+
+    UInt_t eventNAK4JetsPassingCuts_SL_L;
+
+    UInt_t eventNLooseElectrons_SL_L;
+    UInt_t eventNTightElectrons_SL_L;
+    UInt_t eventNLooseMuons_SL_L;
+    UInt_t eventNTightMuons_SL_L;
+
     Float_t selectedHiggsFJ_pt_SL_L;
     Float_t selectedHiggsFJ_eta_SL_L;
     Float_t selectedHiggsFJ_ParticleNet_HbbvsQCD_SL_L;
@@ -888,6 +934,22 @@ void new042023BDTAnalysisData(string datasetString){
     passingEvSemiLepTree->Branch("eventNAK8Jets_SL_L",&eventNAK8Jets_SL_L,"eventNAK8Jets_SL_L/i");
     passingEvSemiLepTree->Branch("eventNMuons_SL_L",&eventNMuons_SL_L,"eventNMuons_SL_L/i");
     passingEvSemiLepTree->Branch("eventNElectrons_SL_L",&eventNElectrons_SL_L,"eventNElectrons_SL_L/i");
+
+    passingEvSemiLepTree->Branch("Jet_eta_SL_L",&Jet_eta_SL_L);
+    passingEvSemiLepTree->Branch("Jet_pt_SL_L",&Jet_pt_SL_L);
+    passingEvSemiLepTree->Branch("Jet_phi_SL_L",&Jet_phi_SL_L);
+    passingEvSemiLepTree->Branch("Jet_mass_SL_L",&Jet_mass_SL_L);
+    passingEvSemiLepTree->Branch("Jet_jetId_SL_L",&Jet_jetId_SL_L);
+    passingEvSemiLepTree->Branch("Jet_btagDeepFlavB_SL_L",&Jet_btagDeepFlavB_SL_L);
+    
+
+    passingEvSemiLepTree->Branch("eventNAK4JetsPassingCuts_SL_L",&eventNAK4JetsPassingCuts_SL_L,"eventNAK4JetsPassingCuts_SL_L/i");
+
+    passingEvSemiLepTree->Branch("eventNLooseElectrons_SL_L",&eventNLooseElectrons_SL_L,"eventNLooseElectrons_SL_L/i");
+    passingEvSemiLepTree->Branch("eventNTightElectrons_SL_L",&eventNTightElectrons_SL_L,"eventNTightElectrons_SL_L/i");
+
+    passingEvSemiLepTree->Branch("eventNLooseMuons_SL_L",&eventNLooseMuons_SL_L,"eventNLooseMuons_SL_L/i");
+    passingEvSemiLepTree->Branch("eventNTightMuons_SL_L",&eventNTightMuons_SL_L,"eventNTightMuons_SL_L/i");
 
     passingEvSemiLepTree->Branch("selectedHiggsFJ_pt_SL_L",&selectedHiggsFJ_pt_SL_L,"selectedHiggsFJ_pt_SL_L/F");
     passingEvSemiLepTree->Branch("selectedHiggsFJ_eta_SL_L",&selectedHiggsFJ_eta_SL_L,"selectedHiggsFJ_eta_SL_L/F");
@@ -1187,6 +1249,17 @@ void new042023BDTAnalysisData(string datasetString){
             */
             std::vector<ROOT::Math::PtEtaPhiMVector> dRCheckVecAr;
             if (debug) std::cout << "*nJetL " << *nJetL << "\n";
+
+            UInt_t elecTightCount = 0;
+            UInt_t elecLooseCount = 0;
+            
+            
+            getNTightAndLooseElectrons(Electron_mvaFall17V2noIso_WPLL,Electron_etaL,Electron_ptL,Electron_dxyL,Electron_dzL,Electron_sip3dL,Electron_miniPFRelIso_allL,Electron_sieieL,Electron_hoeL,Electron_eInvMinusPInvL,Electron_convVetoL,Electron_lostHitsL,Electron_jetIdxL,Jet_btagDeepFlavBL,Electron_mvaTTHL,neLep,ePtTightCut,ePtLooseCut,eEtaCut,lDxyCut,lDzCut,lMiniPFRelIsoCut,eSieieBarrelCut,eSieieEndcapCut,eHoeCut,eInvMinusPInvCut,eLostHitsCut,lepJetDeepTagLooseCut,lepJetDeepTagMediumCut,ePromptMVACut,SIPCut,elecTightCount,elecLooseCount,debug);
+            
+            UInt_t muonTightCount = 0;
+            UInt_t muonLooseCount = 0;
+            getNTightAndLooseMuons(Muon_looseIdL,Muon_mediumIdL,Muon_etaL,Muon_ptL,Muon_dxyL,Muon_dzL,Muon_sip3dL,Muon_miniPFRelIso_allL,Muon_jetIdxL,Jet_btagDeepFlavBL,Muon_mvaTTHL,nmLep,mPtTightCut,mPtLooseCut,mEtaCut,lDxyCut,lDzCut,lMiniPFRelIsoCut,lepJetDeepTagLooseCut,lepJetDeepTagMediumCut,mPromptMVACut,SIPCut,muonTightCount,muonLooseCount,debug);
+            
             
             
             doLeptonicCutsWithTree(Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL, neLep, elecCandIndAr, elecCandVecAr, elecCandChargeAr,negElecCands,posElecCands,totElecCands,enoughElecCands,negMuonCands,posMuonCands,totMuonCands,enoughMuonCands,enoughLepCands,ePtCut,eEtaCut,
@@ -1493,6 +1566,20 @@ void new042023BDTAnalysisData(string datasetString){
 
             if (passesCutsBool){
                 passVBFJetsCtr += 1;
+
+                //get number of passing VBFJets
+
+                UInt_t tmpnAK4JetsPassing = 0;
+
+                for (UInt_t nJetItr=0; nJetItr<nJetLen;nJetItr++){
+                    UInt_t tmpJetPt = Jet_ptL[nJetItr];
+                    //Jet_etaL[nJetItr]
+                    Int_t tmpJetId = Jet_jetIdL[nJetItr];
+                    if (tmpJetPt < 30 || !(tmpJetId == 6)) continue;
+                    tmpnAK4JetsPassing += 1;
+
+                
+                }
                 
 
                 //std::cout << passedAsLepBool << " "<< passedAsSemiLepBool << " " << passedAsHadBool << "\n";
@@ -1512,6 +1599,24 @@ void new042023BDTAnalysisData(string datasetString){
                     eventNAK8Jets_L_L = nFatJetLen;
                     eventNMuons_L_L = nmLep;
                     eventNElectrons_L_L = neLep;
+
+                    for (UInt_t nJetItr=0; nJetItr<nJetLen;nJetItr++){
+                        Jet_eta_L_L.push_back(Jet_etaL[nJetItr]);
+                        Jet_pt_L_L.push_back(Jet_ptL[nJetItr]);
+                        Jet_phi_L_L.push_back(Jet_phiL[nJetItr]);
+                        Jet_mass_L_L.push_back(Jet_massL[nJetItr]);
+                        Jet_jetId_L_L.push_back(Jet_jetIdL[nJetItr]);
+                        Jet_btagDeepFlavB_L_L.push_back(Jet_btagDeepFlavBL[nJetItr]);
+                    }
+
+
+                    eventNAK4JetsPassingCuts_L_L = tmpnAK4JetsPassing;
+
+                    eventNLooseElectrons_L_L = elecLooseCount;
+                    eventNTightElectrons_L_L = elecTightCount;
+
+                    eventNLooseMuons_L_L = muonLooseCount;
+                    eventNTightMuons_L_L = muonTightCount;
 
                     selectedHiggsFJ_pt_L_L = hFatJet_pt_fromHTag;
                     selectedHiggsFJ_eta_L_L = hFatJet_eta_fromHTag;
@@ -1564,6 +1669,13 @@ void new042023BDTAnalysisData(string datasetString){
 
 
                     passingEvLepTree->Fill();
+
+                    Jet_eta_L_L.clear();
+                    Jet_pt_L_L.clear();
+                    Jet_phi_L_L.clear();
+                    Jet_mass_L_L.clear();
+                    Jet_jetId_L_L.clear();
+                    Jet_btagDeepFlavB_L_L.clear();
                     
                     
                     
@@ -1586,6 +1698,23 @@ void new042023BDTAnalysisData(string datasetString){
                     eventNAK8Jets_SL_L = nFatJetLen;
                     eventNMuons_SL_L = nmLep;
                     eventNElectrons_SL_L = neLep;
+
+                    for (UInt_t nJetItr=0; nJetItr<nJetLen;nJetItr++){
+                        Jet_eta_SL_L.push_back(Jet_etaL[nJetItr]);
+                        Jet_pt_SL_L.push_back(Jet_ptL[nJetItr]);
+                        Jet_phi_SL_L.push_back(Jet_phiL[nJetItr]);
+                        Jet_mass_SL_L.push_back(Jet_massL[nJetItr]);
+                        Jet_jetId_SL_L.push_back(Jet_jetIdL[nJetItr]);
+                        Jet_btagDeepFlavB_SL_L.push_back(Jet_btagDeepFlavBL[nJetItr]);
+                    }
+
+                    eventNAK4JetsPassingCuts_SL_L = tmpnAK4JetsPassing;
+
+                    eventNLooseElectrons_SL_L = elecLooseCount;
+                    eventNTightElectrons_SL_L = elecTightCount;
+
+                    eventNLooseMuons_SL_L = muonLooseCount;
+                    eventNTightMuons_SL_L = muonTightCount;
 
                     selectedHiggsFJ_pt_SL_L = hFatJet_pt_fromHTag;
                     selectedZFJ_pt_SL_L = dRCheckVecAr[2].Pt();
@@ -1638,6 +1767,13 @@ void new042023BDTAnalysisData(string datasetString){
 
 
                     passingEvSemiLepTree->Fill();
+
+                    Jet_eta_SL_L.clear();
+                    Jet_pt_SL_L.clear();
+                    Jet_phi_SL_L.clear();
+                    Jet_mass_SL_L.clear();
+                    Jet_jetId_SL_L.clear();
+                    Jet_btagDeepFlavB_SL_L.clear();
                     
 
                 }

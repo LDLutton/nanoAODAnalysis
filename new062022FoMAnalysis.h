@@ -331,6 +331,40 @@ std::vector<Double_t> cutHadPassWeightedAr;
 std::vector<Double_t> cutLepOrSemiLepPassWeightedAr;
 std::vector<float> cutRangeAr;
 
+//btag WPs by year
+float bTagUL18Cut = 0.7100;
+float bTagUL17Cut = 0.7476;
+float bTagUL16Cut = 0.6377;
+float bTagUL16APVCut = 0.6502;
+
+//072023 Lepton Tight ttH ID cuts
+float ePtTightCut = 10.;
+float ePtLooseCut = 7.;
+
+float eEtaTightCut = 2.5;
+
+float lDxyTightCut = 0.05;
+float lDzTightCut = 0.1;
+float lMiniPFRelIsoTightCut = 0.4;
+float eSieieBarrelTightCut = 0.011;
+
+float eSieieEndcapTightCut = 0.030;
+
+float eHoeTightCut = 0.1;
+float eInvMinusPInvTightCut = -0.04;
+float ePromptMVATightCut = 0.8;
+
+UInt_t eLostHitsTightCut = 0;
+
+float lepJetDeepTagLooseBDTCut = 0.0521;
+float lepJetDeepTagMediumBDTCut = 0.3033;
+
+
+float mPtTightCut = 10.;
+float mPtLooseCut = 5.;
+
+
+
 //New 062022 Lepton ID cuts
 float lDxyCut = 0.05;
 float lDxyRangeTop = 0.1;
@@ -512,15 +546,22 @@ float hFatJetPTBDTCut = 200.;
 
 float hFatJetParticleNetBDTCut = 0.0;
 
+//updating lep bdt for the tight lepton id 07262023
+float ePtBDTCut = 10.;
 
+float mPtBDTCut = 10.;
+
+float SIPBDTCut = 8.;
+float ePromptMVABDTCut = 0.8;
+float mPromptMVABDTCut = 0.85;
 
 //Lep cuts
 
-float ePtBDTCut = 7.;
+//float ePtBDTCut = 7.;
 
 float eEtaBDTCut = 2.5;
 
-float mPtBDTCut = 5.;
+//float mPtBDTCut = 5.;
 
 float mEtaBDTCut = 2.4;
 
@@ -538,7 +579,7 @@ float optLepInvMassBDTCut = 12.;
 
 float lepIsoBDTCut = 4.;
 
-float SIPBDTCut = 4.;
+//float SIPBDTCut = 4.;
 
 //Semi-Lep cuts
 //fatJetPTBDTCut = 200.;
@@ -557,10 +598,10 @@ float eSieieEndcapBDTCut = 0.011;
 
 float eHoeBDTCut = 0.1;
 float eInvMinusPInvBDTCut = -0.04;
-float ePromptMVABDTCut = -0.8;
-float lepJetDeepTagLooseBDTCut = 0.3;
-float lepJetDeepTagMediumBDTCut = 0.5;
-float mPromptMVABDTCut = 0.2;
+//float ePromptMVABDTCut = -0.8;
+//float lepJetDeepTagLooseBDTCut = 0.3;
+//float lepJetDeepTagMediumBDTCut = 0.5;
+//float mPromptMVABDTCut = 0.2;
 
 
 
