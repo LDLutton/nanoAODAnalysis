@@ -298,8 +298,8 @@ void new042023SemiLepDuplicateEventChecker(){
     passingEvSemiLepUniqueTree->Branch("selectedTrailingLepton_pt_SLU_L",&selectedTrailingLepton_pt_SLU_L,"selectedTrailingLepton_pt_SLU_L/F");
     passingEvSemiLepUniqueTree->Branch("selectedLeadLepton_eta_SLU_L",&selectedLeadLepton_eta_SLU_L,"selectedLeadLepton_eta_SLU_L/F");
     passingEvSemiLepUniqueTree->Branch("selectedTrailingLepton_eta_SLU_L",&selectedTrailingLepton_eta_SLU_L,"selectedTrailingLepton_eta_SLU_L/F");
-    passingEvSemiLepTree->Branch("selectedLeadLepton_phi_SLU_L",&selectedLeadLepton_phi_SLU_L,"selectedLeadLepton_phi_SLU_L/F");
-    passingEvSemiLepTree->Branch("selectedTrailingLepton_phi_SLU_L",&selectedTrailingLepton_phi_SLU_L,"selectedTrailingLepton_phi_SLU_L/F");
+    passingEvSemiLepUniqueTree->Branch("selectedLeadLepton_phi_SLU_L",&selectedLeadLepton_phi_SLU_L,"selectedLeadLepton_phi_SLU_L/F");
+    passingEvSemiLepUniqueTree->Branch("selectedTrailingLepton_phi_SLU_L",&selectedTrailingLepton_phi_SLU_L,"selectedTrailingLepton_phi_SLU_L/F");
     passingEvSemiLepUniqueTree->Branch("selectedLeadLepton_SIP3D_SLU_L",&selectedLeadLepton_SIP3D_SLU_L,"selectedLeadLepton_SIP3D_SLU_L/F");
     passingEvSemiLepUniqueTree->Branch("selectedTrailingLepton_SIP3D_SLU_L",&selectedTrailingLepton_SIP3D_SLU_L,"selectedTrailingLepton_SIP3D_SLU_L/F");
     passingEvSemiLepUniqueTree->Branch("selectedLeptons_RelIso_SLU_L",&selectedLeptons_RelIso_SLU_L,"selectedLeptons_RelIso_SLU_L/F");
