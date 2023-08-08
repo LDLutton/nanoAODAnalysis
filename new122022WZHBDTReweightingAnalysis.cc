@@ -433,6 +433,8 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
     Float_t selectedZOneTrailingLepton_pt_L_L;
     Float_t selectedZOneLeadLepton_eta_L_L;
     Float_t selectedZOneTrailingLepton_eta_L_L;
+    Float_t selectedZOneLeadLepton_phi_L_L;
+    Float_t selectedZOneTrailingLepton_phi_L_L;
     Float_t selectedZOneLeadLepton_SIP3D_L_L;
     Float_t selectedZOneTrailingLepton_SIP3D_L_L;
     Float_t selectedLeptons_MaxRelIso_L_L;
@@ -443,6 +445,8 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
     Float_t selectedZTwoTrailingLepton_pt_L_L;
     Float_t selectedZTwoLeadLepton_eta_L_L;
     Float_t selectedZTwoTrailingLepton_eta_L_L;
+    Float_t selectedZTwoLeadLepton_phi_L_L;
+    Float_t selectedZTwoTrailingLepton_phi_L_L;
     Float_t selectedZTwoLeadLepton_SIP3D_L_L;
     Float_t selectedZTwoTrailingLepton_SIP3D_L_L;
     Float_t selectedZTwoLeptons_InvMass_L_L;
@@ -515,6 +519,8 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
     passingEvLepTree->Branch("selectedZOneTrailingLepton_pt_L_L",&selectedZOneTrailingLepton_pt_L_L,"selectedZOneTrailingLepton_pt_L_L/F");
     passingEvLepTree->Branch("selectedZOneLeadLepton_eta_L_L",&selectedZOneLeadLepton_eta_L_L,"selectedZOneLeadLepton_eta_L_L/F");
     passingEvLepTree->Branch("selectedZOneTrailingLepton_eta_L_L",&selectedZOneTrailingLepton_eta_L_L,"selectedZOneTrailingLepton_eta_L_L/F");
+    passingEvLepTree->Branch("selectedZOneLeadLepton_phi_L_L",&selectedZOneLeadLepton_phi_L_L,"selectedZOneLeadLepton_phi_L_L/F");
+    passingEvLepTree->Branch("selectedZOneTrailingLepton_phi_L_L",&selectedZOneTrailingLepton_phi_L_L,"selectedZOneTrailingLepton_phi_L_L/F");
     passingEvLepTree->Branch("selectedZOneLeadLepton_SIP3D_L_L",&selectedZOneLeadLepton_SIP3D_L_L,"selectedZOneLeadLepton_SIP3D_L_L/F");
     passingEvLepTree->Branch("selectedZOneTrailingLepton_SIP3D_L_L",&selectedZOneTrailingLepton_SIP3D_L_L,"selectedZOneTrailingLepton_SIP3D_L_L/F");
     
@@ -525,6 +531,8 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
     passingEvLepTree->Branch("selectedZTwoTrailingLepton_pt_L_L",&selectedZTwoTrailingLepton_pt_L_L,"selectedZTwoTrailingLepton_pt_L_L/F");
     passingEvLepTree->Branch("selectedZTwoLeadLepton_eta_L_L",&selectedZTwoLeadLepton_eta_L_L,"selectedZTwoLeadLepton_eta_L_L/F");
     passingEvLepTree->Branch("selectedZTwoTrailingLepton_eta_L_L",&selectedZTwoTrailingLepton_eta_L_L,"selectedZTwoTrailingLepton_eta_L_L/F");
+    passingEvLepTree->Branch("selectedZTwoLeadLepton_phi_L_L",&selectedZTwoLeadLepton_phi_L_L,"selectedZTwoLeadLepton_phi_L_L/F");
+    passingEvLepTree->Branch("selectedZTwoTrailingLepton_phi_L_L",&selectedZTwoTrailingLepton_phi_L_L,"selectedZTwoTrailingLepton_phi_L_L/F");
     passingEvLepTree->Branch("selectedZTwoLeadLepton_SIP3D_L_L",&selectedZTwoLeadLepton_SIP3D_L_L,"selectedZTwoLeadLepton_SIP3D_L_L/F");
     passingEvLepTree->Branch("selectedZTwoTrailingLepton_SIP3D_L_L",&selectedZTwoTrailingLepton_SIP3D_L_L,"selectedZTwoTrailingLepton_SIP3D_L_L/F");
 
@@ -614,6 +622,8 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
     Float_t selectedTrailingLepton_pt_SL_L;
     Float_t selectedLeadLepton_eta_SL_L;
     Float_t selectedTrailingLepton_eta_SL_L;
+    Float_t selectedLeadLepton_phi_SL_L;
+    Float_t selectedTrailingLepton_phi_SL_L;
     Float_t selectedLeadLepton_SIP3D_SL_L;
     Float_t selectedTrailingLepton_SIP3D_SL_L;
     Float_t selectedLeptons_RelIso_SL_L;
@@ -698,6 +708,8 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
     passingEvSemiLepTree->Branch("selectedTrailingLepton_pt_SL_L",&selectedTrailingLepton_pt_SL_L,"selectedTrailingLepton_pt_SL_L/F");
     passingEvSemiLepTree->Branch("selectedLeadLepton_eta_SL_L",&selectedLeadLepton_eta_SL_L,"selectedLeadLepton_eta_SL_L/F");
     passingEvSemiLepTree->Branch("selectedTrailingLepton_eta_SL_L",&selectedTrailingLepton_eta_SL_L,"selectedTrailingLepton_eta_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedLeadLepton_phi_SL_L",&selectedLeadLepton_phi_SL_L,"selectedLeadLepton_phi_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedTrailingLepton_phi_SL_L",&selectedTrailingLepton_phi_SL_L,"selectedTrailingLepton_phi_SL_L/F");
     passingEvSemiLepTree->Branch("selectedLeadLepton_SIP3D_SL_L",&selectedLeadLepton_SIP3D_SL_L,"selectedLeadLepton_SIP3D_SL_L/F");
     passingEvSemiLepTree->Branch("selectedTrailingLepton_SIP3D_SL_L",&selectedTrailingLepton_SIP3D_SL_L,"selectedTrailingLepton_SIP3D_SL_L/F");
     passingEvSemiLepTree->Branch("selectedLeptons_RelIso_SL_L",&selectedLeptons_RelIso_SL_L,"selectedLeptons_RelIso_SL_L/F");
@@ -1711,7 +1723,8 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
 
 
             if (debug) std::cout << "Entering jet loop. Len: " << nJetLen << "\n";
-            doVBFJetCutPtSelectionWithBDTVars(nJetLen,Jet_ptL,Jet_jetIdL,Jet_etaL,Jet_phiL,Jet_massL,jetPTCut,jetEtaDifCut,jetInvMassCut,jetPairInvMass,jetLeadPt,jetLeadEta,jetLeadPhi,jetLeadMass,jetTrailingPt,jetTrailingEta,jetTrailingPhi,jetTrailingMass,leadJet_1,leadJet_2,dRCheckVecAr,dRCut,debug);
+            //doVBFJetCutPtSelectionWithBDTVars(nJetLen,Jet_ptL,Jet_jetIdL,Jet_etaL,Jet_phiL,Jet_massL,jetPTCut,jetEtaDifCut,jetInvMassCut,jetPairInvMass,jetLeadPt,jetLeadEta,jetLeadPhi,jetLeadMass,jetTrailingPt,jetTrailingEta,jetTrailingPhi,jetTrailingMass,leadJet_1,leadJet_2,dRCheckVecAr,dRCut,debug);
+            doVBFJetCutdEtaSelectionWithBDTVars(nJetLen,Jet_ptL,Jet_jetIdL,Jet_etaL,Jet_phiL,Jet_massL,jetPTCut,jetEtaDifCut,jetInvMassCut,jetPairInvMass,jetLeadPt,jetLeadEta,jetLeadPhi,jetLeadMass,jetTrailingPt,jetTrailingEta,jetTrailingPhi,jetTrailingMass,leadJet_1,leadJet_2,dRCheckVecAr,dRCut,debug);
             //std::cout << jetLeadPt << endl;
             if (jetLeadPt == 0) continue;
             debugOutputForVBFJetCut(evCount,leadJet_1,leadJet_2,Jet_phiL,Jet_etaL,debug);
@@ -1838,6 +1851,8 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
                     selectedZOneTrailingLepton_pt_L_L = Z1TrailingPt;
                     selectedZOneLeadLepton_eta_L_L = dRCheckVecAr[0].Eta();
                     selectedZOneTrailingLepton_eta_L_L = dRCheckVecAr[1].Eta();
+                    selectedZOneLeadLepton_phi_L_L = dRCheckVecAr[0].Phi();
+                    selectedZOneTrailingLepton_phi_L_L = dRCheckVecAr[1].Phi();
                     selectedZOneLeadLepton_SIP3D_L_L = Z1LeadSIP;
                     selectedZOneTrailingLepton_SIP3D_L_L = Z1TrailingSIP;
 
@@ -1848,6 +1863,8 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
                     selectedZTwoTrailingLepton_pt_L_L = tmpTopZ2TrailingPt;
                     selectedZTwoLeadLepton_eta_L_L = dRCheckVecAr[2].Eta();
                     selectedZTwoTrailingLepton_eta_L_L = dRCheckVecAr[3].Eta();
+                    selectedZTwoLeadLepton_phi_L_L = dRCheckVecAr[2].Phi();
+                    selectedZTwoTrailingLepton_phi_L_L = dRCheckVecAr[3].Phi();
                     selectedZTwoLeadLepton_SIP3D_L_L = Z2LeadSIP;
                     selectedZTwoTrailingLepton_SIP3D_L_L = Z2TrailingSIP;
 
@@ -1972,6 +1989,8 @@ void new122022WZHBDTReweightingAnalysis(string datasetString){
                     selectedTrailingLepton_pt_SL_L = Z1TrailingPt;
                     selectedLeadLepton_eta_SL_L = dRCheckVecAr[0].Eta();
                     selectedTrailingLepton_eta_SL_L = dRCheckVecAr[1].Eta();
+                    selectedLeadLepton_phi_SL_L = dRCheckVecAr[0].Phi();
+                    selectedTrailingLepton_phi_SL_L = dRCheckVecAr[1].Phi();
                     selectedLeadLepton_SIP3D_SL_L = Z1LeadSIP;
                     selectedTrailingLepton_SIP3D_SL_L = Z1TrailingSIP;
                     selectedLeptons_RelIso_SL_L = Z1LeadIso+Z1TrailingIso;

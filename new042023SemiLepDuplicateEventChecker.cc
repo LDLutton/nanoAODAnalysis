@@ -215,6 +215,8 @@ void new042023SemiLepDuplicateEventChecker(){
     Float_t selectedTrailingLepton_pt_SLU_L;
     Float_t selectedLeadLepton_eta_SLU_L;
     Float_t selectedTrailingLepton_eta_SLU_L;
+    Float_t selectedLeadLepton_phi_SLU_L;
+    Float_t selectedTrailingLepton_phi_SLU_L;
     Float_t selectedLeadLepton_SIP3D_SLU_L;
     Float_t selectedTrailingLepton_SIP3D_SLU_L;
     Float_t selectedLeptons_RelIso_SLU_L;
@@ -296,6 +298,8 @@ void new042023SemiLepDuplicateEventChecker(){
     passingEvSemiLepUniqueTree->Branch("selectedTrailingLepton_pt_SLU_L",&selectedTrailingLepton_pt_SLU_L,"selectedTrailingLepton_pt_SLU_L/F");
     passingEvSemiLepUniqueTree->Branch("selectedLeadLepton_eta_SLU_L",&selectedLeadLepton_eta_SLU_L,"selectedLeadLepton_eta_SLU_L/F");
     passingEvSemiLepUniqueTree->Branch("selectedTrailingLepton_eta_SLU_L",&selectedTrailingLepton_eta_SLU_L,"selectedTrailingLepton_eta_SLU_L/F");
+    passingEvSemiLepTree->Branch("selectedLeadLepton_phi_SLU_L",&selectedLeadLepton_phi_SLU_L,"selectedLeadLepton_phi_SLU_L/F");
+    passingEvSemiLepTree->Branch("selectedTrailingLepton_phi_SLU_L",&selectedTrailingLepton_phi_SLU_L,"selectedTrailingLepton_phi_SLU_L/F");
     passingEvSemiLepUniqueTree->Branch("selectedLeadLepton_SIP3D_SLU_L",&selectedLeadLepton_SIP3D_SLU_L,"selectedLeadLepton_SIP3D_SLU_L/F");
     passingEvSemiLepUniqueTree->Branch("selectedTrailingLepton_SIP3D_SLU_L",&selectedTrailingLepton_SIP3D_SLU_L,"selectedTrailingLepton_SIP3D_SLU_L/F");
     passingEvSemiLepUniqueTree->Branch("selectedLeptons_RelIso_SLU_L",&selectedLeptons_RelIso_SLU_L,"selectedLeptons_RelIso_SLU_L/F");
@@ -390,6 +394,8 @@ void new042023SemiLepDuplicateEventChecker(){
         TTreeReaderValue<Float_t> selectedTrailingLepton_pt_SL_L(myEventsReader,  "selectedTrailingLepton_pt_SL_L");
         TTreeReaderValue<Float_t> selectedLeadLepton_eta_SL_L(myEventsReader,  "selectedLeadLepton_eta_SL_L");
         TTreeReaderValue<Float_t> selectedTrailingLepton_eta_SL_L(myEventsReader,  "selectedTrailingLepton_eta_SL_L");
+        TTreeReaderValue<Float_t> selectedLeadLepton_phi_SL_L(myEventsReader,  "selectedLeadLepton_phi_SL_L");
+        TTreeReaderValue<Float_t> selectedTrailingLepton_phi_SL_L(myEventsReader,  "selectedTrailingLepton_phi_SL_L");
         TTreeReaderValue<Float_t> selectedLeadLepton_SIP3D_SL_L(myEventsReader,  "selectedLeadLepton_SIP3D_SL_L");
         TTreeReaderValue<Float_t> selectedTrailingLepton_SIP3D_SL_L(myEventsReader,  "selectedTrailingLepton_SIP3D_SL_L");
         TTreeReaderValue<Float_t> selectedLeptons_RelIso_SL_L(myEventsReader,  "selectedLeptons_RelIso_SL_L");
@@ -518,6 +524,8 @@ void new042023SemiLepDuplicateEventChecker(){
                 selectedTrailingLepton_pt_SLU_L = *selectedTrailingLepton_pt_SL_L;
                 selectedLeadLepton_eta_SLU_L = *selectedLeadLepton_eta_SL_L;
                 selectedTrailingLepton_eta_SLU_L = *selectedTrailingLepton_eta_SL_L;
+                selectedLeadLepton_phi_SLU_L = *selectedLeadLepton_phi_SL_L;
+                selectedTrailingLepton_phi_SLU_L = *selectedTrailingLepton_phi_SL_L;
                 selectedLeadLepton_SIP3D_SLU_L = *selectedLeadLepton_SIP3D_SL_L;
                 selectedTrailingLepton_SIP3D_SLU_L = *selectedTrailingLepton_SIP3D_SL_L;
                 selectedLeptons_RelIso_SLU_L = *selectedLeptons_RelIso_SL_L;
