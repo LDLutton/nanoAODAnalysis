@@ -531,7 +531,9 @@ float dRCutCutStep = (dRCutRangeTop - dRCutRangeBottom) / cutAmnt;
 
 float dRBDTCut = 0.8;
 
-float jetPTBDTCut = 20.;
+//float jetPTBDTCut = 20.;
+//08102023 Changing Pt cut to 30
+float jetPTBDTCut = 30.;
 
 float jetEtaDifBDTCut = 2.0;
 
