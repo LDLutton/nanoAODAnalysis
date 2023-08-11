@@ -2248,9 +2248,10 @@ bool debug
                     Z1TrailingItr,Z1LeadIso,Z1TrailingPt,Muon_pfRelIso03_allL,muonCandIndAr,Z1TrailingIso,Z2IsMuon,elecPassesZ2CutsAr,tmpZ2Ind,Z2LeadIso,Z2TrailingIso,tmpTopZ2LeadPt,tmpTopZ2TrailingPt,muonPassesZ2CutsFinalAr,debug);
                     if (debug) std::cout << "Z1LeadIso " << Z1LeadIso << " Z1TrailingIso " << Z1TrailingIso << " Z2LeadIso " << Z2LeadIso << " Z2TrailingIso " << Z2TrailingIso << "\n";
 
-                    
-                    bool passIsoCut = doISOCut(Z1LeadIso,Z1TrailingIso,Z2LeadIso,Z2TrailingIso,lepIsoCut);
-
+                    //08102023 Change - removing Iso cut - possibly redundant with candidate iso cuts
+                    //plus don't know if we hae scale factors for these isolation cuts
+                    //bool passIsoCut = doISOCut(Z1LeadIso,Z1TrailingIso,Z2LeadIso,Z2TrailingIso,lepIsoCut);
+                    bool passIsoCut = true;
                     if (passIsoCut){
                         
                         if (debug) std::cout << "passed iso cut yay\n";
@@ -2506,10 +2507,13 @@ bool debug){
             bool semiLepPassIso = false;
             getSemiLepIsoVars(Z1IsMuon,Z1LeadPt,Electron_etaL,elecCandIndAr,Z1LeadItr,Electron_dr03EcalRecHitSumEtL,Electron_dr03TkSumPtL,Electron_dr03HcalDepth1TowerSumEtL,Electron_ptL,Electron_pfRelIso03_allL,
             Z1TrailingItr,Z1LeadIso,Z1TrailingPt, Muon_pfRelIso03_allL,muonCandIndAr,Z1TrailingIso,debug);
-            semiLepPassIso = doSemiLepISOCut(Z1LeadIso,Z1TrailingIso,lepIsoCut);
+            //08102023 Change - removing Iso cut - possibly redundant with candidate iso cuts
+            //plus don't know if we hae scale factors for these isolation cuts
+            //semiLepPassIso = doSemiLepISOCut(Z1LeadIso,Z1TrailingIso,lepIsoCut);
             //if (!semiLepPassIso) {
             //    std::cout << "ddntpass semiLepPassIso" << semiLepPassIso << "\n";
             //}
+            semiLepPassIso = true;
             if (semiLepPassIso) {
                 if (debug) std::cout << "Passed SemiLep lep cuts\n";
                 dRCheckVecAr.push_back(Z1LeadVec);
