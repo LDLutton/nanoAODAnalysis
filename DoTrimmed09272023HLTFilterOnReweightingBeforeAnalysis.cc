@@ -2112,6 +2112,113 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
                             else{
                                 genSemiLepChannelNoHTobbCtr += 1;
                                 //genSemiLepChannelNoHTobbWeightedCtr += *genWeight;
+                                //Finding H FatJet
+                                
+                                float tmpHToFJMindR = 1000.;
+                                int HFJInd = -1;
+                                float HFJEta = 0;
+                                float HFJPhi = 0;
+                                UInt_t tmpnGenJetAK8s = *nGenJetAK8;
+
+                                //std::cout << "HFJ Loop " << tmpHEta << " "<< tmpHPhi << "\n";
+                                for (UInt_t fatJetInd=0;fatJetInd<tmpnGenJetAK8s;fatJetInd++){
+                                    float tmpHFJEta = GenJetAK8_eta[fatJetInd];
+                                    float tmpHFJPhi = GenJetAK8_phi[fatJetInd];
+                                    float tmpDeltaR = calcDeltaR(tmpHFJPhi,tmpHFJEta,tmpHPhi,tmpHEta);
+                                    //std::cout << fatJetInd << " " << tmpHFJEta << " " << tmpHFJPhi << " " << tmpDeltaR << "\n";
+                                    if (tmpDeltaR < maxdRCut && tmpDeltaR < tmpHToFJMindR) {
+                                        HFJInd = fatJetInd;
+                                        tmpHToFJMindR = tmpDeltaR;
+                                        HFJEta = tmpHFJEta;
+                                        HFJPhi = tmpHFJPhi;
+                                    }
+                                    
+                                }
+
+                                //Finding Z Had GenJetAK8
+                                
+
+                                
+                                float tmpZHadToFJMindR = 1000.;
+                                int ZHadFJInd = -1;
+                                float ZHadFJEta = 0;
+                                float ZHadFJPhi = 0;
+                                //std::cout << "ZFJ Loop " << ZOneIsHadronic << " " <<  tmpZHadEta << " " << tmpZHadPhi << "\n";
+                                for (UInt_t fatJetInd=0;fatJetInd<tmpnGenJetAK8s;fatJetInd++){
+                                    //if (fatJetInd == HFJInd) continue;
+                                    float tmpZFJEta = GenJetAK8_eta[fatJetInd];
+                                    float tmpZFJPhi = GenJetAK8_phi[fatJetInd];
+                                    float tmpDeltaR = calcDeltaR(tmpZFJPhi,tmpZFJEta,tmpZHadPhi,tmpZHadEta);
+                                    //std::cout << fatJetInd << " " << tmpZFJEta << " " << tmpZFJPhi << " " << tmpDeltaR << "\n";
+                                    if (tmpDeltaR < maxdRCut && tmpDeltaR < tmpZHadToFJMindR) {
+                                        if (fatJetInd == HFJInd && tmpDeltaR >= tmpHToFJMindR){
+                                            continue;
+                                        } 
+                                        ZHadFJInd = fatJetInd;
+                                        tmpZHadToFJMindR = tmpDeltaR;
+                                        ZHadFJEta = tmpZFJEta;
+                                        ZHadFJPhi = tmpZFJPhi;
+                                    }
+                                    
+                                }
+                                if (ZHadFJInd == HFJInd){
+                                    float tmptmpHToFJMindR = 1000.;
+                                    int tmpHFJInd = -1;
+                                    float tmpHFJEta = 0;
+                                    float tmpHFJPhi = 0;
+
+                                    //std::cout << "HFJ Loop " << tmpHEta << " "<< tmpHPhi << "\n";
+                                    for (UInt_t fatJetInd=0;fatJetInd<tmpnGenJetAK8s;fatJetInd++){
+                                        if (fatJetInd == ZHadFJInd) continue;
+                                        float tmpHFJEta = GenJetAK8_eta[fatJetInd];
+                                        float tmpHFJPhi = GenJetAK8_phi[fatJetInd];
+                                        float tmpDeltaR = calcDeltaR(tmpHFJPhi,tmpHFJEta,tmpHPhi,tmpHEta);
+                                        //std::cout << fatJetInd << " " << tmpHFJEta << " " << tmpHFJPhi << " " << tmpDeltaR << "\n";
+                                        if (tmpDeltaR < maxdRCut && tmpDeltaR < tmptmpHToFJMindR) {
+                                            tmpHFJInd = fatJetInd;
+                                            tmptmpHToFJMindR = tmpDeltaR;
+                                            tmpHFJEta = tmpHFJEta;
+                                            tmpHFJPhi = tmpHFJPhi;
+                                        }
+                                        
+                                    }
+                                    HFJInd = tmpHFJInd;
+                                    tmpHToFJMindR = tmptmpHToFJMindR;
+                                    HFJEta = tmpHFJEta;
+                                    HFJPhi = tmpHFJPhi;
+                                }
+
+                                
+                                
+                                
+
+                                
+                                if (ZHadFJInd >= 0) {
+                                    goodGenZFJMatchL = true;
+                                    ZFJGenHadronFlavourL = GenJetAK8_hadronFlavour[ZHadFJInd];
+
+                                    }
+                                if (HFJInd >= 0) {
+                                    goodGenHFJMatchL = true;
+                                    HFJGenHadronFlavourL = GenJetAK8_hadronFlavour[HFJInd];
+                                    }
+
+
+                                int HFJNonGenInd = -1;
+                                int ZHadFJNonGenInd = -1;
+
+                                for (UInt_t fatJetInd=0;fatJetInd<tmpnFatJets;fatJetInd++){
+                                    Int_t tmpFJGenJetInd = FatJet_genJetAK8Idx[fatJetInd];
+                                    if (tmpFJGenJetInd == HFJInd) HFJNonGenInd = fatJetInd;
+                                    else if (tmpFJGenJetInd == ZHadFJInd) ZHadFJNonGenInd = fatJetInd;
+
+                                }
+
+                                HFJIndL = HFJNonGenInd;
+                                ZFJIndL = ZHadFJNonGenInd;
+
+                                if (ZHadFJNonGenInd>=0) goodZFJMatchToGenL = true;
+                                if (HFJNonGenInd>=0) goodHFJMatchToGenL = true;
                             }
 
                         }
