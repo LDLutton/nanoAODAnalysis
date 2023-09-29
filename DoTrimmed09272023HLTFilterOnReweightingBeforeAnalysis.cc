@@ -2113,6 +2113,21 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
                                 genSemiLepChannelNoHTobbCtr += 1;
                                 //genSemiLepChannelNoHTobbWeightedCtr += *genWeight;
                                 //Finding H FatJet
+
+                                int ZHadInd;
+                                if (ZOneIsHadronic) {
+                                    ZHadInd = finalZAr[0];
+
+                                }
+                                else if (ZTwoIsHadronic) {
+                                    ZHadInd = finalZAr[1];
+                                }
+                                
+                                float tmpZHadEta = GenPart_eta[ZHadInd];
+                                float tmpZHadPhi = GenPart_phi[ZHadInd];
+
+                                float tmpHEta = GenPart_eta[finalHAr[0]];
+                                float tmpHPhi = GenPart_phi[finalHAr[0]];
                                 
                                 float tmpHToFJMindR = 1000.;
                                 int HFJInd = -1;
