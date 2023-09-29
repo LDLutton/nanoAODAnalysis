@@ -1098,6 +1098,8 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
             HFJIndL = -1;
             goodGenZFJMatchL = false;
             goodGenHFJMatchL = false;
+            goodZFJMatchToGenL = false;
+            goodHFJMatchToGenL = false;
             eventGenSemileptonicL = false;
             ZFJGenHadronFlavourL = -1;
             HFJGenHadronFlavourL = -1;
