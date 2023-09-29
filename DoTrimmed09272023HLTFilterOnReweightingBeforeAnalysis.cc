@@ -47,7 +47,7 @@
 ////////////////////////////////START OF MAIN FUNCTION////////////////////////////////
 
 
-void DoTrimmedHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
+void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
     // Open the file. Note that the name of your file outside this class
     // will probably NOT be experiment.root.
     std::cout << "start\n";
