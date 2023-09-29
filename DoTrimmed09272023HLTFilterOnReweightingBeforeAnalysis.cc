@@ -924,7 +924,6 @@ void DoTrimmedHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
 
         TTreeReaderArray<Int_t> FatJet_hadronFlavour(myEventsReader, "FatJet_hadronFlavour");
 
-        FatJet_hadronFlavour
 
         //Gen part stuff
 
@@ -1962,8 +1961,8 @@ void DoTrimmedHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
                                     HFJPhi = tmpHFJPhi;
                                 }
 
-                                ZFJGenHadronFlavourL = GenJetAK8_hadronFlavour[ZHadFJInd]
-                                HFJGenHadronFlavourL = GenJetAK8_hadronFlavour[HFJInd]
+                                ZFJGenHadronFlavourL = GenJetAK8_hadronFlavour[ZHadFJInd];
+                                HFJGenHadronFlavourL = GenJetAK8_hadronFlavour[HFJInd];
                                 
 
                                 
