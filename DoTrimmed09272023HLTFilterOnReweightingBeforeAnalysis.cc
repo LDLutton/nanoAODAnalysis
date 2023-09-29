@@ -455,10 +455,12 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
     Int_t HFJIndL;
     Bool_t goodGenZFJMatchL;
     Bool_t goodGenHFJMatchL;
+    Bool_t goodZFJMatchToGenL;
+    Bool_t goodHFJMatchToGenL;
     Bool_t eventGenSemileptonicL;
     Bool_t eventGenHToBBL;
-    UChar_t ZFJGenHadronFlavourL;
-    UChar_t HFJGenHadronFlavourL;
+    Int_t ZFJGenHadronFlavourL;
+    Int_t HFJGenHadronFlavourL;
     std::vector<Int_t> FatJet_hadronFlavourL;
 
     
@@ -584,8 +586,8 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
     FilteredEventsTree->Branch("eventGenSemileptonicL",&eventGenSemileptonicL,"eventGenSemileptonicL/O");
     FilteredEventsTree->Branch("eventGenHToBBL",&eventGenHToBBL,"eventGenHToBBL/O");
 
-    FilteredEventsTree->Branch("ZFJGenHadronFlavourL",&ZFJGenHadronFlavourL,"ZFJGenHadronFlavourL/b");
-    FilteredEventsTree->Branch("HFJGenHadronFlavourL",&HFJGenHadronFlavourL,"HFJGenHadronFlavourL/b");
+    FilteredEventsTree->Branch("ZFJGenHadronFlavourL",&ZFJGenHadronFlavourL,"ZFJGenHadronFlavourL/I");
+    FilteredEventsTree->Branch("HFJGenHadronFlavourL",&HFJGenHadronFlavourL,"HFJGenHadronFlavourL/I");
     FilteredEventsTree->Branch("FatJet_hadronFlavourL",&FatJet_hadronFlavourL);
 
 
@@ -1097,6 +1099,8 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
             goodGenZFJMatchL = false;
             goodGenHFJMatchL = false;
             eventGenSemileptonicL = false;
+            ZFJGenHadronFlavourL = -1;
+            HFJGenHadronFlavourL = -1;
 
             if (!isBackground){
 
@@ -1961,13 +1965,21 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
                                     HFJPhi = tmpHFJPhi;
                                 }
 
-                                ZFJGenHadronFlavourL = GenJetAK8_hadronFlavour[ZHadFJInd];
-                                HFJGenHadronFlavourL = GenJetAK8_hadronFlavour[HFJInd];
+                                
+                                
                                 
 
                                 
-                                if (ZHadFJInd >= 0) goodGenZFJMatchL = true;
-                                if (HFJInd >= 0) goodGenHFJMatchL = true;
+                                if (ZHadFJInd >= 0) {
+                                    goodGenZFJMatchL = true;
+                                    ZFJGenHadronFlavourL = GenJetAK8_hadronFlavour[ZHadFJInd];
+
+                                    }
+                                if (HFJInd >= 0) {
+                                    goodGenHFJMatchL = true;
+                                    HFJGenHadronFlavourL = GenJetAK8_hadronFlavour[HFJInd];
+                                    }
+
 
                                 int HFJNonGenInd = -1;
                                 int ZHadFJNonGenInd = -1;
@@ -1981,7 +1993,9 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
 
                                 HFJIndL = HFJNonGenInd;
                                 ZFJIndL = ZHadFJNonGenInd;
-                                
+
+                                if (ZHadFJNonGenInd>=0) goodZFJMatchToGenL = true;
+                                if (HFJNonGenInd>=0) goodHFJMatchToGenL = true;
                                 
                                 
                                 
