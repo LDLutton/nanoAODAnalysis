@@ -922,6 +922,10 @@ void DoTrimmedHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
         TTreeReaderArray<Float_t> FatJet_msoftdrop(myEventsReader, "FatJet_msoftdrop");
         TTreeReaderArray<Int_t> FatJet_genJetAK8Idx(myEventsReader, "FatJet_genJetAK8Idx");
 
+        TTreeReaderArray<Int_t> FatJet_hadronFlavour(myEventsReader, "FatJet_hadronFlavour");
+
+        FatJet_hadronFlavour
+
         //Gen part stuff
 
         TTreeReaderValue<UInt_t> nGenPart(myEventsReader, "nGenPart");
@@ -1009,6 +1013,9 @@ void DoTrimmedHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
         TTreeReaderArray<Float_t> GenJetAK8_eta(myEventsReader, "GenJetAK8_eta");
         TTreeReaderArray<Float_t> GenJetAK8_pt(myEventsReader, "GenJetAK8_pt");
         TTreeReaderArray<Float_t> GenJetAK8_phi(myEventsReader, "GenJetAK8_phi");
+        TTreeReaderArray<UChar_t> GenJetAK8_hadronFlavour(myEventsReader, "GenJetAK8_hadronFlavour");
+
+        
 
 
 
@@ -1885,7 +1892,7 @@ void DoTrimmedHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
                                 int HFJInd = -1;
                                 float HFJEta = 0;
                                 float HFJPhi = 0;
-                                UInt_t tmpnGenJetAK8s = nGenJetAK8;
+                                UInt_t tmpnGenJetAK8s = *nGenJetAK8;
 
                                 //std::cout << "HFJ Loop " << tmpHEta << " "<< tmpHPhi << "\n";
                                 for (UInt_t fatJetInd=0;fatJetInd<tmpnGenJetAK8s;fatJetInd++){
@@ -1952,7 +1959,7 @@ void DoTrimmedHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
                                     HFJInd = tmpHFJInd;
                                     tmpHToFJMindR = tmptmpHToFJMindR;
                                     HFJEta = tmpHFJEta;
-                                    HFJPhi = tmpHFJPhi
+                                    HFJPhi = tmpHFJPhi;
                                 }
 
                                 ZFJGenHadronFlavourL = GenJetAK8_hadronFlavour[ZHadFJInd]
