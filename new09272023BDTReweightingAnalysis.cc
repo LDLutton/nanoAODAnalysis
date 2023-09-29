@@ -942,6 +942,7 @@ void new09272023BDTReweightingAnalysis(string datasetString){
     Int_t ZFJGenHadronFlavour_SL_L;
     Int_t HFJGenHadronFlavour_SL_L;
     Int_t FatJet_hadronFlavour_SL_L;
+    
 
     
 
@@ -1048,7 +1049,7 @@ void new09272023BDTReweightingAnalysis(string datasetString){
 
     passingEvSemiLepTree->Branch("ZFJGenHadronFlavour_SL_L",&ZFJGenHadronFlavour_SL_L,"ZFJGenHadronFlavour_SL_L/I");
     passingEvSemiLepTree->Branch("HFJGenHadronFlavour_SL_L",&HFJGenHadronFlavour_SL_L,"HFJGenHadronFlavour_SL_L/I");
-    passingEvSemiLepTree->Branch("FatJet_hadronFlavour_SL_L",&FatJet_hadronFlavourL,"FatJet_hadronFlavourL/I");
+    passingEvSemiLepTree->Branch("FatJet_hadronFlavour_SL_L",&FatJet_hadronFlavour_SL_L,"FatJet_hadronFlavour_SL_L/I");
 
 
     
@@ -2269,7 +2270,7 @@ void new09272023BDTReweightingAnalysis(string datasetString){
             }
             else {
                 HReconstructedWithCorrectFJ_SL_L = false;
-                HReconstructedWithHFJ_SL_L = false;
+                HReconstructedWithZFJ_SL_L = false;
             }
 
             if (*HTobbBoolL){
@@ -3410,7 +3411,7 @@ void new09272023BDTReweightingAnalysis(string datasetString){
                         eventGenHToBB_SL_L = *eventGenHToBBL;
                         ZFJGenHadronFlavour_SL_L = *ZFJGenHadronFlavourL;
                         HFJGenHadronFlavour_SL_L = *HFJGenHadronFlavourL;
-                        FatJet_hadronFlavour_SL_L =  *FatJet_hadronFlavourL;
+                        FatJet_hadronFlavour_SL_L =  FatJet_hadronFlavourL[FJIndAr[0]];
 
 
 
@@ -3537,7 +3538,7 @@ void new09272023BDTReweightingAnalysis(string datasetString){
                                 eventGenHToBB_SL_L = *eventGenHToBBL;
                                 ZFJGenHadronFlavour_SL_L = *ZFJGenHadronFlavourL;
                                 HFJGenHadronFlavour_SL_L = *HFJGenHadronFlavourL;
-                                FatJet_hadronFlavour_SL_L =  *FatJet_hadronFlavourL;
+                                FatJet_hadronFlavour_SL_L =  FatJet_hadronFlavourL[FJIndAr[0]];
 
                                 passingEvSemiLepTree->Fill();
 
