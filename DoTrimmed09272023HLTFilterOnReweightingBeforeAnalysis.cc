@@ -1101,6 +1101,7 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
             eventGenSemileptonicL = false;
             ZFJGenHadronFlavourL = -1;
             HFJGenHadronFlavourL = -1;
+            eventGenHToBBL = false;
 
             if (!isBackground){
 
@@ -2113,6 +2114,7 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
                                 genSemiLepChannelNoHTobbCtr += 1;
                                 //genSemiLepChannelNoHTobbWeightedCtr += *genWeight;
                                 //Finding H FatJet
+                                eventGenHToBBL = false;
 
                                 int ZHadInd;
                                 if (ZOneIsHadronic) {
@@ -2122,7 +2124,7 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
                                 else if (ZTwoIsHadronic) {
                                     ZHadInd = finalZAr[1];
                                 }
-                                
+
                                 float tmpZHadEta = GenPart_eta[ZHadInd];
                                 float tmpZHadPhi = GenPart_phi[ZHadInd];
 
