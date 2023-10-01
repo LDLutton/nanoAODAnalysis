@@ -942,6 +942,10 @@ void new09272023BDTReweightingAnalysis(string datasetString){
     Int_t ZFJGenHadronFlavour_SL_L;
     Int_t HFJGenHadronFlavour_SL_L;
     Int_t FatJet_hadronFlavour_SL_L;
+
+    Bool_t firstHToBBBool_SL_L; //including as alternative to eventGenHToBB. Checking if there's a difference.
+
+    
     
 
     
@@ -1050,6 +1054,8 @@ void new09272023BDTReweightingAnalysis(string datasetString){
     passingEvSemiLepTree->Branch("ZFJGenHadronFlavour_SL_L",&ZFJGenHadronFlavour_SL_L,"ZFJGenHadronFlavour_SL_L/I");
     passingEvSemiLepTree->Branch("HFJGenHadronFlavour_SL_L",&HFJGenHadronFlavour_SL_L,"HFJGenHadronFlavour_SL_L/I");
     passingEvSemiLepTree->Branch("FatJet_hadronFlavour_SL_L",&FatJet_hadronFlavour_SL_L,"FatJet_hadronFlavour_SL_L/I");
+
+    passingEvSemiLepTree->Branch("firstHToBBBool_SL_L",&firstHToBBBool_SL_L,"firstHToBBBool_SL_L/O");
 
 
     
@@ -3413,6 +3419,8 @@ void new09272023BDTReweightingAnalysis(string datasetString){
                         HFJGenHadronFlavour_SL_L = *HFJGenHadronFlavourL;
                         FatJet_hadronFlavour_SL_L =  FatJet_hadronFlavourL[FJIndAr[0]];
 
+                        firstHToBBBool_SL_L = *HTobbBoolL;
+
 
 
 
@@ -3540,6 +3548,8 @@ void new09272023BDTReweightingAnalysis(string datasetString){
                                 ZFJGenHadronFlavour_SL_L = *ZFJGenHadronFlavourL;
                                 HFJGenHadronFlavour_SL_L = *HFJGenHadronFlavourL;
                                 FatJet_hadronFlavour_SL_L =  FatJet_hadronFlavourL[FJIndAr[0]];
+
+                                firstHToBBBool_SL_L = *HTobbBoolL;
 
                                 passingEvSemiLepTree->Fill();
 
