@@ -1513,7 +1513,7 @@ void doHiggsFatJetCutEarlyMDPNSelection(UInt_t nFatJetLen,float &hFatJet_pt_from
         }
         if (sameFJ) continue;
         
-        float HPNMD = (particleNetMD_XbbL[i])/(particleNetMD_XbbL[i]+particleNetMD_QCDL[i]);
+        float HPNMD = (particleNetMD_XbbL[fatJetInd])/(particleNetMD_XbbL[fatJetInd]+particleNetMD_QCDL[fatJetInd]);
 
         if (debug) {
             std::cout << fatJetInd << " +++++++++++++++\n";
