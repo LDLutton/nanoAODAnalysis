@@ -947,8 +947,11 @@ void new10052023BDTReweightingAnalysis(string datasetString){
 
     Bool_t firstHToBBBool_SL_L; //including as alternative to eventGenHToBB. Checking if there's a difference.
 
+    UInt_t nHDecayPID_SL_L;
     std::vector<Int_t> HDecayPID_SL_L;
+    UInt_t nZOneDecayPID_SL_L;
     std::vector<Int_t> ZOneDecayPID_SL_L;
+    UInt_t nZTwoDecayPID_SL_L;
     std::vector<Int_t> ZTwoDecayPID_SL_L;
     Int_t ZOneType_SL_L; //0=Leptonic,1=Hadronic,2=Other
     Int_t ZTwoType_SL_L;
@@ -1069,9 +1072,12 @@ void new10052023BDTReweightingAnalysis(string datasetString){
 
     passingEvSemiLepTree->Branch("firstHToBBBool_SL_L",&firstHToBBBool_SL_L,"firstHToBBBool_SL_L/O");
 
+    passingEvSemiLepTree->Branch("nHDecayPID_SL_L",&nHDecayPID_SL_L,"nHDecayPID_SL_L/i");
     passingEvSemiLepTree->Branch("HDecayPID_SL_L",&HDecayPID_SL_L);
 
+    passingEvSemiLepTree->Branch("nZOneDecayPID_SL_L",&nZOneDecayPID_SL_L,"nZOneDecayPID_SL_L/i")
     passingEvSemiLepTree->Branch("ZOneDecayPID_SL_L",&ZOneDecayPID_SL_L);
+    passingEvSemiLepTree->Branch("nZTwoDecayPID_SL_L",&nZTwoDecayPID_SL_L,"nZTwoDecayPID_SL_L/i");
     passingEvSemiLepTree->Branch("ZTwoDecayPID_SL_L",&ZTwoDecayPID_SL_L);
 
     passingEvSemiLepTree->Branch("ZOneType_SL_L",&ZOneType_SL_L,"ZOneType_SL_L/I");
@@ -1196,9 +1202,11 @@ void new10052023BDTReweightingAnalysis(string datasetString){
         TTreeReaderValue<Int_t> HFJGenHadronFlavourL(myEventsReader,"HFJGenHadronFlavourL");
         TTreeReaderArray<Int_t> FatJet_hadronFlavourL(myEventsReader,"FatJet_hadronFlavourL");
 
+        TTreeReaderValue<UInt_t> nHDecayPIDL(myEventsReader,"nHDecayPIDL");
         TTreeReaderArray<Int_t> HDecayPIDL(myEventsReader,"HDecayPIDL");
-
+        TTreeReaderValue<UInt_t> nZOneDecayPIDL(myEventsReader,"nZOneDecayPIDL");
         TTreeReaderArray<Int_t> ZOneDecayPIDL(myEventsReader,"ZOneDecayPIDL");
+        TTreeReaderValue<UInt_t> nZTwoDecayPIDL(myEventsReader,"nZTwoDecayPIDL");
         TTreeReaderArray<Int_t> ZTwoDecayPIDL(myEventsReader,"ZTwoDecayPIDL");
 
         TTreeReaderValue<Int_t> ZOneTypeL(myEventsReader,"ZOneTypeL");
@@ -3454,16 +3462,19 @@ void new10052023BDTReweightingAnalysis(string datasetString){
 
                         ZOneType_SL_L = *ZOneTypeL;
                         ZTwoType_SL_L = *ZTwoTypeL;
-
-                        for (UInt_t HDecayItr=0; HDecayItr<HDecayPIDL.size();HDecayItr++){
+                        
+                        nHDecayPID_SL_L = *nHDecayPIDL;
+                        for (UInt_t HDecayItr=0; HDecayItr<*nHDecayPIDL;HDecayItr++){
                             HDecayPID_SL_L.push_back(HDecayPIDL[HDecayItr]);
                         }
 
-                        for (UInt_t ZDecayItr=0; ZDecayItr<ZOneDecayPIDL.size();ZDecayItr++){
+                        nZOneDecayPID_SL_L = *nZOneDecayPIDL;
+                        for (UInt_t ZDecayItr=0; ZDecayItr<*nZOneDecayPIDL;ZDecayItr++){
                             ZOneDecayPID_SL_L.push_back(ZOneDecayPIDL[ZDecayItr]);
                         }
 
-                        for (UInt_t ZDecayItr=0; ZDecayItr<ZTwoDecayPIDL.size();ZDecayItr++){
+                        nZTwoDecayPID_SL_L = *nZTwoDecayPIDL;
+                        for (UInt_t ZDecayItr=0; ZDecayItr<*nZTwoDecayPIDL;ZDecayItr++){
                             ZTwoDecayPID_SL_L.push_back(ZTwoDecayPIDL[ZDecayItr]);
                         }
 
@@ -3608,15 +3619,18 @@ void new10052023BDTReweightingAnalysis(string datasetString){
                                 ZOneType_SL_L = *ZOneTypeL;
                                 ZTwoType_SL_L = *ZTwoTypeL;
 
-                                for (UInt_t HDecayItr=0; HDecayItr<HDecayPIDL.size();HDecayItr++){
+                                nHDecayPID_SL_L = *nHDecayPIDL;
+                                for (UInt_t HDecayItr=0; HDecayItr<*nHDecayPIDL;HDecayItr++){
                                     HDecayPID_SL_L.push_back(HDecayPIDL[HDecayItr]);
                                 }
 
-                                for (UInt_t ZDecayItr=0; ZDecayItr<ZOneDecayPIDL.size();ZDecayItr++){
+                                nZOneDecayPID_SL_L = *nZOneDecayPIDL;
+                                for (UInt_t ZDecayItr=0; ZDecayItr<*nZOneDecayPIDL;ZDecayItr++){
                                     ZOneDecayPID_SL_L.push_back(ZOneDecayPIDL[ZDecayItr]);
                                 }
 
-                                for (UInt_t ZDecayItr=0; ZDecayItr<ZTwoDecayPIDL.size();ZDecayItr++){
+                                nZTwoDecayPID_SL_L = *nZTwoDecayPIDL;
+                                for (UInt_t ZDecayItr=0; ZDecayItr<*nZTwoDecayPIDL;ZDecayItr++){
                                     ZTwoDecayPID_SL_L.push_back(ZTwoDecayPIDL[ZDecayItr]);
                                 }
 
