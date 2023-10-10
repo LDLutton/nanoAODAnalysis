@@ -947,6 +947,12 @@ void new10052023BDTReweightingAnalysis(string datasetString){
 
     Bool_t firstHToBBBool_SL_L; //including as alternative to eventGenHToBB. Checking if there's a difference.
 
+    std::vector<Int_t> HDecayPID_SL_L;
+    std::vector<Int_t> ZOneDecayPID_SL_L;
+    std::vector<Int_t> ZTwoDecayPID_SL_L;
+    Int_t ZOneType_SL_L; //0=Leptonic,1=Hadronic,2=Other
+    Int_t ZTwoType_SL_L;
+
     
     
 
@@ -1062,6 +1068,14 @@ void new10052023BDTReweightingAnalysis(string datasetString){
     passingEvSemiLepTree->Branch("FatJet_hadronFlavour_SL_L",&FatJet_hadronFlavour_SL_L,"FatJet_hadronFlavour_SL_L/I");
 
     passingEvSemiLepTree->Branch("firstHToBBBool_SL_L",&firstHToBBBool_SL_L,"firstHToBBBool_SL_L/O");
+
+    passingEvSemiLepTree->Branch("HDecayPID_SL_L",&HDecayPID_SL_L);
+
+    passingEvSemiLepTree->Branch("ZOneDecayPID_SL_L",&ZOneDecayPID_SL_L);
+    passingEvSemiLepTree->Branch("ZTwoDecayPID_SL_L",&ZTwoDecayPID_SL_L);
+
+    passingEvSemiLepTree->Branch("ZOneType_SL_L",&ZOneType_SL_L,"ZOneType_SL_L/I");
+    passingEvSemiLepTree->Branch("ZTwoType_SL_L",&ZTwoType_SL_L,"ZTwoType_SL_L/I");
 
 
     
@@ -1181,6 +1195,14 @@ void new10052023BDTReweightingAnalysis(string datasetString){
         TTreeReaderValue<Int_t> ZFJGenHadronFlavourL(myEventsReader,"ZFJGenHadronFlavourL");
         TTreeReaderValue<Int_t> HFJGenHadronFlavourL(myEventsReader,"HFJGenHadronFlavourL");
         TTreeReaderArray<Int_t> FatJet_hadronFlavourL(myEventsReader,"FatJet_hadronFlavourL");
+
+        TTreeReaderArray<Int_t> HDecayPIDL(myEventsReader,"HDecayPIDL");
+
+        TTreeReaderArray<Int_t> ZOneDecayPIDL(myEventsReader,"ZOneDecayPIDL");
+        TTreeReaderArray<Int_t> ZTwoDecayPIDL(myEventsReader,"ZTwoDecayPIDL");
+
+        TTreeReaderValue<Int_t> ZOneTypeL(myEventsReader,"ZOneTypeL");
+        TTreeReaderValue<Int_t> ZTwoTypeL(myEventsReader,"ZTwoTypeL");
 
 
 
@@ -3430,6 +3452,22 @@ void new10052023BDTReweightingAnalysis(string datasetString){
 
                         firstHToBBBool_SL_L = *HTobbBoolL;
 
+                        ZOneType_SL_L = *ZOneTypeL;
+                        ZTwoType_SL_L = *ZTwoTypeL;
+
+                        for (UInt_t HDecayItr=0; HDecayItr<HDecayPIDL.size();HDecayItr++){
+                            HDecayPID_SL_L.push_back(HDecayPIDL[HDecayItr]);
+                        }
+
+                        for (UInt_t ZDecayItr=0; ZDecayItr<ZOneDecayPIDL.size();ZDecayItr++){
+                            ZOneDecayPID_SL_L.push_back(ZOneDecayPIDL[ZDecayItr]);
+                        }
+
+                        for (UInt_t ZDecayItr=0; ZDecayItr<ZTwoDecayPIDL.size();ZDecayItr++){
+                            ZTwoDecayPID_SL_L.push_back(ZTwoDecayPIDL[ZDecayItr]);
+                        }
+
+
 
 
 
@@ -3443,6 +3481,10 @@ void new10052023BDTReweightingAnalysis(string datasetString){
                         Jet_mass_SL_L.clear();
                         Jet_jetId_SL_L.clear();
                         Jet_btagDeepFlavB_SL_L.clear();
+                        
+                        HDecayPID_SL_L.clear();
+                        ZOneDecayPID_SL_L.clear();
+                        ZTwoDecayPID_SL_L.clear();
 
                     }
 
@@ -3563,6 +3605,22 @@ void new10052023BDTReweightingAnalysis(string datasetString){
 
                                 firstHToBBBool_SL_L = *HTobbBoolL;
 
+                                ZOneType_SL_L = *ZOneTypeL;
+                                ZTwoType_SL_L = *ZTwoTypeL;
+
+                                for (UInt_t HDecayItr=0; HDecayItr<HDecayPIDL.size();HDecayItr++){
+                                    HDecayPID_SL_L.push_back(HDecayPIDL[HDecayItr]);
+                                }
+
+                                for (UInt_t ZDecayItr=0; ZDecayItr<ZOneDecayPIDL.size();ZDecayItr++){
+                                    ZOneDecayPID_SL_L.push_back(ZOneDecayPIDL[ZDecayItr]);
+                                }
+
+                                for (UInt_t ZDecayItr=0; ZDecayItr<ZTwoDecayPIDL.size();ZDecayItr++){
+                                    ZTwoDecayPID_SL_L.push_back(ZTwoDecayPIDL[ZDecayItr]);
+                                }
+
+
                                 passingEvSemiLepTree->Fill();
 
                                 LHEReweightingWeight_SL_L.clear();
@@ -3573,6 +3631,10 @@ void new10052023BDTReweightingAnalysis(string datasetString){
                                 Jet_mass_SL_L.clear();
                                 Jet_jetId_SL_L.clear();
                                 Jet_btagDeepFlavB_SL_L.clear();
+
+                                HDecayPID_SL_L.clear();
+                                ZOneDecayPID_SL_L.clear();
+                                ZTwoDecayPID_SL_L.clear();
 
                             }
 
