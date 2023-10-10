@@ -463,8 +463,11 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
     Int_t HFJGenHadronFlavourL;
     std::vector<Int_t> FatJet_hadronFlavourL;
 
+    UInt_t nHDecayPIDL;
     std::vector<Int_t> HDecayPIDL;
+    UInt_t nZOneDecayPIDL;
     std::vector<Int_t> ZOneDecayPIDL;
+    UInt_t nZTwoDecayPIDL;
     std::vector<Int_t> ZTwoDecayPIDL;
     Int_t ZOneTypeL; //0=Leptonic,1=Hadronic,2=Other
     Int_t ZTwoTypeL;
@@ -600,9 +603,12 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
     FilteredEventsTree->Branch("HFJGenHadronFlavourL",&HFJGenHadronFlavourL,"HFJGenHadronFlavourL/I");
     FilteredEventsTree->Branch("FatJet_hadronFlavourL",&FatJet_hadronFlavourL);
 
+    FilteredEventsTree->Branch("nHDecayPIDL",&nHDecayPIDL,"nHDecayPIDL/i");
     FilteredEventsTree->Branch("HDecayPIDL",&HDecayPIDL);
 
+    FilteredEventsTree->Branch("nZOneDecayPIDL",&nZOneDecayPIDL,"nZOneDecayPIDL/i");
     FilteredEventsTree->Branch("ZOneDecayPIDL",&ZOneDecayPIDL);
+    FilteredEventsTree->Branch("nZTwoDecayPIDL",&nZTwoDecayPIDL,"nZTwoDecayPIDL/i");
     FilteredEventsTree->Branch("ZTwoDecayPIDL",&ZTwoDecayPIDL);
 
     FilteredEventsTree->Branch("ZOneTypeL",&ZOneTypeL,"ZOneTypeL/I");
@@ -1126,6 +1132,9 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
             eventGenHToBBL = false;
             ZOneTypeL = -1;
             ZTwoTypeL = -1;
+            nHDecayPIDL = 0;
+            nZOneDecayPIDL = 0;
+            nZTwoDecayPIDL = 0;
 
             if (!isBackground){
 
@@ -1373,6 +1382,7 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
                         HDecayPIDL.push_back(HFJ_decaypdgId_FromGenMatch[tmpHDecayItr]);
 
                     }
+                    nHDecayPIDL = HFJ_decaypdgId_FromGenMatch.size();
                      
 
                     Int_t intermediaryZ = -1;
@@ -1625,9 +1635,11 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
                             for (UInt_t tmpZDecayItr=0;tmpZDecayItr<finalZDecAr[0].size();tmpZDecayItr++){
                                 ZOneDecayPIDL.push_back(finalZDecAr[0][tmpZDecayItr]);
                             }
+                            nZOneDecayPIDL = finalZDecAr[0].size();
                             for (UInt_t tmpZDecayItr=0;tmpZDecayItr<finalZDecAr[1].size();tmpZDecayItr++){
                                 ZTwoDecayPIDL.push_back(finalZDecAr[1][tmpZDecayItr]);
                             }
+                            nZTwoDecayPIDL = finalZDecAr[1].size();
 
                             if (ZOneIsLeptonic) ZOneTypeL = 0;
                             else if (ZOneIsHadronic) ZOneTypeL = 1;
