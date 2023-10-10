@@ -463,6 +463,14 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
     Int_t HFJGenHadronFlavourL;
     std::vector<Int_t> FatJet_hadronFlavourL;
 
+    std::vector<Int_t> HDecayPIDL;
+    std::vector<Int_t> ZOneDecayPIDL;
+    std::vector<Int_t> ZTwoDecayPIDL;
+    Int_t ZOneTypeL; //0=Leptonic,1=Hadronic,2=Other
+    Int_t ZTwoTypeL;
+
+
+
     
 
     
@@ -591,6 +599,18 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
     FilteredEventsTree->Branch("ZFJGenHadronFlavourL",&ZFJGenHadronFlavourL,"ZFJGenHadronFlavourL/I");
     FilteredEventsTree->Branch("HFJGenHadronFlavourL",&HFJGenHadronFlavourL,"HFJGenHadronFlavourL/I");
     FilteredEventsTree->Branch("FatJet_hadronFlavourL",&FatJet_hadronFlavourL);
+
+    FilteredEventsTree->Branch("HDecayPIDL",&HDecayPIDL);
+
+    FilteredEventsTree->Branch("ZOneDecayPIDL",&ZOneDecayPIDL);
+    FilteredEventsTree->Branch("ZTwoDecayPIDL",&ZTwoDecayPIDL);
+
+    FilteredEventsTree->Branch("ZOneTypeL",&ZOneTypeL,"ZOneTypeL/I");
+    FilteredEventsTree->Branch("ZTwoTypeL",&ZTwoTypeL,"ZTwoTypeL/I");
+
+
+
+
 
     //GenTree
 
@@ -1104,6 +1124,8 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
             ZFJGenHadronFlavourL = -1;
             HFJGenHadronFlavourL = -1;
             eventGenHToBBL = false;
+            ZOneTypeL = -1;
+            ZTwoTypeL = -1;
 
             if (!isBackground){
 
@@ -1347,6 +1369,12 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
                         HTobbCtr += 1;
                         //HTobbWeightedCtr += *genWeight;
                     }
+                    for (UInt_t tmpHDecayItr=0;tmpHDecayItr<HFJ_decaypdgId_FromGenMatch.size();tmpHDecayItr++){
+                        HDecayPIDL.push_back(HFJ_decaypdgId_FromGenMatch[tmpHDecayItr]);
+
+                    }
+                     
+
                     Int_t intermediaryZ = -1;
                     
                     if (tmpZAr.size() >= 3){
@@ -1594,6 +1622,21 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
                             if (ZOneIsLeptonic && ZTwoIsLeptonic) ZIsLeptonic = true;
                             else if ((ZOneIsLeptonic && ZTwoIsHadronic) || (ZOneIsHadronic && ZTwoIsLeptonic)) ZIsSemiLeptonic = true;
                             else if (ZOneIsHadronic && ZTwoIsHadronic) ZIsHadronic = true;
+                            for (UInt_t tmpZDecayItr=0;tmpZDecayItr<finalZDecAr[0].size();tmpZDecayItr++){
+                                ZOneDecayPIDL.push_back(finalZDecAr[0][tmpZDecayItr]);
+                            }
+                            for (UInt_t tmpZDecayItr=0;tmpZDecayItr<finalZDecAr[1].size();tmpZDecayItr++){
+                                ZTwoDecayPIDL.push_back(finalZDecAr[1][tmpZDecayItr]);
+                            }
+
+                            if (ZOneIsLeptonic) ZOneTypeL = 0;
+                            else if (ZOneIsHadronic) ZOneTypeL = 1;
+                            else ZOneTypeL = 2;
+
+                            if (ZTwoIsLeptonic) ZTwoTypeL = 0;
+                            else if (ZTwoIsHadronic) ZTwoTypeL = 1;
+                            else ZTwoTypeL = 2;
+                        
                             
                             if (debugGenPart) std::cout << "ZIsHadronic " << ZIsHadronic << "ZIsLeptonic" << ZIsLeptonic << "ZIsSemiLeptonic" << ZIsSemiLeptonic << "\n";
                             float tmpHEtaFordR = GenPart_eta[finalHAr[0]];
@@ -3113,6 +3156,11 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
             FatJet_particleNetMD_XqqL.clear();
 
             FatJet_hadronFlavourL.clear();
+
+            HDecayPIDL.clear();
+
+            ZOneDecayPIDL.clear();
+            ZTwoDecayPIDL.clear();
 
         }
     }
