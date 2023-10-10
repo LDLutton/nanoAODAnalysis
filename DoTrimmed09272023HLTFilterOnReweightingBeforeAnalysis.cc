@@ -1135,6 +1135,9 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
             nHDecayPIDL = 0;
             nZOneDecayPIDL = 0;
             nZTwoDecayPIDL = 0;
+            HDecayPIDL.clear();
+            ZOneDecayPIDL.clear();
+            ZTwoDecayPIDL.clear();
 
             if (!isBackground){
 
