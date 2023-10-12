@@ -1500,6 +1500,99 @@ void doHiggsFatJetCut(UInt_t nFatJetLen,float &hFatJet_pt_fromHParticleNet,float
     }
 }
 
+
+void doHiggsFatJetCutBeforeZMDPNSelection(UInt_t nFatJetLen,float &hFatJet_pt_fromHParticleNet,float &hFatJet_phi_fromHParticleNet,float &hFatJet_eta_fromHParticleNet,float &hFatJet_mass_fromHParticleNet,float &hFatJet_HParticleNet_fromHParticleNet,UInt_t &hFatJet_ind_fromHParticleNet,TTreeReaderArray<Float_t> &particleNetMD_QCDL,TTreeReaderArray<Float_t> &particleNetMD_XbbL,float hFatJetPNCut,TTreeReaderArray<Float_t> &FatJet_pt,float hFatJetPTCut,TTreeReaderArray<Int_t> &FatJet_jetId,TTreeReaderArray<Float_t> &FatJet_phi,TTreeReaderArray<Float_t> &FatJet_eta,TTreeReaderArray<Float_t> &FatJet_mass,std::vector<ROOT::Math::PtEtaPhiMVector> &dRCheckVecAr,float dRCut,bool passedAsSemiLepLepCutBool,bool &passedAsSemiLepHiggsCutBool){
+    if (passedAsSemiLepLepCutBool){
+        float tmpFJHParticleNetMax = hFatJetPNCut;
+        ROOT::Math::PtEtaPhiMVector HFJVec;
+        for (UInt_t fatJetInd=0;fatJetInd<nFatJetLen;fatJetInd++){
+            
+            float HPNMD = (particleNetMD_XbbL[fatJetInd])/(particleNetMD_XbbL[fatJetInd]+particleNetMD_QCDL[fatJetInd]);
+
+            if (debug) {
+                std::cout << fatJetInd << " +++++++++++++++\n";
+                std::cout << "Fat jet HPNMD    " <<  HPNMD << "\n";
+            }
+            
+            if (HPNMD > tmpFJHParticleNetMax){
+                float tmpFatJet_pt = FatJet_pt[fatJetInd];
+
+                if (debug){
+                    std::cout << "Fat jet pt    " <<  tmpFatJet_pt << "\n";
+                }
+                
+                if (tmpFatJet_pt > hFatJetPTCut){
+                    Int_t tmpFatJet_jetId = FatJet_jetId[fatJetInd];
+
+                    if (debug){
+                        std::cout << "Fat jet jetId    " <<  tmpFatJet_jetId << "\n";
+                    }
+
+                    if (tmpFatJet_jetId == 6){
+                        
+                        
+
+                        if (debug) std::cout << "Passed fatjet cuts\n";
+
+                        if (HPNMD > hFatJet_HParticleNet_fromHParticleNet){
+                            if (debug) std::cout << "HParticleNet greater than previous FJ HParticleNet\n";
+                            float tmpFatJet_phi = FatJet_phi[fatJetInd];
+                            float tmpFatJet_eta = FatJet_eta[fatJetInd];
+                            //ROOT::Math::PtEtaPhiMVector tmpFJVec = ROOT::Math::PtEtaPhiMVector(tmpFatJet_pt,tmpFatJet_eta,tmpFatJet_phi,FatJet_mass[fatJetInd]);
+                            bool tmpPassdR = true;
+                            //float tmpZPairPlusHPt = tmpFatJet_pt;
+                            float tmpFatJet_mass = FatJet_mass[fatJetInd];
+                            ROOT::Math::PtEtaPhiMVector tmpFJVec = ROOT::Math::PtEtaPhiMVector(tmpFatJet_pt,tmpFatJet_eta,tmpFatJet_phi,tmpFatJet_mass);
+                            for (UInt_t dRCheckVecInd=0; dRCheckVecInd<dRCheckVecAr.size();dRCheckVecInd++) {
+                                float tmpDeltaR = calcDeltaR(tmpFatJet_phi,tmpFatJet_eta,dRCheckVecAr[dRCheckVecInd].Phi(),dRCheckVecAr[dRCheckVecInd].Eta());
+
+                                
+
+                                if (tmpDeltaR < dRCut){
+                                    tmpPassdR = false;
+                                    break;
+                                }
+                                //tmpZPairPlusHPt += dRCheckVecAr[dRCheckVecInd].Pt();
+                                //tmpFJVec += dRCheckVecAr[dRCheckVecInd];
+
+                            }
+                            //std::cout << "tmpPassdR " << tmpPassdR << " tmpFJVec.M() " << tmpFJVec.M() << " ZPairPlusHInvMassCut " << ZPairPlusHInvMassCut<< "\n";
+                            if (tmpPassdR) {
+                                    
+                                if (debug){
+                                    std::cout << "Fat jet phi    " <<  tmpFatJet_phi << "\n";
+                                    std::cout << "Fat jet eta    " <<  tmpFatJet_eta << "\n";
+                                }
+                                
+
+
+
+
+                                hFatJet_HParticleNet_fromHParticleNet = HPNMD;
+                                hFatJet_pt_fromHParticleNet = tmpFatJet_pt;
+                                hFatJet_eta_fromHParticleNet = tmpFatJet_eta;
+                                hFatJet_phi_fromHParticleNet = tmpFatJet_phi;
+                                hFatJet_mass_fromHParticleNet = tmpFatJet_mass;
+                                hFatJet_ind_fromHParticleNet = fatJetInd;
+                                tmpFJHParticleNetMax = HPNMD;
+                                HFJVec = tmpFJVec;
+                            
+                            }
+                        }
+                        
+                    }
+                }
+            }
+        }
+        if (hFatJet_pt_fromHParticleNet != 0) {
+            //HiggsFJInd = hFatJet_ind_fromHParticleNet);
+            dRCheckVecAr.push_back(HFJVec);
+            passedAsSemiLepHiggsCutBool = true;
+        }
+    }
+}
+
+
 void doHiggsFatJetCutEarlyMDPNSelection(UInt_t nFatJetLen,float &hFatJet_pt_fromHParticleNet,float &hFatJet_phi_fromHParticleNet,float &hFatJet_eta_fromHParticleNet,float &hFatJet_mass_fromHParticleNet,float &hFatJet_HParticleNet_fromHParticleNet,UInt_t &hFatJet_ind_fromHParticleNet,TTreeReaderArray<Float_t> &particleNetMD_QCDL,TTreeReaderArray<Float_t> &particleNetMD_XbbL,float hFatJetPNCut,TTreeReaderArray<Float_t> &FatJet_pt,float hFatJetPTCut,TTreeReaderArray<Int_t> &FatJet_jetId,TTreeReaderArray<Float_t> &FatJet_phi,TTreeReaderArray<Float_t> &FatJet_eta,TTreeReaderArray<Float_t> &FatJet_mass,std::vector<ROOT::Math::PtEtaPhiMVector> &dRCheckVecAr,float dRCut,std::vector<Int_t> &FJIndAr){
     float tmpFJHParticleNetMax = hFatJetPNCut;
     ROOT::Math::PtEtaPhiMVector HFJVec;
@@ -1743,6 +1836,64 @@ void doHiggsFatJetCutSTWithBDTVars(std::vector<ROOT::Math::PtEtaPhiMVector> &dRC
         }
     }
 }
+
+void doSemiLepChanFatJetCutAfterHMDPNSelection(Int_t &FJInd,Int_t numFatJet,float fatJetPTCut,float fatJetZTagCut,TTreeReaderArray<Float_t> &FatJet_pt,TTreeReaderArray<Float_t> &FatJet_phi,TTreeReaderArray<Float_t> &FatJet_eta,TTreeReaderArray<Float_t> &FatJet_mass,TTreeReaderArray<Float_t> &particleNetMD_QCDL,TTreeReaderArray<Float_t> &particleNetMD_XbbL,TTreeReaderArray<Float_t> &particleNetMD_XccL,TTreeReaderArray<Float_t> &particleNetMD_XqqL,TTreeReaderArray<Int_t> &FatJet_jetId,
+std::vector<ROOT::Math::PtEtaPhiMVector> &dRCheckVecAr,float dRCut, UInt_t hFatJet_ind_fromHTag, bool passedAsSemiLepHiggsCutBool,
+UInt_t &passSemiLepCut,bool &passesCutsBool,bool &passedAsSemiLepBool){
+
+    float semiLepFatJetPT = 0;
+    float semiLepFatJetTag = 0;
+    float semiLepFatJet_phi = 0;
+    float semiLepFatJet_eta = 0;
+    ROOT::Math::PtEtaPhiMVector semiLepFatJetVec;
+    if (dRCheckVecAr.size() && passedAsSemiLepHiggsCutBool){
+        for (UInt_t i=0; i<numFatJet;i++){
+
+            //Skip selected higgs fatjet
+            if (i == hFatJet_ind_fromHTag) continue;
+
+            float tmpFatJetPT = FatJet_pt[i];
+            Int_t tmpFatJet_jetId = FatJet_jetId[i];
+            float ZPNMD = (particleNetMD_XbbL[i]+particleNetMD_XccL[i]+particleNetMD_XqqL[i])/(particleNetMD_XbbL[i]+particleNetMD_XccL[i]+particleNetMD_XqqL[i]+particleNetMD_QCDL[i]);
+            
+                    
+            //PN MD For Z used for Selection
+            if (ZPNMD > fatJetZTagCut && tmpFatJetPT > fatJetPTCut && ZPNMD > semiLepFatJetTag && tmpFatJet_jetId == 6){
+                //std::cout << "Wow it passed!\n";
+                ROOT::Math::PtEtaPhiMVector tmpFJVec = ROOT::Math::PtEtaPhiMVector(tmpFatJetPT,FatJet_eta[i],FatJet_phi[i],FatJet_mass[i]);
+                bool tmpPassdR = true;
+                for (UInt_t dRCheckVecInd=0; dRCheckVecInd<dRCheckVecAr.size();dRCheckVecInd++) {
+                    float tmpDeltaR = calcDeltaR(FatJet_phi[i],FatJet_eta[i],dRCheckVecAr[dRCheckVecInd].Phi(),dRCheckVecAr[dRCheckVecInd].Eta());
+                    if (tmpDeltaR < dRCut){
+                        tmpPassdR = false;
+                        break;
+                    }
+
+                }
+                if (tmpPassdR){
+
+                    FJInd = i;
+                    semiLepFatJetPT = tmpFatJetPT;
+                    semiLepFatJetTag = ZPNMD;
+                    semiLepFatJet_phi = FatJet_phi[i];
+                    semiLepFatJet_eta = FatJet_eta[i];
+                    semiLepFatJetVec = tmpFJVec;
+                }
+                
+            }
+        }
+        if (FJInd >= 0) {
+            dRCheckVecAr.push_back(semiLepFatJetVec);
+            passSemiLepCut += 1;
+            passesCutsBool = true;
+            passedAsSemiLepBool = true;
+
+        }
+    }
+    
+
+}
+
 
 void doSemiLepChanFatJetCutMDPNSelection(Int_t &FJInd,Int_t numFatJet,float fatJetPTCut,float fatJetZTagCut,TTreeReaderArray<Float_t> &FatJet_pt,TTreeReaderArray<Float_t> &FatJet_phi,TTreeReaderArray<Float_t> &FatJet_eta,TTreeReaderArray<Float_t> &FatJet_mass,TTreeReaderArray<Float_t> &particleNetMD_QCDL,TTreeReaderArray<Float_t> &particleNetMD_XbbL,TTreeReaderArray<Float_t> &particleNetMD_XccL,TTreeReaderArray<Float_t> &particleNetMD_XqqL,TTreeReaderArray<Int_t> &FatJet_jetId,
 std::vector<ROOT::Math::PtEtaPhiMVector> &dRCheckVecAr,float dRCut,
