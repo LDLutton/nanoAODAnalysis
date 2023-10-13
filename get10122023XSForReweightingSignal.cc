@@ -223,7 +223,8 @@ void get10122023XSForReweightingSignal(UInt_t fileInd){
     std::vector<std::string> C2VNameAr {"-2.0","-1.75","-1.5","-1.25","-1.0","-0.75","-0.5","-0.25","0.0","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9","2.25","2.5","2.75","3.0","3.25","3.5","3.75","4.0"};
     std::vector<Double_t> totWeightAr(37,0.0);
     
-    
+    UInt_t evRunOver = 0;
+    UInt_t evCount = 0;
     
     std::cout << "Going into file loop.\n";
 
@@ -237,7 +238,6 @@ void get10122023XSForReweightingSignal(UInt_t fileInd){
             std::cerr << "Moving to next file.\n";
             continue;
         }
-        outFile->cd();
         TTreeReader myEventsReader("Events", tmpfile);
 
         //eventWeights
