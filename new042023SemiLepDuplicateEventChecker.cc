@@ -48,6 +48,8 @@ int NToEnd = 20;
 int NToEndTot = 10000;
 bool localTest = false;
 
+bool use10162023DataResults = true;
+
 
 
 ////////////////////////////////START OF MAIN FUNCTION////////////////////////////////
@@ -122,7 +124,8 @@ void new042023SemiLepDuplicateEventChecker(){
     ////////////////////////////////GETTING DATASET////////////////////////////////
 
     std::string strAdd;
-    strAdd ="/scratch365/dlutton/new042023BDTAnalysisFiles/";
+    if (use10162023DataResults) strAdd ="/scratch365/dlutton/new10162023BDTAnalysisFiles/";
+    else strAdd ="/scratch365/dlutton/new042023BDTAnalysisFiles/";
     if (localTest) strAdd = "";
     for (UInt_t i = 0; i < nDataSets; i++){
         fileAr.push_back(strAdd+datasetStrAr[i]);
@@ -136,8 +139,11 @@ void new042023SemiLepDuplicateEventChecker(){
 
     std::cout << "Doing duplicate checker\n";
     //Setting up outfile with variables for BDT
+
+    std::string outFileStr
     
-    std::string outFileStr = "new042023BDTAnalysisUniqueData.root";
+    if (use10162023DataResults) outFileStr = "new10162023BDTAnalysisUniqueData.root";
+    else outFileStr = "new042023BDTAnalysisUniqueData.root";
     std::cout << "OutFile: " << outFileStr << "\n";
     TFile *outFile = new TFile(outFileStr.c_str(),"RECREATE");
 
