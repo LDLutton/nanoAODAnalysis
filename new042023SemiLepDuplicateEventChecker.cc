@@ -165,8 +165,17 @@ void new042023SemiLepDuplicateEventChecker(){
 
 
     std::string datasetStrAr[nDataSets];
-    if (use10162023DataResults) datasetStrAr = dataset10162023StrAr;
-    else datasetStrAr = dataset042023StrAr;
+    if (use10162023DataResults) {
+        for (uint i = 0; i < dataset10162023StrAr.size(); i++){
+         datasetStrAr[i] = dataset10162023StrAr[i];
+        }
+         
+    }
+    else {
+        for (uint i = 0; i < dataset042023StrAr.size(); i++){
+         datasetStrAr[i] = dataset042023StrAr[i];
+        }
+    }
 
     ////////////////////////////////GETTING DATASET////////////////////////////////
     ////////////////////////////////GETTING DATASET////////////////////////////////
