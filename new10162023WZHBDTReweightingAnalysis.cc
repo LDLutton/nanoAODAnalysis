@@ -650,6 +650,33 @@ void new10162023WZHBDTReweightingAnalysis(string datasetString){
     Float_t selectedZPairPlusHiggsFJPlusVBFJets_PtScalarSum_SL_L;
 
     Float_t selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_SL_L;
+
+    Bool_t ZReconstructedWithCorrectFJ_SL_L;
+    Bool_t HReconstructedWithCorrectFJ_SL_L;
+
+    Bool_t ZReconstructedWithHFJ_SL_L;
+    Bool_t HReconstructedWithZFJ_SL_L;
+
+    Bool_t goodGenZFJMatch_SL_L;
+    Bool_t goodGenHFJMatch_SL_L;
+    Bool_t goodZFJMatchToGen_SL_L;
+    Bool_t goodHFJMatchToGen_SL_L;
+    Bool_t eventGenSemileptonic_SL_L;
+    Bool_t eventGenHToBB_SL_L;
+    Int_t ZFJGenHadronFlavour_SL_L;
+    Int_t HFJGenHadronFlavour_SL_L;
+    Int_t FatJet_hadronFlavour_SL_L;
+
+    Bool_t firstHToBBBool_SL_L; //including as alternative to eventGenHToBB. Checking if there's a difference.
+
+    UInt_t nHDecayPID_SL_L;
+    std::vector<Int_t> HDecayPID_SL_L;
+    UInt_t nZOneDecayPID_SL_L;
+    std::vector<Int_t> ZOneDecayPID_SL_L;
+    UInt_t nZTwoDecayPID_SL_L;
+    std::vector<Int_t> ZTwoDecayPID_SL_L;
+    Int_t ZOneType_SL_L; //0=Leptonic,1=Hadronic,2=Other
+    Int_t ZTwoType_SL_L;
     
 
     TTree *passingEvSemiLepTree = new TTree("passingEvSemiLepTree", "passingEvSemiLepTree");
@@ -740,7 +767,35 @@ void new10162023WZHBDTReweightingAnalysis(string datasetString){
     passingEvSemiLepTree->Branch("selectedZPairPlusHiggsFJPlusVBFJets_PtVecSum_SL_L",&selectedZPairPlusHiggsFJPlusVBFJets_PtVecSum_SL_L,"selectedZPairPlusHiggsFJPlusVBFJets_PtVecSum_SL_L/F");
     passingEvSemiLepTree->Branch("selectedZPairPlusHiggsFJPlusVBFJets_PtScalarSum_SL_L",&selectedZPairPlusHiggsFJPlusVBFJets_PtScalarSum_SL_L,"selectedZPairPlusHiggsFJPlusVBFJets_PtScalarSum_SL_L/F");
     passingEvSemiLepTree->Branch("selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_SL_L",&selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_SL_L,"selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_SL_L/F");
+    
+    passingEvSemiLepTree->Branch("ZReconstructedWithCorrectFJ_SL_L",&ZReconstructedWithCorrectFJ_SL_L,"ZReconstructedWithCorrectFJ_SL_L/O");
+    passingEvSemiLepTree->Branch("HReconstructedWithCorrectFJ_SL_L",&HReconstructedWithCorrectFJ_SL_L,"HReconstructedWithCorrectFJ_SL_L/O");
+    passingEvSemiLepTree->Branch("ZReconstructedWithHFJ_SL_L",&ZReconstructedWithHFJ_SL_L,"ZReconstructedWithHFJ_SL_L/O");
+    passingEvSemiLepTree->Branch("HReconstructedWithZFJ_SL_L",&HReconstructedWithZFJ_SL_L,"HReconstructedWithZFJ_SL_L/O");
 
+    passingEvSemiLepTree->Branch("goodGenZFJMatch_SL_L",&goodGenZFJMatch_SL_L,"goodGenZFJMatch_SL_L/O");
+    passingEvSemiLepTree->Branch("goodGenHFJMatch_SL_L",&goodGenHFJMatch_SL_L,"goodGenHFJMatch_SL_L/O");
+    passingEvSemiLepTree->Branch("goodZFJMatchToGen_SL_L",&goodZFJMatchToGen_SL_L,"goodZFJMatchToGen_SL_L/O");
+    passingEvSemiLepTree->Branch("goodHFJMatchToGen_SL_L",&goodHFJMatchToGen_SL_L,"goodHFJMatchToGen_SL_L/O");
+    passingEvSemiLepTree->Branch("eventGenSemileptonic_SL_L",&eventGenSemileptonic_SL_L,"eventGenSemileptonic_SL_L/O");
+    passingEvSemiLepTree->Branch("eventGenHToBB_SL_L",&eventGenHToBB_SL_L,"eventGenHToBB_SL_L/O");
+
+    passingEvSemiLepTree->Branch("ZFJGenHadronFlavour_SL_L",&ZFJGenHadronFlavour_SL_L,"ZFJGenHadronFlavour_SL_L/I");
+    passingEvSemiLepTree->Branch("HFJGenHadronFlavour_SL_L",&HFJGenHadronFlavour_SL_L,"HFJGenHadronFlavour_SL_L/I");
+    passingEvSemiLepTree->Branch("FatJet_hadronFlavour_SL_L",&FatJet_hadronFlavour_SL_L,"FatJet_hadronFlavour_SL_L/I");
+
+    passingEvSemiLepTree->Branch("firstHToBBBool_SL_L",&firstHToBBBool_SL_L,"firstHToBBBool_SL_L/O");
+
+    passingEvSemiLepTree->Branch("nHDecayPID_SL_L",&nHDecayPID_SL_L,"nHDecayPID_SL_L/i");
+    passingEvSemiLepTree->Branch("HDecayPID_SL_L",&HDecayPID_SL_L);
+
+    passingEvSemiLepTree->Branch("nZOneDecayPID_SL_L",&nZOneDecayPID_SL_L,"nZOneDecayPID_SL_L/i");
+    passingEvSemiLepTree->Branch("ZOneDecayPID_SL_L",&ZOneDecayPID_SL_L);
+    passingEvSemiLepTree->Branch("nZTwoDecayPID_SL_L",&nZTwoDecayPID_SL_L,"nZTwoDecayPID_SL_L/i");
+    passingEvSemiLepTree->Branch("ZTwoDecayPID_SL_L",&ZTwoDecayPID_SL_L);
+
+    passingEvSemiLepTree->Branch("ZOneType_SL_L",&ZOneType_SL_L,"ZOneType_SL_L/I");
+    passingEvSemiLepTree->Branch("ZTwoType_SL_L",&ZTwoType_SL_L,"ZTwoType_SL_L/I");
 
 
 
@@ -2076,6 +2131,32 @@ void new10162023WZHBDTReweightingAnalysis(string datasetString){
                     selectedZPairPlusHiggsFJPlusVBFJets_PtScalarSum_SL_L = tmpPtScalarSum;
                     selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_SL_L = tmpPtVecSumVec.Pt()/tmpPtScalarSum;
 
+
+                    goodGenZFJMatch_SL_L = false;
+                    goodGenHFJMatch_SL_L = false;
+                    goodZFJMatchToGen_SL_L = false;
+                    goodHFJMatchToGen_SL_L = false;
+                    eventGenSemileptonic_SL_L = false;
+                    eventGenHToBB_SL_L = *false;
+                    ZFJGenHadronFlavour_SL_L = -1;
+                    HFJGenHadronFlavour_SL_L = -1;
+                    FatJet_hadronFlavour_SL_L =  -1;
+                    ZReconstructedWithCorrectFJ_SL_L = false;
+                    HReconstructedWithCorrectFJ_SL_L = false;
+
+                    ZReconstructedWithHFJ_SL_L = false;
+                    HReconstructedWithZFJ_SL_L = false;
+
+                    firstHToBBBool_SL_L = *HTobbBoolL;
+
+                    ZOneType_SL_L = -1;
+                    ZTwoType_SL_L = -1;
+                    
+                    nHDecayPID_SL_L = 0;
+
+                    nZOneDecayPID_SL_L = 0;
+                    nZTwoDecayPID_SL_L = 0;
+
                     passingEvSemiLepTree->Fill();
 
                     LHEReweightingWeight_SL_L.clear();
@@ -2086,6 +2167,10 @@ void new10162023WZHBDTReweightingAnalysis(string datasetString){
                     Jet_mass_SL_L.clear();
                     Jet_jetId_SL_L.clear();
                     Jet_btagDeepFlavB_SL_L.clear();
+
+                    HDecayPID_SL_L.clear();
+                    ZOneDecayPID_SL_L.clear();
+                    ZTwoDecayPID_SL_L.clear();
 
                 
                     
