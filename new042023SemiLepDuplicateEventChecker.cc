@@ -73,7 +73,7 @@ void new042023SemiLepDuplicateEventChecker(){
 
     const uint nDataSets = 44;
 
-    std::string datasetStrAr[nDataSets] =  {"new042023BDTAnalysisBTagCSV16Data.root",
+    std::string dataset042023StrAr[nDataSets] =  {"new042023BDTAnalysisBTagCSV16Data.root",
     "new042023BDTAnalysisBTagCSV17Data.root",
     "new042023BDTAnalysisBTagMu16Data.root",
     "new042023BDTAnalysisBTagMu17Data.root",
@@ -117,6 +117,56 @@ void new042023SemiLepDuplicateEventChecker(){
     "new042023BDTAnalysisTau16Data.root",
     "new042023BDTAnalysisTau17Data.root",
     "new042023BDTAnalysisTauData.root"};
+
+    std::string dataset10162023StrAr[nDataSets] =  {"new10162023BDTAnalysisBTagCSV16Data.root",
+    "new10162023BDTAnalysisBTagCSV17Data.root",
+    "new10162023BDTAnalysisBTagMu16Data.root",
+    "new10162023BDTAnalysisBTagMu17Data.root",
+    "new10162023BDTAnalysisBTagMuData.root",
+    "new10162023BDTAnalysisCharmonium16Data.root",
+    "new10162023BDTAnalysisCharmonium17Data.root",
+    "new10162023BDTAnalysisCharmoniumData.root",
+    "new10162023BDTAnalysisDisplacedJet16Data.root",
+    "new10162023BDTAnalysisDisplacedJet17Data.root",
+    "new10162023BDTAnalysisDisplacedJetData.root",
+    "new10162023BDTAnalysisDoubleEG16Data.root",
+    "new10162023BDTAnalysisDoubleEG17Data.root",
+    "new10162023BDTAnalysisDoubleMuon16Data.root",
+    "new10162023BDTAnalysisDoubleMuon17Data.root",
+    "new10162023BDTAnalysisDoubleMuonData.root",
+    "new10162023BDTAnalysisDoubleMuonLowMass16Data.root",
+    "new10162023BDTAnalysisDoubleMuonLowMass17Data.root",
+    "new10162023BDTAnalysisDoubleMuonLowMassData.root",
+    "new10162023BDTAnalysisEGammaData.root",
+    "new10162023BDTAnalysisHTMHT16Data.root",
+    "new10162023BDTAnalysisHTMHT17Data.root",
+    "new10162023BDTAnalysisJetHT16Data.root",
+    "new10162023BDTAnalysisJetHT17Data.root",
+    "new10162023BDTAnalysisJetHTData.root",
+    "new10162023BDTAnalysisMET16Data.root",
+    "new10162023BDTAnalysisMET17Data.root",
+    "new10162023BDTAnalysisMETData.root",
+    "new10162023BDTAnalysisMuOnia16Data.root",
+    "new10162023BDTAnalysisMuOnia17Data.root",
+    "new10162023BDTAnalysisMuOniaData.root",
+    "new10162023BDTAnalysisMuonEG16Data.root",
+    "new10162023BDTAnalysisMuonEG17Data.root",
+    "new10162023BDTAnalysisMuonEGData.root",
+    "new10162023BDTAnalysisSingleElectron16Data.root",
+    "new10162023BDTAnalysisSingleElectron17Data.root",
+    "new10162023BDTAnalysisSingleMuon16Data.root",
+    "new10162023BDTAnalysisSingleMuon17Data.root",
+    "new10162023BDTAnalysisSingleMuonData.root",
+    "new10162023BDTAnalysisSinglePhoton16Data.root",
+    "new10162023BDTAnalysisSinglePhoton17Data.root",
+    "new10162023BDTAnalysisTau16Data.root",
+    "new10162023BDTAnalysisTau17Data.root",
+    "new10162023BDTAnalysisTauData.root"};
+
+
+    std::string datasetStrAr[nDataSets];
+    if (use10162023DataResults) datasetStrAr = dataset10162023StrAr;
+    else datasetStrAr = dataset042023StrAr;
 
     ////////////////////////////////GETTING DATASET////////////////////////////////
     ////////////////////////////////GETTING DATASET////////////////////////////////
