@@ -3502,7 +3502,7 @@ void new10062023NoGenBDTReweightingAnalysis(string datasetString){
                         goodZFJMatchToGen_SL_L = false;
                         goodHFJMatchToGen_SL_L = false;
                         eventGenSemileptonic_SL_L = false;
-                        eventGenHToBB_SL_L = *false;
+                        eventGenHToBB_SL_L = false;
                         ZFJGenHadronFlavour_SL_L = -1;
                         HFJGenHadronFlavour_SL_L = -1;
                         FatJet_hadronFlavour_SL_L =  -1;
@@ -3653,7 +3653,7 @@ void new10062023NoGenBDTReweightingAnalysis(string datasetString){
                                 goodZFJMatchToGen_SL_L = false;
                                 goodHFJMatchToGen_SL_L = false;
                                 eventGenSemileptonic_SL_L = false;
-                                eventGenHToBB_SL_L = *false;
+                                eventGenHToBB_SL_L = false;
                                 ZFJGenHadronFlavour_SL_L = -1;
                                 HFJGenHadronFlavour_SL_L = -1;
                                 FatJet_hadronFlavour_SL_L =  -1;
