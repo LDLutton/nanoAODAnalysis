@@ -140,7 +140,7 @@ void new042023SemiLepDuplicateEventChecker(){
     std::cout << "Doing duplicate checker\n";
     //Setting up outfile with variables for BDT
 
-    std::string outFileStr
+    std::string outFileStr;
     
     if (use10162023DataResults) outFileStr = "new10162023BDTAnalysisUniqueData.root";
     else outFileStr = "new042023BDTAnalysisUniqueData.root";
