@@ -1491,14 +1491,6 @@ void new10162023WZHBDTReweightingAnalysis(string datasetString){
             
 
             //Now fat jets
-            UInt_t nFatJetLen = *nFatJetL;
-            
-            float hFatJet_pt_fromHTag = 0.;
-            float hFatJet_phi_fromHTag = 0.;
-            float hFatJet_eta_fromHTag = 0.;
-            float hFatJet_mass_fromHTag = 0.;
-            float hFatJet_HTag_fromHTag = 0.;
-            UInt_t hFatJet_ind_fromHTag = 0;
             if (debug){
                 std::cout << "Entering Fat Jets Loop\n";
             }
