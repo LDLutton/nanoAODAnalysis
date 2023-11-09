@@ -374,6 +374,7 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
     std::vector<Float_t> FatJet_deepTag_HL;
     std::vector<Float_t> FatJet_deepTag_ZvsQCDL;
     std::vector<Float_t> FatJet_msoftdropL;
+    std::vector<Float_t> FatJet_particleNet_massL;
 
     //Electrons
     UInt_t nElectronL;
@@ -436,6 +437,7 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
     std::vector<Float_t> FatJet_particleNetMD_XbbL;
     std::vector<Float_t> FatJet_particleNetMD_XccL;
     std::vector<Float_t> FatJet_particleNetMD_XqqL;
+    
 
 
 
@@ -513,6 +515,7 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
     FilteredEventsTree->Branch("FatJet_deepTag_HL",&FatJet_deepTag_HL);
     FilteredEventsTree->Branch("FatJet_deepTag_ZvsQCDL",&FatJet_deepTag_ZvsQCDL);
     FilteredEventsTree->Branch("FatJet_msoftdropL",&FatJet_msoftdropL);
+    FilteredEventsTree->Branch("FatJet_particleNet_massL", &FatJet_particleNet_massL);
 
     //Electrons
     FilteredEventsTree->Branch("nElectronL",&nElectronL,"nElectronL/i");
@@ -615,7 +618,7 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
     FilteredEventsTree->Branch("ZTwoTypeL",&ZTwoTypeL,"ZTwoTypeL/I");
 
 
-
+    
 
 
     //GenTree
@@ -952,6 +955,8 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
 
         TTreeReaderArray<Int_t> FatJet_hadronFlavour(myEventsReader, "FatJet_hadronFlavour");
 
+        TTreeReaderArray<Float_t> FatJet_particleNet_mass(myEventsReader, "FatJet_particleNet_mass");
+
 
         //Gen part stuff
 
@@ -1029,6 +1034,8 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
         TTreeReaderArray<Float_t> FatJet_particleNetMD_Xbb(myEventsReader, "FatJet_particleNetMD_Xbb");
         TTreeReaderArray<Float_t> FatJet_particleNetMD_Xcc(myEventsReader, "FatJet_particleNetMD_Xcc");
         TTreeReaderArray<Float_t> FatJet_particleNetMD_Xqq(myEventsReader, "FatJet_particleNetMD_Xqq");
+
+        
 
         //
 
@@ -3020,6 +3027,7 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
                 FatJet_particleNetMD_XqqL.push_back(FatJet_particleNetMD_Xqq[nFatJetItr]);
                 FatJet_msoftdropL.push_back(FatJet_msoftdrop[nFatJetItr]);
                 FatJet_hadronFlavourL.push_back(FatJet_hadronFlavour[nFatJetItr]);
+                FatJet_particleNet_massL.push_back(FatJet_particleNet_mass[nFatJetItr]);
 
             }
 
@@ -3109,6 +3117,8 @@ void DoTrimmed09272023HLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
             FatJet_deepTag_HL.clear();
             FatJet_deepTag_ZvsQCDL.clear();
             FatJet_msoftdropL.clear();
+            FatJet_particleNet_massL.clear();
+            
             
 
             Electron_etaL.clear();
