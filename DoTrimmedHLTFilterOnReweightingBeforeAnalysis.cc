@@ -374,6 +374,7 @@ void DoTrimmedHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
     std::vector<Float_t> FatJet_deepTag_HL;
     std::vector<Float_t> FatJet_deepTag_ZvsQCDL;
     std::vector<Float_t> FatJet_msoftdropL;
+    std::vector<Float_t> FatJet_particleNet_massL;
 
     //Electrons
     UInt_t nElectronL;
@@ -483,6 +484,7 @@ void DoTrimmedHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
     FilteredEventsTree->Branch("FatJet_deepTag_HL",&FatJet_deepTag_HL);
     FilteredEventsTree->Branch("FatJet_deepTag_ZvsQCDL",&FatJet_deepTag_ZvsQCDL);
     FilteredEventsTree->Branch("FatJet_msoftdropL",&FatJet_msoftdropL);
+    FilteredEventsTree->Branch("FatJet_particleNet_massL", &FatJet_particleNet_massL);
 
     //Electrons
     FilteredEventsTree->Branch("nElectronL",&nElectronL,"nElectronL/i");
@@ -890,6 +892,8 @@ void DoTrimmedHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
         TTreeReaderArray<Float_t> FatJet_deepTag_H(myEventsReader, "FatJet_deepTag_H");
         TTreeReaderArray<Float_t> FatJet_deepTag_ZvsQCD(myEventsReader, "FatJet_deepTag_ZvsQCD");
         TTreeReaderArray<Float_t> FatJet_msoftdrop(myEventsReader, "FatJet_msoftdrop");
+
+        TTreeReaderArray<Float_t> FatJet_particleNet_mass(myEventsReader, "FatJet_particleNet_mass");
 
         //Gen part stuff
 
@@ -2713,6 +2717,7 @@ void DoTrimmedHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
                 FatJet_particleNetMD_XccL.push_back(FatJet_particleNetMD_Xcc[nFatJetItr]);
                 FatJet_particleNetMD_XqqL.push_back(FatJet_particleNetMD_Xqq[nFatJetItr]);
                 FatJet_msoftdropL.push_back(FatJet_msoftdrop[nFatJetItr]);
+                FatJet_particleNet_massL.push_back(FatJet_particleNet_mass[nFatJetItr]);
 
             }
 
@@ -2802,6 +2807,7 @@ void DoTrimmedHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd){
             FatJet_deepTag_HL.clear();
             FatJet_deepTag_ZvsQCDL.clear();
             FatJet_msoftdropL.clear();
+            FatJet_particleNet_massL.clear();
             
 
             Electron_etaL.clear();
