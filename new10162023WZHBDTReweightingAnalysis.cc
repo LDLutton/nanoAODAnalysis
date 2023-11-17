@@ -612,6 +612,9 @@ void new10162023WZHBDTReweightingAnalysis(string datasetString){
     Float_t selectedZFJ_InvMassSoftDrop_SL_L;
     Float_t selectedHiggsFJ_InvMassSoftDrop_SL_L;
 
+    Float_t selectedZFJ_InvMassPNRegress_SL_L;
+    Float_t selectedHiggsFJ_InvMassPNRegress_SL_L;
+
     Float_t selectedHiggsFJ_ParticleNetMD_QCD_SL_L;
     Float_t selectedHiggsFJ_ParticleNetMD_Xbb_SL_L;
     Float_t selectedHiggsFJ_ParticleNetMD_Xcc_SL_L;
@@ -730,6 +733,9 @@ void new10162023WZHBDTReweightingAnalysis(string datasetString){
     passingEvSemiLepTree->Branch("selectedZFJ_InvMassSoftDrop_SL_L",&selectedZFJ_InvMassSoftDrop_SL_L,"selectedZFJ_InvMassSoftDrop_SL_L/F");
     passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMassSoftDrop_SL_L",&selectedHiggsFJ_InvMassSoftDrop_SL_L,"selectedHiggsFJ_InvMassSoftDrop_SL_L/F");
 
+    passingEvSemiLepTree->Branch("selectedZFJ_InvMassPNRegress_SL_L",&selectedZFJ_InvMassPNRegress_SL_L,"selectedZFJ_InvMassPNRegress_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMassPNRegress_SL_L",&selectedHiggsFJ_InvMassPNRegress_SL_L,"selectedHiggsFJ_InvMassPNRegress_SL_L/F");
+
     passingEvSemiLepTree->Branch("selectedHiggsFJ_ParticleNetMD_QCD_SL_L", &selectedHiggsFJ_ParticleNetMD_QCD_SL_L);
     passingEvSemiLepTree->Branch("selectedHiggsFJ_ParticleNetMD_Xbb_SL_L", &selectedHiggsFJ_ParticleNetMD_Xbb_SL_L);
     passingEvSemiLepTree->Branch("selectedHiggsFJ_ParticleNetMD_Xcc_SL_L", &selectedHiggsFJ_ParticleNetMD_Xcc_SL_L);
@@ -837,6 +843,8 @@ void new10162023WZHBDTReweightingAnalysis(string datasetString){
         //TTreeReaderArray<Float_t> FatJet_deepTag_HL(myEventsReader, "FatJet_deepTag_HL");
         //TTreeReaderArray<Float_t> FatJet_deepTag_ZvsQCDL(myEventsReader, "FatJet_deepTag_ZvsQCDL");
         TTreeReaderArray<Float_t> FatJet_msoftdropL(myEventsReader, "FatJet_msoftdropL");
+
+        TTreeReaderArray<Float_t> FatJet_particleNet_massL(myEventsReader, "FatJet_particleNet_massL");
 
         //Electrons
         TTreeReaderValue<UInt_t> nElectronL(myEventsReader, "nElectronL");
@@ -2087,6 +2095,9 @@ void new10162023WZHBDTReweightingAnalysis(string datasetString){
 
                     selectedZFJ_InvMassSoftDrop_SL_L = FatJet_msoftdropL[FJIndAr[0]];
                     selectedHiggsFJ_InvMassSoftDrop_SL_L = FatJet_msoftdropL[FJIndAr[1]];
+
+                    selectedZFJ_InvMassPNRegress_SL_L = FatJet_particleNet_massL[FJIndAr[0]];
+                    selectedHiggsFJ_InvMassPNRegress_SL_L = FatJet_particleNet_massL[FJIndAr[1]];
                     
                     selectedZFJ_ParticleNet_HbbvsQCD_SL_L = FatJet_particleNet_HbbvsQCDL[FJIndAr[0]];
                     selectedHiggsFJ_ParticleNet_HbbvsQCD_SL_L = FatJet_particleNet_HbbvsQCDL[FJIndAr[1]];
