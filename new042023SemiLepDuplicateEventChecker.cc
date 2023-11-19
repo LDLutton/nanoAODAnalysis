@@ -259,6 +259,9 @@ void new042023SemiLepDuplicateEventChecker(){
     Float_t selectedZFJ_InvMassSoftDrop_SLU_L;
     Float_t selectedHiggsFJ_InvMassSoftDrop_SLU_L;
 
+    Float_t selectedZFJ_InvMassPNRegress_SLU_L;
+    Float_t selectedHiggsFJ_InvMassPNRegress_SLU_L;
+
     Float_t selectedHiggsFJ_ParticleNetMD_QCD_SLU_L;
     Float_t selectedHiggsFJ_ParticleNetMD_Xbb_SLU_L;
     Float_t selectedHiggsFJ_ParticleNetMD_Xcc_SLU_L;
@@ -341,6 +344,9 @@ void new042023SemiLepDuplicateEventChecker(){
 
     passingEvSemiLepUniqueTree->Branch("selectedZFJ_InvMassSoftDrop_SLU_L",&selectedZFJ_InvMassSoftDrop_SLU_L,"selectedZFJ_InvMassSoftDrop_SLU_L/F");
     passingEvSemiLepUniqueTree->Branch("selectedHiggsFJ_InvMassSoftDrop_SLU_L",&selectedHiggsFJ_InvMassSoftDrop_SLU_L,"selectedHiggsFJ_InvMassSoftDrop_SLU_L/F");
+
+    passingEvSemiLepTree->Branch("selectedZFJ_InvMassPNRegress_SLU_L",&selectedZFJ_InvMassPNRegress_SLU_L,"selectedZFJ_InvMassPNRegress_SLU_L/F");
+    passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMassPNRegress_SLU_L",&selectedHiggsFJ_InvMassPNRegress_SLU_L,"selectedHiggsFJ_InvMassPNRegress_SLU_L/F");
 
     passingEvSemiLepUniqueTree->Branch("selectedHiggsFJ_ParticleNetMD_QCD_SLU_L", &selectedHiggsFJ_ParticleNetMD_QCD_SLU_L);
     passingEvSemiLepUniqueTree->Branch("selectedHiggsFJ_ParticleNetMD_Xbb_SLU_L", &selectedHiggsFJ_ParticleNetMD_Xbb_SLU_L);
@@ -437,6 +443,9 @@ void new042023SemiLepDuplicateEventChecker(){
 
         TTreeReaderValue<Float_t> selectedZFJ_InvMassSoftDrop_SL_L(myEventsReader,  "selectedZFJ_InvMassSoftDrop_SL_L");
         TTreeReaderValue<Float_t> selectedHiggsFJ_InvMassSoftDrop_SL_L(myEventsReader,  "selectedHiggsFJ_InvMassSoftDrop_SL_L");
+
+        TTreeReaderValue<Float_t> selectedZFJ_InvMassPNRegress_SL_L(myEventsReader,  "selectedZFJ_InvMassPNRegress_SL_L");
+        TTreeReaderValue<Float_t> selectedHiggsFJ_InvMassPNRegress_SL_L(myEventsReader,  "selectedHiggsFJ_InvMassPNRegress_SL_L");
 
         TTreeReaderValue<Float_t> selectedHiggsFJ_ParticleNetMD_QCD_SL_L(myEventsReader, "selectedHiggsFJ_ParticleNetMD_QCD_SL_L");
         TTreeReaderValue<Float_t> selectedHiggsFJ_ParticleNetMD_Xbb_SL_L(myEventsReader, "selectedHiggsFJ_ParticleNetMD_Xbb_SL_L");
@@ -565,6 +574,9 @@ void new042023SemiLepDuplicateEventChecker(){
 
                 selectedZFJ_InvMassSoftDrop_SLU_L = *selectedZFJ_InvMassSoftDrop_SL_L;
                 selectedHiggsFJ_InvMassSoftDrop_SLU_L = *selectedHiggsFJ_InvMassSoftDrop_SL_L;
+
+                selectedZFJ_InvMassPNRegress_SLU_L = selectedZFJ_InvMassPNRegress_SL_L;
+                selectedHiggsFJ_InvMassPNRegress_SLU_L = selectedHiggsFJ_InvMassPNRegress_SL_L;
 
                 selectedZFJ_ParticleNet_ZvsQCD_SLU_L = *selectedZFJ_ParticleNet_ZvsQCD_SL_L;
 
