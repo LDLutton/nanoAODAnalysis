@@ -1021,6 +1021,8 @@ void DoTrimmedHLTFilterBeforeAnalysisY16APVBackground(string datasetString,UInt_
         TTreeReaderArray<Float_t> FatJet_deepTag_ZvsQCD(myEventsReader, "FatJet_deepTag_ZvsQCD");
         TTreeReaderArray<Float_t> FatJet_msoftdrop(myEventsReader, "FatJet_msoftdrop");
 
+        TTreeReaderArray<Float_t> FatJet_particleNet_mass(myEventsReader, "FatJet_particleNet_mass");
+
         //Electrons
         TTreeReaderValue<UInt_t> nElectron(myEventsReader, "nElectron");
         TTreeReaderArray<Float_t> Electron_eta(myEventsReader, "Electron_eta");
