@@ -345,8 +345,8 @@ void new042023SemiLepDuplicateEventChecker(){
     passingEvSemiLepUniqueTree->Branch("selectedZFJ_InvMassSoftDrop_SLU_L",&selectedZFJ_InvMassSoftDrop_SLU_L,"selectedZFJ_InvMassSoftDrop_SLU_L/F");
     passingEvSemiLepUniqueTree->Branch("selectedHiggsFJ_InvMassSoftDrop_SLU_L",&selectedHiggsFJ_InvMassSoftDrop_SLU_L,"selectedHiggsFJ_InvMassSoftDrop_SLU_L/F");
 
-    passingEvSemiLepTree->Branch("selectedZFJ_InvMassPNRegress_SLU_L",&selectedZFJ_InvMassPNRegress_SLU_L,"selectedZFJ_InvMassPNRegress_SLU_L/F");
-    passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMassPNRegress_SLU_L",&selectedHiggsFJ_InvMassPNRegress_SLU_L,"selectedHiggsFJ_InvMassPNRegress_SLU_L/F");
+    passingEvSemiLepUniqueTree->Branch("selectedZFJ_InvMassPNRegress_SLU_L",&selectedZFJ_InvMassPNRegress_SLU_L,"selectedZFJ_InvMassPNRegress_SLU_L/F");
+    passingEvSemiLepUniqueTree->Branch("selectedHiggsFJ_InvMassPNRegress_SLU_L",&selectedHiggsFJ_InvMassPNRegress_SLU_L,"selectedHiggsFJ_InvMassPNRegress_SLU_L/F");
 
     passingEvSemiLepUniqueTree->Branch("selectedHiggsFJ_ParticleNetMD_QCD_SLU_L", &selectedHiggsFJ_ParticleNetMD_QCD_SLU_L);
     passingEvSemiLepUniqueTree->Branch("selectedHiggsFJ_ParticleNetMD_Xbb_SLU_L", &selectedHiggsFJ_ParticleNetMD_Xbb_SLU_L);
@@ -575,8 +575,8 @@ void new042023SemiLepDuplicateEventChecker(){
                 selectedZFJ_InvMassSoftDrop_SLU_L = *selectedZFJ_InvMassSoftDrop_SL_L;
                 selectedHiggsFJ_InvMassSoftDrop_SLU_L = *selectedHiggsFJ_InvMassSoftDrop_SL_L;
 
-                selectedZFJ_InvMassPNRegress_SLU_L = selectedZFJ_InvMassPNRegress_SL_L;
-                selectedHiggsFJ_InvMassPNRegress_SLU_L = selectedHiggsFJ_InvMassPNRegress_SL_L;
+                selectedZFJ_InvMassPNRegress_SLU_L = *selectedZFJ_InvMassPNRegress_SL_L;
+                selectedHiggsFJ_InvMassPNRegress_SLU_L = *selectedHiggsFJ_InvMassPNRegress_SL_L;
 
                 selectedZFJ_ParticleNet_ZvsQCD_SLU_L = *selectedZFJ_ParticleNet_ZvsQCD_SL_L;
 
