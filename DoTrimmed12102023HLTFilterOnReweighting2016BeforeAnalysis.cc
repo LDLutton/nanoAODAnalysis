@@ -78,15 +78,7 @@ void DoTrimmed12102023HLTFilterOnReweighting2016BeforeAnalysis(int fileInd, stri
         isBackground = false;
         int arrSize = sizeof(SDC2V2MCZZH16ReweightAr)/sizeof(SDC2V2MCZZH16ReweightAr[0]);
         std::string tmpStrWithPath = SDC2V2MCZZH16ReweightAr[fileInd];
-        /*
-        for (int i=0; i<arrSize; i++){
-            std::string tmpStrWithPath = SDC2V2MCZZH16ReweightAr[i];
-            fileAr.push_back(tmpStrWithPath);
-        }
-        */
         fileAr.push_back(tmpStrWithPath);
-        useLHETree = true;
-        useFJGenMatchTree = true;
         
     }
     else if (SDC2V2MCZZH16APVReweight){
@@ -94,15 +86,7 @@ void DoTrimmed12102023HLTFilterOnReweighting2016BeforeAnalysis(int fileInd, stri
         isBackground = false;
         int arrSize = sizeof(SDC2V2MCZZH16APVReweightAr)/sizeof(SDC2V2MCZZH16APVReweightAr[0]);
         std::string tmpStrWithPath = SDC2V2MCZZH16APVReweightAr[fileInd];
-        /*
-        for (int i=0; i<arrSize; i++){
-            std::string tmpStrWithPath = SDC2V2MCZZH16APVReweightAr[i];
-            fileAr.push_back(tmpStrWithPath);
-        }
-        */
         fileAr.push_back(tmpStrWithPath);
-        useLHETree = true;
-        useFJGenMatchTree = true;
         
     }
     else if (testRun){
