@@ -826,7 +826,7 @@ void DoTrimmed12102023HLTFilterOnReweightingBeforeAnalysis(int fileInd, string d
         TTreeReaderArray<Float_t> Jet_phi(myEventsReader, "Jet_phi");
         TTreeReaderArray<Float_t> Jet_mass(myEventsReader, "Jet_mass");
         TTreeReaderArray<Int_t> Jet_jetId(myEventsReader, "Jet_jetId");
-        TTreeReaderArray<Int_t> Jet_hadronFlavourL(myEventsReader, "Jet_hadronFlavour");
+        TTreeReaderArray<Int_t> Jet_hadronFlavour(myEventsReader, "Jet_hadronFlavour");
         TTreeReaderArray<Int_t> Jet_genJetIdx(myEventsReader, "Jet_genJetIdx");
         TTreeReaderArray<Float_t> Jet_btagDeepFlavB(myEventsReader, "Jet_btagDeepFlavB");
         TTreeReaderValue<Float_t> fixedGridRhoFastjetAll(myEventsReader, "fixedGridRhoFastjetAll");
