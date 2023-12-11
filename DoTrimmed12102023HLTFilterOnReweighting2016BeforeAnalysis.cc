@@ -47,14 +47,15 @@
 ////////////////////////////////START OF MAIN FUNCTION////////////////////////////////
 
 
-void DoTrimmed12102023HLTFilterOnReweightingBeforeAnalysis(int fileInd, string datasetString){
+void DoTrimmed12102023HLTFilterOnReweighting2016BeforeAnalysis(int fileInd, string datasetString){
     // Open the file. Note that the name of your file outside this class
     // will probably NOT be experiment.root.
     std::cout << "start\n";
     clock_t startt = clock();
     
     if (datasetString == "testRun") testRun = true;
-    if (datasetString == "SDC2V2MCZZHReweight") SDC2V2MCZZHReweight = true;
+    if (datasetString == "SDC2V2MCZZH16Reweight") SDC2V2MCZZH16Reweight = true;
+    if (datasetString == "SDC2V2MCZZH16APVReweight") SDC2V2MCZZH16APVReweight = true;
     //Analyzer will run over all files put into fileAr
 
     std::vector<std::string> fileAr;
@@ -72,12 +73,36 @@ void DoTrimmed12102023HLTFilterOnReweightingBeforeAnalysis(int fileInd, string d
     if (scratchDown) strAdd ="/afs/crc.nd.edu/user/d/dlutton/FROM_PANASAS";
     else strAdd ="/scratch365";
 
-    if (SDC2V2MCZZHReweight){
-        saveName = "SDC2V2MCZZHReweight";
+    if (SDC2V2MCZZH16Reweight){
+        saveName = "SDC2V2MCZZH16Reweight";
         isBackground = false;
-        int arrSize = sizeof(SDC2V2MCZZHReweightAr)/sizeof(SDC2V2MCZZHReweightAr[0]);
-        std::string tmpStrWithPath = SDC2V2MCZZHReweightAr[fileInd];
+        int arrSize = sizeof(SDC2V2MCZZH16ReweightAr)/sizeof(SDC2V2MCZZH16ReweightAr[0]);
+        std::string tmpStrWithPath = SDC2V2MCZZH16ReweightAr[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V2MCZZH16ReweightAr[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
         fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
+        
+    }
+    else if (SDC2V2MCZZH16APVReweight){
+        saveName = "SDC2V2MCZZH16APVReweight";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V2MCZZH16APVReweightAr)/sizeof(SDC2V2MCZZH16APVReweightAr[0]);
+        std::string tmpStrWithPath = SDC2V2MCZZH16APVReweightAr[fileInd];
+        /*
+        for (int i=0; i<arrSize; i++){
+            std::string tmpStrWithPath = SDC2V2MCZZH16APVReweightAr[i];
+            fileAr.push_back(tmpStrWithPath);
+        }
+        */
+        fileAr.push_back(tmpStrWithPath);
+        useLHETree = true;
+        useFJGenMatchTree = true;
         
     }
     else if (testRun){
@@ -758,10 +783,6 @@ void DoTrimmed12102023HLTFilterOnReweightingBeforeAnalysis(int fileInd, string d
 
 
         //HLT Branches
-        TTreeReaderValue<Bool_t> HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02(myEventsReader, "HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_p02");
-        TTreeReaderValue<Bool_t> HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np2(myEventsReader, "HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np2");
-        TTreeReaderValue<Bool_t> HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np4(myEventsReader, "HLT_AK8PFJet330_TrimMass30_PFAK8BoostedDoubleB_np4");
-        TTreeReaderValue<Bool_t> HLT_TripleMu_10_5_5_DZ(myEventsReader, "HLT_TripleMu_10_5_5_DZ");
         TTreeReaderValue<Bool_t> HLT_TripleMu_12_10_5(myEventsReader, "HLT_TripleMu_12_10_5");
 
 
@@ -772,44 +793,25 @@ void DoTrimmed12102023HLTFilterOnReweightingBeforeAnalysis(int fileInd, string d
         TTreeReaderValue<Bool_t> HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ(myEventsReader, "HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ");
         TTreeReaderValue<Bool_t> HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL(myEventsReader, "HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL");
 
-        TTreeReaderValue<Bool_t> HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8(myEventsReader, "HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8");
-        TTreeReaderValue<Bool_t> HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8(myEventsReader, "HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8");
-        TTreeReaderValue<Bool_t> HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL_DZ_Mass3p8(myEventsReader, "HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL_DZ_Mass3p8");
-        TTreeReaderValue<Bool_t> HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL_DZ_Mass8(myEventsReader, "HLT_Mu19_TrkIsoVVL_Mu9_TrkIsoVVL_DZ_Mass8");
+        TTreeReaderValue<Bool_t> HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ(myEventsReader, "HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ");
 
         TTreeReaderValue<Bool_t> HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ(myEventsReader, "HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ");
         TTreeReaderValue<Bool_t> HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL(myEventsReader, "HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL");
-        TTreeReaderValue<Bool_t> HLT_DiEle27_WPTightCaloOnly_L1DoubleEG(myEventsReader, "HLT_DiEle27_WPTightCaloOnly_L1DoubleEG");
         TTreeReaderValue<Bool_t> HLT_DoubleEle33_CaloIdL_MW(myEventsReader, "HLT_DoubleEle33_CaloIdL_MW");
-        TTreeReaderValue<Bool_t> HLT_DoubleEle25_CaloIdL_MW(myEventsReader, "HLT_DoubleEle25_CaloIdL_MW");
-        TTreeReaderValue<Bool_t> HLT_DoubleEle27_CaloIdL_MW(myEventsReader, "HLT_DoubleEle27_CaloIdL_MW");
-        TTreeReaderValue<Bool_t> HLT_DoublePhoton70(myEventsReader, "HLT_DoublePhoton70");
 
         TTreeReaderValue<Bool_t> HLT_IsoMu24(myEventsReader, "HLT_IsoMu24");
         TTreeReaderValue<Bool_t> HLT_IsoMu27(myEventsReader, "HLT_IsoMu27");
-        TTreeReaderValue<Bool_t> HLT_IsoMu30(myEventsReader, "HLT_IsoMu30");
         TTreeReaderValue<Bool_t> HLT_Mu50(myEventsReader, "HLT_Mu50");
 
         TTreeReaderValue<Bool_t> HLT_Ele115_CaloIdVT_GsfTrkIdT(myEventsReader, "HLT_Ele115_CaloIdVT_GsfTrkIdT");
         TTreeReaderValue<Bool_t> HLT_Ele27_WPTight_Gsf(myEventsReader, "HLT_Ele27_WPTight_Gsf");
-        TTreeReaderValue<Bool_t> HLT_Ele28_WPTight_Gsf(myEventsReader, "HLT_Ele28_WPTight_Gsf");
         TTreeReaderValue<Bool_t> HLT_Ele32_WPTight_Gsf(myEventsReader, "HLT_Ele32_WPTight_Gsf");
-        TTreeReaderValue<Bool_t> HLT_Ele35_WPTight_Gsf(myEventsReader, "HLT_Ele35_WPTight_Gsf");
-        TTreeReaderValue<Bool_t> HLT_Ele38_WPTight_Gsf(myEventsReader, "HLT_Ele38_WPTight_Gsf");
-        TTreeReaderValue<Bool_t> HLT_Ele40_WPTight_Gsf(myEventsReader, "HLT_Ele40_WPTight_Gsf");
-        TTreeReaderValue<Bool_t> HLT_Ele32_WPTight_Gsf_L1DoubleEG(myEventsReader, "HLT_Ele32_WPTight_Gsf_L1DoubleEG");
-        TTreeReaderValue<Bool_t> HLT_Photon200(myEventsReader, "HLT_Photon200");
 
         TTreeReaderValue<Bool_t> HLT_AK8PFJet500(myEventsReader, "HLT_AK8PFJet500");
         TTreeReaderValue<Bool_t> HLT_AK8PFJet360_TrimMass30(myEventsReader, "HLT_AK8PFJet360_TrimMass30");
-        TTreeReaderValue<Bool_t> HLT_AK8PFJet380_TrimMass30(myEventsReader, "HLT_AK8PFJet380_TrimMass30");
         TTreeReaderValue<Bool_t> HLT_AK8PFJet400_TrimMass30(myEventsReader, "HLT_AK8PFJet400_TrimMass30");
-        TTreeReaderValue<Bool_t> HLT_AK8PFJet420_TrimMass30(myEventsReader, "HLT_AK8PFJet420_TrimMass30");
         TTreeReaderValue<Bool_t> HLT_AK8PFHT750_TrimMass50(myEventsReader, "HLT_AK8PFHT750_TrimMass50");
         TTreeReaderValue<Bool_t> HLT_AK8PFHT800_TrimMass50(myEventsReader, "HLT_AK8PFHT800_TrimMass50");
-        TTreeReaderValue<Bool_t> HLT_AK8PFHT850_TrimMass50(myEventsReader, "HLT_AK8PFHT850_TrimMass50");
-        TTreeReaderValue<Bool_t> HLT_AK8PFHT900_TrimMass50(myEventsReader, "HLT_AK8PFHT900_TrimMass50");
-        TTreeReaderValue<Bool_t> HLT_PFHT1050(myEventsReader, "HLT_PFHT1050");
 
         //jets
 
@@ -2560,7 +2562,7 @@ void DoTrimmed12102023HLTFilterOnReweightingBeforeAnalysis(int fileInd, string d
             }
             
 
-            bool passFlagBool = *Flag_goodVertices && *Flag_globalSuperTightHalo2016Filter && *Flag_HBHENoiseFilter && *Flag_HBHENoiseIsoFilter && *Flag_EcalDeadCellTriggerPrimitiveFilter && *Flag_BadPFMuonFilter && *Flag_eeBadScFilter && *Flag_ecalBadCalibFilter;
+            bool passFlagBool = *Flag_goodVertices && *Flag_globalSuperTightHalo2016Filter && *Flag_HBHENoiseFilter && *Flag_HBHENoiseIsoFilter && *Flag_EcalDeadCellTriggerPrimitiveFilter && *Flag_BadPFMuonFilter && *Flag_eeBadScFilter;
 
             if (!passFlagBool) continue;
             passFlagCtr += 1;
@@ -2630,10 +2632,10 @@ void DoTrimmed12102023HLTFilterOnReweightingBeforeAnalysis(int fileInd, string d
             }
 
 
-            bool passHLTBool = (*HLT_Ele32_WPTight_Gsf_L1DoubleEG || *HLT_Photon200 || *HLT_Ele115_CaloIdVT_GsfTrkIdT || 
+            bool passHLTBool = (*HLT_Ele27_WPTight_Gsf || *HLT_Ele115_CaloIdVT_GsfTrkIdT || 
             *HLT_IsoMu27 || *HLT_Mu50 || 
-            *HLT_DoubleEle33_CaloIdL_MW || *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ || *HLT_DiEle27_WPTightCaloOnly_L1DoubleEG || *HLT_DoublePhoton70 || 
-            *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8);
+            *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ || 
+            *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ);
             //std::cout << testPassHLTBool << " " << passHLTBool << "\n";
             if (!passHLTBool) continue;
             passHLTCtr += 1;
