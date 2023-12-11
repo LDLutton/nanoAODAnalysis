@@ -222,26 +222,8 @@ void DoTrimmed12102023HLTFilterBeforeAnalysisData(string datasetString,UInt_t fi
     std::vector<Float_t> Jet_phiL;
     std::vector<Float_t> Jet_massL;
     std::vector<Int_t> Jet_jetIdL;
-    std::vector<Int_t> Jet_hadronFlavourL;
-    std::vector<Int_t> Jet_genJetIdxL;
     std::vector<Float_t> Jet_btagDeepFlavBL;
     Float_t fixedGridRhoFastjetAllL;
-
-    //GenJets
-    UInt_t nGenJetL;
-    std::vector<Float_t> GenJet_etaL;
-    std::vector<Float_t> GenJet_ptL;
-    std::vector<Float_t> GenJet_phiL;
-    std::vector<Float_t> GenJet_massL;
-    std::vector<UChar_t> GenJet_hadronFlavourL;
-    
-    //GenJetAK8
-    UInt_t nGenJetAK8L;
-    std::vector<Float_t> GenJetAK8_etaL;
-    std::vector<Float_t> GenJetAK8_ptL;
-    std::vector<Float_t> GenJetAK8_phiL;
-    std::vector<Float_t> GenJetAK8_massL;
-    std::vector<UChar_t> GenJetAK8_hadronFlavourL;
 
     //Fat jets
 
@@ -308,7 +290,6 @@ void DoTrimmed12102023HLTFilterBeforeAnalysisData(string datasetString,UInt_t fi
     std::vector<Float_t> Muon_jetRelIsoL;
     std::vector<Float_t> Muon_mvaTTHL;
     std::vector<Int_t> Muon_nTrackerLayersL;
-    std:vector<Int_t> Muon_genPartIdxL;
 
     
 
@@ -319,20 +300,6 @@ void DoTrimmed12102023HLTFilterBeforeAnalysisData(string datasetString,UInt_t fi
     std::vector<Float_t> FatJet_particleNetMD_XbbL;
     std::vector<Float_t> FatJet_particleNetMD_XccL;
     std::vector<Float_t> FatJet_particleNetMD_XqqL;
-
-    
-
-    //Gen Particles
-
-    UInt_t nGenPartL;
-    std::vector<Float_t> GenPart_etaL;
-    std::vector<Float_t> GenPart_massL;
-    std::vector<Float_t> GenPart_phiL;
-    std::vector<Float_t> GenPart_ptL;
-    std::vector<Int_t> GenPart_genPartIdxMotherL;
-    std::vector<Int_t> GenPart_pdgIdL;
-    std::vector<Int_t> GenPart_statusL;
-    std::vector<Int_t> GenPart_statusFlagsL;
 
 
     
@@ -353,26 +320,8 @@ void DoTrimmed12102023HLTFilterBeforeAnalysisData(string datasetString,UInt_t fi
     FilteredEventsTree->Branch("Jet_phiL",&Jet_phiL);
     FilteredEventsTree->Branch("Jet_massL",&Jet_massL);
     FilteredEventsTree->Branch("Jet_jetIdL",&Jet_jetIdL);
-    FilteredEventsTree->Branch("Jet_hadronFlavourL",&Jet_hadronFlavourL);
-    FilteredEventsTree->Branch("Jet_genJetIdxL",&Jet_genJetIdxL);
     FilteredEventsTree->Branch("Jet_btagDeepFlavBL",&Jet_btagDeepFlavBL);
     FilteredEventsTree->Branch("fixedGridRhoFastjetAllL",&fixedGridRhoFastjetAllL,"fixedGridRhoFastjetAllL/F");
-
-    //GenJets
-    FilteredEventsTree->Branch("nGenJetL",&nGenJetL,"nGenJetL/i");
-    FilteredEventsTree->Branch("GenJet_etaL",&GenJet_etaL);
-    FilteredEventsTree->Branch("GenJet_ptL",&GenJet_ptL);
-    FilteredEventsTree->Branch("GenJet_phiL",&GenJet_phiL);
-    FilteredEventsTree->Branch("GenJet_massL",&GenJet_massL);
-    FilteredEventsTree->Branch("GenJet_hadronFlavourL",&GenJet_hadronFlavourL);
-
-    //GenJetAK8
-    FilteredEventsTree->Branch("nGenJetAK8L",&nGenJetAK8L,"nGenJetAK8L/i");
-    FilteredEventsTree->Branch("GenJetAK8_etaL",&GenJetAK8_etaL);
-    FilteredEventsTree->Branch("GenJetAK8_ptL",&GenJetAK8_ptL);
-    FilteredEventsTree->Branch("GenJetAK8_phiL",&GenJetAK8_phiL);
-    FilteredEventsTree->Branch("GenJetAK8_massL",&GenJetAK8_massL);
-    FilteredEventsTree->Branch("GenJetAK8_hadronFlavourL",&GenJetAK8_hadronFlavourL);
 
     //Fat jets
 
@@ -442,8 +391,6 @@ void DoTrimmed12102023HLTFilterBeforeAnalysisData(string datasetString,UInt_t fi
     FilteredEventsTree->Branch("Muon_jetRelIsoL",&Muon_jetRelIsoL);
     FilteredEventsTree->Branch("Muon_mvaTTHL",&Muon_mvaTTHL);
     FilteredEventsTree->Branch("Muon_nTrackerLayersL",&Muon_nTrackerLayersL);
-    FilteredEventsTree->Branch("Muon_genPartIdxL",&Muon_genPartIdxL);
-
 
     //ParticleNet
     FilteredEventsTree->Branch("FatJet_particleNet_HbbvsQCDL",&FatJet_particleNet_HbbvsQCDL);
@@ -453,19 +400,6 @@ void DoTrimmed12102023HLTFilterBeforeAnalysisData(string datasetString,UInt_t fi
     FilteredEventsTree->Branch("FatJet_particleNetMD_XbbL", &FatJet_particleNetMD_XbbL);
     FilteredEventsTree->Branch("FatJet_particleNetMD_XccL", &FatJet_particleNetMD_XccL);
     FilteredEventsTree->Branch("FatJet_particleNetMD_XqqL", &FatJet_particleNetMD_XqqL);
-
-    //Gen Particles
-    FilteredEventsTree->Branch("nGenPartL",&nGenPartL,"nGenPartL/i");
-    FilteredEventsTree->Branch("GenPart_etaL",&GenPart_etaL);
-    FilteredEventsTree->Branch("GenPart_massL",&GenPart_massL);
-    FilteredEventsTree->Branch("GenPart_phiL",&GenPart_phiL);
-    FilteredEventsTree->Branch("GenPart_ptL",&GenPart_ptL);
-    FilteredEventsTree->Branch("GenPart_genPartIdxMotherL",&GenPart_genPartIdxMotherL);
-    FilteredEventsTree->Branch("GenPart_pdgIdL",&GenPart_pdgIdL);
-    FilteredEventsTree->Branch("GenPart_statusL",&GenPart_statusL);
-    FilteredEventsTree->Branch("GenPart_statusFlagsL",&GenPart_statusFlagsL);
-
-
 
 
 
@@ -524,27 +458,8 @@ void DoTrimmed12102023HLTFilterBeforeAnalysisData(string datasetString,UInt_t fi
         TTreeReaderArray<Float_t> Jet_phi(myEventsReader, "Jet_phi");
         TTreeReaderArray<Float_t> Jet_mass(myEventsReader, "Jet_mass");
         TTreeReaderArray<Int_t> Jet_jetId(myEventsReader, "Jet_jetId");
-        TTreeReaderArray<Int_t> Jet_hadronFlavour(myEventsReader, "Jet_hadronFlavour");
-        TTreeReaderArray<Int_t> Jet_genJetIdx(myEventsReader, "Jet_genJetIdx");
         TTreeReaderArray<Float_t> Jet_btagDeepFlavB(myEventsReader, "Jet_btagDeepFlavB");
         TTreeReaderValue<Float_t> fixedGridRhoFastjetAll(myEventsReader, "fixedGridRhoFastjetAll");
-
-        //GenJet
-
-        TTreeReaderValue<UInt_t> nGenJet(myEventsReader, "nGenJet");
-        TTreeReaderArray<Float_t> GenJet_eta(myEventsReader, "GenJet_eta");
-        TTreeReaderArray<Float_t> GenJet_pt(myEventsReader, "GenJet_pt");
-        TTreeReaderArray<Float_t> GenJet_phi(myEventsReader, "GenJet_phi");
-        TTreeReaderArray<Float_t> GenJet_mass(myEventsReader, "GenJet_mass");
-        TTreeReaderArray<UChar_t> GenJet_hadronFlavour(myEventsReader, "GenJet_hadronFlavour");
-
-        //GenJetAK8
-        TTreeReaderValue<UInt_t> nGenJetAK8(myEventsReader, "nGenJetAK8");
-        TTreeReaderArray<Float_t> GenJetAK8_eta(myEventsReader, "GenJetAK8_eta");
-        TTreeReaderArray<Float_t> GenJetAK8_pt(myEventsReader, "GenJetAK8_pt");
-        TTreeReaderArray<Float_t> GenJetAK8_phi(myEventsReader, "GenJetAK8_phi");
-        TTreeReaderArray<Float_t> GenJetAK8_mass(myEventsReader, "GenJetAK8_mass");
-        TTreeReaderArray<UChar_t> GenJetAK8_hadronFlavour(myEventsReader, "GenJetAK8_hadronFlavour");
 
         //Fat jets
 
@@ -559,18 +474,6 @@ void DoTrimmed12102023HLTFilterBeforeAnalysisData(string datasetString,UInt_t fi
         TTreeReaderArray<Float_t> FatJet_msoftdrop(myEventsReader, "FatJet_msoftdrop");
 
         TTreeReaderArray<Float_t> FatJet_particleNet_mass(myEventsReader, "FatJet_particleNet_mass");
-
-        //Gen part stuff
-
-        TTreeReaderValue<UInt_t> nGenPart(myEventsReader, "nGenPart");
-        TTreeReaderArray<Float_t> GenPart_eta(myEventsReader, "GenPart_eta");
-        TTreeReaderArray<Float_t> GenPart_mass(myEventsReader, "GenPart_mass");
-        TTreeReaderArray<Float_t> GenPart_phi(myEventsReader, "GenPart_phi");
-        TTreeReaderArray<Float_t> GenPart_pt(myEventsReader, "GenPart_pt");
-        TTreeReaderArray<Int_t> GenPart_genPartIdxMother(myEventsReader, "GenPart_genPartIdxMother");
-        TTreeReaderArray<Int_t> GenPart_pdgId(myEventsReader, "GenPart_pdgId");
-        TTreeReaderArray<Int_t> GenPart_status(myEventsReader, "GenPart_status");
-        TTreeReaderArray<Int_t> GenPart_statusFlags(myEventsReader, "GenPart_statusFlags");
 
         
         //Electrons
@@ -609,8 +512,7 @@ void DoTrimmed12102023HLTFilterBeforeAnalysisData(string datasetString,UInt_t fi
         TTreeReaderArray<Bool_t> Muon_looseId(myEventsReader, "Muon_looseId");
 
         TTreeReaderArray<Int_t> Muon_nTrackerLayers(myEventsReader, "Muon_nTrackerLayers");
-        TTreeReaderArray<Int_t> Muon_genPartIdx(myEventsReader, "Muon_genPartIdx");
-
+        
         //For LepID
         TTreeReaderArray<Float_t> Electron_dxy(myEventsReader, "Electron_dxy");
         TTreeReaderArray<Float_t> Electron_dz(myEventsReader, "Electron_dz");
@@ -736,31 +638,9 @@ void DoTrimmed12102023HLTFilterBeforeAnalysisData(string datasetString,UInt_t fi
                 Jet_phiL.push_back(Jet_phi[nJetItr]);
                 Jet_massL.push_back(Jet_mass[nJetItr]);
                 Jet_jetIdL.push_back(Jet_jetId[nJetItr]);
-                Jet_hadronFlavourL.push_back(Jet_hadronFlavour[nJetItr]);
-                Jet_genJetIdxL.push_back(Jet_genJetIdx[nJetItr]);
                 Jet_btagDeepFlavBL.push_back(Jet_btagDeepFlavB[nJetItr]);
             }
             fixedGridRhoFastjetAllL = *fixedGridRhoFastjetAll;
-
-            //GenJets
-            nGenJetL = *nGenJet;
-            for (UInt_t nGenJetItr=0; nGenJetItr<nGenJetL;nGenJetItr++){
-                GenJet_etaL.push_back(GenJet_eta[nGenJetItr]);
-                GenJet_ptL.push_back(GenJet_pt[nGenJetItr]);
-                GenJet_phiL.push_back(GenJet_phi[nGenJetItr]);
-                GenJet_massL.push_back(GenJet_mass[nGenJetItr]);
-                GenJet_hadronFlavourL.push_back(GenJet_hadronFlavour[nGenJetItr]);
-            }
-
-            //GenJetAK8
-            nGenJetAK8L = *nGenJetAK8;
-            for (UInt_t nGenJetAK8Itr=0; nGenJetAK8Itr<nGenJetAK8L;nGenJetAK8Itr++){
-                GenJetAK8_etaL.push_back(GenJetAK8_eta[nGenJetAK8Itr]);
-                GenJetAK8_ptL.push_back(GenJetAK8_pt[nGenJetAK8Itr]);
-                GenJetAK8_phiL.push_back(GenJetAK8_phi[nGenJetAK8Itr]);
-                GenJetAK8_massL.push_back(GenJetAK8_mass[nGenJetAK8Itr]);
-                GenJetAK8_hadronFlavourL.push_back(GenJetAK8_hadronFlavour[nGenJetAK8Itr]);
-            }
 
             //Fat jets
             if (debug){
@@ -847,7 +727,6 @@ void DoTrimmed12102023HLTFilterBeforeAnalysisData(string datasetString,UInt_t fi
                 Muon_jetRelIsoL.push_back(Muon_jetRelIso[nMuonItr]);
                 Muon_mvaTTHL.push_back(Muon_mvaTTH[nMuonItr]);
                 Muon_nTrackerLayersL.push_back(Muon_nTrackerLayers[nMuonItr]);
-                Muon_genPartIdxL.push_back(Muon_genPartIdx[nMuonItr]);
             }
 
             fixedGridRhoFastjetAllL = *fixedGridRhoFastjetAll;
@@ -859,22 +738,7 @@ void DoTrimmed12102023HLTFilterBeforeAnalysisData(string datasetString,UInt_t fi
             Jet_phiL.clear();
             Jet_massL.clear();
             Jet_jetIdL.clear();
-            Jet_hadronFlavourL.clear();
-            Jet_genJetIdxL.clear();
             Jet_btagDeepFlavBL.clear();
-
-            GenJet_etaL.clear();
-            GenJet_ptL.clear();
-            GenJet_phiL.clear();
-            GenJet_massL.clear();
-            GenJet_hadronFlavourL.clear();
-
-            GenJetAK8_etaL.clear();
-            GenJetAK8_ptL.clear();
-            GenJetAK8_phiL.clear();
-            GenJetAK8_massL.clear();
-            GenJetAK8_hadronFlavourL.clear();
-            
 
             FatJet_etaL.clear();
             FatJet_ptL.clear();
@@ -938,16 +802,6 @@ void DoTrimmed12102023HLTFilterBeforeAnalysisData(string datasetString,UInt_t fi
             Muon_mediumIdL.clear();
             Muon_looseIdL.clear();
             Muon_nTrackerLayersL.clear();
-            Muon_genPartIdxL.clear();
-
-            GenPart_etaL.clear();
-            GenPart_massL.clear();
-            GenPart_pdgIdL.clear();
-            GenPart_phiL.clear();
-            GenPart_ptL.clear();
-            GenPart_statusL.clear();
-            GenPart_genPartIdxMotherL.clear();
-            GenPart_statusFlagsL.clear();
 
             FatJet_particleNet_HbbvsQCDL.clear();
             FatJet_particleNet_ZvsQCDL.clear();
