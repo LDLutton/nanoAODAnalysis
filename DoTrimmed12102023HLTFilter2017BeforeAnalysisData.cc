@@ -665,9 +665,9 @@ void DoTrimmed12102023HLTFilter2017BeforeAnalysisData(string datasetString,UInt_
             
 
 
-            bool passHLTBool = (*HLT_Ele32_WPTight_Gsf_L1DoubleEG || *HLT_Photon200 || 
+            bool passHLTBool = (*HLT_Ele32_WPTight_Gsf_L1DoubleEG || 
             *HLT_IsoMu27 || *HLT_Mu50 || 
-            *HLT_DoubleEle33_CaloIdL_MW || *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ || *HLT_DoublePhoton70 || 
+            *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ || 
             *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8);
             
             if (!passHLTBool) continue;
