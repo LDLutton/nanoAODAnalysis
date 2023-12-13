@@ -251,6 +251,7 @@ void DoTrimmed12102023HLTFilter2016BeforeAnalysisData(string datasetString,UInt_
 
     //Run alphanumeric represented by int
     UInt_t runAlphNumL;
+    Bool_t APV;
 
     //Jets
     UInt_t nJetL;
@@ -351,6 +352,7 @@ void DoTrimmed12102023HLTFilter2016BeforeAnalysisData(string datasetString,UInt_
 
     //Run alphanumeric represented by int
     FilteredEventsTree->Branch("runAlphNumL",&runAlphNumL,"runAlphNumL/i");
+    FilteredEventsTree->Branch("APV",&APV,"APV/O");
 
     //Jets    
     FilteredEventsTree->Branch("nJetL",&nJetL,"nJetL/i");
@@ -453,6 +455,9 @@ void DoTrimmed12102023HLTFilter2016BeforeAnalysisData(string datasetString,UInt_
                 break;
             }
         } 
+        //Check if file is APV by checking for "HIPM" string
+        APV = false;
+        if (fileAr[k].find("HIPM") != std::string::npos) APV = true;
         //Open the file, get the Events tree
         TFile* tmpfile = TFile::Open(fileAr[k].c_str());
         if (!tmpfile) {
