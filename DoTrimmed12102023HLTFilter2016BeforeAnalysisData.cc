@@ -217,7 +217,10 @@ void DoTrimmed12102023HLTFilter2016BeforeAnalysisData(string datasetString,UInt_
     std::cout << "OutFile: " << outFileStr << "\n";
     TFile *outFile = new TFile(outFileStr.c_str(),"RECREATE");
     
-
+    //const array of the alphabet in capital letters
+    const char alphabet[26] = {'A','B','C','D','E','F','G','H','I','J','K','L',
+                               'M','N','O','P','Q','R','S','T','U','V','W','X',
+                               'Y','Z'};
     ////////////////////////////////DEFINING TREES////////////////////////////////
     ////////////////////////////////DEFINING TREES////////////////////////////////
     ////////////////////////////////DEFINING TREES////////////////////////////////
@@ -246,6 +249,8 @@ void DoTrimmed12102023HLTFilter2016BeforeAnalysisData(string datasetString,UInt_
 
     UInt_t datasetTypeL;
 
+    //Run alphanumeric represented by int
+    UInt_t runAlphNumL;
 
     //Jets
     UInt_t nJetL;
@@ -344,6 +349,9 @@ void DoTrimmed12102023HLTFilter2016BeforeAnalysisData(string datasetString,UInt_
     FilteredEventsTree->Branch("eventL",&eventL,"eventL/i");
     FilteredEventsTree->Branch("datasetTypeL",&datasetTypeL,"datasetTypeL/i");
 
+    //Run alphanumeric represented by int
+    FilteredEventsTree->Branch("runAlphNumL",&runAlphNumL,"runAlphNumL/i");
+
     //Jets    
     FilteredEventsTree->Branch("nJetL",&nJetL,"nJetL/i");
     FilteredEventsTree->Branch("Jet_etaL",&Jet_etaL);
@@ -437,6 +445,14 @@ void DoTrimmed12102023HLTFilter2016BeforeAnalysisData(string datasetString,UInt_
     for (UInt_t k=0; k<fileAr.size(); k++){
         if (endAfter && evCount > NToEnd) break;
         if (debug) std::cout<<"File:    "<<fileAr[k]<<"\n";
+        //loop through the alphabet array above checking if the file name contains "Run2016"+alphabet[i]. If so, then set runAlphNum to i
+        runAlphNumL = 27;
+        for (UInt_t i=0; i<26; i++){
+            if (fileAr[k].find("Run2016"+alphabet[i]) != std::string::npos){
+                runAlphNumL = i;
+                break;
+            }
+        } 
         //Open the file, get the Events tree
         TFile* tmpfile = TFile::Open(fileAr[k].c_str());
         if (!tmpfile) {
