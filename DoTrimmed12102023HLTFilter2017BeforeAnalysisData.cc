@@ -307,6 +307,7 @@ void DoTrimmed12102023HLTFilter2017BeforeAnalysisData(string datasetString,UInt_
 
     //Run alphanumeric represented by int
     UInt_t runAlphNumL;
+    Bool_t APV;
 
     //Jets
     UInt_t nJetL;
@@ -405,6 +406,7 @@ void DoTrimmed12102023HLTFilter2017BeforeAnalysisData(string datasetString,UInt_
 
     //Run alphanumeric represented by int
     FilteredEventsTree->Branch("runAlphNumL",&runAlphNumL,"runAlphNumL/i");
+    FilteredEventsTree->Branch("APV",&APV,"APV/O");
 
     //Jets    
     FilteredEventsTree->Branch("nJetL",&nJetL,"nJetL/i");
@@ -509,6 +511,8 @@ void DoTrimmed12102023HLTFilter2017BeforeAnalysisData(string datasetString,UInt_
                 break;
             }
         } 
+        //APV false for non-2016
+        APV = false;
         //Open the file, get the Events tree
         TFile* tmpfile = TFile::Open(fileAr[k].c_str());
         if (!tmpfile) {
