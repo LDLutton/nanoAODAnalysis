@@ -274,9 +274,8 @@ void DoTrimmed12102023HLTFilter2017BeforeAnalysisData(string datasetString,UInt_
     TFile *outFile = new TFile(outFileStr.c_str(),"RECREATE");
 
     //const array of the alphabet in capital letters
-    const char alphabet[26] = {'A','B','C','D','E','F','G','H','I','J','K','L',
-                               'M','N','O','P','Q','R','S','T','U','V','W','X',
-                               'Y','Z'};
+    std::string alphabet[26] = {"A","B","C","D","E","F","G","H","I","J","K","L","M",
+                                "N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
     ////////////////////////////////DEFINING TREES////////////////////////////////
     ////////////////////////////////DEFINING TREES////////////////////////////////
     ////////////////////////////////DEFINING TREES////////////////////////////////
