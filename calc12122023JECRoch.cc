@@ -23,9 +23,9 @@
 #include<TTreeReader.h>
 #include<TTreeReaderArray.h>
 #include<TTreeReaderValue.h>
-#include "new062022FoMAnalysis.h"
-#include "new062022FoMAnalysis_Functions.h"
-#include "genFileList.h"
+#include "../new062022FoMAnalysis.h"
+#include "../new062022FoMAnalysis_Functions.h"
+#include "../genFileList.h"
 #include<time.h>
 
 #include<algorithm>
@@ -41,13 +41,13 @@
 
 #include<sys/stat.h>
 #include<errno.h>
-#include "RoccoR.cc"
-#include "NanoCORE/Nano.h"
-#include "NanoCORE/SSSelections.cc"
-#include "NanoCORE/MetSelections.cc"
-#include "NanoCORE/Tools/JetCorrector.cc"
-#include "NanoCORE/Tools/jetcorr/JetResolutionUncertainty.h"
-#include "NanoCORE/Tools/jetcorr/JetCorrectionUncertainty.h"
+#include "../RoccoR.cc"
+#include "../NanoCORE/Nano.h"
+#include "../NanoCORE/SSSelections.cc"
+#include "../NanoCORE/MetSelections.cc"
+#include "../NanoCORE/Tools/JetCorrector.cc"
+#include "../NanoCORE/Tools/jetcorr/JetResolutionUncertainty.h"
+#include "../NanoCORE/Tools/jetcorr/JetCorrectionUncertainty.h"
 
 
 
@@ -630,16 +630,16 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
         textFileArAK8.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL16_RunFGH_V7_DATA/Summer19UL16_RunFGH_V7_DATA_UncertaintySources_AK8PFPuppi_");
     }
 
-    std::vector<JetCorrectionUncertainty> jecUncAr;
+    std::vector<std::unique_ptr<JetCorrectionUncertainty>> jecUncAr;
     for (UInt_t i = 0; i < textFileAr.size(); ++i){
-        JetCorrectionUncertainty tmpJECUnc(textFileAr[i]+corrTypeAr[JECCorInd]+".txt");
-        jecUncAr.push_back(tmpJECUnc);
+        auto tmpJECUnc = std::make_unique<JetCorrectionUncertainty>(textFileAr[i]+corrTypeAr[JECCorInd]+".txt");
+        jecUncAr.push_back(std::move(tmpJECUnc));
     }
     //same for AK8 jets
-    std::vector<JetCorrectionUncertainty> jecUncArAK8;
+    std::vector<std::unique_ptr<JetCorrectionUncertainty>> jecUncArAK8;
     for (UInt_t i = 0; i < textFileArAK8.size(); ++i){
-        JetCorrectionUncertainty tmpJECUnc(textFileArAK8[i]+corrTypeAr[JECCorInd]+".txt");
-        jecUncArAK8.push_back(tmpJECUnc);
+        auto tmpJECUnc = std::make_unique<JetCorrectionUncertainty>(textFileArAK8[i]+corrTypeAr[JECCorInd]+".txt");
+        jecUncArAK8.push_back(std::move(tmpJECUnc));
     }
 
 
