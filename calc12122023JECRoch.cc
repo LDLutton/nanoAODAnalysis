@@ -581,7 +581,7 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
     std::string corrTypeAr[27] = {"Central","AbsoluteMPFBias","AbsoluteStat","FlavorQCD","Fragmentation","PileUpDataMC","PileUpPtBB","PileUpPtEC1","PileUpPtEC2","PileUpPtHF","PileUpPtRef","RelativeFSR","RelativeJEREC1","RelativeJEREC2",
                                 "RelativeJERHF","RelativePtBB","RelativePtEC1","RelativePtEC2","RelativePtHF","RelativeBal","RelativeSample","RelativeStatEC","RelativeStatFSR","RelativeStatHF","SinglePionECAL","SinglePionHCAL","TimePtEta"};
 
-
+    /*
     //Vector for holding the different text file names based on run
     std::vector<std::string> textFileAr;
     //Using the full path "NanoCORE/Tools/jetcorr/data/Summer19UL18_Run{}_V5_DATA/Summer19UL18_Run{}_V5_DATA_UncertaintySources_AK4PFchs.txt" as base string, fill vector with ["A","B","C","D"]
@@ -629,22 +629,115 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
         textFileArAK8.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL16_RunEF_V7_DATA/Summer19UL16_RunEF_V7_DATA_UncertaintySources_AK8PFPuppi_");
         textFileArAK8.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL16_RunFGH_V7_DATA/Summer19UL16_RunFGH_V7_DATA_UncertaintySources_AK8PFPuppi_");
     }
+    */
+
+    //instead of having a loop for each text file, just make that many separate instances of the class
+
+    jec18A = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunA_V5_DATA/Summer19UL18_RunA_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt")
+    jec18B = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunB_V5_DATA/Summer19UL18_RunB_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
+    jec18C = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunC_V5_DATA/Summer19UL18_RunC_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
+    jec18D = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunD_V5_DATA/Summer19UL18_RunD_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
+
+    jec17B = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunB_V5_DATA/Summer19UL17_RunB_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
+    jec17C = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunC_V5_DATA/Summer19UL17_RunC_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
+    jec17D = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunD_V5_DATA/Summer19UL17_RunD_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
+    jec17E = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunE_V5_DATA/Summer19UL17_RunE_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
+    jec17F = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunF_V5_DATA/Summer19UL17_RunF_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
+
+    jec16BCD = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL16APV_RunBCD_V7_DATA/Summer19UL16APV_RunBCD_V7_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
+    jec16EF = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL16_RunEF_V7_DATA/Summer19UL16_RunEF_V7_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
+    jec16GH = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL16_RunFGH_V7_DATA/Summer19UL16_RunFGH_V7_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
+
+    //same for AK8 jets
+    jec18AAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunA_V5_DATA/Summer19UL18_RunA_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+    jec18BAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunB_V5_DATA/Summer19UL18_RunB_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+    jec18CAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunC_V5_DATA/Summer19UL18_RunC_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+    jec18DAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunD_V5_DATA/Summer19UL18_RunD_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+
+    jec17BAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunB_V5_DATA/Summer19UL17_RunB_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+    jec17BAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunB_V5_DATA/Summer19UL17_RunB_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+    jec17CAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunC_V5_DATA/Summer19UL17_RunC_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+    jec17DAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunD_V5_DATA/Summer19UL17_RunD_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+    jec17EAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunE_V5_DATA/Summer19UL17_RunE_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+    jec17FAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunF_V5_DATA/Summer19UL17_RunF_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+
+    jec16BCDAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL16APV_RunBCD_V7_DATA/Summer19UL16APV_RunBCD_V7_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+    jec16EFAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL16_RunEF_V7_DATA/Summer19UL16_RunEF_V7_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+    jec16GHAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL16_RunFGH_V7_DATA/Summer19UL16_RunFGH_V7_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+
+
+    //make a vector of pointers for each year to the class instances
+    std::vector<JetCorrectionUncertainty*> jecUnc18Ar;
+    jecUnc18Ar.push_back(&jec18A);
+    jecUnc18Ar.push_back(&jec18B);
+    jecUnc18Ar.push_back(&jec18C);
+    jecUnc18Ar.push_back(&jec18D);
+
+    std::vector<JetCorrectionUncertainty*> jecUnc17Ar;
+    jecUnc17Ar.push_back(&jec17B);
+    jecUnc17Ar.push_back(&jec17C);
+    jecUnc17Ar.push_back(&jec17D);
+    jecUnc17Ar.push_back(&jec17E);
+    jecUnc17Ar.push_back(&jec17F);
+
+    std::vector<JetCorrectionUncertainty*> jecUnc16Ar;
+    jecUnc16Ar.push_back(&jec16BCD);
+    jecUnc16Ar.push_back(&jec16EF);
+    jecUnc16Ar.push_back(&jec16GH);
+
+    //same for AK8 jets
+    std::vector<JetCorrectionUncertainty*> jecUnc18ArAK8;
+    jecUnc18ArAK8.push_back(&jec18AAK8);
+    jecUnc18ArAK8.push_back(&jec18BAK8);
+    jecUnc18ArAK8.push_back(&jec18CAK8);
+    jecUnc18ArAK8.push_back(&jec18DAK8);
+
+    std::vector<JetCorrectionUncertainty*> jecUnc17ArAK8;
+    jecUnc17ArAK8.push_back(&jec17BAK8);
+    jecUnc17ArAK8.push_back(&jec17BAK8);
+    jecUnc17ArAK8.push_back(&jec17CAK8);
+    jecUnc17ArAK8.push_back(&jec17DAK8);
+    jecUnc17ArAK8.push_back(&jec17EAK8);
+    jecUnc17ArAK8.push_back(&jec17FAK8);
+
+    std::vector<JetCorrectionUncertainty*> jecUnc16ArAK8;
+    jecUnc16ArAK8.push_back(&jec16BCDAK8);
+    jecUnc16ArAK8.push_back(&jec16EFAK8);
+    jecUnc16ArAK8.push_back(&jec16GHAK8);
+
+    //make a vector of the vector of pointers
+    std::vector<std::vector<JetCorrectionUncertainty*>> jecUncAr;
+    jecUncAr.push_back(jecUnc18Ar);
+    jecUncAr.push_back(jecUnc17Ar);
+    jecUncAr.push_back(jecUnc16Ar);
+
+    std::vector<std::vector<JetCorrectionUncertainty*>> jecUncArAK8;
+    jecUncArAK8.push_back(jecUnc18ArAK8);
+    jecUncArAK8.push_back(jecUnc17ArAK8);
+    jecUncArAK8.push_back(jecUnc16ArAK8);
+
+
+
+    /*
 
     std::vector<std::unique_ptr<JetCorrectionUncertainty>> jecUncAr;
     if (JECCorInd){
         for (UInt_t i = 0; i < textFileAr.size(); ++i){
-            auto tmpJECUnc = std::make_unique<JetCorrectionUncertainty>(textFileAr[i]+corrTypeAr[JECCorInd]+".txt");
-            jecUncAr.push_back(std::move(tmpJECUnc));
+            //auto tmpJECUnc = std::make_unique<JetCorrectionUncertainty>(textFileAr[i]+corrTypeAr[JECCorInd]+".txt");
+            //jecUncAr.push_back(std::move(tmpJECUnc));
+            jecUncAr.emplace_back(std::make_unique<JetCorrectionUncertainty>(textFileAr[i]+corrTypeAr[JECCorInd]+".txt"));
         }
     }
     //same for AK8 jets
     std::vector<std::unique_ptr<JetCorrectionUncertainty>> jecUncArAK8;
     if (AK8JECCorInd){
         for (UInt_t i = 0; i < textFileArAK8.size(); ++i){
-            auto tmpJECUnc = std::make_unique<JetCorrectionUncertainty>(textFileArAK8[i]+corrTypeAr[JECCorInd]+".txt");
-            jecUncArAK8.push_back(std::move(tmpJECUnc));
+            //auto tmpJECUnc = std::make_unique<JetCorrectionUncertainty>(textFileArAK8[i]+corrTypeAr[JECCorInd]+".txt");
+            //jecUncArAK8.push_back(std::move(tmpJECUnc));
+            jecUncArAK8.emplace_back(std::make_unique<JetCorrectionUncertainty>(textFileArAK8[i]+corrTypeAr[JECCorInd]+".txt"));
         }
     }
+    */
 
 
     
@@ -1217,8 +1310,10 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
                     float mass = Jet_mass[i];
                     //Get ind for JEC from runAlphNum and APV and year
                     int jecInd;
+                    
                     if (yearType < 2) {
-                        jecInd = *runAlphNum;
+                        if (yearType == 1) jecInd = *runAlphNum - 1;
+                        else jecInd = *runAlphNum;
                     }
                     else if (*APV) {
                         if (*runAlphNum < 5){
@@ -1231,9 +1326,14 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
                     else {
                         jecInd = 2;
                     }
+                    
                     //Get the JEC uncertainty
-                    jecUncAr[jecInd]->setJetPt(pt);
-                    jecUncAr[jecInd]->setJetEta(eta);
+                    if (jecUncAr[yearType][jecInd] == NULL){
+                        std::cout << "jecUncAr[" << yearType << "][" << jecInd << "] is NULL\n";
+                        break;
+                    }
+                    jecUncAr[yearType][jecInd]->setJetPt(pt);
+                    jecUncAr[yearType][jecInd]->setJetEta(eta);
                     //down first
                     double unc = jecUncAr[jecInd]->getUncertainty(false);
                     double JEC = 1. - unc;
@@ -1275,7 +1375,8 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
                     //Get ind for JEC from runAlphNum and APV and year
                     int jecInd;
                     if (yearType < 2) {
-                        jecInd = *runAlphNum;
+                        if (yearType == 1) jecInd = *runAlphNum - 1;
+                        else jecInd = *runAlphNum;
                     }
                     else if (*APV) {
                         if (*runAlphNum < 5){
@@ -1287,6 +1388,12 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
                     }
                     else {
                         jecInd = 2;
+                    }
+                    
+                    //Get the JEC uncertainty
+                    if (jecUncArAK8[yearType][jecInd] == NULL){
+                        std::cout << "jecUncArAK8[" << yearType << "][" << jecInd << "] is NULL\n";
+                        break;
                     }
                     //Get the JEC uncertainty
                     jecUncArAK8[jecInd]->setJetPt(pt);
@@ -1526,6 +1633,13 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
 
 
         }
+        //Loop over and fill evNumTree variables
+        while (myEvNumReader.Next()){
+            nEv = *nEvHLT;
+            nEvPass = *nEvPassHLT;
+            evNumTree->Fill();
+        }
+
     }
     if (debug) std::cout << "Filling complete \n";
 
@@ -1563,8 +1677,11 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
     outFile->cd();
     evNumTree->Write("",TObject::kOverwrite);
     FilteredEventsTree->Write("",TObject::kOverwrite);
+    rochesterCorrHist->Write("",TObject::kOverwrite);
 
     outFile->Close();
+    
 
+    delete outFile;
 
 }
