@@ -736,7 +736,7 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
     UInt_t datasetTypeL;
 
     //Run alphanumeric represented by int
-    UInt_t runAlphaNumL;
+    UInt_t runAlphNumL;
     Bool_t APVL;
     Int_t JECCorIndL;
     Int_t AK8JECCorIndL;
@@ -866,7 +866,7 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
     FilteredEventsTree->Branch("datasetTypeL",&datasetTypeL,"datasetTypeL/i");
 
     //Run alphanumeric represented by int
-    FilteredEventsTree->Branch("runAlphaNumL",&runAlphaNumL,"runAlphaNumL/i");
+    FilteredEventsTree->Branch("runAlphNumL",&runAlphNumL,"runAlphNumL/i");
     FilteredEventsTree->Branch("APVL",&APVL,"APVL/O");
     FilteredEventsTree->Branch("JECCorIndL",&JECCorIndL,"JECCorIndL/I");
     FilteredEventsTree->Branch("AK8JECCorIndL",&AK8JECCorIndL,"AK8JECCorIndL/I");
@@ -1025,7 +1025,7 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
         TTreeReaderValue<UInt_t> run(myEventsReader, "runL");
         TTreeReaderValue<UInt_t> event(myEventsReader, "eventL");
 
-        TTreeReaderValue<UInt_t> runAlphaNum(myEventsReader, "runAlphaNumL");
+        TTreeReaderValue<UInt_t> runAlphNum(myEventsReader, "runAlphNumL");
         TTreeReaderValue<Bool_t> APV(myEventsReader, "APV");
 
         //jets
@@ -1215,13 +1215,13 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
                     float eta = Jet_eta[i];
                     float phi = Jet_phi[i];
                     float mass = Jet_mass[i];
-                    //Get ind for JEC from runAlphaNum and APV and year
+                    //Get ind for JEC from runAlphNum and APV and year
                     int jecInd;
                     if (yearType < 2) {
-                        jecInd = *runAlphaNum;
+                        jecInd = *runAlphNum;
                     }
                     else if (*APV) {
-                        if (*runAlphaNum < 5){
+                        if (*runAlphNum < 5){
                             jecInd = 0;
                         }
                         else {
@@ -1272,13 +1272,13 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
                     float eta = FatJet_eta[i];
                     float phi = FatJet_phi[i];
                     float mass = FatJet_mass[i];
-                    //Get ind for JEC from runAlphaNum and APV and year
+                    //Get ind for JEC from runAlphNum and APV and year
                     int jecInd;
                     if (yearType < 2) {
-                        jecInd = *runAlphaNum;
+                        jecInd = *runAlphNum;
                     }
                     else if (*APV) {
-                        if (*runAlphaNum < 5){
+                        if (*runAlphNum < 5){
                             jecInd = 0;
                         }
                         else {
@@ -1322,7 +1322,7 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
             runL = *run;
             eventL = *event;
 
-            runAlphaNumL = *runAlphaNum;
+            runAlphNumL = *runAlphNum;
             APVL = *APV;
             JECCorIndL = JECCorInd;
             AK8JECCorIndL = AK8JECCorInd;
