@@ -633,37 +633,37 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
 
     //instead of having a loop for each text file, just make that many separate instances of the class
 
-    jec18A = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunA_V5_DATA/Summer19UL18_RunA_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt")
-    jec18B = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunB_V5_DATA/Summer19UL18_RunB_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
-    jec18C = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunC_V5_DATA/Summer19UL18_RunC_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
-    jec18D = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunD_V5_DATA/Summer19UL18_RunD_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
+    JetCorrectionUncertainty jec18A("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunA_V5_DATA/Summer19UL18_RunA_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
+    JetCorrectionUncertainty jec18B("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunB_V5_DATA/Summer19UL18_RunB_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
+    JetCorrectionUncertainty jec18C("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunC_V5_DATA/Summer19UL18_RunC_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
+    JetCorrectionUncertainty jec18D("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunD_V5_DATA/Summer19UL18_RunD_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
 
-    jec17B = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunB_V5_DATA/Summer19UL17_RunB_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
-    jec17C = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunC_V5_DATA/Summer19UL17_RunC_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
-    jec17D = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunD_V5_DATA/Summer19UL17_RunD_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
-    jec17E = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunE_V5_DATA/Summer19UL17_RunE_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
-    jec17F = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunF_V5_DATA/Summer19UL17_RunF_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
+    JetCorrectionUncertainty jec17B("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunB_V5_DATA/Summer19UL17_RunB_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
+    JetCorrectionUncertainty jec17C("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunC_V5_DATA/Summer19UL17_RunC_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
+    JetCorrectionUncertainty jec17D("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunD_V5_DATA/Summer19UL17_RunD_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
+    JetCorrectionUncertainty jec17E("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunE_V5_DATA/Summer19UL17_RunE_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
+    JetCorrectionUncertainty jec17F("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunF_V5_DATA/Summer19UL17_RunF_V5_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
 
-    jec16BCD = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL16APV_RunBCD_V7_DATA/Summer19UL16APV_RunBCD_V7_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
-    jec16EF = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL16_RunEF_V7_DATA/Summer19UL16_RunEF_V7_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
-    jec16GH = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL16_RunFGH_V7_DATA/Summer19UL16_RunFGH_V7_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
+    JetCorrectionUncertainty jec16BCD("../NanoCORE/Tools/jetcorr/data/Summer19UL16APV_RunBCD_V7_DATA/Summer19UL16APV_RunBCD_V7_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
+    JetCorrectionUncertainty jec16EF("../NanoCORE/Tools/jetcorr/data/Summer19UL16_RunEF_V7_DATA/Summer19UL16_RunEF_V7_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
+    JetCorrectionUncertainty jec16GH("../NanoCORE/Tools/jetcorr/data/Summer19UL16_RunFGH_V7_DATA/Summer19UL16_RunFGH_V7_DATA_UncertaintySources_AK4PFchs_"+corrTypeAr[JECCorInd]+".txt");
 
     //same for AK8 jets
-    jec18AAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunA_V5_DATA/Summer19UL18_RunA_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
-    jec18BAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunB_V5_DATA/Summer19UL18_RunB_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
-    jec18CAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunC_V5_DATA/Summer19UL18_RunC_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
-    jec18DAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunD_V5_DATA/Summer19UL18_RunD_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+    JetCorrectionUncertainty jec18AAK8("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunA_V5_DATA/Summer19UL18_RunA_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+    JetCorrectionUncertainty jec18BAK8("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunB_V5_DATA/Summer19UL18_RunB_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+    JetCorrectionUncertainty jec18CAK8("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunC_V5_DATA/Summer19UL18_RunC_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+    JetCorrectionUncertainty jec18DAK8("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunD_V5_DATA/Summer19UL18_RunD_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
 
-    jec17BAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunB_V5_DATA/Summer19UL17_RunB_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
-    jec17BAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunB_V5_DATA/Summer19UL17_RunB_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
-    jec17CAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunC_V5_DATA/Summer19UL17_RunC_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
-    jec17DAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunD_V5_DATA/Summer19UL17_RunD_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
-    jec17EAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunE_V5_DATA/Summer19UL17_RunE_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
-    jec17FAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunF_V5_DATA/Summer19UL17_RunF_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+    JetCorrectionUncertainty jec17BAK8("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunB_V5_DATA/Summer19UL17_RunB_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+    JetCorrectionUncertainty jec17BAK8("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunB_V5_DATA/Summer19UL17_RunB_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+    JetCorrectionUncertainty jec17CAK8("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunC_V5_DATA/Summer19UL17_RunC_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+    JetCorrectionUncertainty jec17DAK8("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunD_V5_DATA/Summer19UL17_RunD_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+    JetCorrectionUncertainty jec17EAK8("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunE_V5_DATA/Summer19UL17_RunE_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+    JetCorrectionUncertainty jec17FAK8("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunF_V5_DATA/Summer19UL17_RunF_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
 
-    jec16BCDAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL16APV_RunBCD_V7_DATA/Summer19UL16APV_RunBCD_V7_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
-    jec16EFAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL16_RunEF_V7_DATA/Summer19UL16_RunEF_V7_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
-    jec16GHAK8 = JetCorrectionUncertainty("../NanoCORE/Tools/jetcorr/data/Summer19UL16_RunFGH_V7_DATA/Summer19UL16_RunFGH_V7_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+    JetCorrectionUncertainty jec16BCDAK8("../NanoCORE/Tools/jetcorr/data/Summer19UL16APV_RunBCD_V7_DATA/Summer19UL16APV_RunBCD_V7_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+    JetCorrectionUncertainty jec16EFAK8("../NanoCORE/Tools/jetcorr/data/Summer19UL16_RunEF_V7_DATA/Summer19UL16_RunEF_V7_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
+    JetCorrectionUncertainty jec16GHAK8("../NanoCORE/Tools/jetcorr/data/Summer19UL16_RunFGH_V7_DATA/Summer19UL16_RunFGH_V7_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
 
 
     //make a vector of pointers for each year to the class instances
