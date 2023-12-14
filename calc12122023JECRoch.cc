@@ -68,7 +68,7 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
     clock_t startt = clock();
 
 
-    RoccoR  rc("RoccoR2018UL.txt"); 
+    RoccoR  rc("../RoccoR2018UL.txt"); 
 
     //Will run over all files put into fileAr
 
@@ -586,48 +586,48 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
     std::vector<std::string> textFileAr;
     //Using the full path "NanoCORE/Tools/jetcorr/data/Summer19UL18_Run{}_V5_DATA/Summer19UL18_Run{}_V5_DATA_UncertaintySources_AK4PFchs.txt" as base string, fill vector with ["A","B","C","D"]
     if (yearType == 0) {
-        textFileAr.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL18_RunA_V5_DATA/Summer19UL18_RunA_V5_DATA_UncertaintySources_AK4PFchs_");
-        textFileAr.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL18_RunB_V5_DATA/Summer19UL18_RunB_V5_DATA_UncertaintySources_AK4PFchs_");
-        textFileAr.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL18_RunC_V5_DATA/Summer19UL18_RunC_V5_DATA_UncertaintySources_AK4PFchs_");
-        textFileAr.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL18_RunD_V5_DATA/Summer19UL18_RunD_V5_DATA_UncertaintySources_AK4PFchs_");
+        textFileAr.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunA_V5_DATA/Summer19UL18_RunA_V5_DATA_UncertaintySources_AK4PFchs_");
+        textFileAr.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunB_V5_DATA/Summer19UL18_RunB_V5_DATA_UncertaintySources_AK4PFchs_");
+        textFileAr.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunC_V5_DATA/Summer19UL18_RunC_V5_DATA_UncertaintySources_AK4PFchs_");
+        textFileAr.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunD_V5_DATA/Summer19UL18_RunD_V5_DATA_UncertaintySources_AK4PFchs_");
     }
     else if (yearType == 1) {
         //now do for UL17 with A to F
-        textFileAr.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL17_RunA_V5_DATA/Summer19UL17_RunA_V5_DATA_UncertaintySources_AK4PFchs_");
-        textFileAr.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL17_RunB_V5_DATA/Summer19UL17_RunB_V5_DATA_UncertaintySources_AK4PFchs_");
-        textFileAr.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL17_RunC_V5_DATA/Summer19UL17_RunC_V5_DATA_UncertaintySources_AK4PFchs_");
-        textFileAr.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL17_RunD_V5_DATA/Summer19UL17_RunD_V5_DATA_UncertaintySources_AK4PFchs_");
-        textFileAr.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL17_RunE_V5_DATA/Summer19UL17_RunE_V5_DATA_UncertaintySources_AK4PFchs_");
-        textFileAr.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL17_RunF_V5_DATA/Summer19UL17_RunF_V5_DATA_UncertaintySources_AK4PFchs_");
+        textFileAr.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunA_V5_DATA/Summer19UL17_RunA_V5_DATA_UncertaintySources_AK4PFchs_");
+        textFileAr.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunB_V5_DATA/Summer19UL17_RunB_V5_DATA_UncertaintySources_AK4PFchs_");
+        textFileAr.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunC_V5_DATA/Summer19UL17_RunC_V5_DATA_UncertaintySources_AK4PFchs_");
+        textFileAr.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunD_V5_DATA/Summer19UL17_RunD_V5_DATA_UncertaintySources_AK4PFchs_");
+        textFileAr.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunE_V5_DATA/Summer19UL17_RunE_V5_DATA_UncertaintySources_AK4PFchs_");
+        textFileAr.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunF_V5_DATA/Summer19UL17_RunF_V5_DATA_UncertaintySources_AK4PFchs_");
     }
     else if (yearType == 2) {
         //now do for UL16 with B to F
-        textFileAr.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL16APV_RunBCD_V7_DATA/Summer19UL16APV_RunBCD_V7_DATA_UncertaintySources_AK4PFchs_");
-        textFileAr.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL16_RunEF_V7_DATA/Summer19UL16_RunEF_V7_DATA_UncertaintySources_AK4PFchs_");
-        textFileAr.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL16_RunFGH_V7_DATA/Summer19UL16_RunFGH_V7_DATA_UncertaintySources_AK4PFchs_");
+        textFileAr.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL16APV_RunBCD_V7_DATA/Summer19UL16APV_RunBCD_V7_DATA_UncertaintySources_AK4PFchs_");
+        textFileAr.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL16_RunEF_V7_DATA/Summer19UL16_RunEF_V7_DATA_UncertaintySources_AK4PFchs_");
+        textFileAr.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL16_RunFGH_V7_DATA/Summer19UL16_RunFGH_V7_DATA_UncertaintySources_AK4PFchs_");
     }
     //Same but for AK8 Puppi jets
     std::vector<std::string> textFileArAK8;
     if (yearType == 0) {
-        textFileArAK8.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL18_RunA_V5_DATA/Summer19UL18_RunA_V5_DATA_UncertaintySources_AK8PFPuppi_");
-        textFileArAK8.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL18_RunB_V5_DATA/Summer19UL18_RunB_V5_DATA_UncertaintySources_AK8PFPuppi_");
-        textFileArAK8.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL18_RunC_V5_DATA/Summer19UL18_RunC_V5_DATA_UncertaintySources_AK8PFPuppi_");
-        textFileArAK8.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL18_RunD_V5_DATA/Summer19UL18_RunD_V5_DATA_UncertaintySources_AK8PFPuppi_");
+        textFileArAK8.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunA_V5_DATA/Summer19UL18_RunA_V5_DATA_UncertaintySources_AK8PFPuppi_");
+        textFileArAK8.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunB_V5_DATA/Summer19UL18_RunB_V5_DATA_UncertaintySources_AK8PFPuppi_");
+        textFileArAK8.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunC_V5_DATA/Summer19UL18_RunC_V5_DATA_UncertaintySources_AK8PFPuppi_");
+        textFileArAK8.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunD_V5_DATA/Summer19UL18_RunD_V5_DATA_UncertaintySources_AK8PFPuppi_");
     }
     else if (yearType == 1) {
         //now do for UL17 with A to F
-        textFileArAK8.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL17_RunA_V5_DATA/Summer19UL17_RunA_V5_DATA_UncertaintySources_AK8PFPuppi_");
-        textFileArAK8.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL17_RunB_V5_DATA/Summer19UL17_RunB_V5_DATA_UncertaintySources_AK8PFPuppi_");
-        textFileArAK8.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL17_RunC_V5_DATA/Summer19UL17_RunC_V5_DATA_UncertaintySources_AK8PFPuppi_");
-        textFileArAK8.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL17_RunD_V5_DATA/Summer19UL17_RunD_V5_DATA_UncertaintySources_AK8PFPuppi_");
-        textFileArAK8.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL17_RunE_V5_DATA/Summer19UL17_RunE_V5_DATA_UncertaintySources_AK8PFPuppi_");
-        textFileArAK8.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL17_RunF_V5_DATA/Summer19UL17_RunF_V5_DATA_UncertaintySources_AK8PFPuppi_");
+        textFileArAK8.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunA_V5_DATA/Summer19UL17_RunA_V5_DATA_UncertaintySources_AK8PFPuppi_");
+        textFileArAK8.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunB_V5_DATA/Summer19UL17_RunB_V5_DATA_UncertaintySources_AK8PFPuppi_");
+        textFileArAK8.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunC_V5_DATA/Summer19UL17_RunC_V5_DATA_UncertaintySources_AK8PFPuppi_");
+        textFileArAK8.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunD_V5_DATA/Summer19UL17_RunD_V5_DATA_UncertaintySources_AK8PFPuppi_");
+        textFileArAK8.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunE_V5_DATA/Summer19UL17_RunE_V5_DATA_UncertaintySources_AK8PFPuppi_");
+        textFileArAK8.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunF_V5_DATA/Summer19UL17_RunF_V5_DATA_UncertaintySources_AK8PFPuppi_");
     }
     else if (yearType == 2) {
         //now do for UL16 with B to F
-        textFileArAK8.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL16APV_RunBCD_V7_DATA/Summer19UL16APV_RunBCD_V7_DATA_UncertaintySources_AK8PFPuppi_");
-        textFileArAK8.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL16_RunEF_V7_DATA/Summer19UL16_RunEF_V7_DATA_UncertaintySources_AK8PFPuppi_");
-        textFileArAK8.push_back("NanoCORE/Tools/jetcorr/data/Summer19UL16_RunFGH_V7_DATA/Summer19UL16_RunFGH_V7_DATA_UncertaintySources_AK8PFPuppi_");
+        textFileArAK8.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL16APV_RunBCD_V7_DATA/Summer19UL16APV_RunBCD_V7_DATA_UncertaintySources_AK8PFPuppi_");
+        textFileArAK8.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL16_RunEF_V7_DATA/Summer19UL16_RunEF_V7_DATA_UncertaintySources_AK8PFPuppi_");
+        textFileArAK8.push_back("../NanoCORE/Tools/jetcorr/data/Summer19UL16_RunFGH_V7_DATA/Summer19UL16_RunFGH_V7_DATA_UncertaintySources_AK8PFPuppi_");
     }
 
     std::vector<std::unique_ptr<JetCorrectionUncertainty>> jecUncAr;
