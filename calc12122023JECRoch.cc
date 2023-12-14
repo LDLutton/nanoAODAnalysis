@@ -732,7 +732,7 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
     UInt_t datasetTypeL;
 
     //Run alphanumeric represented by int
-    UInt_t runAlphNumL;
+    UInt_t runAlphaNumL;
     Bool_t APVL;
     Int_t JECCorIndL;
     Int_t AK8JECCorIndL;
@@ -862,7 +862,7 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
     FilteredEventsTree->Branch("datasetTypeL",&datasetTypeL,"datasetTypeL/i");
 
     //Run alphanumeric represented by int
-    FilteredEventsTree->Branch("runAlphNumL",&runAlphNumL,"runAlphNumL/i");
+    FilteredEventsTree->Branch("runAlphaNumL",&runAlphaNumL,"runAlphaNumL/i");
     FilteredEventsTree->Branch("APVL",&APVL,"APVL/O");
     FilteredEventsTree->Branch("JECCorIndL",&JECCorIndL,"JECCorIndL/I");
     FilteredEventsTree->Branch("AK8JECCorIndL",&AK8JECCorIndL,"AK8JECCorIndL/I");
@@ -948,6 +948,7 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
     FilteredEventsTree->Branch("Muon_looseIdL",&Muon_looseIdL);
     FilteredEventsTree->Branch("Muon_RochMomCorrectionsL",&Muon_RochMomCorrectionsL);
     FilteredEventsTree->Branch("Muon_ptCorrectedL",&Muon_ptCorrectedL);
+    
 
 
     //For LepID
@@ -1081,6 +1082,7 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
         TTreeReaderArray<Bool_t> Muon_tightId(myEventsReader, "Muon_tightIdL");
         TTreeReaderArray<Bool_t> Muon_mediumId(myEventsReader, "Muon_mediumIdL");
         TTreeReaderArray<Bool_t> Muon_looseId(myEventsReader, "Muon_looseIdL");
+        TTreeReaderArray<Int_t> Muon_nTrackerLayers(myEventsReader, "Muon_nTrackerLayersL");
 
 
 
@@ -1209,13 +1211,13 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
                     float eta = Jet_eta[i];
                     float phi = Jet_phi[i];
                     float mass = Jet_mass[i];
-                    //Get ind for JEC from runAlphNum and APV and year
+                    //Get ind for JEC from runAlphaNum and APV and year
                     int jecInd;
                     if (yearType < 2) {
-                        jecInd = runAlphaNum;
+                        jecInd = *runAlphaNum;
                     }
                     else if (*APV) {
-                        if (*runAlphNum < 5){
+                        if (*runAlphaNum < 5){
                             jecInd = 0;
                         }
                         else {
@@ -1266,13 +1268,13 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
                     float eta = FatJet_eta[i];
                     float phi = FatJet_phi[i];
                     float mass = FatJet_mass[i];
-                    //Get ind for JEC from runAlphNum and APV and year
+                    //Get ind for JEC from runAlphaNum and APV and year
                     int jecInd;
                     if (yearType < 2) {
-                        jecInd = runAlphaNum;
+                        jecInd = *runAlphaNum;
                     }
                     else if (*APV) {
-                        if (runAlphNum < 5){
+                        if (*runAlphaNum < 5){
                             jecInd = 0;
                         }
                         else {
@@ -1316,7 +1318,7 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
             runL = *run;
             eventL = *event;
 
-            runAlphNumL = *runAlphNum;
+            runAlphaNumL = *runAlphaNum;
             APVL = *APV;
             JECCorIndL = JECCorInd;
             AK8JECCorIndL = AK8JECCorInd;
@@ -1555,8 +1557,8 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
 
 
     outFile->cd();
-    passingEvLepTree->Write("",TObject::kOverwrite);
-    passingEvSemiLepTree->Write("",TObject::kOverwrite);
+    evNumTree->Write("",TObject::kOverwrite);
+    FilteredEventsTree->Write("",TObject::kOverwrite);
 
     outFile->Close();
 
