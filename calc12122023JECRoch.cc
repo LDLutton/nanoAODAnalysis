@@ -631,15 +631,19 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
     }
 
     std::vector<std::unique_ptr<JetCorrectionUncertainty>> jecUncAr;
-    for (UInt_t i = 0; i < textFileAr.size(); ++i){
-        auto tmpJECUnc = std::make_unique<JetCorrectionUncertainty>(textFileAr[i]+corrTypeAr[JECCorInd]+".txt");
-        jecUncAr.push_back(std::move(tmpJECUnc));
+    if (JECCorInd){
+        for (UInt_t i = 0; i < textFileAr.size(); ++i){
+            auto tmpJECUnc = std::make_unique<JetCorrectionUncertainty>(textFileAr[i]+corrTypeAr[JECCorInd]+".txt");
+            jecUncAr.push_back(std::move(tmpJECUnc));
+        }
     }
     //same for AK8 jets
     std::vector<std::unique_ptr<JetCorrectionUncertainty>> jecUncArAK8;
-    for (UInt_t i = 0; i < textFileArAK8.size(); ++i){
-        auto tmpJECUnc = std::make_unique<JetCorrectionUncertainty>(textFileArAK8[i]+corrTypeAr[JECCorInd]+".txt");
-        jecUncArAK8.push_back(std::move(tmpJECUnc));
+    if (AK8JECCorInd){
+        for (UInt_t i = 0; i < textFileArAK8.size(); ++i){
+            auto tmpJECUnc = std::make_unique<JetCorrectionUncertainty>(textFileArAK8[i]+corrTypeAr[JECCorInd]+".txt");
+            jecUncArAK8.push_back(std::move(tmpJECUnc));
+        }
     }
 
 
