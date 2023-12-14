@@ -655,7 +655,6 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
     JetCorrectionUncertainty jec18DAK8("../NanoCORE/Tools/jetcorr/data/Summer19UL18_RunD_V5_DATA/Summer19UL18_RunD_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
 
     JetCorrectionUncertainty jec17BAK8("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunB_V5_DATA/Summer19UL17_RunB_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
-    JetCorrectionUncertainty jec17BAK8("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunB_V5_DATA/Summer19UL17_RunB_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
     JetCorrectionUncertainty jec17CAK8("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunC_V5_DATA/Summer19UL17_RunC_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
     JetCorrectionUncertainty jec17DAK8("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunD_V5_DATA/Summer19UL17_RunD_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
     JetCorrectionUncertainty jec17EAK8("../NanoCORE/Tools/jetcorr/data/Summer19UL17_RunE_V5_DATA/Summer19UL17_RunE_V5_DATA_UncertaintySources_AK8PFPuppi_"+corrTypeAr[AK8JECCorInd]+".txt");
@@ -1335,15 +1334,15 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
                     jecUncAr[yearType][jecInd]->setJetPt(pt);
                     jecUncAr[yearType][jecInd]->setJetEta(eta);
                     //down first
-                    double unc = jecUncAr[jecInd]->getUncertainty(false);
+                    double unc = jecUncAr[yearType][jecInd]->getUncertainty(false);
                     double JEC = 1. - unc;
                     float tmpPt = pt * JEC;
                     //mass *= JEC;
                     jetCorPtDownVec.push_back(pt);
                     //Now Up
-                    jecUncAr[jecInd]->setJetPt(pt);
-                    jecUncAr[jecInd]->setJetEta(eta);
-                    unc = jecUncAr[jecInd]->getUncertainty(true);
+                    jecUncAr[yearType][jecInd]->setJetPt(pt);
+                    jecUncAr[yearType][jecInd]->setJetEta(eta);
+                    unc = jecUncAr[yearType][jecInd]->getUncertainty(true);
                     JEC = 1. + unc;
                     tmpPt = pt * JEC;
                     //mass *= JEC;
@@ -1396,18 +1395,18 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
                         break;
                     }
                     //Get the JEC uncertainty
-                    jecUncArAK8[jecInd]->setJetPt(pt);
-                    jecUncArAK8[jecInd]->setJetEta(eta);
+                    jecUncArAK8[yearType][jecInd]->setJetPt(pt);
+                    jecUncArAK8[yearType][jecInd]->setJetEta(eta);
                     //down first
-                    double unc = jecUncArAK8[jecInd]->getUncertainty(false);
+                    double unc = jecUncArAK8[yearType][jecInd]->getUncertainty(false);
                     double JEC = 1. - unc;
                     float tmpPt = pt * JEC;
                     //mass *= JEC;
                     AK8jetCorPtDownVec.push_back(pt);
                     //Now Up
-                    jecUncArAK8[jecInd]->setJetPt(pt);
-                    jecUncArAK8[jecInd]->setJetEta(eta);
-                    unc = jecUncArAK8[jecInd]->getUncertainty(true);
+                    jecUncArAK8[yearType][jecInd]->setJetPt(pt);
+                    jecUncArAK8[yearType][jecInd]->setJetEta(eta);
+                    unc = jecUncArAK8[yearType][jecInd]->getUncertainty(true);
                     JEC = 1. + unc;
                     tmpPt = pt * JEC;
                     //mass *= JEC;
