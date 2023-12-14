@@ -1228,18 +1228,18 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
                         jecInd = 2;
                     }
                     //Get the JEC uncertainty
-                    jecUncAr[jecInd].setJetPt(pt);
-                    jecUncAr[jecInd].setJetEta(eta);
+                    jecUncAr[jecInd]->setJetPt(pt);
+                    jecUncAr[jecInd]->setJetEta(eta);
                     //down first
-                    double unc = jecUncAr[jecInd].getUncertainty(false);
+                    double unc = jecUncAr[jecInd]->getUncertainty(false);
                     double JEC = 1. - unc;
                     float tmpPt = pt * JEC;
                     //mass *= JEC;
                     jetCorPtDownVec.push_back(pt);
                     //Now Up
-                    jecUncAr[jecInd].setJetPt(pt);
-                    jecUncAr[jecInd].setJetEta(eta);
-                    unc = jecUncAr[jecInd].getUncertainty(true);
+                    jecUncAr[jecInd]->setJetPt(pt);
+                    jecUncAr[jecInd]->setJetEta(eta);
+                    unc = jecUncAr[jecInd]->getUncertainty(true);
                     JEC = 1. + unc;
                     tmpPt = pt * JEC;
                     //mass *= JEC;
@@ -1285,18 +1285,18 @@ void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd, 
                         jecInd = 2;
                     }
                     //Get the JEC uncertainty
-                    jecUncArAK8[jecInd].setJetPt(pt);
-                    jecUncArAK8[jecInd].setJetEta(eta);
+                    jecUncArAK8[jecInd]->setJetPt(pt);
+                    jecUncArAK8[jecInd]->setJetEta(eta);
                     //down first
-                    double unc = jecUncArAK8[jecInd].getUncertainty(false);
+                    double unc = jecUncArAK8[jecInd]->getUncertainty(false);
                     double JEC = 1. - unc;
                     float tmpPt = pt * JEC;
                     //mass *= JEC;
                     AK8jetCorPtDownVec.push_back(pt);
                     //Now Up
-                    jecUncArAK8[jecInd].setJetPt(pt);
-                    jecUncArAK8[jecInd].setJetEta(eta);
-                    unc = jecUncArAK8[jecInd].getUncertainty(true);
+                    jecUncArAK8[jecInd]->setJetPt(pt);
+                    jecUncArAK8[jecInd]->setJetEta(eta);
+                    unc = jecUncArAK8[jecInd]->getUncertainty(true);
                     JEC = 1. + unc;
                     tmpPt = pt * JEC;
                     //mass *= JEC;
