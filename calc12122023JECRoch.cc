@@ -61,7 +61,7 @@
 //Output should be the same but with additional branches for the corrections and efficiencies
 //Apply JEC and JER before BTagging Efficencies
 //Input should be the dataset string, then an integer for each correction/efficiency to be calculated
-void calc12122023JECRochEff(string datasetString, int JECCorInd, int AK8JECCorInd,  int RochInd){
+void calc12122023JECRoch(string datasetString, int JECCorInd, int AK8JECCorInd,  int RochInd){
     // Open the file. Note that the name of your file outside this class
     // will probably NOT be experiment.root.
     std::cout << "start Analysis\n";
@@ -1020,7 +1020,7 @@ void calc12122023JECRochEff(string datasetString, int JECCorInd, int AK8JECCorIn
         TTreeReaderValue<UInt_t> run(myEventsReader, "runL");
         TTreeReaderValue<UInt_t> event(myEventsReader, "eventL");
 
-        TTreeReaderValue<UInt_t> runAlphNum(myEventsReader, "runAlphNumL");
+        TTreeReaderValue<UInt_t> runAlphaNum(myEventsReader, "runAlphaNumL");
         TTreeReaderValue<Bool_t> APV(myEventsReader, "APV");
 
         //jets
@@ -1031,6 +1031,8 @@ void calc12122023JECRochEff(string datasetString, int JECCorInd, int AK8JECCorIn
         TTreeReaderArray<Float_t> Jet_phi(myEventsReader, "Jet_phiL");
         TTreeReaderArray<Float_t> Jet_mass(myEventsReader, "Jet_massL");
         TTreeReaderArray<Int_t> Jet_jetId(myEventsReader, "Jet_jetIdL");
+        TTreeReaderArray<Float_t> Jet_btagDeepFlavB(myEventsReader,"Jet_btagDeepFlavBL");
+        TTreeReaderValue<Float_t> fixedGridRhoFastjetAll(myEventsReader, "fixedGridRhoFastjetAllL");
 
         //Fat jets
 
@@ -1040,8 +1042,8 @@ void calc12122023JECRochEff(string datasetString, int JECCorInd, int AK8JECCorIn
         TTreeReaderArray<Float_t> FatJet_phi(myEventsReader, "FatJet_phiL");
         TTreeReaderArray<Float_t> FatJet_mass(myEventsReader, "FatJet_massL");
         TTreeReaderArray<Int_t> FatJet_jetId(myEventsReader, "FatJet_jetIdL");
-        //TTreeReaderArray<Float_t> FatJet_deepTag_H(myEventsReader, "FatJet_deepTag_HL");
-        //TTreeReaderArray<Float_t> FatJet_deepTag_ZvsQCD(myEventsReader, "FatJet_deepTag_ZvsQCDL");
+        TTreeReaderArray<Float_t> FatJet_deepTag_H(myEventsReader, "FatJet_deepTag_HL");
+        TTreeReaderArray<Float_t> FatJet_deepTag_ZvsQCD(myEventsReader, "FatJet_deepTag_ZvsQCDL");
         TTreeReaderArray<Float_t> FatJet_msoftdrop(myEventsReader, "FatJet_msoftdropL");
 
         TTreeReaderArray<Float_t> FatJet_particleNet_mass(myEventsReader, "FatJet_particleNet_massL");
@@ -1059,7 +1061,12 @@ void calc12122023JECRochEff(string datasetString, int JECCorInd, int AK8JECCorIn
         TTreeReaderArray<Float_t> Electron_dr03HcalDepth1TowerSumEt(myEventsReader, "Electron_dr03HcalDepth1TowerSumEtL");
         TTreeReaderArray<Float_t> Electron_pfRelIso03_all(myEventsReader, "Electron_pfRelIso03_allL");
         TTreeReaderArray<Float_t> Electron_sip3d(myEventsReader, "Electron_sip3dL");
-        //TTreeReaderArray<Bool_t> Electron_mvaFall17V2Iso_WP80(myEventsReader, "Electron_mvaFall17V2Iso_WP80L");
+        TTreeReaderArray<Int_t> Electron_cutBased(myEventsReader, "Electron_cutBasedL");
+        TTreeReaderArray<Bool_t> Electron_mvaFall17V2Iso_WP80(myEventsReader, "Electron_mvaFall17V2Iso_WP80L");
+        TTreeReaderArray<Bool_t> Electron_mvaFall17V2Iso_WP90(myEventsReader, "Electron_mvaFall17V2Iso_WP90L");
+        TTreeReaderArray<Bool_t> Electron_mvaFall17V2Iso_WPL(myEventsReader, "Electron_mvaFall17V2Iso_WPLL");
+        TTreeReaderArray<Bool_t> Electron_mvaFall17V2noIso_WP80(myEventsReader, "Electron_mvaFall17V2noIso_WP80L");
+        TTreeReaderArray<Bool_t> Electron_mvaFall17V2noIso_WP90(myEventsReader, "Electron_mvaFall17V2noIso_WP90L");
         TTreeReaderArray<Bool_t> Electron_mvaFall17V2noIso_WPL(myEventsReader, "Electron_mvaFall17V2noIso_WPLL");
 
         //Muons
@@ -1071,9 +1078,10 @@ void calc12122023JECRochEff(string datasetString, int JECCorInd, int AK8JECCorIn
         TTreeReaderArray<Float_t> Muon_pt(myEventsReader, "Muon_ptL");
         TTreeReaderArray<Float_t> Muon_pfRelIso03_all(myEventsReader, "Muon_pfRelIso03_allL");
         TTreeReaderArray<Float_t> Muon_sip3d(myEventsReader, "Muon_sip3dL");
-        //TTreeReaderArray<Bool_t> Muon_tightId(myEventsReader, "Muon_tightIdL");
+        TTreeReaderArray<Bool_t> Muon_tightId(myEventsReader, "Muon_tightIdL");
         TTreeReaderArray<Bool_t> Muon_mediumId(myEventsReader, "Muon_mediumIdL");
         TTreeReaderArray<Bool_t> Muon_looseId(myEventsReader, "Muon_looseIdL");
+
 
 
 
@@ -1097,7 +1105,7 @@ void calc12122023JECRochEff(string datasetString, int JECCorInd, int AK8JECCorIn
         TTreeReaderArray<Float_t> Muon_jetRelIso(myEventsReader, "Muon_jetRelIsoL");
         TTreeReaderArray<Float_t> Muon_mvaTTH(myEventsReader, "Muon_mvaTTHL");
 
-        TTreeReaderArray<Float_t> Jet_btagDeepFlavB(myEventsReader,"Jet_btagDeepFlavBL");
+        
 
         //ParticleNet
         TTreeReaderArray<Float_t> FatJet_particleNet_HbbvsQCD(myEventsReader, "FatJet_particleNet_HbbvsQCDL");
@@ -1206,8 +1214,8 @@ void calc12122023JECRochEff(string datasetString, int JECCorInd, int AK8JECCorIn
                     if (yearType < 2) {
                         jecInd = runAlphaNum;
                     }
-                    else if (APV) {
-                        if (runAlphNum < 5){
+                    else if (*APV) {
+                        if (*runAlphNum < 5){
                             jecInd = 0;
                         }
                         else {
@@ -1229,7 +1237,7 @@ void calc12122023JECRochEff(string datasetString, int JECCorInd, int AK8JECCorIn
                     //Now Up
                     jecUncAr[jecInd].setJetPt(pt);
                     jecUncAr[jecInd].setJetEta(eta);
-                    double unc = jecUncAr[jecInd].getUncertainty(true);
+                    unc = jecUncAr[jecInd].getUncertainty(true);
                     JEC = 1. + unc;
                     tmpPt = pt * JEC;
                     //mass *= JEC;
@@ -1263,7 +1271,7 @@ void calc12122023JECRochEff(string datasetString, int JECCorInd, int AK8JECCorIn
                     if (yearType < 2) {
                         jecInd = runAlphaNum;
                     }
-                    else if (APV) {
+                    else if (*APV) {
                         if (runAlphNum < 5){
                             jecInd = 0;
                         }
@@ -1286,7 +1294,7 @@ void calc12122023JECRochEff(string datasetString, int JECCorInd, int AK8JECCorIn
                     //Now Up
                     jecUncArAK8[jecInd].setJetPt(pt);
                     jecUncArAK8[jecInd].setJetEta(eta);
-                    double unc = jecUncArAK8[jecInd].getUncertainty(true);
+                    unc = jecUncArAK8[jecInd].getUncertainty(true);
                     JEC = 1. + unc;
                     tmpPt = pt * JEC;
                     //mass *= JEC;
@@ -1318,7 +1326,7 @@ void calc12122023JECRochEff(string datasetString, int JECCorInd, int AK8JECCorIn
             if (debug){
                 std::cout <<"Filling Jets\n";
             }
-            nJetL = tmpnVBFJets;
+            nJetL = *nJet;
             for (UInt_t nJetItr=0; nJetItr<nJetL;nJetItr++){
                 Jet_etaL.push_back(Jet_eta[nJetItr]);
                 Jet_ptL.push_back(Jet_pt[nJetItr]);
@@ -1335,7 +1343,7 @@ void calc12122023JECRochEff(string datasetString, int JECCorInd, int AK8JECCorIn
             if (debug){
                 std::cout <<"Filling FJs\n";
             }
-            nFatJetL = tmpnFatJets;
+            nFatJetL = *nFatJet;
             for (UInt_t nFatJetItr=0; nFatJetItr<nFatJetL;nFatJetItr++){
                 FatJet_etaL.push_back(FatJet_eta[nFatJetItr]);
                 FatJet_ptL.push_back(FatJet_pt[nFatJetItr]);
