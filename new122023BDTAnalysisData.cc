@@ -56,6 +56,8 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
     //Analyzer will run over all files put into fileAr
 
     std::vector<std::string> fileAr;
+    bool handBrake = false;
+    int handBrakeInd = 2000;
 
 
     std::string saveName;
@@ -133,84 +135,84 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         datasetType = 27;
         saveName = "BTagMuData";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisBTagMuData"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisBTagMuData_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (CharmoniumData){
         datasetType = 28;
         saveName = "CharmoniumData";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisCharmoniumData"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisCharmoniumData_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DisplacedJetData){
         datasetType = 29;
         saveName = "DisplacedJetData";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisDisplacedJetData"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisDisplacedJetData_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DoubleMuonData){
         datasetType = 31;
         saveName = "DoubleMuonData";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisDoubleMuonData"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisDoubleMuonData_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DoubleMuonLowMassData){
         datasetType = 32;
         saveName = "DoubleMuonLowMassData";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisDoubleMuonLowMassData"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisDoubleMuonLowMassData_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (EGammaData){
         datasetType = 33;
         saveName = "EGammaData";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisEGammaData"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisEGammaData_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (JetHTData){
         datasetType = 41;
         saveName = "JetHTData";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisJetHTData"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisJetHTData_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (METData){
         datasetType = 43;
         saveName = "METData";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisMETData"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisMETData_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (MuOniaData){
         datasetType = 44;
         saveName = "MuOniaData";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisMuOniaData"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisMuOniaData_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (MuonEGData){
         datasetType = 45;
         saveName = "MuonEGData";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisMuonEGData"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisMuonEGData_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SingleMuonData){
         datasetType = 47;
         saveName = "SingleMuonData";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisSingleMuonData"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSingleMuonData_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (TauData){
         datasetType = 49;
         saveName = "TauData";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisTauData"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisTauData_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
 
@@ -219,7 +221,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 1;
         saveName = "BTagCSV17Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisBTagCSV17Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisBTagCSV17Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (BTagMu17Data){
@@ -227,7 +229,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 1;
         saveName = "BTagMu17Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisBTagMu17Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisBTagMu17Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (Charmonium17Data){
@@ -235,7 +237,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 1;
         saveName = "Charmonium17Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisCharmonium17Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisCharmonium17Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DisplacedJet17Data){
@@ -243,7 +245,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 1;
         saveName = "DisplacedJet17Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisDisplacedJet17Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisDisplacedJet17Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DoubleEG17Data){
@@ -251,7 +253,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 1;
         saveName = "DoubleEG17Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisDoubleEG17Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisDoubleEG17Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DoubleMuon17Data){
@@ -259,7 +261,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 1;
         saveName = "DoubleMuon17Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisDoubleMuon17Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisDoubleMuon17Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DoubleMuonLowMass17Data){
@@ -267,7 +269,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 1;
         saveName = "DoubleMuonLowMass17Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisDoubleMuonLowMass17Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisDoubleMuonLowMass17Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (FSQJet117Data){
@@ -275,7 +277,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 1;
         saveName = "FSQJet117Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisFSQJet117Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisFSQJet117Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (FSQJet217Data){
@@ -283,7 +285,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 1;
         saveName = "FSQJet217Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisFSQJet217Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisFSQJet217Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (HTMHT17Data){
@@ -291,7 +293,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 1;
         saveName = "HTMHT17Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisHTMHT17Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisHTMHT17Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (HeavyFlavor17Data){
@@ -299,7 +301,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 1;
         saveName = "HeavyFlavor17Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisHeavyFlavor17Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisHeavyFlavor17Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (HighEGJet17Data){
@@ -307,7 +309,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 1;
         saveName = "HighEGJet17Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisHighEGJet17Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisHighEGJet17Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (HighPtLowerPhotons17Data){
@@ -315,7 +317,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 1;
         saveName = "HighPtLowerPhotons17Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisHighPtLowerPhotons17Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisHighPtLowerPhotons17Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (HighPtPhoton30AndZ17Data){
@@ -323,7 +325,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 1;
         saveName = "HighPtPhoton30AndZ17Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisHighPtPhoton30AndZ17Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisHighPtPhoton30AndZ17Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (JetHT17Data){
@@ -331,7 +333,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 1;
         saveName = "JetHT17Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisJetHT17Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisJetHT17Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (LowEGJet17Data){
@@ -339,7 +341,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 1;
         saveName = "LowEGJet17Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisLowEGJet17Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisLowEGJet17Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (MET17Data){
@@ -347,7 +349,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 1;
         saveName = "MET17Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisMET17Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisMET17Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (MuOnia17Data){
@@ -355,7 +357,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 1;
         saveName = "MuOnia17Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisMuOnia17Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisMuOnia17Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (MuonEG17Data){
@@ -363,7 +365,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 1;
         saveName = "MuonEG17Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisMuonEG17Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisMuonEG17Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SingleElectron17Data){
@@ -371,7 +373,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 1;
         saveName = "SingleElectron17Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisSingleElectron17Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSingleElectron17Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SingleMuon17Data){
@@ -379,7 +381,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 1;
         saveName = "SingleMuon17Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisSingleMuon17Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSingleMuon17Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SinglePhoton17Data){
@@ -387,7 +389,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 1;
         saveName = "SinglePhoton17Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisSinglePhoton17Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSinglePhoton17Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (Tau17Data){
@@ -395,7 +397,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 1;
         saveName = "Tau17Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisTau17Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisTau17Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (BTagCSV16Data){
@@ -403,7 +405,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 2;
         saveName = "BTagCSV16Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisBTagCSV16Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisBTagCSV16Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (BTagMu16Data){
@@ -411,7 +413,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 2;
         saveName = "BTagMu16Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisBTagMu16Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisBTagMu16Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (Charmonium16Data){
@@ -419,7 +421,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 2;
         saveName = "Charmonium16Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisCharmonium16Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisCharmonium16Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DisplacedJet16Data){
@@ -427,7 +429,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 2;
         saveName = "DisplacedJet16Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisDisplacedJet16Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisDisplacedJet16Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DoubleEG16Data){
@@ -435,7 +437,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 2;
         saveName = "DoubleEG16Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisDoubleEG16Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisDoubleEG16Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DoubleMuon16Data){
@@ -443,7 +445,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 2;
         saveName = "DoubleMuon16Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisDoubleMuon16Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisDoubleMuon16Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DoubleMuonLowMass16Data){
@@ -451,7 +453,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 2;
         saveName = "DoubleMuonLowMass16Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisDoubleMuonLowMass16Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisDoubleMuonLowMass16Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (HTMHT16Data){
@@ -459,7 +461,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 2;
         saveName = "HTMHT16Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisHTMHT16Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisHTMHT16Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (JetHT16Data){
@@ -467,7 +469,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 2;
         saveName = "JetHT16Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisJetHT16Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisJetHT16Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (MET16Data){
@@ -475,7 +477,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 2;
         saveName = "MET16Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisMET16Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisMET16Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (MuOnia16Data){
@@ -483,7 +485,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 2;
         saveName = "MuOnia16Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisMuOnia16Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisMuOnia16Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (MuonEG16Data){
@@ -491,7 +493,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 2;
         saveName = "MuonEG16Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisMuonEG16Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisMuonEG16Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SingleElectron16Data){
@@ -499,7 +501,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 2;
         saveName = "SingleElectron16Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisSingleElectron16Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSingleElectron16Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SingleMuon16Data){
@@ -507,7 +509,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 2;
         saveName = "SingleMuon16Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisSingleMuon16Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSingleMuon16Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SinglePhoton16Data){
@@ -515,7 +517,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 2;
         saveName = "SinglePhoton16Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisSinglePhoton16Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSinglePhoton16Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (Tau16Data){
@@ -523,7 +525,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
         yearType = 2;
         saveName = "Tau16Data";
         
-        std::string tmpStrWithPath = "./"+"HLTTrimmedFilteredForAnalysisTau16Data"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisTau16Data_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
 
@@ -1241,6 +1243,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
                 std::cout << "-------------------------\n";
                 std::cout << evCount+1 << " starting jets loop\n";
             }
+            if (handBrake && evCount > handBrakeInd) break;
             //Increment event count
             evRunOver += 1;
             evCount += 1;
