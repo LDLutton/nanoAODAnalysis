@@ -531,7 +531,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
 
     else if (testRun){
         saveName = "testRun";
-        fileAr.push_back("./HLTFilteredForAnalysistestRun_0"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root");
+        fileAr.push_back("./HLTFilteredForAnalysistestRun_0_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root");
         
     }
     else{
@@ -1843,7 +1843,7 @@ void new10162023BDTAnalysisData(string datasetString, int JECCorInd,  int RochIn
                     runAlphNum_SL_L = *runAlphNumL;
                     APV_SL_L = *APVL;
                     JECCorInd_SL_L = *JECCorIndL;
-                    RochInd_SL_L = *RochCorIndL;
+                    RochInd_SL_L = *RochIndL;
 
                     
 
