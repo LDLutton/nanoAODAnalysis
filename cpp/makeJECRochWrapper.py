@@ -9,7 +9,7 @@ def create_c_file(string_var, int_var1, int_var2):
     gROOT->ProcessLine(".L ../NanoCORE/NANO_CORE.so");
     gROOT->ProcessLine(".L calc12122023JECRoch.cc+");
 
-    calc12122023JECRoch("{string_var}", {int_var1},{int_var2});
+    calc12122023JECRoch({string_var}, {int_var1},{int_var2});
     std::cout << "all done\\n";
 }}
 """
