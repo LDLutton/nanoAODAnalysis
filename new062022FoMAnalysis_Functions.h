@@ -3424,7 +3424,7 @@ bool debug
 ) {
     if (neLep){
         if (debug) std::cout << "Doing elec cand cut\n";
-        dolCandCutWithID_RochUnc(Elec_IdL,Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL,Electron_DxyL,Electron_DzL,Electron_sip3dL,Electron_MiniPFRelIsoL,Electron_sieieL,Electron_hoeL,Electron_eInvMinusPInvL,Electron_convVetoL,Electron_lostHitsL,Electron_jetIdxL,Jet_btagDeepFlavBL,Electron_mvaTTHL,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut,lDxyCut,lDzCut,lMiniPFRelIsoCut,eSieieBarrelCut,eSieieEndcapCut,eHoeCut,eInvMinusPInvCut,eLostHitsCut,lepJetDeepTagLooseCut,lepJetDeepTagMediumCut,ePromptMVACut,SIPCut,false,debug);
+        dolCandCutWithID(Elec_IdL,Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL,Electron_DxyL,Electron_DzL,Electron_sip3dL,Electron_MiniPFRelIsoL,Electron_sieieL,Electron_hoeL,Electron_eInvMinusPInvL,Electron_convVetoL,Electron_lostHitsL,Electron_jetIdxL,Jet_btagDeepFlavBL,Electron_mvaTTHL,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut,lDxyCut,lDzCut,lMiniPFRelIsoCut,eSieieBarrelCut,eSieieEndcapCut,eHoeCut,eInvMinusPInvCut,eLostHitsCut,lepJetDeepTagLooseCut,lepJetDeepTagMediumCut,ePromptMVACut,SIPCut,false,debug);
         //doeCandCut(Electron_etaL,Electron_massL,Electron_chargeL,Electron_phiL,Electron_ptL,neLep,elecCandIndAr,elecCandVecAr,elecCandChargeAr,ePtCut,eEtaCut);
         for (UInt_t elecCandChargeInd=0;elecCandChargeInd<elecCandChargeAr.size();elecCandChargeInd++){
             if (elecCandChargeAr[elecCandChargeInd] == -1) negElecCands += 1;
@@ -3447,7 +3447,7 @@ bool debug
     if (nmLep){
         if (debug) std::cout << "Doing muon cand cut\n";
 
-        dolCandCutWithID(Muon_IdL,Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,Muon_DxyL,Muon_DzL,Muon_sip3dL,Muon_MiniPFRelIsoL,Electron_sieieL,Electron_hoeL,Electron_eInvMinusPInvL,Electron_convVetoL,Electron_lostHitsL,Muon_jetIdxL,Jet_btagDeepFlavBL,Muon_mvaTTHL,nmLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut,lDxyCut,lDzCut,lMiniPFRelIsoCut,eSieieBarrelCut,eSieieEndcapCut,eHoeCut,eInvMinusPInvCut,eLostHitsCut,lepJetDeepTagLooseCut,lepJetDeepTagMediumCut,mPromptMVACut,SIPCut,true,debug);
+        dolCandCutWithID_RochUnc(Muon_IdL,Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,Muon_DxyL,Muon_DzL,Muon_sip3dL,Muon_MiniPFRelIsoL,Electron_sieieL,Electron_hoeL,Electron_eInvMinusPInvL,Electron_convVetoL,Electron_lostHitsL,Muon_jetIdxL,Jet_btagDeepFlavBL,Muon_mvaTTHL,nmLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut,lDxyCut,lDzCut,lMiniPFRelIsoCut,eSieieBarrelCut,eSieieEndcapCut,eHoeCut,eInvMinusPInvCut,eLostHitsCut,lepJetDeepTagLooseCut,lepJetDeepTagMediumCut,mPromptMVACut,SIPCut,true,debug);
 
         //domCandCut(Muon_etaL,Muon_massL,Muon_chargeL,Muon_phiL,Muon_ptL,neLep,muonCandIndAr,muonCandVecAr,muonCandChargeAr,mPtCut,mEtaCut);
         for (UInt_t muonCandChargeInd=0;muonCandChargeInd<muonCandChargeAr.size();muonCandChargeInd++){
@@ -3478,7 +3478,7 @@ bool debug
         }
         std::vector<std::array<UInt_t,2>> muonPassesZ2CutsAr;
         if (enoughMuonCands){ //If enough muon cands, run Z1 cuts
-            dolZ1CutWithTree(Muon_ptL,muonCandIndAr,muonCandVecAr,muonCandChargeAr,muonPassesZ2CutsAr,Z1IsMuon,true,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,Z1LeadPt,Z1TrailingPt,Z1LeadItr,Z1TrailingItr,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,difFromZMassOne,LepInvMass,debug);
+            dolZ1CutWithTree_RochUnc(Muon_ptL,muonCandIndAr,muonCandVecAr,muonCandChargeAr,muonPassesZ2CutsAr,Z1IsMuon,true,invMassCutLow,invMassCutHigh,ptLeadCut,ptTrailingCut,Z1LeadPt,Z1TrailingPt,Z1LeadItr,Z1TrailingItr,Z1LeadVec,Z1TrailingVec,Z1LeadCharge,Z1TrailingCharge,difFromZMassOne,LepInvMass,debug);
         }
         if (debug) std::cout <<"Z1LeadItr " << Z1LeadItr << " Z1TrailingItr " << Z1TrailingItr << " Z1LeadPt " << Z1LeadPt << " Z1TrailingPt " << Z1TrailingPt << " Z1LeadVec " << Z1LeadVec << " Z1TrailingVec " << Z1TrailingVec << " Z1LeadCharge " << Z1LeadCharge << " Z1TrailingCharge " << Z1TrailingCharge << " Z1IsMuon " << Z1IsMuon << " difFromZMassOne " << difFromZMassOne << "\n";
         if (Z1LeadItr >= 0) { //If Z1 found
