@@ -926,6 +926,7 @@ void calc12122023JECRoch(string datasetString, int JECCorInd,  int RochInd){
     std::vector<Bool_t> Muon_looseIdL;
     std::vector<Float_t> Muon_RochMomCorrectionsL;
     std::vector<Float_t> Muon_ptCorrectedL;
+    std::vector<Float_t> Muon_RochCorUncL;
 
     std::vector<Float_t> Muon_dxyL;
     std::vector<Float_t> Muon_dzL;
@@ -934,6 +935,7 @@ void calc12122023JECRoch(string datasetString, int JECCorInd,  int RochInd){
     std::vector<Float_t> Muon_jetRelIsoL;
     std::vector<Float_t> Muon_mvaTTHL;
     std::vector<Int_t> Muon_nTrackerLayersL;
+    
 
     
 
@@ -1043,6 +1045,7 @@ void calc12122023JECRoch(string datasetString, int JECCorInd,  int RochInd){
     FilteredEventsTree->Branch("Muon_looseIdL",&Muon_looseIdL);
     FilteredEventsTree->Branch("Muon_RochMomCorrectionsL",&Muon_RochMomCorrectionsL);
     FilteredEventsTree->Branch("Muon_ptCorrectedL",&Muon_ptCorrectedL);
+    FilteredEventsTree->Branch("Muon_RochCorUncL",&Muon_RochCorUncL);
     
 
 
@@ -1246,50 +1249,85 @@ void calc12122023JECRoch(string datasetString, int JECCorInd,  int RochInd){
 
 
             std::vector<Float_t> rochMomCorrections;
+            std::vector<Float_t> Muon_RochCorUnc;
+            //Loop through muons and calculate default rochester correction
+            for (int i = 0; i < *nMuon; i++){
+                muCount += 1;
+                double mcSF;
+                int charge = Muon_charge[i];
+                float pt = Muon_pt[i];
+                float eta = Muon_eta[i];
+                float phi = Muon_phi[i];
+                mcSF = rc.kScaleDT(charge, pt, eta, phi, RochInd, 0);
+                //Fill histogram
+                rochesterCorrHist->Fill(mcSF);
+                //check if outside hist range
+                if (mcSF < 0.9 || mcSF > 1.1) outOfRange += 1;
+                //check if min or max
+                if (mcSF < minRes) {
+                    minRes = mcSF;
+                    minPt = pt;
+                    minEta = eta;
+                    minPhi = phi;
+                    minCharge = charge;
+                    minEvCount = evCount;
+                    mini = i;
+                    
+                }
+                if (mcSF > maxRes) {
+                    maxRes = mcSF;
+                    maxPt = pt;
+                    maxEta = eta;
+                    maxPhi = phi;
+                    maxCharge = charge;
+                    maxEvCount = evCount;
+                    maxi = i;
+                }
+                //Add scale to scale vector
+                rochMomCorrections.push_back(mcSF);
+            }
+            //check if doing an uncertainty of the rochester correction
             if (RochInd > 0){
 
-                //Loop through muons and calculate rochester correction
+                //Loop through muons and calculate rochester correction uncertainty
                 for (int i = 0; i < *nMuon; i++){
-                    muCount += 1;
-                    double mcSF;
+                    double mcSFUnc;
+                    double mcSFErr;
                     int charge = Muon_charge[i];
                     float pt = Muon_pt[i];
                     float eta = Muon_eta[i];
                     float phi = Muon_phi[i];
+                    //Create vector in case that error set is Stat
+                    std::vector<Float_t> rochMomCorrectionsStat;
+                    if (RochInd != 1){
+                        mcSFUnc = rc.kScaleDT(charge, pt, eta, phi, RochInd, 0);
+                    }
+                    else{ //loop through all 100 error members and store them in a vector
+                        for (int j = 0; j < 100; j++){
+                            mcSFErr = rc.kScaleDT(charge, pt, eta, phi, RochInd, j);
+                            rochMomCorrectionsStat.push_back(mcSFErr);
+                        }
+                        //Get the mean and standard deviation of the vector
+                        float mean = TMath::Mean(rochMomCorrectionsStat.begin(), rochMomCorrectionsStat.end());
+                        float stdDev = TMath::StdDev(rochMomCorrectionsStat.begin(), rochMomCorrectionsStat.end());
+                        /*
+                        //Get a random number from a gaussian with the mean and std dev
+                        TRandom3 *r = new TRandom3();
+                        mcSF = r->Gaus(mean, stdDev);
+                        */
+                        mcSFUnc = stdDev;
+                    }
+                    Muon_RochCorUnc.push_back(mcSFUnc);
                     
-                    mcSF = rc.kScaleDT(charge, pt, eta, phi, RochInd-1, 0);
-                    //Fill histogram
-                    rochesterCorrHist->Fill(mcSF);
-                    //check if outside hist range
-                    if (mcSF < 0.9 || mcSF > 1.1) outOfRange += 1;
-                    //check if min or max
-                    if (mcSF < minRes) {
-                        minRes = mcSF;
-                        minPt = pt;
-                        minEta = eta;
-                        minPhi = phi;
-                        minCharge = charge;
-                        minEvCount = evCount;
-                        mini = i;
-                        
-                    }
-                    if (mcSF > maxRes) {
-                        maxRes = mcSF;
-                        maxPt = pt;
-                        maxEta = eta;
-                        maxPhi = phi;
-                        maxCharge = charge;
-                        maxEvCount = evCount;
-                        maxi = i;
-                    }
-                    //Add scale to scale vector
-                    rochMomCorrections.push_back(mcSF);
+                    
                 }
+                
+                
             }
             else {
-                //If not, just transfer the pt unchanged
+                //If not, just set unc to 0
                 for (int i = 0; i < *nMuon; i++){
-                    rochMomCorrections.push_back(1.);
+                    Muon_RochCorUnc.push_back(0);
                 }
             }
 
@@ -1522,6 +1560,7 @@ void calc12122023JECRoch(string datasetString, int JECCorInd,  int RochInd){
                 Muon_looseIdL.push_back(Muon_looseId[nMuonItr]);
                 Muon_RochMomCorrectionsL.push_back(rochMomCorrections[nMuonItr]);
                 Muon_ptCorrectedL.push_back(Muon_pt[nMuonItr]*rochMomCorrections[nMuonItr]);
+                Muon_RochCorUncL.push_back(Muon_RochCorUnc[nMuonItr]);
 
                 Muon_dxyL.push_back(Muon_dxy[nMuonItr]);
                 Muon_dzL.push_back(Muon_dz[nMuonItr]);
@@ -1611,6 +1650,7 @@ void calc12122023JECRoch(string datasetString, int JECCorInd,  int RochInd){
             Muon_nTrackerLayersL.clear();
             Muon_RochMomCorrectionsL.clear();
             Muon_ptCorrectedL.clear();
+            Muon_RochCorUncL.clear();
 
             FatJet_particleNet_HbbvsQCDL.clear();
             FatJet_particleNet_ZvsQCDL.clear();
@@ -1627,6 +1667,8 @@ void calc12122023JECRoch(string datasetString, int JECCorInd,  int RochInd){
             nEv = *nEvHLT;
             nEvPass = *nEvPassHLT;
             evNumTree->Fill();
+            datanEv += *nEvHLT;
+            datanEvPass += *nEvPassHLT;
         }
 
     }
