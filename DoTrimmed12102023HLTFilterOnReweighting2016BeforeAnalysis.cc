@@ -296,7 +296,7 @@ void DoTrimmed12102023HLTFilterOnReweighting2016BeforeAnalysis(int fileInd, stri
     std::vector<Float_t> Muon_jetRelIsoL;
     std::vector<Float_t> Muon_mvaTTHL;
     std::vector<Int_t> Muon_nTrackerLayersL;
-    std:vector<Int_t> Muon_genPartIdxL;
+    std::vector<Int_t> Muon_genPartIdxL;
     
 
     //ParticleNet

@@ -287,7 +287,7 @@ void DoTrimmed12102023HLTFilterOnReweighting2017BeforeAnalysis(int fileInd, stri
     std::vector<Float_t> Muon_jetRelIsoL;
     std::vector<Float_t> Muon_mvaTTHL;
     std::vector<Int_t> Muon_nTrackerLayersL;
-    std:vector<Int_t> Muon_genPartIdxL;
+    std::vector<Int_t> Muon_genPartIdxL;
     
 
     //ParticleNet
@@ -2626,9 +2626,9 @@ void DoTrimmed12102023HLTFilterOnReweighting2017BeforeAnalysis(int fileInd, stri
             }
 
 
-            bool passHLTBool = (*HLT_Ele32_WPTight_Gsf_L1DoubleEG || *HLT_Photon200 || 
+            bool passHLTBool = (*HLT_Ele32_WPTight_Gsf_L1DoubleEG || 
             *HLT_IsoMu27 || *HLT_Mu50 || 
-            *HLT_DoubleEle33_CaloIdL_MW || *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ || *HLT_DoublePhoton70 || 
+            *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ || 
             *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8);
             //std::cout << testPassHLTBool << " " << passHLTBool << "\n";
             if (!passHLTBool) continue;
