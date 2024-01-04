@@ -622,6 +622,8 @@ void new012024SemiLepDuplicateEventChecker(){
                             Jet_mass_SLU_L.clear();
                             Jet_jetId_SLU_L.clear();
                             Jet_btagDeepFlavB_SLU_L.clear();
+                            Jet_ptCorrectedDown_SLU_L.clear();
+                            Jet_ptCorrectedUp_SLU_L.clear();
                             
 
 
