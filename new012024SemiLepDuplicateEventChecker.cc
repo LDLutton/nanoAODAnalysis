@@ -65,7 +65,7 @@ void new012024SemiLepDuplicateEventChecker(){
     clock_t startt = clock();
     //Analyzer will run over all files put into fileAr
 
-    std::vector<std::string> fileAr;
+    
 
 
     std::string saveName;
@@ -126,14 +126,16 @@ void new012024SemiLepDuplicateEventChecker(){
             if (i != 0 && j != 0) continue;
             //Loop over "", "UncUp", "UncDown"
             for (uint uncInd = 0; uncInd <3; uncInd++){
-                //skip instances where i and j are both zero and uncInd is not zero
-                if (i == 0 && j == 0 && uncInd != 0) continue;
+                //skip instances where i is zero and uncInd is not zero
+                if (i == 0 && uncInd != 0) continue;
+                //skip instances where i is nonzero and uncInd is zero
+                if (i != 0 && uncInd == 0) continue;
 
 
 
 
                 std::string datasetStrAr[nDataSets];
-                for (uint k = 0; k < nDataSets; i++){
+                for (uint k = 0; k < nDataSets; k++){
                     datasetStrAr[k] = "new122023BDTAnalysis"+datasetTypeStrAr[k]+"Data_"+std::to_string(i)+"_"+std::to_string(j)+uncUpDownAr[uncInd]+".root";
                 }
                     
@@ -144,6 +146,7 @@ void new012024SemiLepDuplicateEventChecker(){
                 ////////////////////////////////GETTING DATASET////////////////////////////////
 
                 std::string strAdd;
+                std::vector<std::string> fileAr;
                 strAdd ="/scratch365/dlutton/BDTWithJecRochData/";
                 for (UInt_t i = 0; i < nDataSets; i++){
                     fileAr.push_back(strAdd+datasetStrAr[i]);
@@ -155,13 +158,12 @@ void new012024SemiLepDuplicateEventChecker(){
 
             
 
-                std::cout << "Doing duplicate checker\n";
                 //Setting up outfile with variables for BDT
 
                 std::string outFileStr;
-                outFileStr = "new122024BDTAnalysisUniqueData_"+std::to_string(i)+"_"+std::to_string(j)+uncUpDownAr[uncInd]+".root";
+                outFileStr = "new012024BDTAnalysisUniqueData_"+std::to_string(i)+"_"+std::to_string(j)+uncUpDownAr[uncInd]+".root";
                 
-                std::cout << "OutFile: " << outFileStr << "\n";
+                std::cout << "Doing duplicate checker for outFile: " << outFileStr << "\n";
                 TFile *outFile = new TFile(outFileStr.c_str(),"RECREATE");
 
                 ////////////////////////////////DEFINING TREES////////////////////////////////
@@ -476,8 +478,8 @@ void new012024SemiLepDuplicateEventChecker(){
                         double tmpTime = (double)(clock()-startt)/CLOCKS_PER_SEC;
                         std::cout << "Going into event loop for file" << k << " .\ttime:" << (double)(clock()-startt)/CLOCKS_PER_SEC << "\n";
                     }
-                    std::cout << "Current nEv: " << allCtr << "\n";
-                    std::cout << "Current unique: " << uniqueCtr << "\n"; 
+                    std::cout << "File " << k << " Current nEv: " << allCtr << " Current unique: " << uniqueCtr << " time " << (double)(clock()-startt)/CLOCKS_PER_SEC << "\n";
+                    
 
                     uint evCount = 0;
                     //EvLoop
@@ -633,11 +635,8 @@ void new012024SemiLepDuplicateEventChecker(){
                 double time_spent = (double)(endt - startt) / CLOCKS_PER_SEC;
 
 
-                std::cout << "Finished file loop. " << "time: " << time_spent << "\n";
+                std::cout << "Finished file loop. time: " << time_spent << " nEv total: " << allCtr << " nEv unique: " << uniqueCtr << "\n";
                 
-                std::cout << "nEv total: " << allCtr << "\n";
-                std::cout << "nEv unique: " << uniqueCtr << "\n"; 
-
 
                 outFile->cd();
                 passingEvSemiLepUniqueTree->Write("",TObject::kOverwrite);
