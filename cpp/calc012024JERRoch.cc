@@ -171,7 +171,7 @@ void calc012024JERRoch(string datasetString){
     //convert int to str
 
 
-    std::string outFileStr = "HLTTrimmedFilteredForAnalysis"+saveName+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+    std::string outFileStr = "HLTTrimmedFilteredForAnalysis"+saveName+"_WithJERRoch.root";
     std::cout << "OutFile: " << outFileStr << "\n";
     TFile *outFile = new TFile(outFileStr.c_str(),"RECREATE");
 
@@ -902,7 +902,7 @@ void calc012024JERRoch(string datasetString){
                 float pt = Muon_pt[i];
                 float eta = Muon_eta[i];
                 float phi = Muon_phi[i];
-                mcSF = rc.kScaleDT(charge, pt, eta, phi, RochInd, 0);
+                mcSF = rc.kScaleDT(charge, pt, eta, phi, 0, 0);
                 //Fill histogram
                 rochesterCorrHist->Fill(mcSF);
                 //check if outside hist range
