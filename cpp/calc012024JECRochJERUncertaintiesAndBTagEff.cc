@@ -71,6 +71,8 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
 
     //Will run over all files put into fileAr
 
+    gInterpreter->GenerateDictionary("vector<vector<vector<Double_t> > >", "vector");
+    gInterpreter->GenerateDictionary("vector<vector<vector<Int_t> > >", "vector");
 
 
     std::vector<std::string> fileAr;
@@ -98,7 +100,7 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
 
     std::string strAdd;
     if (scratchDown) strAdd ="/afs/crc.nd.edu/user/d/dlutton/Public/condorStuff/NanoAODToHistos/tmpHoldForNanoAODWithoutScratch/";
-    else strAdd ="/scratch365/dlutton/HLTFilteredFiles/dataFiles/";
+    else strAdd ="/scratch365/dlutton/HLTFilteredFiles/";
     if (localTest) strAdd = "";
 
 
@@ -109,6 +111,8 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
     if (SDC2V2MCZZHReweightTrimmed){
         saveName = "SDC2V2MCZZHReweightTrimmed";
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweightTrimmed_WithJERRoch.root";
+        //std::string tmpStrWithPath = "/afs/crc.nd.edu/user/d/dlutton/Public/condorStuff/NanoAODToHistos/nanoAODAnalysis/cpp/HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweightTrimmed_WithJERRoch.root"
+        //std::string tmpStrWithPath = "/scratch365/dlutton/testDirectory/cpp/HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweightTrimmed_WithJERRoch.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SDC2V2MCZZH17ReweightTrimmed){
@@ -419,6 +423,7 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
     std::vector<Bool_t> Muon_looseIdL;
     std::vector<Float_t> Muon_RochMomCorrectionsL;
     std::vector<Float_t> Muon_ptCorrectedL;
+    std::vector<Float_t> Muon_RochCorUncL;
 
     std::vector<Float_t> Muon_dxyL;
     std::vector<Float_t> Muon_dzL;
@@ -603,6 +608,7 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
     FilteredEventsTree->Branch("Muon_looseIdL",&Muon_looseIdL);
     FilteredEventsTree->Branch("Muon_RochMomCorrectionsL",&Muon_RochMomCorrectionsL);
     FilteredEventsTree->Branch("Muon_ptCorrectedL",&Muon_ptCorrectedL);
+    FilteredEventsTree->Branch("Muon_RochCorUncL",&Muon_RochCorUncL);
     
 
 
@@ -711,10 +717,10 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
     //here the inds are for ==0, ==4, ==5
     //initialize here
     //Create branches and tree for btagging efficiencies
-    std::vector<std::vector<std::vector<int>>> nJetsCtrL;
-    std::vector<std::vector<std::vector<int>>> nJetsPassBtagCtrL;
+    std::vector<std::vector<std::vector<Int_t>>> nJetsCtrL;
+    std::vector<std::vector<std::vector<Int_t>>> nJetsPassBtagCtrL;
     //3d vector of btagging efficiencies
-    std::vector<std::vector<std::vector<double>>> btagEffL;
+    std::vector<std::vector<std::vector<Double_t>>> btagEffL;
     TTree *btagEffTree = new TTree("btagEffTree","btagEffTree");
     btagEffTree->Branch("nJetsCtrL",&nJetsCtrL);
     btagEffTree->Branch("nJetsPassBtagCtrL",&nJetsPassBtagCtrL);
@@ -760,7 +766,7 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
     //Vector of btag cuts
     std::vector<float> bTagCuts = {bTagUL18Cut,bTagUL17Cut,bTagUL16Cut,bTagUL16APVCut};
 
-    float bTagCutToUse = bTagCuts[yearInd];
+    float bTagCutToUse = bTagCuts[yearType];
 
 
     
@@ -954,7 +960,7 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
         TTreeReaderValue<Bool_t> eventGenHToBB(myEventsReader, "eventGenHToBBL");
         TTreeReaderValue<Int_t> ZFJGenHadronFlavour(myEventsReader, "ZFJGenHadronFlavourL");
         TTreeReaderValue<Int_t> HFJGenHadronFlavour(myEventsReader, "HFJGenHadronFlavourL");
-        TTreeReaderValue<Int_t> FatJet_hadronFlavour(myEventsReader, "FatJet_hadronFlavourL");
+        TTreeReaderArray<Int_t> FatJet_hadronFlavour(myEventsReader, "FatJet_hadronFlavourL");
 
         TTreeReaderValue<UInt_t> nHDecayPID(myEventsReader, "nHDecayPIDL");
         TTreeReaderArray<Int_t> HDecayPID(myEventsReader, "HDecayPIDL");
@@ -1002,6 +1008,8 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
             //Increment event count
             evRunOver += 1;
             evCount += 1;
+
+            std::vector<Float_t> Muon_RochCorUnc;
 
             //check if doing an uncertainty of the rochester correction
             if (RochInd > 0){
@@ -1108,15 +1116,15 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                     AK8jetAllCorMassVec.push_back(mass);
                     
                     //Get the JEC uncertainty
-                    if (jecUncArAK8[yearType] == NULL){
-                        std::cout << "jecUncArAK8[" << yearType << "] is NULL\n";
+                    if (jecUncAr[yearType] == NULL){
+                        std::cout << "jecUncAr[" << yearType << "] is NULL\n";
                         break;
                     }
                     //Get the JEC uncertainty
-                    jecUncArAK8[yearType]->setJetPt(pt);
-                    jecUncArAK8[yearType]->setJetEta(eta);
+                    jecUncAr[yearType]->setJetPt(pt);
+                    jecUncAr[yearType]->setJetEta(eta);
                     //get unc
-                    double unc = jecUncArAK8[yearType]->getUncertainty(JECCorUpOrDown);
+                    double unc = jecUncAr[yearType]->getUncertainty(JECCorUpOrDown);
                     double JEC;
                     if (JECCorUpOrDown){
                         JEC = 1. - unc;
@@ -1175,8 +1183,9 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
             for (UInt_t jetInd=0; jetInd<*nJet;jetInd++){
                 bool passesCut = false;
                 float jetPt = jetAllCorPtVec[jetInd];
+                float jetEta = jetAllCorEtaVec[jetInd];
                 if (jetPt >= 30){
-                    float jetEta = jetAllCorEtaVec[jetInd];
+                    
                     if (abs(jetEta) <= 2.5){
                         passesCut = true;
                     }
@@ -1346,6 +1355,8 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                 FatJet_pt_JERDownL.push_back(FatJet_pt[nFatJetItr]);
                 FatJet_phi_JERDownL.push_back(FatJet_phi[nFatJetItr]);
                 FatJet_mass_JERDownL.push_back(FatJet_mass[nFatJetItr]);
+
+                FatJet_hadronFlavourL.push_back(FatJet_hadronFlavour[nFatJetItr]);
                 
 
 
@@ -1406,8 +1417,9 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                 Muon_tightIdL.push_back(Muon_tightId[nMuonItr]);
                 Muon_mediumIdL.push_back(Muon_mediumId[nMuonItr]);
                 Muon_looseIdL.push_back(Muon_looseId[nMuonItr]);
-                Muon_RochMomCorrectionsL.push_back(rochMomCorrections[nMuonItr]);
-                Muon_ptCorrectedL.push_back(Muon_pt[nMuonItr]*rochMomCorrections[nMuonItr]);
+                Muon_RochMomCorrectionsL.push_back(Muon_RochMomCorrections[nMuonItr]);
+                Muon_ptCorrectedL.push_back(Muon_ptCorrected[nMuonItr]);
+                Muon_RochCorUncL.push_back(Muon_RochCorUnc[nMuonItr]);
 
                 Muon_dxyL.push_back(Muon_dxy[nMuonItr]);
                 Muon_dzL.push_back(Muon_dz[nMuonItr]);
@@ -1463,7 +1475,6 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
             eventGenHToBBL = *eventGenHToBB;
             ZFJGenHadronFlavourL = *ZFJGenHadronFlavour;
             HFJGenHadronFlavourL = *HFJGenHadronFlavour;
-            FatJet_hadronFlavourL = *FatJet_hadronFlavour;
 
             nHDecayPIDL = *nHDecayPID;
             for (UInt_t nHDecayPIDItr=0; nHDecayPIDItr<nHDecayPIDL;nHDecayPIDItr++){
@@ -1537,7 +1548,7 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
             FatJet_pt_JERMidL.clear();
             FatJet_phi_JERMidL.clear();
             FatJet_mass_JERMidL.clear();
-             FatJet_eta_JERUpL.clear();
+            FatJet_eta_JERUpL.clear();
             FatJet_pt_JERUpL.clear();
             FatJet_phi_JERUpL.clear();
             FatJet_mass_JERUpL.clear();
@@ -1545,6 +1556,8 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
             FatJet_pt_JERDownL.clear();
             FatJet_phi_JERDownL.clear();
             FatJet_mass_JERDownL.clear();
+
+            FatJet_hadronFlavourL.clear();
 
             GenPart_etaL.clear();
             GenPart_massL.clear();
@@ -1613,6 +1626,7 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
             Muon_genPartIdxL.clear();
             Muon_RochMomCorrectionsL.clear();
             Muon_ptCorrectedL.clear();
+            Muon_RochCorUncL.clear();
 
             FatJet_particleNet_HbbvsQCDL.clear();
             FatJet_particleNet_ZvsQCDL.clear();
@@ -1646,7 +1660,7 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
     //loop through pt, eta, and flavor bins
     for (UInt_t ptInd=0; ptInd<ptBins.size();ptInd++){
         for (UInt_t etaInd=0; etaInd<etaBins.size();etaInd++){
-            for (UInt_t flavInd=0; flavInd<flavBins.size();flavInd++){
+            for (UInt_t flavInd=0; flavInd<flavorBins.size();flavInd++){
                 //get the number of jets in the bin
                 float nJets = nJetsCtrL[ptInd][etaInd][flavInd];
                 //get the number of btags in the bin

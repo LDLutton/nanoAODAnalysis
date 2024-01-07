@@ -80,7 +80,6 @@ void calc012024JERRoch(string datasetString){
     bool isBackground;
 
     if (datasetString == "testRun") testRun = true;
-    if (datasetString == "SDC2V2MCWZHReweight") SDC2V2MCWZHReweight = true;
     if (datasetString == "SDC2V2MCZZHReweightTrimmed") SDC2V2MCZZHReweightTrimmed = true;
     if (datasetString == "SDC2V2MCZZH17ReweightTrimmed") SDC2V2MCZZH17ReweightTrimmed = true;
     if (datasetString == "SDC2V2MCZZH16ReweightTrimmed") SDC2V2MCZZH16ReweightTrimmed = true;
@@ -98,7 +97,7 @@ void calc012024JERRoch(string datasetString){
 
     std::string strAdd;
     if (scratchDown) strAdd ="/afs/crc.nd.edu/user/d/dlutton/Public/condorStuff/NanoAODToHistos/tmpHoldForNanoAODWithoutScratch/";
-    else strAdd ="/scratch365/dlutton/HLTFilteredFiles/dataFiles/";
+    else strAdd ="/scratch365/dlutton/HLTFilteredFiles/";
     if (localTest) strAdd = "";
 
 
@@ -186,12 +185,12 @@ void calc012024JERRoch(string datasetString){
     else if (yearType == 2) yearStr = "Summer20UL16_JRV3_MC";
     else if (yearType == 3) yearStr = "Summer20UL16APV_JRV3_MC";
     std::string filePathStr = "../NanoCORE/Tools/jetcorr/data/"+yearStr+"/"+yearStr;
-    std::string jetres_SF_chsStr = filePathStr+"_SF_AK4PFchs.txt"
-    std::string jetres_PtResolution_chsStr = filePathStr+"_PtResolution_AK4PFchs.txt"
-    std::string jetres_SF_PuppiStr = filePathStr+"_SF_AK8PFPuppi.txt"
-    std::string jetres_PtResolution_PuppiStr = filePathStr+"_PtResolution_AK8PFPuppi.txt"
-    JetResolutionUncertainty jetResUncPuppi(jetres_PtResolution_PuppiStr, jetres_SF_PuppiStr)
-    JetResolutionUncertainty jetResUncCHS(jetres_PtResolution_chsStr, jetres_SF_chsStr)
+    std::string jetres_SF_chsStr = filePathStr+"_SF_AK4PFchs.txt";
+    std::string jetres_PtResolution_chsStr = filePathStr+"_PtResolution_AK4PFchs.txt";
+    std::string jetres_SF_PuppiStr = filePathStr+"_SF_AK8PFPuppi.txt";
+    std::string jetres_PtResolution_PuppiStr = filePathStr+"_PtResolution_AK8PFPuppi.txt";
+    JetResolutionUncertainty jetResUncPuppi(jetres_PtResolution_PuppiStr, jetres_SF_PuppiStr);
+    JetResolutionUncertainty jetResUncCHS(jetres_PtResolution_chsStr, jetres_SF_chsStr);
     
 
 
@@ -846,7 +845,7 @@ void calc012024JERRoch(string datasetString){
         TTreeReaderValue<Bool_t> eventGenHToBB(myEventsReader, "eventGenHToBBL");
         TTreeReaderValue<Int_t> ZFJGenHadronFlavour(myEventsReader, "ZFJGenHadronFlavourL");
         TTreeReaderValue<Int_t> HFJGenHadronFlavour(myEventsReader, "HFJGenHadronFlavourL");
-        TTreeReaderValue<Int_t> FatJet_hadronFlavour(myEventsReader, "FatJet_hadronFlavourL");
+        TTreeReaderArray<Int_t> FatJet_hadronFlavour(myEventsReader, "FatJet_hadronFlavourL");
 
         TTreeReaderValue<UInt_t> nHDecayPID(myEventsReader, "nHDecayPIDL");
         TTreeReaderArray<Int_t> HDecayPID(myEventsReader, "HDecayPIDL");
@@ -938,7 +937,7 @@ void calc012024JERRoch(string datasetString){
                 genJetP4s.push_back(p4);
             }
             //Loop through gen AK8 jets and add each p4 to a vector
-            std::vector<LorentzVector> genAK8JetP4s
+            std::vector<LorentzVector> genAK8JetP4s;
             for (UInt_t nGenJetAK8Itr=0; nGenJetAK8Itr<*nGenJetAK8;nGenJetAK8Itr++){
                 LorentzVector p4(GenJetAK8_pt[nGenJetAK8Itr],GenJetAK8_eta[nGenJetAK8Itr],GenJetAK8_phi[nGenJetAK8Itr],GenJetAK8_mass[nGenJetAK8Itr]);
                 genAK8JetP4s.push_back(p4);
@@ -955,20 +954,20 @@ void calc012024JERRoch(string datasetString){
             //Do mid, up, and down
             for (UInt_t nJetItr=0; nJetItr<*nJet;nJetItr++){
                 LorentzVector p4Mid(Jet_pt[nJetItr],Jet_eta[nJetItr],Jet_phi[nJetItr],Jet_mass[nJetItr]);
-                jetResUncCHS->setJetEta(Jet_eta[nJetItr]);
-                jetResUncCHS->setJetPt(Jet_pt[nJetItr]);
-                jetResUncCHS->setRho(*fixedGridRhoFastjetAll);
-                jetResUncCHS->applyJER(p4Mid,1,genJetP4s,rand) //Alters jetp4, so store in branch. need to do this for up/down also (2 and -2)
+                jetResUncCHS.setJetEta(Jet_eta[nJetItr]);
+                jetResUncCHS.setJetPt(Jet_pt[nJetItr]);
+                jetResUncCHS.setRho(*fixedGridRhoFastjetAll);
+                jetResUncCHS.applyJER(p4Mid,1,genJetP4s,*rand); //Alters jetp4, so store in branch. need to do this for up/down also (2 and -2)
                 LorentzVector p4Up(Jet_pt[nJetItr],Jet_eta[nJetItr],Jet_phi[nJetItr],Jet_mass[nJetItr]);
-                jetResUncCHS->setJetEta(Jet_eta[nJetItr]);
-                jetResUncCHS->setJetPt(Jet_pt[nJetItr]);
-                jetResUncCHS->setRho(*fixedGridRhoFastjetAll);
-                jetResUncCHS->applyJER(p4Up,2,genJetP4s,rand)
+                jetResUncCHS.setJetEta(Jet_eta[nJetItr]);
+                jetResUncCHS.setJetPt(Jet_pt[nJetItr]);
+                jetResUncCHS.setRho(*fixedGridRhoFastjetAll);
+                jetResUncCHS.applyJER(p4Up,2,genJetP4s,*rand);
                 LorentzVector p4Down(Jet_pt[nJetItr],Jet_eta[nJetItr],Jet_phi[nJetItr],Jet_mass[nJetItr]);
-                jetResUncCHS->setJetEta(Jet_eta[nJetItr]);
-                jetResUncCHS->setJetPt(Jet_pt[nJetItr]);
-                jetResUncCHS->setRho(*fixedGridRhoFastjetAll);
-                jetResUncCHS->applyJER(p4Down,-2,genJetP4s,rand)
+                jetResUncCHS.setJetEta(Jet_eta[nJetItr]);
+                jetResUncCHS.setJetPt(Jet_pt[nJetItr]);
+                jetResUncCHS.setRho(*fixedGridRhoFastjetAll);
+                jetResUncCHS.applyJER(p4Down,-2,genJetP4s,*rand);
                 //Store p4s in branch vectors
                 Jet_eta_JERMidL.push_back(p4Mid.Eta());
                 Jet_pt_JERMidL.push_back(p4Mid.Pt());
@@ -987,20 +986,20 @@ void calc012024JERRoch(string datasetString){
             //Do JER corrections for fat jets
             for (UInt_t nFatJetItr=0; nFatJetItr<*nFatJet;nFatJetItr++){
                 LorentzVector p4Mid(FatJet_pt[nFatJetItr],FatJet_eta[nFatJetItr],FatJet_phi[nFatJetItr],FatJet_mass[nFatJetItr]);
-                jetResUncCHS->setJetEta(FatJet_eta[nFatJetItr]);
-                jetResUncCHS->setJetPt(FatJet_pt[nFatJetItr]);
-                jetResUncCHS->setRho(*fixedGridRhoFastjetAll);
-                jetResUncCHS->applyJER(p4Mid,1,genAK8JetP4s,rand) //Alters jetp4, so store in branch. need to do this for up/down also (2 and -2)
+                jetResUncCHS.setJetEta(FatJet_eta[nFatJetItr]);
+                jetResUncCHS.setJetPt(FatJet_pt[nFatJetItr]);
+                jetResUncCHS.setRho(*fixedGridRhoFastjetAll);
+                jetResUncCHS.applyJER(p4Mid,1,genAK8JetP4s,*rand); //Alters jetp4, so store in branch. need to do this for up/down also (2 and -2)
                 LorentzVector p4Up(FatJet_pt[nFatJetItr],FatJet_eta[nFatJetItr],FatJet_phi[nFatJetItr],FatJet_mass[nFatJetItr]);
-                jetResUncCHS->setJetEta(FatJet_eta[nFatJetItr]);
-                jetResUncCHS->setJetPt(FatJet_pt[nFatJetItr]);
-                jetResUncCHS->setRho(*fixedGridRhoFastjetAll);
-                jetResUncCHS->applyJER(p4Up,2,genAK8JetP4s,rand)
+                jetResUncCHS.setJetEta(FatJet_eta[nFatJetItr]);
+                jetResUncCHS.setJetPt(FatJet_pt[nFatJetItr]);
+                jetResUncCHS.setRho(*fixedGridRhoFastjetAll);
+                jetResUncCHS.applyJER(p4Up,2,genAK8JetP4s,*rand);
                 LorentzVector p4Down(FatJet_pt[nFatJetItr],FatJet_eta[nFatJetItr],FatJet_phi[nFatJetItr],FatJet_mass[nFatJetItr]);
-                jetResUncCHS->setJetEta(FatJet_eta[nFatJetItr]);
-                jetResUncCHS->setJetPt(FatJet_pt[nFatJetItr]);
-                jetResUncCHS->setRho(*fixedGridRhoFastjetAll);
-                jetResUncCHS->applyJER(p4Down,-2,genAK8JetP4s,rand)
+                jetResUncCHS.setJetEta(FatJet_eta[nFatJetItr]);
+                jetResUncCHS.setJetPt(FatJet_pt[nFatJetItr]);
+                jetResUncCHS.setRho(*fixedGridRhoFastjetAll);
+                jetResUncCHS.applyJER(p4Down,-2,genAK8JetP4s,*rand);
                 //Store p4s in branch vectors
                 FatJet_eta_JERMidL.push_back(p4Mid.Eta());
                 FatJet_pt_JERMidL.push_back(p4Mid.Pt());
@@ -1123,6 +1122,7 @@ void calc012024JERRoch(string datasetString){
                 FatJet_pt_JERDownL.push_back(FatJet_pt[nFatJetItr]);
                 FatJet_phi_JERDownL.push_back(FatJet_phi[nFatJetItr]);
                 FatJet_mass_JERDownL.push_back(FatJet_mass[nFatJetItr]);
+                FatJet_hadronFlavourL.push_back(FatJet_hadronFlavour[nFatJetItr]);
                 
 
 
@@ -1240,7 +1240,6 @@ void calc012024JERRoch(string datasetString){
             eventGenHToBBL = *eventGenHToBB;
             ZFJGenHadronFlavourL = *ZFJGenHadronFlavour;
             HFJGenHadronFlavourL = *HFJGenHadronFlavour;
-            FatJet_hadronFlavourL = *FatJet_hadronFlavour;
 
             nHDecayPIDL = *nHDecayPID;
             for (UInt_t nHDecayPIDItr=0; nHDecayPIDItr<nHDecayPIDL;nHDecayPIDItr++){
@@ -1322,6 +1321,8 @@ void calc012024JERRoch(string datasetString){
             FatJet_pt_JERDownL.clear();
             FatJet_phi_JERDownL.clear();
             FatJet_mass_JERDownL.clear();
+
+            FatJet_hadronFlavourL.clear();
 
             GenPart_etaL.clear();
             GenPart_massL.clear();

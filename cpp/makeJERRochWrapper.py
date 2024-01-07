@@ -5,7 +5,7 @@
 import sys
 
 
-def create_c_file(string_var, int_var1, int_var2):
+def create_c_file(string_var):
     content = f"""{{
     gROOT->ProcessLine(".L ../NanoCORE/NANO_CORE.so");
     gROOT->ProcessLine(".L calc012024JERRoch.cc+");
