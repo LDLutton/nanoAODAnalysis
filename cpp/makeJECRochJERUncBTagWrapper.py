@@ -18,7 +18,7 @@ def create_c_file(string_var, int_var1,bool_var1, int_var2, int_var3):
         file.write(content)
 
 #Check if correct number of arguments are provided
-if len(sys.argv) != 4:
+if len(sys.argv) != 6:
     print("Usage: python3 makeJECRochJERUncBTagWrapper.py <string> <int1> <bool1> <int2> <int3>")
 else:
     #Extract arguments
