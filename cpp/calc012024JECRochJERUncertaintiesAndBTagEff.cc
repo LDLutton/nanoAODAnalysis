@@ -110,7 +110,8 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
 
     if (SDC2V2MCZZHReweightTrimmed){
         saveName = "SDC2V2MCZZHReweightTrimmed";
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweightTrimmed_WithJERRoch.root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweightTrimmed_WithJERRochHLT.root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweightTrimmed_WithJERRoch.root";
         //std::string tmpStrWithPath = "/afs/crc.nd.edu/user/d/dlutton/Public/condorStuff/NanoAODToHistos/nanoAODAnalysis/cpp/HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweightTrimmed_WithJERRoch.root";
         //std::string tmpStrWithPath = "/scratch365/dlutton/testDirectory/cpp/HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweightTrimmed_WithJERRoch.root";
         fileAr.push_back(tmpStrWithPath);
@@ -118,46 +119,53 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
     else if (SDC2V2MCZZH17ReweightTrimmed){
         saveName = "SDC2V2MCZZH17ReweightTrimmed";
         yearType = 1;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH17ReweightTrimmed_WithJERRoch.root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCZZH17ReweightTrimmed_WithJERRoch.root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH17ReweightTrimmed_WithJERRoch.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SDC2V2MCZZH16ReweightTrimmed){
         saveName = "SDC2V2MCZZH16ReweightTrimmed";
         yearType = 2;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16ReweightTrimmed_WithJERRoch.root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16ReweightTrimmed_WithJERRoch.root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16ReweightTrimmed_WithJERRoch.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SDC2V2MCZZH16APVReweightTrimmed){
         saveName = "SDC2V2MCZZH16APVReweightTrimmed";
         yearType = 3;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16APVReweightTrimmed_WithJERRoch.root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16APVReweightTrimmed_WithJERRoch.root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16APVReweightTrimmed_WithJERRoch.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SDC2V2MCWZHReweightTrimmed){
         saveName = "SDC2V2MCWZHReweightTrimmed";
         datasetType = 25;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCWZHReweightTrimmed_WithJERRoch.root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCWZHReweightTrimmed_WithJERRoch.root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCWZHReweightTrimmed_WithJERRoch.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SDC2V2MCWZH17ReweightTrimmed){
         saveName = "SDC2V2MCWZH17ReweightTrimmed";
         datasetType = 25;
         yearType = 1;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCWZH17ReweightTrimmed_WithJERRoch.root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCWZH17ReweightTrimmed_WithJERRoch.root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCWZH17ReweightTrimmed_WithJERRoch.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SDC2V2MCWZH16ReweightTrimmed){
         saveName = "SDC2V2MCWZH16ReweightTrimmed";
         datasetType = 25;
         yearType = 2;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCWZH16ReweightTrimmed_WithJERRoch.root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCWZH16ReweightTrimmed_WithJERRoch.root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCWZH16ReweightTrimmed_WithJERRoch.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SDC2V2MCWZH16APVReweightTrimmed){
         saveName = "SDC2V2MCWZH16APVReweightTrimmed";
         datasetType = 25;
         yearType = 3;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCWZH16APVReweightTrimmed_WithJERRoch.root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCWZH16APVReweightTrimmed_WithJERRoch.root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCWZH16APVReweightTrimmed_WithJERRoch.root";
         fileAr.push_back(tmpStrWithPath);
     }
 
@@ -175,7 +183,7 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
     //convert int to str
 
 
-    std::string outFileStr = "HLTTrimmedFilteredForAnalysis"+saveName+"_WithJERRoch"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+    std::string outFileStr = "HLTTrimmedFilteredForAnalysis"+saveName+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
     std::cout << "OutFile: " << outFileStr << "\n";
     TFile *outFile = new TFile(outFileStr.c_str(),"RECREATE");
 
@@ -736,10 +744,12 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
     std::vector<std::vector<std::vector<Int_t>>> nJetsPassBtagCtrL;
     //3d vector of btagging efficiencies
     std::vector<std::vector<std::vector<Double_t>>> btagEffL;
+    /*
     TTree *btagEffTree = new TTree("btagEffTree","btagEffTree");
     btagEffTree->Branch("nJetsCtrL",&nJetsCtrL);
     btagEffTree->Branch("nJetsPassBtagCtrL",&nJetsPassBtagCtrL);
     btagEffTree->Branch("btagEffL",&btagEffL);
+    */
     //fill the 3d vectors with 0s
     for (int i=0; i<10; i++){
         std::vector<std::vector<int>> nJetsCtrL2;
@@ -1714,12 +1724,18 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                 //get the number of btags in the bin
                 float nBtags = nJetsPassBtagCtrL[ptInd][etaInd][flavInd];
                 //calculate the efficiency
-                float eff = nBtags/nJets;
+                float eff = 0;
+                if (nJets != 0){
+                    eff = nBtags/nJets;
+                }
+                
                 //store the efficiency
                 btagEffL[ptInd][etaInd][flavInd] = eff;
+                //std::cout << "ptInd: " << ptInd << " etaInd: " << etaInd << " flavInd: " << flavInd << " nJets: " << nJets << " nBtags: " << nBtags << " eff: " << eff << "\n";
             }
         }
     }
+    /*
     //Fill the btagEffTree
     std::cout << "Filling btagEffTree\n";
     btagEffTree->Fill();
@@ -1727,6 +1743,78 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
     btagEffL.clear();
     nJetsCtrL.clear();
     nJetsPassBtagCtrL.clear();
+    */
+    // Open a file for writing
+    std::ofstream btagOutFile("btag_eff_"+saveName+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".py");
+
+    // Check if the file is open
+    if (!btagOutFile.is_open()) {
+        std::cout << "Failed to open the file for writing." << std::endl;
+    }
+
+    // Dimensions of the 3D vector
+    const int dim1 = 10, dim2 = 2, dim3 = 3;
+    btagOutFile << "nJetsCtrAr_" + saveName+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+" = [";
+    
+
+    // Write the 3D vector to the file
+    for (int i = 0; i < dim1; ++i) {
+        btagOutFile << "[";
+        for (int j = 0; j < dim2; ++j) {
+            btagOutFile << "[";
+            for (int k = 0; k < dim3; ++k) {
+                //if (k == 0) btagOutFile << "[";
+                btagOutFile << nJetsCtrL[i][j][k];
+                if (k < dim3 - 1) btagOutFile << ",";
+            }
+            btagOutFile << "]";
+            if (j < dim2 - 1) btagOutFile << ",";
+        }
+        btagOutFile << "]";
+        if (i < dim1 -1) btagOutFile << ",";
+    }
+    btagOutFile << "]\n";
+
+    btagOutFile << "nJetsPassBtagCtrAr_" +saveName+ std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+" = [";
+    for (int i = 0; i < dim1; ++i) {
+        btagOutFile << "[";
+        for (int j = 0; j < dim2; ++j) {
+            btagOutFile << "[";
+            for (int k = 0; k < dim3; ++k) {
+                //if (k == 0) btagOutFile << "[";
+                btagOutFile << nJetsPassBtagCtrL[i][j][k];
+                if (k < dim3 - 1) btagOutFile << ",";
+            }
+            btagOutFile << "]";
+            if (j < dim2 - 1) btagOutFile << ",";
+        }
+        btagOutFile << "]";
+        if (i < dim1 -1) btagOutFile << ",";
+    }
+    btagOutFile << "]\n";
+
+
+    btagOutFile << "btagEffAr_" +saveName+ std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+" = [";
+
+    for (int i = 0; i < dim1; ++i) {
+        btagOutFile << "[";
+        for (int j = 0; j < dim2; ++j) {
+            btagOutFile << "[";
+            for (int k = 0; k < dim3; ++k) {
+                //if (k == 0) btagOutFile << "[";
+                btagOutFile << btagEffL[i][j][k];
+                if (k < dim3 - 1) btagOutFile << ",";
+            }
+            btagOutFile << "]";
+            if (j < dim2 - 1) btagOutFile << ",";
+        }
+        btagOutFile << "]";
+        if (i < dim1 -1) btagOutFile << ",";
+    }
+    btagOutFile << "]";
+
+    // Close the file
+    btagOutFile.close();
 
 
 
@@ -1766,7 +1854,7 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
     evNumTree->Write("",TObject::kOverwrite);
     FilteredEventsTree->Write("",TObject::kOverwrite);
     rochesterCorrHist->Write("",TObject::kOverwrite);
-    btagEffTree->Write("",TObject::kOverwrite);
+    //btagEffTree->Write("",TObject::kOverwrite);
 
     outFile->Close();
     

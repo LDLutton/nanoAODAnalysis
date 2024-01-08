@@ -66,10 +66,6 @@ void new012024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     bool isBackground = false;
 
     if (datasetString == "testRun") testRun = true;
-    if (datasetString == "SDC2V2MCZZHReweight") SDC2V2MCZZHReweight = true;
-    if (datasetString == "SDC2V2MCZZH17Reweight") SDC2V2MCZZH17Reweight = true;
-    if (datasetString == "SDC2V2MCZZH16Reweight") SDC2V2MCZZH16Reweight = true;
-    if (datasetString == "SDC2V2MCZZH16APVReweight") SDC2V2MCZZH16APVReweight = true;
     if (datasetString == "SDC2V2MCZZHReweightTrimmed") SDC2V2MCZZHReweightTrimmed = true;
     if (datasetString == "SDC2V2MCZZH17ReweightTrimmed") SDC2V2MCZZH17ReweightTrimmed = true;
     if (datasetString == "SDC2V2MCZZH16ReweightTrimmed") SDC2V2MCZZH16ReweightTrimmed = true;
@@ -95,47 +91,14 @@ void new012024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     UInt_t yearType = 0;
 
     
-    if (SDC2V2MCZZHReweight){
-        saveName = "SDC2V2MCZZHReweight";
-        //totWeight = ;
-        //XS = ;
-        isBackground = false;
-        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSDC2V2MCZZHReweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
-        fileAr.push_back(tmpStrWithPath);
-    }
-    else if (SDC2V2MCZZH17Reweight){
-        saveName = "SDC2V2MCZZH17Reweight";
-        yearType = 1;
-        //totWeight = ;
-        //XS = ;
-        isBackground = false;
-        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSDC2V2MCZZH17Reweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
-        fileAr.push_back(tmpStrWithPath);
-    }
-    else if (SDC2V2MCZZH16Reweight){
-        saveName = "SDC2V2MCZZH16Reweight";
-        yearType = 2;
-        //totWeight = ;
-        //XS = ;
-        isBackground = false;
-        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSDC2V2MCZZH16Reweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
-        fileAr.push_back(tmpStrWithPath);
-    }
-    else if (SDC2V2MCZZH16APVReweight){
-        saveName = "SDC2V2MCZZH16APVReweight";
-        yearType = 3;
-        //totWeight = ;
-        //XS = ;
-        isBackground = false;
-        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisSDC2V2MCZZH16APVReweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
-        fileAr.push_back(tmpStrWithPath);
-    }
-    else if (SDC2V2MCZZHReweightTrimmed){
+    if (SDC2V2MCZZHReweightTrimmed){
         saveName = "SDC2V2MCZZHReweightTrimmed";
         //totWeight = ;
         //XS = ;
         isBackground = false;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        //std::string tmpStrWithPath = "/afs/crc.nd.edu/user/d/dlutton/Public/condorStuff/NanoAODToHistos/nanoAODAnalysis/cpp/HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweightTrimmed_WithJERRoch_0_0_0_1.root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SDC2V2MCZZH17ReweightTrimmed){
@@ -144,7 +107,8 @@ void new012024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
         //totWeight = ;
         //XS = ;
         isBackground = false;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH17Reweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCZZH17Reweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH17Reweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SDC2V2MCZZH16ReweightTrimmed){
@@ -153,7 +117,8 @@ void new012024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
         //totWeight = ;
         //XS = ;
         isBackground = false;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16Reweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16Reweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16Reweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SDC2V2MCZZH16APVReweightTrimmed){
@@ -162,7 +127,8 @@ void new012024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
         //totWeight = ;
         //XS = ;
         isBackground = false;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16APVReweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16APVReweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16APVReweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (testRun){
@@ -173,10 +139,6 @@ void new012024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
         isBackground = false;
         totWeight = 1;
         
-    }
-    else if (LaraTest){
-        saveName = "LaraTest";
-        fileAr.push_back("/scratch365/dlutton/NanoAODFiles/pp_hwpwmjj_EFT_VBF_chw_09999000_250k.root");
     }
     else{
         std::cout << "ERROR. NO INPUT DATASET NAME GIVEN\n";
@@ -886,6 +848,7 @@ void new012024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     std::vector<Float_t> Jet_mass_SL_L;
     std::vector<Int_t> Jet_jetId_SL_L;
     std::vector<Float_t> Jet_btagDeepFlavB_SL_L;
+    std::vector<Int_t> Jet_hadronFlavour_SL_L;
     Float_t fixedGridRhoFastjetAll_SL_L;
     std::vector<Float_t> Jet_eta_Final_SL_L;
     std::vector<Float_t> Jet_pt_Final_SL_L;
@@ -1016,6 +979,7 @@ void new012024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     passingEvSemiLepTree->Branch("Jet_phi_SL_L",&Jet_phi_SL_L);
     passingEvSemiLepTree->Branch("Jet_mass_SL_L",&Jet_mass_SL_L);
     passingEvSemiLepTree->Branch("Jet_jetId_SL_L",&Jet_jetId_SL_L);
+    passingEvSemiLepTree->Branch("Jet_hadronFlavour_SL_L",&Jet_hadronFlavour_SL_L);
     passingEvSemiLepTree->Branch("Jet_btagDeepFlavB_SL_L",&Jet_btagDeepFlavB_SL_L);
     passingEvSemiLepTree->Branch("fixedGridRhoFastjetAll_SL_L",&fixedGridRhoFastjetAll_SL_L,"fixedGridRhoFastjetAll_SL_L/F");
     passingEvSemiLepTree->Branch("Jet_eta_Final_SL_L",&Jet_eta_Final_SL_L);
@@ -1134,6 +1098,7 @@ void new012024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     //here the inds are for ==0, ==4, ==5
     //initialize here
     //Create branches and tree for btagging efficiencies
+    /*
     std::vector<std::vector<std::vector<Int_t>>> nJetsCtr_SL_L;
     std::vector<std::vector<std::vector<Int_t>>> nJetsPassBtagCtr_SL_L;
     //3d vector of btagging efficiencies
@@ -1171,6 +1136,7 @@ void new012024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     std::vector<double> etaBins = {0,2.5};
     //array for flavor dimensions
     std::vector<int> flavorBins = {0,4,5};
+    */
 
 
     
@@ -1199,8 +1165,8 @@ void new012024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
         TTreeReaderArray<Float_t> Jet_phiL(myEventsReader, "Jet_phiL");
         TTreeReaderArray<Float_t> Jet_massL(myEventsReader, "Jet_massL");
         TTreeReaderArray<Int_t> Jet_jetIdL(myEventsReader, "Jet_jetIdL");
-        TTreeReaderArray<Float_t> Jet_hadronFlavourL(myEventsReader, "Jet_hadronFlavourL");
-        TTreeReaderArray<Float_t> Jet_genJetIdxL(myEventsReader, "Jet_genJetIdxL");
+        TTreeReaderArray<Int_t> Jet_hadronFlavourL(myEventsReader, "Jet_hadronFlavourL");
+        TTreeReaderArray<Int_t> Jet_genJetIdxL(myEventsReader, "Jet_genJetIdxL");
         TTreeReaderValue<Float_t> fixedGridRhoFastjetAllL(myEventsReader, "fixedGridRhoFastjetAllL");
         TTreeReaderArray<Float_t> Jet_eta_FinalL(myEventsReader, "Jet_eta_FinalL");
         TTreeReaderArray<Float_t> Jet_pt_FinalL(myEventsReader, "Jet_pt_FinalL");
@@ -1250,9 +1216,9 @@ void new012024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
         //TTreeReaderArray<Bool_t> Muon_tightIdL(myEventsReader, "Muon_tightIdL");
         TTreeReaderArray<Bool_t> Muon_mediumIdL(myEventsReader, "Muon_mediumIdL");
         TTreeReaderArray<Bool_t> Muon_looseIdL(myEventsReader, "Muon_looseIdL");
-        TTreeReaderArray<Bool_t> Muon_RochMomCorrectionsL(myEventsReader, "Muon_RochMomCorrectionsL");
-        TTreeReaderArray<Bool_t> Muon_ptCorrectedL(myEventsReader, "Muon_ptCorrectedL");
-        TTreeREaderArray<Bool_t> Muon_RochCorUncL(myEventsReader, "Muon_RochCorUncL");
+        TTreeReaderArray<Float_t> Muon_RochMomCorrectionsL(myEventsReader, "Muon_RochMomCorrectionsL");
+        TTreeReaderArray<Float_t> Muon_ptCorrectedL(myEventsReader, "Muon_ptCorrectedL");
+        TTreeReaderArray<Float_t> Muon_RochCorUncL(myEventsReader, "Muon_RochCorUncL");
 
 
         //For LepID
@@ -1324,8 +1290,9 @@ void new012024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
         TTreeReaderValue<UInt_t> nEv(myEvNumReader, "nEv");
         TTreeReaderValue<UInt_t> nEvPass(myEvNumReader, "nEvPass");
 
-        TTreeReader myXSReader("crossSectionTree", tmpfile);
-        TTreeReaderValue<Float_t> crossSectionVar(myXSReader, "crossSectionVar");
+
+        //TTreeReader myXSReader("crossSectionTree", tmpfile);
+        //TTreeReaderValue<Float_t> crossSectionVar(myXSReader, "crossSectionVar");
 
         Int_t tmpPDGId;
 
@@ -1373,12 +1340,13 @@ void new012024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
         //Getting the cross section
         //For background it's precalculated
 
-    
+        /*
         while (myXSReader.Next()){
             crossSectionAvg += *crossSectionVar;
             crossSectionCnt += 1;
             //dataXS = *crossSectionVar;
         }
+        */
 
         while (myEvNumReader.Next()){
             /*
@@ -2988,7 +2956,7 @@ void new012024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
             //B jet veto
             bool passBJetVeto = true;
             float maxPassingBTag = 0;
-            doBJetVeto_WithBDTVariablesc(nJetLen,Jet_pt_FinalL,Jet_eta_FinalL,Jet_phi_FinalL,Jet_btagDeepFlavBL,hFatJet_phi_fromHTag,hFatJet_eta_fromHTag,dRCut,bTagCut,passBJetVeto,maxPassingBTag,debug);
+            doBJetVeto_WithBDTVariables(nJetLen,Jet_pt_FinalL,Jet_eta_FinalL,Jet_phi_FinalL,Jet_btagDeepFlavBL,hFatJet_phi_fromHTag,hFatJet_eta_fromHTag,dRCut,bTagCut,passBJetVeto,maxPassingBTag,debug);
             if (!passBJetVeto) continue;
 
             passVBFJetBVetoCtr += 1;
@@ -4013,26 +3981,57 @@ void new012024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
 
         }
 
-        //Now that events loop has finished, get the btag branches and transfer them to the output tree
-        //std::cout << "Getting btag branches \n";
+        /*
 
-        TTree *btagTree = (TTree*)tmpfile->Get("btagEffTree/ttree");
+        //Now that events loop has finished, get the btag branches and transfer them to the output tree
+        std::cout << "Getting btag branches \n";
+
+        TTree *btagTree = (TTree*)tmpfile->Get("btagEffTree");
         std::vector<std::vector<std::vector<Int_t>>> nJetsCtrL;
         std::vector<std::vector<std::vector<Int_t>>> nJetsPassBtagCtrL;
         std::vector<std::vector<std::vector<Double_t>>> btagEffL;
+        std::cout << "Get nJetsCtrL\n";
         TBranch *nJetsCtrBr = btagTree->GetBranch("nJetsCtrL");
+        std::cout << "set nJetsCtrL address\n";
         nJetsCtrBr->SetAddress(&nJetsCtrL);
+        std::cout << "Get nJetsPassBtagCtrL\n";
         TBranch *nJetsPassBtagCtrBr = btagTree->GetBranch("nJetsPassBtagCtrL");
+        std::cout << "set nJetsPassBtagCtrL address\n";
         nJetsPassBtagCtrBr->SetAddress(&nJetsPassBtagCtrL);
+        std::cout << "Get btagEffL\n";
         TBranch *btagEffBr = btagTree->GetBranch("btagEffL");
+        std::cout << "set btagEffL address\n";
         btagEffBr->SetAddress(&btagEffL);
 
+        std::cout << "Going into loop\n";
+        */
+        /*
+        std::cout << nJetsCtrL.size() << "\n";
+        std::cout << nJetsPassBtagCtrL.size() << "\n";
+        std::cout << btagEffL.size() << "\n";
+        std::cout << nJetsCtrL[0].size() << "\n";
+        std::cout << nJetsPassBtagCtrL[0].size() << "\n";
+        std::cout << btagEffL[0].size() << "\n";
+        std::cout << nJetsCtr_SL_L.size() << "\n";
+        std::cout << nJetsPassBtagCtr_SL_L.size() << "\n";
+        std::cout << btagEff_SL_L.size() << "\n";
+        */
+
+
+
+        /*
         Long64_t nentries = btagTree->GetEntries();
         for (Long64_t i=0;i<nentries;i++) {
             btagTree->GetEntry(i);
+            std::cout << nJetsCtrL.size() << "\n";
+            std::cout << nJetsPassBtagCtrL.size() << "\n";
+            std::cout << btagEffL.size() << "\n";
             for (int ptInd = 0; ptInd < 10; ptInd++){
+                std::cout << "ptInd: " << ptInd << "\n";
                 for (int etaInd = 0; etaInd < 2; etaInd++){
+                    std::cout << "etaInd: " << etaInd << "\n";
                     for (int btagInd = 0; btagInd < 3; btagInd++){
+                        std::cout << "btagInd: " << btagInd << "\n";
                         nJetsCtr_SL_L[ptInd][etaInd][btagInd] = nJetsCtrL[ptInd][etaInd][btagInd];
                         nJetsPassBtagCtr_SL_L[ptInd][etaInd][btagInd] = nJetsPassBtagCtrL[ptInd][etaInd][btagInd];
                         btagEff_SL_L[ptInd][etaInd][btagInd] = btagEffL[ptInd][etaInd][btagInd];
@@ -4050,17 +4049,19 @@ void new012024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
 
         }
 
-    }
-    if (debug) std::cout << "Filling complete \n";
-
     
+    if (debug) std::cout << "Filling complete \n";
+    */
+    }
+
+
 
     clock_t endt = clock();
     double time_spent = (double)(endt - startt) / CLOCKS_PER_SEC;
 
 
     std::cout << "Finished file loop. " << "time: " << time_spent << "\n";
-    crossSection = crossSectionAvg / crossSectionCnt;
+    //crossSection = crossSectionAvg / crossSectionCnt;
         
     std::cout << "XS: " << crossSection << "\n";
     std::cout << "nEv total: " << datanEv << "\n";
@@ -4317,7 +4318,7 @@ void new012024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     outFile->cd();
     passingEvLepTree->Write("",TObject::kOverwrite);
     passingEvSemiLepTree->Write("",TObject::kOverwrite);
-    btagEffTree->Write("",TObject::kOverwrite);
+    //btagEffTree->Write("",TObject::kOverwrite);
 
     outFile->Close();
 

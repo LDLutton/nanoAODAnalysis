@@ -967,7 +967,7 @@ void doBJetVeto(UInt_t nJetLen,TTreeReaderArray<Float_t> &Jet_pt,TTreeReaderArra
     //debug = true;
     //std::cout << "++++++++ "<< VBFJetdRCut << "\n";
     passesCut = true;
-    for (UInt_t jetInd=0; jetInd<nJetLen-1;jetInd++){
+    for (UInt_t jetInd=0; jetInd<nJetLen;jetInd++){
         float jetPt = Jet_pt[jetInd];
         if (jetPt >= 30){
             float jetEta = Jet_eta[jetInd];
@@ -990,7 +990,7 @@ void doBJetVeto_WithBDTVariables(UInt_t nJetLen,TTreeReaderArray<Float_t> &Jet_p
     //debug = true;
     //std::cout << "++++++++ "<< VBFJetdRCut << "\n";
     passesCut = true;
-    for (UInt_t jetInd=0; jetInd<nJetLen-1;jetInd++){
+    for (UInt_t jetInd=0; jetInd<nJetLen;jetInd++){
         float jetPt = Jet_pt[jetInd];
         if (jetPt >= 30){
             float jetEta = Jet_eta[jetInd];
@@ -1014,7 +1014,7 @@ void doBJetVeto_WithBDTVariables_JECUnc(UInt_t nJetLen,std::vector<Float_t> &Jet
     //debug = true;
     //std::cout << "++++++++ "<< VBFJetdRCut << "\n";
     passesCut = true;
-    for (UInt_t jetInd=0; jetInd<nJetLen-1;jetInd++){
+    for (UInt_t jetInd=0; jetInd<nJetLen;jetInd++){
         float jetPt = Jet_pt[jetInd];
         if (jetPt >= 30){
             float jetEta = Jet_eta[jetInd];
