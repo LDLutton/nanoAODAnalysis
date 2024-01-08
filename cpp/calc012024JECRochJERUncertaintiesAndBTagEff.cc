@@ -71,8 +71,8 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
 
     //Will run over all files put into fileAr
 
-    gInterpreter->GenerateDictionary("vector<vector<vector<Double_t> > >", "vector");
-    gInterpreter->GenerateDictionary("vector<vector<vector<Int_t> > >", "vector");
+    //gInterpreter->GenerateDictionary("vector<vector<vector<Double_t> > >", "vector");
+    //gInterpreter->GenerateDictionary("vector<vector<vector<Int_t> > >", "vector");
 
 
     std::vector<std::string> fileAr;

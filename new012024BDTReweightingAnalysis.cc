@@ -55,8 +55,8 @@ void new012024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     clock_t startt = clock();
     //Analyzer will run over all files put into fileAr
 
-    gInterpreter->GenerateDictionary("vector<vector<vector<Double_t> > >", "vector");
-    gInterpreter->GenerateDictionary("vector<vector<vector<Int_t> > >", "vector");
+    //gInterpreter->GenerateDictionary("vector<vector<vector<Double_t> > >", "vector");
+    //gInterpreter->GenerateDictionary("vector<vector<vector<Int_t> > >", "vector");
 
     std::vector<std::string> fileAr;
 
