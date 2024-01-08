@@ -111,7 +111,7 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
     if (SDC2V2MCZZHReweightTrimmed){
         saveName = "SDC2V2MCZZHReweightTrimmed";
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweightTrimmed_WithJERRoch.root";
-        //std::string tmpStrWithPath = "/afs/crc.nd.edu/user/d/dlutton/Public/condorStuff/NanoAODToHistos/nanoAODAnalysis/cpp/HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweightTrimmed_WithJERRoch.root"
+        //std::string tmpStrWithPath = "/afs/crc.nd.edu/user/d/dlutton/Public/condorStuff/NanoAODToHistos/nanoAODAnalysis/cpp/HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweightTrimmed_WithJERRoch.root";
         //std::string tmpStrWithPath = "/scratch365/dlutton/testDirectory/cpp/HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweightTrimmed_WithJERRoch.root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -175,7 +175,7 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
     //convert int to str
 
 
-    std::string outFileStr = "HLTTrimmedFilteredForAnalysis"+saveName+"_WithJERRoch"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(RochInd)+".root";
+    std::string outFileStr = "HLTTrimmedFilteredForAnalysis"+saveName+"_WithJERRoch"+"_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
     std::cout << "OutFile: " << outFileStr << "\n";
     TFile *outFile = new TFile(outFileStr.c_str(),"RECREATE");
 
@@ -376,6 +376,12 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
     std::vector<Float_t> FatJet_pt_JERDownL;
     std::vector<Float_t> FatJet_phi_JERDownL;
     std::vector<Float_t> FatJet_mass_JERDownL;
+    //JetsAllCorrections. Whatever the JECInd, JECCorUpOrDown, and JERInd are set to, the resulting jets will be stored in these vectors
+    std::vector<Float_t> FatJet_eta_FinalL;
+    std::vector<Float_t> FatJet_pt_FinalL;
+    std::vector<Float_t> FatJet_phi_FinalL;
+    std::vector<Float_t> FatJet_mass_FinalL;
+
 
     //Electrons
     UInt_t nElectronL;
@@ -525,6 +531,11 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
     FilteredEventsTree->Branch("Jet_pt_JERDownL",&Jet_pt_JERDownL);
     FilteredEventsTree->Branch("Jet_phi_JERDownL",&Jet_phi_JERDownL);
     FilteredEventsTree->Branch("Jet_mass_JERDownL",&Jet_mass_JERDownL);
+    FilteredEventsTree->Branch("Jet_eta_FinalL",&Jet_eta_FinalL);
+    FilteredEventsTree->Branch("Jet_pt_FinalL",&Jet_pt_FinalL);
+    FilteredEventsTree->Branch("Jet_phi_FinalL",&Jet_phi_FinalL);
+    FilteredEventsTree->Branch("Jet_mass_FinalL",&Jet_mass_FinalL);
+
 
     //GenJets
     FilteredEventsTree->Branch("nGenJetL",&nGenJetL,"nGenJetL/i");
@@ -567,6 +578,10 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
     FilteredEventsTree->Branch("FatJet_pt_JERDownL",&FatJet_pt_JERDownL);
     FilteredEventsTree->Branch("FatJet_phi_JERDownL",&FatJet_phi_JERDownL);
     FilteredEventsTree->Branch("FatJet_mass_JERDownL",&FatJet_mass_JERDownL);
+    FilteredEventsTree->Branch("FatJet_eta_FinalL",&FatJet_eta_FinalL);
+    FilteredEventsTree->Branch("FatJet_pt_FinalL",&FatJet_pt_FinalL);
+    FilteredEventsTree->Branch("FatJet_phi_FinalL",&FatJet_phi_FinalL);
+    FilteredEventsTree->Branch("FatJet_mass_FinalL",&FatJet_mass_FinalL);
 
 
 
@@ -1155,6 +1170,22 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                     }
                     
                 }
+                //Now AK8 jets
+                for (int i = 0; i < *nFatJet; i++){
+                    //transfer the kinematics
+                    if (JERInd == 1){
+                        AK8jetAllCorPtVec.push_back(FatJet_pt_JERUp[i]);
+                        AK8jetAllCorEtaVec.push_back(FatJet_eta_JERUp[i]);
+                        AK8jetAllCorPhiVec.push_back(FatJet_phi_JERUp[i]);
+                        AK8jetAllCorMassVec.push_back(FatJet_mass_JERUp[i]);
+                    }
+                    else {
+                        AK8jetAllCorPtVec.push_back(FatJet_pt_JERDown[i]);
+                        AK8jetAllCorEtaVec.push_back(FatJet_eta_JERDown[i]);
+                        AK8jetAllCorPhiVec.push_back(FatJet_phi_JERDown[i]);
+                        AK8jetAllCorMassVec.push_back(FatJet_mass_JERDown[i]);
+                    }
+                }
 
             }
             else {
@@ -1277,18 +1308,23 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                 Jet_btagDeepFlavBL.push_back(Jet_btagDeepFlavB[nJetItr]);
                 Jet_hadronFlavourL.push_back(Jet_hadronFlavour[nJetItr]);
                 Jet_genJetIdxL.push_back(Jet_genJetIdx[nJetItr]);
-                Jet_eta_JERMidL.push_back(Jet_eta[nJetItr]);
-                Jet_pt_JERMidL.push_back(Jet_pt[nJetItr]);
-                Jet_phi_JERMidL.push_back(Jet_phi[nJetItr]);
-                Jet_mass_JERMidL.push_back(Jet_mass[nJetItr]);
-                Jet_eta_JERUpL.push_back(Jet_eta[nJetItr]);
-                Jet_pt_JERUpL.push_back(Jet_pt[nJetItr]);
-                Jet_phi_JERUpL.push_back(Jet_phi[nJetItr]);
-                Jet_mass_JERUpL.push_back(Jet_mass[nJetItr]);
-                Jet_eta_JERDownL.push_back(Jet_eta[nJetItr]);
-                Jet_pt_JERDownL.push_back(Jet_pt[nJetItr]);
-                Jet_phi_JERDownL.push_back(Jet_phi[nJetItr]);
-                Jet_mass_JERDownL.push_back(Jet_mass[nJetItr]);
+                Jet_eta_JERMidL.push_back(Jet_eta_JERMid[nJetItr]);
+                Jet_pt_JERMidL.push_back(Jet_pt_JERMid[nJetItr]);
+                Jet_phi_JERMidL.push_back(Jet_phi_JERMid[nJetItr]);
+                Jet_mass_JERMidL.push_back(Jet_mass_JERMid[nJetItr]);
+                Jet_eta_JERUpL.push_back(Jet_eta_JERUp[nJetItr]);
+                Jet_pt_JERUpL.push_back(Jet_pt_JERUp[nJetItr]);
+                Jet_phi_JERUpL.push_back(Jet_phi_JERUp[nJetItr]);
+                Jet_mass_JERUpL.push_back(Jet_mass_JERUp[nJetItr]);
+                Jet_eta_JERDownL.push_back(Jet_eta_JERDown[nJetItr]);
+                Jet_pt_JERDownL.push_back(Jet_pt_JERDown[nJetItr]);
+                Jet_phi_JERDownL.push_back(Jet_phi_JERDown[nJetItr]);
+                Jet_mass_JERDownL.push_back(Jet_mass_JERDown[nJetItr]);
+                Jet_eta_FinalL.push_back(jetAllCorEtaVec[nJetItr]);
+                Jet_pt_FinalL.push_back(jetAllCorPtVec[nJetItr]);
+                Jet_phi_FinalL.push_back(jetAllCorPhiVec[nJetItr]);
+                Jet_mass_FinalL.push_back(jetAllCorMassVec[nJetItr]);
+
 
 
             }
@@ -1343,18 +1379,22 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                 FatJet_particleNetMD_XqqL.push_back(FatJet_particleNetMD_Xqq[nFatJetItr]);
                 FatJet_msoftdropL.push_back(FatJet_msoftdrop[nFatJetItr]);
                 FatJet_particleNet_massL.push_back(FatJet_particleNet_mass[nFatJetItr]);
-                FatJet_eta_JERMidL.push_back(FatJet_eta[nFatJetItr]);
-                FatJet_pt_JERMidL.push_back(FatJet_pt[nFatJetItr]);
-                FatJet_phi_JERMidL.push_back(FatJet_phi[nFatJetItr]);
-                FatJet_mass_JERMidL.push_back(FatJet_mass[nFatJetItr]);
-                FatJet_eta_JERUpL.push_back(FatJet_eta[nFatJetItr]);
-                FatJet_pt_JERUpL.push_back(FatJet_pt[nFatJetItr]);
-                FatJet_phi_JERUpL.push_back(FatJet_phi[nFatJetItr]);
-                FatJet_mass_JERUpL.push_back(FatJet_mass[nFatJetItr]);
-                FatJet_eta_JERDownL.push_back(FatJet_eta[nFatJetItr]);
-                FatJet_pt_JERDownL.push_back(FatJet_pt[nFatJetItr]);
-                FatJet_phi_JERDownL.push_back(FatJet_phi[nFatJetItr]);
-                FatJet_mass_JERDownL.push_back(FatJet_mass[nFatJetItr]);
+                FatJet_eta_JERMidL.push_back(FatJet_pt_JERMid[nFatJetItr]);
+                FatJet_pt_JERMidL.push_back(FatJet_pt_JERMid[nFatJetItr]);
+                FatJet_phi_JERMidL.push_back(FatJet_phi_JERMid[nFatJetItr]);
+                FatJet_mass_JERMidL.push_back(FatJet_mass_JERMid[nFatJetItr]);
+                FatJet_eta_JERUpL.push_back(FatJet_eta_JERUp[nFatJetItr]);
+                FatJet_pt_JERUpL.push_back(FatJet_pt_JERUp[nFatJetItr]);
+                FatJet_phi_JERUpL.push_back(FatJet_phi_JERUp[nFatJetItr]);
+                FatJet_mass_JERUpL.push_back(FatJet_mass_JERUp[nFatJetItr]);
+                FatJet_eta_JERDownL.push_back(FatJet_eta_JERDown[nFatJetItr]);
+                FatJet_pt_JERDownL.push_back(FatJet_pt_JERDown[nFatJetItr]);
+                FatJet_phi_JERDownL.push_back(FatJet_phi_JERDown[nFatJetItr]);
+                FatJet_mass_JERDownL.push_back(FatJet_mass_JERDown[nFatJetItr]);
+                FatJet_eta_FinalL.push_back(AK8jetAllCorEtaVec[nFatJetItr]);
+                FatJet_pt_FinalL.push_back(AK8jetAllCorPtVec[nFatJetItr]);
+                FatJet_phi_FinalL.push_back(AK8jetAllCorPhiVec[nFatJetItr]);
+                FatJet_mass_FinalL.push_back(AK8jetAllCorMassVec[nFatJetItr]);
 
                 FatJet_hadronFlavourL.push_back(FatJet_hadronFlavour[nFatJetItr]);
                 
@@ -1513,7 +1553,7 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
             Jet_pt_JERMidL.clear();
             Jet_phi_JERMidL.clear();
             Jet_mass_JERMidL.clear();
-             Jet_eta_JERUpL.clear();
+            Jet_eta_JERUpL.clear();
             Jet_pt_JERUpL.clear();
             Jet_phi_JERUpL.clear();
             Jet_mass_JERUpL.clear();
@@ -1521,6 +1561,10 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
             Jet_pt_JERDownL.clear();
             Jet_phi_JERDownL.clear();
             Jet_mass_JERDownL.clear();
+            Jet_eta_FinalL.clear();
+            Jet_pt_FinalL.clear();
+            Jet_phi_FinalL.clear();
+            Jet_mass_FinalL.clear();
 
             GenJet_etaL.clear();
             GenJet_ptL.clear();
@@ -1556,6 +1600,10 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
             FatJet_pt_JERDownL.clear();
             FatJet_phi_JERDownL.clear();
             FatJet_mass_JERDownL.clear();
+            FatJet_eta_FinalL.clear();
+            FatJet_pt_FinalL.clear();
+            FatJet_phi_FinalL.clear();
+            FatJet_mass_FinalL.clear();
 
             FatJet_hadronFlavourL.clear();
 
@@ -1718,6 +1766,7 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
     evNumTree->Write("",TObject::kOverwrite);
     FilteredEventsTree->Write("",TObject::kOverwrite);
     rochesterCorrHist->Write("",TObject::kOverwrite);
+    btagEffTree->Write("",TObject::kOverwrite);
 
     outFile->Close();
     
