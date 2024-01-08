@@ -110,7 +110,7 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
 
     if (SDC2V2MCZZHReweightTrimmed){
         saveName = "SDC2V2MCZZHReweightTrimmed";
-        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweightTrimmed_WithJERRochHLT.root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweightTrimmed_WithJERRoch.root";
         //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweightTrimmed_WithJERRoch.root";
         //std::string tmpStrWithPath = "/afs/crc.nd.edu/user/d/dlutton/Public/condorStuff/NanoAODToHistos/nanoAODAnalysis/cpp/HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweightTrimmed_WithJERRoch.root";
         //std::string tmpStrWithPath = "/scratch365/dlutton/testDirectory/cpp/HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweightTrimmed_WithJERRoch.root";
