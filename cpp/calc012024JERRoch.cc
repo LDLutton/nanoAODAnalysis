@@ -1044,18 +1044,6 @@ void calc012024JERRoch(string datasetString){
                 Jet_btagDeepFlavBL.push_back(Jet_btagDeepFlavB[nJetItr]);
                 Jet_hadronFlavourL.push_back(Jet_hadronFlavour[nJetItr]);
                 Jet_genJetIdxL.push_back(Jet_genJetIdx[nJetItr]);
-                Jet_eta_JERMidL.push_back(Jet_eta[nJetItr]);
-                Jet_pt_JERMidL.push_back(Jet_pt[nJetItr]);
-                Jet_phi_JERMidL.push_back(Jet_phi[nJetItr]);
-                Jet_mass_JERMidL.push_back(Jet_mass[nJetItr]);
-                Jet_eta_JERUpL.push_back(Jet_eta[nJetItr]);
-                Jet_pt_JERUpL.push_back(Jet_pt[nJetItr]);
-                Jet_phi_JERUpL.push_back(Jet_phi[nJetItr]);
-                Jet_mass_JERUpL.push_back(Jet_mass[nJetItr]);
-                Jet_eta_JERDownL.push_back(Jet_eta[nJetItr]);
-                Jet_pt_JERDownL.push_back(Jet_pt[nJetItr]);
-                Jet_phi_JERDownL.push_back(Jet_phi[nJetItr]);
-                Jet_mass_JERDownL.push_back(Jet_mass[nJetItr]);
 
 
             }
@@ -1110,18 +1098,6 @@ void calc012024JERRoch(string datasetString){
                 FatJet_particleNetMD_XqqL.push_back(FatJet_particleNetMD_Xqq[nFatJetItr]);
                 FatJet_msoftdropL.push_back(FatJet_msoftdrop[nFatJetItr]);
                 FatJet_particleNet_massL.push_back(FatJet_particleNet_mass[nFatJetItr]);
-                FatJet_eta_JERMidL.push_back(FatJet_eta[nFatJetItr]);
-                FatJet_pt_JERMidL.push_back(FatJet_pt[nFatJetItr]);
-                FatJet_phi_JERMidL.push_back(FatJet_phi[nFatJetItr]);
-                FatJet_mass_JERMidL.push_back(FatJet_mass[nFatJetItr]);
-                FatJet_eta_JERUpL.push_back(FatJet_eta[nFatJetItr]);
-                FatJet_pt_JERUpL.push_back(FatJet_pt[nFatJetItr]);
-                FatJet_phi_JERUpL.push_back(FatJet_phi[nFatJetItr]);
-                FatJet_mass_JERUpL.push_back(FatJet_mass[nFatJetItr]);
-                FatJet_eta_JERDownL.push_back(FatJet_eta[nFatJetItr]);
-                FatJet_pt_JERDownL.push_back(FatJet_pt[nFatJetItr]);
-                FatJet_phi_JERDownL.push_back(FatJet_phi[nFatJetItr]);
-                FatJet_mass_JERDownL.push_back(FatJet_mass[nFatJetItr]);
                 FatJet_hadronFlavourL.push_back(FatJet_hadronFlavour[nFatJetItr]);
                 
 
