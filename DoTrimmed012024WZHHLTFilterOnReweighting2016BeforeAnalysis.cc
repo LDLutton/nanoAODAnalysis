@@ -2124,6 +2124,7 @@ void DoTrimmed012024WZHHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd, 
                 FatJet_particleNetMD_XccL.push_back(FatJet_particleNetMD_Xcc[nFatJetItr]);
                 FatJet_particleNetMD_XqqL.push_back(FatJet_particleNetMD_Xqq[nFatJetItr]);
                 FatJet_msoftdropL.push_back(FatJet_msoftdrop[nFatJetItr]);
+                FatJet_hadronFlavourL.push_back(FatJet_hadronFlavour[nFatJetItr]);
                 FatJet_particleNet_massL.push_back(FatJet_particleNet_mass[nFatJetItr]);
             }
 
