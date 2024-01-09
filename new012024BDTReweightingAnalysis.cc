@@ -97,7 +97,7 @@ void new012024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
         //XS = ;
         isBackground = false;
         //std::string tmpStrWithPath = "/afs/crc.nd.edu/user/d/dlutton/Public/condorStuff/NanoAODToHistos/nanoAODAnalysis/cpp/HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweightTrimmed_WithJERRoch_0_0_0_1.root";
-        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweightTrimmed_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -107,7 +107,7 @@ void new012024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
         //totWeight = ;
         //XS = ;
         isBackground = false;
-        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCZZH17Reweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCZZH17ReweightTrimmed_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH17Reweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -117,7 +117,7 @@ void new012024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
         //totWeight = ;
         //XS = ;
         isBackground = false;
-        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16Reweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16ReweightTrimmed_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16Reweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
@@ -127,7 +127,7 @@ void new012024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
         //totWeight = ;
         //XS = ;
         isBackground = false;
-        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16APVReweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16APVReweightTrimmed_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16APVReweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
