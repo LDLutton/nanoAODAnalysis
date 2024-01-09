@@ -181,7 +181,7 @@ void calc012024JERRoch(string datasetString){
 
     std::string yearStr;
     if (yearType == 0) yearStr = "Summer19UL18_JRV2_MC";
-    else if (yearType == 1) yearStr = "Summer19UL17_JRV2_MC";
+    else if (yearType == 1) yearStr = "Summer19UL17_JRV3_MC";
     else if (yearType == 2) yearStr = "Summer20UL16_JRV3_MC";
     else if (yearType == 3) yearStr = "Summer20UL16APV_JRV3_MC";
     std::string filePathStr = "../NanoCORE/Tools/jetcorr/data/"+yearStr+"/"+yearStr;
