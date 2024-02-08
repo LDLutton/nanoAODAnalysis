@@ -201,9 +201,9 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
 
     //instead of having a loop for each text file, just make that many separate instances of the class
     //Array for holding different correction types
-    std::string corrType2018Ar[11] = {"FlavorQCD","RelativeBal","HF","BBEC1","EC2","Absolute","Absolute_2018","HF_2018","EC2_2018","RelativeSample_2018","BBEC1_2018"};
-    std::string corrType2017Ar[11] = {"FlavorQCD","RelativeBal","HF","BBEC1","EC2","Absolute","Absolute_2017","HF_2017","EC2_2017","RelativeSample_2017","BBEC1_2017"};
-    std::string corrType2016Ar[11] = {"FlavorQCD","RelativeBal","HF","BBEC1","EC2","Absolute","Absolute_2016","HF_2016","EC2_2016","RelativeSample_2016","BBEC1_2016"};
+    std::string corrType2018Ar[12] = {"NOTRUN","FlavorQCD","RelativeBal","HF","BBEC1","EC2","Absolute","Absolute_2018","HF_2018","EC2_2018","RelativeSample_2018","BBEC1_2018"};
+    std::string corrType2017Ar[12] = {"NOTRUN","FlavorQCD","RelativeBal","HF","BBEC1","EC2","Absolute","Absolute_2017","HF_2017","EC2_2017","RelativeSample_2017","BBEC1_2017"};
+    std::string corrType2016Ar[12] = {"NOTRUN","FlavorQCD","RelativeBal","HF","BBEC1","EC2","Absolute","Absolute_2016","HF_2016","EC2_2016","RelativeSample_2016","BBEC1_2016"};
 
 
 
@@ -1039,22 +1039,48 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
             //check if doing an uncertainty of the rochester correction
             if (RochInd > 0){
 
+                
+
                 //Loop through muons and calculate rochester correction uncertainty
                 for (int i = 0; i < *nMuon; i++){
+                    int genPartIdx = Muon_genPartIdx[i];
                     double mcSFUnc;
                     double mcSFErr;
                     int charge = Muon_charge[i];
                     float pt = Muon_pt[i];
                     float eta = Muon_eta[i];
                     float phi = Muon_phi[i];
+                    float u = gRandom->Rndm();
                     //Create vector in case that error set is Stat
                     std::vector<Float_t> rochMomCorrectionsStat;
                     if (RochInd != 1){
-                        mcSFUnc = rc.kScaleDT(charge, pt, eta, phi, RochInd, 0);
+                        //Get gRandom for function
+                        
+                        //Check if muon has a genmatch
+                        if (genPartIdx == -1) {
+                            //no gen match, use kSmearMC with random u
+                            mcSFUnc = rc.kSmearMC(charge, pt, eta, phi, nl, u, RochInd, 0);
+                        }
+                        else{
+                            float genPt = GenPart_pt[genPartIdx];
+                            //Get rochester correction with kSpreadMC
+                            mcSFUnc = rc.kSpreadMC(charge, pt, eta, phi, genPt, RochInd, 0);
+                        }
+                        //mcSFUnc = rc.kScaleDT(charge, pt, eta, phi, RochInd, 0);
                     }
                     else{ //loop through all 100 error members and store them in a vector
                         for (int j = 0; j < 100; j++){
-                            mcSFErr = rc.kScaleDT(charge, pt, eta, phi, RochInd, j);
+                            //Check if muon has a genmatch
+                            if (genPartIdx == -1) {
+                                //no gen match, use kSmearMC with random u
+                                mcSFErr = rc.kSmearMC(charge, pt, eta, phi, nl, u, RochInd, j);
+                            }
+                            else{
+                                float genPt = GenPart_pt[genPartIdx];
+                                //Get rochester correction with kSpreadMC
+                                mcSFErr = rc.kSpreadMC(charge, pt, eta, phi, genPt, RochInd, j);
+                            }
+                            //mcSFErr = rc.kScaleDT(charge, pt, eta, phi, RochInd, j);
                             rochMomCorrectionsStat.push_back(mcSFErr);
                         }
                         //Get the mean and standard deviation of the vector

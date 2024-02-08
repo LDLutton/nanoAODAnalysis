@@ -896,12 +896,26 @@ void calc012024JERRoch(string datasetString){
             //Loop through muons and calculate default rochester correction
             for (int i = 0; i < *nMuon; i++){
                 muCount += 1;
+                int genPartIdx = Muon_genPartIdx[i];
                 double mcSF;
                 int charge = Muon_charge[i];
                 float pt = Muon_pt[i];
                 float eta = Muon_eta[i];
                 float phi = Muon_phi[i];
-                mcSF = rc.kScaleDT(charge, pt, eta, phi, 0, 0);
+                int nl = Muon_nTrackerLayers[i];
+
+                //Get gRandom for function
+                float u = gRandom->Rndm();
+                //Check if muon has a genmatch
+                if (genPartIdx == -1) {
+                    //no gen match, use kSmearMC with random u
+                    mcSF = rc.kSmearMC(charge, pt, eta, phi, nl, u, 0, 0);
+                }
+                else{
+                    float genPt = GenPart_pt[genPartIdx];
+                    //Get rochester correction with kSpreadMC
+                    mcSF = rc.kSpreadMC(charge, pt, eta, phi, genPt, 0, 0);
+                }
                 //Fill histogram
                 rochesterCorrHist->Fill(mcSF);
                 //check if outside hist range
