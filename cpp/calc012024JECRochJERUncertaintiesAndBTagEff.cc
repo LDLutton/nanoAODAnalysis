@@ -1051,6 +1051,7 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                     float eta = Muon_eta[i];
                     float phi = Muon_phi[i];
                     float u = gRandom->Rndm();
+                    int nl = Muon_nTrackerLayers[i];
                     //Create vector in case that error set is Stat
                     std::vector<Float_t> rochMomCorrectionsStat;
                     if (RochInd != 1){
