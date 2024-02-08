@@ -201,9 +201,9 @@ void calc012024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
 
     //instead of having a loop for each text file, just make that many separate instances of the class
     //Array for holding different correction types
-    std::string corrType2018Ar[12] = {"NOTRUN","FlavorQCD","RelativeBal","HF","BBEC1","EC2","Absolute","Absolute_2018","HF_2018","EC2_2018","RelativeSample_2018","BBEC1_2018"};
-    std::string corrType2017Ar[12] = {"NOTRUN","FlavorQCD","RelativeBal","HF","BBEC1","EC2","Absolute","Absolute_2017","HF_2017","EC2_2017","RelativeSample_2017","BBEC1_2017"};
-    std::string corrType2016Ar[12] = {"NOTRUN","FlavorQCD","RelativeBal","HF","BBEC1","EC2","Absolute","Absolute_2016","HF_2016","EC2_2016","RelativeSample_2016","BBEC1_2016"};
+    std::string corrType2018Ar[12] = {"FlavorQCD","FlavorQCD","RelativeBal","HF","BBEC1","EC2","Absolute","Absolute_2018","HF_2018","EC2_2018","RelativeSample_2018","BBEC1_2018"};
+    std::string corrType2017Ar[12] = {"FlavorQCD","FlavorQCD","RelativeBal","HF","BBEC1","EC2","Absolute","Absolute_2017","HF_2017","EC2_2017","RelativeSample_2017","BBEC1_2017"};
+    std::string corrType2016Ar[12] = {"FlavorQCD","FlavorQCD","RelativeBal","HF","BBEC1","EC2","Absolute","Absolute_2016","HF_2016","EC2_2016","RelativeSample_2016","BBEC1_2016"};
 
 
 
