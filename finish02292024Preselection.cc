@@ -655,6 +655,13 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
     UInt_t evCount = 0;
     UInt_t evRunOver = 0;
 
+    UInt_t evPassesLep = 0;
+    UInt_t evPassesAK8Jet = 0;
+    UInt_t evPassesAK4Jet = 0;
+    UInt_t evTooFewTightLeps = 0;
+    UInt_t evTooManyTightLeps = 0;
+    UInt_t evTooManyVetoLeps = 0;
+
     std::cout << "Going into file loop.\n";
 
     for (UInt_t k=0; k<fileAr.size(); k++){
@@ -988,9 +995,12 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
                     tightLepTwoIsMuon = true;
                 }
             }
-            
+            if (nTightElec + nTightMuon < 2) evTooFewTightLeps += 1;
+            if (nTightElec + nTightMuon > 2) evTooManyTightLeps += 1;
+            if (nVetoElec + nVetoMuon > 2) evTooManyVetoLeps += 1;
             if (nTightElec + nTightMuon != 2) continue;
             if (nVetoElec + nVetoMuon != 2) continue;
+            evPassesLep += 1;
             //get eta, phi, pt, and mass of tight leptons
             float tightLepOneEta;
             float tightLepOnePhi;
@@ -1053,6 +1063,7 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
             if (debug){
                 std::cout <<"Passed nFJs\n";
             }
+            evPassesAK8Jet += 1;
             // check if two or more VBF jets in event
             UInt_t tmpnVBFJets = *nJet;
             
@@ -1106,6 +1117,7 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
 
             }
             if (!passnVBFJets) continue;
+            evPassesVBFJet += 1;
             tmpVBFJetPtOne = Jet_pt_Final[VBFJetOneInd];
             tmpVBFJetPtTwo = Jet_pt_Final[VBFJetTwoInd];
             tmpVBFJetEtaOne = Jet_eta_Final[VBFJetOneInd];
@@ -1618,11 +1630,21 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
     double time_spent = (double)(endt - startt) / CLOCKS_PER_SEC;
 
 
+
     std::cout << "Finished file loop. " << "time: " << time_spent << "\n";
     //crossSection = crossSectionAvg / crossSectionCnt;
     
     std::cout << "nEv total: " << datanEv << "\n";
-    std::cout << "nEv post pre-selection: " << datanEvPass << "\n"; 
+    std::cout << "nEv post HLT: " << datanEvPass << "\n"; 
+    std::cout << "nEv run over: " << evRunOver << "\n";
+    std::cout << "nEv pass lep: " << evPassesLep << "\n";
+    std::cout << "Too few tight leptons: " << evTooFewTightLeps << "\n";
+    std::cout << "Too many tight leptons: " << evTooManyTightLeps << "\n";
+    std::cout << "Too many veto leptons: " << evTooManyVetoLeps << "\n";
+    std::cout << "nEv pass AK8: " << evPassesAK8Jet << "\n";
+    std::cout << "nEv pass VBF: " << evPassesAK4Jet << "\n";
+
+    
     
 
     outFile->cd();
