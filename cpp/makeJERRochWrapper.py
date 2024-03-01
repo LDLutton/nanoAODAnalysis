@@ -5,12 +5,12 @@
 import sys
 
 
-def create_c_file(string_var):
+def create_c_file(string_var,tmpStr):
     content = f"""{{
     gROOT->ProcessLine(".L ../NanoCORE/NANO_CORE.so");
-    gROOT->ProcessLine(".L calc012024JERRoch.cc+");
+    gROOT->ProcessLine(".L calc{tmpStr}2024JERRoch.cc+");
 
-    calc012024JERRoch({string_var});
+    calc{tmpStr}2024JERRoch({string_var});
     std::cout << "all done\\n";
 }}
 """
@@ -19,11 +19,17 @@ def create_c_file(string_var):
         file.write(content)
 
 #Check if correct number of arguments are provided
-if len(sys.argv) != 2:
-    print("Usage: python3 makeJERRochWrapper.py <string>")
+if len(sys.argv) != 2 and len(sys.argv) != 3:
+    print("Usage: python3 makeJERRochWrapper.py <string> or <string> <string>")
 else:
     #Extract arguments
-    _, string_var = sys.argv
+    tmpStr = ""
+    if len(sys.argv) == 2:
+        _, string_var = sys.argv
+        tmpStr = "01"
+    elif len(sys.argv) == 3:
+        _, string_var, string_var2 = sys.argv
+        tmpStr = string_var2
 
     #Create the .C file
-    create_c_file(string_var)
+    create_c_file(string_var,tmpStr)

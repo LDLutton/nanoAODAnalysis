@@ -4,12 +4,12 @@
 #basically I'm a genius (idiot)
 import sys
 
-def create_c_file(string_var, int_var1,bool_var1, int_var2, int_var3):
+def create_c_file(string_var, int_var1,bool_var1, int_var2, int_var3,tmpStr):
     content = f"""{{
     gROOT->ProcessLine(".L ../NanoCORE/NANO_CORE.so");
-    gROOT->ProcessLine(".L calc012024JECRochJERUncertaintiesAndBTagEff.cc+");
+    gROOT->ProcessLine(".L calc{tmpStr}2024JECRochJERUncertaintiesAndBTagEff.cc+");
 
-    calc012024JECRochJERUncertaintiesAndBTagEff({string_var}, {int_var1},{bool_var1},{int_var2},{int_var3});
+    calc{tmpStr}2024JECRochJERUncertaintiesAndBTagEff({string_var}, {int_var1},{bool_var1},{int_var2},{int_var3});
     std::cout << "all done\\n";
 }}
 """
@@ -18,11 +18,17 @@ def create_c_file(string_var, int_var1,bool_var1, int_var2, int_var3):
         file.write(content)
 
 #Check if correct number of arguments are provided
-if len(sys.argv) != 6:
-    print("Usage: python3 makeJECRochJERUncBTagWrapper.py <string> <int1> <bool1> <int2> <int3>")
+if len(sys.argv) != 6 and len(sys.argv) != 7:
+    print("Usage: python3 makeJECRochJERUncBTagWrapper.py <string> <int1> <bool1> <int2> <int3> or <string> <int1> <bool1> <int2> <int3> <string>")
 else:
     #Extract arguments
-    _, string_var, int_var1, bool_var1, int_var2, int_var3 = sys.argv
+    tmpStr = ""
+    if len(sys.argv) == 6:
+        _, string_var, int_var1, bool_var1, int_var2, int_var3 = sys.argv
+        tmpStr = "02"
+    elif len(sys.argv) == 7:
+        _, string_var, int_var1, bool_var1, int_var2, int_var3,string_varTwo = sys.argv
+        tmpStr = string_varTwo
 
     #Convert string arguments for integers to actual integers
     try:
@@ -43,4 +49,4 @@ else:
     
 
     #Create the .C file
-    create_c_file(string_var, int_var1, bool_var1, int_var2, int_var3)
+    create_c_file(string_var, int_var1, bool_var1, int_var2, int_var3,tmpStr)
