@@ -896,12 +896,15 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
             getVetoAndTightElectrons(nElectron,Electron_mvaFall17V2noIso_WPL,Electron_pt,Electron_eta,
             Electron_dxy,Electron_dz,Electron_sip3d,Electron_miniPFRelIso_all,
             Electron_hoe,Electron_eInvMinusPInv,Electron_convVeto,Electron_lostHits,
-            Electron_jetIdx,Jet_btagDeepFlavB,Electron_mvaTTH,nVetoElec,nTightElec,tightLepOneInd,tightLepTwoInd,oneTightLepFound,debug)
+            Electron_jetIdx,Jet_btagDeepFlavB,Electron_mvaTTH,nVetoElec,nTightElec,tightLepOneInd,tightLepTwoInd,oneTightLepFound,
+            elecPtVetoCut,elecEtaVetoCut,elecDxyVetoCut,elecDzVetoCut,elecSIP3DVetoCut,elecMiniPFRelIsoCut,elecLostHitsVetoCut,elecPtTightCut,
+            elecHoeTightCut,elecInvMinusPInvTightCut,elecLostHitsTightCut,elecJetDeepTagMediumCut,elecPromptMVACut,debug)
 
             getVetoAndTightMuons(nMuon,Muon_looseId,Muon_mediumId,Muon_pt,Muon_eta,Muon_dxy,Muon_dz,
             Muon_sip3d,Muon_miniPFRelIso_all,Muon_jetIdx,Jet_btagDeepFlavB,
             Muon_mvaTTH,nVetoMuon,nTightMuon,tightLepOneInd,tightLepTwoInd,
-            oneTightLepFound,debug)
+            oneTightLepFound,muonPtVetoCut,muonEtaVetoCut,muonDxyVetoCut,muonDzVetoCut,muonSIP3DVetoCut,
+            muonPtTightCut,muonJetDeepTagMediumCut,muonPromptMVACut,debug)
             
             if (nTightElec + nTightMuon != 2) continue;
             if (nVetoElec + nVetoMuon != 2) continue;

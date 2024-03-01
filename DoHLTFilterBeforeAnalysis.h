@@ -255,9 +255,9 @@ float elecDxyVetoCut = 0.05;
 float elecDzVetoCut = 0.1;
 float elecSIP3DVetoCut = 8;
 float elecMiniPFRelIsoCut = 0.4;
-float elecLostHitsVetoCut = 1;
+int elecLostHitsVetoCut = 1;
 //elec tight
-float elecPtTightCut = 10;
+float elecPtTightCut = 10.;
 float elecHoeTightCut = 0.1;
 float elecInvMinusPInvTightCut = -0.04;
 float elecLostHitsTightCut = 0;
@@ -288,8 +288,8 @@ float muonPromptMVACut = 0.85;
 
 
 
-void getVetoAndTightElectrons(TTreeReaderArray<Int_t> &nLep,TTreeReaderArray<Bool_t> &Lep_IdL,TTreeReaderArray<Float_t> &Lep_pt,TTreeReaderArray<Float_t> &Lep_eta,TTreeReaderArray<Float_t> &Lep_Dxy,TTreeReaderArray<Float_t> &Lep_Dz,TTreeReaderArray<Float_t> &Lep_sip3d,TTreeReaderArray<Float_t> &Lep_MiniPFRelIso,TTreeReaderArray<Float_t> &Electron_hoe,TTreeReaderArray<Float_t> &Electron_eInvMinusPInv,TTreeReaderArray<Bool_t> &Electron_convVeto,TTreeReaderArray<UChar_t> &Electron_lostHits,TTreeReaderArray<Int_t> &Lep_jetIdx,TTreeReaderArray<Float_t> &Jet_btagDeepFlavB,TTreeReaderArray<Float_t> &Lep_mvaTTH, int &nVetoLep, int &nTightLep, int &tightLepOneInd, int &tightLepTwoInd,bool &oneTightLepFound, bool debug){
-    for (UInt_t lItr=0; lItr < nlLep; lItr++){
+void getVetoAndTightElectrons(TTreeReaderArray<Int_t> &nLep,TTreeReaderArray<Bool_t> &Lep_IdL,TTreeReaderArray<Float_t> &Lep_pt,TTreeReaderArray<Float_t> &Lep_eta,TTreeReaderArray<Float_t> &Lep_Dxy,TTreeReaderArray<Float_t> &Lep_Dz,TTreeReaderArray<Float_t> &Lep_sip3d,TTreeReaderArray<Float_t> &Lep_MiniPFRelIso,TTreeReaderArray<Float_t> &Electron_hoe,TTreeReaderArray<Float_t> &Electron_eInvMinusPInv,TTreeReaderArray<Bool_t> &Electron_convVeto,TTreeReaderArray<UChar_t> &Electron_lostHits,TTreeReaderArray<Int_t> &Lep_jetIdx,TTreeReaderArray<Float_t> &Jet_btagDeepFlavB,TTreeReaderArray<Float_t> &Lep_mvaTTH, int &nVetoLep, int &nTightLep, int &tightLepOneInd, int &tightLepTwoInd,bool &oneTightLepFound, float lPtVetoCut,float lEtaVetoCut,float lDxyVetoCut,float lDzVetoCut,float lSIP3DVetoCut,float lMiniPFRelIsoCut,int eLostHitsVetoCut,float lPtTightCut,float eHoeTightCut,float eInvMinusPInvTightCut,int eLostHitsTightCut,float lepJetDeepTagMediumCut,float lPromptMVACut, bool debug){
+    for (UInt_t lItr=0; lItr < nLep; lItr++){
         if (debug) std::cout << "lItr " << lItr<< "Lep_IdL[lItr]" << Lep_IdL[lItr] << "\n";
         if (!Lep_IdL[lItr]){ //EGamma POG MVA LOOSE ID
             continue;
@@ -338,8 +338,7 @@ void getVetoAndTightElectrons(TTreeReaderArray<Int_t> &nLep,TTreeReaderArray<Boo
                                                         else {
                                                             tmpJetbTag = Jet_btagDeepFlavB[tmpJetId];
                                                         }
-                                                        tmpJetbTagCut = lepJetDeepTagMediumCut;
-                                                        if (tmpJetbTag < tmpJetbTagCut){
+                                                        if (tmpJetbTag < lepJetDeepTagMediumCut){
                                                             float tmpLepMVA = Lep_mvaTTH[lItr];
                                                             if (tmpLepMVA > lPromptMVACut) {
                                                                 if (debug) std::cout << "passed Lep ttH MVA cut\n";
@@ -369,9 +368,9 @@ void getVetoAndTightElectrons(TTreeReaderArray<Int_t> &nLep,TTreeReaderArray<Boo
 }
 
 
-void getVetoAndTightMuons(TTreeReaderArray<Int_t> &nLep,TTreeReaderArray<Bool_t> &Lep_LooseIdL,TTreeReaderArray<Bool_t> &Lep_MediumIdL,TTreeReaderArray<Float_t> &Lep_pt,TTreeReaderArray<Float_t> &Lep_eta,TTreeReaderArray<Float_t> &Lep_Dxy,TTreeReaderArray<Float_t> &Lep_Dz,TTreeReaderArray<Float_t> &Lep_sip3d,TTreeReaderArray<Float_t> &Lep_MiniPFRelIso,TTreeReaderArray<Int_t> &Lep_jetIdx,TTreeReaderArray<Float_t> &Jet_btagDeepFlavB,TTreeReaderArray<Float_t> &Lep_mvaTTH, int &nVetoLep, int &nTightLep, int &tightLepOneInd, int &tightLepTwoInd, bool &oneTightLepFound,bool debug){
+void getVetoAndTightMuons(TTreeReaderArray<Int_t> &nLep,TTreeReaderArray<Bool_t> &Lep_LooseIdL,TTreeReaderArray<Bool_t> &Lep_MediumIdL,TTreeReaderArray<Float_t> &Lep_pt,TTreeReaderArray<Float_t> &Lep_eta,TTreeReaderArray<Float_t> &Lep_Dxy,TTreeReaderArray<Float_t> &Lep_Dz,TTreeReaderArray<Float_t> &Lep_sip3d,TTreeReaderArray<Float_t> &Lep_MiniPFRelIso,TTreeReaderArray<Int_t> &Lep_jetIdx,TTreeReaderArray<Float_t> &Jet_btagDeepFlavB,TTreeReaderArray<Float_t> &Lep_mvaTTH, int &nVetoLep, int &nTightLep, int &tightLepOneInd, int &tightLepTwoInd, bool &oneTightLepFound, float lPtVetoCut,float lEtaVetoCut,float lDxyVetoCut,float lDzVetoCut,float lSIP3DVetoCut,float lPtTightCut,float lepJetDeepTagMediumCut,float lPromptMVACut,bool debug){
     
-    for (UInt_t lItr=0; lItr < nlLep; lItr++){
+    for (UInt_t lItr=0; lItr < nLep; lItr++){
         float tmpPt = Lep_pt[lItr];
         if (debug) std::cout << "lItr " << lItr << " tmpPt " << tmpPt << "\n";
         if (tmpPt > lPtVetoCut){
