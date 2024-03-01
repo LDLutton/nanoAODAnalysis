@@ -1597,8 +1597,8 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
     
 
     outFile->cd();
-    passingEvLepTree->Write("",TObject::kOverwrite);
-    passingEvSemiLepTree->Write("",TObject::kOverwrite);
+    evNumTree->Write("",TObject::kOverwrite);
+    FilteredEventsTree->Write("",TObject::kOverwrite);
     //btagEffTree->Write("",TObject::kOverwrite);
 
     outFile->Close();
