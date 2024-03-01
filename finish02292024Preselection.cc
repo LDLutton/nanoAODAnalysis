@@ -1117,7 +1117,7 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
 
             }
             if (!passnVBFJets) continue;
-            evPassesVBFJet += 1;
+            evPassesAK4Jet += 1;
             tmpVBFJetPtOne = Jet_pt_Final[VBFJetOneInd];
             tmpVBFJetPtTwo = Jet_pt_Final[VBFJetTwoInd];
             tmpVBFJetEtaOne = Jet_eta_Final[VBFJetOneInd];
