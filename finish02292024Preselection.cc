@@ -738,6 +738,8 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
         TTreeReaderArray<Float_t> FatJet_pt_Final(myEventsReader, "FatJet_pt_FinalL");
         TTreeReaderArray<Float_t> FatJet_phi_Final(myEventsReader, "FatJet_phi_FinalL");
         TTreeReaderArray<Float_t> FatJet_mass_Final(myEventsReader, "FatJet_mass_FinalL");
+        TTreeReaderArray<Float_t> FatJet_deepTag_H(myEventsReader, "FatJet_deepTag_HL");
+        TTreeReaderArray<Float_t> FatJet_deepTag_ZvsQCD(myEventsReader, "FatJet_deepTag_ZvsQCDL");
 
         TTreeReaderArray<Float_t> FatJet_particleNet_mass(myEventsReader, "FatJet_particleNet_massL");
         //Jets with JER applied
@@ -766,7 +768,12 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
         TTreeReaderArray<Float_t> Electron_dr03HcalDepth1TowerSumEt(myEventsReader, "Electron_dr03HcalDepth1TowerSumEtL");
         TTreeReaderArray<Float_t> Electron_pfRelIso03_all(myEventsReader, "Electron_pfRelIso03_allL");
         TTreeReaderArray<Float_t> Electron_sip3d(myEventsReader, "Electron_sip3dL");
-        //TTreeReaderArray<Bool_t> Electron_mvaFall17V2Iso_WP80(myEventsReader, "Electron_mvaFall17V2Iso_WP80L");
+        TTreeReaderArray<Int_t> Electron_cutBased(myEventsReader, "Electron_cutBasedL");
+        TTreeReaderArray<Bool_t> Electron_mvaFall17V2Iso_WP80(myEventsReader, "Electron_mvaFall17V2Iso_WP80L");
+        TTreeReaderArray<Bool_t> Electron_mvaFall17V2Iso_WP90(myEventsReader, "Electron_mvaFall17V2Iso_WP90L");
+        TTreeReaderArray<Bool_t> Electron_mvaFall17V2Iso_WPL(myEventsReader, "Electron_mvaFall17V2Iso_WPLL");
+        TTreeReaderArray<Bool_t> Electron_mvaFall17V2noIso_WP80(myEventsReader, "Electron_mvaFall17V2noIso_WP80L");
+        TTreeReaderArray<Bool_t> Electron_mvaFall17V2noIso_WP90(myEventsReader, "Electron_mvaFall17V2noIso_WP90L");
         TTreeReaderArray<Bool_t> Electron_mvaFall17V2noIso_WPL(myEventsReader, "Electron_mvaFall17V2noIso_WPLL");
 
         //Muons
@@ -778,11 +785,14 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
         TTreeReaderArray<Float_t> Muon_pt(myEventsReader, "Muon_ptL");
         TTreeReaderArray<Float_t> Muon_pfRelIso03_all(myEventsReader, "Muon_pfRelIso03_allL");
         TTreeReaderArray<Float_t> Muon_sip3d(myEventsReader, "Muon_sip3dL");
+        TTreeReaderArray<Bool_t> Muon_tightId(myEventsReader, "Muon_tightIdL");
         TTreeReaderArray<Bool_t> Muon_mediumId(myEventsReader, "Muon_mediumIdL");
         TTreeReaderArray<Bool_t> Muon_looseId(myEventsReader, "Muon_looseIdL");
         TTreeReaderArray<Float_t> Muon_RochMomCorrections(myEventsReader, "Muon_RochMomCorrectionsL");
         TTreeReaderArray<Float_t> Muon_ptCorrected(myEventsReader, "Muon_ptCorrectedL");
         TTreeReaderArray<Float_t> Muon_RochCorUnc(myEventsReader, "Muon_RochCorUncL");
+        TTreeReaderArray<Int_t> Muon_nTrackerLayers(myEventsReader, "Muon_nTrackerLayersL");
+        TTreeReaderArray<Int_t> Muon_genPartIdx(myEventsReader, "Muon_genPartIdxL");
 
 
         //For LepID
@@ -815,6 +825,18 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
         TTreeReaderArray<Float_t> FatJet_particleNetMD_Xbb(myEventsReader, "FatJet_particleNetMD_XbbL");
         TTreeReaderArray<Float_t> FatJet_particleNetMD_Xcc(myEventsReader, "FatJet_particleNetMD_XccL");
         TTreeReaderArray<Float_t> FatJet_particleNetMD_Xqq(myEventsReader, "FatJet_particleNetMD_XqqL");
+
+
+        //Gen Particles
+        TTreeReaderValue<UInt_t> nGenPart(myEventsReader, "nGenPartL");
+        TTreeReaderArray<Float_t> GenPart_eta(myEventsReader, "GenPart_etaL");
+        TTreeReaderArray<Float_t> GenPart_mass(myEventsReader, "GenPart_massL");
+        TTreeReaderArray<Float_t> GenPart_phi(myEventsReader, "GenPart_phiL");
+        TTreeReaderArray<Float_t> GenPart_pt(myEventsReader, "GenPart_ptL");
+        TTreeReaderArray<Int_t> GenPart_genPartIdxMother(myEventsReader, "GenPart_genPartIdxMotherL");
+        TTreeReaderArray<Int_t> GenPart_pdgId(myEventsReader, "GenPart_pdgIdL");
+        TTreeReaderArray<Int_t> GenPart_status(myEventsReader, "GenPart_statusL");
+        TTreeReaderArray<Int_t> GenPart_statusFlags(myEventsReader, "GenPart_statusFlagsL");
 
         //genChannelL
         TTreeReaderValue<UInt_t> genChannel(myEventsReader, "genChannelL");
