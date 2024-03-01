@@ -976,7 +976,7 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
                 }
             }
 
-            getVetoAndTightMuons(nMuon,Muon_looseId,Muon_mediumId,Muon_pt,Muon_eta,Muon_dxy,Muon_dz,
+            getVetoAndTightMuons(nMuon,Muon_looseId,Muon_mediumId,Muon_ptCorrected,Muon_eta,Muon_dxy,Muon_dz,
             Muon_sip3d,Muon_miniPFRelIso_all,Muon_jetIdx,Jet_btagDeepFlavB,
             Muon_mvaTTH,nVetoMuon,nTightMuon,tightLepOneInd,tightLepTwoInd,
             oneTightLepFound,muonPtVetoCut,muonEtaVetoCut,muonDxyVetoCut,muonDzVetoCut,muonSIP3DVetoCut,
@@ -991,7 +991,7 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
             
             if (nTightElec + nTightMuon != 2) continue;
             if (nVetoElec + nVetoMuon != 2) continue;
-            //get eta and phi of tight leptons
+            //get eta, phi, pt, and mass of tight leptons
             float tightLepOneEta;
             float tightLepOnePhi;
             float tightLepTwoEta;
@@ -1003,18 +1003,26 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
             if (tightLepOneIsElec){
                 tightLepOneEta = Electron_eta[tightLepOneInd];
                 tightLepOnePhi = Electron_phi[tightLepOneInd];
+                tightLepOnePt = Electron_pt[tightLepOneInd];
+                tightLepOneMass = Electron_mass[tightLepOneInd];
             }
             else {
                 tightLepOneEta = Muon_eta[tightLepOneInd];
                 tightLepOnePhi = Muon_phi[tightLepOneInd];
+                tightLepOnePt = Muon_ptCorrected[tightLepOneInd];
+                tightLepOneMass = Muon_mass[tightLepOneInd];
             }
             if (tightLepTwoIsElec){
                 tightLepTwoEta = Electron_eta[tightLepTwoInd];
                 tightLepTwoPhi = Electron_phi[tightLepTwoInd];
+                tightLepTwoPt = Electron_pt[tightLepTwoInd];
+                tightLepTwoMass = Electron_mass[tightLepTwoInd];
             }
             else {
                 tightLepTwoEta = Muon_eta[tightLepTwoInd];
                 tightLepTwoPhi = Muon_phi[tightLepTwoInd];
+                tightLepTwoPt = Muon_ptCorrected[tightLepTwoInd];
+                tightLepTwoMass = Muon_mass[tightLepTwoInd];
             }
 
             //Do AK8 Preselection
@@ -1085,6 +1093,7 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
                         VBFJetAbsDEta = tmpAbsDEta;
                         VBFJetOneInd = jetInd;
                         VBFJetTwoInd = jetIndTwo;
+                        
                     }
                     
                 }
@@ -1092,8 +1101,19 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
                 std::cout <<"Passed VBFJets\n";
             }
 
+            
+
+
             }
             if (!passnVBFJets) continue;
+            tmpVBFJetPtOne = Jet_pt_Final[VBFJetOneInd];
+            tmpVBFJetPtTwo = Jet_pt_Final[VBFJetTwoInd];
+            tmpVBFJetEtaOne = Jet_eta_Final[VBFJetOneInd];
+            tmpVBFJetEtaTwo = Jet_eta_Final[VBFJetTwoInd];
+            tmpVBFJetPhiOne = Jet_phi_Final[VBFJetOneInd];
+            tmpVBFJetPhiTwo = Jet_phi_Final[VBFJetTwoInd];
+            tmpVBFJetMassOne = Jet_mass_Final[VBFJetOneInd];
+            tmpVBFJetMassTwo = Jet_mass_Final[VBFJetTwoInd];
             
             //Fill in all branches of TTree
 
