@@ -61,8 +61,11 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
 
 
     std::string saveName;
-    float crossSection;
     bool isBackground = false;
+    bool SDC2V2MCZZHReweightTrimmed = false;
+    bool SDC2V2MCZZH17ReweightTrimmed = false;
+    bool SDC2V2MCZZH16ReweightTrimmed = false;
+    bool SDC2V2MCZZH16APVReweightTrimmed = false;
 
     if (datasetString == "testRun") testRun = true;
     if (datasetString == "SDC2V2MCZZHReweightTrimmed") SDC2V2MCZZHReweightTrimmed = true;
@@ -80,7 +83,6 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
     std::string strAdd;
     if (scratchDown) strAdd ="/afs/crc.nd.edu/user/d/dlutton/Public/condorStuff/NanoAODToHistos/tmpHoldForNanoAODWithoutScratch/";
     else strAdd ="/scratch365/dlutton/HLTFilteredFiles/";
-    if (localTest) strAdd = "";
 
     float totWeight = 1;
     //precalculate this
@@ -627,13 +629,13 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
     FilteredEventsTree->Branch("tightLepLeadMassL",&tightLepLeadMassL,"tightLepLeadMassL/F");
     FilteredEventsTree->Branch("tightLepTrailingMassL",&tightLepTrailingMassL,"tightLepTrailingMassL/F");
     
-    L/L/AK8 Jet variables
+    //AK8 Jet variables
     FilteredEventsTree->Branch("AK8TopPNIndL",&AK8TopPNIndL,"AK8TopPNIndL/I");
     FilteredEventsTree->Branch("AK8TopPNPtL",&AK8TopPNPtL,"AK8TopPNPtL/F");
     FilteredEventsTree->Branch("AK8TopPNEtaL",&AK8TopPNEtaL,"AK8TopPNEtaL/F");
     FilteredEventsTree->Branch("AK8TopPNPhiL",&AK8TopPNPhiL,"AK8TopPNPhiL/F");
     FilteredEventsTree->Branch("AK8TopPNMassL",&AK8TopPNMassL,"AK8TopPNMassL/F");
-    L/L/AK4 Jet variables
+    //AK4 Jet variables
     FilteredEventsTree->Branch("AK4TopDEtaLeadIndL",&AK4TopDEtaLeadIndL,"AK4TopDEtaLeadIndL/I");
     FilteredEventsTree->Branch("AK4TopDEtaTrailingIndL",&AK4TopDEtaTrailingIndL,"AK4TopDEtaTrailingIndL/I");
     FilteredEventsTree->Branch("AK4TopDEtaLeadPtL",&AK4TopDEtaLeadPtL,"AK4TopDEtaLeadPtL/F");
@@ -648,7 +650,10 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
 
     
 
-    
+    UInt_t datanEv = 0;
+    UInt_t datanEvPass = 0;
+    UInt_t evCount = 0;
+    UInt_t evRunOver = 0;
 
     std::cout << "Going into file loop.\n";
 
@@ -802,8 +807,8 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
 
 
         TTreeReader myEvNumReader("evNumTree", tmpfile);
-        TTreeReaderValue<UInt_t> nEv(myEvNumReader, "nEv");
-        TTreeReaderValue<UInt_t> nEvPass(myEvNumReader, "nEvPass");
+        TTreeReaderValue<UInt_t> nEvHLT(myEvNumReader, "nEv");
+        TTreeReaderValue<UInt_t> nEvPassHLT(myEvNumReader, "nEvPass");
 
         Int_t tmpPDGId;
 
@@ -1519,8 +1524,7 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
 
     std::cout << "Finished file loop. " << "time: " << time_spent << "\n";
     //crossSection = crossSectionAvg / crossSectionCnt;
-        
-    std::cout << "XS: " << crossSection << "\n";
+    
     std::cout << "nEv total: " << datanEv << "\n";
     std::cout << "nEv post pre-selection: " << datanEvPass << "\n"; 
     
