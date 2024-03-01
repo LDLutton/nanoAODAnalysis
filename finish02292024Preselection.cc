@@ -686,10 +686,6 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
         TTreeReaderArray<Float_t> Jet_pt_Final(myEventsReader, "Jet_pt_FinalL");
         TTreeReaderArray<Float_t> Jet_phi_Final(myEventsReader, "Jet_phi_FinalL");
         TTreeReaderArray<Float_t> Jet_mass_Final(myEventsReader, "Jet_mass_FinalL");
-        TTreeReaderArray<Float_t> jetAllCorEtaVec(myEventsReader, "jetAllCorEtaVecL");
-        TTreeReaderArray<Float_t> jetAllCorPtVec(myEventsReader, "jetAllCorPtVecL");
-        TTreeReaderArray<Float_t> jetAllCorPhiVec(myEventsReader, "jetAllCorPhiVecL");
-        TTreeReaderArray<Float_t> jetAllCorMassVec(myEventsReader, "jetAllCorMassVecL");
 
 
         //Jets with JER applied
