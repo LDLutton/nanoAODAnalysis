@@ -969,12 +969,25 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
             Electron_jetIdx,Jet_btagDeepFlavB,Electron_mvaTTH,nVetoElec,nTightElec,tightLepOneInd,tightLepTwoInd,oneTightLepFound,
             elecPtVetoCut,elecEtaVetoCut,elecDxyVetoCut,elecDzVetoCut,elecSIP3DVetoCut,elecMiniPFRelIsoCut,elecLostHitsVetoCut,elecPtTightCut,
             elecHoeTightCut,elecInvMinusPInvTightCut,elecLostHitsTightCut,elecJetDeepTagMediumCut,elecPromptMVACut,debug);
+            if (nTightElec > 0){
+                tightLepOneIsElec = true;
+                if (nTightElec > 1){
+                    tightLepTwoIsElec = true;
+                }
+            }
 
             getVetoAndTightMuons(nMuon,Muon_looseId,Muon_mediumId,Muon_pt,Muon_eta,Muon_dxy,Muon_dz,
             Muon_sip3d,Muon_miniPFRelIso_all,Muon_jetIdx,Jet_btagDeepFlavB,
             Muon_mvaTTH,nVetoMuon,nTightMuon,tightLepOneInd,tightLepTwoInd,
             oneTightLepFound,muonPtVetoCut,muonEtaVetoCut,muonDxyVetoCut,muonDzVetoCut,muonSIP3DVetoCut,
             muonPtTightCut,muonJetDeepTagMediumCut,muonPromptMVACut,debug);
+            if (nTightMuon > 0){
+                if (tightLepOneIsElec) tightLepTwoIsMuon = true;
+                else tightLepOneIsMuon = true;
+                if (nTightMuon > 1){
+                    tightLepTwoIsMuon = true;
+                }
+            }
             
             if (nTightElec + nTightMuon != 2) continue;
             if (nVetoElec + nVetoMuon != 2) continue;
