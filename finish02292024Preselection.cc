@@ -853,10 +853,6 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
         float ZPairPlusHInvMass;
         float ZPairPlusHPt;
 
-        while (myEvNumReader.Next()){
-            datanEv += *nEv;
-            datanEvPass += *nEvPass;
-        }
         
         if (k % 10 == 0){
             double tmpTime = (double)(clock()-startt)/CLOCKS_PER_SEC;
@@ -903,13 +899,13 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
             Electron_hoe,Electron_eInvMinusPInv,Electron_convVeto,Electron_lostHits,
             Electron_jetIdx,Jet_btagDeepFlavB,Electron_mvaTTH,nVetoElec,nTightElec,tightLepOneInd,tightLepTwoInd,oneTightLepFound,
             elecPtVetoCut,elecEtaVetoCut,elecDxyVetoCut,elecDzVetoCut,elecSIP3DVetoCut,elecMiniPFRelIsoCut,elecLostHitsVetoCut,elecPtTightCut,
-            elecHoeTightCut,elecInvMinusPInvTightCut,elecLostHitsTightCut,elecJetDeepTagMediumCut,elecPromptMVACut,debug)
+            elecHoeTightCut,elecInvMinusPInvTightCut,elecLostHitsTightCut,elecJetDeepTagMediumCut,elecPromptMVACut,debug);
 
             getVetoAndTightMuons(nMuon,Muon_looseId,Muon_mediumId,Muon_pt,Muon_eta,Muon_dxy,Muon_dz,
             Muon_sip3d,Muon_miniPFRelIso_all,Muon_jetIdx,Jet_btagDeepFlavB,
             Muon_mvaTTH,nVetoMuon,nTightMuon,tightLepOneInd,tightLepTwoInd,
             oneTightLepFound,muonPtVetoCut,muonEtaVetoCut,muonDxyVetoCut,muonDzVetoCut,muonSIP3DVetoCut,
-            muonPtTightCut,muonJetDeepTagMediumCut,muonPromptMVACut,debug)
+            muonPtTightCut,muonJetDeepTagMediumCut,muonPromptMVACut,debug);
             
             if (nTightElec + nTightMuon != 2) continue;
             if (nVetoElec + nVetoMuon != 2) continue;
@@ -941,11 +937,11 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
 
             //Do AK8 Preselection
             
-            passingJetExists = false;
-            topPNScore = 0;
-            topPNScoreInd = -1;
+            bool passingJetExists = false;
+            float topPNScore = 0;
+            int topPNScoreInd = -1;
             //Loop over fatjets and do preselection cuts
-            for (UInt_t fatJetInd=0;fatJetInd<tmpnFatJets;fatJetInd++){
+            for (UInt_t fatJetInd=0;fatJetInd<*nFatJet;fatJetInd++){
                 float tmpFJPt = FatJet_pt_Final[fatJetInd];
                 float tmpFJEta = FatJet_eta_Final[fatJetInd];
                 float tmpFJPhi = FatJet_phi_Final[fatJetInd];
@@ -967,7 +963,6 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
             if (debug){
                 std::cout <<"Passed nFJs\n";
             }
-            passnFJCtr += 1;
             // check if two or more VBF jets in event
             UInt_t tmpnVBFJets = *nJet;
             
@@ -997,7 +992,7 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
                     if (tmpVBFJetPtTwo < AK4PtCut) continue;
                     
                     tmpVBFJetEtaTwo = Jet_eta_Final[jetIndTwo];
-                    tmpAbsDEta = abs(tmpVBFJetEtaOne - tmpVBFJetEtaTwo);
+                    float tmpAbsDEta = abs(tmpVBFJetEtaOne - tmpVBFJetEtaTwo);
                     if (tmpAbsDEta < AK4AbsDEtaCut) continue;
                     
                     tmpVBFJetPhiTwo = Jet_phi_Final[jetIndTwo];
@@ -1015,7 +1010,6 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
                 std::cout <<"Passed VBFJets\n";
             }
 
-            passnVBFCtr += 1;
             }
             if (!passnVBFJets) continue;
             
