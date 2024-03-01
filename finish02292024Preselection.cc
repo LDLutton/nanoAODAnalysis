@@ -686,6 +686,44 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
         TTreeReaderArray<Float_t> Jet_pt_Final(myEventsReader, "Jet_pt_FinalL");
         TTreeReaderArray<Float_t> Jet_phi_Final(myEventsReader, "Jet_phi_FinalL");
         TTreeReaderArray<Float_t> Jet_mass_Final(myEventsReader, "Jet_mass_FinalL");
+        TTreeReaderArray<Float_t> jetAllCorEtaVec(myEventsReader, "jetAllCorEtaVecL");
+        TTreeReaderArray<Float_t> jetAllCorPtVec(myEventsReader, "jetAllCorPtVecL");
+        TTreeReaderArray<Float_t> jetAllCorPhiVec(myEventsReader, "jetAllCorPhiVecL");
+        TTreeReaderArray<Float_t> jetAllCorMassVec(myEventsReader, "jetAllCorMassVecL");
+
+
+        //Jets with JER applied
+        TTreeReaderArray<Float_t> Jet_eta_JERMid(myEventsReader, "Jet_eta_JERMidL");
+        TTreeReaderArray<Float_t> Jet_pt_JERMid(myEventsReader, "Jet_pt_JERMidL");
+        TTreeReaderArray<Float_t> Jet_phi_JERMid(myEventsReader, "Jet_phi_JERMidL");
+        TTreeReaderArray<Float_t> Jet_mass_JERMid(myEventsReader, "Jet_mass_JERMidL");
+        TTreeReaderArray<Float_t> Jet_eta_JERUp(myEventsReader, "Jet_eta_JERUpL");
+        TTreeReaderArray<Float_t> Jet_pt_JERUp(myEventsReader, "Jet_pt_JERUpL");
+        TTreeReaderArray<Float_t> Jet_phi_JERUp(myEventsReader, "Jet_phi_JERUpL");
+        TTreeReaderArray<Float_t> Jet_mass_JERUp(myEventsReader, "Jet_mass_JERUpL");
+        TTreeReaderArray<Float_t> Jet_eta_JERDown(myEventsReader, "Jet_eta_JERDownL");
+        TTreeReaderArray<Float_t> Jet_pt_JERDown(myEventsReader, "Jet_pt_JERDownL");
+        TTreeReaderArray<Float_t> Jet_phi_JERDown(myEventsReader, "Jet_phi_JERDownL");
+        TTreeReaderArray<Float_t> Jet_mass_JERDown(myEventsReader, "Jet_mass_JERDownL");
+
+        //GenJets
+
+        TTreeReaderValue<UInt_t> nGenJet(myEventsReader, "nGenJetL");
+        TTreeReaderArray<Float_t> GenJet_eta(myEventsReader, "GenJet_etaL");
+        TTreeReaderArray<Float_t> GenJet_pt(myEventsReader, "GenJet_ptL");
+        TTreeReaderArray<Float_t> GenJet_phi(myEventsReader, "GenJet_phiL");
+        TTreeReaderArray<Float_t> GenJet_mass(myEventsReader, "GenJet_massL");
+        TTreeReaderArray<UChar_t> GenJet_hadronFlavour(myEventsReader, "GenJet_hadronFlavourL");
+
+        //GenJetAK8
+        TTreeReaderValue<UInt_t> nGenJetAK8(myEventsReader, "nGenJetAK8L");
+        TTreeReaderArray<Float_t> GenJetAK8_eta(myEventsReader, "GenJetAK8_etaL");
+        TTreeReaderArray<Float_t> GenJetAK8_pt(myEventsReader, "GenJetAK8_ptL");
+        TTreeReaderArray<Float_t> GenJetAK8_phi(myEventsReader, "GenJetAK8_phiL");
+        TTreeReaderArray<Float_t> GenJetAK8_mass(myEventsReader, "GenJetAK8_massL");
+        TTreeReaderArray<UChar_t> GenJetAK8_hadronFlavour(myEventsReader, "GenJetAK8_hadronFlavourL");
+
+
 
         //Fat jets
 
@@ -702,6 +740,19 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
         TTreeReaderArray<Float_t> FatJet_mass_Final(myEventsReader, "FatJet_mass_FinalL");
 
         TTreeReaderArray<Float_t> FatJet_particleNet_mass(myEventsReader, "FatJet_particleNet_massL");
+        //Jets with JER applied
+        TTreeReaderArray<Float_t> FatJet_eta_JERMid(myEventsReader, "FatJet_eta_JERMidL");
+        TTreeReaderArray<Float_t> FatJet_pt_JERMid(myEventsReader, "FatJet_pt_JERMidL");
+        TTreeReaderArray<Float_t> FatJet_phi_JERMid(myEventsReader, "FatJet_phi_JERMidL");
+        TTreeReaderArray<Float_t> FatJet_mass_JERMid(myEventsReader, "FatJet_mass_JERMidL");
+        TTreeReaderArray<Float_t> FatJet_eta_JERUp(myEventsReader, "FatJet_eta_JERUpL");
+        TTreeReaderArray<Float_t> FatJet_pt_JERUp(myEventsReader, "FatJet_pt_JERUpL");
+        TTreeReaderArray<Float_t> FatJet_phi_JERUp(myEventsReader, "FatJet_phi_JERUpL");
+        TTreeReaderArray<Float_t> FatJet_mass_JERUp(myEventsReader, "FatJet_mass_JERUpL");
+        TTreeReaderArray<Float_t> FatJet_eta_JERDown(myEventsReader, "FatJet_eta_JERDownL");
+        TTreeReaderArray<Float_t> FatJet_pt_JERDown(myEventsReader, "FatJet_pt_JERDownL");
+        TTreeReaderArray<Float_t> FatJet_phi_JERDown(myEventsReader, "FatJet_phi_JERDownL");
+        TTreeReaderArray<Float_t> FatJet_mass_JERDown(myEventsReader, "FatJet_mass_JERDownL");
 
         //Electrons
         TTreeReaderValue<UInt_t> nElectron(myEventsReader, "nElectronL");
@@ -1053,10 +1104,10 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
                 Jet_pt_JERDownL.push_back(Jet_pt_JERDown[nJetItr]);
                 Jet_phi_JERDownL.push_back(Jet_phi_JERDown[nJetItr]);
                 Jet_mass_JERDownL.push_back(Jet_mass_JERDown[nJetItr]);
-                Jet_eta_FinalL.push_back(jetAllCorEtaVec[nJetItr]);
-                Jet_pt_FinalL.push_back(jetAllCorPtVec[nJetItr]);
-                Jet_phi_FinalL.push_back(jetAllCorPhiVec[nJetItr]);
-                Jet_mass_FinalL.push_back(jetAllCorMassVec[nJetItr]);
+                Jet_eta_FinalL.push_back(Jet_eta_Final[nJetItr]);
+                Jet_pt_FinalL.push_back(Jet_pt_Final[nJetItr]);
+                Jet_phi_FinalL.push_back(Jet_phi_Final[nJetItr]);
+                Jet_mass_FinalL.push_back(Jet_mass_Final[nJetItr]);
 
 
 
@@ -1124,10 +1175,10 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
                 FatJet_pt_JERDownL.push_back(FatJet_pt_JERDown[nFatJetItr]);
                 FatJet_phi_JERDownL.push_back(FatJet_phi_JERDown[nFatJetItr]);
                 FatJet_mass_JERDownL.push_back(FatJet_mass_JERDown[nFatJetItr]);
-                FatJet_eta_FinalL.push_back(AK8jetAllCorEtaVec[nFatJetItr]);
-                FatJet_pt_FinalL.push_back(AK8jetAllCorPtVec[nFatJetItr]);
-                FatJet_phi_FinalL.push_back(AK8jetAllCorPhiVec[nFatJetItr]);
-                FatJet_mass_FinalL.push_back(AK8jetAllCorMassVec[nFatJetItr]);
+                FatJet_eta_FinalL.push_back(FatJet_eta_Final[nFatJetItr]);
+                FatJet_pt_FinalL.push_back(FatJet_pt_Final[nFatJetItr]);
+                FatJet_phi_FinalL.push_back(FatJet_phi_Final[nFatJetItr]);
+                FatJet_mass_FinalL.push_back(FatJet_mass_Final[nFatJetItr]);
 
                 FatJet_hadronFlavourL.push_back(FatJet_hadronFlavour[nFatJetItr]);
                 
