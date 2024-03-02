@@ -1058,11 +1058,12 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
                 float tmpFJM = FatJet_mass_Final[fatJetInd];
                 float tmpFJSDM = FatJet_msoftdrop[fatJetInd];
                 //Check to avoid dividing by zero
+                float tmpFJPNScore = 0;
                 if (FatJet_particleNetMD_Xbb[fatJetInd]+FatJet_particleNetMD_QCD[fatJetInd] == 0) {
                     tmpFJPNScore = 0;
                 }
                 else{
-                    float tmpFJPNScore = FatJet_particleNetMD_Xbb[fatJetInd]/(FatJet_particleNetMD_Xbb[fatJetInd]+FatJet_particleNetMD_QCD[fatJetInd]);
+                    tmpFJPNScore = FatJet_particleNetMD_Xbb[fatJetInd]/(FatJet_particleNetMD_Xbb[fatJetInd]+FatJet_particleNetMD_QCD[fatJetInd]);
                 }
                 if (tmpFJPt < AK8PtCut) continue;
                 if (tmpFJM > AK8MassCut) continue;
