@@ -1048,7 +1048,7 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
             //Do AK8 Preselection
             
             bool passingJetExists = false;
-            float topPNScore = 0;
+            float topPNScore = -1;
             int topPNScoreInd = -1;
             //Loop over fatjets and do preselection cuts
             for (UInt_t fatJetInd=0;fatJetInd<*nFatJet;fatJetInd++){
@@ -1057,14 +1057,20 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
                 float tmpFJPhi = FatJet_phi_Final[fatJetInd];
                 float tmpFJM = FatJet_mass_Final[fatJetInd];
                 float tmpFJSDM = FatJet_msoftdrop[fatJetInd];
-                float tmpFJPNScore = FatJet_particleNetMD_Xbb[fatJetInd]/(FatJet_particleNetMD_Xbb[fatJetInd]+FatJet_particleNetMD_QCD[fatJetInd]);
+                //Check to avoid dividing by zero
+                if (FatJet_particleNetMD_Xbb[fatJetInd]+FatJet_particleNetMD_QCD[fatJetInd] == 0) {
+                    tmpFJPNScore = 0;
+                }
+                else{
+                    float tmpFJPNScore = FatJet_particleNetMD_Xbb[fatJetInd]/(FatJet_particleNetMD_Xbb[fatJetInd]+FatJet_particleNetMD_QCD[fatJetInd]);
+                }
                 if (tmpFJPt < AK8PtCut) continue;
                 if (tmpFJM > AK8MassCut) continue;
                 if (tmpFJSDM > AK8SDMassCut) continue;
                 if (calcDeltaR(tightLepOnePhi,tightLepOneEta,tmpFJPhi,tmpFJEta) < maxdRCut) continue;
                 if (calcDeltaR(tightLepTwoPhi,tightLepTwoEta,tmpFJPhi,tmpFJEta) < maxdRCut) continue;
                 passingJetExists = true;
-                if (tmpFJPNScore > topPNScore){
+                if (tmpFJPNScore >= topPNScore){
                     topPNScore = tmpFJPNScore;
                     topPNScoreInd = fatJetInd;
                 }
@@ -1118,13 +1124,10 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
                     }
                     
                 }
+            
+            }
             if (debug){
                 std::cout <<"Passed VBFJets\n";
-            }
-
-            
-
-
             }
             if (!passnVBFJets) continue;
             evPassesAK4Jet += 1;
