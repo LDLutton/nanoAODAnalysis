@@ -512,7 +512,7 @@ void DoTrimmed022024HLTFilterOnBackground(int fileInd, string datasetString){
         */
         fileAr.push_back(TTJetsBackgroundAr[fileInd]);
     }
-    else if (TTJetsHadronicBackground){
+    else if (TTToHadronicBackground){
         //saveName = "";
         
         crossSection = 377.96;
@@ -528,7 +528,7 @@ void DoTrimmed022024HLTFilterOnBackground(int fileInd, string datasetString){
         */
         fileAr.push_back(TTJetsHadronicBackgroundAr[fileInd]);
     }
-    else if (TTJetsSemiLeptonicBackground){
+    else if (TTToSemiLeptonicBackground){
         //saveName = "";
         
         crossSection = 365.346;
@@ -544,7 +544,7 @@ void DoTrimmed022024HLTFilterOnBackground(int fileInd, string datasetString){
         */
         fileAr.push_back(TTJetsSemiLeptonicBackgroundAr[fileInd]);
     }
-    else if (TTJets2L2NuBackground){
+    else if (TTTo2L2NuBackground){
         //saveName = "";
         
         crossSection = 88.29;
@@ -903,8 +903,7 @@ void DoTrimmed022024HLTFilterOnBackground(int fileInd, string datasetString){
     else if (testRun){
         saveName = "testRun";
         fileAr.push_back("./unweighted_eventspphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev10080Seed_0p999cHW100GeVIMJetCut_200.root");
-        useLHETree = true;
-        useFJGenMatchTree = true;
+        
         isBackground = false;
         
     }
@@ -1080,6 +1079,8 @@ void DoTrimmed022024HLTFilterOnBackground(int fileInd, string datasetString){
     std::vector<Int_t> GenPart_statusL;
     std::vector<Int_t> GenPart_statusFlagsL;
 
+    std::vector<Int_t> FatJet_hadronFlavourL;
+
     
 
     //genChannel characterization
@@ -1231,6 +1232,8 @@ void DoTrimmed022024HLTFilterOnBackground(int fileInd, string datasetString){
     FilteredEventsTree->Branch("GenPart_pdgIdL",&GenPart_pdgIdL);
     FilteredEventsTree->Branch("GenPart_statusL",&GenPart_statusL);
     FilteredEventsTree->Branch("GenPart_statusFlagsL",&GenPart_statusFlagsL);
+
+    FilteredEventsTree->Branch("FatJet_hadronFlavourL",&FatJet_hadronFlavourL);
 
     
 
