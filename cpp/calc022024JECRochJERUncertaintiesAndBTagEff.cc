@@ -509,6 +509,10 @@ void calc022024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
     Bool_t HLT_Mu50L;
     Bool_t HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZL;
     Bool_t HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8L;
+
+    //2016 in other years just set these to false
+    Bool_t HLT_Ele27_WPTight_GsfL;
+    Bool_t HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL;
     
     
 
@@ -720,6 +724,10 @@ void calc022024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
     FilteredEventsTree->Branch("HLT_Mu50L",&HLT_Mu50L,"HLT_Mu50L/O");
     FilteredEventsTree->Branch("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZL",&HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZL,"HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZL/O");
     FilteredEventsTree->Branch("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8L",&HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8L,"HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8L/O");
+
+    //2016
+    FilteredEventsTree->Branch("HLT_Ele27_WPTight_GsfL",&HLT_Ele27_WPTight_GsfL,"HLT_Ele27_WPTight_GsfL/O");
+    FilteredEventsTree->Branch("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL",&HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL,"HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL/O");
 
 
     //Rochester corrections optional tracking variables
@@ -1025,6 +1033,9 @@ void calc022024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
         TTreeReaderValue<Bool_t> HLT_Mu50(myEventsReader, "HLT_Mu50L");
         TTreeReaderValue<Bool_t> HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ(myEventsReader, "HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZL");
         TTreeReaderValue<Bool_t> HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8(myEventsReader, "HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8L");
+
+        TTreeReaderValue<Bool_t> HLT_Ele27_WPTight_Gsf(myEventsReader,"HLT_Ele27_WPTight_GsfL");
+        TTreeReaderValue<Bool_t> HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ(myEventsReader,"HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL");
 
 
 
@@ -1610,6 +1621,8 @@ void calc022024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
             HLT_Mu50L = *HLT_Mu50;
             HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZL = *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ;
             HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8L = *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8;
+
+            
 
 
             FilteredEventsTree->Fill();

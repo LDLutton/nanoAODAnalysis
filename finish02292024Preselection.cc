@@ -373,6 +373,9 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
     Bool_t HLT_Mu50L;
     Bool_t HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZL;
     Bool_t HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8L;
+    //2016 in other years just set these to false
+    Bool_t HLT_Ele27_WPTight_GsfL;
+    Bool_t HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL;
     //Tight/Veto lep variables
     Bool_t tightLepLeadIsElecL;
     Bool_t tightLepTrailingIsElecL;
@@ -613,6 +616,10 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
     FilteredEventsTree->Branch("HLT_Mu50L",&HLT_Mu50L,"HLT_Mu50L/O");
     FilteredEventsTree->Branch("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZL",&HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZL,"HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZL/O");
     FilteredEventsTree->Branch("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8L",&HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8L,"HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8L/O");
+
+    //2016
+    FilteredEventsTree->Branch("HLT_Ele27_WPTight_GsfL",&HLT_Ele27_WPTight_GsfL,"HLT_Ele27_WPTight_GsfL/O");
+    FilteredEventsTree->Branch("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL",&HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL,"HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL/O");
 
     FilteredEventsTree->Branch("tightLepLeadIsElecL",&tightLepLeadIsElecL,"tightLepLeadIsElecL/O");
     FilteredEventsTree->Branch("tightLepTrailingIsElecL",&tightLepTrailingIsElecL,"tightLepTrailingIsElecL/O");
@@ -875,6 +882,9 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
         TTreeReaderValue<Bool_t> HLT_Mu50(myEventsReader,"HLT_Mu50L");
         TTreeReaderValue<Bool_t> HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ(myEventsReader,"HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZL");
         TTreeReaderValue<Bool_t> HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8(myEventsReader,"HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8L");
+
+        TTreeReaderValue<Bool_t> HLT_Ele27_WPTight_Gsf(myEventsReader,"HLT_Ele27_WPTight_GsfL");
+        TTreeReaderValue<Bool_t> HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ(myEventsReader,"HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL");
 
 
 
@@ -1388,6 +1398,9 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
             HLT_Mu50L = *HLT_Mu50;
             HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZL = *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ;
             HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8L = *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8;
+
+            HLT_Ele27_WPTight_GsfL = *HLT_Ele27_WPTight_Gsf;
+            HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL = *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ;
             //Tight/Veto lep variables
             if (tightLepOnePt > tightLepTwoPt){
                 tightLepLeadIsElecL = tightLepOneIsElec;
