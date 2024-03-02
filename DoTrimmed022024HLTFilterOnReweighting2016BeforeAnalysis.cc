@@ -792,7 +792,6 @@ void DoTrimmed022024HLTFilterOnReweighting2016BeforeAnalysis(int fileInd, string
 
 
         //HLT Branches
-        TTreeReaderValue<Bool_t> HLT_TripleMu_10_5_5_DZ(myEventsReader, "HLT_TripleMu_10_5_5_DZ");
         TTreeReaderValue<Bool_t> HLT_TripleMu_12_10_5(myEventsReader, "HLT_TripleMu_12_10_5");
 
 
