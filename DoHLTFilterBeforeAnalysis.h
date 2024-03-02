@@ -121,6 +121,17 @@ bool QCDPT1800to2400Background = false;
 bool QCDPT2400to3200Background = false;
 bool QCDPT3200toInfBackground = false;
 
+
+bool QCDHT50to100Background = false;
+bool QCDHT100to200Background = false;
+bool QCDHT200to300Background = false;
+bool QCDHT300to500Background = false;
+bool QCDHT500to700Background = false;
+bool QCDHT700to1000Background = false;
+bool QCDHT1000to1500Background = false;
+bool QCDHT1500to2000Background = false;
+bool QCDHT2000toInfBackground = false;
+
 bool TTJetsBackground = false;
 bool TTToHadronicBackground = false;
 bool TTTo2L2NuBackground = false;
