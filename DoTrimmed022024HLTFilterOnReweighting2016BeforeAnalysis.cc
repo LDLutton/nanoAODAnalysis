@@ -54,7 +54,8 @@ void DoTrimmed022024HLTFilterOnReweighting2016BeforeAnalysis(int fileInd, string
     clock_t startt = clock();
     
     if (datasetString == "testRun") testRun = true;
-    if (datasetString == "SDC2V2MCZZH16Reweight") SDC2V2MCZZH17Reweight = true;
+    if (datasetString == "SDC2V2MCZZH16Reweight") SDC2V2MCZZH16Reweight = true;
+    if (datasetString == "SDC2V2MCZZH16APVReweight") SDC2V2MCZZH16APVReweight = true;
 
     //Analyzer will run over all files put into fileAr
 
@@ -78,6 +79,14 @@ void DoTrimmed022024HLTFilterOnReweighting2016BeforeAnalysis(int fileInd, string
         isBackground = false;
         int arrSize = sizeof(SDC2V2MCZZH16ReweightAr)/sizeof(SDC2V2MCZZH16ReweightAr[0]);
         std::string tmpStrWithPath = SDC2V2MCZZH16ReweightAr[fileInd];
+        fileAr.push_back(tmpStrWithPath);
+        
+    }
+    else if (SDC2V2MCZZH16APVReweight){
+        saveName = "SDC2V2MCZZH16APVReweight";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V2MCZZH16APVReweightAr)/sizeof(SDC2V2MCZZH16APVReweightAr[0]);
+        std::string tmpStrWithPath = SDC2V2MCZZH16APVReweightAr[fileInd];
         fileAr.push_back(tmpStrWithPath);
         
     }
