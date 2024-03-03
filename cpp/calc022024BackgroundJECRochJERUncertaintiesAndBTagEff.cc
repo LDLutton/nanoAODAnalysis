@@ -60,7 +60,7 @@
 //Output should be the same but with additional branches for the corrections and efficiencies
 //Apply JER before BTagging Efficencies
 //Input should be the dataset string, then an integer for each correction/efficiency to be calculated
-void calc022024BackgroundJECRochJERUncertaintiesAndBTagEff(string datasetString,uint yearInd, int JECCorInd, bool JECCorUpOrDown,  int RochInd, int JERInd,uint yearInd){
+void calc022024BackgroundJECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCorInd, bool JECCorUpOrDown,  int RochInd, int JERInd,uint yearInd){
     // Open the file. Note that the name of your file outside this class
     // will probably NOT be experiment.root.
     std::cout << "start Analysis\n";
