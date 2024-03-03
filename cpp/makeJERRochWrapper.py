@@ -29,7 +29,7 @@ def create_c_file(string_var,tmpStr,backgroundBool,yearInd):
         file.write(content)
 
 #Check if correct number of arguments are provided
-if len(sys.argv) != 2 and len(sys.argv) != 3:
+if len(sys.argv) != 2 and len(sys.argv) != 3 and len(sys.argv) != 5:
     print("Usage: python3 makeJERRochWrapper.py <string> or <string> <string> or <string> <string> <0 or 1> <yearInd>")
 else:
     #Extract arguments
