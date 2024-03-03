@@ -1015,7 +1015,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //"./unweighted_eventspphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev10080Seed_0p999cHW100GeVIMJetCut_200.root");
         
-        isBackground = false;
+        
         
     }
     else if (LaraTest){
@@ -1948,13 +1948,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
             //Fill in all branches of TTree
 
             //Event reweighting
-            if (debug){
-                std::cout <<"Filling Reweighting\n";
-            }
-            nLHEReweightingWeightL = *nLHEReweightingWeight;
-            for (UInt_t nLHEReweightingWeightItr=0; nLHEReweightingWeightItr<nLHEReweightingWeightL;nLHEReweightingWeightItr++){
-                LHEReweightingWeightL.push_back(LHEReweightingWeight[nLHEReweightingWeightItr]);
-            }
+          
 
             genWeightL = *genWeight;
 
