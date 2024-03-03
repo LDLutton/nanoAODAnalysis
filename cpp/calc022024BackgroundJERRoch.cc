@@ -169,7 +169,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
 
 
 
-    if (ttHToBBBackground){
+    if (ttHToBBTrimmedBackground){
         //saveName = "ttHToBB";
         crossSection = 0.5071*0.582;
 
@@ -186,7 +186,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //ttHToBBBackgroundAr[fileInd]);
     }
-    else if (ttZJetsBackground){
+    else if (ttZJetsTrimmedBackground){
         //saveName = "ttZJets";
         
         crossSection = 0.5407;
@@ -202,7 +202,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //ttZJetsBackgroundAr[fileInd]);
     }
-    else if (ttWJetsBackground){
+    else if (ttWJetsTrimmedBackground){
         
         crossSection = 0.4611;
         saveName = "ttWJets";
@@ -211,7 +211,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //ttWJetsBackgroundAr[fileInd]);
     }
-    else if (DYBackground){
+    else if (DYTrimmedBackground){
         //saveName = "DY";
         
         crossSection = 5364;
@@ -228,7 +228,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //DYBackgroundAr[fileInd]);
     }
-    else if (QCDPT170to300Background){
+    else if (QCDPT170to300TrimmedBackground){
         //saveName = "QCDPT170to300";
         
         crossSection = 103300.0;
@@ -246,7 +246,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //QCDPT170to300BackgroundAr[fileInd]);
     }
-    else if (QCDPT300to470Background){
+    else if (QCDPT300to470TrimmedBackground){
         //saveName = "QCDPT300to470";
         
         crossSection = 6826.0;
@@ -264,7 +264,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //QCDPT300to470BackgroundAr[fileInd]);
     }
-    else if (QCDPT470to600Background){
+    else if (QCDPT470to600TrimmedBackground){
         //saveName = "QCDPT470to600";
         
         crossSection = 552.6;
@@ -282,7 +282,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //QCDPT470to600BackgroundAr[fileInd]);
     }
-    else if (QCDPT600to800Background){
+    else if (QCDPT600to800TrimmedBackground){
         //saveName = "QCDPT600to800";
         
         crossSection = 156.6;
@@ -300,7 +300,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //QCDPT600to800BackgroundAr[fileInd]);
     }
-    else if (QCDPT800to1000Background){
+    else if (QCDPT800to1000TrimmedBackground){
         //saveName = "QCDPT800to1000";
         
         crossSection = 26.32;
@@ -318,7 +318,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //QCDPT800to1000BackgroundAr[fileInd]);
     }
-    else if (QCDPT1000to1400Background){
+    else if (QCDPT1000to1400TrimmedBackground){
         //saveName = "QCDPT1000to1400";
         
         crossSection = 7.5;
@@ -336,7 +336,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //QCDPT1000to1400BackgroundAr[fileInd]);
     }
-    else if (QCDPT1400to1800Background){
+    else if (QCDPT1400to1800TrimmedBackground){
         //saveName = "QCDPT1400to1800";
         
         crossSection = 0.6479;
@@ -354,7 +354,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //QCDPT1400to1800BackgroundAr[fileInd]);
     }
-    else if (QCDPT1800to2400Background){
+    else if (QCDPT1800to2400TrimmedBackground){
         //saveName = "QCDPT1800to2400";
         
         crossSection = 0.08715;
@@ -372,7 +372,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //QCDPT1800to2400BackgroundAr[fileInd]);
     }
-    else if (QCDPT2400to3200Background){
+    else if (QCDPT2400to3200TrimmedBackground){
         //saveName = "QCDPT2400to3200";
         
         crossSection = 0.005242;
@@ -390,7 +390,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //QCDPT2400to3200BackgroundAr[fileInd]);
     }
-    else if (QCDPT3200toInfBackground){
+    else if (QCDPT3200toInfTrimmedBackground){
         //saveName = "QCDPT3200toInf";
         
         crossSection = 0.0001349;
@@ -408,7 +408,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //QCDPT3200toInfBackgroundAr[fileInd]);
     }
-    else if (QCDHT50to100Background){
+    else if (QCDHT50to100TrimmedBackground){
         //saveName = "QCDHT50to100";
         
         crossSection = 187700000.;
@@ -426,7 +426,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //QCDHT50to100BackgroundAr[fileInd]);
     }
-    else if (QCDHT100to200Background){
+    else if (QCDHT100to200TrimmedBackground){
         //saveName = "QCDHT100to200";
         
         crossSection = 23640000.0;
@@ -444,7 +444,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //QCDHT100to200BackgroundAr[fileInd]);
     }
-    else if (QCDHT200to300Background){
+    else if (QCDHT200to300TrimmedBackground){
         //saveName = "QCDHT200to300";
         
         crossSection = 1546000.0;
@@ -462,7 +462,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //QCDHT200to300BackgroundAr[fileInd]);
     }
-    else if (QCDHT300to500Background){
+    else if (QCDHT300to500TrimmedBackground){
         //saveName = "QCDHT300to500";
         
         crossSection = 321600.0;
@@ -480,7 +480,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //QCDHT300to500BackgroundAr[fileInd]);
     }
-    else if (QCDHT500to700Background){
+    else if (QCDHT500to700TrimmedBackground){
         //saveName = "QCDHT500to700";
         
         crossSection = 30980.0;
@@ -498,7 +498,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //QCDHT500to700BackgroundAr[fileInd]);
     }
-    else if (QCDHT700to1000Background){
+    else if (QCDHT700to1000TrimmedBackground){
         //saveName = "QCDHT700to1000";
         
         crossSection = 6364.0;
@@ -516,7 +516,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //QCDHT700to1000BackgroundAr[fileInd]);
     }
-    else if (QCDHT1000to1500Background){
+    else if (QCDHT1000to1500TrimmedBackground){
         //saveName = "QCDHT1000to1500";
         
         crossSection = 1117.0;
@@ -534,7 +534,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //QCDHT1000to1500BackgroundAr[fileInd]);
     }
-    else if (QCDHT1500to2000Background){
+    else if (QCDHT1500to2000TrimmedBackground){
         //saveName = "QCDHT1500to2000";
         
         crossSection = 108.4;
@@ -552,7 +552,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //QCDHT1500to2000BackgroundAr[fileInd]);
     }
-    else if (QCDHT2000toInfBackground){
+    else if (QCDHT2000toInfTrimmedBackground){
         //saveName = "QCDHT2000toInf";
         
         crossSection = 22.36;
@@ -570,7 +570,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //QCDHT2000toInfBackgroundAr[fileInd]);
     }
-    else if (TTJetsBackground){
+    else if (TTJetsTrimmedBackground){
         //saveName = "";
         
         crossSection = 722.8;
@@ -588,7 +588,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //TTJetsBackgroundAr[fileInd]);
     }
-    else if (TTToHadronicBackground){
+    else if (TTToHadronicTrimmedBackground){
         //saveName = "";
         
         crossSection = 377.96;
@@ -606,7 +606,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //TTJetsHadronicBackgroundAr[fileInd]);
     }
-    else if (TTToSemiLeptonicBackground){
+    else if (TTToSemiLeptonicTrimmedBackground){
         //saveName = "";
         
         crossSection = 365.346;
@@ -624,7 +624,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //TTJetsSemiLeptonicBackgroundAr[fileInd]);
     }
-    else if (TTTo2L2NuBackground){
+    else if (TTTo2L2NuTrimmedBackground){
         //saveName = "";
         
         crossSection = 88.29;
@@ -642,7 +642,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //TTJets2L2NuBackgroundAr[fileInd]);
     }
-    else if (ST_s_ChannelBackground){
+    else if (ST_s_ChannelTrimmedBackground){
         //saveName = "";
         
         crossSection = 3.74;
@@ -660,7 +660,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //ST_s_ChannelBackgroundAr[fileInd]);
     }
-    else if (ST_t_ChannelAntiTopBackground){
+    else if (ST_t_ChannelAntiTopTrimmedBackground){
         //saveName = "";
         
         crossSection = 69.09;
@@ -678,7 +678,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //ST_t_ChannelAntiTopBackgroundAr[fileInd]);
     }
-    else if (ST_t_ChannelTopBackground){
+    else if (ST_t_ChannelTopTrimmedBackground){
         //saveName = "";
         
         crossSection = 115.3;
@@ -696,7 +696,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //ST_t_ChannelTopBackgroundAr[fileInd]);
     }
-    else if (ZZBackground){
+    else if (ZZTrimmedBackground){
         //saveName = "";
         
         crossSection = 12.17;
@@ -714,7 +714,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //ZZBackgroundAr[fileInd]);
     }
-    else if (WWBackground){
+    else if (WWTrimmedBackground){
         //saveName = "";
         
         crossSection = 75.95;
@@ -732,7 +732,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //WWBackgroundAr[fileInd]);
     }
-    else if (WZBackground){
+    else if (WZTrimmedBackground){
         //saveName = "";
         
         crossSection = 27.59;
@@ -750,7 +750,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //WZBackgroundAr[fileInd]);
     }
-    else if (TTbb_TTToHadronicBackground){
+    else if (TTbb_TTToHadronicTrimmedBackground){
         //saveName = "QCDPT3200toInf";
         
         crossSection = 5.5;
@@ -768,7 +768,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //TTbb_TTToHadronicBackgroundAr[fileInd]);
     }
-    else if (TTbb_TTTo2L2NuBackground){
+    else if (TTbb_TTTo2L2NuTrimmedBackground){
         //saveName = "";
         
         crossSection = 2.9;
@@ -786,7 +786,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //TTbb_TTTo2L2NuBackgroundAr[fileInd]);
     }
-    else if (TTbb_TTToSemiLeptonicBackground){
+    else if (TTbb_TTToSemiLeptonicTrimmedBackground){
         //saveName = "";
         
         crossSection = 4.7;
@@ -804,7 +804,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //TTbb_TTToSemiLeptonicBackgroundAr[fileInd]);
     }
-    else if (DYM10To50Background){
+    else if (DYM10To50TrimmedBackground){
         //datasetType = 50;
         saveName = "DYM10To50";
         
@@ -812,7 +812,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //DYM10To50BackgroundAr[fileInd]);
     }
-    else if (ST_tW_antitopBackground){
+    else if (ST_tW_antitopTrimmedBackground){
         //datasetType = 51;
         saveName = "ST_tW_antitop";
         
@@ -820,7 +820,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //ST_tW_antitopBackgroundAr[fileInd]);
     }
-    else if (ST_tW_topBackground){
+    else if (ST_tW_topTrimmedBackground){
         //datasetType = 52;
         saveName = "ST_tW_top";
         
@@ -828,7 +828,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //ST_tW_topBackgroundAr[fileInd]);
     }
-    else if (EWKWMinus2Jets_WToLNuBackground){
+    else if (EWKWMinus2Jets_WToLNuTrimmedBackground){
         //datasetType = 53;
         saveName = "EWKWMinus2Jets_WToLNu";
         
@@ -836,7 +836,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //EWKWMinus2Jets_WToLNuBackgroundAr[fileInd]);
     }
-    else if (EWKWMinus2Jets_WToQQBackground){
+    else if (EWKWMinus2Jets_WToQQTrimmedBackground){
         //datasetType = 54;
         saveName = "EWKWMinus2Jets_WToQQ";
         
@@ -844,7 +844,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //EWKWMinus2Jets_WToQQBackgroundAr[fileInd]);
     }
-    else if (EWKWPlus2Jets_WToLNuBackground){
+    else if (EWKWPlus2Jets_WToLNuTrimmedBackground){
         //datasetType = 55;
         saveName = "EWKWPlus2Jets_WToLNu";
         
@@ -852,7 +852,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //EWKWPlus2Jets_WToLNuBackgroundAr[fileInd]);
     }
-    else if (EWKWPlus2Jets_WToQQBackground){
+    else if (EWKWPlus2Jets_WToQQTrimmedBackground){
         //datasetType = 56;
         saveName = "EWKWPlus2Jets_WToQQ";
         
@@ -860,7 +860,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //EWKWPlus2Jets_WToQQBackgroundAr[fileInd]);
     }
-    else if (VHToNonbbBackground){
+    else if (VHToNonbbTrimmedBackground){
         //datasetType = 57;
         saveName = "VHToNonbb";
         
@@ -868,7 +868,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //VHToNonbbBackgroundAr[fileInd]);
     }
-    else if (WminusH_HToBB_WToLNuBackground){
+    else if (WminusH_HToBB_WToLNuTrimmedBackground){
         //datasetType = 58;
         saveName = "WminusH_HToBB_WToLNu";
         
@@ -876,7 +876,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //WminusH_HToBB_WToLNuBackgroundAr[fileInd]);
     }
-    else if (WminusH_HToBB_WToQQBackground){
+    else if (WminusH_HToBB_WToQQTrimmedBackground){
         //datasetType = 59;
         saveName = "WminusH_HToBB_WToQQ";
         
@@ -884,7 +884,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //WminusH_HToBB_WToQQBackgroundAr[fileInd]);
     }
-    else if (WplusH_HToBB_WToLNuBackground){
+    else if (WplusH_HToBB_WToLNuTrimmedBackground){
         //datasetType = 60;
         saveName = "WplusH_HToBB_WToLNu";
         
@@ -892,7 +892,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //WplusH_HToBB_WToLNuBackgroundAr[fileInd]);
     }
-    else if (WplusH_HToBB_WToQQBackground){
+    else if (WplusH_HToBB_WToQQTrimmedBackground){
         //datasetType = 61;
         saveName = "WplusH_HToBB_WToQQ";
         
@@ -900,7 +900,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //WplusH_HToBB_WToQQBackgroundAr[fileInd]);
     }
-    else if (WJetsToLNuBackground){
+    else if (WJetsToLNuTrimmedBackground){
         //datasetType = 62;
         saveName = "WJetsToLNu";
         
@@ -908,7 +908,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //WJetsToLNuBackgroundAr[fileInd]);
     }
-    else if (WWWBackground){
+    else if (WWWTrimmedBackground){
         //datasetType = 63;
         saveName = "WWW";
         
@@ -916,7 +916,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //WWWBackgroundAr[fileInd]);
     }
-    else if (WWZBackground){
+    else if (WWZTrimmedBackground){
         //datasetType = 64;
         saveName = "WWZ";
         
@@ -924,7 +924,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //WWZBackgroundAr[fileInd]);
     }
-    else if (WZZBackground){
+    else if (WZZTrimmedBackground){
         //datasetType = 65;
         saveName = "WZZ";
         
@@ -932,7 +932,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //WZZBackgroundAr[fileInd]);
     }
-    else if (ZH_HToBB_ZToBBBackground){
+    else if (ZH_HToBB_ZToBBTrimmedBackground){
         //datasetType = 66;
         saveName = "ZH_HToBB_ZToBB";
         
@@ -940,7 +940,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //ZH_HToBB_ZToBBBackgroundAr[fileInd]);
     }
-    else if (ZH_HToBB_ZToNuNuBackground){
+    else if (ZH_HToBB_ZToNuNuTrimmedBackground){
         //datasetType = 66;
         saveName = "ZH_HToBB_ZToNuNu";
         
@@ -948,7 +948,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //ZH_HToBB_ZToNuNuBackgroundAr[fileInd]);
     }
-    else if (ZH_HToBB_ZToLLBackground){
+    else if (ZH_HToBB_ZToLLTrimmedBackground){
         //datasetType = 66;
         saveName = "ZH_HToBB_ZToLL";
         
@@ -956,7 +956,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //ZH_HToBB_ZToLLBackgroundAr[fileInd]);
     }
-    else if (ZH_HToBB_ZToQQBackground){
+    else if (ZH_HToBB_ZToQQTrimmedBackground){
         //datasetType = 67;
         saveName = "ZH_HToBB_ZToQQ";
         
@@ -964,7 +964,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //ZH_HToBB_ZToQQBackgroundAr[fileInd]);
     }
-    else if (ggZH_HToBB_ZToBBBackground){
+    else if (ggZH_HToBB_ZToBBTrimmedBackground){
         //datasetType = 68;
         saveName = "ggZH_HToBB_ZToBB";
         
@@ -972,7 +972,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //ggZH_HToBB_ZToBBBackgroundAr[fileInd]);
     }
-    else if (ggZH_HToBB_ZToNuNuBackground){
+    else if (ggZH_HToBB_ZToNuNuTrimmedBackground){
         //datasetType = 68;
         saveName = "ggZH_HToBB_ZToNuNu";
         
@@ -980,7 +980,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //ggZH_HToBB_ZToNuNuBackgroundAr[fileInd]);
     }
-    else if (ggZH_HToBB_ZToLLBackground){
+    else if (ggZH_HToBB_ZToLLTrimmedBackground){
         //datasetType = 68;
         saveName = "ggZH_HToBB_ZToLL";
         
@@ -988,7 +988,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //ggZH_HToBB_ZToLLBackgroundAr[fileInd]);
     }
-    else if (ggZH_HToBB_ZToQQBackground){
+    else if (ggZH_HToBB_ZToQQTrimmedBackground){
         //datasetType = 69;
         saveName = "ggZH_HToBB_ZToQQ";
         
@@ -996,7 +996,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //ggZH_HToBB_ZToQQBackgroundAr[fileInd]);
     }
-    else if (EWKZ2Jets_ZToLLBackground){
+    else if (EWKZ2Jets_ZToLLTrimmedBackground){
         //datasetType = 70;
         saveName = "EWKZ2Jets_ZToLL";
         
@@ -1004,7 +1004,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //EWKZ2Jets_ZToLLBackgroundAr[fileInd]);
     }
-    else if (EWKZ2Jets_ZToNuNuBackground){
+    else if (EWKZ2Jets_ZToNuNuTrimmedBackground){
         //datasetType = 71;
         saveName = "EWKZ2Jets_ZToNuNu";
         
@@ -1012,7 +1012,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //EWKZ2Jets_ZToNuNuBackgroundAr[fileInd]);
     }
-    else if (EWKZ2Jets_ZToQQBackground){
+    else if (EWKZ2Jets_ZToQQTrimmedBackground){
         //datasetType = 72;
         saveName = "EWKZ2Jets_ZToQQ";
         
@@ -1020,7 +1020,7 @@ void calc022024BackgroundJERRoch(string datasetString,uint yearInd){
         fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+".root");
         //EWKZ2Jets_ZToQQBackgroundAr[fileInd]);
     }
-    else if (ZZZBackground){
+    else if (ZZZTrimmedBackground){
         //datasetType = 73;
         saveName = "ZZZ";
         
