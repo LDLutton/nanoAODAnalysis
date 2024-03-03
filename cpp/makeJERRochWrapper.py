@@ -46,6 +46,7 @@ else:
         yearInd = 0
     elif len(sys.argv) == 5:
         _, string_var, string_var2, backgroundBool,yearInd = sys.argv
+        tmpStr = string_var2
         backgroundBool = int(backgroundBool)
         yearInd = int(yearInd)
         
