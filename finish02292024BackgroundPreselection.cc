@@ -161,11 +161,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(ttHToBBBackgroundAr)/sizeof(ttHToBBBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //ttHToBBBackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //ttHToBBBackgroundAr[fileInd]);
     }
     else if (ttZJetsBackground){
@@ -177,11 +177,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(ttZJetsBackgroundAr)/sizeof(ttZJetsBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //ttZJetsBackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //ttZJetsBackgroundAr[fileInd]);
     }
     else if (ttWJetsBackground){
@@ -190,7 +190,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "ttWJets";
         
         //int arrSize = sizeof(ttWJetsBackgroundAr)/sizeof(ttWJetsBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //ttWJetsBackgroundAr[fileInd]);
     }
     else if (DYBackground){
@@ -203,11 +203,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(DYBackgroundAr)/sizeof(DYBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //DYBackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //DYBackgroundAr[fileInd]);
     }
     else if (QCDPT170to300Background){
@@ -221,11 +221,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(QCDPT170to300BackgroundAr)/sizeof(QCDPT170to300BackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDPT170to300BackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDPT170to300BackgroundAr[fileInd]);
     }
     else if (QCDPT300to470Background){
@@ -239,11 +239,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(QCDPT300to470BackgroundAr)/sizeof(QCDPT300to470BackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDPT300to470BackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDPT300to470BackgroundAr[fileInd]);
     }
     else if (QCDPT470to600Background){
@@ -257,11 +257,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(QCDPT470to600BackgroundAr)/sizeof(QCDPT470to600BackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDPT470to600BackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDPT470to600BackgroundAr[fileInd]);
     }
     else if (QCDPT600to800Background){
@@ -275,11 +275,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(QCDPT600to800BackgroundAr)/sizeof(QCDPT600to800BackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDPT600to800BackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDPT600to800BackgroundAr[fileInd]);
     }
     else if (QCDPT800to1000Background){
@@ -293,11 +293,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(QCDPT800to1000BackgroundAr)/sizeof(QCDPT800to1000BackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDPT800to1000BackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDPT800to1000BackgroundAr[fileInd]);
     }
     else if (QCDPT1000to1400Background){
@@ -311,11 +311,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(QCDPT1000to1400BackgroundAr)/sizeof(QCDPT1000to1400BackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDPT1000to1400BackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDPT1000to1400BackgroundAr[fileInd]);
     }
     else if (QCDPT1400to1800Background){
@@ -329,11 +329,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(QCDPT1400to1800BackgroundAr)/sizeof(QCDPT1400to1800BackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDPT1400to1800BackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDPT1400to1800BackgroundAr[fileInd]);
     }
     else if (QCDPT1800to2400Background){
@@ -347,11 +347,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(QCDPT1800to2400BackgroundAr)/sizeof(QCDPT1800to2400BackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDPT1800to2400BackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDPT1800to2400BackgroundAr[fileInd]);
     }
     else if (QCDPT2400to3200Background){
@@ -365,11 +365,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(QCDPT2400to3200BackgroundAr)/sizeof(QCDPT2400to3200BackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDPT2400to3200BackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDPT2400to3200BackgroundAr[fileInd]);
     }
     else if (QCDPT3200toInfBackground){
@@ -383,11 +383,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(QCDPT3200toInfBackgroundAr)/sizeof(QCDPT3200toInfBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDPT3200toInfBackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDPT3200toInfBackgroundAr[fileInd]);
     }
     else if (QCDHT50to100Background){
@@ -401,11 +401,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(QCDHT50to100BackgroundAr)/sizeof(QCDHT50to100BackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDHT50to100BackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDHT50to100BackgroundAr[fileInd]);
     }
     else if (QCDHT100to200Background){
@@ -419,11 +419,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(QCDHT100to200BackgroundAr)/sizeof(QCDHT100to200BackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDHT100to200BackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDHT100to200BackgroundAr[fileInd]);
     }
     else if (QCDHT200to300Background){
@@ -437,11 +437,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(QCDHT200to300BackgroundAr)/sizeof(QCDHT200to300BackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDHT200to300BackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDHT200to300BackgroundAr[fileInd]);
     }
     else if (QCDHT300to500Background){
@@ -455,11 +455,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(QCDHT300to500BackgroundAr)/sizeof(QCDHT300to500BackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDHT300to500BackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDHT300to500BackgroundAr[fileInd]);
     }
     else if (QCDHT500to700Background){
@@ -473,11 +473,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(QCDHT500to700BackgroundAr)/sizeof(QCDHT500to700BackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDHT500to700BackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDHT500to700BackgroundAr[fileInd]);
     }
     else if (QCDHT700to1000Background){
@@ -491,11 +491,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(QCDHT700to1000BackgroundAr)/sizeof(QCDHT700to1000BackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDHT700to1000BackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDHT700to1000BackgroundAr[fileInd]);
     }
     else if (QCDHT1000to1500Background){
@@ -509,11 +509,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(QCDHT1000to1500BackgroundAr)/sizeof(QCDHT1000to1500BackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDHT1000to1500BackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDHT1000to1500BackgroundAr[fileInd]);
     }
     else if (QCDHT1500to2000Background){
@@ -527,11 +527,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(QCDHT1500to2000BackgroundAr)/sizeof(QCDHT1500to2000BackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDHT1500to2000BackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDHT1500to2000BackgroundAr[fileInd]);
     }
     else if (QCDHT2000toInfBackground){
@@ -545,11 +545,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(QCDHT2000toInfBackgroundAr)/sizeof(QCDHT2000toInfBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDHT2000toInfBackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //QCDHT2000toInfBackgroundAr[fileInd]);
     }
     else if (TTJetsBackground){
@@ -563,11 +563,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(TTJetsBackgroundAr)/sizeof(TTJetsBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //TTJetsBackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //TTJetsBackgroundAr[fileInd]);
     }
     else if (TTToHadronicBackground){
@@ -581,11 +581,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(TTJetsHadronicBackgroundAr)/sizeof(TTJetsHadronicBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //TTJetsHadronicBackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //TTJetsHadronicBackgroundAr[fileInd]);
     }
     else if (TTToSemiLeptonicBackground){
@@ -599,11 +599,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(TTJetsSemiLeptonicBackgroundAr)/sizeof(TTJetsSemiLeptonicBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //TTJetsSemiLeptonicBackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //TTJetsSemiLeptonicBackgroundAr[fileInd]);
     }
     else if (TTTo2L2NuBackground){
@@ -617,11 +617,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(TTJets2L2NuBackgroundAr)/sizeof(TTJets2L2NuBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //TTJets2L2NuBackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //TTJets2L2NuBackgroundAr[fileInd]);
     }
     else if (ST_s_ChannelBackground){
@@ -635,11 +635,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(ST_s_ChannelBackgroundAr)/sizeof(ST_s_ChannelBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //ST_s_ChannelBackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //ST_s_ChannelBackgroundAr[fileInd]);
     }
     else if (ST_t_ChannelAntiTopBackground){
@@ -653,11 +653,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(ST_t_ChannelAntiTopBackgroundAr)/sizeof(ST_t_ChannelAntiTopBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //ST_t_ChannelAntiTopBackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //ST_t_ChannelAntiTopBackgroundAr[fileInd]);
     }
     else if (ST_t_ChannelTopBackground){
@@ -671,11 +671,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(ST_t_ChannelTopBackgroundAr)/sizeof(ST_t_ChannelTopBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //ST_t_ChannelTopBackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //ST_t_ChannelTopBackgroundAr[fileInd]);
     }
     else if (ZZBackground){
@@ -689,11 +689,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(ZZBackgroundAr)/sizeof(ZZBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //ZZBackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //ZZBackgroundAr[fileInd]);
     }
     else if (WWBackground){
@@ -707,11 +707,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(WWBackgroundAr)/sizeof(WWBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //WWBackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //WWBackgroundAr[fileInd]);
     }
     else if (WZBackground){
@@ -725,11 +725,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(WZBackgroundAr)/sizeof(WZBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //WZBackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //WZBackgroundAr[fileInd]);
     }
     else if (TTbb_TTToHadronicBackground){
@@ -743,11 +743,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(TTbb_TTToHadronicBackgroundAr)/sizeof(TTbb_TTToHadronicBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //TTbb_TTToHadronicBackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //TTbb_TTToHadronicBackgroundAr[fileInd]);
     }
     else if (TTbb_TTTo2L2NuBackground){
@@ -761,11 +761,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(TTbb_TTTo2L2NuBackgroundAr)/sizeof(TTbb_TTTo2L2NuBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //TTbb_TTTo2L2NuBackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //TTbb_TTTo2L2NuBackgroundAr[fileInd]);
     }
     else if (TTbb_TTToSemiLeptonicBackground){
@@ -779,11 +779,11 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         //int arrSize = sizeof(TTbb_TTToSemiLeptonicBackgroundAr)/sizeof(TTbb_TTToSemiLeptonicBackgroundAr[0]);
         /*
         for (int i=0; i<arrSize; i++){
-            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+            fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //TTbb_TTToSemiLeptonicBackgroundAr[i]);
         }
         */
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //TTbb_TTToSemiLeptonicBackgroundAr[fileInd]);
     }
     else if (DYM10To50Background){
@@ -791,7 +791,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "DYM10To50";
         
         //int arrSize = sizeof(DYM10To50BackgroundAr)/sizeof(DYM10To50BackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //DYM10To50BackgroundAr[fileInd]);
     }
     else if (ST_tW_antitopBackground){
@@ -799,7 +799,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "ST_tW_antitop";
         
         //int arrSize = sizeof(ST_tW_antitopBackgroundAr)/sizeof(ST_tW_antitopBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //ST_tW_antitopBackgroundAr[fileInd]);
     }
     else if (ST_tW_topBackground){
@@ -807,7 +807,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "ST_tW_top";
         
         //int arrSize = sizeof(ST_tW_topBackgroundAr)/sizeof(ST_tW_topBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //ST_tW_topBackgroundAr[fileInd]);
     }
     else if (EWKWMinus2Jets_WToLNuBackground){
@@ -815,7 +815,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "EWKWMinus2Jets_WToLNu";
         
         //int arrSize = sizeof(EWKWMinus2Jets_WToLNuBackgroundAr)/sizeof(EWKWMinus2Jets_WToLNuBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //EWKWMinus2Jets_WToLNuBackgroundAr[fileInd]);
     }
     else if (EWKWMinus2Jets_WToQQBackground){
@@ -823,7 +823,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "EWKWMinus2Jets_WToQQ";
         
         //int arrSize = sizeof(EWKWMinus2Jets_WToQQBackgroundAr)/sizeof(EWKWMinus2Jets_WToQQBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //EWKWMinus2Jets_WToQQBackgroundAr[fileInd]);
     }
     else if (EWKWPlus2Jets_WToLNuBackground){
@@ -831,7 +831,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "EWKWPlus2Jets_WToLNu";
         
         //int arrSize = sizeof(EWKWPlus2Jets_WToLNuBackgroundAr)/sizeof(EWKWPlus2Jets_WToLNuBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //EWKWPlus2Jets_WToLNuBackgroundAr[fileInd]);
     }
     else if (EWKWPlus2Jets_WToQQBackground){
@@ -839,7 +839,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "EWKWPlus2Jets_WToQQ";
         
         //int arrSize = sizeof(EWKWPlus2Jets_WToQQBackgroundAr)/sizeof(EWKWPlus2Jets_WToQQBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //EWKWPlus2Jets_WToQQBackgroundAr[fileInd]);
     }
     else if (VHToNonbbBackground){
@@ -847,7 +847,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "VHToNonbb";
         
         //int arrSize = sizeof(VHToNonbbBackgroundAr)/sizeof(VHToNonbbBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //VHToNonbbBackgroundAr[fileInd]);
     }
     else if (WminusH_HToBB_WToLNuBackground){
@@ -855,7 +855,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "WminusH_HToBB_WToLNu";
         
         //int arrSize = sizeof(WminusH_HToBB_WToLNuBackgroundAr)/sizeof(WminusH_HToBB_WToLNuBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //WminusH_HToBB_WToLNuBackgroundAr[fileInd]);
     }
     else if (WminusH_HToBB_WToQQBackground){
@@ -863,7 +863,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "WminusH_HToBB_WToQQ";
         
         //int arrSize = sizeof(WminusH_HToBB_WToQQBackgroundAr)/sizeof(WminusH_HToBB_WToQQBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //WminusH_HToBB_WToQQBackgroundAr[fileInd]);
     }
     else if (WplusH_HToBB_WToLNuBackground){
@@ -871,7 +871,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "WplusH_HToBB_WToLNu";
         
         //int arrSize = sizeof(WplusH_HToBB_WToLNuBackgroundAr)/sizeof(WplusH_HToBB_WToLNuBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //WplusH_HToBB_WToLNuBackgroundAr[fileInd]);
     }
     else if (WplusH_HToBB_WToQQBackground){
@@ -879,7 +879,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "WplusH_HToBB_WToQQ";
         
         //int arrSize = sizeof(WplusH_HToBB_WToQQBackgroundAr)/sizeof(WplusH_HToBB_WToQQBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //WplusH_HToBB_WToQQBackgroundAr[fileInd]);
     }
     else if (WJetsToLNuBackground){
@@ -887,7 +887,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "WJetsToLNu";
         
         //int arrSize = sizeof(WJetsToLNuBackgroundAr)/sizeof(WJetsToLNuBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //WJetsToLNuBackgroundAr[fileInd]);
     }
     else if (WWWBackground){
@@ -895,7 +895,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "WWW";
         
         //int arrSize = sizeof(WWWBackgroundAr)/sizeof(WWWBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //WWWBackgroundAr[fileInd]);
     }
     else if (WWZBackground){
@@ -903,7 +903,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "WWZ";
         
         //int arrSize = sizeof(WWZBackgroundAr)/sizeof(WWZBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //WWZBackgroundAr[fileInd]);
     }
     else if (WZZBackground){
@@ -911,7 +911,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "WZZ";
         
         //int arrSize = sizeof(WZZBackgroundAr)/sizeof(WZZBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //WZZBackgroundAr[fileInd]);
     }
     else if (ZH_HToBB_ZToBBBackground){
@@ -919,7 +919,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "ZH_HToBB_ZToBB";
         
         //int arrSize = sizeof(ZH_HToBB_ZToBBBackgroundAr)/sizeof(ZH_HToBB_ZToBBBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //ZH_HToBB_ZToBBBackgroundAr[fileInd]);
     }
     else if (ZH_HToBB_ZToNuNuBackground){
@@ -927,7 +927,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "ZH_HToBB_ZToNuNu";
         
         //int arrSize = sizeof(ZH_HToBB_ZToNuNuBackgroundAr)/sizeof(ZH_HToBB_ZToNuNuBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //ZH_HToBB_ZToNuNuBackgroundAr[fileInd]);
     }
     else if (ZH_HToBB_ZToLLBackground){
@@ -935,7 +935,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "ZH_HToBB_ZToLL";
         
         //int arrSize = sizeof(ZH_HToBB_ZToLLBackgroundAr)/sizeof(ZH_HToBB_ZToLLBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //ZH_HToBB_ZToLLBackgroundAr[fileInd]);
     }
     else if (ZH_HToBB_ZToQQBackground){
@@ -943,7 +943,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "ZH_HToBB_ZToQQ";
         
         //int arrSize = sizeof(ZH_HToBB_ZToQQBackgroundAr)/sizeof(ZH_HToBB_ZToQQBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //ZH_HToBB_ZToQQBackgroundAr[fileInd]);
     }
     else if (ggZH_HToBB_ZToBBBackground){
@@ -951,7 +951,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "ggZH_HToBB_ZToBB";
         
         //int arrSize = sizeof(ggZH_HToBB_ZToBBBackgroundAr)/sizeof(ggZH_HToBB_ZToBBBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //ggZH_HToBB_ZToBBBackgroundAr[fileInd]);
     }
     else if (ggZH_HToBB_ZToNuNuBackground){
@@ -959,7 +959,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "ggZH_HToBB_ZToNuNu";
         
         //int arrSize = sizeof(ggZH_HToBB_ZToNuNuBackgroundAr)/sizeof(ggZH_HToBB_ZToNuNuBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //ggZH_HToBB_ZToNuNuBackgroundAr[fileInd]);
     }
     else if (ggZH_HToBB_ZToLLBackground){
@@ -967,7 +967,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "ggZH_HToBB_ZToLL";
         
         //int arrSize = sizeof(ggZH_HToBB_ZToLLBackgroundAr)/sizeof(ggZH_HToBB_ZToLLBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //ggZH_HToBB_ZToLLBackgroundAr[fileInd]);
     }
     else if (ggZH_HToBB_ZToQQBackground){
@@ -975,7 +975,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "ggZH_HToBB_ZToQQ";
         
         //int arrSize = sizeof(ggZH_HToBB_ZToQQBackgroundAr)/sizeof(ggZH_HToBB_ZToQQBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //ggZH_HToBB_ZToQQBackgroundAr[fileInd]);
     }
     else if (EWKZ2Jets_ZToLLBackground){
@@ -983,7 +983,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "EWKZ2Jets_ZToLL";
         
         //int arrSize = sizeof(EWKZ2Jets_ZToLLBackgroundAr)/sizeof(EWKZ2Jets_ZToLLBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //EWKZ2Jets_ZToLLBackgroundAr[fileInd]);
     }
     else if (EWKZ2Jets_ZToNuNuBackground){
@@ -991,7 +991,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "EWKZ2Jets_ZToNuNu";
         
         //int arrSize = sizeof(EWKZ2Jets_ZToNuNuBackgroundAr)/sizeof(EWKZ2Jets_ZToNuNuBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //EWKZ2Jets_ZToNuNuBackgroundAr[fileInd]);
     }
     else if (EWKZ2Jets_ZToQQBackground){
@@ -999,7 +999,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "EWKZ2Jets_ZToQQ";
         
         //int arrSize = sizeof(EWKZ2Jets_ZToQQBackgroundAr)/sizeof(EWKZ2Jets_ZToQQBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //EWKZ2Jets_ZToQQBackgroundAr[fileInd]);
     }
     else if (ZZZBackground){
@@ -1007,12 +1007,12 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
         saveName = "ZZZ";
         
         //int arrSize = sizeof(ZZZBackgroundAr)/sizeof(ZZZBackgroundAr[0]);
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //ZZZBackgroundAr[fileInd]);
     }
     else if (testRun){
         saveName = "testRun";
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //"./unweighted_eventspphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev10080Seed_0p999cHW100GeVIMJetCut_200.root");
         
         
@@ -1020,7 +1020,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
     }
     else if (LaraTest){
         saveName = "LaraTest";
-        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+yearStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root");
         //"/scratch365/dlutton/NanoAODFiles/pp_hwpwmjj_EFT_VBF_chw_09999000_250k.root");
     }
     else{
@@ -2247,7 +2247,6 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
             FilteredEventsTree->Fill();
 
             //Clear all vectors
-            LHEReweightingWeightL.clear();
 
 
             Jet_etaL.clear();
