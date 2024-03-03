@@ -128,6 +128,21 @@ bool QCDPT1800to2400TrimmedBackground = false;
 bool QCDPT2400to3200TrimmedBackground = false;
 bool QCDPT3200toInfTrimmedBackground = false;
 
+
+bool QCDHT50to100TrimmedBackground = false;
+bool QCDHT100to200TrimmedBackground = false;
+bool QCDHT200to300TrimmedBackground = false;
+bool QCDHT300to500TrimmedBackground = false;
+bool QCDHT500to700TrimmedBackground = false;
+bool QCDHT700to1000TrimmedBackground = false;
+bool QCDHT1000to1500TrimmedBackground = false;
+bool QCDHT1500to2000TrimmedBackground = false;
+bool QCDHT2000toInfTrimmedBackground = false;
+
+bool TTToHadronicTrimmedBackground = false;
+bool TTTo2L2NuTrimmedBackground = false;
+bool TTToSemiLeptonicTrimmedBackground = false;
+
 bool TTJetsTrimmedBackground = false;
 
 bool ST_s_ChannelTrimmedBackground = false;
