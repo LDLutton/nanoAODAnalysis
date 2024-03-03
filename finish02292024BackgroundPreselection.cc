@@ -145,7 +145,7 @@ void finish02292024BackgroundPreselection(string datasetString, int JECCorInd, b
     double XS = 1;
 
     float crossSection; //this is unused
-    std::vector<string> yearStringAr = {"","Y17","Y16","Y16APV"}
+    std::vector<string> yearStringAr = {"","Y17","Y16","Y16APV"};
     UInt_t yearType = yearInd;
     string yearStr = yearStringAr[yearType];
 
