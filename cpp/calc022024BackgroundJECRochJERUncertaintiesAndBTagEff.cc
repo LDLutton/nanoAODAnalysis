@@ -1813,30 +1813,7 @@ void calc022024BackgroundJECRochJERUncertaintiesAndBTagEff(string datasetString,
 
         TTreeReaderValue<Bool_t> HTobbBool(myEventsReader, "HTobbBoolL");
 
-        //FJ GENMATCH
-
-        TTreeReaderValue<Int_t> ZFJInd(myEventsReader, "ZFJIndL");
-        TTreeReaderValue<Int_t> HFJInd(myEventsReader, "HFJIndL");
-        TTreeReaderValue<Bool_t> goodGenZFJMatch(myEventsReader, "goodGenZFJMatchL");
-        TTreeReaderValue<Bool_t> goodGenHFJMatch(myEventsReader, "goodGenHFJMatchL");
-        TTreeReaderValue<Bool_t> goodZFJMatchToGen(myEventsReader, "goodZFJMatchToGenL");
-        TTreeReaderValue<Bool_t> goodHFJMatchToGen(myEventsReader, "goodHFJMatchToGenL");
-        TTreeReaderValue<Bool_t> eventGenSemileptonic(myEventsReader, "eventGenSemileptonicL");
-        TTreeReaderValue<Bool_t> eventGenHToBB(myEventsReader, "eventGenHToBBL");
-        TTreeReaderValue<Int_t> ZFJGenHadronFlavour(myEventsReader, "ZFJGenHadronFlavourL");
-        TTreeReaderValue<Int_t> HFJGenHadronFlavour(myEventsReader, "HFJGenHadronFlavourL");
         TTreeReaderArray<Int_t> FatJet_hadronFlavour(myEventsReader, "FatJet_hadronFlavourL");
-
-        TTreeReaderValue<UInt_t> nHDecayPID(myEventsReader, "nHDecayPIDL");
-        TTreeReaderArray<Int_t> HDecayPID(myEventsReader, "HDecayPIDL");
-
-        TTreeReaderValue<UInt_t> nZOneDecayPID(myEventsReader, "nZOneDecayPIDL");
-        TTreeReaderArray<Int_t> ZOneDecayPID(myEventsReader, "ZOneDecayPIDL");
-        TTreeReaderValue<UInt_t> nZTwoDecayPID(myEventsReader, "nZTwoDecayPIDL");
-        TTreeReaderArray<Int_t> ZTwoDecayPID(myEventsReader, "ZTwoDecayPIDL");
-
-        TTreeReaderValue<Int_t> ZOneType(myEventsReader, "ZOneTypeL");
-        TTreeReaderValue<Int_t> ZTwoType(myEventsReader, "ZTwoTypeL");
 
         //HLT
 
