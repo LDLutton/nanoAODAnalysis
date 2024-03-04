@@ -1569,10 +1569,15 @@ void calc022024BackgroundJECRochJERUncertaintiesAndBTagEff(string datasetString,
 
     TH1D* rochesterCorrHist = new TH1D("rochesterCorrHist","rochesterCorrHist",1000,0.9,1.1);
     //3d vectors with 1 dimension for pt, 1 for eta, 1 for jet flavor
-    //pt dimensions are [0, 30, 50, 70, 100, 140, 200, 300, 600, 1000]
-    //here the inds are for [0,30), [30,50), ... [600,1000), [1000,inf)
-    //eta dimensions are [0,2.5]
-    //here the inds are for [0,2.5), [2.5,inf)
+    //pt dimensions were [0, 30, 50, 70, 100, 140, 200, 300, 600, 1000]
+    //03032024 change 9 bins from 0 to 270 [0, 30, 60, 90, 120, 150, 180, 210, 240, 270]
+    //here the inds were for [0,30), [30,50), ... [600,1000), [1000,inf)
+    //now the inds are for [0,30), [30,60), ... [240,270), [270,300), [300,inf)
+    //eta dimensions were [0,2.5]
+    //Now 4 bins from 0 to 2.5 [0, 0.625, 1.25, 1.875, 2.5]
+    //here the inds were for [0,2.5), [2.5,inf)
+    //Now for [0,0.625), [0.625,1.25), [1.25,1.875), [1.875,2.5)]
+    //no 2.5 to inf. btagging cuts those jets anyway
     //flavor dimensions are [0,4,5]
     //here the inds are for ==0, ==4, ==5
     //initialize here
@@ -1588,15 +1593,18 @@ void calc022024BackgroundJECRochJERUncertaintiesAndBTagEff(string datasetString,
     btagEffTree->Branch("btagEffL",&btagEffL);
     */
     //fill the 3d vectors with 0s
-    for (int i=0; i<10; i++){
+    nPtBins = 10;
+    nEtaBins = 4;
+    nFlavorBins = 3;
+    for (int i=0; i<nPtBins; i++){
         std::vector<std::vector<int>> nJetsCtrL2;
         std::vector<std::vector<int>> nJetsPassBtagCtrL2;
         std::vector<std::vector<double>> btagEffL2;
-        for (int j=0; j<2; j++){
+        for (int j=0; j<nEtaBins; j++){
             std::vector<int> nJetsCtrL3;
             std::vector<int> nJetsPassBtagCtrL3;
             std::vector<double> btagEffL3;
-            for (int k=0; k<3; k++){
+            for (int k=0; k<nFlavorBins; k++){
                 nJetsCtrL3.push_back(0);
                 nJetsPassBtagCtrL3.push_back(0);
                 btagEffL3.push_back(0.);
@@ -1611,9 +1619,11 @@ void calc022024BackgroundJECRochJERUncertaintiesAndBTagEff(string datasetString,
     }
 
     //array for pt dimensions
-    std::vector<double> ptBins = {0, 30, 50, 70, 100, 140, 200, 300, 600, 1000};
+    //std::vector<double> ptBins = {0, 30, 50, 70, 100, 140, 200, 300, 600, 1000};
+    std::vector<double> ptBins = {0, 30, 60, 90, 120, 150, 180, 210, 240, 270};
     //array for eta dimensions
-    std::vector<double> etaBins = {0,2.5};
+    //std::vector<double> etaBins = {0,2.5};
+    std::vector<double> etaBins = {0, 0.625, 1.25, 1.875};
     //array for flavor dimensions
     std::vector<int> flavorBins = {0,4,5};
 
@@ -2579,7 +2589,8 @@ void calc022024BackgroundJECRochJERUncertaintiesAndBTagEff(string datasetString,
     }
 
     // Dimensions of the 3D vector
-    const int dim1 = 10, dim2 = 2, dim3 = 3;
+    //const int dim1 = 10, dim2 = 2, dim3 = 3;
+    const int dim1 = ptBins.size(), dim2 = etaBins.size(), dim3 = flavorBins.size();
     btagOutFile << "nJetsCtrAr_" + saveName+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+" = [";
     
 
