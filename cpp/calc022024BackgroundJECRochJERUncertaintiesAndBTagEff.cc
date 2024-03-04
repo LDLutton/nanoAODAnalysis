@@ -1593,9 +1593,9 @@ void calc022024BackgroundJECRochJERUncertaintiesAndBTagEff(string datasetString,
     btagEffTree->Branch("btagEffL",&btagEffL);
     */
     //fill the 3d vectors with 0s
-    nPtBins = 10;
-    nEtaBins = 4;
-    nFlavorBins = 3;
+    int nPtBins = 10;
+    int nEtaBins = 4;
+    int nFlavorBins = 3;
     for (int i=0; i<nPtBins; i++){
         std::vector<std::vector<int>> nJetsCtrL2;
         std::vector<std::vector<int>> nJetsPassBtagCtrL2;
