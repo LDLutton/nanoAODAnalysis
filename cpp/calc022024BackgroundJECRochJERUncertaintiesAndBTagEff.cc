@@ -1050,7 +1050,7 @@ void calc022024BackgroundJECRochJERUncertaintiesAndBTagEff(string datasetString,
     //convert int to str
 
 
-    std::string outFileStr = "HLTTrimmedFilteredForAnalysis"+saveName+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+    std::string outFileStr = "HLTTrimmedFilteredForAnalysis"+saveName+yearNameStr+"_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
     std::cout << "OutFile: " << outFileStr << "\n";
     TFile *outFile = new TFile(outFileStr.c_str(),"RECREATE");
 
