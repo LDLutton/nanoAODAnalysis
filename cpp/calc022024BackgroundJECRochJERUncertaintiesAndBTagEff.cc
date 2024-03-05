@@ -2383,6 +2383,9 @@ void calc022024BackgroundJECRochJERUncertaintiesAndBTagEff(string datasetString,
             HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZL = *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ;
             HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8L = *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8;
 
+            HLT_Ele27_WPTight_GsfL = *HLT_Ele27_WPTight_Gsf;
+            HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL = *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ;
+
             
 
 
