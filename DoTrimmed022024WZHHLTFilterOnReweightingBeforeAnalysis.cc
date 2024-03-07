@@ -55,6 +55,7 @@ void DoTrimmed022024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
 
     if (datasetString == "testRun") testRun = true;
     if (datasetString == "SDC2V2MCWZHReweight") SDC2V2MCWZHReweight = true;
+    if (datasetString == "SDC2V2MCWZH17Reweight") SDC2V2MCWZH17Reweight = true;
     //Analyzer will run over all files put into fileAr
 
     std::vector<std::string> fileAr;
