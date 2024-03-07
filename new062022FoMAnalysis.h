@@ -5,6 +5,8 @@ bool endAfter = false;
 int NToStart = 0;
 int NToEnd = 20;
 
+bool useSingleLepHLT = false;
+
 bool useTighterCut = false;
 
 bool FoMOnHiggsCut = true;

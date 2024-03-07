@@ -101,6 +101,10 @@ void DoTrimmed022024HLTFilterOnReweightingBeforeAnalysis(int fileInd, string dat
         std::cout << "ERROR. NO INPUT DATASET NAME GIVEN\n";
     }
 
+    if (!useSingleLepHLT){
+        saveName = saveName+"_NoSLHLT";
+    }
+
     std::cout << "Doing " << saveName << "\n";
     //Setting up outfile for tree
     std::string outFileStr = "HLTTrimmedFilteredForAnalysis"+saveName+"_"+std::to_string(fileInd)+".root";
@@ -2659,11 +2663,16 @@ void DoTrimmed022024HLTFilterOnReweightingBeforeAnalysis(int fileInd, string dat
                 std::cout <<"Passed flag\n";
             }
 
-
+            bool passHLTBool = (*HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ || *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8);
+            if (useSingleLepHLT) {
+                passHLTBool = (passHLTBool || *HLT_IsoMu27 || *HLT_Mu50 || *HLT_Ele32_WPTight_Gsf_L1DoubleEG);
+            }
+            /*
             bool passHLTBool = (*HLT_Ele32_WPTight_Gsf_L1DoubleEG || 
             *HLT_IsoMu27 || *HLT_Mu50 || 
             *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ || 
             *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8);
+            */
             //std::cout << testPassHLTBool << " " << passHLTBool << "\n";
             if (!passHLTBool) continue;
             passHLTCtr += 1;

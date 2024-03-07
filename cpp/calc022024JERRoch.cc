@@ -74,6 +74,10 @@ void calc022024JERRoch(string datasetString){
 
 
     std::vector<std::string> fileAr;
+    string NoSLString = "";
+    if (!useSingleLepHLT){
+        NoSLString = "_NoSLHLT"
+    }
 
 
     std::string saveName;
@@ -105,54 +109,56 @@ void calc022024JERRoch(string datasetString){
 
     UInt_t yearType = 0;
 
+
+
     if (SDC2V2MCZZHReweightTrimmed){
         saveName = "SDC2V2MCZZHReweightTrimmed";
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweight_0.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweight"+NoSLString+"_0.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SDC2V2MCZZH17ReweightTrimmed){
         saveName = "SDC2V2MCZZH17ReweightTrimmed";
         yearType = 1;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH17Reweight_0.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH17Reweight"+NoSLString+"_0.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SDC2V2MCZZH16ReweightTrimmed){
         saveName = "SDC2V2MCZZH16ReweightTrimmed";
         yearType = 2;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16Reweight_0.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16Reweight"+NoSLString+"_0.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SDC2V2MCZZH16APVReweightTrimmed){
         saveName = "SDC2V2MCZZH16APVReweightTrimmed";
         yearType = 3;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16APVReweight_0.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16APVReweight"+NoSLString+"_0.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SDC2V2MCWZHReweightTrimmed){
         saveName = "SDC2V2MCWZHReweightTrimmed";
         datasetType = 25;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCWZHReweight_0.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCWZHReweight"+NoSLString+"_0.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SDC2V2MCWZH17ReweightTrimmed){
         saveName = "SDC2V2MCWZH17ReweightTrimmed";
         datasetType = 25;
         yearType = 1;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCWZH17Reweight_0.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCWZH17Reweight"+NoSLString+"_0.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SDC2V2MCWZH16ReweightTrimmed){
         saveName = "SDC2V2MCWZH16ReweightTrimmed";
         datasetType = 25;
         yearType = 2;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCWZH16Reweight_0.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCWZH16Reweight"+NoSLString+"_0.root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SDC2V2MCWZH16APVReweightTrimmed){
         saveName = "SDC2V2MCWZH16APVReweightTrimmed";
         datasetType = 25;
         yearType = 3;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCWZH16APVReweight_0.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCWZH16APVReweight"+NoSLString+"_0.root";
         fileAr.push_back(tmpStrWithPath);
     }
 
@@ -163,6 +169,10 @@ void calc022024JERRoch(string datasetString){
     }
     else{
         std::cout << "ERROR. NO INPUT DATASET NAME GIVEN\n";
+    }
+
+    if (!useSingleLepHLT){
+        saveName = saveName+NoSLString;
     }
 
     std::cout << "Doing " << saveName << "\n";
