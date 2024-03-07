@@ -66,12 +66,20 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
     bool SDC2V2MCZZH17ReweightTrimmed = false;
     bool SDC2V2MCZZH16ReweightTrimmed = false;
     bool SDC2V2MCZZH16APVReweightTrimmed = false;
+    bool SDC2V2MCWZHReweightTrimmed = false;
+    bool SDC2V2MCWZH17ReweightTrimmed = false;
+    bool SDC2V2MCWZH16ReweightTrimmed = false;
+    bool SDC2V2MCWZH16APVReweightTrimmed = false;
 
     if (datasetString == "testRun") testRun = true;
     if (datasetString == "SDC2V2MCZZHReweightTrimmed") SDC2V2MCZZHReweightTrimmed = true;
     if (datasetString == "SDC2V2MCZZH17ReweightTrimmed") SDC2V2MCZZH17ReweightTrimmed = true;
     if (datasetString == "SDC2V2MCZZH16ReweightTrimmed") SDC2V2MCZZH16ReweightTrimmed = true;
     if (datasetString == "SDC2V2MCZZH16APVReweightTrimmed") SDC2V2MCZZH16APVReweightTrimmed = true;
+    if (datasetString == "SDC2V2MCWZHReweightTrimmed") SDC2V2MCWZHReweightTrimmed = true;
+    if (datasetString == "SDC2V2MCWZH17ReweightTrimmed") SDC2V2MCWZH17ReweightTrimmed = true;
+    if (datasetString == "SDC2V2MCWZH16ReweightTrimmed") SDC2V2MCWZH16ReweightTrimmed = true;
+    if (datasetString == "SDC2V2MCWZH16APVReweightTrimmed") SDC2V2MCWZH16APVReweightTrimmed = true;
 
     if (datasetString == "LaraTest") LaraTest = true;
 
@@ -130,6 +138,46 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
         isBackground = false;
         std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16APVReweightTrimmed_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16APVReweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (SDC2V2MCZZHReweightTrimmed){
+        saveName = "SDC2V2MCZZHReweightTrimmed";
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        //std::string tmpStrWithPath = "/afs/crc.nd.edu/user/d/dlutton/Public/condorStuff/NanoAODToHistos/nanoAODAnalysis/cpp/HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweightTrimmed_WithJERRoch_0_0_0_1.root";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweightTrimmed_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (SDC2V2MCZZH17ReweightTrimmed){
+        saveName = "SDC2V2MCZZH17ReweightTrimmed";
+        yearType = 1;
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCZZH17ReweightTrimmed_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH17Reweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (SDC2V2MCWZH16ReweightTrimmed){
+        saveName = "SDC2V2MCWZH16ReweightTrimmed";
+        yearType = 2;
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCWZH16ReweightTrimmed_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCWZH16Reweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (SDC2V2MCWZH16APVReweightTrimmed){
+        saveName = "SDC2V2MCWZH16APVReweightTrimmed";
+        yearType = 3;
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisSDC2V2MCWZH16APVReweightTrimmed_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCWZH16APVReweight_WithJERRoch_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (testRun){
