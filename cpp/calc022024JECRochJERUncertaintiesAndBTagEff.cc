@@ -78,7 +78,7 @@ void calc022024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
     std::vector<std::string> fileAr;
     string NoSLString = "";
     if (!useSingleLepHLT){
-        NoSLString = "_NoSLHLT"
+        NoSLString = "_NoSLHLT";
     }
 
 

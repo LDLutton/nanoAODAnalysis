@@ -76,7 +76,7 @@ void calc022024JERRoch(string datasetString){
     std::vector<std::string> fileAr;
     string NoSLString = "";
     if (!useSingleLepHLT){
-        NoSLString = "_NoSLHLT"
+        NoSLString = "_NoSLHLT";
     }
 
 
