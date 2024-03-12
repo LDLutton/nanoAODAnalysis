@@ -1122,8 +1122,8 @@ void finish02292024Preselection(string datasetString, int JECCorInd, bool JECCor
                     tmpFJPNScore = FatJet_particleNetMD_Xbb[fatJetInd]/(FatJet_particleNetMD_Xbb[fatJetInd]+FatJet_particleNetMD_QCD[fatJetInd]);
                 }
                 if (tmpFJPt < AK8PtCut) continue;
-                if (tmpFJM > AK8MassCut) continue;
-                if (tmpFJSDM > AK8SDMassCut) continue;
+                if (tmpFJM < AK8MassCut) continue;
+                if (tmpFJSDM < AK8SDMassCut) continue;
                 if (calcDeltaR(tightLepOnePhi,tightLepOneEta,tmpFJPhi,tmpFJEta) < maxdRCut) continue;
                 if (calcDeltaR(tightLepTwoPhi,tightLepTwoEta,tmpFJPhi,tmpFJEta) < maxdRCut) continue;
                 passingJetExists = true;
