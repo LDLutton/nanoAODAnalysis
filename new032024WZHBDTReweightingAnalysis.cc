@@ -1549,6 +1549,32 @@ void new032024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
 
                     ZOneType_SL_L = -1;
                     ZTwoType_SL_L = -1;
+
+                    //HLT 
+                    HLT_Ele32_WPTight_Gsf_L1DoubleEG_SL_L = *HLT_Ele32_WPTight_Gsf_L1DoubleEGL;
+                    HLT_IsoMu27_SL_L = *HLT_IsoMu27L;
+                    HLT_Mu50_SL_L = *HLT_Mu50L;
+                    HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_SL_L = *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZL;
+                    HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_SL_L = *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8L;
+
+                    HLT_Ele27_WPTight_Gsf_SL_L = *HLT_Ele27_WPTight_GsfL;
+                    HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_SL_L = *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL;
+
+                    tightLepLeadIsElec_SL_L = *tightLepLeadIsElecL;
+                    tightLepTrailingIsElec_SL_L = *tightLepTrailingIsElecL;
+                    tightLepLeadIsMuon_SL_L = *tightLepLeadIsMuonL;
+                    tightLepTrailingIsMuon_SL_L = *tightLepTrailingIsMuonL;
+                    tightLepLeadInd_SL_L = *tightLepLeadIndL;
+                    tightLepTrailingInd_SL_L = *tightLepTrailingIndL;
+                
+                    tightLepLeadPt_SL_L = *tightLepLeadPtL;
+                    tightLepTrailingPt_SL_L = *tightLepTrailingPtL;
+                    tightLepLeadEta_SL_L = *tightLepLeadEtaL;
+                    tightLepTrailingEta_SL_L = *tightLepTrailingEtaL;
+                    tightLepLeadPhi_SL_L = *tightLepLeadPhiL;
+                    tightLepTrailingPhi_SL_L = *tightLepTrailingPhiL;
+                    tightLepLeadMass_SL_L = *tightLepLeadMassL;
+                    tightLepTrailingMass_SL_L = *tightLepTrailingMassL;
                     
                     nHDecayPID_SL_L = 0;
 
