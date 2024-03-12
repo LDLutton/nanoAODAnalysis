@@ -348,11 +348,22 @@ std::vector<Double_t> cutHadPassWeightedAr;
 std::vector<Double_t> cutLepOrSemiLepPassWeightedAr;
 std::vector<float> cutRangeAr;
 
-//btag WPs by year
+//btag tight WPs by year
 float bTagUL18Cut = 0.7100;
 float bTagUL17Cut = 0.7476;
 float bTagUL16Cut = 0.6377;
 float bTagUL16APVCut = 0.6502;
+
+
+//032024 UpdatedCuts
+
+float ptLeadElecCut = 25.;
+float ptLeadMuonCut = 19.;
+float ptTrailingElecCut = 18.;
+float ptTrailingMuonCut = 12.;
+
+float hFatJetPTBDTCut = 250.;
+
 
 //072023 Lepton Tight ttH ID cuts
 float ePtTightCut = 10.;
@@ -560,7 +571,7 @@ float bTagBDTCut = 1.0;
 
 //Higgs FJ cuts
 
-float hFatJetPTBDTCut = 200.;
+//float hFatJetPTBDTCut = 200.;
 
 
 float hFatJetParticleNetBDTCut = 0.0;
