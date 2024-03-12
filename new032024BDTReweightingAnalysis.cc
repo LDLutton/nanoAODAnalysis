@@ -685,11 +685,6 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
 
     UInt_t eventNAK4JetsPassingCuts_SL_L;
 
-    UInt_t eventNLooseElectrons_SL_L;
-    UInt_t eventNTightElectrons_SL_L;
-    UInt_t eventNLooseMuons_SL_L;
-    UInt_t eventNTightMuons_SL_L;
-
     Float_t selectedHiggsFJ_pt_SL_L;
     Float_t selectedHiggsFJ_eta_SL_L;
     Float_t selectedHiggsFJ_phi_SL_L;
@@ -845,12 +840,6 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     
 
     passingEvSemiLepTree->Branch("eventNAK4JetsPassingCuts_SL_L",&eventNAK4JetsPassingCuts_SL_L,"eventNAK4JetsPassingCuts_SL_L/i");
-
-    passingEvSemiLepTree->Branch("eventNLooseElectrons_SL_L",&eventNLooseElectrons_SL_L,"eventNLooseElectrons_SL_L/i");
-    passingEvSemiLepTree->Branch("eventNTightElectrons_SL_L",&eventNTightElectrons_SL_L,"eventNTightElectrons_SL_L/i");
-
-    passingEvSemiLepTree->Branch("eventNLooseMuons_SL_L",&eventNLooseMuons_SL_L,"eventNLooseMuons_SL_L/i");
-    passingEvSemiLepTree->Branch("eventNTightMuons_SL_L",&eventNTightMuons_SL_L,"eventNTightMuons_SL_L/i");
 
     passingEvSemiLepTree->Branch("selectedHiggsFJ_pt_SL_L",&selectedHiggsFJ_pt_SL_L,"selectedHiggsFJ_pt_SL_L/F");
     passingEvSemiLepTree->Branch("selectedHiggsFJ_eta_SL_L",&selectedHiggsFJ_eta_SL_L,"selectedHiggsFJ_eta_SL_L/F");
@@ -2531,12 +2520,6 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
 
                         eventNAK4JetsPassingCuts_SL_L = tmpnAK4JetsPassing;
 
-                        eventNLooseElectrons_SL_L = elecLooseCount;
-                        eventNTightElectrons_SL_L = elecTightCount;
-
-                        eventNLooseMuons_SL_L = muonLooseCount;
-                        eventNTightMuons_SL_L = muonTightCount;
-
                         selectedHiggsFJ_pt_SL_L = hFatJet_pt_fromHTag;
                         selectedZFJ_pt_SL_L = dRCheckVecAr[3].Pt();
                         selectedHiggsFJ_eta_SL_L = hFatJet_eta_fromHTag;
@@ -2708,12 +2691,6 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
                                 fixedGridRhoFastjetAll_SL_L = *fixedGridRhoFastjetAllL;
 
                                 eventNAK4JetsPassingCuts_SL_L = tmpnAK4JetsPassing;
-
-                                eventNLooseElectrons_SL_L = elecLooseCount;
-                                eventNTightElectrons_SL_L = elecTightCount;
-
-                                eventNLooseMuons_SL_L = muonLooseCount;
-                                eventNTightMuons_SL_L = muonTightCount;
 
                                 selectedHiggsFJ_pt_SL_L = hFatJet_pt_fromHTag;
                                 selectedZFJ_pt_SL_L = dRCheckVecAr[3].Pt();
@@ -3184,7 +3161,6 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
 
 
     outFile->cd();
-    passingEvLepTree->Write("",TObject::kOverwrite);
     passingEvSemiLepTree->Write("",TObject::kOverwrite);
     //btagEffTree->Write("",TObject::kOverwrite);
 
