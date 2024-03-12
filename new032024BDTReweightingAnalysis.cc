@@ -1461,19 +1461,21 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
                             tmpPtTrailingCut = ptTrailingElecCut;
                             Z1LeadSIP = Electron_sip3dL[*tightLepLeadIndL];
                             Z1TrailingSIP = Electron_sip3dL[*tightLepTrailingIndL];
+                            float tmpIso;
+                            float tmpIsoAdd = 0.;
 
                             if (*tightLepLeadPtL > 35){
-                                if (abs(Electron_etaL[*tightLepLeadIndL]) < 1.4) tmpAdd = max(0., Electron_dr03EcalRecHitSumEtL[*tightLepLeadIndL] - 1.);
-                                else tmpAdd = Electron_dr03EcalRecHitSumEtL[*tightLepLeadIndL];
-                                tmpIso = ( Electron_dr03TkSumPtL[*tightLepLeadIndL] + tmpAdd + Electron_dr03HcalDepth1TowerSumEtL[*tightLepLeadIndL] ) / Electron_ptL[*tightLepLeadIndL];
+                                if (abs(Electron_etaL[*tightLepLeadIndL]) < 1.4) tmpIsoAdd = max(0., Electron_dr03EcalRecHitSumEtL[*tightLepLeadIndL] - 1.);
+                                else tmpIsoAdd = Electron_dr03EcalRecHitSumEtL[*tightLepLeadIndL];
+                                tmpIso = ( Electron_dr03TkSumPtL[*tightLepLeadIndL] + tmpIsoAdd + Electron_dr03HcalDepth1TowerSumEtL[*tightLepLeadIndL] ) / Electron_ptL[*tightLepLeadIndL];
                             }
                             else tmpIso = Electron_pfRelIso03_allL[*tightLepLeadIndL];
                             Z1LeadIso = tmpIso;
                         
                             if (tightLepTrailingPtL > 35){
-                                if (abs(Electron_etaL[*tightLepTrailingIndL]) < 1.4) tmpAdd = max(0., Electron_dr03EcalRecHitSumEtL[*tightLepTrailingIndL] - 1.);
-                                else tmpAdd = Electron_dr03EcalRecHitSumEtL[*tightLepTrailingIndL];
-                                tmpIso = ( Electron_dr03TkSumPtL[*tightLepTrailingIndL] + tmpAdd + Electron_dr03HcalDepth1TowerSumEtL[*tightLepTrailingIndL] ) / Electron_ptL[*tightLepTrailingIndL];
+                                if (abs(Electron_etaL[*tightLepTrailingIndL]) < 1.4) tmpIsoAdd = max(0., Electron_dr03EcalRecHitSumEtL[*tightLepTrailingIndL] - 1.);
+                                else tmpIsoAdd = Electron_dr03EcalRecHitSumEtL[*tightLepTrailingIndL];
+                                tmpIso = ( Electron_dr03TkSumPtL[*tightLepTrailingIndL] + tmpIsoAdd + Electron_dr03HcalDepth1TowerSumEtL[*tightLepTrailingIndL] ) / Electron_ptL[*tightLepTrailingIndL];
                             }
                             else tmpIso = Electron_pfRelIso03_allL[*tightLepTrailingIndL];
                             Z1TrailingIso = tmpIso;
