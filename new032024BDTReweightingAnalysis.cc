@@ -1124,12 +1124,8 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
 
         float Z1LeadIso;
         float Z1TrailingIso;
-        float Z2LeadIso;
-        float Z2TrailingIso;
         float Z1LeadSIP;
         float Z1TrailingSIP;
-        float Z2LeadSIP;
-        float Z2TrailingSIP;
 
         std::vector<UInt_t> muonCandIndAr;
         std::vector<UInt_t> elecCandIndAr;
@@ -1465,6 +1461,22 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
                             tmpPtTrailingCut = ptTrailingElecCut;
                             Z1LeadSIP = Electron_sip3dL[*tightLepLeadIndL];
                             Z1TrailingSIP = Electron_sip3dL[*tightLepTrailingIndL];
+
+                            if (*tightLepLeadPtL > 35){
+                                if (abs(Electron_etaL[*tightLepLeadIndL]) < 1.4) tmpAdd = max(0., Electron_dr03EcalRecHitSumEtL[*tightLepLeadIndL] - 1.);
+                                else tmpAdd = Electron_dr03EcalRecHitSumEtL[*tightLepLeadIndL];
+                                tmpIso = ( Electron_dr03TkSumPtL[*tightLepLeadIndL] + tmpAdd + Electron_dr03HcalDepth1TowerSumEtL[*tightLepLeadIndL] ) / Electron_ptL[*tightLepLeadIndL];
+                            }
+                            else tmpIso = Electron_pfRelIso03_allL[*tightLepLeadIndL];
+                            Z1LeadIso = tmpIso;
+                        
+                            if (tightLepTrailingPtL > 35){
+                                if (abs(Electron_etaL[*tightLepTrailingIndL]) < 1.4) tmpAdd = max(0., Electron_dr03EcalRecHitSumEtL[*tightLepTrailingIndL] - 1.);
+                                else tmpAdd = Electron_dr03EcalRecHitSumEtL[*tightLepTrailingIndL];
+                                tmpIso = ( Electron_dr03TkSumPtL[*tightLepTrailingIndL] + tmpAdd + Electron_dr03HcalDepth1TowerSumEtL[*tightLepTrailingIndL] ) / Electron_ptL[*tightLepTrailingIndL];
+                            }
+                            else tmpIso = Electron_pfRelIso03_allL[*tightLepTrailingIndL];
+                            Z1TrailingIso = tmpIso;
                             
                         }
                     }
@@ -1477,6 +1489,8 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
                             tmpPtTrailingCut = mPtCut;
                             Z1LeadSIP = Muon_sip3dL[*tightLepLeadIndL];
                             Z1TrailingSIP = Muon_sip3dL[*tightLepTrailingIndL];
+                            Z1LeadIso = Muon_pfRelIso03_allL[*tightLepLeadIndL];
+                            Z1TrailingIso = Muon_pfRelIso03_allL[*tightLepTrailingIndL];
                         }
                     }
                 }
@@ -1485,6 +1499,7 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
                     std::cout << "neither tightLepLeadIsElecL nor tightLepLeadIsMuonL is true. Event: " << evCount << "\n";
                 }
                 if (!chargeFlavorMatch) continue;
+                Z1IsMuon = *tightLepLeadIsMuonL;
                 
                 //Doing the semilep cuts
 
@@ -1501,6 +1516,7 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
                     dRCheckVecAr.push_back(tmpTrailingLepVec);
                     Z1LeadPt = *tightLepLeadPtL;
                     Z1TrailingPt = *tightLepTrailingPtL;
+                    selectedLeptons_InvMass = tmpZ1M;
                     
 
                 
