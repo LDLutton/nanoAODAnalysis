@@ -465,7 +465,9 @@ void finish03132024Preselection(string datasetString, int JECCorInd, bool JECCor
     Float_t AK4TopDEtaLeadMassL;
     Float_t AK4TopDEtaTrailingMassL;
     //Vector array for Veto lepton indices
+    UInt_t nVetoElecL;
     std::vector<Int_t> vetoElecIndL;
+    UInt_t nVetoMuonL;
     std::vector<Int_t> vetoMuonIndL;
 
 
@@ -1536,6 +1538,8 @@ void finish03132024Preselection(string datasetString, int JECCorInd, bool JECCor
                 AK4TopDEtaTrailingMassL = tmpVBFJetMassOne;
             }
             //Veto leptons
+            nVetoElecL = vetoElecInd.size();
+            nVetoMuonL = vetoMuonInd.size();
             for (UInt_t nVEItr =0; nVEItr < vetoElecInd.size();nVEItr++){
                 vetoElecIndL.push_back(vetoElecInd[nVEItr]);
             }
