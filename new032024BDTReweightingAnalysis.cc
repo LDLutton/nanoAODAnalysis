@@ -177,6 +177,7 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     UInt_t passVBFJetBVetoCtr = 0;
     UInt_t passVBFJetBVetoSemiLepCtr = 0;
     UInt_t passVBFJetsCtr = 0;
+    UInt_t passLepVetoCtr = 0;
     UInt_t passAsSemiLepCtr = 0;
 
 
@@ -211,6 +212,8 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     std::vector<std::vector<std::vector<Double_t>>> passVBFJetBVetoWeightedSemiLepCtr(2,zeroTypeVec);
 
     std::vector<std::vector<std::vector<Double_t>>> passVBFJetsWeightedCtr(2,zeroTypeVec);
+
+    std::vector<std::vector<std::vector<Double_t>>> passLepVetoWeightedCtr(2,zeroTypeVec);
 
     std::vector<std::vector<std::vector<Double_t>>> passAsSemiLepWeightedCtr(2,zeroTypeVec);
 
@@ -248,6 +251,7 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     UInt_t passVBFJetBVetoSemiLepGenLepCtr = 0;
     UInt_t passVBFJetBVetoHadGenLepCtr = 0;
     UInt_t passVBFJetsGenLepCtr = 0;
+    UInt_t passLepVetoGenLepCtr = 0;
     UInt_t passAsLepGenLepCtr = 0;
     UInt_t passAsSemiLepGenLepCtr = 0;
     UInt_t passAsHadGenLepCtr = 0;
@@ -283,6 +287,7 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     UInt_t passVBFJetBVetoSemiLepGenSemiLepCtr = 0;
     UInt_t passVBFJetBVetoHadGenSemiLepCtr = 0;
     UInt_t passVBFJetsGenSemiLepCtr = 0;
+    UInt_t passLepVetoGenSemiLepCtr = 0;
     UInt_t passAsLepGenSemiLepCtr = 0;
     UInt_t passAsSemiLepGenSemiLepCtr = 0;
     UInt_t passAsHadGenSemiLepCtr = 0;
@@ -320,6 +325,7 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     UInt_t passVBFJetBVetoSemiLepGenHadCtr = 0;
     UInt_t passVBFJetBVetoHadGenHadCtr = 0;
     UInt_t passVBFJetsGenHadCtr = 0;
+    UInt_t passLepVetoGenHadCtr = 0;
     UInt_t passAsLepGenHadCtr = 0;
     UInt_t passAsSemiLepGenHadCtr = 0;
     UInt_t passAsHadGenHadCtr = 0;
@@ -355,6 +361,7 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     UInt_t passVBFJetBVetoSemiLepGenOtherCtr = 0;
     UInt_t passVBFJetBVetoHadGenOtherCtr = 0;
     UInt_t passVBFJetsGenOtherCtr = 0;
+    UInt_t passLepVetoGenOtherCtr = 0;
     UInt_t passAsLepGenOtherCtr = 0;
     UInt_t passAsSemiLepGenOtherCtr = 0;
     UInt_t passAsHadGenOtherCtr = 0;
@@ -394,6 +401,7 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     UInt_t passVBFJetBVetoSemiLepGenLepNoHTobbCtr = 0;
     UInt_t passVBFJetBVetoHadGenLepNoHTobbCtr = 0;
     UInt_t passVBFJetsGenLepNoHTobbCtr = 0;
+    UInt_t passLepVetoGenLepNoHTobbCtr = 0;
     UInt_t passAsLepGenLepNoHTobbCtr = 0;
     UInt_t passAsSemiLepGenLepNoHTobbCtr = 0;
     UInt_t passAsHadGenLepNoHTobbCtr = 0;
@@ -430,6 +438,7 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     UInt_t passVBFJetBVetoSemiLepGenSemiLepNoHTobbCtr = 0;
     UInt_t passVBFJetBVetoHadGenSemiLepNoHTobbCtr = 0;
     UInt_t passVBFJetsGenSemiLepNoHTobbCtr = 0;
+    UInt_t passLepVetoGenSemiLepNoHTobbCtr = 0;
     UInt_t passAsLepGenSemiLepNoHTobbCtr = 0;
     UInt_t passAsSemiLepGenSemiLepNoHTobbCtr = 0;
     UInt_t passAsHadGenSemiLepNoHTobbCtr = 0;
@@ -466,6 +475,7 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     UInt_t passVBFJetBVetoSemiLepGenHadNoHTobbCtr = 0;
     UInt_t passVBFJetBVetoHadGenHadNoHTobbCtr = 0;
     UInt_t passVBFJetsGenHadNoHTobbCtr = 0;
+    UInt_t passLepVetoGenHadNoHTobbCtr = 0;
     UInt_t passAsLepGenHadNoHTobbCtr = 0;
     UInt_t passAsSemiLepGenHadNoHTobbCtr = 0;
     UInt_t passAsHadGenHadNoHTobbCtr = 0;
@@ -501,6 +511,7 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     UInt_t passVBFJetBVetoSemiLepGenOtherNoHTobbCtr = 0;
     UInt_t passVBFJetBVetoHadGenOtherNoHTobbCtr = 0;
     UInt_t passVBFJetsGenOtherNoHTobbCtr = 0;
+    UInt_t passLepVetoGenOtherNoHTobbCtr = 0;
     UInt_t passAsLepGenOtherNoHTobbCtr = 0;
     UInt_t passAsSemiLepGenOtherNoHTobbCtr = 0;
     UInt_t passAsHadGenOtherNoHTobbCtr = 0;
@@ -1096,6 +1107,11 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
         TTreeReaderValue<Float_t> tightLepLeadMassL(myEventsReader,"tightLepLeadMassL");
         TTreeReaderValue<Float_t> tightLepTrailingMassL(myEventsReader,"tightLepTrailingMassL");
 
+        TTreeReaderValue<UInt_t> nVetoElecL(myEventsReader,"nVetoElecL");
+        TTreeReaderValue<UInt_t> nVetoMuonL(myEventsReader,"nVetoMuonL");
+        TTreeReaderArray<Int_t> vetoElecIndL(myEventsReader,"vetoElecIndL");
+        TTreeReaderArray<Int_t> vetoMuonIndL(myEventsReader,"vetoMuonIndL");
+
 
 
 
@@ -1312,7 +1328,6 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
             Int_t Z1LeadCharge = 0;
             Int_t Z1TrailingCharge = 0;
 
-            if (debug) cout << "trying Leptonic\n";
             tryingLepCtr += 1;
             std::vector<Float_t> LepInvMass;
             std::vector<Int_t> FJIndAr;
@@ -2171,6 +2186,10 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
                 tmpPtScalarSum += dRCheckVecAr[dRCheckVecInd].Pt();
             }
 
+            dRCheckVecAr.push_back(tmpLeadJetVec);
+            dRCheckVecAr.push_back(tmpTrailingJetVec);
+            
+
             if (passesCutsBool){
                 passVBFJetsCtr += 1;
                 //passVBFJetsWeightedCtr += tmpGenWeights;
@@ -2221,6 +2240,89 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
                         }
                     }
                 }
+
+
+                bool passVetoLep = true;
+                //if any veto leptons, check if they are close to the other objects
+                //if there are any that aren't close, veto the event
+                for (UInt_t elecItr=0; elecItr < *nVetoElecL; elecItr++){
+                    //Loop through dRCheckVecAr
+                    for (UInt_t dRCheckVecInd=0; dRCheckVecInd<dRCheckVecAr.size();dRCheckVecInd++) {
+                        float tmpDeltaR = calcDeltaR(Electron_phiL[vetoElecIndL[elecItr]],Electron_etaL[vetoElecIndL[elecItr]],dRCheckVecAr[dRCheckVecInd].Phi(),dRCheckVecAr[dRCheckVecInd].Eta());
+
+                        if (tmpDeltaR > lepVetodRCut){
+                            passVetoLep = false;
+                            break;
+                        }
+                    }
+                    if (!passVetoLep) break;
+                }
+                if (!passVetoLep) continue;
+                //now check muons
+                for (UInt_t muItr=0; muItr < *nVetoMuonL; muItr++){
+                    //Loop through dRCheckVecAr
+                    for (UInt_t dRCheckVecInd=0; dRCheckVecInd<dRCheckVecAr.size();dRCheckVecInd++) {
+                        float tmpDeltaR = calcDeltaR(Muon_phiL[vetoMuonIndL[muItr]],Muon_etaL[vetoMuonIndL[muItr]],dRCheckVecAr[dRCheckVecInd].Phi(),dRCheckVecAr[dRCheckVecInd].Eta());
+
+                        if (tmpDeltaR > lepVetodRCut){
+                            passVetoLep = false;
+                            break;
+                        }
+                    }
+                    if (!passVetoLep) break;
+                }
+                if (!passVetoLep) continue;
+
+                passLepVetoCtr += 1;
+
+                if (*HTobbBoolL){
+                    if (*genChannelL == 0) {
+                        passLepVetoGenLepCtr += 1;
+                        //passLepVetoGenLepWeightedCtr += tmpGenWeights;
+                    }
+                    if (*genChannelL == 1) {
+                        passLepVetoGenSemiLepCtr += 1;
+                        //passLepVetoGenSemiLepWeightedCtr += tmpGenWeights;
+                    }
+                    if (*genChannelL == 2) {
+                        passLepVetoGenHadCtr += 1;
+                        //passLepVetoGenHadWeightedCtr += tmpGenWeights;
+                    }
+                    if (*genChannelL == 3) {
+                        passLepVetoGenOtherCtr += 1;
+                        //passLepVetoGenOtherWeightedCtr += tmpGenWeights;
+                    }
+                }
+                else {
+                    if (*genChannelL == 0) {
+                        passLepVetoGenLepNoHTobbCtr += 1;
+                        //passLepVetoGenLepNoHTobbWeightedCtr += tmpGenWeights;
+                    }
+                    if (*genChannelL == 1) {
+                        passLepVetoGenSemiLepNoHTobbCtr += 1;
+                        //passLepVetoGenSemiLepNoHTobbWeightedCtr += tmpGenWeights;
+                    }
+                    if (*genChannelL == 2) {
+                        passLepVetoGenHadNoHTobbCtr += 1;
+                        //passLepVetoGenHadNoHTobbWeightedCtr += tmpGenWeights;
+                    }
+                    if (*genChannelL == 3) {
+                        passLepVetoGenOtherNoHTobbCtr += 1;
+                        //passLepVetoGenOtherNoHTobbWeightedCtr += tmpGenWeights;
+                    }
+                }
+
+                for (unsigned int maskHtobbInt = 0; maskHtobbInt < falseHtobbMask.size(); maskHtobbInt++){
+                    for (unsigned int maskTypeInt = 0; maskTypeInt < falseHtobbMask[maskHtobbInt].size(); maskTypeInt++){
+                        if (falseHtobbMask[maskHtobbInt][maskTypeInt]){
+                            passLepVetoWeightedCtr[maskHtobbInt][maskTypeInt][0] += *genWeightL;
+                            for (unsigned int C2VCtr = 1; C2VCtr < passLepVetoWeightedCtr[maskHtobbInt][maskTypeInt].size(); C2VCtr++){
+                                passLepVetoWeightedCtr[maskHtobbInt][maskTypeInt][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
+                            }
+                        }
+                    }
+                }
+
 
                 //get number of passing VBFJets
 
@@ -2800,6 +2902,10 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     std::vector<UInt_t> passVBFJetsTypeNoHTobbCtrAr {passVBFJetsGenLepNoHTobbCtr,passVBFJetsGenSemiLepNoHTobbCtr,passVBFJetsGenHadNoHTobbCtr,passVBFJetsGenOtherNoHTobbCtr};
     std::vector<std::vector<UInt_t>> passVBFJetsHTobbCtrAr {passVBFJetsTypeCtrAr,passVBFJetsTypeNoHTobbCtrAr};
 
+    std::vector<UInt_t> passLepVetoTypeCtrAr {passLepVetoGenLepCtr,passLepVetoGenSemiLepCtr,passLepVetoGenHadCtr,passLepVetoGenOtherCtr};
+    std::vector<UInt_t> passLepVetoTypeNoHTobbCtrAr {passLepVetoGenLepNoHTobbCtr,passLepVetoGenSemiLepNoHTobbCtr,passLepVetoGenHadNoHTobbCtr,passLepVetoGenOtherNoHTobbCtr};
+    std::vector<std::vector<UInt_t>> passLepVetoHTobbCtrAr {passLepVetoTypeCtrAr,passLepVetoTypeNoHTobbCtrAr};
+
     std::vector<UInt_t> passAsLepTypeCtrAr {passAsLepGenLepCtr,passAsLepGenSemiLepCtr,passAsLepGenHadCtr,passAsLepGenOtherCtr};
     std::vector<UInt_t> passAsLepTypeNoHTobbCtrAr {passAsLepGenLepNoHTobbCtr,passAsLepGenSemiLepNoHTobbCtr,passAsLepGenHadNoHTobbCtr,passAsLepGenOtherNoHTobbCtr};
     std::vector<std::vector<UInt_t>> passAsLepHTobbCtrAr {passAsLepTypeCtrAr,passAsLepTypeNoHTobbCtrAr};
@@ -2814,10 +2920,10 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     
 
     std::vector<std::vector<std::vector<UInt_t>>> ctrAr {startingHTobbCtrAr,tryingSemiLepChannelHTobbCtrAr,passEnoughFJsInSemiLepChannelHTobbCtrAr,passEnoughLepsInSemiLepChannelHTobbCtrAr,passSemiLepLepCutChannelHTobbCtrAr,passHiggsFJInSemiLepChannelHTobbCtrAr,passFJInSemiLepChannelHTobbCtrAr,passChannelHTobbCtrAr,passLepOrSemiLepChannelHTobbCtrAr,passLepChannelHTobbCtrAr,
-    passSemiLepChannelHTobbCtrAr,passHadChannelHTobbCtrAr,passHiggsFJPreSTHTobbCtrAr,passHiggsFJPreSTLepHTobbCtrAr,passHiggsFJPreSTSemiLepHTobbCtrAr,passHiggsFJPreSTHadHTobbCtrAr,passHiggsFJHTobbCtrAr,passHiggsFJLepHTobbCtrAr,passHiggsFJSemiLepHTobbCtrAr,passHiggsFJHadHTobbCtrAr,passVBFJetBVetoHTobbCtrAr,passVBFJetBVetoLepHTobbCtrAr,passVBFJetBVetoSemiLepHTobbCtrAr,passVBFJetBVetoHadHTobbCtrAr,passVBFJetsHTobbCtrAr,passAsLepHTobbCtrAr,passAsSemiLepHTobbCtrAr,passAsHadHTobbCtrAr};
+    passSemiLepChannelHTobbCtrAr,passHadChannelHTobbCtrAr,passHiggsFJPreSTHTobbCtrAr,passHiggsFJPreSTLepHTobbCtrAr,passHiggsFJPreSTSemiLepHTobbCtrAr,passHiggsFJPreSTHadHTobbCtrAr,passHiggsFJHTobbCtrAr,passHiggsFJLepHTobbCtrAr,passHiggsFJSemiLepHTobbCtrAr,passHiggsFJHadHTobbCtrAr,passVBFJetBVetoHTobbCtrAr,passVBFJetBVetoLepHTobbCtrAr,passVBFJetBVetoSemiLepHTobbCtrAr,passVBFJetBVetoHadHTobbCtrAr,passVBFJetsHTobbCtrAr,passLepVetoHTobbCtrAr,passAsLepHTobbCtrAr,passAsSemiLepHTobbCtrAr,passAsHadHTobbCtrAr};
 
     std::vector<string> ctrNameAr {"startingHTobbCtrAr","tryingSemiLepChannelHTobbCtrAr","passEnoughFJsInSemiLepChannelHTobbCtrAr","passEnoughLepsInSemiLepChannelHTobbCtrAr","passSemiLepLepCutChannelHTobbCtrAr","passHiggsFJInSemiLepChannelHTobbCtrAr","passFJInSemiLepChannelHTobbCtrAr","passChannelHTobbCtrAr","passLepOrSemiLepChannelHTobbCtrAr","passLepChannelHTobbCtrAr",
-    "passSemiLepChannelHTobbCtrAr","passHadChannelHTobbCtrAr","passHiggsFJPreSTHTobbCtrAr","passHiggsFJPreSTLepHTobbCtrAr","passHiggsFJPreSTSemiLepHTobbCtrAr","passHiggsFJPreSTHadHTobbCtrAr","passHiggsFJHTobbCtrAr","passHiggsFJLepHTobbCtrAr","passHiggsFJSemiLepHTobbCtrAr","passHiggsFJHadHTobbCtrAr","passVBFJetBVetoHTobbCtrAr","passVBFJetBVetoLepHTobbCtrAr","passVBFJetBVetoSemiLepHTobbCtrAr","passVBFJetBVetoHadHTobbCtrAr","passVBFJetsHTobbCtrAr","passAsLepHTobbCtrAr","passAsSemiLepHTobbCtrAr","passAsHadHTobbCtrAr"};
+    "passSemiLepChannelHTobbCtrAr","passHadChannelHTobbCtrAr","passHiggsFJPreSTHTobbCtrAr","passHiggsFJPreSTLepHTobbCtrAr","passHiggsFJPreSTSemiLepHTobbCtrAr","passHiggsFJPreSTHadHTobbCtrAr","passHiggsFJHTobbCtrAr","passHiggsFJLepHTobbCtrAr","passHiggsFJSemiLepHTobbCtrAr","passHiggsFJHadHTobbCtrAr","passVBFJetBVetoHTobbCtrAr","passVBFJetBVetoLepHTobbCtrAr","passVBFJetBVetoSemiLepHTobbCtrAr","passVBFJetBVetoHadHTobbCtrAr","passVBFJetsHTobbCtrAr","passLepVetoHTobbCtrAr","passAsLepHTobbCtrAr","passAsSemiLepHTobbCtrAr","passAsHadHTobbCtrAr"};
 
 
 
@@ -2850,6 +2956,8 @@ void new032024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     std::cout << "UInt_t " << saveName << "PassVBFJetBVetoSemiLepCtr = " << passVBFJetBVetoSemiLepCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "PassVBFJetsCtr = " << passVBFJetsCtr << "\n";
+    std::cout << "------------------------\n";
+    std::cout << "UInt_t " << saveName << "PassLepVetoCtr = " << passLepVetoCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "PassAsSemiLepCtr = " << passAsSemiLepCtr << "\n";
     std::cout << "------------------------\n";

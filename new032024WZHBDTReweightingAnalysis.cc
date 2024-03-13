@@ -174,6 +174,7 @@ void new032024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
     UInt_t passVBFJetBVetoCtr = 0;
     UInt_t passVBFJetBVetoSemiLepCtr = 0;
     UInt_t passVBFJetsCtr = 0;
+    UInt_t passLepVetoCtr = 0;
     UInt_t passAsSemiLepCtr = 0;
 
 
@@ -208,6 +209,8 @@ void new032024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
     std::vector<std::vector<Double_t>> passVBFJetBVetoWeightedSemiLepCtr(2,zeroC2VVec);
     
     std::vector<std::vector<Double_t>> passVBFJetsWeightedCtr(2,zeroC2VVec);
+
+    std::vector<std::vector<Double_t>> passLepVetoWeightedCtr(2,zeroC2VVec);
 
     std::vector<std::vector<Double_t>> passAsSemiLepWeightedCtr(2,zeroC2VVec);
     std::vector<std::vector<Double_t>> passSemiLepLepCutWeightedCtr(2,zeroC2VVec);
@@ -780,6 +783,11 @@ void new032024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         TTreeReaderValue<Float_t> tightLepLeadMassL(myEventsReader,"tightLepLeadMassL");
         TTreeReaderValue<Float_t> tightLepTrailingMassL(myEventsReader,"tightLepTrailingMassL");
 
+        TTreeReaderValue<UInt_t> nVetoElecL(myEventsReader,"nVetoElecL");
+        TTreeReaderValue<UInt_t> nVetoMuonL(myEventsReader,"nVetoMuonL");
+        TTreeReaderArray<Int_t> vetoElecIndL(myEventsReader,"vetoElecIndL");
+        TTreeReaderArray<Int_t> vetoMuonIndL(myEventsReader,"vetoMuonIndL");
+
         TTreeReader myEvNumReader("evNumTree", tmpfile);
         TTreeReaderValue<UInt_t> nEv(myEvNumReader, "nEv");
         TTreeReaderValue<UInt_t> nEvPass(myEvNumReader, "nEvPass");
@@ -959,7 +967,6 @@ void new032024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
             Int_t Z1LeadCharge = 0;
             Int_t Z1TrailingCharge = 0;
 
-            if (debug) cout << "trying Leptonic\n";
             tryingLepCtr += 1;
             std::vector<Float_t> LepInvMass;
             std::vector<Int_t> FJIndAr;
@@ -1396,6 +1403,9 @@ void new032024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
                 tmpPtScalarSum += dRCheckVecAr[dRCheckVecInd].Pt();
             }
 
+            dRCheckVecAr.push_back(tmpLeadJetVec);
+            dRCheckVecAr.push_back(tmpTrailingJetVec);
+
             if (passesCutsBool){
                 passVBFJetsCtr += 1;
                 //passVBFJetsWeightedCtr += tmpGenWeights;
@@ -1412,6 +1422,52 @@ void new032024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
                     passVBFJetsWeightedCtr[1][0] = *genWeightL;
                     for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[1].size(); C2VCtr++){
                         passVBFJetsWeightedCtr[1][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
+                    }
+                }
+
+                bool passVetoLep = true;
+                //if any veto leptons, check if they are close to the other objects
+                //if there are any that aren't close, veto the event
+                for (UInt_t elecItr=0; elecItr < *nVetoElecL; elecItr++){
+                    //Loop through dRCheckVecAr
+                    for (UInt_t dRCheckVecInd=0; dRCheckVecInd<dRCheckVecAr.size();dRCheckVecInd++) {
+                        float tmpDeltaR = calcDeltaR(Electron_phiL[vetoElecIndL[elecItr]],Electron_etaL[vetoElecIndL[elecItr]],dRCheckVecAr[dRCheckVecInd].Phi(),dRCheckVecAr[dRCheckVecInd].Eta());
+
+                        if (tmpDeltaR > lepVetodRCut){
+                            passVetoLep = false;
+                            break;
+                        }
+                    }
+                    if (!passVetoLep) break;
+                }
+                if (!passVetoLep) continue;
+                //now check muons
+                for (UInt_t muItr=0; muItr < *nVetoMuonL; muItr++){
+                    //Loop through dRCheckVecAr
+                    for (UInt_t dRCheckVecInd=0; dRCheckVecInd<dRCheckVecAr.size();dRCheckVecInd++) {
+                        float tmpDeltaR = calcDeltaR(Muon_phiL[vetoMuonIndL[muItr]],Muon_etaL[vetoMuonIndL[muItr]],dRCheckVecAr[dRCheckVecInd].Phi(),dRCheckVecAr[dRCheckVecInd].Eta());
+
+                        if (tmpDeltaR > lepVetodRCut){
+                            passVetoLep = false;
+                            break;
+                        }
+                    }
+                    if (!passVetoLep) break;
+                }
+                if (!passVetoLep) continue;
+
+                passLepVetoCtr += 1;
+
+                if (falseHtobbMask) {
+                    passLepVetoWeightedCtr[0][0] = *genWeightL;
+                    for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[0].size(); C2VCtr++){
+                        passLepVetoWeightedCtr[0][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
+                    }
+                }
+                else {
+                    passLepVetoWeightedCtr[1][0] = *genWeightL;
+                    for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[1].size(); C2VCtr++){
+                        passLepVetoWeightedCtr[1][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
                     }
                 }
 
@@ -1675,6 +1731,8 @@ void new032024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "PassVBFJetsCtr = " << passVBFJetsCtr << "\n";
     std::cout << "------------------------\n";
+    std::cout << "UInt_t " << saveName << "PassLepVetoCtr = " << passLepVetoCtr << "\n";
+    std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "PassAsSemiLepCtr = " << passAsSemiLepCtr << "\n";
     std::cout << "------------------------\n";
 
@@ -1687,6 +1745,7 @@ void new032024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
     tryingSemiLepChannelWeightedCtrAr,passHiggsFJInSemiLepChannelWeightedCtrAr,passFJInSemiLepChannelWeightedCtrAr,
     passEnoughFJsInSemiLepChannelWeightedCtrAr,passSemiLepLepCutWeightedCtrAr,passSemiLepChannelWeightedCtrAr,
     passVBFJetBVetoWeightedCtr,passVBFJetBVetoWeightedSemiLepCtr,
+    passVBFJetsWeightedCtr,passLepVetoWeightedCtr,
     passAsSemiLepWeightedCtr,passSemiLepLepCutWeightedCtr};
 
     std::vector<string> allWeightedNameAr {"startingWeightedCtrAr",
@@ -1695,6 +1754,7 @@ void new032024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
     "tryingSemiLepChannelWeightedCtrAr","passHiggsFJInSemiLepChannelWeightedCtrAr","passFJInSemiLepChannelWeightedCtrAr",
     "passEnoughFJsInSemiLepChannelWeightedCtrAr","passSemiLepLepCutWeightedCtrAr","passSemiLepChannelWeightedCtrAr",
     "passVBFJetBVetoWeightedCtr","passVBFJetBVetoWeightedSemiLepCtr",
+    "passVBFJetsWeightedCtr","passLepVetoWeightedCtr",
     "passAsSemiLepWeightedCtr","passSemiLepLepCutWeightedCtr"};
     for (unsigned int allItr = 0; allItr < allWeightedNameAr.size(); allItr++){
         std::cout << allWeightedNameAr[allItr] << "\n";
