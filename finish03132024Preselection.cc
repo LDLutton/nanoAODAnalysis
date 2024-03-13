@@ -715,6 +715,8 @@ void finish03132024Preselection(string datasetString, int JECCorInd, bool JECCor
     FilteredEventsTree->Branch("AK4TopDEtaLeadMassL",&AK4TopDEtaLeadMassL,"AK4TopDEtaLeadMassL/F");
     FilteredEventsTree->Branch("AK4TopDEtaTrailingMassL",&AK4TopDEtaTrailingMassL,"AK4TopDEtaTrailingMassL/F");
     //Vector array for Veto lepton indices
+    FilteredEventsTree->Branch("nVetoElecL",&nVetoElecL,"nVetoElecL/i");
+    FilteredEventsTree->Branch("nVetoMuonL",&nVetoMuonL,"nVetoMuonL/i");
     FilteredEventsTree->Branch("vetoElecIndL",&vetoElecIndL);
     FilteredEventsTree->Branch("vetoMuonIndL",&vetoMuonIndL);
 
