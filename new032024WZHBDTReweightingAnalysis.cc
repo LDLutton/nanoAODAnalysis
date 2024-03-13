@@ -1050,7 +1050,7 @@ void new032024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
                             else tmpIso = Electron_pfRelIso03_allL[*tightLepLeadIndL];
                             Z1LeadIso = tmpIso;
                         
-                            if (tightLepTrailingPtL > 35){
+                            if (*tightLepTrailingPtL > 35){
                                 if (abs(Electron_etaL[*tightLepTrailingIndL]) < 1.4) tmpIsoAdd = max(0., Electron_dr03EcalRecHitSumEtL[*tightLepTrailingIndL] - 1.);
                                 else tmpIsoAdd = Electron_dr03EcalRecHitSumEtL[*tightLepTrailingIndL];
                                 tmpIso = ( Electron_dr03TkSumPtL[*tightLepTrailingIndL] + tmpIsoAdd + Electron_dr03HcalDepth1TowerSumEtL[*tightLepTrailingIndL] ) / Electron_ptL[*tightLepTrailingIndL];

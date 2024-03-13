@@ -1536,7 +1536,7 @@ void finish03132024Preselection(string datasetString, int JECCorInd, bool JECCor
                 AK4TopDEtaTrailingMassL = tmpVBFJetMassOne;
             }
             //Veto leptons
-            for (UInt_t nVEItr =0; nVEitr < vetoElecInd.size();nVEItr++){
+            for (UInt_t nVEItr =0; nVEItr < vetoElecInd.size();nVEItr++){
                 vetoElecIndL.push_back(vetoElecInd[nVEItr]);
             }
             for (UInt_t nVMItr =0; nVMItr < vetoMuonInd.size();nVMItr++){
