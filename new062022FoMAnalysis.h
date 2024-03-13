@@ -354,6 +354,8 @@ float bTagUL17Cut = 0.7476;
 float bTagUL16Cut = 0.6377;
 float bTagUL16APVCut = 0.6502;
 
+//03132024 added veto dr
+lepVetodRCut = 0.4;
 
 //032024 UpdatedCuts
 
