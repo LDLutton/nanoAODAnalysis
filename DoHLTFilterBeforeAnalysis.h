@@ -447,3 +447,162 @@ void getVetoAndTightMuons(TTreeReaderValue<UInt_t> &nLep,TTreeReaderArray<Bool_t
 
 
 
+
+
+
+void getVetoAndTightElectronsWithVetoArray(TTreeReaderValue<UInt_t> &nLep,TTreeReaderArray<Bool_t> &Lep_IdL,TTreeReaderArray<Float_t> &Lep_pt,TTreeReaderArray<Float_t> &Lep_eta,TTreeReaderArray<Float_t> &Lep_Dxy,TTreeReaderArray<Float_t> &Lep_Dz,TTreeReaderArray<Float_t> &Lep_sip3d,TTreeReaderArray<Float_t> &Lep_MiniPFRelIso,TTreeReaderArray<Float_t> &Electron_hoe,TTreeReaderArray<Float_t> &Electron_eInvMinusPInv,TTreeReaderArray<Bool_t> &Electron_convVeto,TTreeReaderArray<UChar_t> &Electron_lostHits,TTreeReaderArray<Int_t> &Lep_jetIdx,TTreeReaderArray<Float_t> &Jet_btagDeepFlavB,TTreeReaderArray<Float_t> &Lep_mvaTTH, int &nVetoLep, int &nTightLep, int &tightLepOneInd, int &tightLepTwoInd,bool &oneTightLepFound, float lPtVetoCut,float lEtaVetoCut,float lDxyVetoCut,float lDzVetoCut,float lSIP3DVetoCut,float lMiniPFRelIsoCut,int eLostHitsVetoCut,float lPtTightCut,float eHoeTightCut,float eInvMinusPInvTightCut,int eLostHitsTightCut,float lepJetDeepTagMediumCut,float lPromptMVACut,std::vector<int> vetoLeptonInd, bool debug){
+    for (UInt_t lItr=0; lItr < *nLep; lItr++){
+        if (debug) std::cout << "lItr " << lItr<< "Lep_IdL[lItr]" << Lep_IdL[lItr] << "\n";
+        bool passedVeto = false;
+        bool passedTight = false;
+        if (!Lep_IdL[lItr]){ //EGamma POG MVA LOOSE ID
+            continue;
+        }
+        float tmpPt = Lep_pt[lItr];
+        if (debug) std::cout << "lItr " << lItr << " tmpPt " << tmpPt << "\n";
+        if (tmpPt > lPtVetoCut){
+            if (debug) std::cout << "passed pt cut\n";
+            float tmpEta = Lep_eta[lItr];
+            if (debug) std::cout << "tmpEta " <<tmpEta << "\n";
+            if (abs(tmpEta) < lEtaVetoCut){
+                if (debug) std::cout << "passed eta cut\n";
+                float tmpDxy = Lep_Dxy[lItr];
+                if (abs(tmpDxy) < lDxyVetoCut) {
+                    if (debug) std::cout << "passed Dxy cut\n";
+                    float tmpDz = Lep_Dz[lItr];
+                    if (abs(tmpDz) < lDzVetoCut) {
+                        if (debug) std::cout << "passed Dz cut\n";
+                        float tmpLepSIP3D = Lep_sip3d[lItr];
+                        if (tmpLepSIP3D < lSIP3DVetoCut) {
+                            if (debug) std::cout << "passed LepSIP3D cut\n";
+                            float tmpLep_MiniPFRelIso = Lep_MiniPFRelIso[lItr];
+                            if (tmpLep_MiniPFRelIso < lMiniPFRelIsoCut*tmpPt) {
+                                UChar_t tmpLostHits =  Electron_lostHits[lItr];
+                                if (tmpLostHits <= eLostHitsVetoCut) {
+                                    //Passed Veto cut
+                                    nVetoLep += 1;
+                                    passedVeto = true;
+                                    
+                                    if (tmpPt > lPtTightCut){
+                                        float tmpHoe = Electron_hoe[lItr];
+                                        if (tmpHoe < eHoeTightCut) {
+                                            if (debug) std::cout << "passed Lep Hoe cut\n";
+                                            float tmpInvEInvP = Electron_eInvMinusPInv[lItr];
+                                            if (tmpInvEInvP > eInvMinusPInvTightCut) {
+                                                if (debug) std::cout << "passed Lep eInvMinusPInv cut\n";
+                                                if (Electron_convVeto[lItr]) {
+                                                    if (debug) std::cout << "passed Elec Conv cut\n";
+                                                    UChar_t tmpLostHits =  Electron_lostHits[lItr];
+                                                    if (tmpLostHits <= eLostHitsTightCut) {
+                                                        if (debug) std::cout << "passed elec tight misshits cut\n";
+                                                        Int_t tmpJetId = Lep_jetIdx[lItr];
+                                                        if (debug) std::cout << "tmpJetId " << tmpJetId << "\n";
+                                                        float tmpJetbTag;
+                                                        if (tmpJetId <0) {
+                                                            tmpJetbTag = 0;
+                                                        }
+                                                        else {
+                                                            tmpJetbTag = Jet_btagDeepFlavB[tmpJetId];
+                                                        }
+                                                        if (tmpJetbTag < lepJetDeepTagMediumCut){
+                                                            float tmpLepMVA = Lep_mvaTTH[lItr];
+                                                            if (tmpLepMVA > lPromptMVACut) {
+                                                                if (debug) std::cout << "passed Lep ttH MVA cut\n";
+                                                                nTightLep += 1;
+                                                                passedTight = true;
+                                                                if (!oneTightLepFound){
+                                                                    tightLepOneInd = lItr;
+                                                                    oneTightLepFound = true;
+                                                                }
+                                                                else{
+                                                                    tightLepTwoInd = lItr;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (!passedTight) vetoLeptonInd.push_back(lItr);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+void getVetoAndTightMuonsWithVetoArray(TTreeReaderValue<UInt_t> &nLep,TTreeReaderArray<Bool_t> &Lep_LooseIdL,TTreeReaderArray<Bool_t> &Lep_MediumIdL,TTreeReaderArray<Float_t> &Lep_pt,TTreeReaderArray<Float_t> &Lep_eta,TTreeReaderArray<Float_t> &Lep_Dxy,TTreeReaderArray<Float_t> &Lep_Dz,TTreeReaderArray<Float_t> &Lep_sip3d,TTreeReaderArray<Float_t> &Lep_MiniPFRelIso,TTreeReaderArray<Int_t> &Lep_jetIdx,TTreeReaderArray<Float_t> &Jet_btagDeepFlavB,TTreeReaderArray<Float_t> &Lep_mvaTTH, int &nVetoLep, int &nTightLep, int &tightLepOneInd, int &tightLepTwoInd, bool &oneTightLepFound, float lPtVetoCut,float lEtaVetoCut,float lDxyVetoCut,float lDzVetoCut,float lSIP3DVetoCut,float lPtTightCut,float lepJetDeepTagMediumCut,float lPromptMVACut,std::vector<int> vetoLeptonInd, bool debug){
+    
+    for (UInt_t lItr=0; lItr < *nLep; lItr++){
+        bool passedVeto = false;
+        bool passedTight = false;
+        float tmpPt = Lep_pt[lItr];
+        if (debug) std::cout << "lItr " << lItr << " tmpPt " << tmpPt << "\n";
+        if (tmpPt > lPtVetoCut){
+            if (debug) std::cout << "passed pt cut\n";
+            float tmpEta = Lep_eta[lItr];
+            if (debug) std::cout << "tmpEta " <<tmpEta << "\n";
+            if (abs(tmpEta) < lEtaVetoCut){
+                if (debug) std::cout << "passed eta cut\n";
+                float tmpDxy = Lep_Dxy[lItr];
+                if (abs(tmpDxy) < lDxyVetoCut) {
+                    if (debug) std::cout << "passed Dxy cut\n";
+                    float tmpDz = Lep_Dz[lItr];
+                    if (abs(tmpDz) < lDzVetoCut) {
+                        if (debug) std::cout << "passed Dz cut\n";
+                        float tmpLepSIP3D = Lep_sip3d[lItr];
+                        if (tmpLepSIP3D < lSIP3DVetoCut) {
+                            if (debug) std::cout << "passed LepSIP3D cut\n";
+                            if (Lep_LooseIdL[lItr]){
+                                if (debug) std::cout << "passed PFmuon loose WP cut\n";
+                                //Passed Veto cut
+                                nVetoLep += 1;
+                                passedVeto = true;
+                                if (tmpPt > lPtTightCut){
+                                    if (debug) std::cout << "passed tight pt cut\n";
+                                    if (Lep_MediumIdL[lItr]){
+                                        if (debug) std::cout << "passed PFmuon medium WP cut\n";
+
+                                    
+                                        Int_t tmpJetId = Lep_jetIdx[lItr];
+                                        if (debug) std::cout << "tmpJetId " << tmpJetId << "\n";
+                                        float tmpJetbTag;
+                                        if (tmpJetId <0) {
+                                            tmpJetbTag = 0;
+                                        }
+                                        else {
+                                            tmpJetbTag = Jet_btagDeepFlavB[tmpJetId];
+                                        }
+                                        if (tmpJetbTag < lepJetDeepTagMediumCut){
+                                            if (debug) std::cout << "passed jet btag cut\n";
+                                            float tmpLepMVA = Lep_mvaTTH[lItr];
+                                            if (tmpLepMVA > lPromptMVACut) {
+                                                if (debug) std::cout << "passed Lep ttH MVA cut\n";
+                                                nTightLep += 1;
+                                                passedTight = true;
+                                                if (!oneTightLepFound){
+                                                    tightLepOneInd = lItr;
+                                                    oneTightLepFound = true;
+                                                }
+                                                else{
+                                                    tightLepTwoInd = lItr;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                if (!passedTight) vetoLeptonInd.push_back(lItr);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
