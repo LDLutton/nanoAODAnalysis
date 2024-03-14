@@ -1074,7 +1074,7 @@ void finish03132024Preselection(string datasetString, int JECCorInd, bool JECCor
             }
             if (nTightElec + nTightMuon < 2) evTooFewTightLeps += 1;
             if (nTightElec + nTightMuon > 2) evTooManyTightLeps += 1;
-            if (nVetoElec + nVetoMuon > 2) evTooManyVetoLeps += 1;
+            if ((nVetoElec + nVetoMuon > 2) && (nTightElec + nTightMuon == 2)) evTooManyVetoLeps += 1;
             if (nTightElec + nTightMuon != 2) continue;
             //if (nVetoElec + nVetoMuon != 2) continue;
             evPassesLep += 1;
