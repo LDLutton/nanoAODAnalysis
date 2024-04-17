@@ -149,7 +149,7 @@ void new042024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     std::cout << "Doing " << saveName << "\n";
     //Setting up outfile with variables for BDT
     
-    std::string outFileStr = "new032024BDTAnalysis"+saveName+"_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+    std::string outFileStr = "new042024BDTAnalysis"+saveName+"_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
     std::cout << "OutFile: " << outFileStr << "\n";
     TFile *outFile = new TFile(outFileStr.c_str(),"RECREATE");
     
