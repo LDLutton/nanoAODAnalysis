@@ -354,6 +354,9 @@ float bTagUL17Cut = 0.7476;
 float bTagUL16Cut = 0.6377;
 float bTagUL16APVCut = 0.6502;
 
+//042024 updateCuts
+float jetEtaDifBDTCut = 2.5;
+
 //03132024 added veto dr
 float lepVetodRCut = 0.4;
 
@@ -565,7 +568,7 @@ float dRBDTCut = 0.8;
 //08102023 Changing Pt cut to 30
 float jetPTBDTCut = 30.;
 
-float jetEtaDifBDTCut = 2.0;
+//float jetEtaDifBDTCut = 2.0;
 
 float jetInvMassBDTCut = 200.;
 
