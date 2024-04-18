@@ -2723,7 +2723,7 @@ void new042024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
 
                         //042024SFAndSuchAdditions
                         //PU JetID
-                        for (UInt_t nJetItr=0; nJetItr<nJetL;nJetItr++){
+                        for (UInt_t nJetItr=0; nJetItr<nJetLen;nJetItr++){
                             Jet_puIdL.push_back(Jet_puId[nJetItr]);
                         }
                         //L1 Prefiring Weights
@@ -2753,13 +2753,13 @@ void new042024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
                         Generator_weightL = *Generator_weight;
                         //additional 042024Branches starting with this script
                         //PUID SF check
-                        for (UInt_t nJetItr=0; nJetItr<nJetL;nJetItr++){
-                            Jet_LowPtPassesPUIDL.push_back(tmpJet_LowPtPassesPUID[nJetItr]);
+                        for (UInt_t nJetItr=0; nJetItr<nJetLen;nJetItr++){
+                            Jet_LowPtPassesPUIDL.push_back(Jet_LowPtPassesPUID[nJetItr]);
                         }
 
                         //more 042024Branches starting with selection
-                        selectedLeadVBFJet_PUIDSFEligible_SL_L = tmpJet_LowPtPassesPUID[leadJet_1];
-                        selectedTrailingVBFJet_PUIDSFEligible_SL_L = tmpJet_LowPtPassesPUID[leadJet_2];
+                        selectedLeadVBFJet_PUIDSFEligible_SL_L = Jet_LowPtPassesPUID[leadJet_1];
+                        selectedTrailingVBFJet_PUIDSFEligible_SL_L = Jet_LowPtPassesPUID[leadJet_2];
 
                         passingEvSemiLepTree->Fill();
 
@@ -2962,7 +2962,7 @@ void new042024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
 
                                 //042024SFAndSuchAdditions
                                 //PU JetID
-                                for (UInt_t nJetItr=0; nJetItr<nJetL;nJetItr++){
+                                for (UInt_t nJetItr=0; nJetItr<nJetLen;nJetItr++){
                                     Jet_puIdL.push_back(Jet_puId[nJetItr]);
                                 }
                                 //L1 Prefiring Weights
@@ -2992,13 +2992,13 @@ void new042024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
                                 Generator_weightL = *Generator_weight;
                                 //additional 042024Branches starting with this script
                                 //PUID SF check
-                                for (UInt_t nJetItr=0; nJetItr<nJetL;nJetItr++){
-                                    Jet_LowPtPassesPUIDL.push_back(tmpJet_LowPtPassesPUID[nJetItr]);
+                                for (UInt_t nJetItr=0; nJetItr<nJetLen;nJetItr++){
+                                    Jet_LowPtPassesPUIDL.push_back(Jet_LowPtPassesPUID[nJetItr]);
                                 }
 
                                 //more 042024Branches starting with selection
-                                selectedLeadVBFJet_PUIDSFEligible_SL_L = tmpJet_LowPtPassesPUID[leadJet_1];
-                                selectedTrailingVBFJet_PUIDSFEligible_SL_L = tmpJet_LowPtPassesPUID[leadJet_2];
+                                selectedLeadVBFJet_PUIDSFEligible_SL_L = Jet_LowPtPassesPUID[leadJet_1];
+                                selectedTrailingVBFJet_PUIDSFEligible_SL_L = Jet_LowPtPassesPUID[leadJet_2];
 
 
                                 passingEvSemiLepTree->Fill();
