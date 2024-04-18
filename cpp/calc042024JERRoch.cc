@@ -101,7 +101,7 @@ void calc042024JERRoch(string datasetString){
 
     std::string strAdd;
     if (scratchDown) strAdd ="/afs/crc.nd.edu/user/d/dlutton/Public/condorStuff/NanoAODToHistos/tmpHoldForNanoAODWithoutScratch/";
-    else strAdd ="/scratch365/dlutton/HLT022024ForPreSel/";
+    else strAdd ="/scratch365/dlutton/HLT042024ForPreSel/";
     if (localTest) strAdd = "";
 
 

@@ -1477,9 +1477,15 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                 for (int i = 0; i < *nJet; i++){
                     //transfer the kinematics
                     float tmpPt;
+                    float eta;
+                    float phi;
+                    float mass;
                     if (JERInd == 1){
                         //jetAllCorPtVec.push_back(Jet_pt_JERUp[i]);
                         tmpPt = Jet_pt_JERUp[i];
+                        eta = Jet_eta_JERUp[i];
+                        phi = Jet_phi_JERUp[i];
+                        mass = Jet_mass_JERUp[i];
                         jetAllCorEtaVec.push_back(Jet_eta_JERUp[i]);
                         jetAllCorPhiVec.push_back(Jet_phi_JERUp[i]);
                         jetAllCorMassVec.push_back(Jet_mass_JERUp[i]);
@@ -1487,6 +1493,9 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                     else {
                         //jetAllCorPtVec.push_back(Jet_pt_JERDown[i]);
                         tmpPt = Jet_pt_JERDown[i];
+                        eta = Jet_eta_JERDown[i];
+                        phi = Jet_phi_JERDown[i];
+                        mass = Jet_mass_JERDown[i];
                         jetAllCorEtaVec.push_back(Jet_eta_JERDown[i]);
                         jetAllCorPhiVec.push_back(Jet_phi_JERDown[i]);
                         jetAllCorMassVec.push_back(Jet_mass_JERDown[i]);
@@ -1546,6 +1555,9 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                 //If not, just transfer the kinematics for JERMid unchanged
                 for (int i = 0; i < *nJet; i++){
                     float tmpPt = Jet_pt_JERMid[i];
+                    float eta = Jet_eta_JERMid[i];
+                    float phi = Jet_phi_JERMid[i];
+                    float mass = Jet_mass_JERMid[i];
                     //jetAllCorPtVec.push_back(Jet_pt_JERMid[i]);
                     float finalPt;
                     if (yearType == 2018){
