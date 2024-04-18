@@ -975,7 +975,7 @@ void new042024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     passingEvSemiLepTree->Branch("L1PreFiringWeight_UpL",&L1PreFiringWeight_UpL,"L1PreFiringWeight_UpL/F");
     //PileUp number of interactions
     passingEvSemiLepTree->Branch("Pileup_nTrueIntL",&Pileup_nTrueIntL,"Pileup_nTrueIntL/F");
-    passingEvSemiLepTree->Branch("Pileup_nPUL",&Pileup_nPUL,"Pileup_nPUL/F");
+    passingEvSemiLepTree->Branch("Pileup_nPUL",&Pileup_nPUL,"Pileup_nPUL/I");
     //PSWeight
     passingEvSemiLepTree->Branch("nPSWeightL",&nPSWeightL,"nPSWeightL/i");
     passingEvSemiLepTree->Branch("PSWeightL",&PSWeightL);

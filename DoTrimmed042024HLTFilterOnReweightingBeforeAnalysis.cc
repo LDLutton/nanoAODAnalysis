@@ -583,7 +583,7 @@ void DoTrimmed042024HLTFilterOnReweightingBeforeAnalysis(int fileInd, string dat
     FilteredEventsTree->Branch("L1PreFiringWeight_UpL",&L1PreFiringWeight_UpL,"L1PreFiringWeight_UpL/F");
     //PileUp number of interactions
     FilteredEventsTree->Branch("Pileup_nTrueIntL",&Pileup_nTrueIntL,"Pileup_nTrueIntL/F");
-    FilteredEventsTree->Branch("Pileup_nPUL",&Pileup_nPUL,"Pileup_nPUL/F");
+    FilteredEventsTree->Branch("Pileup_nPUL",&Pileup_nPUL,"Pileup_nPUL/I");
     //PSWeight
     FilteredEventsTree->Branch("nPSWeightL",&nPSWeightL,"nPSWeightL/i");
     FilteredEventsTree->Branch("PSWeightL",&PSWeightL);
