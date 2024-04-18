@@ -1365,7 +1365,7 @@ void finish042024Preselection(string datasetString, int JECCorInd, bool JECCorUp
             //Quick jet loop before the actual loop to fill the Jet_LowPtPassesPUID vector
             for (UInt_t jetInd=0;jetInd<tmpnVBFJets;jetInd++){
                 if (Jet_pt_Final[jetInd] < 50) {
-                    if (jet_puId[jetInd] == 7) tmpJet_LowPtPassesPUID.push_back(true);
+                    if (Jet_puId[jetInd] == 7) tmpJet_LowPtPassesPUID.push_back(true);
                     else tmpJet_LowPtPassesPUID.push_back(false);
                 }
                 else tmpJet_LowPtPassesPUID.push_back(false);
