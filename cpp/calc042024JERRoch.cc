@@ -1013,8 +1013,8 @@ void calc042024JERRoch(string datasetString){
 
 
         TTreeReader myEvNumReader("evNumTree", tmpfile);
-        TTreeReaderValue<UInt_t> nEvHLT(myEvNumReader, "nEvL");
-        TTreeReaderValue<UInt_t> nEvPassHLT(myEvNumReader, "nEvPassL");
+        TTreeReaderValue<UInt_t> nEvHLT(myEvNumReader, "nEv");
+        TTreeReaderValue<UInt_t> nEvPassHLT(myEvNumReader, "nEvPass");
 
         //Transferring run tree
         TTreeReader myRunsReader("runTree", tmpfile);
