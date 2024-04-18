@@ -1158,7 +1158,7 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
         TTreeReaderValue<Float_t> L1PreFiringWeight_Up(myEventsReader, "L1PreFiringWeight_UpL");
         //PileUp number of interactions
         TTreeReaderValue<Float_t> Pileup_nTrueInt(myEventsReader, "Pileup_nTrueIntL");
-        TTreeReaderValue<Float_t> Int_t(myEventsReader, "Pileup_nPUL");
+        TTreeReaderValue<Int_t> Pileup_nPUL(myEventsReader, "Pileup_nPUL");
         //PSWeight
         TTreeReaderValue<UInt_t> nPSWeight(myEventsReader, "nPSWeightL");
         TTreeReaderArray<Float_t> PSWeight(myEventsReader, "PSWeightL");
