@@ -1017,7 +1017,7 @@ void new042024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     runTree->Branch("LHEScaleSumwL",&LHEScaleSumwL);
     runTree->Branch("nLHEReweightingSumwL",&nLHEReweightingSumwL,"nLHEReweightingSumwL/i");
     runTree->Branch("LHEReweightingSumwL",&LHEReweightingSumwL);
-    runTree->Branch("genEventCountL",&genEventCountL,"genEventCountL/l");
+    runTree->Branch("genEventCountL",&genEventCountL,"genEventCountL/L");
     runTree->Branch("genEventSumwL",&genEventSumwL,"genEventSumwL/D");
     runTree->Branch("genEventSumw2L",&genEventSumw2L,"genEventSumw2L/D");
     runTree->Branch("runL",&runL,"runL/i");
