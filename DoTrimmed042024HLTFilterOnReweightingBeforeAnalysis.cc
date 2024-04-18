@@ -822,15 +822,15 @@ void DoTrimmed042024HLTFilterOnReweightingBeforeAnalysis(int fileInd, string dat
     weightSumsTree->Branch("LHEWeight_originalXWGTUPSumL",&LHEWeight_originalXWGTUPSumL,"LHEWeight_originalXWGTUPSumL/F");
     weightSumsTree->Branch("genWeightSumL",&genWeightSumL,"genWeightSumL/F");
 
-    tmpGenerator_weightSum = 0;
-    tmpnLHEPdfWeightSum = 101;
+    float tmpGenerator_weightSum = 0;
+    uint tmpnLHEPdfWeightSum = 101;
     //size of 101 is hardcoded in the LHEPdfWeight branch
     std::vector<Float_t> tmpLHEPdfWeightSum(tmpnLHEPdfWeightSum,0.0);
-    tmpnLHEReweightingWeightSum = 36;
+    uint tmpnLHEReweightingWeightSum = 36;
     //size of 36 is hardcoded in the LHEReweightingWeight branch
     std::vector<Float_t> tmpLHEReweightingWeightSum(tmpnLHEReweightingWeightSum,0.0);
-    tmpLHEWeight_originalXWGTUPSum = 0;
-    tmpgenWeightSum = 0;
+    float tmpLHEWeight_originalXWGTUPSum = 0;
+    float tmpgenWeightSum = 0;
 
 
 
