@@ -990,44 +990,44 @@ void calc042024JERRoch(string datasetString){
 
         //042024SFAndSuchAdditions
         //PU JetID
-        TTreeReaderArray<Int_t> Jet_puId(myEventsReader, "Jet_puId");
+        TTreeReaderArray<Int_t> Jet_puId(myEventsReader, "Jet_puIdL");
         //L1 Prefiring Weights
-        TTreeReaderValue<Float_t> L1PreFiringWeight_Nom(myEventsReader, "L1PreFiringWeight_Nom");
-        TTreeReaderValue<Float_t> L1PreFiringWeight_Dn(myEventsReader, "L1PreFiringWeight_Dn");
-        TTreeReaderValue<Float_t> L1PreFiringWeight_Up(myEventsReader, "L1PreFiringWeight_Up");
+        TTreeReaderValue<Float_t> L1PreFiringWeight_Nom(myEventsReader, "L1PreFiringWeight_NomL");
+        TTreeReaderValue<Float_t> L1PreFiringWeight_Dn(myEventsReader, "L1PreFiringWeight_DnL");
+        TTreeReaderValue<Float_t> L1PreFiringWeight_Up(myEventsReader, "L1PreFiringWeight_UpL");
         //PileUp number of interactions
-        TTreeReaderValue<Float_t> Pileup_nTrueInt(myEventsReader, "Pileup_nTrueInt");
-        TTreeReaderValue<Int_t> Pileup_nPU(myEventsReader, "Pileup_nPU");
+        TTreeReaderValue<Float_t> Pileup_nTrueInt(myEventsReader, "Pileup_nTrueIntL");
+        TTreeReaderValue<Int_t> Pileup_nPU(myEventsReader, "Pileup_nPUL");
         //PSWeight
-        TTreeReaderValue<UInt_t> nPSWeight(myEventsReader, "nPSWeight");
-        TTreeReaderArray<Float_t> PSWeight(myEventsReader, "PSWeight");
+        TTreeReaderValue<UInt_t> nPSWeight(myEventsReader, "nPSWeightL");
+        TTreeReaderArray<Float_t> PSWeight(myEventsReader, "PSWeightL");
         //LHE Scale Weight
-        TTreeReaderValue<UInt_t> nLHEScaleWeight(myEventsReader, "nLHEScaleWeight");
-        TTreeReaderArray<Float_t> LHEScaleWeight(myEventsReader, "LHEScaleWeight");
+        TTreeReaderValue<UInt_t> nLHEScaleWeight(myEventsReader, "nLHEScaleWeightL");
+        TTreeReaderArray<Float_t> LHEScaleWeight(myEventsReader, "LHEScaleWeightL");
         //LHE PDF Weight
-        TTreeReaderValue<UInt_t> nLHEPdfWeight(myEventsReader, "nLHEPdfWeight");
-        TTreeReaderArray<Float_t> LHEPdfWeight(myEventsReader, "LHEPdfWeight");
-        TTreeReaderValue<Float_t> LHEWeight_originalXWGTUP(myEventsReader, "LHEWeight_originalXWGTUP");
+        TTreeReaderValue<UInt_t> nLHEPdfWeight(myEventsReader, "nLHEPdfWeightL");
+        TTreeReaderArray<Float_t> LHEPdfWeight(myEventsReader, "LHEPdfWeightL");
+        TTreeReaderValue<Float_t> LHEWeight_originalXWGTUP(myEventsReader, "LHEWeight_originalXWGTUPL");
         //gen weights and weight sums
-        TTreeReaderValue<Float_t> Generator_weight(myEventsReader, "Generator_weight");
+        TTreeReaderValue<Float_t> Generator_weight(myEventsReader, "Generator_weightL");
 
 
         TTreeReader myEvNumReader("evNumTree", tmpfile);
-        TTreeReaderValue<UInt_t> nEvHLT(myEvNumReader, "nEv");
-        TTreeReaderValue<UInt_t> nEvPassHLT(myEvNumReader, "nEvPass");
+        TTreeReaderValue<UInt_t> nEvHLT(myEvNumReader, "nEvL");
+        TTreeReaderValue<UInt_t> nEvPassHLT(myEvNumReader, "nEvPassL");
 
         //Transferring run tree
         TTreeReader myRunsReader("runTree", tmpfile);
-        TTreeReaderValue<UInt_t> run(myRunsReader, "run");
-        TTreeReaderValue<UInt_t> nLHEPdfSumw(myRunsReader, "nLHEPdfSumw");
-        TTreeReaderArray<Double_t> LHEPdfSumw(myRunsReader, "LHEPdfSumw");
-        TTreeReaderValue<UInt_t> nLHEScaleSumw(myRunsReader, "nLHEScaleSumw");
-        TTreeReaderArray<Double_t> LHEScaleSumw(myRunsReader, "LHEScaleSumw");
-        TTreeReaderValue<UInt_t> nLHEReweightingSumw(myRunsReader, "nLHEReweightingSumw");
-        TTreeReaderArray<Double_t> LHEReweightingSumw(myRunsReader, "LHEReweightingSumw");
-        TTreeReaderValue<Long64_t> genEventCount(myRunsReader, "genEventCount");
-        TTreeReaderValue<Double_t> genEventSumw(myRunsReader, "genEventSumw");
-        TTreeReaderValue<Double_t> genEventSumw2(myRunsReader, "genEventSumw2");
+        TTreeReaderValue<UInt_t> run(myRunsReader, "runL");
+        TTreeReaderValue<UInt_t> nLHEPdfSumw(myRunsReader, "nLHEPdfSumwL");
+        TTreeReaderArray<Double_t> LHEPdfSumw(myRunsReader, "LHEPdfSumwL");
+        TTreeReaderValue<UInt_t> nLHEScaleSumw(myRunsReader, "nLHEScaleSumwL");
+        TTreeReaderArray<Double_t> LHEScaleSumw(myRunsReader, "LHEScaleSumwL");
+        TTreeReaderValue<UInt_t> nLHEReweightingSumw(myRunsReader, "nLHEReweightingSumwL");
+        TTreeReaderArray<Double_t> LHEReweightingSumw(myRunsReader, "LHEReweightingSumwL");
+        TTreeReaderValue<Long64_t> genEventCount(myRunsReader, "genEventCountL");
+        TTreeReaderValue<Double_t> genEventSumw(myRunsReader, "genEventSumwL");
+        TTreeReaderValue<Double_t> genEventSumw2(myRunsReader, "genEventSumw2L");
 
         Long64_t eventLoopMax = myRunsReader.GetEntries();
         UInt_t tmpRunsInt = 0;
