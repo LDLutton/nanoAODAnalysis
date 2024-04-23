@@ -1943,6 +1943,10 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
             HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZL = *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ;
             HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8L = *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8;
 
+            //2016
+            HLT_Ele27_WPTight_GsfL = *HLT_Ele27_WPTight_Gsf;
+            HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL = *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ;
+
             //042024SFAndSuchAdditions
             //PU JetID
             for (UInt_t nJetItr=0; nJetItr<nJetL;nJetItr++){
