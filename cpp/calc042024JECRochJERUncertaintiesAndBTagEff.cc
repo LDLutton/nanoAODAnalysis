@@ -917,17 +917,19 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
     
 
 
-    //Switching to medium cuts
-    /*
+    //Tight cuts
+    
     float bTagUL18Cut = 0.7100;
     float bTagUL17Cut = 0.7476;
     float bTagUL16Cut = 0.6377;
     float bTagUL16APVCut = 0.6502;
-    */
+    //medium cuts
+    /*
     float bTagUL18Cut = 0.2783;
     float bTagUL17Cut = 0.3040;
     float bTagUL16Cut = 0.2489;
     float bTagUL16APVCut = 0.2598;
+    */
     //Vector of btag cuts
     std::vector<float> bTagCuts = {bTagUL18Cut,bTagUL17Cut,bTagUL16Cut,bTagUL16APVCut};
 
