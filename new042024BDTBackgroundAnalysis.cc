@@ -1925,7 +1925,7 @@ void new042024BDTBackgroundAnalysis(string datasetString, int JECCorInd, bool JE
     Double_t startingWeightedCtr = 0;
 
     Double_t passHiggsFJWeightedCtr = 0;
-    Double_t passHiggsFJSemiLepWeightedCtr = 0;
+    Double_t passHiggsFJWeightedSemiLepCtr = 0;
     Double_t passChannelWeightedCtr = 0;
     Double_t passLepOrSemiLepChannelWeightedCtr = 0;
     Double_t tryingSemiLepChannelWeightedCtr = 0;
@@ -1935,7 +1935,7 @@ void new042024BDTBackgroundAnalysis(string datasetString, int JECCorInd, bool JE
     Double_t passLepCutInSemiLepChannelWeightedCtr = 0;
     Double_t passSemiLepChannelWeightedCtr = 0;
     Double_t passVBFJetBVetoWeightedCtr = 0;
-    Double_t passVBFJetBVetoSemiLepWeightedCtr = 0;
+    Double_t passVBFJetBVetoWeightedSemiLepCtr = 0;
     Double_t passVBFJetsWeightedCtr = 0;
     Double_t passLepVetoWeightedCtr = 0;
     Double_t passAsSemiLepWeightedCtr = 0;
@@ -3066,7 +3066,7 @@ void new042024BDTBackgroundAnalysis(string datasetString, int JECCorInd, bool JE
             
             if (passedAsSemiLepBool) {
                 passVBFJetBVetoSemiLepCtr += 1;
-                passVBFJetBVetoSemiLepWeightedCtr += tmpGenWeights;
+                passVBFJetBVetoWeightedSemiLepCtr += tmpGenWeights;
             
             }
             
@@ -3384,9 +3384,10 @@ void new042024BDTBackgroundAnalysis(string datasetString, int JECCorInd, bool JE
     std::cout << "==============================TOTAL COUNTERS==============================\n";
     
     std::cout << "startingCtr: " << startingCtr << "\n";
+    std::cout << "Double_t " << saveName << "startingWeightedCtr = " << startingWeightedCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "tryingSemiLepChannelCtr = " << tryingSemiLepChannelCtr << "\n";
-    std::cout << "Double_t " << saveName << "startingWeightedCtr = " << startingWeightedCtr << "\n";
+    std::cout << "Double_t " << saveName << "tryingSemiLepChannelWeightedCtr = " << tryingSemiLepChannelWeightedCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "passEnoughFJsInSemiLepChannelCtr = " << passEnoughFJsInSemiLepChannelCtr << "\n";
     std::cout << "Double_t " << saveName << "passEnoughFJsInSemiLepChannelWeightedCtr = " << passEnoughFJsInSemiLepChannelWeightedCtr << "\n";
