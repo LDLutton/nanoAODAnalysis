@@ -348,6 +348,20 @@ std::vector<Double_t> cutHadPassWeightedAr;
 std::vector<Double_t> cutLepOrSemiLepPassWeightedAr;
 std::vector<float> cutRangeAr;
 
+//05052024 PN regress mass scaling and resolution variables
+float PNRegMassJMS2018 = -0.002;
+float PNRegMassJMS2017 = -0.006;
+float PNRegMassJMS2016 = -0.012;
+float PNRegMassJMS2016APV = -0.015;
+
+float PNRegMassJMR2018 = 0.01;
+float PNRegMassJMR2017 = 0.009;
+float PNRegMassJMR2016 = 0.015;
+float PNRegMassJMR2016APV = 0.013;
+//put these into vectors
+std::vector<float> PNRegMassJMSAr = {PNRegMassJMS2018, PNRegMassJMS2017, PNRegMassJMS2016, PNRegMassJMS2016APV};
+std::vector<float> PNRegMassJMRAr = {PNRegMassJMR2018, PNRegMassJMR2017, PNRegMassJMR2016, PNRegMassJMR2016APV};
+
 //btag tight WPs by year
 float bTagUL18Cut = 0.7100;
 float bTagUL17Cut = 0.7476;

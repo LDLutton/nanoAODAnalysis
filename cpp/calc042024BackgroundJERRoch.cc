@@ -60,7 +60,7 @@
 //Output should be the same but with additional branches for the corrections and efficiencies
 //Apply JER before BTagging Efficencies
 //Input should be the dataset string, then an integer for each correction/efficiency to be calculated
-void calc042024JERRoch(string datasetString){
+void calc042024BackgroundJERRoch(string datasetString,uint yearInd){
     // Open the file. Note that the name of your file outside this class
     // will probably NOT be experiment.root.
     std::cout << "start Analysis\n";
@@ -84,16 +84,76 @@ void calc042024JERRoch(string datasetString){
     bool isBackground;
 
     if (datasetString == "testRun") testRun = true;
-    if (datasetString == "SDC2V2MCZZHReweightTrimmed") SDC2V2MCZZHReweightTrimmed = true;
-    if (datasetString == "SDC2V2MCZZH17ReweightTrimmed") SDC2V2MCZZH17ReweightTrimmed = true;
-    if (datasetString == "SDC2V2MCZZH16ReweightTrimmed") SDC2V2MCZZH16ReweightTrimmed = true;
-    if (datasetString == "SDC2V2MCZZH16APVReweightTrimmed") SDC2V2MCZZH16APVReweightTrimmed = true;
-    if (datasetString == "SDC2V2MCWZHReweightTrimmed") SDC2V2MCWZHReweightTrimmed = true;
-    if (datasetString == "SDC2V2MCWZH17ReweightTrimmed") SDC2V2MCWZH17ReweightTrimmed = true;
-    if (datasetString == "SDC2V2MCWZH16ReweightTrimmed") SDC2V2MCWZH16ReweightTrimmed = true;
-    if (datasetString == "SDC2V2MCWZH16APVReweightTrimmed") SDC2V2MCWZH16APVReweightTrimmed = true;
+    if (datasetString == "ttHToBB") ttHToBBTrimmedBackground = true;
+    if (datasetString == "ttZJets") ttZJetsTrimmedBackground = true;
+    if (datasetString == "ttWJets") ttWJetsTrimmedBackground = true;
+    if (datasetString == "DY") DYTrimmedBackground = true;
+    if (datasetString == "TTJets") TTJetsTrimmedBackground = true;
+    if (datasetString == "ST_s_Channel") ST_s_ChannelTrimmedBackground = true;
+    if (datasetString == "ST_t_ChannelAntiTop") ST_t_ChannelAntiTopTrimmedBackground = true;
+    if (datasetString == "ST_t_ChannelTop") ST_t_ChannelTopTrimmedBackground = true;
+    if (datasetString == "ZZ") ZZTrimmedBackground = true;
+    if (datasetString == "WW") WWTrimmedBackground = true;
+    if (datasetString == "WZ") WZTrimmedBackground = true;
+    if (datasetString == "TTbb_TTToHadronic") TTbb_TTToHadronicTrimmedBackground = true;
+    if (datasetString == "TTbb_TTTo2L2Nu") TTbb_TTTo2L2NuTrimmedBackground = true;
+    if (datasetString == "TTbb_TTToSemiLeptonic") TTbb_TTToSemiLeptonicTrimmedBackground = true;
+
+    if (datasetString == "TTToHadronic") TTToHadronicTrimmedBackground = true;
+    if (datasetString == "TTTo2L2Nu") TTTo2L2NuTrimmedBackground = true;
+    if (datasetString == "TTToSemiLeptonic") TTToSemiLeptonicTrimmedBackground = true;
+
+    if (datasetString == "QCDPT170to300") QCDPT170to300TrimmedBackground = true;
+    if (datasetString == "QCDPT300to470") QCDPT300to470TrimmedBackground = true;
+    if (datasetString == "QCDPT470to600") QCDPT470to600TrimmedBackground = true;
+    if (datasetString == "QCDPT600to800") QCDPT600to800TrimmedBackground = true;
+    if (datasetString == "QCDPT800to1000") QCDPT800to1000TrimmedBackground = true;
+    if (datasetString == "QCDPT1000to1400") QCDPT1000to1400TrimmedBackground = true;
+    if (datasetString == "QCDPT1400to1800") QCDPT1400to1800TrimmedBackground = true;
+    if (datasetString == "QCDPT1800to2400") QCDPT1800to2400TrimmedBackground = true;
+    if (datasetString == "QCDPT2400to3200") QCDPT2400to3200TrimmedBackground = true;
+    if (datasetString == "QCDPT3200toInf") QCDPT3200toInfTrimmedBackground = true;
+
+    if (datasetString == "QCDHT50to100") QCDHT50to100TrimmedBackground = true;
+    if (datasetString == "QCDHT100to200") QCDHT100to200TrimmedBackground = true;
+    if (datasetString == "QCDHT200to300") QCDHT200to300TrimmedBackground = true;
+    if (datasetString == "QCDHT300to500") QCDHT300to500TrimmedBackground = true;
+    if (datasetString == "QCDHT500to700") QCDHT500to700TrimmedBackground = true;
+    if (datasetString == "QCDHT700to1000") QCDHT700to1000TrimmedBackground = true;
+    if (datasetString == "QCDHT1000to1500") QCDHT1000to1500TrimmedBackground = true;
+    if (datasetString == "QCDHT1500to2000") QCDHT1500to2000TrimmedBackground = true;
+    if (datasetString == "QCDHT2000toInf") QCDHT2000toInfTrimmedBackground = true;
 
 
+    if (datasetString == "DYM10To50") DYM10To50TrimmedBackground = true;
+    if (datasetString == "ST_tW_antitop") ST_tW_antitopTrimmedBackground = true;
+    if (datasetString == "ST_tW_top") ST_tW_topTrimmedBackground = true;
+    if (datasetString == "EWKWMinus2Jets_WToLNu") EWKWMinus2Jets_WToLNuTrimmedBackground = true;
+    if (datasetString == "EWKWMinus2Jets_WToQQ") EWKWMinus2Jets_WToQQTrimmedBackground = true;
+    if (datasetString == "EWKWPlus2Jets_WToLNu") EWKWPlus2Jets_WToLNuTrimmedBackground = true;
+    if (datasetString == "EWKWPlus2Jets_WToQQ") EWKWPlus2Jets_WToQQTrimmedBackground = true;
+    if (datasetString == "VHToNonbb") VHToNonbbTrimmedBackground = true;
+    if (datasetString == "WminusH_HToBB_WToLNu") WminusH_HToBB_WToLNuTrimmedBackground = true;
+    if (datasetString == "WminusH_HToBB_WToQQ") WminusH_HToBB_WToQQTrimmedBackground = true;
+    if (datasetString == "WplusH_HToBB_WToLNu") WplusH_HToBB_WToLNuTrimmedBackground = true;
+    if (datasetString == "WplusH_HToBB_WToQQ") WplusH_HToBB_WToQQTrimmedBackground = true;
+    if (datasetString == "WJetsToLNu") WJetsToLNuTrimmedBackground = true;
+    if (datasetString == "WWW") WWWTrimmedBackground = true;
+    if (datasetString == "WWZ") WWZTrimmedBackground = true;
+    if (datasetString == "WZZ") WZZTrimmedBackground = true;
+    if (datasetString == "ZH_HToBB_ZToBB") ZH_HToBB_ZToBBTrimmedBackground = true;
+    if (datasetString == "ZH_HToBB_ZToNuNu") ZH_HToBB_ZToNuNuTrimmedBackground = true;
+    if (datasetString == "ZH_HToBB_ZToLL") ZH_HToBB_ZToLLTrimmedBackground = true;
+    if (datasetString == "ZH_HToBB_ZToQQ") ZH_HToBB_ZToQQTrimmedBackground = true;
+    if (datasetString == "ggZH_HToBB_ZToBB") ggZH_HToBB_ZToBBTrimmedBackground = true;
+    if (datasetString == "ggZH_HToBB_ZToNuNu") ggZH_HToBB_ZToNuNuTrimmedBackground = true;
+    if (datasetString == "ggZH_HToBB_ZToLL") ggZH_HToBB_ZToLLTrimmedBackground = true;
+    if (datasetString == "ggZH_HToBB_ZToQQ") ggZH_HToBB_ZToQQTrimmedBackground = true;
+    if (datasetString == "EWKZ2Jets_ZToLL") EWKZ2Jets_ZToLLTrimmedBackground = true;
+    if (datasetString == "EWKZ2Jets_ZToNuNu") EWKZ2Jets_ZToNuNuTrimmedBackground = true;
+    if (datasetString == "EWKZ2Jets_ZToQQ") EWKZ2Jets_ZToQQTrimmedBackground = true;
+    if (datasetString == "ZZZ") ZZZTrimmedBackground = true;
+    
     ////////////////////////////////GETTING DATASET////////////////////////////////
     ////////////////////////////////GETTING DATASET////////////////////////////////
     ////////////////////////////////GETTING DATASET////////////////////////////////
@@ -101,71 +161,889 @@ void calc042024JERRoch(string datasetString){
 
     std::string strAdd;
     if (scratchDown) strAdd ="/afs/crc.nd.edu/user/d/dlutton/Public/condorStuff/NanoAODToHistos/tmpHoldForNanoAODWithoutScratch/";
-    else strAdd ="/scratch365/dlutton/HLT042024ForPreSel/";
+    else strAdd ="/scratch365/dlutton/HLT042024BackgroundForPreSel/";
     if (localTest) strAdd = "";
 
-
+    float crossSection; //this is unused
     UInt_t datasetType = 0;
+    std::vector<string> yearStringAr = {"","Y17","Y16","Y16APV"};
+    UInt_t yearType = yearInd;
+    string yearNameStr = yearStringAr[yearType];
 
-    UInt_t yearType = 0;
 
 
 
-    if (SDC2V2MCZZHReweightTrimmed){
-        saveName = "SDC2V2MCZZHReweightTrimmed";
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZHReweight"+NoSLString+"_0.root";
-        fileAr.push_back(tmpStrWithPath);
-    }
-    else if (SDC2V2MCZZH17ReweightTrimmed){
-        saveName = "SDC2V2MCZZH17ReweightTrimmed";
-        yearType = 1;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH17Reweight"+NoSLString+"_0.root";
-        fileAr.push_back(tmpStrWithPath);
-    }
-    else if (SDC2V2MCZZH16ReweightTrimmed){
-        saveName = "SDC2V2MCZZH16ReweightTrimmed";
-        yearType = 2;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16Reweight"+NoSLString+"_0.root";
-        fileAr.push_back(tmpStrWithPath);
-    }
-    else if (SDC2V2MCZZH16APVReweightTrimmed){
-        saveName = "SDC2V2MCZZH16APVReweightTrimmed";
-        yearType = 3;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCZZH16APVReweight"+NoSLString+"_0.root";
-        fileAr.push_back(tmpStrWithPath);
-    }
-    else if (SDC2V2MCWZHReweightTrimmed){
-        saveName = "SDC2V2MCWZHReweightTrimmed";
-        datasetType = 25;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCWZHReweight"+NoSLString+"_0.root";
-        fileAr.push_back(tmpStrWithPath);
-    }
-    else if (SDC2V2MCWZH17ReweightTrimmed){
-        saveName = "SDC2V2MCWZH17ReweightTrimmed";
-        datasetType = 25;
-        yearType = 1;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCWZH17Reweight"+NoSLString+"_0.root";
-        fileAr.push_back(tmpStrWithPath);
-    }
-    else if (SDC2V2MCWZH16ReweightTrimmed){
-        saveName = "SDC2V2MCWZH16ReweightTrimmed";
-        datasetType = 25;
-        yearType = 2;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCWZH16Reweight"+NoSLString+"_0.root";
-        fileAr.push_back(tmpStrWithPath);
-    }
-    else if (SDC2V2MCWZH16APVReweightTrimmed){
-        saveName = "SDC2V2MCWZH16APVReweightTrimmed";
-        datasetType = 25;
-        yearType = 3;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisSDC2V2MCWZH16APVReweight"+NoSLString+"_0.root";
-        fileAr.push_back(tmpStrWithPath);
-    }
+    if (ttHToBBTrimmedBackground){
+        //saveName = "ttHToBB";
+        crossSection = 0.5071*0.582;
 
+        saveName = "ttHToBB";
+        
+        
+        //int arrSize = sizeof(ttHToBBBackgroundAr)/sizeof(ttHToBBBackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //ttHToBBBackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //ttHToBBBackgroundAr[fileInd]);
+    }
+    else if (ttZJetsTrimmedBackground){
+        //saveName = "ttZJets";
+        
+        crossSection = 0.5407;
+        saveName = "ttZJets";
+        
+        //int arrSize = sizeof(ttZJetsBackgroundAr)/sizeof(ttZJetsBackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //ttZJetsBackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //ttZJetsBackgroundAr[fileInd]);
+    }
+    else if (ttWJetsTrimmedBackground){
+        
+        crossSection = 0.4611;
+        saveName = "ttWJets";
+        
+        //int arrSize = sizeof(ttWJetsBackgroundAr)/sizeof(ttWJetsBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //ttWJetsBackgroundAr[fileInd]);
+    }
+    else if (DYTrimmedBackground){
+        //saveName = "DY";
+        
+        crossSection = 5364;
+        saveName = "DY";
+
+        
+        //int arrSize = sizeof(DYBackgroundAr)/sizeof(DYBackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //DYBackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //DYBackgroundAr[fileInd]);
+    }
+    else if (QCDPT170to300TrimmedBackground){
+        //saveName = "QCDPT170to300";
+        
+        crossSection = 103300.0;
+
+        saveName = "QCDPT170to300";
+        
+        
+        //int arrSize = sizeof(QCDPT170to300BackgroundAr)/sizeof(QCDPT170to300BackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDPT170to300BackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDPT170to300BackgroundAr[fileInd]);
+    }
+    else if (QCDPT300to470TrimmedBackground){
+        //saveName = "QCDPT300to470";
+        
+        crossSection = 6826.0;
+
+        saveName = "QCDPT300to470";
+        
+        
+        //int arrSize = sizeof(QCDPT300to470BackgroundAr)/sizeof(QCDPT300to470BackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDPT300to470BackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDPT300to470BackgroundAr[fileInd]);
+    }
+    else if (QCDPT470to600TrimmedBackground){
+        //saveName = "QCDPT470to600";
+        
+        crossSection = 552.6;
+        
+        saveName = "QCDPT470to600";
+
+        
+        //int arrSize = sizeof(QCDPT470to600BackgroundAr)/sizeof(QCDPT470to600BackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDPT470to600BackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDPT470to600BackgroundAr[fileInd]);
+    }
+    else if (QCDPT600to800TrimmedBackground){
+        //saveName = "QCDPT600to800";
+        
+        crossSection = 156.6;
+
+        saveName = "QCDPT600to800";
+        
+        
+        //int arrSize = sizeof(QCDPT600to800BackgroundAr)/sizeof(QCDPT600to800BackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDPT600to800BackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDPT600to800BackgroundAr[fileInd]);
+    }
+    else if (QCDPT800to1000TrimmedBackground){
+        //saveName = "QCDPT800to1000";
+        
+        crossSection = 26.32;
+
+        saveName = "QCDPT800to1000";
+        
+        
+        //int arrSize = sizeof(QCDPT800to1000BackgroundAr)/sizeof(QCDPT800to1000BackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDPT800to1000BackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDPT800to1000BackgroundAr[fileInd]);
+    }
+    else if (QCDPT1000to1400TrimmedBackground){
+        //saveName = "QCDPT1000to1400";
+        
+        crossSection = 7.5;
+
+        saveName = "QCDPT1000to1400";
+        
+        
+        //int arrSize = sizeof(QCDPT1000to1400BackgroundAr)/sizeof(QCDPT1000to1400BackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDPT1000to1400BackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDPT1000to1400BackgroundAr[fileInd]);
+    }
+    else if (QCDPT1400to1800TrimmedBackground){
+        //saveName = "QCDPT1400to1800";
+        
+        crossSection = 0.6479;
+
+        saveName = "QCDPT1400to1800";
+        
+        
+        //int arrSize = sizeof(QCDPT1400to1800BackgroundAr)/sizeof(QCDPT1400to1800BackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDPT1400to1800BackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDPT1400to1800BackgroundAr[fileInd]);
+    }
+    else if (QCDPT1800to2400TrimmedBackground){
+        //saveName = "QCDPT1800to2400";
+        
+        crossSection = 0.08715;
+
+        saveName = "QCDPT1800to2400";
+        
+        
+        //int arrSize = sizeof(QCDPT1800to2400BackgroundAr)/sizeof(QCDPT1800to2400BackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDPT1800to2400BackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDPT1800to2400BackgroundAr[fileInd]);
+    }
+    else if (QCDPT2400to3200TrimmedBackground){
+        //saveName = "QCDPT2400to3200";
+        
+        crossSection = 0.005242;
+
+        saveName = "QCDPT2400to3200";
+        
+        
+        //int arrSize = sizeof(QCDPT2400to3200BackgroundAr)/sizeof(QCDPT2400to3200BackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDPT2400to3200BackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDPT2400to3200BackgroundAr[fileInd]);
+    }
+    else if (QCDPT3200toInfTrimmedBackground){
+        //saveName = "QCDPT3200toInf";
+        
+        crossSection = 0.0001349;
+
+        saveName = "QCDPT3200toInf";
+        
+        
+        //int arrSize = sizeof(QCDPT3200toInfBackgroundAr)/sizeof(QCDPT3200toInfBackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDPT3200toInfBackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDPT3200toInfBackgroundAr[fileInd]);
+    }
+    else if (QCDHT50to100TrimmedBackground){
+        //saveName = "QCDHT50to100";
+        
+        crossSection = 187700000.;
+
+        saveName = "QCDHT50to100";
+        
+        
+        //int arrSize = sizeof(QCDHT50to100BackgroundAr)/sizeof(QCDHT50to100BackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDHT50to100BackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDHT50to100BackgroundAr[fileInd]);
+    }
+    else if (QCDHT100to200TrimmedBackground){
+        //saveName = "QCDHT100to200";
+        
+        crossSection = 23640000.0;
+
+        saveName = "QCDHT100to200";
+        
+        
+        //int arrSize = sizeof(QCDHT100to200BackgroundAr)/sizeof(QCDHT100to200BackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDHT100to200BackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDHT100to200BackgroundAr[fileInd]);
+    }
+    else if (QCDHT200to300TrimmedBackground){
+        //saveName = "QCDHT200to300";
+        
+        crossSection = 1546000.0;
+
+        saveName = "QCDHT200to300";
+        
+        
+        //int arrSize = sizeof(QCDHT200to300BackgroundAr)/sizeof(QCDHT200to300BackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDHT200to300BackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDHT200to300BackgroundAr[fileInd]);
+    }
+    else if (QCDHT300to500TrimmedBackground){
+        //saveName = "QCDHT300to500";
+        
+        crossSection = 321600.0;
+
+        saveName = "QCDHT300to500";
+        
+        
+        //int arrSize = sizeof(QCDHT300to500BackgroundAr)/sizeof(QCDHT300to500BackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDHT300to500BackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDHT300to500BackgroundAr[fileInd]);
+    }
+    else if (QCDHT500to700TrimmedBackground){
+        //saveName = "QCDHT500to700";
+        
+        crossSection = 30980.0;
+
+        saveName = "QCDHT500to700";
+        
+        
+        //int arrSize = sizeof(QCDHT500to700BackgroundAr)/sizeof(QCDHT500to700BackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDHT500to700BackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDHT500to700BackgroundAr[fileInd]);
+    }
+    else if (QCDHT700to1000TrimmedBackground){
+        //saveName = "QCDHT700to1000";
+        
+        crossSection = 6364.0;
+
+        saveName = "QCDHT700to1000";
+        
+        
+        //int arrSize = sizeof(QCDHT700to1000BackgroundAr)/sizeof(QCDHT700to1000BackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDHT700to1000BackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDHT700to1000BackgroundAr[fileInd]);
+    }
+    else if (QCDHT1000to1500TrimmedBackground){
+        //saveName = "QCDHT1000to1500";
+        
+        crossSection = 1117.0;
+
+        saveName = "QCDHT1000to1500";
+        
+        
+        //int arrSize = sizeof(QCDHT1000to1500BackgroundAr)/sizeof(QCDHT1000to1500BackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDHT1000to1500BackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDHT1000to1500BackgroundAr[fileInd]);
+    }
+    else if (QCDHT1500to2000TrimmedBackground){
+        //saveName = "QCDHT1500to2000";
+        
+        crossSection = 108.4;
+
+        saveName = "QCDHT1500to2000";
+        
+        
+        //int arrSize = sizeof(QCDHT1500to2000BackgroundAr)/sizeof(QCDHT1500to2000BackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDHT1500to2000BackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDHT1500to2000BackgroundAr[fileInd]);
+    }
+    else if (QCDHT2000toInfTrimmedBackground){
+        //saveName = "QCDHT2000toInf";
+        
+        crossSection = 22.36;
+
+        saveName = "QCDHT2000toInf";
+        
+        
+        //int arrSize = sizeof(QCDHT2000toInfBackgroundAr)/sizeof(QCDHT2000toInfBackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDHT2000toInfBackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //QCDHT2000toInfBackgroundAr[fileInd]);
+    }
+    else if (TTJetsTrimmedBackground){
+        //saveName = "";
+        
+        crossSection = 722.8;
+
+        saveName = "TTJets";
+        
+        
+        //int arrSize = sizeof(TTJetsBackgroundAr)/sizeof(TTJetsBackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //TTJetsBackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //TTJetsBackgroundAr[fileInd]);
+    }
+    else if (TTToHadronicTrimmedBackground){
+        //saveName = "";
+        
+        crossSection = 377.96;
+
+        saveName = "TTJetsHadronic";
+        
+        
+        //int arrSize = sizeof(TTJetsHadronicBackgroundAr)/sizeof(TTJetsHadronicBackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //TTJetsHadronicBackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //TTJetsHadronicBackgroundAr[fileInd]);
+    }
+    else if (TTToSemiLeptonicTrimmedBackground){
+        //saveName = "";
+        
+        crossSection = 365.346;
+
+        saveName = "TTJetsSemiLeptonic";
+        
+        
+        //int arrSize = sizeof(TTJetsSemiLeptonicBackgroundAr)/sizeof(TTJetsSemiLeptonicBackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //TTJetsSemiLeptonicBackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //TTJetsSemiLeptonicBackgroundAr[fileInd]);
+    }
+    else if (TTTo2L2NuTrimmedBackground){
+        //saveName = "";
+        
+        crossSection = 88.29;
+
+        saveName = "TTJets2L2Nu";
+        
+        
+        //int arrSize = sizeof(TTJets2L2NuBackgroundAr)/sizeof(TTJets2L2NuBackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //TTJets2L2NuBackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //TTJets2L2NuBackgroundAr[fileInd]);
+    }
+    else if (ST_s_ChannelTrimmedBackground){
+        //saveName = "";
+        
+        crossSection = 3.74;
+
+        saveName = "ST_s_Channel";
+        
+        
+        //int arrSize = sizeof(ST_s_ChannelBackgroundAr)/sizeof(ST_s_ChannelBackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //ST_s_ChannelBackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //ST_s_ChannelBackgroundAr[fileInd]);
+    }
+    else if (ST_t_ChannelAntiTopTrimmedBackground){
+        //saveName = "";
+        
+        crossSection = 69.09;
+
+        saveName = "ST_t_ChannelAntiTop";
+        
+        
+        //int arrSize = sizeof(ST_t_ChannelAntiTopBackgroundAr)/sizeof(ST_t_ChannelAntiTopBackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //ST_t_ChannelAntiTopBackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //ST_t_ChannelAntiTopBackgroundAr[fileInd]);
+    }
+    else if (ST_t_ChannelTopTrimmedBackground){
+        //saveName = "";
+        
+        crossSection = 115.3;
+
+        saveName = "ST_t_ChannelTop";
+        
+        
+        //int arrSize = sizeof(ST_t_ChannelTopBackgroundAr)/sizeof(ST_t_ChannelTopBackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //ST_t_ChannelTopBackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //ST_t_ChannelTopBackgroundAr[fileInd]);
+    }
+    else if (ZZTrimmedBackground){
+        //saveName = "";
+        
+        crossSection = 12.17;
+
+        saveName = "ZZ";
+        
+        
+        //int arrSize = sizeof(ZZBackgroundAr)/sizeof(ZZBackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //ZZBackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //ZZBackgroundAr[fileInd]);
+    }
+    else if (WWTrimmedBackground){
+        //saveName = "";
+        
+        crossSection = 75.95;
+
+        saveName = "WW";
+        
+        
+        //int arrSize = sizeof(WWBackgroundAr)/sizeof(WWBackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //WWBackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //WWBackgroundAr[fileInd]);
+    }
+    else if (WZTrimmedBackground){
+        //saveName = "";
+        
+        crossSection = 27.59;
+
+        saveName = "WZ";
+        
+        
+        //int arrSize = sizeof(WZBackgroundAr)/sizeof(WZBackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //WZBackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //WZBackgroundAr[fileInd]);
+    }
+    else if (TTbb_TTToHadronicTrimmedBackground){
+        //saveName = "QCDPT3200toInf";
+        
+        crossSection = 5.5;
+
+        saveName = "TTbb_TTToHadronic";
+        
+        
+        //int arrSize = sizeof(TTbb_TTToHadronicBackgroundAr)/sizeof(TTbb_TTToHadronicBackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //TTbb_TTToHadronicBackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //TTbb_TTToHadronicBackgroundAr[fileInd]);
+    }
+    else if (TTbb_TTTo2L2NuTrimmedBackground){
+        //saveName = "";
+        
+        crossSection = 2.9;
+
+        saveName = "TTbb_TTTo2L2Nu";
+        
+        
+        //int arrSize = sizeof(TTbb_TTTo2L2NuBackgroundAr)/sizeof(TTbb_TTTo2L2NuBackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //TTbb_TTTo2L2NuBackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //TTbb_TTTo2L2NuBackgroundAr[fileInd]);
+    }
+    else if (TTbb_TTToSemiLeptonicTrimmedBackground){
+        //saveName = "";
+        
+        crossSection = 4.7;
+
+        saveName = "TTbb_TTToSemiLeptonic";
+        
+        
+        //int arrSize = sizeof(TTbb_TTToSemiLeptonicBackgroundAr)/sizeof(TTbb_TTToSemiLeptonicBackgroundAr[0]);
+        /*
+        for (int i=0; i<arrSize; i++){
+            fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //TTbb_TTToSemiLeptonicBackgroundAr[i]);
+        }
+        */
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //TTbb_TTToSemiLeptonicBackgroundAr[fileInd]);
+    }
+    else if (DYM10To50TrimmedBackground){
+        //datasetType = 50;
+        saveName = "DYM10To50";
+        
+        //int arrSize = sizeof(DYM10To50BackgroundAr)/sizeof(DYM10To50BackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //DYM10To50BackgroundAr[fileInd]);
+    }
+    else if (ST_tW_antitopTrimmedBackground){
+        //datasetType = 51;
+        saveName = "ST_tW_antitop";
+        
+        //int arrSize = sizeof(ST_tW_antitopBackgroundAr)/sizeof(ST_tW_antitopBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //ST_tW_antitopBackgroundAr[fileInd]);
+    }
+    else if (ST_tW_topTrimmedBackground){
+        //datasetType = 52;
+        saveName = "ST_tW_top";
+        
+        //int arrSize = sizeof(ST_tW_topBackgroundAr)/sizeof(ST_tW_topBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //ST_tW_topBackgroundAr[fileInd]);
+    }
+    else if (EWKWMinus2Jets_WToLNuTrimmedBackground){
+        //datasetType = 53;
+        saveName = "EWKWMinus2Jets_WToLNu";
+        
+        //int arrSize = sizeof(EWKWMinus2Jets_WToLNuBackgroundAr)/sizeof(EWKWMinus2Jets_WToLNuBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //EWKWMinus2Jets_WToLNuBackgroundAr[fileInd]);
+    }
+    else if (EWKWMinus2Jets_WToQQTrimmedBackground){
+        //datasetType = 54;
+        saveName = "EWKWMinus2Jets_WToQQ";
+        
+        //int arrSize = sizeof(EWKWMinus2Jets_WToQQBackgroundAr)/sizeof(EWKWMinus2Jets_WToQQBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //EWKWMinus2Jets_WToQQBackgroundAr[fileInd]);
+    }
+    else if (EWKWPlus2Jets_WToLNuTrimmedBackground){
+        //datasetType = 55;
+        saveName = "EWKWPlus2Jets_WToLNu";
+        
+        //int arrSize = sizeof(EWKWPlus2Jets_WToLNuBackgroundAr)/sizeof(EWKWPlus2Jets_WToLNuBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //EWKWPlus2Jets_WToLNuBackgroundAr[fileInd]);
+    }
+    else if (EWKWPlus2Jets_WToQQTrimmedBackground){
+        //datasetType = 56;
+        saveName = "EWKWPlus2Jets_WToQQ";
+        
+        //int arrSize = sizeof(EWKWPlus2Jets_WToQQBackgroundAr)/sizeof(EWKWPlus2Jets_WToQQBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //EWKWPlus2Jets_WToQQBackgroundAr[fileInd]);
+    }
+    else if (VHToNonbbTrimmedBackground){
+        //datasetType = 57;
+        saveName = "VHToNonbb";
+        
+        //int arrSize = sizeof(VHToNonbbBackgroundAr)/sizeof(VHToNonbbBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //VHToNonbbBackgroundAr[fileInd]);
+    }
+    else if (WminusH_HToBB_WToLNuTrimmedBackground){
+        //datasetType = 58;
+        saveName = "WminusH_HToBB_WToLNu";
+        
+        //int arrSize = sizeof(WminusH_HToBB_WToLNuBackgroundAr)/sizeof(WminusH_HToBB_WToLNuBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //WminusH_HToBB_WToLNuBackgroundAr[fileInd]);
+    }
+    else if (WminusH_HToBB_WToQQTrimmedBackground){
+        //datasetType = 59;
+        saveName = "WminusH_HToBB_WToQQ";
+        
+        //int arrSize = sizeof(WminusH_HToBB_WToQQBackgroundAr)/sizeof(WminusH_HToBB_WToQQBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //WminusH_HToBB_WToQQBackgroundAr[fileInd]);
+    }
+    else if (WplusH_HToBB_WToLNuTrimmedBackground){
+        //datasetType = 60;
+        saveName = "WplusH_HToBB_WToLNu";
+        
+        //int arrSize = sizeof(WplusH_HToBB_WToLNuBackgroundAr)/sizeof(WplusH_HToBB_WToLNuBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //WplusH_HToBB_WToLNuBackgroundAr[fileInd]);
+    }
+    else if (WplusH_HToBB_WToQQTrimmedBackground){
+        //datasetType = 61;
+        saveName = "WplusH_HToBB_WToQQ";
+        
+        //int arrSize = sizeof(WplusH_HToBB_WToQQBackgroundAr)/sizeof(WplusH_HToBB_WToQQBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //WplusH_HToBB_WToQQBackgroundAr[fileInd]);
+    }
+    else if (WJetsToLNuTrimmedBackground){
+        //datasetType = 62;
+        saveName = "WJetsToLNu";
+        
+        //int arrSize = sizeof(WJetsToLNuBackgroundAr)/sizeof(WJetsToLNuBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //WJetsToLNuBackgroundAr[fileInd]);
+    }
+    else if (WWWTrimmedBackground){
+        //datasetType = 63;
+        saveName = "WWW";
+        
+        //int arrSize = sizeof(WWWBackgroundAr)/sizeof(WWWBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //WWWBackgroundAr[fileInd]);
+    }
+    else if (WWZTrimmedBackground){
+        //datasetType = 64;
+        saveName = "WWZ";
+        
+        //int arrSize = sizeof(WWZBackgroundAr)/sizeof(WWZBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //WWZBackgroundAr[fileInd]);
+    }
+    else if (WZZTrimmedBackground){
+        //datasetType = 65;
+        saveName = "WZZ";
+        
+        //int arrSize = sizeof(WZZBackgroundAr)/sizeof(WZZBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //WZZBackgroundAr[fileInd]);
+    }
+    else if (ZH_HToBB_ZToBBTrimmedBackground){
+        //datasetType = 66;
+        saveName = "ZH_HToBB_ZToBB";
+        
+        //int arrSize = sizeof(ZH_HToBB_ZToBBBackgroundAr)/sizeof(ZH_HToBB_ZToBBBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //ZH_HToBB_ZToBBBackgroundAr[fileInd]);
+    }
+    else if (ZH_HToBB_ZToNuNuTrimmedBackground){
+        //datasetType = 66;
+        saveName = "ZH_HToBB_ZToNuNu";
+        
+        //int arrSize = sizeof(ZH_HToBB_ZToNuNuBackgroundAr)/sizeof(ZH_HToBB_ZToNuNuBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //ZH_HToBB_ZToNuNuBackgroundAr[fileInd]);
+    }
+    else if (ZH_HToBB_ZToLLTrimmedBackground){
+        //datasetType = 66;
+        saveName = "ZH_HToBB_ZToLL";
+        
+        //int arrSize = sizeof(ZH_HToBB_ZToLLBackgroundAr)/sizeof(ZH_HToBB_ZToLLBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //ZH_HToBB_ZToLLBackgroundAr[fileInd]);
+    }
+    else if (ZH_HToBB_ZToQQTrimmedBackground){
+        //datasetType = 67;
+        saveName = "ZH_HToBB_ZToQQ";
+        
+        //int arrSize = sizeof(ZH_HToBB_ZToQQBackgroundAr)/sizeof(ZH_HToBB_ZToQQBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //ZH_HToBB_ZToQQBackgroundAr[fileInd]);
+    }
+    else if (ggZH_HToBB_ZToBBTrimmedBackground){
+        //datasetType = 68;
+        saveName = "ggZH_HToBB_ZToBB";
+        
+        //int arrSize = sizeof(ggZH_HToBB_ZToBBBackgroundAr)/sizeof(ggZH_HToBB_ZToBBBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //ggZH_HToBB_ZToBBBackgroundAr[fileInd]);
+    }
+    else if (ggZH_HToBB_ZToNuNuTrimmedBackground){
+        //datasetType = 68;
+        saveName = "ggZH_HToBB_ZToNuNu";
+        
+        //int arrSize = sizeof(ggZH_HToBB_ZToNuNuBackgroundAr)/sizeof(ggZH_HToBB_ZToNuNuBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //ggZH_HToBB_ZToNuNuBackgroundAr[fileInd]);
+    }
+    else if (ggZH_HToBB_ZToLLTrimmedBackground){
+        //datasetType = 68;
+        saveName = "ggZH_HToBB_ZToLL";
+        
+        //int arrSize = sizeof(ggZH_HToBB_ZToLLBackgroundAr)/sizeof(ggZH_HToBB_ZToLLBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //ggZH_HToBB_ZToLLBackgroundAr[fileInd]);
+    }
+    else if (ggZH_HToBB_ZToQQTrimmedBackground){
+        //datasetType = 69;
+        saveName = "ggZH_HToBB_ZToQQ";
+        
+        //int arrSize = sizeof(ggZH_HToBB_ZToQQBackgroundAr)/sizeof(ggZH_HToBB_ZToQQBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //ggZH_HToBB_ZToQQBackgroundAr[fileInd]);
+    }
+    else if (EWKZ2Jets_ZToLLTrimmedBackground){
+        //datasetType = 70;
+        saveName = "EWKZ2Jets_ZToLL";
+        
+        //int arrSize = sizeof(EWKZ2Jets_ZToLLBackgroundAr)/sizeof(EWKZ2Jets_ZToLLBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //EWKZ2Jets_ZToLLBackgroundAr[fileInd]);
+    }
+    else if (EWKZ2Jets_ZToNuNuTrimmedBackground){
+        //datasetType = 71;
+        saveName = "EWKZ2Jets_ZToNuNu";
+        
+        //int arrSize = sizeof(EWKZ2Jets_ZToNuNuBackgroundAr)/sizeof(EWKZ2Jets_ZToNuNuBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //EWKZ2Jets_ZToNuNuBackgroundAr[fileInd]);
+    }
+    else if (EWKZ2Jets_ZToQQTrimmedBackground){
+        //datasetType = 72;
+        saveName = "EWKZ2Jets_ZToQQ";
+        
+        //int arrSize = sizeof(EWKZ2Jets_ZToQQBackgroundAr)/sizeof(EWKZ2Jets_ZToQQBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //EWKZ2Jets_ZToQQBackgroundAr[fileInd]);
+    }
+    else if (ZZZTrimmedBackground){
+        //datasetType = 73;
+        saveName = "ZZZ";
+        
+        //int arrSize = sizeof(ZZZBackgroundAr)/sizeof(ZZZBackgroundAr[0]);
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //ZZZBackgroundAr[fileInd]);
+    }
     else if (testRun){
         saveName = "testRun";
-        fileAr.push_back("./HLTFilteredForAnalysistestRun_0.root");
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //"./unweighted_eventspphzzjjQCD0SMHLOOP0NPE1NPcHWE1QEDE5ResMasAllVer100Ev10080Seed_0p999cHW100GeVIMJetCut_200.root");
         
+        isBackground = false;
+        
+    }
+    else if (LaraTest){
+        saveName = "LaraTest";
+        fileAr.push_back(strAdd+"HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearNameStr+".root");
+        //"/scratch365/dlutton/NanoAODFiles/pp_hwpwmjj_EFT_VBF_chw_09999000_250k.root");
     }
     else{
         std::cout << "ERROR. NO INPUT DATASET NAME GIVEN\n";
@@ -180,7 +1058,7 @@ void calc042024JERRoch(string datasetString){
     //convert int to str
 
 
-    std::string outFileStr = "HLTTrimmedFilteredForAnalysis"+saveName+"_WithJERRoch.root";
+    std::string outFileStr = "HLTTrimmedFilteredForAnalysis"+saveName+yearNameStr+"_WithJERRoch.root";
     std::cout << "OutFile: " << outFileStr << "\n";
     TFile *outFile = new TFile(outFileStr.c_str(),"RECREATE");
 
@@ -291,9 +1169,6 @@ void calc042024JERRoch(string datasetString){
 
     evNumTree->Branch("nEv",&nEv,"nEv/i");
     evNumTree->Branch("nEvPass",&nEvPass,"nEvPass/i");
-
-    UInt_t nLHEReweightingWeightL;
-    std::vector<Float_t> LHEReweightingWeightL;
 
     Double_t genWeightL;
 
@@ -454,30 +1329,7 @@ void calc042024JERRoch(string datasetString){
 
     Bool_t HTobbBoolL;
 
-    //FJ GENMATCH
-    //THESE BRANCHES CURRENTLY SET TO DEFAULT VALUES
-    //ONLY INCLUDED TO MAKE COMPATIBLE WITH ZZH ANALYSIS CODE
-
-    Int_t ZFJIndL;
-    Int_t HFJIndL;
-    Bool_t goodGenZFJMatchL;
-    Bool_t goodGenHFJMatchL;
-    Bool_t goodZFJMatchToGenL;
-    Bool_t goodHFJMatchToGenL;
-    Bool_t eventGenSemileptonicL;
-    Bool_t eventGenHToBBL;
-    Int_t ZFJGenHadronFlavourL;
-    Int_t HFJGenHadronFlavourL;
     std::vector<Int_t> FatJet_hadronFlavourL;
-
-    UInt_t nHDecayPIDL;
-    std::vector<Int_t> HDecayPIDL;
-    UInt_t nZOneDecayPIDL;
-    std::vector<Int_t> ZOneDecayPIDL;
-    UInt_t nZTwoDecayPIDL;
-    std::vector<Int_t> ZTwoDecayPIDL;
-    Int_t ZOneTypeL; //0=Leptonic,1=Hadronic,2=Other
-    Int_t ZTwoTypeL;
     //HLT 
     Bool_t HLT_Ele32_WPTight_Gsf_L1DoubleEGL;
     Bool_t HLT_IsoMu27L;
@@ -517,19 +1369,11 @@ void calc042024JERRoch(string datasetString){
     ULong64_t eventL;
     //PN Regress Mass nominal JMS and JMR plus up/down
     std::vector<Float_t> FatJet_particleNet_mass_JMSNomJMRNomCorL;
-    std::vector<Float_t> FatJet_particleNet_mass_JMSNomJMRUpCorL;
-    std::vector<Float_t> FatJet_particleNet_mass_JMSNomJMRDownCorL;
-    std::vector<Float_t> FatJet_particleNet_mass_JMSUpJMRNomCorL;
-    std::vector<Float_t> FatJet_particleNet_mass_JMSDownJMRNomCorL;
     
     
 
 
     TTree *FilteredEventsTree = new TTree("FilteredEventsTree", "FilteredEventsTree");
-
-    //Event reweighting
-    FilteredEventsTree->Branch("nLHEReweightingWeightL",&nLHEReweightingWeightL,"nLHEReweightingWeightL/i");
-    FilteredEventsTree->Branch("LHEReweightingWeightL",&LHEReweightingWeightL);
 
     //gen weights
     FilteredEventsTree->Branch("genWeightL",&genWeightL,"genWeightL/D");
@@ -692,29 +1536,8 @@ void calc042024JERRoch(string datasetString){
 
     FilteredEventsTree->Branch("HTobbBoolL",&HTobbBoolL,"HTobbBoolL/O");
 
-    FilteredEventsTree->Branch("ZFJIndL",&ZFJIndL,"ZFJIndL/I");
-    FilteredEventsTree->Branch("HFJIndL",&HFJIndL,"HFJIndL/I");
-    FilteredEventsTree->Branch("goodGenZFJMatchL",&goodGenZFJMatchL,"goodGenZFJMatchL/O");
-    FilteredEventsTree->Branch("goodGenHFJMatchL",&goodGenHFJMatchL,"goodGenHFJMatchL/O");
-    FilteredEventsTree->Branch("goodZFJMatchToGenL",&goodZFJMatchToGenL,"goodZFJMatchToGenL/O");
-    FilteredEventsTree->Branch("goodHFJMatchToGenL",&goodHFJMatchToGenL,"goodHFJMatchToGenL/O");
-    FilteredEventsTree->Branch("eventGenSemileptonicL",&eventGenSemileptonicL,"eventGenSemileptonicL/O");
-    FilteredEventsTree->Branch("eventGenHToBBL",&eventGenHToBBL,"eventGenHToBBL/O");
-
-    FilteredEventsTree->Branch("ZFJGenHadronFlavourL",&ZFJGenHadronFlavourL,"ZFJGenHadronFlavourL/I");
-    FilteredEventsTree->Branch("HFJGenHadronFlavourL",&HFJGenHadronFlavourL,"HFJGenHadronFlavourL/I");
     FilteredEventsTree->Branch("FatJet_hadronFlavourL",&FatJet_hadronFlavourL);
 
-    FilteredEventsTree->Branch("nHDecayPIDL",&nHDecayPIDL,"nHDecayPIDL/i");
-    FilteredEventsTree->Branch("HDecayPIDL",&HDecayPIDL);
-
-    FilteredEventsTree->Branch("nZOneDecayPIDL",&nZOneDecayPIDL,"nZOneDecayPIDL/i");
-    FilteredEventsTree->Branch("ZOneDecayPIDL",&ZOneDecayPIDL);
-    FilteredEventsTree->Branch("nZTwoDecayPIDL",&nZTwoDecayPIDL,"nZTwoDecayPIDL/i");
-    FilteredEventsTree->Branch("ZTwoDecayPIDL",&ZTwoDecayPIDL);
-
-    FilteredEventsTree->Branch("ZOneTypeL",&ZOneTypeL,"ZOneTypeL/I");
-    FilteredEventsTree->Branch("ZTwoTypeL",&ZTwoTypeL,"ZTwoTypeL/I");
 
     FilteredEventsTree->Branch("HLT_Ele32_WPTight_Gsf_L1DoubleEGL",&HLT_Ele32_WPTight_Gsf_L1DoubleEGL,"HLT_Ele32_WPTight_Gsf_L1DoubleEGL/O");
     FilteredEventsTree->Branch("HLT_IsoMu27L",&HLT_IsoMu27L,"HLT_IsoMu27L/O");
@@ -753,10 +1576,6 @@ void calc042024JERRoch(string datasetString){
     FilteredEventsTree->Branch("eventL",&eventL,"eventL/l");
     //PN Regress Mass nominal JMS and JMR plus up/down
     FilteredEventsTree->Branch("FatJet_particleNet_mass_JMSNomJMRNomCorL", &FatJet_particleNet_mass_JMSNomJMRNomCorL);
-    FilteredEventsTree->Branch("FatJet_particleNet_mass_JMSNomJMRUpCorL", &FatJet_particleNet_mass_JMSNomJMRUpCorL);
-    FilteredEventsTree->Branch("FatJet_particleNet_mass_JMSNomJMRDownCorL", &FatJet_particleNet_mass_JMSNomJMRDownCorL);
-    FilteredEventsTree->Branch("FatJet_particleNet_mass_JMSUpJMRNomCorL", &FatJet_particleNet_mass_JMSUpJMRNomCorL);
-    FilteredEventsTree->Branch("FatJet_particleNet_mass_JMSDownJMRNomCorL", &FatJet_particleNet_mass_JMSDownJMRNomCorL);
 
 
     //Whole Run Tree
@@ -764,8 +1583,6 @@ void calc042024JERRoch(string datasetString){
     std::vector<Double_t> LHEPdfSumwL;
     UInt_t nLHEScaleSumwL;
     std::vector<Double_t> LHEScaleSumwL;
-    UInt_t nLHEReweightingSumwL;
-    std::vector<Double_t> LHEReweightingSumwL;
     Long64_t genEventCountL;
     Double_t genEventSumwL;
     Double_t genEventSumw2L;
@@ -778,8 +1595,6 @@ void calc042024JERRoch(string datasetString){
     runTree->Branch("LHEPdfSumwL",&LHEPdfSumwL);
     runTree->Branch("nLHEScaleSumwL",&nLHEScaleSumwL,"nLHEScaleSumwL/i");
     runTree->Branch("LHEScaleSumwL",&LHEScaleSumwL);
-    runTree->Branch("nLHEReweightingSumwL",&nLHEReweightingSumwL,"nLHEReweightingSumwL/i");
-    runTree->Branch("LHEReweightingSumwL",&LHEReweightingSumwL);
     runTree->Branch("genEventCountL",&genEventCountL,"genEventCountL/L");
     runTree->Branch("genEventSumwL",&genEventSumwL,"genEventSumwL/D");
     runTree->Branch("genEventSumw2L",&genEventSumw2L,"genEventSumw2L/D");
@@ -789,8 +1604,6 @@ void calc042024JERRoch(string datasetString){
     Float_t Generator_weightSumL;
     UInt_t nLHEPdfWeightSumL;
     std::vector<Float_t> LHEPdfWeightSumL;
-    UInt_t nLHEReweightingWeightSumL;
-    std::vector<Float_t> LHEReweightingWeightSumL;
     Float_t LHEWeight_originalXWGTUPSumL;
     Float_t genWeightSumL;
 
@@ -799,11 +1612,8 @@ void calc042024JERRoch(string datasetString){
     weightSumsTree->Branch("Generator_weightSumL",&Generator_weightSumL,"Generator_weightSumL/F");
     weightSumsTree->Branch("nLHEPdfWeightSumL",&nLHEPdfWeightSumL,"nLHEPdfWeightSumL/i");
     weightSumsTree->Branch("LHEPdfWeightSumL",&LHEPdfWeightSumL);
-    weightSumsTree->Branch("nLHEReweightingWeightSumL",&nLHEReweightingWeightSumL,"nLHEReweightingWeightSumL/i");
-    weightSumsTree->Branch("LHEReweightingWeightSumL",&LHEReweightingWeightSumL);
     weightSumsTree->Branch("LHEWeight_originalXWGTUPSumL",&LHEWeight_originalXWGTUPSumL,"LHEWeight_originalXWGTUPSumL/F");
     weightSumsTree->Branch("genWeightSumL",&genWeightSumL,"genWeightSumL/F");
-
 
     //Rochester corrections optional tracking variables
     //add doubles for the min and max results
@@ -842,10 +1652,6 @@ void calc042024JERRoch(string datasetString){
         TFile* tmpfile = TFile::Open(fileAr[k].c_str());
         //outFile->cd();
         TTreeReader myEventsReader("FilteredEventsTree", tmpfile);
-
-        //Event reweighting
-        TTreeReaderValue<UInt_t> nLHEReweightingWeight(myEventsReader, "nLHEReweightingWeightL");
-        TTreeReaderArray<Float_t> LHEReweightingWeight(myEventsReader, "LHEReweightingWeightL");
 
         //gen weights
         TTreeReaderValue<Double_t> genWeight(myEventsReader, "genWeightL");
@@ -981,30 +1787,7 @@ void calc042024JERRoch(string datasetString){
 
         TTreeReaderValue<Bool_t> HTobbBool(myEventsReader, "HTobbBoolL");
 
-        //FJ GENMATCH
-
-        TTreeReaderValue<Int_t> ZFJInd(myEventsReader, "ZFJIndL");
-        TTreeReaderValue<Int_t> HFJInd(myEventsReader, "HFJIndL");
-        TTreeReaderValue<Bool_t> goodGenZFJMatch(myEventsReader, "goodGenZFJMatchL");
-        TTreeReaderValue<Bool_t> goodGenHFJMatch(myEventsReader, "goodGenHFJMatchL");
-        TTreeReaderValue<Bool_t> goodZFJMatchToGen(myEventsReader, "goodZFJMatchToGenL");
-        TTreeReaderValue<Bool_t> goodHFJMatchToGen(myEventsReader, "goodHFJMatchToGenL");
-        TTreeReaderValue<Bool_t> eventGenSemileptonic(myEventsReader, "eventGenSemileptonicL");
-        TTreeReaderValue<Bool_t> eventGenHToBB(myEventsReader, "eventGenHToBBL");
-        TTreeReaderValue<Int_t> ZFJGenHadronFlavour(myEventsReader, "ZFJGenHadronFlavourL");
-        TTreeReaderValue<Int_t> HFJGenHadronFlavour(myEventsReader, "HFJGenHadronFlavourL");
         TTreeReaderArray<Int_t> FatJet_hadronFlavour(myEventsReader, "FatJet_hadronFlavourL");
-
-        TTreeReaderValue<UInt_t> nHDecayPID(myEventsReader, "nHDecayPIDL");
-        TTreeReaderArray<Int_t> HDecayPID(myEventsReader, "HDecayPIDL");
-
-        TTreeReaderValue<UInt_t> nZOneDecayPID(myEventsReader, "nZOneDecayPIDL");
-        TTreeReaderArray<Int_t> ZOneDecayPID(myEventsReader, "ZOneDecayPIDL");
-        TTreeReaderValue<UInt_t> nZTwoDecayPID(myEventsReader, "nZTwoDecayPIDL");
-        TTreeReaderArray<Int_t> ZTwoDecayPID(myEventsReader, "ZTwoDecayPIDL");
-
-        TTreeReaderValue<Int_t> ZOneType(myEventsReader, "ZOneTypeL");
-        TTreeReaderValue<Int_t> ZTwoType(myEventsReader, "ZTwoTypeL");
 
         TTreeReaderValue<Bool_t> HLT_Ele32_WPTight_Gsf_L1DoubleEG(myEventsReader,"HLT_Ele32_WPTight_Gsf_L1DoubleEGL");
         TTreeReaderValue<Bool_t> HLT_IsoMu27(myEventsReader,"HLT_IsoMu27L");
@@ -1054,8 +1837,6 @@ void calc042024JERRoch(string datasetString){
         TTreeReaderArray<Double_t> LHEPdfSumw(myRunsReader, "LHEPdfSumwL");
         TTreeReaderValue<UInt_t> nLHEScaleSumw(myRunsReader, "nLHEScaleSumwL");
         TTreeReaderArray<Double_t> LHEScaleSumw(myRunsReader, "LHEScaleSumwL");
-        TTreeReaderValue<UInt_t> nLHEReweightingSumw(myRunsReader, "nLHEReweightingSumwL");
-        TTreeReaderArray<Double_t> LHEReweightingSumw(myRunsReader, "LHEReweightingSumwL");
         TTreeReaderValue<Long64_t> genEventCount(myRunsReader, "genEventCountL");
         TTreeReaderValue<Double_t> genEventSumw(myRunsReader, "genEventSumwL");
         TTreeReaderValue<Double_t> genEventSumw2(myRunsReader, "genEventSumw2L");
@@ -1072,10 +1853,6 @@ void calc042024JERRoch(string datasetString){
             for (UInt_t i = 0; i < nLHEScaleSumwL; i++){
                 LHEScaleSumwL.push_back(LHEScaleSumw[i]);
             }
-            nLHEReweightingSumwL = *nLHEReweightingSumw;
-            for (UInt_t i = 0; i < nLHEReweightingSumwL; i++){
-                LHEReweightingSumwL.push_back(LHEReweightingSumw[i]);
-            }
             genEventCountL = *genEventCount;
             genEventSumwL = *genEventSumw;
             genEventSumw2L = *genEventSumw2;
@@ -1084,7 +1861,6 @@ void calc042024JERRoch(string datasetString){
             //clear run tree vectors
             LHEPdfSumwL.clear();
             LHEScaleSumwL.clear();
-            LHEReweightingSumwL.clear();
 
         }
         std::cout << "Run loop for file " << k << " done. RunsInt " << tmpRunsInt <<"\n";
@@ -1094,8 +1870,6 @@ void calc042024JERRoch(string datasetString){
         TTreeReaderValue<Float_t> Generator_weightSum(myWeightSumReader, "Generator_weightSumL");
         TTreeReaderValue<UInt_t> nLHEPdfWeightSum(myWeightSumReader, "nLHEPdfWeightSumL");
         TTreeReaderArray<Float_t> LHEPdfWeightSum(myWeightSumReader, "LHEPdfWeightSumL");
-        TTreeReaderValue<UInt_t> nLHEReweightingWeightSum(myWeightSumReader, "nLHEReweightingWeightSumL");
-        TTreeReaderArray<Float_t> LHEReweightingWeightSum(myWeightSumReader, "LHEReweightingWeightSumL");
         TTreeReaderValue<Float_t> LHEWeight_originalXWGTUPSum(myWeightSumReader, "LHEWeight_originalXWGTUPSumL");
         TTreeReaderValue<Float_t> genWeightSum(myWeightSumReader, "genWeightSumL");
 
@@ -1107,22 +1881,15 @@ void calc042024JERRoch(string datasetString){
             for (UInt_t i = 0; i < nLHEPdfWeightSumL; i++){
                 LHEPdfWeightSumL.push_back(LHEPdfWeightSum[i]);
             }
-            nLHEReweightingWeightSumL = *nLHEReweightingWeightSum;
-            for (UInt_t i = 0; i < nLHEReweightingWeightSumL; i++){
-                LHEReweightingWeightSumL.push_back(LHEReweightingWeightSum[i]);
-            }
             LHEWeight_originalXWGTUPSumL = *LHEWeight_originalXWGTUPSum;
             genWeightSumL = *genWeightSum;
             tmpWeightSumInt += 1;
             weightSumsTree->Fill();
             //clear weight sums tree vectors
             LHEPdfWeightSumL.clear();
-            LHEReweightingWeightSumL.clear();
         }
 
         std::cout << "Weight sum loop for file " << k << " done. WeightSumInt " << tmpWeightSumInt <<"\n";
-
-
 
 
 
@@ -1131,8 +1898,6 @@ void calc042024JERRoch(string datasetString){
             double tmpTime = (double)(clock()-startt)/CLOCKS_PER_SEC;
             std::cout << "Going into event loop for file" << k << " .\ttime:" << (double)(clock()-startt)/CLOCKS_PER_SEC << "\n";
         }
-
-
 
 
         //EvLoop
@@ -1292,54 +2057,22 @@ void calc042024JERRoch(string datasetString){
                 FatJet_mass_JERDownL.push_back(p4Down.M());
 
                 //05052024 adding JMS and JMR corrections
-                //050502024 Adding the PN regress mass scaling, resolution, and uncertainty
-                //Using double the scale/resolution values for the Up variation
-                //using 0% (no change) for the Down variation
+                //050502024 Adding the PN regress mass scaling, resolution
                 float scaleValNom = 1.0 + PNRegMassJMSAr[yearType];
-                float scaleValUp = 1.0 + (2*PNRegMassJMSAr[yearType]);
 
                 float PNRegMasJMSCorNom = massScale(FatJet_particleNet_mass[nFatJetItr],scaleValNom);
-                float PNRegMasJMSCorUp = massScale(FatJet_particleNet_mass[nFatJetItr],scaleValUp);
-                float PNRegMasJMSCorDown = FatJet_particleNet_mass[nFatJetItr];
 
-                float resSmearNom = PNRegMassJMRAr[yearType];
-                float resSmearUp = (2*PNRegMassJMRAr[yearType]);
+                float resSmearNom = PNRegMassJMRAr[yearType];=
 
                 float PNRegMasJMSNomJMRNomCor = massSmear(PNRegMasJMSCorNom,*luminosityBlock,*event,resSmearNom);
 
-                float PNRegMasJMSUpJMRNomCor = massSmear(PNRegMasJMSCorUp,*luminosityBlock,*event,resSmearNom);
-                float PNRegMasJMSDownJMRNomCor = massSmear(PNRegMasJMSCorDown,*luminosityBlock,*event,resSmearNom);
-
-                float PNRegMasJMSNomJMRUpCor = massSmear(PNRegMasJMSCorNom,*luminosityBlock,*event,resSmearUp);
-                float PNRegMasJMSNomJMRDownCor = PNRegMasJMSCorNom;
-
 
                 FatJet_particleNet_mass_JMSNomJMRNomCorL.push_back(PNRegMasJMSNomJMRNomCor);
-                FatJet_particleNet_mass_JMSUpJMRNomCorL.push_back(PNRegMasJMSUpJMRNomCor);
-                FatJet_particleNet_mass_JMSDownJMRNomCorL.push_back(PNRegMasJMSDownJMRNomCor);
-                FatJet_particleNet_mass_JMSNomJMRUpCorL.push_back(PNRegMasJMSNomJMRUpCor);
-                FatJet_particleNet_mass_JMSNomJMRDownCorL.push_back(PNRegMasJMSNomJMRDownCor);
-                
-
-
-
-
-
-
-                
             }
 
             
             //Fill in all branches of TTree
 
-            //Event reweighting
-            if (debug){
-                std::cout <<"Filling Reweighting\n";
-            }
-            nLHEReweightingWeightL = *nLHEReweightingWeight;
-            for (UInt_t nLHEReweightingWeightItr=0; nLHEReweightingWeightItr<nLHEReweightingWeightL;nLHEReweightingWeightItr++){
-                LHEReweightingWeightL.push_back(LHEReweightingWeight[nLHEReweightingWeightItr]);
-            }
 
             genWeightL = *genWeight;
 
@@ -1520,34 +2253,6 @@ void calc042024JERRoch(string datasetString){
             if (debug){
                 std::cout <<"Filling FJGenMatch\n";
             }
-            ZFJIndL = *ZFJInd;
-            HFJIndL = *HFJInd;
-            goodGenZFJMatchL = *goodGenZFJMatch;
-            goodGenHFJMatchL = *goodGenHFJMatch;
-            goodZFJMatchToGenL = *goodZFJMatchToGen;
-            goodHFJMatchToGenL = *goodHFJMatchToGen;
-            eventGenSemileptonicL = *eventGenSemileptonic;
-            eventGenHToBBL = *eventGenHToBB;
-            ZFJGenHadronFlavourL = *ZFJGenHadronFlavour;
-            HFJGenHadronFlavourL = *HFJGenHadronFlavour;
-
-            nHDecayPIDL = *nHDecayPID;
-            for (UInt_t nHDecayPIDItr=0; nHDecayPIDItr<nHDecayPIDL;nHDecayPIDItr++){
-                HDecayPIDL.push_back(HDecayPID[nHDecayPIDItr]);
-            }
-
-            nZOneDecayPIDL = *nZOneDecayPID;
-            for (UInt_t nZOneDecayPIDItr=0; nZOneDecayPIDItr<nZOneDecayPIDL;nZOneDecayPIDItr++){
-                ZOneDecayPIDL.push_back(ZOneDecayPID[nZOneDecayPIDItr]);
-            }
-
-            nZTwoDecayPIDL = *nZTwoDecayPID;
-            for (UInt_t nZTwoDecayPIDItr=0; nZTwoDecayPIDItr<nZTwoDecayPIDL;nZTwoDecayPIDItr++){
-                ZTwoDecayPIDL.push_back(ZTwoDecayPID[nZTwoDecayPIDItr]);
-            }
-
-            ZOneTypeL = *ZOneType;
-            ZTwoTypeL = *ZTwoType;
 
             //HLT 
             HLT_Ele32_WPTight_Gsf_L1DoubleEGL = *HLT_Ele32_WPTight_Gsf_L1DoubleEG;
@@ -1595,12 +2300,9 @@ void calc042024JERRoch(string datasetString){
             eventL = *event;
 
 
-
-
             FilteredEventsTree->Fill();
 
             //Clear all vectors
-            LHEReweightingWeightL.clear();
 
 
             Jet_etaL.clear();
@@ -1615,7 +2317,7 @@ void calc042024JERRoch(string datasetString){
             Jet_pt_JERMidL.clear();
             Jet_phi_JERMidL.clear();
             Jet_mass_JERMidL.clear();
-             Jet_eta_JERUpL.clear();
+            Jet_eta_JERUpL.clear();
             Jet_pt_JERUpL.clear();
             Jet_phi_JERUpL.clear();
             Jet_mass_JERUpL.clear();
@@ -1737,10 +2439,6 @@ void calc042024JERRoch(string datasetString){
             FatJet_particleNetMD_XccL.clear();
             FatJet_particleNetMD_XqqL.clear();
 
-            HDecayPIDL.clear();
-            ZOneDecayPIDL.clear();
-            ZTwoDecayPIDL.clear();
-
             Jet_puIdL.clear();
 
             PSWeightL.clear();
@@ -1749,10 +2447,6 @@ void calc042024JERRoch(string datasetString){
 
             //05052024 Additions for PN regress mass scaling and resolution corrections
             FatJet_particleNet_mass_JMSNomJMRNomCorL.clear();
-            FatJet_particleNet_mass_JMSUpJMRNomCorL.clear();
-            FatJet_particleNet_mass_JMSDownJMRNomCorL.clear();
-            FatJet_particleNet_mass_JMSNomJMRUpCorL.clear();
-            FatJet_particleNet_mass_JMSNomJMRDownCorL.clear();
 
 
 

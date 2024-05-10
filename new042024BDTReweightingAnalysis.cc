@@ -805,7 +805,23 @@ void new042024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     //more 042024Branches starting with selection
     Bool_t selectedLeadVBFJet_PUIDSFEligible_SL_L;
     Bool_t selectedTrailingVBFJet_PUIDSFEligible_SL_L;
-    
+
+    //05052024 Additions for PN regress mass scaling and resolution corrections
+    UInt_t luminosityBlock_SL_L;
+    ULong64_t event_SL_L;
+
+    //PN Regress Mass nominal JMS and JMR plus up/down
+    Float_t selectedZFJ_InvMassPNRegress_JMSNomJMRNom_SL_L;
+    Float_t selectedZFJ_InvMassPNRegress_JMSUpJMRNom_SL_L;
+    Float_t selectedZFJ_InvMassPNRegress_JMSDownJMRNom_SL_L;
+    Float_t selectedZFJ_InvMassPNRegress_JMSNomJMRUp_SL_L;
+    Float_t selectedZFJ_InvMassPNRegress_JMSNomJMRDown_SL_L;
+    Float_t selectedHiggsFJ_InvMassPNRegress_JMSNomJMRNom_SL_L;
+    Float_t selectedHiggsFJ_InvMassPNRegress_JMSUpJMRNom_SL_L;
+    Float_t selectedHiggsFJ_InvMassPNRegress_JMSDownJMRNom_SL_L;
+    Float_t selectedHiggsFJ_InvMassPNRegress_JMSNomJMRUp_SL_L;
+    Float_t selectedHiggsFJ_InvMassPNRegress_JMSNomJMRDown_SL_L;
+
     TTree *passingEvSemiLepTree = new TTree("passingEvSemiLepTree", "passingEvSemiLepTree");
 
     //EventCor/UncInds
@@ -995,6 +1011,22 @@ void new042024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     //more 042024Branches starting with selection
     passingEvSemiLepTree->Branch("selectedLeadVBFJet_PUIDSFEligible_SL_L",&selectedLeadVBFJet_PUIDSFEligible_SL_L,"selectedLeadVBFJet_PUIDSFEligible_SL_L/O");
     passingEvSemiLepTree->Branch("selectedTrailingVBFJet_PUIDSFEligible_SL_L",&selectedTrailingVBFJet_PUIDSFEligible_SL_L,"selectedTrailingVBFJet_PUIDSFEligible_SL_L/O");
+
+    //05052024 Additions for PN regress mass scaling and resolution corrections
+    passingEvSemiLepTree->Branch("luminosityBlock_SL_L",&luminosityBlock_SL_L,"luminosityBlock_SL_L/i");
+    passingEvSemiLepTree->Branch("event_SL_L",&event_SL_L,"event_SL_L/l");
+    //PN Regress Mass nominal JMS and JMR plus up/down
+    passingEvSemiLepTree->Branch("selectedZFJ_InvMassSoftDrop_JMSNomJMRNom_SL_L",&selectedZFJ_InvMassSoftDrop_JMSNomJMRNom_SL_L,"selectedZFJ_InvMassSoftDrop_JMSNomJMRNom_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedZFJ_InvMassSoftDrop_JMSUpJMRNom_SL_L",&selectedZFJ_InvMassSoftDrop_JMSUpJMRNom_SL_L,"selectedZFJ_InvMassSoftDrop_JMSUpJMRNom_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedZFJ_InvMassSoftDrop_JMSDownJMRNom_SL_L",&selectedZFJ_InvMassSoftDrop_JMSDownJMRNom_SL_L,"selectedZFJ_InvMassSoftDrop_JMSDownJMRNom_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedZFJ_InvMassSoftDrop_JMSNomJMRUp_SL_L",&selectedZFJ_InvMassSoftDrop_JMSNomJMRUp_SL_L,"selectedZFJ_InvMassSoftDrop_JMSNomJMRUp_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedZFJ_InvMassSoftDrop_JMSNomJMRDown_SL_L",&selectedZFJ_InvMassSoftDrop_JMSNomJMRDown_SL_L,"selectedZFJ_InvMassSoftDrop_JMSNomJMRDown_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRNom_SL_L",&selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRNom_SL_L,"selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRNom_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMassSoftDrop_JMSUpJMRNom_SL_L",&selectedHiggsFJ_InvMassSoftDrop_JMSUpJMRNom_SL_L,"selectedHiggsFJ_InvMassSoftDrop_JMSUpJMRNom_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMassSoftDrop_JMSDownJMRNom_SL_L",&selectedHiggsFJ_InvMassSoftDrop_JMSDownJMRNom_SL_L,"selectedHiggsFJ_InvMassSoftDrop_JMSDownJMRNom_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRUp_SL_L",&selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRUp_SL_L,"selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRUp_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRDown_SL_L",&selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRDown_SL_L,"selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRDown_SL_L/F");
+
 
     //Whole Run Tree
     UInt_t nLHEPdfSumwL;
@@ -1242,6 +1274,15 @@ void new042024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
         //additional 042024Branches starting with preselection
         //PUID SF check
         TTreeReaderArray<Bool_t> Jet_LowPtPassesPUID(myEventsReader, "Jet_LowPtPassesPUIDL");
+
+        //05052024 Additions for PN regress mass scaling and resolution corrections
+        TTreeReaderValue<UInt_t> luminosityBlock(myEventsReader, "luminosityBlockL");
+        TTreeReaderValue<ULong64_t> event(myEventsReader, "eventL");
+        TTreeReaderArray<Float_t> FatJet_particleNet_mass_JMSNomJMRNomCor(myEventsReader, "FatJet_particleNet_mass_JMSNomJMRNomCorL");
+        TTreeReaderArray<Float_t> FatJet_particleNet_mass_JMSNomJMRUpCor(myEventsReader, "FatJet_particleNet_mass_JMSNomJMRUpCorL");
+        TTreeReaderArray<Float_t> FatJet_particleNet_mass_JMSNomJMRDownCor(myEventsReader, "FatJet_particleNet_mass_JMSNomJMRDownCorL");
+        TTreeReaderArray<Float_t> FatJet_particleNet_mass_JMSUpJMRNomCor(myEventsReader, "FatJet_particleNet_mass_JMSUpJMRNomCorL");
+        TTreeReaderArray<Float_t> FatJet_particleNet_mass_JMSDownJMRNomCor(myEventsReader, "FatJet_particleNet_mass_JMSDownJMRNomCorL");
 
 
         //Transferring run tree
@@ -2761,6 +2802,22 @@ void new042024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
                         selectedLeadVBFJet_PUIDSFEligible_SL_L = Jet_LowPtPassesPUID[leadJet_1];
                         selectedTrailingVBFJet_PUIDSFEligible_SL_L = Jet_LowPtPassesPUID[leadJet_2];
 
+                        //05052024 Additions for PN regress mass scaling and resolution corrections
+                        luminosityBlockL = *luminosityBlock;
+                        eventL = *event;
+
+                        selectedZFJ_InvMassPNRegress_JMSNomJMRNom_SL_L = FatJet_particleNet_mass_JMSNomJMRNomCorL[FJIndAr[0]];
+                        selectedZFJ_InvMassPNRegress_JMSUpJMRNom_SL_L = FatJet_particleNet_mass_JMSUpJMRNomCorL[FJIndAr[0]];
+                        selectedZFJ_InvMassPNRegress_JMSDownJMRNom_SL_L = FatJet_particleNet_mass_JMSDownJMRNomCorL[FJIndAr[0]];
+                        selectedZFJ_InvMassPNRegress_JMSNomJMRUp_SL_L = FatJet_particleNet_mass_JMSNomJMRUpCorL[FJIndAr[0]];
+                        selectedZFJ_InvMassPNRegress_JMSNomJMRDown_SL_L = FatJet_particleNet_mass_JMSNomJMRDownCorL[FJIndAr[0]];
+
+                        selectedHiggsFJ_InvMassPNRegress_JMSNomJMRNom_SL_L = FatJet_particleNet_mass_JMSNomJMRNomCorL[FJIndAr[1]];
+                        selectedHiggsFJ_InvMassPNRegress_JMSUpJMRNom_SL_L = FatJet_particleNet_mass_JMSUpJMRNomCorL[FJIndAr[1]];
+                        selectedHiggsFJ_InvMassPNRegress_JMSDownJMRNom_SL_L = FatJet_particleNet_mass_JMSDownJMRNomCorL[FJIndAr[1]];
+                        selectedHiggsFJ_InvMassPNRegress_JMSNomJMRUp_SL_L = FatJet_particleNet_mass_JMSNomJMRUpCorL[FJIndAr[1]];
+                        selectedHiggsFJ_InvMassPNRegress_JMSNomJMRDown_SL_L = FatJet_particleNet_mass_JMSNomJMRDownCorL[FJIndAr[1]];
+
                         passingEvSemiLepTree->Fill();
 
                         LHEReweightingWeight_SL_L.clear();
@@ -2999,6 +3056,22 @@ void new042024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
                                 //more 042024Branches starting with selection
                                 selectedLeadVBFJet_PUIDSFEligible_SL_L = Jet_LowPtPassesPUID[leadJet_1];
                                 selectedTrailingVBFJet_PUIDSFEligible_SL_L = Jet_LowPtPassesPUID[leadJet_2];
+
+                                //05052024 Additions for PN regress mass scaling and resolution corrections
+                                luminosityBlockL = *luminosityBlock;
+                                eventL = *event;
+
+                                selectedZFJ_InvMassPNRegress_JMSNomJMRNom_SL_L = FatJet_particleNet_mass_JMSNomJMRNomCorL[FJIndAr[0]];
+                                selectedZFJ_InvMassPNRegress_JMSUpJMRNom_SL_L = FatJet_particleNet_mass_JMSUpJMRNomCorL[FJIndAr[0]];
+                                selectedZFJ_InvMassPNRegress_JMSDownJMRNom_SL_L = FatJet_particleNet_mass_JMSDownJMRNomCorL[FJIndAr[0]];
+                                selectedZFJ_InvMassPNRegress_JMSNomJMRUp_SL_L = FatJet_particleNet_mass_JMSNomJMRUpCorL[FJIndAr[0]];
+                                selectedZFJ_InvMassPNRegress_JMSNomJMRDown_SL_L = FatJet_particleNet_mass_JMSNomJMRDownCorL[FJIndAr[0]];
+
+                                selectedHiggsFJ_InvMassPNRegress_JMSNomJMRNom_SL_L = FatJet_particleNet_mass_JMSNomJMRNomCorL[FJIndAr[1]];
+                                selectedHiggsFJ_InvMassPNRegress_JMSUpJMRNom_SL_L = FatJet_particleNet_mass_JMSUpJMRNomCorL[FJIndAr[1]];
+                                selectedHiggsFJ_InvMassPNRegress_JMSDownJMRNom_SL_L = FatJet_particleNet_mass_JMSDownJMRNomCorL[FJIndAr[1]];
+                                selectedHiggsFJ_InvMassPNRegress_JMSNomJMRUp_SL_L = FatJet_particleNet_mass_JMSNomJMRUpCorL[FJIndAr[1]];
+                                selectedHiggsFJ_InvMassPNRegress_JMSNomJMRDown_SL_L = FatJet_particleNet_mass_JMSNomJMRDownCorL[FJIndAr[1]];
 
 
                                 passingEvSemiLepTree->Fill();

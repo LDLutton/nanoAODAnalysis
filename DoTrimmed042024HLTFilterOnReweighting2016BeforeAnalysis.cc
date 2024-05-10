@@ -390,6 +390,10 @@ void DoTrimmed042024HLTFilterOnReweighting2016BeforeAnalysis(int fileInd, string
     Float_t LHEWeight_originalXWGTUPL;
     //generator weight
     Float_t Generator_weightL;
+
+    //05052024 Additions for PN regress mass scaling and resolution corrections
+    UInt_t luminosityBlockL;
+    ULong64_t eventL;
     
 
 
@@ -596,6 +600,10 @@ void DoTrimmed042024HLTFilterOnReweighting2016BeforeAnalysis(int fileInd, string
     FilteredEventsTree->Branch("LHEWeight_originalXWGTUPL",&LHEWeight_originalXWGTUPL,"LHEWeight_originalXWGTUPL/F");
     //generator weight
     FilteredEventsTree->Branch("Generator_weightL",&Generator_weightL,"Generator_weightL/F");
+
+    //05052024 Additions for PN regress mass scaling and resolution corrections
+    FilteredEventsTree->Branch("luminosityBlockL",&luminosityBlockL,"luminosityBlockL/i");
+    FilteredEventsTree->Branch("eventL",&eventL,"eventL/l");
 
 
 
@@ -1091,6 +1099,10 @@ void DoTrimmed042024HLTFilterOnReweighting2016BeforeAnalysis(int fileInd, string
         TTreeReaderValue<Float_t> LHEWeight_originalXWGTUP(myEventsReader, "LHEWeight_originalXWGTUP");
         //gen weights and weight sums
         TTreeReaderValue<Float_t> Generator_weight(myEventsReader, "Generator_weight");
+
+        //05052024 Additions for PN regress mass scaling and resolution corrections
+        TTreeReaderValue<UInt_t> luminosityBlock(myEventsReader, "luminosityBlock");
+        TTreeReaderValue<ULong64_t> event(myEventsReader, "event");
 
 
 
@@ -3236,6 +3248,10 @@ void DoTrimmed042024HLTFilterOnReweighting2016BeforeAnalysis(int fileInd, string
             LHEWeight_originalXWGTUPL = *LHEWeight_originalXWGTUP;
             //generator weight
             Generator_weightL = *Generator_weight;
+
+            //05052024 Additions for PN regress mass scaling and resolution corrections
+            luminosityBlockL = *luminosityBlock;
+            eventL = *event;
 
 
 

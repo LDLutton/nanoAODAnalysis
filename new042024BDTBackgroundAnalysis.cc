@@ -47,8 +47,8 @@
 ////////////////////////////////START OF MAIN FUNCTION////////////////////////////////
 ////////////////////////////////START OF MAIN FUNCTION////////////////////////////////
 
-//This version has the higgs being selected before the Z and the MDPN being used for selection
-void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, bool JECCorUpOrDown,  int RochInd, int JERInd){
+//This version has the higgs being selected before the Z
+void new042024BDTBackgroundAnalysis(string datasetString, int JECCorInd, bool JECCorUpOrDown,  int RochInd, int JERInd){
     // Open the file. Note that the name of your file outside this class
     // will probably NOT be experiment.root.
     std::cout << "start Analysis\n";
@@ -68,10 +68,75 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
     bool isBackground = false;
 
     if (datasetString == "testRun") testRun = true;
-    if (datasetString == "SDC2V2MCWZHReweightTrimmed") SDC2V2MCWZHReweightTrimmed = true;
-    if (datasetString == "SDC2V2MCWZH17ReweightTrimmed") SDC2V2MCWZH17ReweightTrimmed = true;
-    if (datasetString == "SDC2V2MCWZH16ReweightTrimmed") SDC2V2MCWZH16ReweightTrimmed = true;
-    if (datasetString == "SDC2V2MCWZH16APVReweightTrimmed") SDC2V2MCWZH16APVReweightTrimmed = true;
+    if (datasetString == "ttHToBB") ttHToBBTrimmedBackground = true;
+    if (datasetString == "ttZJets") ttZJetsTrimmedBackground = true;
+    if (datasetString == "ttWJets") ttWJetsTrimmedBackground = true;
+    if (datasetString == "DY") DYTrimmedBackground = true;
+    if (datasetString == "TTJets") TTJetsTrimmedBackground = true;
+    if (datasetString == "ST_s_Channel") ST_s_ChannelTrimmedBackground = true;
+    if (datasetString == "ST_t_ChannelAntiTop") ST_t_ChannelAntiTopTrimmedBackground = true;
+    if (datasetString == "ST_t_ChannelTop") ST_t_ChannelTopTrimmedBackground = true;
+    if (datasetString == "ZZ") ZZTrimmedBackground = true;
+    if (datasetString == "WW") WWTrimmedBackground = true;
+    if (datasetString == "WZ") WZTrimmedBackground = true;
+    if (datasetString == "TTbb_TTToHadronic") TTbb_TTToHadronicTrimmedBackground = true;
+    if (datasetString == "TTbb_TTTo2L2Nu") TTbb_TTTo2L2NuTrimmedBackground = true;
+    if (datasetString == "TTbb_TTToSemiLeptonic") TTbb_TTToSemiLeptonicTrimmedBackground = true;
+
+    if (datasetString == "TTToHadronic") TTToHadronicTrimmedBackground = true;
+    if (datasetString == "TTTo2L2Nu") TTTo2L2NuTrimmedBackground = true;
+    if (datasetString == "TTToSemiLeptonic") TTToSemiLeptonicTrimmedBackground = true;
+
+    if (datasetString == "QCDPT170to300") QCDPT170to300TrimmedBackground = true;
+    if (datasetString == "QCDPT300to470") QCDPT300to470TrimmedBackground = true;
+    if (datasetString == "QCDPT470to600") QCDPT470to600TrimmedBackground = true;
+    if (datasetString == "QCDPT600to800") QCDPT600to800TrimmedBackground = true;
+    if (datasetString == "QCDPT800to1000") QCDPT800to1000TrimmedBackground = true;
+    if (datasetString == "QCDPT1000to1400") QCDPT1000to1400TrimmedBackground = true;
+    if (datasetString == "QCDPT1400to1800") QCDPT1400to1800TrimmedBackground = true;
+    if (datasetString == "QCDPT1800to2400") QCDPT1800to2400TrimmedBackground = true;
+    if (datasetString == "QCDPT2400to3200") QCDPT2400to3200TrimmedBackground = true;
+    if (datasetString == "QCDPT3200toInf") QCDPT3200toInfTrimmedBackground = true;
+
+    if (datasetString == "QCDHT50to100") QCDHT50to100TrimmedBackground = true;
+    if (datasetString == "QCDHT100to200") QCDHT100to200TrimmedBackground = true;
+    if (datasetString == "QCDHT200to300") QCDHT200to300TrimmedBackground = true;
+    if (datasetString == "QCDHT300to500") QCDHT300to500TrimmedBackground = true;
+    if (datasetString == "QCDHT500to700") QCDHT500to700TrimmedBackground = true;
+    if (datasetString == "QCDHT700to1000") QCDHT700to1000TrimmedBackground = true;
+    if (datasetString == "QCDHT1000to1500") QCDHT1000to1500TrimmedBackground = true;
+    if (datasetString == "QCDHT1500to2000") QCDHT1500to2000TrimmedBackground = true;
+    if (datasetString == "QCDHT2000toInf") QCDHT2000toInfTrimmedBackground = true;
+
+
+    if (datasetString == "DYM10To50") DYM10To50TrimmedBackground = true;
+    if (datasetString == "ST_tW_antitop") ST_tW_antitopTrimmedBackground = true;
+    if (datasetString == "ST_tW_top") ST_tW_topTrimmedBackground = true;
+    if (datasetString == "EWKWMinus2Jets_WToLNu") EWKWMinus2Jets_WToLNuTrimmedBackground = true;
+    if (datasetString == "EWKWMinus2Jets_WToQQ") EWKWMinus2Jets_WToQQTrimmedBackground = true;
+    if (datasetString == "EWKWPlus2Jets_WToLNu") EWKWPlus2Jets_WToLNuTrimmedBackground = true;
+    if (datasetString == "EWKWPlus2Jets_WToQQ") EWKWPlus2Jets_WToQQTrimmedBackground = true;
+    if (datasetString == "VHToNonbb") VHToNonbbTrimmedBackground = true;
+    if (datasetString == "WminusH_HToBB_WToLNu") WminusH_HToBB_WToLNuTrimmedBackground = true;
+    if (datasetString == "WminusH_HToBB_WToQQ") WminusH_HToBB_WToQQTrimmedBackground = true;
+    if (datasetString == "WplusH_HToBB_WToLNu") WplusH_HToBB_WToLNuTrimmedBackground = true;
+    if (datasetString == "WplusH_HToBB_WToQQ") WplusH_HToBB_WToQQTrimmedBackground = true;
+    if (datasetString == "WJetsToLNu") WJetsToLNuTrimmedBackground = true;
+    if (datasetString == "WWW") WWWTrimmedBackground = true;
+    if (datasetString == "WWZ") WWZTrimmedBackground = true;
+    if (datasetString == "WZZ") WZZTrimmedBackground = true;
+    if (datasetString == "ZH_HToBB_ZToBB") ZH_HToBB_ZToBBTrimmedBackground = true;
+    if (datasetString == "ZH_HToBB_ZToNuNu") ZH_HToBB_ZToNuNuTrimmedBackground = true;
+    if (datasetString == "ZH_HToBB_ZToLL") ZH_HToBB_ZToLLTrimmedBackground = true;
+    if (datasetString == "ZH_HToBB_ZToQQ") ZH_HToBB_ZToQQTrimmedBackground = true;
+    if (datasetString == "ggZH_HToBB_ZToBB") ggZH_HToBB_ZToBBTrimmedBackground = true;
+    if (datasetString == "ggZH_HToBB_ZToNuNu") ggZH_HToBB_ZToNuNuTrimmedBackground = true;
+    if (datasetString == "ggZH_HToBB_ZToLL") ggZH_HToBB_ZToLLTrimmedBackground = true;
+    if (datasetString == "ggZH_HToBB_ZToQQ") ggZH_HToBB_ZToQQTrimmedBackground = true;
+    if (datasetString == "EWKZ2Jets_ZToLL") EWKZ2Jets_ZToLLTrimmedBackground = true;
+    if (datasetString == "EWKZ2Jets_ZToNuNu") EWKZ2Jets_ZToNuNuTrimmedBackground = true;
+    if (datasetString == "EWKZ2Jets_ZToQQ") EWKZ2Jets_ZToQQTrimmedBackground = true;
+    if (datasetString == "ZZZ") ZZZTrimmedBackground = true;
 
     if (datasetString == "LaraTest") LaraTest = true;
 
@@ -80,58 +145,1734 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
     ////////////////////////////////GETTING DATASET////////////////////////////////
     ////////////////////////////////GETTING DATASET////////////////////////////////
 
+
     float totWeight = 1;
     //precalculate this
     double XS = 1;
 
-    UInt_t datasetType = 25;
+    UInt_t datasetType = 0;
     UInt_t yearType = 0;
 
-
     
-    if (SDC2V2MCWZHReweightTrimmed){
-        saveName = "SDC2V2MCWZHReweightTrimmed";
-        //totWeight = ;
-        //XS = ;
-        isBackground = false;
-        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisSDC2V2MCWZHReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+    if (ttHToBBBackground){
+        //saveName = "ttHToBB";
+        crossSection = 0.5071*0.582;
+        totWeight = 4834432.8;
+        saveName = "ttHToBB";
+        
+        isBackground = true;
+        datasetType = 2;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisttHToBB.root";
+        fileAr.push_back(tmpStrWithPath);
+        
+    }
+    else if (ttZJetsBackground){
+        //saveName = "ttZJets";
+        
+        crossSection = 0.5407;
+        saveName = "ttZJets";
+        isBackground = true;
+        totWeight = 32793821;
+        datasetType = 3;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisttZJets.root";
         fileAr.push_back(tmpStrWithPath);
     }
-    else if (SDC2V2MCWZH17ReweightTrimmed){
-        saveName = "SDC2V2MCWZH17ReweightTrimmed";
-        yearType = 1;
-        //totWeight = ;
-        //XS = ;
-        isBackground = false;
-        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisSDC2V2MCWZH17ReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+    else if (DYBackground){
+        //saveName = "DY";
+        
+        //crossSection = 5364;
+        crossSection = 6424;
+        //totWeight = 96233326;
+        totWeight = 3323478039000;
+        saveName = "DY";
+
+        isBackground = true;
+        datasetType = 4;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisDY.root";
         fileAr.push_back(tmpStrWithPath);
     }
-    else if (SDC2V2MCWZH16ReweightTrimmed){
-        saveName = "SDC2V2MCWZH16ReweightTrimmed";
-        yearType = 2;
-        //totWeight = ;
-        //XS = ;
-        isBackground = false;
-        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisSDC2V2MCWZH16ReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+    else if (QCDPT170to300Background){
+        //saveName = "QCDPT170to300";
+        
+        crossSection = 103300.0;
+        totWeight = 29478000;
+
+        saveName = "QCDPT170to300";
+        
+        isBackground = true;
+        datasetType = 15;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT170to300.root";
         fileAr.push_back(tmpStrWithPath);
     }
-    else if (SDC2V2MCWZH16APVReweightTrimmed){
-        saveName = "SDC2V2MCWZH16APVReweightTrimmed";
-        yearType = 3;
-        //totWeight = ;
-        //XS = ;
-        isBackground = false;
-        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisSDC2V2MCWZH16APVReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+    else if (QCDPT300to470Background){
+        //saveName = "QCDPT300to470";
+        
+        crossSection = 6826.0;
+        totWeight = 57868000;
+
+        saveName = "QCDPT300to470";
+        
+        isBackground = true;
+        datasetType = 16;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT300to470.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT470to600Background){
+        //saveName = "QCDPT470to600";
+        
+        crossSection = 552.6;
+        totWeight = 51062083.800000004;
+        
+        saveName = "QCDPT470to600";
+
+        isBackground = true;
+        datasetType = 17;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT470to600.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT600to800Background){
+        //saveName = "QCDPT600to800";
+        
+        crossSection = 156.6;
+        totWeight = 66914000;
+
+        saveName = "QCDPT600to800";
+        
+        isBackground = true;
+        datasetType = 18;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT600to800.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT800to1000Background){
+        //saveName = "QCDPT800to1000";
+        
+        crossSection = 26.32;
+        totWeight = 36830000;
+
+        saveName = "QCDPT800to1000";
+        
+        isBackground = true;
+        datasetType = 19;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT800to1000.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT1000to1400Background){
+        //saveName = "QCDPT1000to1400";
+        
+        crossSection = 7.5;
+        totWeight = 19664000;
+
+
+        saveName = "QCDPT1000to1400";
+        
+        isBackground = true;
+        datasetType = 20;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT1000to1400.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT1400to1800Background){
+        //saveName = "QCDPT1400to1800";
+        
+        crossSection = 0.6479;
+        totWeight = 10982000;
+
+        saveName = "QCDPT1400to1800";
+        
+        isBackground = true;
+        datasetType = 21;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT1400to1800.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT1800to2400Background){
+        //saveName = "QCDPT1800to2400";
+        
+        crossSection = 0.08715;
+        totWeight = 5491000;
+
+        saveName = "QCDPT1800to2400";
+        
+        isBackground = true;
+        datasetType = 22;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT1800to2400.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT2400to3200Background){
+        //saveName = "QCDPT2400to3200";
+        
+        crossSection = 0.005242;
+        //totWeight = 2931000;
+        totWeight = 2847000.0;
+
+        saveName = "QCDPT2400to3200";
+        
+        isBackground = true;
+        datasetType = 23;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT2400to3200.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT3200toInfBackground){
+        //saveName = "QCDPT3200toInf";
+        
+        crossSection = 0.0001349;
+        totWeight = 1000000;
+
+        saveName = "QCDPT3200toInf";
+        
+        isBackground = true;
+        datasetType = 24;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisQCDPT3200toInf.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (TTJetsBackground){
+        //saveName = "QCDPT3200toInf";
+        
+        crossSection = 722.8;
+        totWeight = 610815599000;
+
+        saveName = "TTJets";
+        
+        isBackground = true;
+        datasetType = 5;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisTTJets.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ST_s_ChannelBackground){
+        //saveName = "QCDPT3200toInf";
+        
+        crossSection = 3.74;
+        totWeight = 68767088;
+
+        saveName = "ST_s_Channel";
+        
+        isBackground = true;
+        datasetType = 9;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisST_s_Channel.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ST_t_ChannelAntiTopBackground){
+        //saveName = "QCDPT3200toInf";
+        
+        crossSection = 69.09;
+        //totWeight = 6014529940;
+        totWeight = 6114949140.0;
+        saveName = "ST_t_ChannelAntiTop";
+        
+        isBackground = true;
+        datasetType = 10;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisST_t_ChannelAntiTop.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ST_t_ChannelTopBackground){
+        //saveName = "QCDPT3200toInf";
+        
+        crossSection = 115.3;
+        totWeight = 18955976000;
+
+        saveName = "ST_t_ChannelTop";
+        
+        isBackground = true;
+        datasetType = 11;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisST_t_ChannelTop.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ZZBackground){
+        //saveName = "";
+        
+        crossSection = 12.17;
+        totWeight = 3526000.0;
+
+        saveName = "ZZ";
+        
+        isBackground = true;
+        datasetType = 12;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisZZ.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (WWBackground){
+        //saveName = "";
+        
+        crossSection = 75.95;
+        totWeight = 15679125.299999999;
+
+        saveName = "WW";
+        
+        isBackground = true;
+        datasetType = 13;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisWW.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (WZBackground){
+        //saveName = "";
+        
+        crossSection = 27.59;
+        totWeight = 7940000.0;
+
+        saveName = "WZ";
+        
+        isBackground = true;
+        datasetType = 14;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisWZ.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (TTbb_TTToHadronicBackground){
+        //saveName = "QCDPT3200toInf";
+        
+        crossSection = 5.5;
+        totWeight = 160749330.0;
+
+        saveName = "TTbb_TTToHadronic";
+        
+        isBackground = true;
+        datasetType = 6;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisTTbb_TTToHadronic.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (TTbb_TTTo2L2NuBackground){
+        //saveName = "";
+        
+        crossSection = 2.9;
+        totWeight = 21986500.0;
+
+        saveName = "TTbb_TTTo2L2Nu";
+        
+        isBackground = true;
+        datasetType = 8;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisTTbb_TTTo2L2Nu.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (TTbb_TTToSemiLeptonicBackground){
+        //saveName = "";
+        
+        crossSection = 4.7;
+        totWeight = 233964864.0;
+
+        saveName = "TTbb_TTToSemiLeptonic";
+        
+        isBackground = true;
+        datasetType = 7;
+        std::string tmpStrWithPath = strAdd+"HLTFilteredForAnalysisTTbb_TTToSemiLeptonic.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ttHToBBTrimmedBackground){
+
+        crossSection = 0.29513219999999996;
+        if (yearType == 0){
+            totWeight = 4843451.890000001;
+        }
+        else if (yearType == 1){
+            totWeight = 3919780.398000001;
+        }
+        else if (yearType == 2){
+            totWeight = 2470819.7700000005;
+        }
+        else if (yearType == 3){
+            totWeight = 2315362.9999999995;
+        }
+        
+        saveName = "TrimmedttHToBB"+yearString;
+
+        isBackground = true;
+        datasetType = 2;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisttHToBB"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ttZJetsTrimmedBackground){
+
+        crossSection = 0.5407;
+        if (yearType == 0){
+            totWeight = 32793821.0;
+        }
+        else if (yearType == 1){
+            totWeight = 31791133.0;
+        }
+        else if (yearType == 2){
+            totWeight = 14329445.0;
+        }
+        else if (yearType == 3){
+            totWeight = 17127762.0;
+        }
+        
+        saveName = "TrimmedttZJets"+yearString;
+
+        isBackground = true;
+        datasetType = 3;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisttZJets"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (DYTrimmedBackground){
+
+        crossSection = 6424;
+        if (yearType == 0){
+            totWeight = 3323478039000.0;
+        }
+        else if (yearType == 1){
+            totWeight = 3322971118000.0;
+        }
+        else if (yearType == 2){
+            totWeight = 1220934300000.0;
+        }
+        else if (yearType == 3){
+            totWeight = 1545708040000.0;
+        }
+        
+        saveName = "TrimmedDY"+yearString;
+
+        isBackground = true;
+        datasetType = 4;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDY"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT170to300TrimmedBackground){
+
+        crossSection = 103300;
+        if (yearType == 0){
+            totWeight = 29478000.0;
+        }
+        else if (yearType == 1){
+            totWeight = 29491000.0;
+        }
+        else if (yearType == 2){
+            totWeight = 29758000.0;
+        }
+        else if (yearType == 3){
+            totWeight = 27885000.0;
+        }
+        
+        saveName = "TrimmedQCDPT170to300"+yearString;
+
+        isBackground = true;
+        datasetType = 15;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisQCDPT170to300"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT300to470TrimmedBackground){
+
+        crossSection = 6826;
+        if (yearType == 0){
+            totWeight = 57868000.0;
+        }
+        else if (yearType == 1){
+            totWeight = 55358000.0;
+        }
+        else if (yearType == 2){
+            totWeight = 55264000.0;
+        }
+        else if (yearType == 3){
+            totWeight = 54028000.0;
+        }
+        
+        saveName = "TrimmedQCDPT300to470"+yearString;
+
+        isBackground = true;
+        datasetType = 16;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisQCDPT300to470"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT470to600TrimmedBackground){
+
+        crossSection = 552.6;
+        if (yearType == 0){
+            totWeight = 52448083.800000004;
+        }
+        else if (yearType == 1){
+            totWeight = 50475112.150000006;
+        }
+        else if (yearType == 2){
+            totWeight = 52408079.3;
+        }
+        else if (yearType == 3){
+            totWeight = 50782081.0;
+        }
+        
+        saveName = "TrimmedQCDPT470to600"+yearString;
+
+        isBackground = true;
+        datasetType = 17;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisQCDPT470to600"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT600to800TrimmedBackground){
+
+        crossSection = 156.6;
+        if (yearType == 0){
+            totWeight = 66914000.0;
+        }
+        else if (yearType == 1){
+            totWeight = 66419000.0;
+        }
+        else if (yearType == 2){
+            totWeight = 64584000.0;
+        }
+        else if (yearType == 3){
+            totWeight = 61904000.0;
+        }
+        
+        saveName = "TrimmedQCDPT600to800"+yearString;
+
+        isBackground = true;
+        datasetType = 18;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisQCDPT600to800"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT800to1000TrimmedBackground){
+
+        crossSection = 26.32;
+        if (yearType == 0){
+            totWeight = 36830000.0;
+        }
+        else if (yearType == 1){
+            totWeight = 36890000.0;
+        }
+        else if (yearType == 2){
+            totWeight = 37698000.0;
+        }
+        else if (yearType == 3){
+            totWeight = 35459000.0;
+        }
+        
+        saveName = "TrimmedQCDPT800to1000"+yearString;
+
+        isBackground = true;
+        datasetType = 19;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisQCDPT800to1000"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT1000to1400TrimmedBackground){
+
+        crossSection = 7.5;
+        if (yearType == 0){
+            totWeight = 19664000.0;
+        }
+        else if (yearType == 1){
+            totWeight = 19461000.0;
+        }
+        else if (yearType == 2){
+            totWeight = 19892000.0;
+        }
+        else if (yearType == 3){
+            totWeight = 19077000.0;
+        }
+        
+        saveName = "TrimmedQCDPT1000to1400"+yearString;
+
+        isBackground = true;
+        datasetType = 20;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisQCDPT1000to1400"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT1400to1800TrimmedBackground){
+
+        crossSection = 0.6479;
+        if (yearType == 0){
+            totWeight = 10982000.0;
+        }
+        else if (yearType == 1){
+            totWeight = 10994000.0;
+        }
+        else if (yearType == 2){
+            totWeight = 10722000.0;
+        }
+        else if (yearType == 3){
+            totWeight = 11000000.0;
+        }
+        
+        saveName = "TrimmedQCDPT1400to1800"+yearString;
+
+        isBackground = true;
+        datasetType = 21;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisQCDPT1400to1800"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT1800to2400TrimmedBackground){
+
+        crossSection = 0.08715;
+        if (yearType == 0){
+            totWeight = 5491000.0;
+        }
+        else if (yearType == 1){
+            totWeight = 5168000.0;
+        }
+        else if (yearType == 2){
+            totWeight = 5236000.0;
+        }
+        else if (yearType == 3){
+            totWeight = 5262000.0;
+        }
+        
+        saveName = "TrimmedQCDPT1800to2400"+yearString;
+
+        isBackground = true;
+        datasetType = 22;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisQCDPT1800to2400"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT2400to3200TrimmedBackground){
+
+        crossSection = 0.005242;
+        if (yearType == 0){
+            totWeight = 2931000.0;
+        }
+        else if (yearType == 1){
+            totWeight = 2997000.0;
+        }
+        else if (yearType == 2){
+            totWeight = 2848000.0;
+        }
+        else if (yearType == 3){
+            totWeight = 2999000.0;
+        }
+        
+        saveName = "TrimmedQCDPT2400to3200"+yearString;
+
+        isBackground = true;
+        datasetType = 23;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisQCDPT2400to3200"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDPT3200toInfTrimmedBackground){
+
+        crossSection = 0.0001349;
+        if (yearType == 0){
+            totWeight = 1000000.0;
+        }
+        else if (yearType == 1){
+            totWeight = 1000000.0;
+        }
+        else if (yearType == 2){
+            totWeight = 996000.0;
+        }
+        else if (yearType == 3){
+            totWeight = 1000000.0;
+        }
+        
+        saveName = "TrimmedQCDPT3200toInf"+yearString;
+
+        isBackground = true;
+        datasetType = 24;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisQCDPT3200toInf"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (QCDHT50to100TrimmedBackground){
+        //saveName = "QCDHT50to100";
+        
+        crossSection = 187700000.; //XS for QCDHT aren't valid yet since they're only for one year but not used here anyway
+
+        saveName = "QCDHT50to100";
+        datasetType = 79;
+        
+        
+        
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearString+".root");
+        //QCDHT50to100BackgroundAr[fileInd]);
+    }
+    else if (QCDHT100to200TrimmedBackground){
+        //saveName = "QCDHT100to200";
+        
+        crossSection = 23640000.0;
+
+        saveName = "QCDHT100to200";
+
+        datasetType = 80;
+        
+        
+        
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearString+".root");
+        //QCDHT100to200BackgroundAr[fileInd]);
+    }
+    else if (QCDHT200to300TrimmedBackground){
+        //saveName = "QCDHT200to300";
+        
+        crossSection = 1546000.0;
+
+        saveName = "QCDHT200to300";
+
+        datasetType = 81;
+        
+        
+        
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearString+".root");
+        //QCDHT200to300BackgroundAr[fileInd]);
+    }
+    else if (QCDHT300to500TrimmedBackground){
+        //saveName = "QCDHT300to500";
+        
+        crossSection = 321600.0;
+
+        saveName = "QCDHT300to500";
+
+        datasetType = 82;
+        
+        
+        
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearString+".root");
+        //QCDHT300to500BackgroundAr[fileInd]);
+    }
+    else if (QCDHT500to700TrimmedBackground){
+        //saveName = "QCDHT500to700";
+        
+        crossSection = 30980.0;
+
+        saveName = "QCDHT500to700";
+
+        datasetType = 83;
+        
+        
+        
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearString+".root");
+        //QCDHT500to700BackgroundAr[fileInd]);
+    }
+    else if (QCDHT700to1000TrimmedBackground){
+        //saveName = "QCDHT700to1000";
+        
+        crossSection = 6364.0;
+
+        saveName = "QCDHT700to1000";
+
+        datasetType = 84;
+        
+        
+        
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearString+".root");
+        //QCDHT700to1000BackgroundAr[fileInd]);
+    }
+    else if (QCDHT1000to1500TrimmedBackground){
+        //saveName = "QCDHT1000to1500";
+        
+        crossSection = 1117.0;
+
+        saveName = "QCDHT1000to1500";
+
+        datasetType = 85;
+        
+        
+        
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearString+".root");
+        //QCDHT1000to1500BackgroundAr[fileInd]);
+    }
+    else if (QCDHT1500to2000TrimmedBackground){
+        //saveName = "QCDHT1500to2000";
+        
+        crossSection = 108.4;
+
+        saveName = "QCDHT1500to2000";
+
+        datasetType = 86;
+        
+        
+        
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearString+".root");
+        //QCDHT1500to2000BackgroundAr[fileInd]);
+    }
+    else if (QCDHT2000toInfTrimmedBackground){
+        //saveName = "QCDHT2000toInf";
+        
+        crossSection = 22.36;
+
+        saveName = "QCDHT2000toInf";
+
+        datasetType = 87;
+        
+        
+        
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearString+".root");
+        
+    }
+    else if (ST_s_ChannelTrimmedBackground){
+
+        crossSection = 3.74;
+        if (yearType == 0){
+            totWeight = 68767088.0;
+        }
+        else if (yearType == 1){
+            totWeight = 48361399.0;
+        }
+        else if (yearType == 2){
+            totWeight = 19433136.53;
+        }
+        else if (yearType == 3){
+            totWeight = 19596255.0;
+        }
+        
+        saveName = "TrimmedST_s_Channel"+yearString;
+
+        isBackground = true;
+        datasetType = 9;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisST_s_Channel"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ST_t_ChannelAntiTopTrimmedBackground){
+
+        crossSection = 69.09;
+        if (yearType == 0){
+            totWeight = 6114949140.0;
+        }
+        else if (yearType == 1){
+            totWeight = 4462869700.0;
+        }
+        else if (yearType == 2){
+            totWeight = 1957283170.0;
+        }
+        else if (yearType == 3){
+            totWeight = 1983864428.0;
+        }
+        
+        saveName = "TrimmedST_t_ChannelAntiTop"+yearString;
+
+        isBackground = true;
+        datasetType = 10;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisST_t_ChannelAntiTop"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ST_t_ChannelTopTrimmedBackground){
+
+        crossSection = 115.3;
+        if (yearType == 0){
+            totWeight = 18955976000.0;
+        }
+        else if (yearType == 1){
+            totWeight = 13808002655.0;
+        }
+        else if (yearType == 2){
+            totWeight = 6703801811.0;
+        }
+        else if (yearType == 3){
+            totWeight = 5948133240.0;
+        }
+        
+        saveName = "TrimmedST_t_ChannelTop"+yearString;
+
+        isBackground = true;
+        datasetType = 11;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisST_t_ChannelTop"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (TTJetsTrimmedBackground){
+
+        crossSection = 722.8;
+        if (yearType == 0){
+            totWeight = 610815599000.0;
+        }
+        else if (yearType == 1){
+            totWeight = 497148414000.0;
+        }
+        else if (yearType == 2){
+            totWeight = 178352266900.0;
+        }
+        else if (yearType == 3){
+            totWeight = 188323895600.0;
+        }
+        
+        saveName = "TrimmedTTJets"+yearString;
+
+        isBackground = true;
+        datasetType = 5;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisTTJets"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (TTToHadronicTrimmedBackground){
+        
+        
+        crossSection = 377.96; //XS for these three TT aren't valid but also aren't used here so ignore
+
+        saveName = "TTJetsHadronic";
+
+        datasetType = 88;
+        
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearString+".root");
+        
+    }
+    else if (TTToSemiLeptonicTrimmedBackground){
+        //saveName = "";
+        
+        crossSection = 365.346;
+
+        saveName = "TTJetsSemiLeptonic";
+
+        datasetType = 89;
+        
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearString+".root");
+        
+    }
+    else if (TTTo2L2NuTrimmedBackground){
+        
+        crossSection = 88.29;
+
+        saveName = "TTJets2L2Nu";
+
+        datasetType = 90;
+        
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+yearString+".root");
+        
+    }
+    else if (WWTrimmedBackground){
+
+        crossSection = 75.95;
+        if (yearType == 0){
+            totWeight = 15679125.299999999;
+        }
+        else if (yearType == 1){
+            totWeight = 15634113.2;
+        }
+        else if (yearType == 2){
+            totWeight = 15821146.729999997;
+        }
+        else if (yearType == 3){
+            totWeight = 15859132.4;
+        }
+        
+        saveName = "TrimmedWW"+yearString;
+
+        isBackground = true;
+        datasetType = 13;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisWW"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (WZTrimmedBackground){
+
+        crossSection = 27.59;
+        if (yearType == 0){
+            totWeight = 7940000.0;
+        }
+        else if (yearType == 1){
+            totWeight = 7889000.0;
+        }
+        else if (yearType == 2){
+            totWeight = 7584000.0;
+        }
+        else if (yearType == 3){
+            totWeight = 7934000.0;
+        }
+        
+        saveName = "TrimmedWZ"+yearString;
+
+        isBackground = true;
+        datasetType = 14;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisWZ"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ZZTrimmedBackground){
+
+        crossSection = 12.17;
+        if (yearType == 0){
+            totWeight = 3526000.0;
+        }
+        else if (yearType == 1){
+            totWeight = 2704470.0;
+        }
+        else if (yearType == 2){
+            totWeight = 1151000.0;
+        }
+        else if (yearType == 3){
+            totWeight = 1282000.0;
+        }
+        
+        saveName = "TrimmedZZ"+yearString;
+
+        isBackground = true;
+        datasetType = 12;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisZZ"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (TTbb_TTTo2L2NuTrimmedBackground){
+
+        crossSection = 2.9;
+        if (yearType == 0){
+            totWeight = 21986500.0;
+        }
+        else if (yearType == 1){
+            totWeight = 15930875.0;
+        }
+        else if (yearType == 2){
+            totWeight = 7209373.0;
+        }
+        else if (yearType == 3){
+            totWeight = 6367619.0;
+        }
+        
+        saveName = "TrimmedTTbb_TTTo2L2Nu"+yearString;
+
+        isBackground = true;
+        datasetType = 8;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisTTbb_TTTo2L2Nu"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (TTbb_TTToHadronicTrimmedBackground){
+
+        crossSection = 5.5;
+        if (yearType == 0){
+            totWeight = 160749330.0;
+        }
+        else if (yearType == 1){
+            totWeight = 113736153.5;
+        }
+        else if (yearType == 2){
+            totWeight = 51913700.0;
+        }
+        else if (yearType == 3){
+            totWeight = 46015100.0;
+        }
+        
+        saveName = "TrimmedTTbb_TTToHadronic"+yearString;
+
+        isBackground = true;
+        datasetType = 6;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisTTbb_TTToHadronic"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (TTbb_TTToSemiLeptonicTrimmedBackground){
+
+        crossSection = 4.7;
+        if (yearType == 0){
+            totWeight = 233964864.0;
+        }
+        else if (yearType == 1){
+            totWeight = 153797770.0;
+        }
+        else if (yearType == 2){
+            totWeight = 61707077.0;
+        }
+        else if (yearType == 3){
+            totWeight = 57255440.0;
+        }
+        
+        saveName = "TrimmedTTbb_TTToSemiLeptonic"+yearString;
+
+        isBackground = true;
+        datasetType = 7;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisTTbb_TTToSemiLeptonic"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ttWJetsTrimmedBackground){
+
+        crossSection = 0.4611;
+        if (yearType == 0){
+            totWeight = 27686858.0;
+        }
+        else if (yearType == 1){
+            totWeight = 27662128.0;
+        }
+        else if (yearType == 2){
+            totWeight = 14396001.0;
+        }
+        else if (yearType == 3){
+            totWeight = 14186419.0;
+        }
+        
+        saveName = "TrimmedttWJets"+yearString;
+
+        isBackground = true;
+        datasetType = 50;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisttWJets"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (DYM10To50TrimmedBackground){
+
+        crossSection = 20490;
+        if (yearType == 0){
+            totWeight = 3351537100000.0;
+        }
+        else if (yearType == 1){
+            totWeight = 3240932300000.0;
+        }
+        else if (yearType == 2){
+            totWeight = 1664772700000.0;
+        }
+        else if (yearType == 3){
+            totWeight = 1677278070000.0;
+        }
+        
+        saveName = "TrimmedDYM10To50"+yearString;
+
+        isBackground = true;
+        datasetType = 51;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisDYM10To50"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ST_tW_antitopTrimmedBackground){
+
+        crossSection = 32.51;
+        if (yearType == 0){
+            totWeight = 251902108.0;
+        }
+        else if (yearType == 1){
+            totWeight = 184446275.0;
+        }
+        else if (yearType == 2){
+            totWeight = 83024122.0;
+        }
+        else if (yearType == 3){
+            totWeight = 74766330.0;
+        }
+        
+        saveName = "TrimmedST_tW_antitop"+yearString;
+
+        isBackground = true;
+        datasetType = 52;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisST_tW_antitop"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ST_tW_topTrimmedBackground){
+
+        crossSection = 32.45;
+        if (yearType == 0){
+            totWeight = 258137399.49999997;
+        }
+        else if (yearType == 1){
+            totWeight = 183284979.29999998;
+        }
+        else if (yearType == 2){
+            totWeight = 80821413.6;
+        }
+        else if (yearType == 3){
+            totWeight = 74624684.0;
+        }
+        
+        saveName = "TrimmedST_tW_top"+yearString;
+
+        isBackground = true;
+        datasetType = 53;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisST_tW_top"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (EWKWMinus2Jets_WToLNuTrimmedBackground){
+
+        crossSection = 32.05;
+        if (yearType == 0){
+            totWeight = 4479000.0;
+        }
+        else if (yearType == 1){
+            totWeight = 4077000.0;
+        }
+        else if (yearType == 2){
+            totWeight = 2202000.0;
+        }
+        else if (yearType == 3){
+            totWeight = 2248000.0;
+        }
+        
+        saveName = "TrimmedEWKWMinus2Jets_WToLNu"+yearString;
+
+        isBackground = true;
+        datasetType = 54;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisEWKWMinus2Jets_WToLNu"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (EWKWPlus2Jets_WToLNuTrimmedBackground){
+
+        crossSection = 39.13;
+        if (yearType == 0){
+            totWeight = 4488000.0;
+        }
+        else if (yearType == 1){
+            totWeight = 3595000.0;
+        }
+        else if (yearType == 2){
+            totWeight = 2033000.0;
+        }
+        else if (yearType == 3){
+            totWeight = 2185000.0;
+        }
+        
+        saveName = "TrimmedEWKWPlus2Jets_WToLNu"+yearString;
+
+        isBackground = true;
+        datasetType = 56;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisEWKWPlus2Jets_WToLNu"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (EWKWMinus2Jets_WToQQTrimmedBackground){
+
+        crossSection = 19.19;
+        if (yearType == 0){
+            totWeight = 9655000.0;
+        }
+        else if (yearType == 1){
+            totWeight = 7874000.0;
+        }
+        else if (yearType == 2){
+            totWeight = 4998130.0;
+        }
+        else if (yearType == 3){
+            totWeight = 4999000.0;
+        }
+        
+        saveName = "TrimmedEWKWMinus2Jets_WToQQ"+yearString;
+
+        isBackground = true;
+        datasetType = 55;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisEWKWMinus2Jets_WToQQ"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (EWKWPlus2Jets_WToQQTrimmedBackground){
+
+        crossSection = 28.71;
+        if (yearType == 0){
+            totWeight = 9991000.0;
+        }
+        else if (yearType == 1){
+            totWeight = 7994000.0;
+        }
+        else if (yearType == 2){
+            totWeight = 4998118.0;
+        }
+        else if (yearType == 3){
+            totWeight = 4943000.0;
+        }
+        
+        saveName = "TrimmedEWKWPlus2Jets_WToQQ"+yearString;
+
+        isBackground = true;
+        datasetType = 57;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisEWKWPlus2Jets_WToQQ"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (VHToNonbbTrimmedBackground){
+
+        crossSection = 2.605;
+        if (yearType == 0){
+            totWeight = 7023767.399999999;
+        }
+        else if (yearType == 1){
+            totWeight = 5066307.699999999;
+        }
+        else if (yearType == 2){
+            totWeight = 1917609.33;
+        }
+        else if (yearType == 3){
+            totWeight = 2561274.6000000006;
+        }
+        
+        saveName = "TrimmedVHToNonbb"+yearString;
+
+        isBackground = true;
+        datasetType = 58;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisVHToNonbb"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (WminusH_HToBB_WToLNuTrimmedBackground){
+
+        crossSection = 0.177;
+        if (yearType == 0){
+            totWeight = 862915.6845000001;
+        }
+        else if (yearType == 1){
+            totWeight = 838429.8309999999;
+        }
+        else if (yearType == 2){
+            totWeight = 396666.2394000001;
+        }
+        else if (yearType == 3){
+            totWeight = 456329.16;
+        }
+        
+        saveName = "TrimmedWminusH_HToBB_WToLNu"+yearString;
+
+        isBackground = true;
+        datasetType = 59;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisWminusH_HToBB_WToLNu"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (WminusH_HToBB_WToQQTrimmedBackground){
+
+        crossSection = 0.3675;
+        if (yearType == 0){
+            totWeight = 3676316.52;
+        }
+        else if (yearType == 1){
+            totWeight = 2924795.0339999995;
+        }
+        else if (yearType == 2){
+            totWeight = 1836585.5289999996;
+        }
+        else if (yearType == 3){
+            totWeight = 1794191.0599999998;
+        }
+        
+        saveName = "TrimmedWminusH_HToBB_WToQQ"+yearString;
+
+        isBackground = true;
+        datasetType = 60;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisWminusH_HToBB_WToQQ"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (WplusH_HToBB_WToLNuTrimmedBackground){
+
+        crossSection = 0.2832;
+        if (yearType == 0){
+            totWeight = 1377078.4579999996;
+        }
+        else if (yearType == 1){
+            totWeight = 1379070.2299999997;
+        }
+        else if (yearType == 2){
+            totWeight = 630588.626;
+        }
+        else if (yearType == 3){
+            totWeight = 745714.035;
+        }
+        
+        saveName = "TrimmedWplusH_HToBB_WToLNu"+yearString;
+
+        isBackground = true;
+        datasetType = 61;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisWplusH_HToBB_WToLNu"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (WplusH_HToBB_WToQQTrimmedBackground){
+
+        crossSection = 0.589;
+        if (yearType == 0){
+            totWeight = 5600077.85;
+        }
+        else if (yearType == 1){
+            totWeight = 4609323.54;
+        }
+        else if (yearType == 2){
+            totWeight = 2910762.9379999996;
+        }
+        else if (yearType == 3){
+            totWeight = 2934336.9399999995;
+        }
+        
+        saveName = "TrimmedWplusH_HToBB_WToQQ"+yearString;
+
+        isBackground = true;
+        datasetType = 62;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisWplusH_HToBB_WToQQ"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (WJetsToLNuTrimmedBackground){
+
+        crossSection = 66680.0;
+        if (yearType == 0){
+            totWeight = 5018114340000.0;
+        }
+        else if (yearType == 1){
+            totWeight = 4559894064000.0;
+        }
+        else if (yearType == 2){
+            totWeight = 4872963500000.0;
+        }
+        else if (yearType == 3){
+            totWeight = 4989518390000.0;
+        }
+        
+        saveName = "TrimmedWJetsToLNu"+yearString;
+
+        isBackground = true;
+        datasetType = 63;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisWJetsToLNu"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (WWWTrimmedBackground){
+
+        crossSection = 0.2158;
+        if (yearType == 0){
+            totWeight = 2135751.129;
+        }
+        else if (yearType == 1){
+            totWeight = 2127101.264;
+        }
+        else if (yearType == 2){
+            totWeight = 897983.3620000002;
+        }
+        else if (yearType == 3){
+            totWeight = 1120296.68;
+        }
+        
+        saveName = "TrimmedWWW"+yearString;
+
+        isBackground = true;
+        datasetType = 64;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisWWW"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (WWZTrimmedBackground){
+
+        crossSection = 0.1707;
+        if (yearType == 0){
+            totWeight = 1572221.397;
+        }
+        else if (yearType == 1){
+            totWeight = 1697048.0349999997;
+        }
+        else if (yearType == 2){
+            totWeight = 784714.14;
+        }
+        else if (yearType == 3){
+            totWeight = 866227.1599999999;
+        }
+        
+        saveName = "TrimmedWWZ"+yearString;
+
+        isBackground = true;
+        datasetType = 65;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisWWZ"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (WZZTrimmedBackground){
+
+        crossSection = 0.05709;
+        if (yearType == 0){
+            totWeight = 571468.7320000001;
+        }
+        else if (yearType == 1){
+            totWeight = 565804.579;
+        }
+        else if (yearType == 2){
+            totWeight = 260326.46;
+        }
+        else if (yearType == 3){
+            totWeight = 308416.94;
+        }
+        
+        saveName = "TrimmedWZZ"+yearString;
+
+        isBackground = true;
+        datasetType = 66;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisWZZ"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ZH_HToBB_ZToBBTrimmedBackground){
+
+        crossSection = 0.5612;
+        if (yearType == 0){
+            totWeight = 2686414.836;
+        }
+        else if (yearType == 1){
+            totWeight = 2663478.1038999995;
+        }
+        else if (yearType == 2){
+            totWeight = 1240904.3085000003;
+        }
+        else if (yearType == 3){
+            totWeight = 1448833.7057000003;
+        }
+        
+        saveName = "TrimmedZH_HToBB_ZToBB"+yearString;
+
+        isBackground = true;
+        datasetType = 75;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisZH_HToBB_ZToBB"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ZH_HToBB_ZToLLTrimmedBackground){
+
+        crossSection = 0.07977;
+        if (yearType == 0){
+            totWeight = 389609.65400000004;
+        }
+        else if (yearType == 1){
+            totWeight = 367961.3039;
+        }
+        else if (yearType == 2){
+            totWeight = 176165.53599999993;
+        }
+        else if (yearType == 3){
+            totWeight = 212477.136;
+        }
+        
+        saveName = "TrimmedZH_HToBB_ZToLL"+yearString;
+
+        isBackground = true;
+        datasetType = 67;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisZH_HToBB_ZToLL"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ZH_HToBB_ZToNuNuTrimmedBackground){
+
+        crossSection = 0.1573;
+        if (yearType == 0){
+            totWeight = 361453.3201;
+        }
+        else if (yearType == 1){
+            totWeight = 742376.6619999999;
+        }
+        else if (yearType == 2){
+            totWeight = 346164.48300000007;
+        }
+        else if (yearType == 3){
+            totWeight = 401141.5949;
+        }
+        
+        saveName = "TrimmedZH_HToBB_ZToNuNu"+yearString;
+
+        isBackground = true;
+        datasetType = 76;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisZH_HToBB_ZToNuNu"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ZH_HToBB_ZToQQTrimmedBackground){
+
+        crossSection = 0.5612;
+        if (yearType == 0){
+            totWeight = 5611321.760000001;
+        }
+        else if (yearType == 1){
+            totWeight = 5523315.285000001;
+        }
+        else if (yearType == 2){
+            totWeight = 2574971.707000001;
+        }
+        else if (yearType == 3){
+            totWeight = 3031836.7879999997;
+        }
+        
+        saveName = "TrimmedZH_HToBB_ZToQQ"+yearString;
+
+        isBackground = true;
+        datasetType = 68;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisZH_HToBB_ZToQQ"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ggZH_HToBB_ZToBBTrimmedBackground){
+
+        crossSection = 0.04319;
+        if (yearType == 0){
+            totWeight = 200515.39800000004;
+        }
+        else if (yearType == 1){
+            totWeight = 203165.06699999998;
+        }
+        else if (yearType == 2){
+            totWeight = 92902.46724999997;
+        }
+        else if (yearType == 3){
+            totWeight = 104596.24113999997;
+        }
+        
+        saveName = "TrimmedggZH_HToBB_ZToBB"+yearString;
+
+        isBackground = true;
+        datasetType = 77;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisggZH_HToBB_ZToBB"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ggZH_HToBB_ZToLLTrimmedBackground){
+
+        crossSection = 0.006185;
+        if (yearType == 0){
+            totWeight = 30249.127000000008;
+        }
+        else if (yearType == 1){
+            totWeight = 28900.881299999994;
+        }
+        else if (yearType == 2){
+            totWeight = 13538.205100000001;
+        }
+        else if (yearType == 3){
+            totWeight = 14942.124299999996;
+        }
+        
+        saveName = "TrimmedggZH_HToBB_ZToLL"+yearString;
+
+        isBackground = true;
+        datasetType = 69;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisggZH_HToBB_ZToLL"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ggZH_HToBB_ZToNuNuTrimmedBackground){
+
+        crossSection = 0.01222;
+        if (yearType == 0){
+            totWeight = 59566.16379999999;
+        }
+        else if (yearType == 1){
+            totWeight = 59040.78879999999;
+        }
+        else if (yearType == 2){
+            totWeight = 26758.943700000007;
+        }
+        else if (yearType == 3){
+            totWeight = 31340.952200000007;
+        }
+        
+        saveName = "TrimmedggZH_HToBB_ZToNuNu"+yearString;
+
+        isBackground = true;
+        datasetType = 78;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisggZH_HToBB_ZToNuNu"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ggZH_HToBB_ZToQQTrimmedBackground){
+
+        crossSection = 0.04319;
+        if (yearType == 0){
+            totWeight = 212862.332;
+        }
+        else if (yearType == 1){
+            totWeight = 215713.47199999998;
+        }
+        else if (yearType == 2){
+            totWeight = 99347.31699999997;
+        }
+        else if (yearType == 3){
+            totWeight = 116625.05099999998;
+        }
+        
+        saveName = "TrimmedggZH_HToBB_ZToQQ"+yearString;
+
+        isBackground = true;
+        datasetType = 70;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisggZH_HToBB_ZToQQ"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (EWKZ2Jets_ZToLLTrimmedBackground){
+
+        crossSection = 6.214;
+        if (yearType == 0){
+            totWeight = 1000000.0;
+        }
+        else if (yearType == 1){
+            totWeight = 579000.0;
+        }
+        else if (yearType == 2){
+            totWeight = 453000.0;
+        }
+        else if (yearType == 3){
+            totWeight = 500000.0;
+        }
+        
+        saveName = "TrimmedEWKZ2Jets_ZToLL"+yearString;
+
+        isBackground = true;
+        datasetType = 71;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisEWKZ2Jets_ZToLL"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (EWKZ2Jets_ZToNuNuTrimmedBackground){
+
+        crossSection = 10.68;
+        if (yearType == 0){
+            totWeight = 2969000.0;
+        }
+        else if (yearType == 1){
+            totWeight = 2976000.0;
+        }
+        else if (yearType == 2){
+            totWeight = 1500000.0;
+        }
+        else if (yearType == 3){
+            totWeight = 1450000.0;
+        }
+        
+        saveName = "TrimmedEWKZ2Jets_ZToNuNu"+yearString;
+
+        isBackground = true;
+        datasetType = 72;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisEWKZ2Jets_ZToNuNu"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (EWKZ2Jets_ZToQQTrimmedBackground){
+
+        crossSection = 9.778;
+        if (yearType == 0){
+            totWeight = 9985000.0;
+        }
+        else if (yearType == 1){
+            totWeight = 8000000.0;
+        }
+        else if (yearType == 2){
+            totWeight = 4928082.0;
+        }
+        else if (yearType == 3){
+            totWeight = 4979000.0;
+        }
+        
+        saveName = "TrimmedEWKZ2Jets_ZToQQ"+yearString;
+
+        isBackground = true;
+        datasetType = 73;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisEWKZ2Jets_ZToQQ"+yearString+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (ZZZTrimmedBackground){
+
+        crossSection = 0.01476;
+        if (yearType == 0){
+            totWeight = 146027.43779999999;
+        }
+        else if (yearType == 1){
+            totWeight = 140629.42869999996;
+        }
+        else if (yearType == 2){
+            totWeight = 66938.7465;
+        }
+        else if (yearType == 3){
+            totWeight = 78317.072;
+        }
+        
+        saveName = "TrimmedZZZ"+yearString;
+
+        isBackground = true;
+        datasetType = 74;
+        
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisZZZ"+yearString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (testRun){
         saveName = "testRun";
-        fileAr.push_back("/scratch365/dlutton/HLT042024WithPreSel/HLTFilteredForAnalysistestRun_0.root");
-        
-        
+        fileAr.push_back("./HLTTrimmedFilteredForAnalysistestRun_0.root");
+        useLHETree = true;
+        useFJGenMatchTree = true;
         isBackground = false;
         totWeight = 1;
         
+    }
+    else if (LaraTest){
+        saveName = "LaraTest";
+        fileAr.push_back("/scratch365/dlutton/NanoAODFiles/pp_hwpwmjj_EFT_VBF_chw_09999000_250k.root");
     }
     else{
         std::cout << "ERROR. NO INPUT DATASET NAME GIVEN\n";
@@ -164,9 +1905,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
     UInt_t passChannelCtr = 0;
     UInt_t passLepOrSemiLepChannelCtr = 0;
     UInt_t tryingSemiLepChannelCtr = 0;
-
     UInt_t passHiggsFJInSemiLepChannelCtr = 0;
-
     UInt_t passFJInSemiLepChannelCtr = 0;
     UInt_t passEnoughFJsInSemiLepChannelCtr = 0;
     UInt_t passLepCutInSemiLepChannelCtr = 0;
@@ -179,48 +1918,32 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
 
 
     
-
-    std::vector<std::string> C2VNameAr {"-2.0","-1.75","-1.5","-1.25","-1.0","-0.75","-0.5","-0.25","0.0","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9","2.25","2.5","2.75","3.0","3.25","3.5","3.75","4.0"};
-    std::vector<std::string> htobbNameAr {"HTobb","NoHTobb"};
-    //std::vector<std::string> typeNameAr {"","GenLep","GenSemiLep","GenHad","GenOther"};
-    //std::vector<std::string> typeNameAltAr {"GenLep","GenSemiLep","GenHad","GenOther"};
-    std::vector<Double_t> zeroC2VVec(37,0.0);
-    //std::vector<std::vector<Double_t>> zeroTypeVec(5,zeroC2VVec);
-
-    std::vector<std::vector<Double_t>> startingWeightedCtrAr(2,zeroC2VVec);
-
-    std::vector<std::vector<Double_t>> passHiggsFJWeightedCtrAr(2,zeroC2VVec);
-    std::vector<std::vector<Double_t>> passHiggsFJWeightedSemiLepCtr(2,zeroC2VVec);
-    
-    std::vector<std::vector<Double_t>> passChannelWeightedCtrAr(2,zeroC2VVec);
-    std::vector<std::vector<Double_t>> passLepOrSemiLepChannelWeightedCtrAr(2,zeroC2VVec);
-
-    std::vector<std::vector<Double_t>> tryingSemiLepChannelWeightedCtrAr(2,zeroC2VVec);
-    
-    std::vector<std::vector<Double_t>> passHiggsFJInSemiLepChannelWeightedCtrAr(2,zeroC2VVec);
-    
-    std::vector<std::vector<Double_t>> passFJInSemiLepChannelWeightedCtrAr(2,zeroC2VVec);
-
-    std::vector<std::vector<Double_t>> passEnoughFJsInSemiLepChannelWeightedCtrAr(2,zeroC2VVec);
-    std::vector<std::vector<Double_t>> passSemiLepLepCutWeightedCtrAr(2,zeroC2VVec);
-    std::vector<std::vector<Double_t>> passSemiLepChannelWeightedCtrAr(2,zeroC2VVec);
-
-    std::vector<std::vector<Double_t>> passVBFJetBVetoWeightedCtr(2,zeroC2VVec);
-    std::vector<std::vector<Double_t>> passVBFJetBVetoWeightedSemiLepCtr(2,zeroC2VVec);
-    
-    std::vector<std::vector<Double_t>> passVBFJetsWeightedCtr(2,zeroC2VVec);
-
-    std::vector<std::vector<Double_t>> passLepVetoWeightedCtr(2,zeroC2VVec);
-
-    std::vector<std::vector<Double_t>> passAsSemiLepWeightedCtr(2,zeroC2VVec);
-    std::vector<std::vector<Double_t>> passSemiLepLepCutWeightedCtr(2,zeroC2VVec);
-
-    
     
     UInt_t passSemiLepLepCutCtr = 0;
-    //Double_t passSemiLepLepCutWeightedCtr = 0.;
     
 
+    Double_t startingWeightedCtr = 0;
+
+    Double_t passHiggsFJWeightedCtr = 0;
+    Double_t passHiggsFJSemiLepWeightedCtr = 0;
+    Double_t passChannelWeightedCtr = 0;
+    Double_t passLepOrSemiLepChannelWeightedCtr = 0;
+    Double_t tryingSemiLepChannelWeightedCtr = 0;
+    Double_t passHiggsFJInSemiLepChannelWeightedCtr = 0;
+    Double_t passFJInSemiLepChannelWeightedCtr = 0;
+    Double_t passEnoughFJsInSemiLepChannelWeightedCtr = 0;
+    Double_t passLepCutInSemiLepChannelWeightedCtr = 0;
+    Double_t passSemiLepChannelWeightedCtr = 0;
+    Double_t passVBFJetBVetoWeightedCtr = 0;
+    Double_t passVBFJetBVetoSemiLepWeightedCtr = 0;
+    Double_t passVBFJetsWeightedCtr = 0;
+    Double_t passLepVetoWeightedCtr = 0;
+    Double_t passAsSemiLepWeightedCtr = 0;
+
+
+    
+    
+    Double_t passSemiLepLepCutWeightedCtr = 0;
 
     ////////////////////////////////OTHER COUNTERS////////////////////////////////
 
@@ -237,15 +1960,27 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
     UInt_t tryingSemiLepCtr = 0;
     UInt_t tryingHadCtr = 0;
 
-    //float dataXS;
-    /*
-    UInt_t datanEv;
-    UInt_t datanEvPass;
-    */
     UInt_t datanEv = 0;
     UInt_t datanEvPass = 0;
     UInt_t evCount = 0;
     UInt_t evRunOver = 0;
+
+    UInt_t passVBFJetsWeighted = 0;
+    UInt_t passFatJetsWeighted = 0;
+    UInt_t passFJMatchWeighted = 0;
+    UInt_t passLepCutWeighted = 0;
+    UInt_t passSemiLepCutWeighted = 0;
+
+    UInt_t passHadCutWeighted = 0;
+
+    UInt_t tryingLepWeightedCtr = 0;
+    UInt_t tryingSemiLepWeightedCtr = 0;
+    UInt_t tryingHadWeightedCtr = 0;
+
+    UInt_t datanEvWeighted = 0;
+    UInt_t datanEvPassWeighted = 0;
+    UInt_t evCountWeighted = 0;
+    UInt_t evRunOverWeighted = 0;
 
     float crossSectionAvg = 0;
     float crossSectionCnt = 0;
@@ -320,7 +2055,8 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         lepJetDeepTagMediumCut = lepJetDeepTagMediumBDTCut;
         mPromptMVACut = mPromptMVABDTCut;
     }
-    
+
+
 
     //PASSING EV TREE FOR BDT IN SEMILEP CHANNEL
 
@@ -329,10 +2065,6 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
     UInt_t JECCorUpOrDown_SL_L;
     UInt_t RochInd_SL_L;
     UInt_t JERInd_SL_L;
-
-    //EventReweighting
-    UInt_t nLHEReweightingWeight_SL_L;
-    std::vector<Float_t> LHEReweightingWeight_SL_L;
 
     Double_t passingEvGenWeight_SL_L;
 
@@ -361,19 +2093,15 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
 
     UInt_t eventNAK4JetsPassingCuts_SL_L;
 
-
     Float_t selectedHiggsFJ_pt_SL_L;
     Float_t selectedHiggsFJ_eta_SL_L;
     Float_t selectedHiggsFJ_phi_SL_L;
-
     Float_t selectedZFJ_ParticleNet_HbbvsQCD_SL_L;
-    
     Float_t selectedHiggsFJ_ParticleNet_HbbvsQCD_SL_L;
     Float_t selectedZFJ_pt_SL_L;
     Float_t selectedZFJ_eta_SL_L;
     Float_t selectedZFJ_phi_SL_L;
     Float_t selectedZFJ_ParticleNet_ZvsQCD_SL_L;
-
     Float_t selectedHiggsFJ_ParticleNet_ZvsQCD_SL_L;
 
     Float_t selectedZFJ_InvMass_SL_L;
@@ -384,7 +2112,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
 
     Float_t selectedZFJ_InvMassPNRegress_SL_L;
     Float_t selectedHiggsFJ_InvMassPNRegress_SL_L;
-
+    
     Float_t selectedHiggsFJ_ParticleNetMD_QCD_SL_L;
     Float_t selectedHiggsFJ_ParticleNetMD_Xbb_SL_L;
     Float_t selectedHiggsFJ_ParticleNetMD_Xcc_SL_L;
@@ -424,32 +2152,9 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
 
     Float_t selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_SL_L;
 
-    Bool_t ZReconstructedWithCorrectFJ_SL_L;
-    Bool_t HReconstructedWithCorrectFJ_SL_L;
-
-    Bool_t ZReconstructedWithHFJ_SL_L;
-    Bool_t HReconstructedWithZFJ_SL_L;
-
-    Bool_t goodGenZFJMatch_SL_L;
-    Bool_t goodGenHFJMatch_SL_L;
-    Bool_t goodZFJMatchToGen_SL_L;
-    Bool_t goodHFJMatchToGen_SL_L;
-    Bool_t eventGenSemileptonic_SL_L;
-    Bool_t eventGenHToBB_SL_L;
-    Int_t ZFJGenHadronFlavour_SL_L;
-    Int_t HFJGenHadronFlavour_SL_L;
     Int_t FatJet_hadronFlavour_SL_L;
 
     Bool_t firstHToBBBool_SL_L; //including as alternative to eventGenHToBB. Checking if there's a difference.
-
-    UInt_t nHDecayPID_SL_L;
-    std::vector<Int_t> HDecayPID_SL_L;
-    UInt_t nZOneDecayPID_SL_L;
-    std::vector<Int_t> ZOneDecayPID_SL_L;
-    UInt_t nZTwoDecayPID_SL_L;
-    std::vector<Int_t> ZTwoDecayPID_SL_L;
-    Int_t ZOneType_SL_L; //0=Leptonic,1=Hadronic,2=Other
-    Int_t ZTwoType_SL_L;
 
     //HLT 
     Bool_t HLT_Ele32_WPTight_Gsf_L1DoubleEG_SL_L;
@@ -513,16 +2218,8 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
 
     //PN Regress Mass nominal JMS and JMR plus up/down
     Float_t selectedZFJ_InvMassPNRegress_JMSNomJMRNom_SL_L;
-    Float_t selectedZFJ_InvMassPNRegress_JMSUpJMRNom_SL_L;
-    Float_t selectedZFJ_InvMassPNRegress_JMSDownJMRNom_SL_L;
-    Float_t selectedZFJ_InvMassPNRegress_JMSNomJMRUp_SL_L;
-    Float_t selectedZFJ_InvMassPNRegress_JMSNomJMRDown_SL_L;
     Float_t selectedHiggsFJ_InvMassPNRegress_JMSNomJMRNom_SL_L;
-    Float_t selectedHiggsFJ_InvMassPNRegress_JMSUpJMRNom_SL_L;
-    Float_t selectedHiggsFJ_InvMassPNRegress_JMSDownJMRNom_SL_L;
-    Float_t selectedHiggsFJ_InvMassPNRegress_JMSNomJMRUp_SL_L;
-    Float_t selectedHiggsFJ_InvMassPNRegress_JMSNomJMRDown_SL_L;
-    
+
     TTree *passingEvSemiLepTree = new TTree("passingEvSemiLepTree", "passingEvSemiLepTree");
 
     //EventCor/UncInds
@@ -531,9 +2228,6 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
     passingEvSemiLepTree->Branch("RochInd_SL_L",&RochInd_SL_L,"RochInd_SL_L/i");
     passingEvSemiLepTree->Branch("JERInd_SL_L",&JERInd_SL_L,"JERInd_SL_L/i");
 
-    passingEvSemiLepTree->Branch("nLHEReweightingWeight_SL_L",&nLHEReweightingWeight_SL_L,"nLHEReweightingWeight_SL_L/i");
-    passingEvSemiLepTree->Branch("LHEReweightingWeight_SL_L",&LHEReweightingWeight_SL_L);
-    
     passingEvSemiLepTree->Branch("passingEvGenWeight_SL_L",&passingEvGenWeight_SL_L,"passingEvGenWeight_SL_L/D");
 
     //passingEvSemiLepTree->Branch("passingEvFullWeight_SL_L",&passingEvFullWeight_SL_L,"passingEvFullWeight_SL_L/D");
@@ -545,6 +2239,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
     passingEvSemiLepTree->Branch("eventNAK8Jets_SL_L",&eventNAK8Jets_SL_L,"eventNAK8Jets_SL_L/i");
     passingEvSemiLepTree->Branch("eventNMuons_SL_L",&eventNMuons_SL_L,"eventNMuons_SL_L/i");
     passingEvSemiLepTree->Branch("eventNElectrons_SL_L",&eventNElectrons_SL_L,"eventNElectrons_SL_L/i");
+
 
     passingEvSemiLepTree->Branch("Jet_eta_SL_L",&Jet_eta_SL_L);
     passingEvSemiLepTree->Branch("Jet_pt_SL_L",&Jet_pt_SL_L);
@@ -558,6 +2253,8 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
     passingEvSemiLepTree->Branch("Jet_pt_Final_SL_L",&Jet_pt_Final_SL_L);
     passingEvSemiLepTree->Branch("Jet_phi_Final_SL_L",&Jet_phi_Final_SL_L);
     passingEvSemiLepTree->Branch("Jet_mass_Final_SL_L",&Jet_mass_Final_SL_L);
+
+
     
 
     passingEvSemiLepTree->Branch("eventNAK4JetsPassingCuts_SL_L",&eventNAK4JetsPassingCuts_SL_L,"eventNAK4JetsPassingCuts_SL_L/i");
@@ -567,14 +2264,13 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
     passingEvSemiLepTree->Branch("selectedHiggsFJ_phi_SL_L",&selectedHiggsFJ_phi_SL_L,"selectedHiggsFJ_phi_SL_L/F");
 
     passingEvSemiLepTree->Branch("selectedZFJ_ParticleNet_HbbvsQCD_SL_L",&selectedZFJ_ParticleNet_HbbvsQCD_SL_L,"selectedZFJ_ParticleNet_HbbvsQCD_SL_L/F");
-
     passingEvSemiLepTree->Branch("selectedHiggsFJ_ParticleNet_HbbvsQCD_SL_L",&selectedHiggsFJ_ParticleNet_HbbvsQCD_SL_L,"selectedHiggsFJ_ParticleNet_HbbvsQCD_SL_L/F");
     passingEvSemiLepTree->Branch("selectedZFJ_pt_SL_L",&selectedZFJ_pt_SL_L,"selectedZFJ_pt_SL_L/F");
     passingEvSemiLepTree->Branch("selectedZFJ_eta_SL_L",&selectedZFJ_eta_SL_L,"selectedZFJ_eta_SL_L/F");
     passingEvSemiLepTree->Branch("selectedZFJ_phi_SL_L",&selectedZFJ_phi_SL_L,"selectedZFJ_phi_SL_L/F");
     passingEvSemiLepTree->Branch("selectedZFJ_ParticleNet_ZvsQCD_SL_L",&selectedZFJ_ParticleNet_ZvsQCD_SL_L,"selectedZFJ_ParticleNet_ZvsQCD_SL_L/F");
-
     passingEvSemiLepTree->Branch("selectedHiggsFJ_ParticleNet_ZvsQCD_SL_L",&selectedHiggsFJ_ParticleNet_ZvsQCD_SL_L,"selectedHiggsFJ_ParticleNet_ZvsQCD_SL_L/F");
+
 
     passingEvSemiLepTree->Branch("selectedZFJ_InvMass_SL_L",&selectedZFJ_InvMass_SL_L,"selectedZFJ_InvMass_SL_L/F");
     passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMass_SL_L",&selectedHiggsFJ_InvMass_SL_L,"selectedHiggsFJ_InvMass_SL_L/F");
@@ -594,6 +2290,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
     passingEvSemiLepTree->Branch("selectedZFJ_ParticleNetMD_Xbb_SL_L", &selectedZFJ_ParticleNetMD_Xbb_SL_L);
     passingEvSemiLepTree->Branch("selectedZFJ_ParticleNetMD_Xcc_SL_L", &selectedZFJ_ParticleNetMD_Xcc_SL_L);
     passingEvSemiLepTree->Branch("selectedZFJ_ParticleNetMD_Xqq_SL_L", &selectedZFJ_ParticleNetMD_Xqq_SL_L);
+
 
     passingEvSemiLepTree->Branch("selectedLeadVBFJet_pt_SL_L",&selectedLeadVBFJet_pt_SL_L,"selectedLeadVBFJet_pt_SL_L/F");
     passingEvSemiLepTree->Branch("selectedTrailingVBFJet_pt_SL_L",&selectedTrailingVBFJet_pt_SL_L,"selectedTrailingVBFJet_pt_SL_L/F");
@@ -622,35 +2319,11 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
     passingEvSemiLepTree->Branch("selectedZPairPlusHiggsFJPlusVBFJets_PtVecSum_SL_L",&selectedZPairPlusHiggsFJPlusVBFJets_PtVecSum_SL_L,"selectedZPairPlusHiggsFJPlusVBFJets_PtVecSum_SL_L/F");
     passingEvSemiLepTree->Branch("selectedZPairPlusHiggsFJPlusVBFJets_PtScalarSum_SL_L",&selectedZPairPlusHiggsFJPlusVBFJets_PtScalarSum_SL_L,"selectedZPairPlusHiggsFJPlusVBFJets_PtScalarSum_SL_L/F");
     passingEvSemiLepTree->Branch("selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_SL_L",&selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_SL_L,"selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_SL_L/F");
-    
-    passingEvSemiLepTree->Branch("ZReconstructedWithCorrectFJ_SL_L",&ZReconstructedWithCorrectFJ_SL_L,"ZReconstructedWithCorrectFJ_SL_L/O");
-    passingEvSemiLepTree->Branch("HReconstructedWithCorrectFJ_SL_L",&HReconstructedWithCorrectFJ_SL_L,"HReconstructedWithCorrectFJ_SL_L/O");
-    passingEvSemiLepTree->Branch("ZReconstructedWithHFJ_SL_L",&ZReconstructedWithHFJ_SL_L,"ZReconstructedWithHFJ_SL_L/O");
-    passingEvSemiLepTree->Branch("HReconstructedWithZFJ_SL_L",&HReconstructedWithZFJ_SL_L,"HReconstructedWithZFJ_SL_L/O");
 
-    passingEvSemiLepTree->Branch("goodGenZFJMatch_SL_L",&goodGenZFJMatch_SL_L,"goodGenZFJMatch_SL_L/O");
-    passingEvSemiLepTree->Branch("goodGenHFJMatch_SL_L",&goodGenHFJMatch_SL_L,"goodGenHFJMatch_SL_L/O");
-    passingEvSemiLepTree->Branch("goodZFJMatchToGen_SL_L",&goodZFJMatchToGen_SL_L,"goodZFJMatchToGen_SL_L/O");
-    passingEvSemiLepTree->Branch("goodHFJMatchToGen_SL_L",&goodHFJMatchToGen_SL_L,"goodHFJMatchToGen_SL_L/O");
-    passingEvSemiLepTree->Branch("eventGenSemileptonic_SL_L",&eventGenSemileptonic_SL_L,"eventGenSemileptonic_SL_L/O");
-    passingEvSemiLepTree->Branch("eventGenHToBB_SL_L",&eventGenHToBB_SL_L,"eventGenHToBB_SL_L/O");
 
-    passingEvSemiLepTree->Branch("ZFJGenHadronFlavour_SL_L",&ZFJGenHadronFlavour_SL_L,"ZFJGenHadronFlavour_SL_L/I");
-    passingEvSemiLepTree->Branch("HFJGenHadronFlavour_SL_L",&HFJGenHadronFlavour_SL_L,"HFJGenHadronFlavour_SL_L/I");
     passingEvSemiLepTree->Branch("FatJet_hadronFlavour_SL_L",&FatJet_hadronFlavour_SL_L,"FatJet_hadronFlavour_SL_L/I");
 
     passingEvSemiLepTree->Branch("firstHToBBBool_SL_L",&firstHToBBBool_SL_L,"firstHToBBBool_SL_L/O");
-
-    passingEvSemiLepTree->Branch("nHDecayPID_SL_L",&nHDecayPID_SL_L,"nHDecayPID_SL_L/i");
-    passingEvSemiLepTree->Branch("HDecayPID_SL_L",&HDecayPID_SL_L);
-
-    passingEvSemiLepTree->Branch("nZOneDecayPID_SL_L",&nZOneDecayPID_SL_L,"nZOneDecayPID_SL_L/i");
-    passingEvSemiLepTree->Branch("ZOneDecayPID_SL_L",&ZOneDecayPID_SL_L);
-    passingEvSemiLepTree->Branch("nZTwoDecayPID_SL_L",&nZTwoDecayPID_SL_L,"nZTwoDecayPID_SL_L/i");
-    passingEvSemiLepTree->Branch("ZTwoDecayPID_SL_L",&ZTwoDecayPID_SL_L);
-
-    passingEvSemiLepTree->Branch("ZOneType_SL_L",&ZOneType_SL_L,"ZOneType_SL_L/I");
-    passingEvSemiLepTree->Branch("ZTwoType_SL_L",&ZTwoType_SL_L,"ZTwoType_SL_L/I");
 
     passingEvSemiLepTree->Branch("HLT_Ele32_WPTight_Gsf_L1DoubleEG_SL_L",&HLT_Ele32_WPTight_Gsf_L1DoubleEG_SL_L,"HLT_Ele32_WPTight_Gsf_L1DoubleEG_SL_L/O");
     passingEvSemiLepTree->Branch("HLT_IsoMu27_SL_L",&HLT_IsoMu27_SL_L,"HLT_IsoMu27_SL_L/O");
@@ -712,23 +2385,14 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
     passingEvSemiLepTree->Branch("event_SL_L",&event_SL_L,"event_SL_L/l");
     //PN Regress Mass nominal JMS and JMR plus up/down
     passingEvSemiLepTree->Branch("selectedZFJ_InvMassSoftDrop_JMSNomJMRNom_SL_L",&selectedZFJ_InvMassSoftDrop_JMSNomJMRNom_SL_L,"selectedZFJ_InvMassSoftDrop_JMSNomJMRNom_SL_L/F");
-    passingEvSemiLepTree->Branch("selectedZFJ_InvMassSoftDrop_JMSUpJMRNom_SL_L",&selectedZFJ_InvMassSoftDrop_JMSUpJMRNom_SL_L,"selectedZFJ_InvMassSoftDrop_JMSUpJMRNom_SL_L/F");
-    passingEvSemiLepTree->Branch("selectedZFJ_InvMassSoftDrop_JMSDownJMRNom_SL_L",&selectedZFJ_InvMassSoftDrop_JMSDownJMRNom_SL_L,"selectedZFJ_InvMassSoftDrop_JMSDownJMRNom_SL_L/F");
-    passingEvSemiLepTree->Branch("selectedZFJ_InvMassSoftDrop_JMSNomJMRUp_SL_L",&selectedZFJ_InvMassSoftDrop_JMSNomJMRUp_SL_L,"selectedZFJ_InvMassSoftDrop_JMSNomJMRUp_SL_L/F");
-    passingEvSemiLepTree->Branch("selectedZFJ_InvMassSoftDrop_JMSNomJMRDown_SL_L",&selectedZFJ_InvMassSoftDrop_JMSNomJMRDown_SL_L,"selectedZFJ_InvMassSoftDrop_JMSNomJMRDown_SL_L/F");
     passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRNom_SL_L",&selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRNom_SL_L,"selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRNom_SL_L/F");
-    passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMassSoftDrop_JMSUpJMRNom_SL_L",&selectedHiggsFJ_InvMassSoftDrop_JMSUpJMRNom_SL_L,"selectedHiggsFJ_InvMassSoftDrop_JMSUpJMRNom_SL_L/F");
-    passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMassSoftDrop_JMSDownJMRNom_SL_L",&selectedHiggsFJ_InvMassSoftDrop_JMSDownJMRNom_SL_L,"selectedHiggsFJ_InvMassSoftDrop_JMSDownJMRNom_SL_L/F");
-    passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRUp_SL_L",&selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRUp_SL_L,"selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRUp_SL_L/F");
-    passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRDown_SL_L",&selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRDown_SL_L,"selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRDown_SL_L/F");
+
 
     //Whole Run Tree
     UInt_t nLHEPdfSumwL;
     std::vector<Double_t> LHEPdfSumwL;
     UInt_t nLHEScaleSumwL;
     std::vector<Double_t> LHEScaleSumwL;
-    UInt_t nLHEReweightingSumwL;
-    std::vector<Double_t> LHEReweightingSumwL;
     Long64_t genEventCountL;
     Double_t genEventSumwL;
     Double_t genEventSumw2L;
@@ -741,8 +2405,6 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
     runTree->Branch("LHEPdfSumwL",&LHEPdfSumwL);
     runTree->Branch("nLHEScaleSumwL",&nLHEScaleSumwL,"nLHEScaleSumwL/i");
     runTree->Branch("LHEScaleSumwL",&LHEScaleSumwL);
-    runTree->Branch("nLHEReweightingSumwL",&nLHEReweightingSumwL,"nLHEReweightingSumwL/i");
-    runTree->Branch("LHEReweightingSumwL",&LHEReweightingSumwL);
     runTree->Branch("genEventCountL",&genEventCountL,"genEventCountL/L");
     runTree->Branch("genEventSumwL",&genEventSumwL,"genEventSumwL/D");
     runTree->Branch("genEventSumw2L",&genEventSumw2L,"genEventSumw2L/D");
@@ -752,8 +2414,6 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
     Float_t Generator_weightSumL;
     UInt_t nLHEPdfWeightSumL;
     std::vector<Float_t> LHEPdfWeightSumL;
-    UInt_t nLHEReweightingWeightSumL;
-    std::vector<Float_t> LHEReweightingWeightSumL;
     Float_t LHEWeight_originalXWGTUPSumL;
     Float_t genWeightSumL;
 
@@ -762,12 +2422,10 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
     weightSumsTree->Branch("Generator_weightSumL",&Generator_weightSumL,"Generator_weightSumL/F");
     weightSumsTree->Branch("nLHEPdfWeightSumL",&nLHEPdfWeightSumL,"nLHEPdfWeightSumL/i");
     weightSumsTree->Branch("LHEPdfWeightSumL",&LHEPdfWeightSumL);
-    weightSumsTree->Branch("nLHEReweightingWeightSumL",&nLHEReweightingWeightSumL,"nLHEReweightingWeightSumL/i");
-    weightSumsTree->Branch("LHEReweightingWeightSumL",&LHEReweightingWeightSumL);
     weightSumsTree->Branch("LHEWeight_originalXWGTUPSumL",&LHEWeight_originalXWGTUPSumL,"LHEWeight_originalXWGTUPSumL/F");
     weightSumsTree->Branch("genWeightSumL",&genWeightSumL,"genWeightSumL/F");
 
-
+    Float_t dataSetTotWeight = 0;
 
     std::cout << "Going into file loop.\n";
 
@@ -778,10 +2436,6 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         TFile* tmpfile = TFile::Open(fileAr[k].c_str());
         //outFile->cd();
         TTreeReader myEventsReader("FilteredEventsTree", tmpfile);
-
-        //eventWeights
-        TTreeReaderValue<UInt_t> nLHEReweightingWeightL(myEventsReader, "nLHEReweightingWeightL");
-        TTreeReaderArray<Float_t> LHEReweightingWeightL(myEventsReader, "LHEReweightingWeightL");
 
         //genWeights
         TTreeReaderValue<Double_t> genWeightL(myEventsReader, "genWeightL");
@@ -876,20 +2530,22 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         //ParticleNet
         TTreeReaderArray<Float_t> FatJet_particleNet_HbbvsQCDL(myEventsReader, "FatJet_particleNet_HbbvsQCDL");
         TTreeReaderArray<Float_t> FatJet_particleNet_ZvsQCDL(myEventsReader, "FatJet_particleNet_ZvsQCDL");
-
+        
         TTreeReaderArray<Float_t> FatJet_particleNetMD_QCDL(myEventsReader, "FatJet_particleNetMD_QCDL");
         TTreeReaderArray<Float_t> FatJet_particleNetMD_XbbL(myEventsReader, "FatJet_particleNetMD_XbbL");
         TTreeReaderArray<Float_t> FatJet_particleNetMD_XccL(myEventsReader, "FatJet_particleNetMD_XccL");
         TTreeReaderArray<Float_t> FatJet_particleNetMD_XqqL(myEventsReader, "FatJet_particleNetMD_XqqL");
 
-
-        
-
-
         //genChannelL
         TTreeReaderValue<UInt_t> genChannelL(myEventsReader, "genChannelL");
         //HTobbBool
         TTreeReaderValue<Bool_t> HTobbBoolL(myEventsReader, "HTobbBoolL");
+
+
+        TTreeReaderValue<Int_t> ZFJIndL(myEventsReader,"ZFJIndL");
+        TTreeReaderValue<Int_t> HFJIndL(myEventsReader,"HFJIndL");
+        
+        TTreeReaderArray<Int_t> FatJet_hadronFlavourL(myEventsReader,"FatJet_hadronFlavourL");
 
         //HLT
         TTreeReaderValue<Bool_t> HLT_Ele32_WPTight_Gsf_L1DoubleEGL(myEventsReader,"HLT_Ele32_WPTight_Gsf_L1DoubleEGL");
@@ -953,10 +2609,6 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         TTreeReaderValue<UInt_t> luminosityBlock(myEventsReader, "luminosityBlockL");
         TTreeReaderValue<ULong64_t> event(myEventsReader, "eventL");
         TTreeReaderArray<Float_t> FatJet_particleNet_mass_JMSNomJMRNomCor(myEventsReader, "FatJet_particleNet_mass_JMSNomJMRNomCorL");
-        TTreeReaderArray<Float_t> FatJet_particleNet_mass_JMSNomJMRUpCor(myEventsReader, "FatJet_particleNet_mass_JMSNomJMRUpCorL");
-        TTreeReaderArray<Float_t> FatJet_particleNet_mass_JMSNomJMRDownCor(myEventsReader, "FatJet_particleNet_mass_JMSNomJMRDownCorL");
-        TTreeReaderArray<Float_t> FatJet_particleNet_mass_JMSUpJMRNomCor(myEventsReader, "FatJet_particleNet_mass_JMSUpJMRNomCorL");
-        TTreeReaderArray<Float_t> FatJet_particleNet_mass_JMSDownJMRNomCor(myEventsReader, "FatJet_particleNet_mass_JMSDownJMRNomCorL");
 
 
         //Transferring run tree
@@ -966,8 +2618,6 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         TTreeReaderArray<Double_t> LHEPdfSumw(myRunsReader, "LHEPdfSumwL");
         TTreeReaderValue<UInt_t> nLHEScaleSumw(myRunsReader, "nLHEScaleSumwL");
         TTreeReaderArray<Double_t> LHEScaleSumw(myRunsReader, "LHEScaleSumwL");
-        TTreeReaderValue<UInt_t> nLHEReweightingSumw(myRunsReader, "nLHEReweightingSumwL");
-        TTreeReaderArray<Double_t> LHEReweightingSumw(myRunsReader, "LHEReweightingSumwL");
         TTreeReaderValue<Long64_t> genEventCount(myRunsReader, "genEventCountL");
         TTreeReaderValue<Double_t> genEventSumw(myRunsReader, "genEventSumwL");
         TTreeReaderValue<Double_t> genEventSumw2(myRunsReader, "genEventSumw2L");
@@ -984,10 +2634,6 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
             for (UInt_t i = 0; i < nLHEScaleSumwL; i++){
                 LHEScaleSumwL.push_back(LHEScaleSumw[i]);
             }
-            nLHEReweightingSumwL = *nLHEReweightingSumw;
-            for (UInt_t i = 0; i < nLHEReweightingSumwL; i++){
-                LHEReweightingSumwL.push_back(LHEReweightingSumw[i]);
-            }
             genEventCountL = *genEventCount;
             genEventSumwL = *genEventSumw;
             genEventSumw2L = *genEventSumw2;
@@ -996,7 +2642,6 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
             //clear run tree vectors
             LHEPdfSumwL.clear();
             LHEScaleSumwL.clear();
-            LHEReweightingSumwL.clear();
 
         }
         std::cout << "Run loop for file " << k << " done. RunsInt " << tmpRunsInt <<"\n";
@@ -1006,8 +2651,6 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         TTreeReaderValue<Float_t> Generator_weightSum(myWeightSumReader, "Generator_weightSumL");
         TTreeReaderValue<UInt_t> nLHEPdfWeightSum(myWeightSumReader, "nLHEPdfWeightSumL");
         TTreeReaderArray<Float_t> LHEPdfWeightSum(myWeightSumReader, "LHEPdfWeightSumL");
-        TTreeReaderValue<UInt_t> nLHEReweightingWeightSum(myWeightSumReader, "nLHEReweightingWeightSumL");
-        TTreeReaderArray<Float_t> LHEReweightingWeightSum(myWeightSumReader, "LHEReweightingWeightSumL");
         TTreeReaderValue<Float_t> LHEWeight_originalXWGTUPSum(myWeightSumReader, "LHEWeight_originalXWGTUPSumL");
         TTreeReaderValue<Float_t> genWeightSum(myWeightSumReader, "genWeightSumL");
 
@@ -1015,13 +2658,10 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         UInt_t tmpWeightSumInt = 0;
         while (myWeightSumReader.Next()){
             Generator_weightSumL = *Generator_weightSum;
+            
             nLHEPdfWeightSumL = *nLHEPdfWeightSum;
             for (UInt_t i = 0; i < nLHEPdfWeightSumL; i++){
                 LHEPdfWeightSumL.push_back(LHEPdfWeightSum[i]);
-            }
-            nLHEReweightingWeightSumL = *nLHEReweightingWeightSum;
-            for (UInt_t i = 0; i < nLHEReweightingWeightSumL; i++){
-                LHEReweightingWeightSumL.push_back(LHEReweightingWeightSum[i]);
             }
             LHEWeight_originalXWGTUPSumL = *LHEWeight_originalXWGTUPSum;
             genWeightSumL = *genWeightSum;
@@ -1029,7 +2669,6 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
             weightSumsTree->Fill();
             //clear weight sums tree vectors
             LHEPdfWeightSumL.clear();
-            LHEReweightingWeightSumL.clear();
         }
 
         std::cout << "Weight sum loop for file " << k << " done. WeightSumInt " << tmpWeightSumInt <<"\n";
@@ -1039,6 +2678,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         TTreeReader myEvNumReader("evNumTree", tmpfile);
         TTreeReaderValue<UInt_t> nEv(myEvNumReader, "nEv");
         TTreeReaderValue<UInt_t> nEvPass(myEvNumReader, "nEvPass");
+
 
         //TTreeReader myXSReader("crossSectionTree", tmpfile);
         //TTreeReaderValue<Float_t> crossSectionVar(myXSReader, "crossSectionVar");
@@ -1094,10 +2734,6 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         */
 
         while (myEvNumReader.Next()){
-            /*
-            datanEv = *nEv;
-            datanEvPass = *nEvPass;
-            */
             datanEv += *nEv;
             datanEvPass += *nEvPass;
         }
@@ -1126,53 +2762,16 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
             //Increment event count
             evRunOver += 1;
             evCount += 1;
-
+            
             elecCandIndAr.clear();
             muonCandIndAr.clear();
 
             eZ2VecPairAr.clear();
             mZ2VecPairAr.clear();
 
-            if (*nLHEReweightingWeightL == 0) {
-                std::cout << "Event " << evCount << " nLHEReweightingWeightL == 0\n";
-                continue;
-            }
-
-            Bool_t falseHtobbMask = false;
-
-            //std::vector<Bool_t> falseTypeMask(5,false);
-            //std::vector<std::vector<Bool_t>> falseHtobbMask(2,falseTypeMask);
-
             Double_t tmpGenWeights = *genWeightL;
             startingCtr += 1;
-            //startingWeightedCtr += tmpGenWeights;
-            
-            
-
-        
-            if (*HTobbBoolL){
-                falseHtobbMask = true;
-                
-            }
-            else{
-                falseHtobbMask = false;
-                
-            }
-            
-            if (falseHtobbMask) {
-                startingWeightedCtrAr[0][0] = *genWeightL;
-                for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[0].size(); C2VCtr++){
-                    startingWeightedCtrAr[0][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                }
-            }
-            else {
-                startingWeightedCtrAr[1][0] = *genWeightL;
-                for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[1].size(); C2VCtr++){
-                    startingWeightedCtrAr[1][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                }
-            }
-            
-        
+            startingWeightedCtr += tmpGenWeights;
         
 
 
@@ -1216,6 +2815,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
             Int_t Z1TrailingCharge = 0;
 
             tryingLepCtr += 1;
+            tryingLepWeightedCtr += tmpGenWeights;
             std::vector<Float_t> LepInvMass;
             std::vector<Int_t> FJIndAr;
 
@@ -1228,33 +2828,22 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
             float hFatJet_mass_fromHTag = 0.;
             float hFatJet_HTag_fromHTag = 0.;
             UInt_t hFatJet_ind_fromHTag = 0;
+
             
             std::vector<ROOT::Math::PtEtaPhiMVector> dRCheckVecAr;
             if (debug) std::cout << "*nJetL " << *nJetL << "\n";
+
+
+
             
-            dRCheckVecAr.clear();
             std::vector<Float_t> SemiLepInvMass;
             
             if (debug) std::cout << "trying SemiLeptonic\n";
             tryingSemiLepChannelCtr += 1;
-            
-
-            if (falseHtobbMask) {
-                tryingSemiLepChannelWeightedCtrAr[0][0] = *genWeightL;
-                for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[0].size(); C2VCtr++){
-                    tryingSemiLepChannelWeightedCtrAr[0][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                }
-            }
-            else {
-                tryingSemiLepChannelWeightedCtrAr[1][0] = *genWeightL;
-                for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[1].size(); C2VCtr++){
-                    tryingSemiLepChannelWeightedCtrAr[1][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                }
-            }
-
-            
+            tryingSemiLepChannelWeightedCtr += tmpGenWeights;
         
             tryingSemiLepCtr += 1;
+            tryingSemiLepWeightedCtr += tmpGenWeights;
             //Checking that there are enough FJs for both the Z and the H
             UInt_t numFatJet = *nFatJetL;
             UInt_t nPassingJetIdFJs = 0;
@@ -1265,20 +2854,8 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
 
             if (nPassingJetIdFJs >=2){
                 passEnoughFJsInSemiLepChannelCtr += 1;
-
-
-                if (falseHtobbMask) {
-                    passEnoughFJsInSemiLepChannelWeightedCtrAr[0][0] = *genWeightL;
-                    for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[0].size(); C2VCtr++){
-                        passEnoughFJsInSemiLepChannelWeightedCtrAr[0][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                    }
-                }
-                else {
-                    passEnoughFJsInSemiLepChannelWeightedCtrAr[1][0] = *genWeightL;
-                    for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[1].size(); C2VCtr++){
-                        passEnoughFJsInSemiLepChannelWeightedCtrAr[1][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                    }
-                }
+                passEnoughFJsInSemiLepChannelWeightedCtr += tmpGenWeights;
+                
 
 
                 float tmpPtLeadCut = 0;
@@ -1352,35 +2929,19 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
                     Z1LeadPt = *tightLepLeadPtL;
                     Z1TrailingPt = *tightLepTrailingPtL;
                     selectedLeptons_InvMass = tmpZ1M;
-                    
-
-                
                 }
 
                 if (!passedAsSemiLepLepCutBool) continue;
 
                 if (passedAsSemiLepLepCutBool){
                     if (debug) std::cout << "Passed semi lep lep cut\n";
-                    passHiggsFJInSemiLepChannelCtr += 1;
-                    //passSemiLepLepCutWeightedCtr += tmpGenWeights;
-                    
-
-
-                    if (falseHtobbMask) {
-                        passSemiLepLepCutWeightedCtrAr[0][0] = *genWeightL;
-                        for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[0].size(); C2VCtr++){
-                            passSemiLepLepCutWeightedCtrAr[0][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                        }
-                    }
-                    else {
-                        passSemiLepLepCutWeightedCtrAr[1][0] = *genWeightL;
-                        for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[1].size(); C2VCtr++){
-                            passSemiLepLepCutWeightedCtrAr[1][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                        }
-                    }
+                    passSemiLepLepCutCtr += 1;
+                    passSemiLepLepCutWeightedCtr += tmpGenWeights;
                 
                     
                 }
+
+
 
 
 
@@ -1394,31 +2955,16 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
 
 
                 if (passedAsSemiLepHiggsCutBool){
-                    passSemiLepLepCutCtr += 1;
-                    //passSemiLepLepCutWeightedCtr += tmpGenWeights;
+                    passHiggsFJInSemiLepChannelCtr += 1;
+                    passHiggsFJInSemiLepChannelWeightedCtr += tmpGenWeights;
+
                     
-
-
-                    if (falseHtobbMask) {
-                        passHiggsFJInSemiLepChannelWeightedCtrAr[0][0] = *genWeightL;
-                        for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[0].size(); C2VCtr++){
-                            passHiggsFJInSemiLepChannelWeightedCtrAr[0][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                        }
-                    }
-                    else {
-                        passHiggsFJInSemiLepChannelWeightedCtrAr[1][0] = *genWeightL;
-                        for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[1].size(); C2VCtr++){
-                            passHiggsFJInSemiLepChannelWeightedCtrAr[1][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                        }
-                    }
                 
-                    
                 }
 
 
 
-
-
+                
                 Int_t FJInd;
 
                 FJInd = -1;
@@ -1432,131 +2978,56 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
                 }
                 if (FJInd >= 0){
                     passFJInSemiLepChannelCtr += 1;
-                    //passFJInSemiLepChannelWeightedCtr += tmpGenWeights;
-                    
+                    passFJInSemiLepChannelWeightedCtr += tmpGenWeights;
 
-                    if (falseHtobbMask) {
-                        passFJInSemiLepChannelWeightedCtrAr[0][0] = *genWeightL;
-                        for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[0].size(); C2VCtr++){
-                            passFJInSemiLepChannelWeightedCtrAr[0][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                        }
-                    }
-                    else {
-                        passFJInSemiLepChannelWeightedCtrAr[1][0] = *genWeightL;
-                        for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[1].size(); C2VCtr++){
-                            passFJInSemiLepChannelWeightedCtrAr[1][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                        }
-                    }
-                    
-                FJIndAr.push_back(FJInd);
-                FJIndAr.push_back(hFatJet_ind_fromHTag);
                 
+                    FJIndAr.push_back(FJInd);
+                    FJIndAr.push_back(hFatJet_ind_fromHTag);
+                    
                 }
             }
             
             if (passesCutsBool){
                 passChannelCtr += 1;
-                //passChannelWeightedCtr += tmpGenWeights;
+                passChannelWeightedCtr += tmpGenWeights;
                 
-
-                if (falseHtobbMask) {
-                    passChannelWeightedCtrAr[0][0] = *genWeightL;
-                    for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[0].size(); C2VCtr++){
-                        passChannelWeightedCtrAr[0][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                    }
-                }
-                else {
-                    passChannelWeightedCtrAr[1][0] = *genWeightL;
-                    for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[1].size(); C2VCtr++){
-                        passChannelWeightedCtrAr[1][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                    }
-                }
                 
-
-
                 passSemiLepChannelCtr += 1;
-                //passSemiLepChannelWeightedCtr += tmpGenWeights;
-                
-
-
-                if (falseHtobbMask) {
-                    passSemiLepChannelWeightedCtrAr[0][0] = *genWeightL;
-                    for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[0].size(); C2VCtr++){
-                        passSemiLepChannelWeightedCtrAr[0][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                    }
-                }
-                else {
-                    passSemiLepChannelWeightedCtrAr[1][0] = *genWeightL;
-                    for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[1].size(); C2VCtr++){
-                        passSemiLepChannelWeightedCtrAr[1][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                    }
-                }
+                passSemiLepChannelWeightedCtr += tmpGenWeights;
                 
 
                 passLepOrSemiLepChannelCtr += 1;
-                //passLepOrSemiLepChannelWeightedCtr += tmpGenWeights;
-                
-
-                if (falseHtobbMask) {
-                    passLepOrSemiLepChannelWeightedCtrAr[0][0] = *genWeightL;
-                    for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[0].size(); C2VCtr++){
-                        passLepOrSemiLepChannelWeightedCtrAr[0][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                    }
-                }
-                else {
-                    passLepOrSemiLepChannelWeightedCtrAr[1][0] = *genWeightL;
-                    for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[1].size(); C2VCtr++){
-                        passLepOrSemiLepChannelWeightedCtrAr[1][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                    }
-                }
+                passLepOrSemiLepChannelWeightedCtr += tmpGenWeights;
                 
             }
-        
-            if (debug) std::cout << "Test\n";
-            
             if ((!passesCutsBool)) continue;
             
+
+            //Now fat jets
+            
+            if (debug){
+                std::cout << "Entering Fat Jets Loop\n";
+            }
+
+
+
+
+
+
+
 
             bool passesSTCutBool = false;
             doHiggsFatJetCutSTWithBDTVars(dRCheckVecAr,ZPairPlusHInvMassCut,ZPairPlusHPtCut,ZPairPlusHInvMass,ZPairPlusHPt,passesSTCutBool);
             if (!passesSTCutBool) continue;
             if (debug) std::cout << " found Higgs fat jet\n";
             passHiggsFJCtr += 1;
-            //passHiggsFJWeightedCtr += tmpGenWeights;
+            passHiggsFJWeightedCtr += tmpGenWeights;
             
-
-
-            if (falseHtobbMask) {
-                passHiggsFJWeightedCtrAr[0][0] = *genWeightL;
-                for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[0].size(); C2VCtr++){
-                    passHiggsFJWeightedCtrAr[0][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                }
-            }
-            else {
-                passHiggsFJWeightedCtrAr[1][0] = *genWeightL;
-                for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[1].size(); C2VCtr++){
-                    passHiggsFJWeightedCtrAr[1][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                }
-            }
             
 
             if (passedAsSemiLepBool) {
                 passHiggsFJSemiLepCtr += 1;
-                
-
-
-                if (falseHtobbMask) {
-                    passHiggsFJWeightedSemiLepCtr[0][0] = *genWeightL;
-                    for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[0].size(); C2VCtr++){
-                        passHiggsFJWeightedSemiLepCtr[0][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                    }
-                }
-                else {
-                    passHiggsFJWeightedSemiLepCtr[1][0] = *genWeightL;
-                    for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[1].size(); C2VCtr++){
-                        passHiggsFJWeightedSemiLepCtr[1][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                    }
-                }
+                passHiggsFJWeightedSemiLepCtr += tmpGenWeights;
             
             }
             
@@ -1589,42 +3060,13 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
             if (!passBJetVeto) continue;
 
             passVBFJetBVetoCtr += 1;
-            //passVBFJetBVetoWeightedCtr += tmpGenWeights;
+            passVBFJetBVetoWeightedCtr += tmpGenWeights;
+        
+
             
-
-
-            if (falseHtobbMask) {
-                passVBFJetBVetoWeightedCtr[0][0] = *genWeightL;
-                for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[0].size(); C2VCtr++){
-                    passVBFJetBVetoWeightedCtr[0][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                }
-            }
-            else {
-                passVBFJetBVetoWeightedCtr[1][0] = *genWeightL;
-                for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[1].size(); C2VCtr++){
-                    passVBFJetBVetoWeightedCtr[1][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                }
-            }
-    
-
             if (passedAsSemiLepBool) {
                 passVBFJetBVetoSemiLepCtr += 1;
-                //passVBFJetBVetoWeightedSemiLepCtr += tmpGenWeights;
-                
-
-
-                if (falseHtobbMask) {
-                    passVBFJetBVetoWeightedSemiLepCtr[0][0] = *genWeightL;
-                    for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[0].size(); C2VCtr++){
-                        passVBFJetBVetoWeightedSemiLepCtr[0][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                    }
-                }
-                else {
-                    passVBFJetBVetoWeightedSemiLepCtr[1][0] = *genWeightL;
-                    for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[1].size(); C2VCtr++){
-                        passVBFJetBVetoWeightedSemiLepCtr[1][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                    }
-                }
+                passVBFJetBVetoSemiLepWeightedCtr += tmpGenWeights;
             
             }
             
@@ -1639,6 +3081,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
             if (jetLeadPt == 0) continue;
             debugOutputForVBFJetCut(evCount,leadJet_1,leadJet_2,Jet_phi_FinalL,Jet_eta_FinalL,debug);
             passVBFJets += 1;
+            passVBFJetsWeighted += tmpGenWeights;
 
             ROOT::Math::PtEtaPhiMVector tmpLeadJetVec = ROOT::Math::PtEtaPhiMVector(jetLeadPt, jetLeadEta, jetLeadPhi, jetLeadMass);
             ROOT::Math::PtEtaPhiMVector tmpTrailingJetVec = ROOT::Math::PtEtaPhiMVector(jetTrailingPt, jetTrailingEta, jetTrailingPhi, jetTrailingMass);
@@ -1653,25 +3096,12 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
 
             dRCheckVecAr.push_back(tmpLeadJetVec);
             dRCheckVecAr.push_back(tmpTrailingJetVec);
+            
 
             if (passesCutsBool){
                 passVBFJetsCtr += 1;
-                //passVBFJetsWeightedCtr += tmpGenWeights;
-                
+                passVBFJetsWeightedCtr += tmpGenWeights;
 
-
-                if (falseHtobbMask) {
-                    passVBFJetsWeightedCtr[0][0] = *genWeightL;
-                    for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[0].size(); C2VCtr++){
-                        passVBFJetsWeightedCtr[0][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                    }
-                }
-                else {
-                    passVBFJetsWeightedCtr[1][0] = *genWeightL;
-                    for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[1].size(); C2VCtr++){
-                        passVBFJetsWeightedCtr[1][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                    }
-                }
 
                 bool passVetoLep = true;
                 //if any veto leptons, check if they are close to the other objects
@@ -1705,19 +3135,8 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
                 if (!passVetoLep) continue;
 
                 passLepVetoCtr += 1;
+                passLepVetoWeightedCtr += tmpGenWeights;
 
-                if (falseHtobbMask) {
-                    passLepVetoWeightedCtr[0][0] = *genWeightL;
-                    for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[0].size(); C2VCtr++){
-                        passLepVetoWeightedCtr[0][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                    }
-                }
-                else {
-                    passLepVetoWeightedCtr[1][0] = *genWeightL;
-                    for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[1].size(); C2VCtr++){
-                        passLepVetoWeightedCtr[1][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                    }
-                }
 
                 //get number of passing VBFJets
 
@@ -1734,36 +3153,18 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
                 }
             
 
-                //std::cout << passedAsLepBool << " "<< passedAsSemiLepBool << " " << passedAsHadBool << "\n";
                 if (passedAsSemiLepBool){
 
 
                     passAsSemiLepCtr += 1;
-
-                    if (falseHtobbMask) {
-                        passAsSemiLepWeightedCtr[0][0] = *genWeightL;
-                        for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[0].size(); C2VCtr++){
-                            passAsSemiLepWeightedCtr[0][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                        }
-                    }
-                    else {
-                        passAsSemiLepWeightedCtr[1][0] = *genWeightL;
-                        for (unsigned int C2VCtr = 1; C2VCtr < startingWeightedCtrAr[1].size(); C2VCtr++){
-                            passAsSemiLepWeightedCtr[1][C2VCtr] += *genWeightL*(LHEReweightingWeightL[C2VCtr-1]);
-                        }
-                    }
-
+                    passAsSemiLepWeightedCtr += tmpGenWeights;
 
                     //EventCor/UncInds
-                        JECCorInd_SL_L = JECCorInd;
-                        JECCorUpOrDown_SL_L = JECCorUpOrDown;
-                        RochInd_SL_L = RochInd;
-                        JERInd_SL_L = JERInd;
-                
-                    nLHEReweightingWeight_SL_L = *nLHEReweightingWeightL;
-                    for (UInt_t nReweightItr=0; nReweightItr<nLHEReweightingWeight_SL_L;nReweightItr++){
-                        LHEReweightingWeight_SL_L.push_back(LHEReweightingWeightL[nReweightItr]);
-                    }
+                    JECCorInd_SL_L = JECCorInd;
+                    JECCorUpOrDown_SL_L = JECCorUpOrDown;
+                    RochInd_SL_L = RochInd;
+                    JERInd_SL_L = JERInd;
+
                     passingEvGenWeight_SL_L = tmpGenWeights;
 
                     //passingEvFullWeight_SL_L = tmpGenWeights*XS*Run2Lumi/totWeight;
@@ -1789,6 +3190,8 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
                         Jet_phi_Final_SL_L.push_back(Jet_phi_FinalL[nJetItr]);
                         Jet_mass_Final_SL_L.push_back(Jet_mass_FinalL[nJetItr]);
                     }
+                    fixedGridRhoFastjetAll_SL_L = *fixedGridRhoFastjetAllL;
+
 
                     eventNAK4JetsPassingCuts_SL_L = tmpnAK4JetsPassing;
 
@@ -1798,7 +3201,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
                     selectedZFJ_eta_SL_L = dRCheckVecAr[3].Eta();
                     selectedHiggsFJ_phi_SL_L = hFatJet_phi_fromHTag;
                     selectedZFJ_phi_SL_L = dRCheckVecAr[3].Phi();
-
+                    
                     selectedZFJ_InvMass_SL_L = dRCheckVecAr[3].M();
                     selectedHiggsFJ_InvMass_SL_L = dRCheckVecAr[2].M();
 
@@ -1807,9 +3210,10 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
 
                     selectedZFJ_InvMassPNRegress_SL_L = FatJet_particleNet_massL[FJIndAr[0]];
                     selectedHiggsFJ_InvMassPNRegress_SL_L = FatJet_particleNet_massL[FJIndAr[1]];
-                    
+
                     selectedZFJ_ParticleNet_HbbvsQCD_SL_L = FatJet_particleNet_HbbvsQCDL[FJIndAr[0]];
                     selectedHiggsFJ_ParticleNet_HbbvsQCD_SL_L = FatJet_particleNet_HbbvsQCDL[FJIndAr[1]];
+                    
                     selectedZFJ_ParticleNet_ZvsQCD_SL_L = FatJet_particleNet_ZvsQCDL[FJIndAr[0]];
                     selectedHiggsFJ_ParticleNet_ZvsQCD_SL_L = FatJet_particleNet_ZvsQCDL[FJIndAr[1]];
 
@@ -1852,25 +3256,10 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
                     selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_SL_L = tmpPtVecSumVec.Pt()/tmpPtScalarSum;
 
 
-                    goodGenZFJMatch_SL_L = false;
-                    goodGenHFJMatch_SL_L = false;
-                    goodZFJMatchToGen_SL_L = false;
-                    goodHFJMatchToGen_SL_L = false;
-                    eventGenSemileptonic_SL_L = false;
-                    eventGenHToBB_SL_L = false;
-                    ZFJGenHadronFlavour_SL_L = -1;
-                    HFJGenHadronFlavour_SL_L = -1;
-                    FatJet_hadronFlavour_SL_L =  -1;
-                    ZReconstructedWithCorrectFJ_SL_L = false;
-                    HReconstructedWithCorrectFJ_SL_L = false;
-
-                    ZReconstructedWithHFJ_SL_L = false;
-                    HReconstructedWithZFJ_SL_L = false;
+                    
+                    FatJet_hadronFlavour_SL_L =  FatJet_hadronFlavourL[FJIndAr[0]];
 
                     firstHToBBBool_SL_L = *HTobbBoolL;
-
-                    ZOneType_SL_L = -1;
-                    ZTwoType_SL_L = -1;
 
                     //HLT 
                     HLT_Ele32_WPTight_Gsf_L1DoubleEG_SL_L = *HLT_Ele32_WPTight_Gsf_L1DoubleEGL;
@@ -1898,10 +3287,6 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
                     tightLepLeadMass_SL_L = *tightLepLeadMassL;
                     tightLepTrailingMass_SL_L = *tightLepTrailingMassL;
                     
-                    nHDecayPID_SL_L = 0;
-
-                    nZOneDecayPID_SL_L = 0;
-                    nZTwoDecayPID_SL_L = 0;
 
                     //042024SFAndSuchAdditions
                     //PU JetID
@@ -1948,20 +3333,10 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
                     eventL = *event;
 
                     selectedZFJ_InvMassPNRegress_JMSNomJMRNom_SL_L = FatJet_particleNet_mass_JMSNomJMRNomCorL[FJIndAr[0]];
-                    selectedZFJ_InvMassPNRegress_JMSUpJMRNom_SL_L = FatJet_particleNet_mass_JMSUpJMRNomCorL[FJIndAr[0]];
-                    selectedZFJ_InvMassPNRegress_JMSDownJMRNom_SL_L = FatJet_particleNet_mass_JMSDownJMRNomCorL[FJIndAr[0]];
-                    selectedZFJ_InvMassPNRegress_JMSNomJMRUp_SL_L = FatJet_particleNet_mass_JMSNomJMRUpCorL[FJIndAr[0]];
-                    selectedZFJ_InvMassPNRegress_JMSNomJMRDown_SL_L = FatJet_particleNet_mass_JMSNomJMRDownCorL[FJIndAr[0]];
 
                     selectedHiggsFJ_InvMassPNRegress_JMSNomJMRNom_SL_L = FatJet_particleNet_mass_JMSNomJMRNomCorL[FJIndAr[1]];
-                    selectedHiggsFJ_InvMassPNRegress_JMSUpJMRNom_SL_L = FatJet_particleNet_mass_JMSUpJMRNomCorL[FJIndAr[1]];
-                    selectedHiggsFJ_InvMassPNRegress_JMSDownJMRNom_SL_L = FatJet_particleNet_mass_JMSDownJMRNomCorL[FJIndAr[1]];
-                    selectedHiggsFJ_InvMassPNRegress_JMSNomJMRUp_SL_L = FatJet_particleNet_mass_JMSNomJMRUpCorL[FJIndAr[1]];
-                    selectedHiggsFJ_InvMassPNRegress_JMSNomJMRDown_SL_L = FatJet_particleNet_mass_JMSNomJMRDownCorL[FJIndAr[1]];
 
                     passingEvSemiLepTree->Fill();
-
-                    LHEReweightingWeight_SL_L.clear();
 
                     Jet_eta_SL_L.clear();
                     Jet_pt_SL_L.clear();
@@ -1975,10 +3350,6 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
                     Jet_phi_Final_SL_L.clear();
                     Jet_mass_Final_SL_L.clear();
 
-                    HDecayPID_SL_L.clear();
-                    ZOneDecayPID_SL_L.clear();
-                    ZTwoDecayPID_SL_L.clear();
-
                     Jet_puIdL.clear();
 
                     PSWeightL.clear();
@@ -1987,16 +3358,16 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
 
                     Jet_LowPtPassesPUIDL.clear();
 
-                
-                    
-
                 }
 
             }
 
         }
+
+        
     }
-    if (debug) std::cout << "Filling complete \n";
+
+
 
     clock_t endt = clock();
     double time_spent = (double)(endt - startt) / CLOCKS_PER_SEC;
@@ -2008,9 +3379,6 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
     std::cout << "XS: " << crossSection << "\n";
     std::cout << "nEv total: " << datanEv << "\n";
     std::cout << "nEv post pre-selection: " << datanEvPass << "\n"; 
-    
-
-    //--------------------HTobbChannel Output--------------
 
 
     std::cout << "==============================TOTAL COUNTERS==============================\n";
@@ -2018,74 +3386,50 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
     std::cout << "startingCtr: " << startingCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "tryingSemiLepChannelCtr = " << tryingSemiLepChannelCtr << "\n";
+    std::cout << "Double_t " << saveName << "startingWeightedCtr = " << startingWeightedCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "passEnoughFJsInSemiLepChannelCtr = " << passEnoughFJsInSemiLepChannelCtr << "\n";
+    std::cout << "Double_t " << saveName << "passEnoughFJsInSemiLepChannelWeightedCtr = " << passEnoughFJsInSemiLepChannelWeightedCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "passSemiLepLepCutCtr = " << passSemiLepLepCutCtr << "\n";
+    std::cout << "Double_t " << saveName << "passSemiLepLepCutWeightedCtr = " << passSemiLepLepCutWeightedCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "passHiggsFJInSemiLepChannelCtr = " << passHiggsFJInSemiLepChannelCtr << "\n";
+    std::cout << "Double_t " << saveName << "passHiggsFJInSemiLepChannelWeightedCtr = " << passHiggsFJInSemiLepChannelWeightedCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "passFJInSemiLepChannelCtr = " << passFJInSemiLepChannelCtr << "\n";
+    std::cout << "Double_t " << saveName << "passFJInSemiLepChannelWeightedCtr = " << passFJInSemiLepChannelWeightedCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "PassChannelCtr = " << passChannelCtr << "\n";
+    std::cout << "Double_t " << saveName << "PassChannelWeightedCtr = " << passChannelWeightedCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "PassLepOrSemiLepChannelCtr = " << passLepOrSemiLepChannelCtr << "\n";
+    std::cout << "Double_t " << saveName << "PassLepOrSemiLepChannelWeightedCtr = " << passLepOrSemiLepChannelWeightedCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "PassSemiLepChannelCtr = " << passSemiLepChannelCtr << "\n";
+    std::cout << "Double_t " << saveName << "PassSemiLepChannelWeightedCtr = " << passSemiLepChannelWeightedCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "PassHiggsFJCtr = " << passHiggsFJCtr << "\n";
+    std::cout << "Double_t " << saveName << "passHiggsFJWeightedCtr = " << passHiggsFJWeightedCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "PassHiggsFJSemiLepCtr = " << passHiggsFJSemiLepCtr << "\n";
+    std::cout << "Double_t " << saveName << "passHiggsFJWeightedSemiLepCtr = " << passHiggsFJWeightedSemiLepCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "PassVBFJetBVetoCtr = " << passVBFJetBVetoCtr << "\n";
+    std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedCtr = " << passVBFJetBVetoWeightedCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "PassVBFJetBVetoSemiLepCtr = " << passVBFJetBVetoSemiLepCtr << "\n";
+    std::cout << "Double_t " << saveName << "passVBFJetBVetoWeightedSemiLepCtr = " << passVBFJetBVetoWeightedSemiLepCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "PassVBFJetsCtr = " << passVBFJetsCtr << "\n";
+    std::cout << "Double_t " << saveName << "PassVBFJetsWeightedCtr = " << passVBFJetsWeightedCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "PassLepVetoCtr = " << passLepVetoCtr << "\n";
+    std::cout << "Double_t " << saveName << "PassLepVetoWeightedCtr = " << PassLepVetoWeightedCtr << "\n";
     std::cout << "------------------------\n";
     std::cout << "UInt_t " << saveName << "PassAsSemiLepCtr = " << passAsSemiLepCtr << "\n";
+    std::cout << "Double_t " << saveName << "PassAsSemiLepWeightedCtr = " << passAsSemiLepWeightedCtr << "\n";
     std::cout << "------------------------\n";
-
-
-
-
-    std::vector<std::vector<std::vector<Double_t>>> allWeightedCtrAr {startingWeightedCtrAr,
-    passHiggsFJWeightedCtrAr,passHiggsFJWeightedSemiLepCtr,
-    passChannelWeightedCtrAr,passLepOrSemiLepChannelWeightedCtrAr,
-    tryingSemiLepChannelWeightedCtrAr,passHiggsFJInSemiLepChannelWeightedCtrAr,passFJInSemiLepChannelWeightedCtrAr,
-    passEnoughFJsInSemiLepChannelWeightedCtrAr,passSemiLepLepCutWeightedCtrAr,passSemiLepChannelWeightedCtrAr,
-    passVBFJetBVetoWeightedCtr,passVBFJetBVetoWeightedSemiLepCtr,
-    passVBFJetsWeightedCtr,passLepVetoWeightedCtr,
-    passAsSemiLepWeightedCtr,passSemiLepLepCutWeightedCtr};
-
-    std::vector<string> allWeightedNameAr {"startingWeightedCtrAr",
-    "passHiggsFJWeightedCtrAr","passHiggsFJWeightedSemiLepCtr",
-    "passChannelWeightedCtrAr","passLepOrSemiLepChannelWeightedCtrAr",
-    "tryingSemiLepChannelWeightedCtrAr","passHiggsFJInSemiLepChannelWeightedCtrAr","passFJInSemiLepChannelWeightedCtrAr",
-    "passEnoughFJsInSemiLepChannelWeightedCtrAr","passSemiLepLepCutWeightedCtrAr","passSemiLepChannelWeightedCtrAr",
-    "passVBFJetBVetoWeightedCtr","passVBFJetBVetoWeightedSemiLepCtr",
-    "passVBFJetsWeightedCtr","passLepVetoWeightedCtr",
-    "passAsSemiLepWeightedCtr","passSemiLepLepCutWeightedCtr"};
-    for (unsigned int allItr = 0; allItr < allWeightedNameAr.size(); allItr++){
-        std::cout << allWeightedNameAr[allItr] << "\n";
-        for (unsigned int htobbItr = 0; htobbItr < htobbNameAr.size(); htobbItr++){
-            std::cout << htobbNameAr[htobbItr] << "\n";
-            
-            for (unsigned int loopItr = 0; loopItr < C2VNameAr.size(); loopItr++){
-                if (loopItr == C2VNameAr.size() - 1) {
-                    std::cout << "(" << C2VNameAr[loopItr] << "," << allWeightedCtrAr[allItr][htobbItr][loopItr + 1] << ")\n";
-                }
-                else std::cout << "(" << C2VNameAr[loopItr] << "," << allWeightedCtrAr[allItr][htobbItr][loopItr + 1] << "),";
-                if (loopItr == 27) {
-                    std::cout << "(2.0," << allWeightedCtrAr[allItr][htobbItr][0] << "),";
-                }
-            }
-        
-        }
-        std::cout << "-------------------------------\n";
-    }
 
 
 
@@ -2093,6 +3437,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
     weightSumsTree->Write("",TObject::kOverwrite);
     runTree->Write("",TObject::kOverwrite);
     passingEvSemiLepTree->Write("",TObject::kOverwrite);
+    //btagEffTree->Write("",TObject::kOverwrite);
 
     outFile->Close();
 
