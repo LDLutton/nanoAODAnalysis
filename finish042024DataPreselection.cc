@@ -47,7 +47,7 @@
 ////////////////////////////////START OF MAIN FUNCTION////////////////////////////////
 
 //This version has the higgs being selected before the Z
-void finish042024DataPreselection(string datasetString,uint yearInd){
+void finish042024DataPreselection(string datasetString){
     // Open the file. Note that the name of your file outside this class
     // will probably NOT be experiment.root.
     std::cout << "start Analysis\n";
@@ -644,8 +644,6 @@ void finish042024DataPreselection(string datasetString,uint yearInd){
         TTreeReaderValue<UInt_t> luminosityBlock(myEventsReader, "luminosityBlockL");
         TTreeReaderValue<ULong64_t> event(myEventsReader, "eventL");
 
-        std::cout << "Run loop for file " << k << " done. RunsInt " << tmpRunsInt <<"\n";
-
         TTreeReader myEvNumReader("evNumTree", tmpfile);
         TTreeReaderValue<UInt_t> nEvHLT(myEvNumReader, "nEv");
         TTreeReaderValue<UInt_t> nEvPassHLT(myEvNumReader, "nEvPass");
@@ -749,7 +747,7 @@ void finish042024DataPreselection(string datasetString,uint yearInd){
                 }
             }
 
-            getVetoAndTightMuonsWithVetoArray(nMuon,Muon_looseId,Muon_mediumId,Muon_ptCorrected,Muon_eta,Muon_dxy,Muon_dz,
+            getVetoAndTightMuonsWithVetoArray(nMuon,Muon_looseId,Muon_mediumId,Muon_pt,Muon_eta,Muon_dxy,Muon_dz,
             Muon_sip3d,Muon_miniPFRelIso_all,Muon_jetIdx,Jet_btagDeepFlavB,
             Muon_mvaTTH,nVetoMuon,nTightMuon,tightLepOneInd,tightLepTwoInd,
             oneTightLepFound,muonPtVetoCut,muonEtaVetoCut,muonDxyVetoCut,muonDzVetoCut,muonSIP3DVetoCut,
@@ -785,7 +783,7 @@ void finish042024DataPreselection(string datasetString,uint yearInd){
             else {
                 tightLepOneEta = Muon_eta[tightLepOneInd];
                 tightLepOnePhi = Muon_phi[tightLepOneInd];
-                tightLepOnePt = Muon_ptCorrected[tightLepOneInd];
+                tightLepOnePt = Muon_pt[tightLepOneInd];
                 tightLepOneMass = Muon_mass[tightLepOneInd];
             }
             if (tightLepTwoIsElec){
@@ -797,7 +795,7 @@ void finish042024DataPreselection(string datasetString,uint yearInd){
             else {
                 tightLepTwoEta = Muon_eta[tightLepTwoInd];
                 tightLepTwoPhi = Muon_phi[tightLepTwoInd];
-                tightLepTwoPt = Muon_ptCorrected[tightLepTwoInd];
+                tightLepTwoPt = Muon_pt[tightLepTwoInd];
                 tightLepTwoMass = Muon_mass[tightLepTwoInd];
             }
 
@@ -1126,11 +1124,6 @@ void finish042024DataPreselection(string datasetString,uint yearInd){
             luminosityBlockL = *luminosityBlock;
             eventL = *event;
 
-            for (UInt_t nFatJetItr=0; nFatJetItr<nFatJetL;nFatJetItr++){
-
-                FatJet_particleNet_mass_JMSNomJMRNomCorL.push_back(FatJet_particleNet_mass_JMSNomJMRNomCor[nFatJetItr]);
-
-            }
             
 
 
