@@ -48,11 +48,12 @@
 ////////////////////////////////START OF MAIN FUNCTION////////////////////////////////
 
 //THIS FILE IS FOR A SUBSET OF THE 2017 DATA FILES, SPECIFICALLY
-//DoubleMuon17Data FILES 147 to 310
+//DoubleMuon17Data FILES 147 to 310 (164 files)
 //AND
-//SingleMuon17Data FILES 436 to 658
+//SingleMuon17Data FILES 436 to 658 (223 files)
 //WHICH DO NOT HAVE HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8 BRANCH FOR SOME REASON
-//SO RUN THE SAME ANALYSIS BUT WITHOUT THAT BRANCH, GIVE "false" TO THE BRANCH WE PUT IN THE TREE 
+//ALSO MISSING HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ
+//SO RUN THE SAME ANALYSIS BUT WITHOUT THOSE BRANCHES, GIVE "false" TO THE BRANCHES WE PUT IN THE TREE 
 void DoTrimmed042024HLTFilterWith2017FixBeforeAnalysisData(string datasetString,UInt_t fileInd,uint yearInd){
     // Open the file. Note that the name of your file outside this class
     // will probably NOT be experiment.root.
@@ -698,7 +699,7 @@ void DoTrimmed042024HLTFilterWith2017FixBeforeAnalysisData(string datasetString,
 
         //TTreeReaderValue<Bool_t> HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8(myEventsReader, "HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8");
 
-        TTreeReaderValue<Bool_t> HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ(myEventsReader, "HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ");
+        //TTreeReaderValue<Bool_t> HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ(myEventsReader, "HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ");
         TTreeReaderValue<Bool_t> HLT_DoubleEle33_CaloIdL_MW(myEventsReader, "HLT_DoubleEle33_CaloIdL_MW");
         TTreeReaderValue<Bool_t> HLT_DoublePhoton70(myEventsReader, "HLT_DoublePhoton70");
 
@@ -875,7 +876,7 @@ void DoTrimmed042024HLTFilterWith2017FixBeforeAnalysisData(string datasetString,
             
 
 
-            bool passHLTBool = (*HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ);
+            bool passHLTBool = false;
             if (useSingleLepHLT) {
                 passHLTBool = (passHLTBool || *HLT_IsoMu27 || *HLT_Mu50 || *HLT_Ele32_WPTight_Gsf_L1DoubleEG);
             }
@@ -1023,7 +1024,7 @@ void DoTrimmed042024HLTFilterWith2017FixBeforeAnalysisData(string datasetString,
             HLT_Ele32_WPTight_Gsf_L1DoubleEGL = *HLT_Ele32_WPTight_Gsf_L1DoubleEG;
             HLT_IsoMu27L = *HLT_IsoMu27;
             HLT_Mu50L = *HLT_Mu50;
-            HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZL = *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ;
+            HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZL = false;
             HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8L = false;
 
             //2016
