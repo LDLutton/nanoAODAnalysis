@@ -1302,8 +1302,8 @@ void new042024BDTDataAnalysis(string datasetString){
                     selectedTrailingVBFJet_PUIDSFEligible_SL_L = Jet_LowPtPassesPUID[leadJet_2];
 
                     //05052024 Additions for PN regress mass scaling and resolution corrections
-                    luminosityBlockL = *luminosityBlock;
-                    eventL = *event;
+                    luminosityBlock_SL_L = *luminosityBlock;
+                    event_SL_L = *event;
 
                     passingEvSemiLepTree->Fill();
 
@@ -1379,8 +1379,6 @@ void new042024BDTDataAnalysis(string datasetString){
 
 
     outFile->cd();
-    weightSumsTree->Write("",TObject::kOverwrite);
-    runTree->Write("",TObject::kOverwrite);
     passingEvSemiLepTree->Write("",TObject::kOverwrite);
     //btagEffTree->Write("",TObject::kOverwrite);
 
