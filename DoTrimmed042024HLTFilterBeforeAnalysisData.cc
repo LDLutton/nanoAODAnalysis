@@ -398,7 +398,6 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
     evNumTree->Branch("nEvPass",&nEvPass,"nEvPass/i");
 
     UInt_t runL;
-    UInt_t eventL;
 
     UInt_t datasetTypeL;
 
@@ -517,7 +516,6 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
     TTree *FilteredEventsTree = new TTree("FilteredEventsTree", "FilteredEventsTree");
 
     FilteredEventsTree->Branch("runL",&runL,"runL/i");
-    FilteredEventsTree->Branch("eventL",&eventL,"eventL/i");
     FilteredEventsTree->Branch("datasetTypeL",&datasetTypeL,"datasetTypeL/i");
 
     //Run alphanumeric represented by int
@@ -635,7 +633,7 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
 
 
     //Getting ready the golden JSON arrays
-    std::vector<UInt_t> runAr;
+    std::vector<int> runAr;
     std::vector<std::vector<std::pair<int, int>>> lumiAr;
 
     if (yearInd == 0){
@@ -676,8 +674,6 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
         }
         outFile->cd();
         TTreeReader myEventsReader("Events", tmpfile);
-
-        TTreeReaderValue<unsigned long long> event(myEventsReader, "event");
         TTreeReaderValue<UInt_t> run(myEventsReader, "run");
 
         //Flag branches
