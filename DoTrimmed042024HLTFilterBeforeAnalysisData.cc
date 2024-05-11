@@ -700,7 +700,6 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
         TTreeReaderValue<Bool_t> HLT_IsoMu27(myEventsReader, "HLT_IsoMu27");
         TTreeReaderValue<Bool_t> HLT_Mu50(myEventsReader, "HLT_Mu50");
 
-        TTreeReaderValue<Bool_t> HLT_Ele115_CaloIdVT_GsfTrkIdT(myEventsReader, "HLT_Ele115_CaloIdVT_GsfTrkIdT");
         TTreeReaderValue<Bool_t> HLT_Ele32_WPTight_Gsf_L1DoubleEG(myEventsReader, "HLT_Ele32_WPTight_Gsf_L1DoubleEG");
         TTreeReaderValue<Bool_t> HLT_Photon200(myEventsReader, "HLT_Photon200");
 
