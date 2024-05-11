@@ -107,21 +107,21 @@ void finish042024DataPreselection(string datasetString,uint yearInd){
         datasetType = 31;
         saveName = "DoubleMuonData";
         
-        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+".root";
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024DataForPreSel/HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (EGammaData){
         datasetType = 33;
         saveName = "EGammaData";
         
-        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+".root";
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024DataForPreSel/HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SingleMuonData){
         datasetType = 47;
         saveName = "SingleMuonData";
         
-        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+".root";
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024DataForPreSel/HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DoubleEG17Data){
@@ -129,7 +129,7 @@ void finish042024DataPreselection(string datasetString,uint yearInd){
         yearType = 1;
         saveName = "DoubleEG17Data";
         
-        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+".root";
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024DataForPreSel/HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DoubleMuon17Data){
@@ -137,7 +137,7 @@ void finish042024DataPreselection(string datasetString,uint yearInd){
         yearType = 1;
         saveName = "DoubleMuon17Data";
         
-        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+".root";
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024DataForPreSel/HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SingleElectron17Data){
@@ -145,7 +145,7 @@ void finish042024DataPreselection(string datasetString,uint yearInd){
         yearType = 1;
         saveName = "SingleElectron17Data";
         
-        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+".root";
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024DataForPreSel/HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SingleMuon17Data){
@@ -153,7 +153,7 @@ void finish042024DataPreselection(string datasetString,uint yearInd){
         yearType = 1;
         saveName = "SingleMuon17Data";
         
-        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+".root";
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024DataForPreSel/HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DoubleEG16Data){
@@ -161,7 +161,7 @@ void finish042024DataPreselection(string datasetString,uint yearInd){
         yearType = 2;
         saveName = "DoubleEG16Data";
         
-        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+".root";
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024DataForPreSel/HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (DoubleMuon16Data){
@@ -169,7 +169,7 @@ void finish042024DataPreselection(string datasetString,uint yearInd){
         yearType = 2;
         saveName = "DoubleMuon16Data";
         
-        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+".root";
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024DataForPreSel/HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SingleElectron16Data){
@@ -177,7 +177,7 @@ void finish042024DataPreselection(string datasetString,uint yearInd){
         yearType = 2;
         saveName = "SingleElectron16Data";
         
-        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+".root";
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024DataForPreSel/HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (SingleMuon16Data){
@@ -185,7 +185,7 @@ void finish042024DataPreselection(string datasetString,uint yearInd){
         yearType = 2;
         saveName = "SingleMuon16Data";
         
-        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+".root";
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024DataForPreSel/HLTTrimmedFilteredForAnalysis"+saveName+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else{
