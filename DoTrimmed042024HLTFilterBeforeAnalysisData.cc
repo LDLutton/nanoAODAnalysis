@@ -64,6 +64,7 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
     //if (datasetString == "DisplacedJetData") DisplacedJetData = true;
     if (datasetString == "DoubleEG17Data") DoubleEG17Data = true;
     if (datasetString == "DoubleMuonData") DoubleMuonData = true;
+    if (datasetString == "DoubleMuon17Data") DoubleMuon17Data = true;
     //if (datasetString == "DoubleMuonLowMassData") DoubleMuonLowMassData = true;
     if (datasetString == "EGammaData") EGammaData = true;
     //if (datasetString == "JetHTData") JetHTData = true;
@@ -72,6 +73,7 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
     //if (datasetString == "MuonEGData") MuonEGData = true;
     if (datasetString == "SingleElectron17Data") SingleElectron17Data = true;
     if (datasetString == "SingleMuonData") SingleMuonData = true;
+    if (datasetString == "SingleMuon17Data") SingleMuon17Data = true;
     //if (datasetString == "TauData") TauData = true;
 
     ////////////////////////////////GETTING DATASET////////////////////////////////
