@@ -136,7 +136,6 @@ void new042024SemiLepDuplicateEventChecker(){
 
     //PASSING EV TREE FOR BDT IN SEMILEP CHANNEL
     UInt_t run_SLU_L;
-    UInt_t event_SLU_L;
     UInt_t datasetType_SLU_L;
 
     UInt_t yearType_SLU_L;
@@ -148,6 +147,8 @@ void new042024SemiLepDuplicateEventChecker(){
     UInt_t eventNAK8Jets_SLU_L;
     UInt_t eventNMuons_SLU_L;
     UInt_t eventNElectrons_SLU_L;
+
+
 
     std::vector<Float_t> Jet_eta_SLU_L;
     std::vector<Float_t> Jet_pt_SLU_L;
@@ -374,17 +375,17 @@ void new042024SemiLepDuplicateEventChecker(){
 
     //042024SFAndSuchAdditions
     //PU JetID
-    passingEvSemiLepTree->Branch("Jet_puId_SLU_L",&Jet_puId_SLU_L);
+    passingEvSemiLepUniqueTree->Branch("Jet_puId_SLU_L",&Jet_puId_SLU_L);
     //additional 042024Branches starting with this script
     //PUID SF check
-    passingEvSemiLepTree->Branch("Jet_LowPtPassesPUID_SLU_L",&Jet_LowPtPassesPUID_SLU_L);
+    passingEvSemiLepUniqueTree->Branch("Jet_LowPtPassesPUID_SLU_L",&Jet_LowPtPassesPUID_SLU_L);
 
     //more 042024Branches starting with selection
-    passingEvSemiLepTree->Branch("selectedLeadVBFJet_PUIDSFEligible_SLU_L",&selectedLeadVBFJet_PUIDSFEligible_SLU_L,"selectedLeadVBFJet_PUIDSFEligible_SLU_L/O");
-    passingEvSemiLepTree->Branch("selectedTrailingVBFJet_PUIDSFEligible_SLU_L",&selectedTrailingVBFJet_PUIDSFEligible_SLU_L,"selectedTrailingVBFJet_PUIDSFEligible_SLU_L/O");
+    passingEvSemiLepUniqueTree->Branch("selectedLeadVBFJet_PUIDSFEligible_SLU_L",&selectedLeadVBFJet_PUIDSFEligible_SLU_L,"selectedLeadVBFJet_PUIDSFEligible_SLU_L/O");
+    passingEvSemiLepUniqueTree->Branch("selectedTrailingVBFJet_PUIDSFEligible_SLU_L",&selectedTrailingVBFJet_PUIDSFEligible_SLU_L,"selectedTrailingVBFJet_PUIDSFEligible_SLU_L/O");
 
     //05052024 Additions for PN regress mass scaling and resolution corrections
-    passingEvSemiLepTree->Branch("luminosityBlock_SLU_L",&luminosityBlock_SLU_L,"luminosityBlock_SLU_L/i");
+    passingEvSemiLepUniqueTree->Branch("luminosityBlock_SLU_L",&luminosityBlock_SLU_L,"luminosityBlock_SLU_L/i");
 
 
     
@@ -529,6 +530,10 @@ void new042024SemiLepDuplicateEventChecker(){
         //PUID SF check
         TTreeReaderArray<Bool_t> Jet_LowPtPassesPUID_SL_L(myEventsReader, "Jet_LowPtPassesPUID_SL_L");
 
+        //more 042024Branches starting with selection
+        TTreeReaderValue<Bool_t> selectedLeadVBFJet_PUIDSFEligible_SL_L(myEventsReader, "selectedLeadVBFJet_PUIDSFEligible_SL_L");
+        TTreeReaderValue<Bool_t> selectedTrailingVBFJet_PUIDSFEligible_SL_L(myEventsReader, "selectedTrailingVBFJet_PUIDSFEligible_SL_L");
+
         //05052024 Additions for PN regress mass scaling and resolution corrections
         TTreeReaderValue<UInt_t> luminosityBlock_SL_L(myEventsReader, "luminosityBlock_SL_L");
 
@@ -623,7 +628,7 @@ void new042024SemiLepDuplicateEventChecker(){
                 selectedZFJ_InvMassPNRegress_SLU_L = *selectedZFJ_InvMassPNRegress_SL_L;
                 selectedHiggsFJ_InvMassPNRegress_SLU_L = *selectedHiggsFJ_InvMassPNRegress_SL_L;
 
-                selectedZFJ_ParticleNet_HbbvsQCD_SLU_L = selectedZFJ_ParticleNet_HbbvsQCD_SL_L;
+                selectedZFJ_ParticleNet_HbbvsQCD_SLU_L = *selectedZFJ_ParticleNet_HbbvsQCD_SL_L;
                 selectedHiggsFJ_ParticleNet_HbbvsQCD_SLU_L = *selectedHiggsFJ_ParticleNet_HbbvsQCD_SL_L;
 
                 selectedZFJ_ParticleNet_ZvsQCD_SLU_L = *selectedZFJ_ParticleNet_ZvsQCD_SL_L;
@@ -697,18 +702,18 @@ void new042024SemiLepDuplicateEventChecker(){
 
                 //042024SFAndSuchAdditions
                 //PU JetID
-                for (UInt_t nJetItr=0; nJetItr<nJetLen;nJetItr++){
+                for (UInt_t nJetItr=0; nJetItr<*eventNAK4Jets_SL_L;nJetItr++){
                     Jet_puId_SLU_L.push_back(Jet_puId_SL_L[nJetItr]);
                 }
                 //additional 042024Branches starting with this script
                 //PUID SF check
-                for (UInt_t nJetItr=0; nJetItr<nJetLen;nJetItr++){
+                for (UInt_t nJetItr=0; nJetItr<*eventNAK4Jets_SL_L;nJetItr++){
                     Jet_LowPtPassesPUID_SLU_L.push_back(Jet_LowPtPassesPUID_SL_L[nJetItr]);
                 }
 
                 //more 042024Branches starting with selection
-                selectedLeadVBFJet_PUIDSFEligible_SLU_L = selectedLeadVBFJet_PUIDSFEligible_SL_L[leadJet_1];
-                selectedTrailingVBFJet_PUIDSFEligible_SLU_L = selectedTrailingVBFJet_PUIDSFEligible_SL_L[leadJet_2];
+                selectedLeadVBFJet_PUIDSFEligible_SLU_L = *selectedLeadVBFJet_PUIDSFEligible_SL_L;
+                selectedTrailingVBFJet_PUIDSFEligible_SLU_L = *selectedTrailingVBFJet_PUIDSFEligible_SL_L;
 
                 //05052024 Additions for PN regress mass scaling and resolution corrections
                 luminosityBlock_SLU_L = *luminosityBlock_SL_L;
