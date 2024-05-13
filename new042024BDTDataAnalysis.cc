@@ -594,7 +594,7 @@ void new042024BDTDataAnalysis(string datasetString){
         TTreeReaderValue<UInt_t> run(myEventsReader, "runL");
 
         TTreeReaderValue<UInt_t> runAlphNum(myEventsReader, "runAlphNumL");
-        TTreeReaderValue<Bool_t> APVL(myEventsReader, "APVL");
+        TTreeReaderValue<Bool_t> APV(myEventsReader, "APVL");
 
         //jets
 
