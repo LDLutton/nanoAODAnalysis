@@ -2827,11 +2827,6 @@ void DoTrimmed042024HLTFilter2016OnBackground(int fileInd, string datasetString,
 
             FatJet_hadronFlavourL.clear();
 
-            HDecayPIDL.clear();
-
-            ZOneDecayPIDL.clear();
-            ZTwoDecayPIDL.clear();
-
             Jet_puIdL.clear();
 
             PSWeightL.clear();
