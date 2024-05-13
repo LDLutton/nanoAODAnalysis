@@ -220,7 +220,13 @@ void finish042024DataPreselection(string datasetString){
     evNumTree->Branch("nEv",&nEv,"nEv/i");
     evNumTree->Branch("nEvPass",&nEvPass,"nEvPass/i");
 
+    UInt_t runL;
 
+    UInt_t datasetTypeL;
+
+    //Run alphanumeric represented by int
+    UInt_t runAlphNumL;
+    Bool_t APVL;
 
     //Jets
     UInt_t nJetL;
@@ -368,6 +374,12 @@ void finish042024DataPreselection(string datasetString){
     std::vector<Bool_t> Jet_LowPtPassesPUIDL; 
 
     TTree *FilteredEventsTree = new TTree("FilteredEventsTree", "FilteredEventsTree");
+
+    FilteredEventsTree->Branch("runL",&runL,"runL/i");
+    FilteredEventsTree->Branch("datasetTypeL",&datasetTypeL,"datasetTypeL/i");
+
+    FilteredEventsTree->Branch("runAlphNumL",&runAlphNumL,"runAlphNumL/i");
+    FilteredEventsTree->Branch("APVL",&APVL,"APVL/O");
 
     //Jets    
     FilteredEventsTree->Branch("nJetL",&nJetL,"nJetL/i");
@@ -536,6 +548,11 @@ void finish042024DataPreselection(string datasetString){
         TFile* tmpfile = TFile::Open(fileAr[k].c_str());
         //outFile->cd();
         TTreeReader myEventsReader("FilteredEventsTree", tmpfile);
+
+        TTreeReaderValue<UInt_t> run(myEventsReader, "runL");
+        TTreeReaderValue<UInt_t> datasetType(myEventsReader, "datasetTypeL");
+        TTreeReaderValue<UInt_t> runAlphNum(myEventsReader, "runAlphNumL");
+        TTreeReaderValue<Bool_t> APV(myEventsReader, "APV");
 
         //jets
 
@@ -912,6 +929,11 @@ void finish042024DataPreselection(string datasetString){
             tmpVBFJetMassTwo = Jet_mass[VBFJetTwoInd];
             
             //Fill in all branches of TTree
+
+            runL = *run;
+            datasetTypeL = *datasetType;
+            runAlphNumL = *runAlphNum;
+            APVL = *APV;
 
             
             //std::cout << evRunOver-1 << "passed\n";

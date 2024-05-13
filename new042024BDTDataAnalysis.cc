@@ -323,6 +323,11 @@ void new042024BDTDataAnalysis(string datasetString){
 
     //PASSING EV TREE FOR BDT IN SEMILEP CHANNEL
 
+    UInt_t run_SL_L;
+
+    UInt_t runAlphNum_SL_L;
+    Bool_t APV_SL_L;
+
 
     UInt_t datasetType_SL_L;
     UInt_t yearType_SL_L;
@@ -338,7 +343,6 @@ void new042024BDTDataAnalysis(string datasetString){
     std::vector<Float_t> Jet_mass_SL_L;
     std::vector<Int_t> Jet_jetId_SL_L;
     std::vector<Float_t> Jet_btagDeepFlavB_SL_L;
-    std::vector<Int_t> Jet_hadronFlavour_SL_L;
     Float_t fixedGridRhoFastjetAll_SL_L;
 
     UInt_t eventNAK4JetsPassingCuts_SL_L;
@@ -429,10 +433,10 @@ void new042024BDTDataAnalysis(string datasetString){
 
     //042024SFAndSuchAdditions
     //PU JetID
-    std::vector<Int_t> Jet_puIdL;
+    std::vector<Int_t> Jet_puId_SL_L;
     //additional 042024Branches starting with this presel script
     //PUID SF check
-    std::vector<Bool_t> Jet_LowPtPassesPUIDL;
+    std::vector<Bool_t> Jet_LowPtPassesPUID_SL_L;
 
     //more 042024Branches starting with selection
     Bool_t selectedLeadVBFJet_PUIDSFEligible_SL_L;
@@ -444,6 +448,11 @@ void new042024BDTDataAnalysis(string datasetString){
 
 
     TTree *passingEvSemiLepTree = new TTree("passingEvSemiLepTree", "passingEvSemiLepTree");
+
+    passingEvSemiLepTree->Branch("run_SL_L",&run_SL_L,"run_SL_L/i");
+
+    passingEvSemiLepTree->Branch("runAlphNumSL_L",&runAlphNum_SL_L,"runAlphNum_SL_L/i");
+    passingEvSemiLepTree->Branch("APV_SL_L",&APV_SL_L,"APV_SL_L/O");
 
 
     passingEvSemiLepTree->Branch("datasetType_SL_L",&datasetType_SL_L,"datasetType_SL_L/i");
@@ -557,10 +566,10 @@ void new042024BDTDataAnalysis(string datasetString){
 
     //042024SFAndSuchAdditions
     //PU JetID
-    passingEvSemiLepTree->Branch("Jet_puIdL",&Jet_puIdL);
+    passingEvSemiLepTree->Branch("Jet_puId_SL_L",&Jet_puId_SL_L);
     //additional 042024Branches starting with this script
     //PUID SF check
-    passingEvSemiLepTree->Branch("Jet_LowPtPassesPUIDL",&Jet_LowPtPassesPUIDL);
+    passingEvSemiLepTree->Branch("Jet_LowPtPassesPUID_SL_L",&Jet_LowPtPassesPUID_SL_L);
 
     //more 042024Branches starting with selection
     passingEvSemiLepTree->Branch("selectedLeadVBFJet_PUIDSFEligible_SL_L",&selectedLeadVBFJet_PUIDSFEligible_SL_L,"selectedLeadVBFJet_PUIDSFEligible_SL_L/O");
@@ -581,6 +590,11 @@ void new042024BDTDataAnalysis(string datasetString){
         TFile* tmpfile = TFile::Open(fileAr[k].c_str());
         //outFile->cd();
         TTreeReader myEventsReader("FilteredEventsTree", tmpfile);
+
+        TTreeReaderValue<UInt_t> run(myEventsReader, "runL");
+
+        TTreeReaderValue<UInt_t> runAlphNum(myEventsReader, "runAlphNumL");
+        TTreeReaderValue<Bool_t> APVL(myEventsReader, "APVL");
 
         //jets
 
@@ -1176,6 +1190,12 @@ void new042024BDTDataAnalysis(string datasetString){
 
                     //passingEvFullWeight_SL_L = tmpGenWeights*XS*Run2Lumi/totWeight;
 
+                    run_SL_L = *run;
+
+                    runAlphNum_SL_L = *runAlphNum;
+
+                    APV_SL_L = *APV;
+
                     datasetType_SL_L = datasetType;
                     yearType_SL_L = yearType;
 
@@ -1289,12 +1309,12 @@ void new042024BDTDataAnalysis(string datasetString){
                     //042024SFAndSuchAdditions
                     //PU JetID
                     for (UInt_t nJetItr=0; nJetItr<nJetLen;nJetItr++){
-                        Jet_puIdL.push_back(Jet_puId[nJetItr]);
+                        Jet_puId_SL_L.push_back(Jet_puId[nJetItr]);
                     }
                     //additional 042024Branches starting with this script
                     //PUID SF check
                     for (UInt_t nJetItr=0; nJetItr<nJetLen;nJetItr++){
-                        Jet_LowPtPassesPUIDL.push_back(Jet_LowPtPassesPUID[nJetItr]);
+                        Jet_LowPtPassesPUID_SL_L.push_back(Jet_LowPtPassesPUID[nJetItr]);
                     }
 
                     //more 042024Branches starting with selection
@@ -1314,9 +1334,9 @@ void new042024BDTDataAnalysis(string datasetString){
                     Jet_jetId_SL_L.clear();
                     Jet_btagDeepFlavB_SL_L.clear();
 
-                    Jet_puIdL.clear();
+                    Jet_puId_SL_L.clear();
 
-                    Jet_LowPtPassesPUIDL.clear();
+                    Jet_LowPtPassesPUID_SL_L.clear();
 
                 }
 
