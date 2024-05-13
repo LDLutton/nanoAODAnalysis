@@ -2417,7 +2417,6 @@ void DoTrimmed042024HLTFilter2016OnBackground(int fileInd, string datasetString,
             //clear run tree vectors
             LHEPdfSumwL.clear();
             LHEScaleSumwL.clear();
-            LHEReweightingSumwL.clear();
         }
         
         if (k % 10 == 0){
