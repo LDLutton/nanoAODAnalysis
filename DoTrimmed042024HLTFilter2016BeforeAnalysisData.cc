@@ -368,7 +368,6 @@ void DoTrimmed042024HLTFilter2016BeforeAnalysisData(string datasetString,UInt_t 
     TTree *FilteredEventsTree = new TTree("FilteredEventsTree", "FilteredEventsTree");
 
     FilteredEventsTree->Branch("runL",&runL,"runL/i");
-    FilteredEventsTree->Branch("eventL",&eventL,"eventL/i");
     FilteredEventsTree->Branch("datasetTypeL",&datasetTypeL,"datasetTypeL/i");
 
     //Run alphanumeric represented by int
