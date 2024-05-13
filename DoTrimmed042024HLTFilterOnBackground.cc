@@ -2118,23 +2118,24 @@ void DoTrimmed042024HLTFilterOnBackground(int fileInd, string datasetString,uint
 
     //Weight sums tree
     Float_t Generator_weightSumL;
-    UInt_t nLHEPdfWeightSumL;
-    std::vector<Float_t> LHEPdfWeightSumL;
+    //UInt_t nLHEPdfWeightSumL;
+    //std::vector<Float_t> LHEPdfWeightSumL;
     Float_t LHEWeight_originalXWGTUPSumL;
     Float_t genWeightSumL;
 
     TTree *weightSumsTree = new TTree("weightSumsTree", "weightSumsTree");
 
     weightSumsTree->Branch("Generator_weightSumL",&Generator_weightSumL,"Generator_weightSumL/F");
-    weightSumsTree->Branch("nLHEPdfWeightSumL",&nLHEPdfWeightSumL,"nLHEPdfWeightSumL/i");
-    weightSumsTree->Branch("LHEPdfWeightSumL",&LHEPdfWeightSumL);
+    //weightSumsTree->Branch("nLHEPdfWeightSumL",&nLHEPdfWeightSumL,"nLHEPdfWeightSumL/i");
+    //weightSumsTree->Branch("LHEPdfWeightSumL",&LHEPdfWeightSumL);
     weightSumsTree->Branch("LHEWeight_originalXWGTUPSumL",&LHEWeight_originalXWGTUPSumL,"LHEWeight_originalXWGTUPSumL/F");
     weightSumsTree->Branch("genWeightSumL",&genWeightSumL,"genWeightSumL/F");
 
     float tmpGenerator_weightSum = 0;
-    uint tmpnLHEPdfWeightSum = 101;
+    //uint tmpnLHEPdfWeightSum = 101;
     //size of 101 is hardcoded in the LHEPdfWeight branch
-    std::vector<Float_t> tmpLHEPdfWeightSum(tmpnLHEPdfWeightSum,0.0);
+    //at least it is for our signal. might not be the case here, so i am removing it
+    //std::vector<Float_t> tmpLHEPdfWeightSum(tmpnLHEPdfWeightSum,0.0);
     float tmpLHEWeight_originalXWGTUPSum = 0;
     float tmpgenWeightSum = 0;
 
@@ -2457,9 +2458,11 @@ void DoTrimmed042024HLTFilterOnBackground(int fileInd, string datasetString,uint
             evCount += 1;
 
             tmpGenerator_weightSum += *Generator_weight;
+            /*
             for (UInt_t i=0; i<*nLHEPdfWeight; i++){
                 tmpLHEPdfWeightSum[i] += LHEPdfWeight[i];
             }
+            */
             tmpLHEWeight_originalXWGTUPSum += *LHEWeight_originalXWGTUP;
             tmpgenWeightSum += *genWeight;
 
@@ -2858,23 +2861,27 @@ void DoTrimmed042024HLTFilterOnBackground(int fileInd, string datasetString,uint
 
     //Fill Weight sum tree
     Generator_weightSumL = tmpGenerator_weightSum;
+    /*
     nLHEPdfWeightSumL = tmpnLHEPdfWeightSum;
     for (UInt_t nLHEPdfWeightSumItr=0; nLHEPdfWeightSumItr<nLHEPdfWeightSumL;nLHEPdfWeightSumItr++){
         LHEPdfWeightSumL.push_back(tmpLHEPdfWeightSum[nLHEPdfWeightSumItr]);
     }
+    */
     LHEWeight_originalXWGTUPSumL = tmpLHEWeight_originalXWGTUPSum;
     genWeightSumL = tmpgenWeightSum;
     std::cout << "Generator_weightSumL: " << Generator_weightSumL << "\n";
+    /*
     std::cout << "nLHEPdfWeightSumL: " << nLHEPdfWeightSumL << "\n";
     std::cout << "LHEPdfWeightSumL: ";
     for (UInt_t nLHEPdfWeightSumItr=0; nLHEPdfWeightSumItr<nLHEPdfWeightSumL;nLHEPdfWeightSumItr++){
         std::cout << LHEPdfWeightSumL[nLHEPdfWeightSumItr] << " ";
     }
     std::cout << "\n";
+    */
     std::cout << "LHEWeight_originalXWGTUPSumL: " << LHEWeight_originalXWGTUPSumL << "\n";
     std::cout << "genWeightSumL: " << genWeightSumL << "\n";
     weightSumsTree->Fill();
-    LHEPdfWeightSumL.clear();
+    //LHEPdfWeightSumL.clear();
 
     outFile->cd();
     weightSumsTree->Write("",TObject::kOverwrite);
