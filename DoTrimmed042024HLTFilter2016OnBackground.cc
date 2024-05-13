@@ -2105,8 +2105,6 @@ void DoTrimmed042024HLTFilter2016OnBackground(int fileInd, string datasetString,
     std::vector<Double_t> LHEPdfSumwL;
     UInt_t nLHEScaleSumwL;
     std::vector<Double_t> LHEScaleSumwL;
-    UInt_t nLHEReweightingSumwL;
-    std::vector<Double_t> LHEReweightingSumwL;
     Long64_t genEventCountL;
     Double_t genEventSumwL;
     Double_t genEventSumw2L;
@@ -2119,8 +2117,6 @@ void DoTrimmed042024HLTFilter2016OnBackground(int fileInd, string datasetString,
     runTree->Branch("LHEPdfSumwL",&LHEPdfSumwL);
     runTree->Branch("nLHEScaleSumwL",&nLHEScaleSumwL,"nLHEScaleSumwL/i");
     runTree->Branch("LHEScaleSumwL",&LHEScaleSumwL);
-    runTree->Branch("nLHEReweightingSumwL",&nLHEReweightingSumwL,"nLHEReweightingSumwL/i");
-    runTree->Branch("LHEReweightingSumwL",&LHEReweightingSumwL);
     runTree->Branch("genEventCountL",&genEventCountL,"genEventCountL/L");
     runTree->Branch("genEventSumwL",&genEventSumwL,"genEventSumwL/D");
     runTree->Branch("genEventSumw2L",&genEventSumw2L,"genEventSumw2L/D");
@@ -2381,8 +2377,6 @@ void DoTrimmed042024HLTFilter2016OnBackground(int fileInd, string datasetString,
         TTreeReaderArray<Double_t> LHEPdfSumw(myRunsReader, "LHEPdfSumw");
         TTreeReaderValue<UInt_t> nLHEScaleSumw(myRunsReader, "nLHEScaleSumw");
         TTreeReaderArray<Double_t> LHEScaleSumw(myRunsReader, "LHEScaleSumw");
-        TTreeReaderValue<UInt_t> nLHEReweightingSumw(myRunsReader, "nLHEReweightingSumw");
-        TTreeReaderArray<Double_t> LHEReweightingSumw(myRunsReader, "LHEReweightingSumw");
         TTreeReaderValue<Long64_t> genEventCount(myRunsReader, "genEventCount");
         TTreeReaderValue<Double_t> genEventSumw(myRunsReader, "genEventSumw");
         TTreeReaderValue<Double_t> genEventSumw2(myRunsReader, "genEventSumw2");
@@ -2414,10 +2408,6 @@ void DoTrimmed042024HLTFilter2016OnBackground(int fileInd, string datasetString,
             nLHEScaleSumwL = *nLHEScaleSumw;
             for (UInt_t i=0; i<nLHEScaleSumwL; i++){
                 LHEScaleSumwL.push_back(LHEScaleSumw[i]);
-            }
-            nLHEReweightingSumwL = *nLHEReweightingSumw;
-            for (UInt_t i=0; i<nLHEReweightingSumwL; i++){
-                LHEReweightingSumwL.push_back(LHEReweightingSumw[i]);
             }
             genEventCountL = *genEventCount;
             genEventSumwL = *genEventSumw;
