@@ -1499,7 +1499,45 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                         JEC = 1. + unc;
                     }
                     float tmpPt = pt * JEC;
-                    AK8jetAllCorPtVec.push_back(tmpPt);
+
+                    //Do HEM15/16 correction
+                    float tmpPt = pt;
+                    float phi = phi;
+                    float eta = eta;
+
+
+                    float finalPt = tmpPt;
+                    if (yearType == 0){
+                        if(phi > -1.57 && phi < -0.87) {
+                            if (eta > -3.0 && eta < -2.5){
+                                if (tmpPt > 15 && FatJet_jetId[nJetItr] == 6){
+                                    finalPt = tmpPt * 0.65;
+                                }
+                                else {
+                                    finalPt = tmpPt;
+                                }
+                            }
+                            else if (eta > -2.5 && eta < -1.3){
+                                if (tmpPt > 15 && FatJet_jetId[nJetItr] == 6){
+                                    finalPt = tmpPt * 0.8;
+                                }
+                                else {
+                                    finalPt = tmpPt;
+                                }
+                            }
+                            else {
+                                finalPt = tmpPt;
+                            }
+                        }
+                        else {
+                            finalPt = tmpPt;
+                        }
+                    }
+                    else {
+                        finalPt = tmpPt;
+                    }
+                    AK8jetAllCorPtVec.push_back(finalPt);
+                    //AK8jetAllCorPtVec.push_back(tmpPt);
                 }
             }
             else if (JERInd > 0){
@@ -1567,18 +1605,62 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                 //Now AK8 jets
                 for (int i = 0; i < *nFatJet; i++){
                     //transfer the kinematics
+                    float tmpPt;
+                    float eta;
+                    float phi;
+                    float mass;
                     if (JERInd == 1){
-                        AK8jetAllCorPtVec.push_back(FatJet_pt_JERUp[i]);
+                        //AK8jetAllCorPtVec.push_back(FatJet_pt_JERUp[i]);
+                        tmpPt = FatJet_pt_JERUp[i];
+                        eta = FatJet_eta_JERUp[i];
+                        phi = FatJet_phi_JERUp[i];
+                        mass = FatJet_mass_JERUp[i];
                         AK8jetAllCorEtaVec.push_back(FatJet_eta_JERUp[i]);
                         AK8jetAllCorPhiVec.push_back(FatJet_phi_JERUp[i]);
                         AK8jetAllCorMassVec.push_back(FatJet_mass_JERUp[i]);
                     }
                     else {
-                        AK8jetAllCorPtVec.push_back(FatJet_pt_JERDown[i]);
+                        //AK8jetAllCorPtVec.push_back(FatJet_pt_JERDown[i]);
+                        tmpPt = FatJet_pt_JERDown[i];
+                        eta = FatJet_eta_JERDown[i];
+                        phi = FatJet_phi_JERDown[i];
+                        mass = FatJet_mass_JERDown[i];
                         AK8jetAllCorEtaVec.push_back(FatJet_eta_JERDown[i]);
                         AK8jetAllCorPhiVec.push_back(FatJet_phi_JERDown[i]);
                         AK8jetAllCorMassVec.push_back(FatJet_mass_JERDown[i]);
                     }
+                    //Do HEM15/16 correction
+                    float finalPt = tmpPt;
+                    if (yearType == 0){
+                        if(phi > -1.57 && phi < -0.87) {
+                            if (eta > -3.0 && eta < -2.5){
+                                if (tmpPt > 15 && FatJet_jetId[nJetItr] == 6){
+                                    finalPt = tmpPt * 0.65;
+                                }
+                                else {
+                                    finalPt = tmpPt;
+                                }
+                            }
+                            else if (eta > -2.5 && eta < -1.3){
+                                if (tmpPt > 15 && FatJet_jetId[nJetItr] == 6){
+                                    finalPt = tmpPt * 0.8;
+                                }
+                                else {
+                                    finalPt = tmpPt;
+                                }
+                            }
+                            else {
+                                finalPt = tmpPt;
+                            }
+                        }
+                        else {
+                            finalPt = tmpPt;
+                        }
+                    }
+                    else {
+                        finalPt = tmpPt;
+                    }
+                    AK8jetAllCorPtVec.push_back(finalPt);
                 }
 
             }
@@ -1626,17 +1708,59 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                     jetAllCorMassVec.push_back(Jet_mass_JERMid[i]);
                 }
                 for (int i = 0; i < *nFatJet; i++){
-                    AK8jetAllCorPtVec.push_back(FatJet_pt_JERMid[i]);
+                    float tmpPt;
+                    float eta;
+                    float phi;
+                    float mass;
+                    //AK8jetAllCorPtVec.push_back(FatJet_pt_JERMid[i]);
+                    tmpPt = FatJet_pt_JERMid[i];
+                    eta = FatJet_eta_JERMid[i];
+                    phi = FatJet_phi_JERMid[i];
+                    mass = FatJet_mass_JERMid[i];
                     AK8jetAllCorEtaVec.push_back(FatJet_eta_JERMid[i]);
                     AK8jetAllCorPhiVec.push_back(FatJet_phi_JERMid[i]);
                     AK8jetAllCorMassVec.push_back(FatJet_mass_JERMid[i]);
+                    //Do HEM15/16 correction
+                    float finalPt = tmpPt;
+                    if (yearType == 0){
+                        if(phi > -1.57 && phi < -0.87) {
+                            if (eta > -3.0 && eta < -2.5){
+                                if (tmpPt > 15 && FatJet_jetId[nJetItr] == 6){
+                                    finalPt = tmpPt * 0.65;
+                                }
+                                else {
+                                    finalPt = tmpPt;
+                                }
+                            }
+                            else if (eta > -2.5 && eta < -1.3){
+                                if (tmpPt > 15 && FatJet_jetId[nJetItr] == 6){
+                                    finalPt = tmpPt * 0.8;
+                                }
+                                else {
+                                    finalPt = tmpPt;
+                                }
+                            }
+                            else {
+                                finalPt = tmpPt;
+                            }
+                        }
+                        else {
+                            finalPt = tmpPt;
+                        }
+                    }
+                    else {
+                        finalPt = tmpPt;
+                    }
+                    AK8jetAllCorPtVec.push_back(finalPt);
                 }
             }
 
             /*
             //Do new HEM 15/16 veto #05042024 UPDATE. was going to add this but for now we are waiting on adding the HEM stuff.
             bool passesHEM = true;
-            if (yearType == 2018){
+            //Want to do for roughly every 15 events to match the luminosity fraction of the data that this veto is also applied to
+            //so check if the event number is divisible by 15
+            if (yearType == 2018 && *event % 15 == 0){
                 for (int i = 0; i < *nJet; i++){
                         if (jetAllCorEtaVec[i] > -3.2 && jetAllCorEtaVec[i] < -1.3){
                             if (jetAllCorPhiVec[i] > -1.57 && jetAllCorPhiVec[i] < -0.87){
