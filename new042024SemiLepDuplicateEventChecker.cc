@@ -71,7 +71,7 @@ void new042024SemiLepDuplicateEventChecker(){
     std::string saveName;
     bool isBackground;
 
-    const uint nDataSets = 44;
+    const uint nDataSets = 11;
 
     std::string datasetTypeStrAr[nDataSets] =  {
     "DoubleEG16",
