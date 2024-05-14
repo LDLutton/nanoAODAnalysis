@@ -1323,7 +1323,7 @@ void new042024BDTDataAnalysis(string datasetString){
                     for (UInt_t nVEItr =0; nVEItr < *nVetoElecL;nVEItr++){
                         vetoElecInd_SL_L.push_back(vetoElecIndL[nVEItr]);
                     }
-                    for (UInt_t nVMItr =0; nVMItr < *nVetoMuonL);nVMItr++){
+                    for (UInt_t nVMItr =0; nVMItr < *nVetoMuonL;nVMItr++){
                         vetoMuonInd_SL_L.push_back(vetoMuonIndL[nVMItr]);
                     }
                     
