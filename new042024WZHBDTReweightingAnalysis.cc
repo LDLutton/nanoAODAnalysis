@@ -1944,8 +1944,8 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
                     selectedTrailingVBFJet_PUIDSFEligible_SL_L = Jet_LowPtPassesPUID[leadJet_2];
 
                     //05052024 Additions for PN regress mass scaling and resolution corrections
-                    luminosityBlockL = *luminosityBlock;
-                    eventL = *event;
+                    luminosityBlock_SL_L = *luminosityBlock;
+                    event_SL_L = *event;
 
                     selectedZFJ_InvMassPNRegress_JMSNomJMRNom_SL_L = FatJet_particleNet_mass_JMSNomJMRNomCor[FJIndAr[0]];
                     selectedZFJ_InvMassPNRegress_JMSUpJMRNom_SL_L = FatJet_particleNet_mass_JMSUpJMRNomCor[FJIndAr[0]];
