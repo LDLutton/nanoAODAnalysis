@@ -940,8 +940,8 @@ void DoTrimmed042024WZHHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd, 
         TTreeReaderValue<Float_t> Generator_weight(myEventsReader, "Generator_weight");
 
         //05052024 Additions for PN regress mass scaling and resolution corrections
-        TTreeReaderValue<UInt_t> luminosityBlock(myEventsReader, "luminosityBlockL");
-        TTreeReaderValue<ULong64_t> event(myEventsReader, "eventL");
+        TTreeReaderValue<UInt_t> luminosityBlock(myEventsReader, "luminosityBlock");
+        TTreeReaderValue<ULong64_t> event(myEventsReader, "event");
 
 
 
