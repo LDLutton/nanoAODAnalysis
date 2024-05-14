@@ -431,6 +431,12 @@ void new042024BDTDataAnalysis(string datasetString){
     Float_t tightLepLeadMass_SL_L;
     Float_t tightLepTrailingMass_SL_L;
 
+    //Vector array for Veto lepton indices
+    UInt_t nVetoElec_SL_L;
+    std::vector<Int_t> vetoElecInd_SL_L;
+    UInt_t nVetoMuon_SL_L;
+    std::vector<Int_t> vetoMuonInd_SL_L;
+
     //042024SFAndSuchAdditions
     //PU JetID
     std::vector<Int_t> Jet_puId_SL_L;
@@ -563,6 +569,12 @@ void new042024BDTDataAnalysis(string datasetString){
     passingEvSemiLepTree->Branch("tightLepTrailingPhi_SL_L",&tightLepTrailingPhi_SL_L,"tightLepTrailingPhi_SL_L/F");
     passingEvSemiLepTree->Branch("tightLepLeadMass_SL_L",&tightLepLeadMass_SL_L,"tightLepLeadMass_SL_L/F");
     passingEvSemiLepTree->Branch("tightLepTrailingMass_SL_L",&tightLepTrailingMass_SL_L,"tightLepTrailingMass_SL_L/F");
+
+    //Vector array for Veto lepton indices
+    FilteredEventsTree->Branch("nVetoElec_SL_L",&nVetoElec_SL_L,"nVetoElec_SL_L/i");
+    FilteredEventsTree->Branch("nVetoMuon_SL_L",&nVetoMuon_SL_L,"nVetoMuon_SL_L/i");
+    FilteredEventsTree->Branch("vetoElecInd_SL_L",&vetoElecInd_SL_L);
+    FilteredEventsTree->Branch("vetoMuonInd_SL_L",&vetoMuonInd_SL_L);
 
     //042024SFAndSuchAdditions
     //PU JetID
@@ -1304,6 +1316,16 @@ void new042024BDTDataAnalysis(string datasetString){
                     tightLepTrailingPhi_SL_L = *tightLepTrailingPhiL;
                     tightLepLeadMass_SL_L = *tightLepLeadMassL;
                     tightLepTrailingMass_SL_L = *tightLepTrailingMassL;
+
+                    //Veto leptons
+                    nVetoElec_SL_L = *nVetoElecL;
+                    nVetoMuon_SL_L = *nVetoMuonL;
+                    for (UInt_t nVEItr =0; nVEItr < *nVetoElec.size();nVEItr++){
+                        vetoElecInd_SL_L.push_back(vetoElecIndL[nVEItr]);
+                    }
+                    for (UInt_t nVMItr =0; nVMItr < *nVetoMuonL.size();nVMItr++){
+                        vetoMuonInd_SL_L.push_back(vetoMuonIndL[nVMItr]);
+                    }
                     
 
                     //042024SFAndSuchAdditions
@@ -1333,6 +1355,9 @@ void new042024BDTDataAnalysis(string datasetString){
                     Jet_mass_SL_L.clear();
                     Jet_jetId_SL_L.clear();
                     Jet_btagDeepFlavB_SL_L.clear();
+
+                    vetoElecInd_SL_L.clear();
+                    vetoMuonInd_SL_L.clear();
 
                     Jet_puId_SL_L.clear();
 
