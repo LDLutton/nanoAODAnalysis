@@ -90,7 +90,7 @@ void new042024SemiLepDuplicateEventChecker(){
 
     std::string datasetStrAr[nDataSets];
     for (uint k = 0; k < nDataSets; k++){
-        datasetStrAr[k] = "new042024BDTAnalysis"+datasetTypeStrAr[k]+".root";
+        datasetStrAr[k] = "new042024BDTAnalysis"+datasetTypeStrAr[k]+"Data.root";
     }
         
 
