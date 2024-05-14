@@ -451,7 +451,7 @@ void new042024BDTDataAnalysis(string datasetString){
 
     passingEvSemiLepTree->Branch("run_SL_L",&run_SL_L,"run_SL_L/i");
 
-    passingEvSemiLepTree->Branch("runAlphNumSL_L",&runAlphNum_SL_L,"runAlphNum_SL_L/i");
+    passingEvSemiLepTree->Branch("runAlphNum_SL_L",&runAlphNum_SL_L,"runAlphNum_SL_L/i");
     passingEvSemiLepTree->Branch("APV_SL_L",&APV_SL_L,"APV_SL_L/O");
 
 
