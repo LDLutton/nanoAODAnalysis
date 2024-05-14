@@ -1630,7 +1630,7 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                     if (yearType == 0){
                         if(phi > -1.57 && phi < -0.87) {
                             if (eta > -3.0 && eta < -2.5){
-                                if (tmpPt > 15 && FatJet_jetId[nJetItr] == 6){
+                                if (tmpPt > 15 && FatJet_jetId[i] == 6){
                                     finalPt = tmpPt * 0.65;
                                 }
                                 else {
@@ -1638,7 +1638,7 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                                 }
                             }
                             else if (eta > -2.5 && eta < -1.3){
-                                if (tmpPt > 15 && FatJet_jetId[nJetItr] == 6){
+                                if (tmpPt > 15 && FatJet_jetId[i] == 6){
                                     finalPt = tmpPt * 0.8;
                                 }
                                 else {
@@ -1721,7 +1721,7 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                     if (yearType == 0){
                         if(phi > -1.57 && phi < -0.87) {
                             if (eta > -3.0 && eta < -2.5){
-                                if (tmpPt > 15 && FatJet_jetId[nJetItr] == 6){
+                                if (tmpPt > 15 && FatJet_jetId[i] == 6){
                                     finalPt = tmpPt * 0.65;
                                 }
                                 else {
@@ -1729,7 +1729,7 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                                 }
                             }
                             else if (eta > -2.5 && eta < -1.3){
-                                if (tmpPt > 15 && FatJet_jetId[nJetItr] == 6){
+                                if (tmpPt > 15 && FatJet_jetId[i] == 6){
                                     finalPt = tmpPt * 0.8;
                                 }
                                 else {
