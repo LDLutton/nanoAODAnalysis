@@ -244,6 +244,12 @@ void new042024SemiLepDuplicateEventChecker(){
     Float_t tightLepTrailingPhi_SLU_L;
     Float_t tightLepLeadMass_SLU_L;
     Float_t tightLepTrailingMass_SLU_L;
+
+    //Vector array for Veto lepton indices
+    UInt_t nVetoElec_SLU_L;
+    std::vector<Int_t> vetoElecInd_SLU_L;
+    UInt_t nVetoMuon_SLU_L;
+    std::vector<Int_t> vetoMuonInd_SLU_L;
     //042024SFAndSuchAdditions
     //PU JetID
     std::vector<Int_t> Jet_puId_SLU_L;
@@ -372,6 +378,12 @@ void new042024SemiLepDuplicateEventChecker(){
     passingEvSemiLepUniqueTree->Branch("tightLepTrailingPhi_SLU_L",&tightLepTrailingPhi_SLU_L,"tightLepTrailingPhi_SLU_L/F");
     passingEvSemiLepUniqueTree->Branch("tightLepLeadMass_SLU_L",&tightLepLeadMass_SLU_L,"tightLepLeadMass_SLU_L/F");
     passingEvSemiLepUniqueTree->Branch("tightLepTrailingMass_SLU_L",&tightLepTrailingMass_SLU_L,"tightLepTrailingMass_SLU_L/F");
+
+    //Vector array for Veto lepton indices
+    passingEvSemiLepTree->Branch("nVetoElec_SLU_L",&nVetoElec_SLU_L,"nVetoElec_SLU_L/i");
+    passingEvSemiLepTree->Branch("nVetoMuon_SLU_L",&nVetoMuon_SLU_L,"nVetoMuon_SLU_L/i");
+    passingEvSemiLepTree->Branch("vetoElecInd_SLU_L",&vetoElecInd_SLU_L);
+    passingEvSemiLepTree->Branch("vetoMuonInd_SLU_L",&vetoMuonInd_SLU_L);
 
     //042024SFAndSuchAdditions
     //PU JetID
@@ -705,7 +717,7 @@ void new042024SemiLepDuplicateEventChecker(){
                 for (UInt_t nVEItr =0; nVEItr < *nVetoElec_SL_L;nVEItr++){
                     vetoElecInd_SLU_L.push_back(vetoElecInd_SL_L[nVEItr]);
                 }
-                for (UInt_t nVMItr =0; nVMItr < *nVetoMuonL;nVMItr++){
+                for (UInt_t nVMItr =0; nVMItr < *nVetoMuon_SL_L;nVMItr++){
                     vetoMuonInd_SLU_L.push_back(vetoMuonInd_SL_L[nVMItr]);
                 }
                 
