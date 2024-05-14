@@ -380,10 +380,10 @@ void new042024SemiLepDuplicateEventChecker(){
     passingEvSemiLepUniqueTree->Branch("tightLepTrailingMass_SLU_L",&tightLepTrailingMass_SLU_L,"tightLepTrailingMass_SLU_L/F");
 
     //Vector array for Veto lepton indices
-    passingEvSemiLepTree->Branch("nVetoElec_SLU_L",&nVetoElec_SLU_L,"nVetoElec_SLU_L/i");
-    passingEvSemiLepTree->Branch("nVetoMuon_SLU_L",&nVetoMuon_SLU_L,"nVetoMuon_SLU_L/i");
-    passingEvSemiLepTree->Branch("vetoElecInd_SLU_L",&vetoElecInd_SLU_L);
-    passingEvSemiLepTree->Branch("vetoMuonInd_SLU_L",&vetoMuonInd_SLU_L);
+    passingEvSemiLepUniqueTree->Branch("nVetoElec_SLU_L",&nVetoElec_SLU_L,"nVetoElec_SLU_L/i");
+    passingEvSemiLepUniqueTree->Branch("nVetoMuon_SLU_L",&nVetoMuon_SLU_L,"nVetoMuon_SLU_L/i");
+    passingEvSemiLepUniqueTree->Branch("vetoElecInd_SLU_L",&vetoElecInd_SLU_L);
+    passingEvSemiLepUniqueTree->Branch("vetoMuonInd_SLU_L",&vetoMuonInd_SLU_L);
 
     //042024SFAndSuchAdditions
     //PU JetID
