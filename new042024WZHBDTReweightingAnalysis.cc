@@ -711,16 +711,16 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
     passingEvSemiLepTree->Branch("luminosityBlock_SL_L",&luminosityBlock_SL_L,"luminosityBlock_SL_L/i");
     passingEvSemiLepTree->Branch("event_SL_L",&event_SL_L,"event_SL_L/l");
     //PN Regress Mass nominal JMS and JMR plus up/down
-    passingEvSemiLepTree->Branch("selectedZFJ_InvMassSoftDrop_JMSNomJMRNom_SL_L",&selectedZFJ_InvMassSoftDrop_JMSNomJMRNom_SL_L,"selectedZFJ_InvMassSoftDrop_JMSNomJMRNom_SL_L/F");
-    passingEvSemiLepTree->Branch("selectedZFJ_InvMassSoftDrop_JMSUpJMRNom_SL_L",&selectedZFJ_InvMassSoftDrop_JMSUpJMRNom_SL_L,"selectedZFJ_InvMassSoftDrop_JMSUpJMRNom_SL_L/F");
-    passingEvSemiLepTree->Branch("selectedZFJ_InvMassSoftDrop_JMSDownJMRNom_SL_L",&selectedZFJ_InvMassSoftDrop_JMSDownJMRNom_SL_L,"selectedZFJ_InvMassSoftDrop_JMSDownJMRNom_SL_L/F");
-    passingEvSemiLepTree->Branch("selectedZFJ_InvMassSoftDrop_JMSNomJMRUp_SL_L",&selectedZFJ_InvMassSoftDrop_JMSNomJMRUp_SL_L,"selectedZFJ_InvMassSoftDrop_JMSNomJMRUp_SL_L/F");
-    passingEvSemiLepTree->Branch("selectedZFJ_InvMassSoftDrop_JMSNomJMRDown_SL_L",&selectedZFJ_InvMassSoftDrop_JMSNomJMRDown_SL_L,"selectedZFJ_InvMassSoftDrop_JMSNomJMRDown_SL_L/F");
-    passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRNom_SL_L",&selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRNom_SL_L,"selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRNom_SL_L/F");
-    passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMassSoftDrop_JMSUpJMRNom_SL_L",&selectedHiggsFJ_InvMassSoftDrop_JMSUpJMRNom_SL_L,"selectedHiggsFJ_InvMassSoftDrop_JMSUpJMRNom_SL_L/F");
-    passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMassSoftDrop_JMSDownJMRNom_SL_L",&selectedHiggsFJ_InvMassSoftDrop_JMSDownJMRNom_SL_L,"selectedHiggsFJ_InvMassSoftDrop_JMSDownJMRNom_SL_L/F");
-    passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRUp_SL_L",&selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRUp_SL_L,"selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRUp_SL_L/F");
-    passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRDown_SL_L",&selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRDown_SL_L,"selectedHiggsFJ_InvMassSoftDrop_JMSNomJMRDown_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedZFJ_InvMassPNRegress_JMSNomJMRNom_SL_L",&selectedZFJ_InvMassPNRegress_JMSNomJMRNom_SL_L,"selectedZFJ_InvMassPNRegress_JMSNomJMRNom_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedZFJ_InvMassPNRegress_JMSUpJMRNom_SL_L",&selectedZFJ_InvMassPNRegress_JMSUpJMRNom_SL_L,"selectedZFJ_InvMassPNRegress_JMSUpJMRNom_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedZFJ_InvMassPNRegress_JMSDownJMRNom_SL_L",&selectedZFJ_InvMassPNRegress_JMSDownJMRNom_SL_L,"selectedZFJ_InvMassPNRegress_JMSDownJMRNom_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedZFJ_InvMassPNRegress_JMSNomJMRUp_SL_L",&selectedZFJ_InvMassPNRegress_JMSNomJMRUp_SL_L,"selectedZFJ_InvMassPNRegress_JMSNomJMRUp_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedZFJ_InvMassPNRegress_JMSNomJMRDown_SL_L",&selectedZFJ_InvMassPNRegress_JMSNomJMRDown_SL_L,"selectedZFJ_InvMassPNRegress_JMSNomJMRDown_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMassPNRegress_JMSNomJMRNom_SL_L",&selectedHiggsFJ_InvMassPNRegress_JMSNomJMRNom_SL_L,"selectedHiggsFJ_InvMassPNRegress_JMSNomJMRNom_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMassPNRegress_JMSUpJMRNom_SL_L",&selectedHiggsFJ_InvMassPNRegress_JMSUpJMRNom_SL_L,"selectedHiggsFJ_InvMassPNRegress_JMSUpJMRNom_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMassPNRegress_JMSDownJMRNom_SL_L",&selectedHiggsFJ_InvMassPNRegress_JMSDownJMRNom_SL_L,"selectedHiggsFJ_InvMassPNRegress_JMSDownJMRNom_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMassPNRegress_JMSNomJMRUp_SL_L",&selectedHiggsFJ_InvMassPNRegress_JMSNomJMRUp_SL_L,"selectedHiggsFJ_InvMassPNRegress_JMSNomJMRUp_SL_L/F");
+    passingEvSemiLepTree->Branch("selectedHiggsFJ_InvMassPNRegress_JMSNomJMRDown_SL_L",&selectedHiggsFJ_InvMassPNRegress_JMSNomJMRDown_SL_L,"selectedHiggsFJ_InvMassPNRegress_JMSNomJMRDown_SL_L/F");
 
     //Whole Run Tree
     UInt_t nLHEPdfSumwL;
@@ -1947,17 +1947,17 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
                     luminosityBlockL = *luminosityBlock;
                     eventL = *event;
 
-                    selectedZFJ_InvMassPNRegress_JMSNomJMRNom_SL_L = FatJet_particleNet_mass_JMSNomJMRNomCorL[FJIndAr[0]];
-                    selectedZFJ_InvMassPNRegress_JMSUpJMRNom_SL_L = FatJet_particleNet_mass_JMSUpJMRNomCorL[FJIndAr[0]];
-                    selectedZFJ_InvMassPNRegress_JMSDownJMRNom_SL_L = FatJet_particleNet_mass_JMSDownJMRNomCorL[FJIndAr[0]];
-                    selectedZFJ_InvMassPNRegress_JMSNomJMRUp_SL_L = FatJet_particleNet_mass_JMSNomJMRUpCorL[FJIndAr[0]];
-                    selectedZFJ_InvMassPNRegress_JMSNomJMRDown_SL_L = FatJet_particleNet_mass_JMSNomJMRDownCorL[FJIndAr[0]];
+                    selectedZFJ_InvMassPNRegress_JMSNomJMRNom_SL_L = FatJet_particleNet_mass_JMSNomJMRNomCor[FJIndAr[0]];
+                    selectedZFJ_InvMassPNRegress_JMSUpJMRNom_SL_L = FatJet_particleNet_mass_JMSUpJMRNomCor[FJIndAr[0]];
+                    selectedZFJ_InvMassPNRegress_JMSDownJMRNom_SL_L = FatJet_particleNet_mass_JMSDownJMRNomCor[FJIndAr[0]];
+                    selectedZFJ_InvMassPNRegress_JMSNomJMRUp_SL_L = FatJet_particleNet_mass_JMSNomJMRUpCor[FJIndAr[0]];
+                    selectedZFJ_InvMassPNRegress_JMSNomJMRDown_SL_L = FatJet_particleNet_mass_JMSNomJMRDownCor[FJIndAr[0]];
 
-                    selectedHiggsFJ_InvMassPNRegress_JMSNomJMRNom_SL_L = FatJet_particleNet_mass_JMSNomJMRNomCorL[FJIndAr[1]];
-                    selectedHiggsFJ_InvMassPNRegress_JMSUpJMRNom_SL_L = FatJet_particleNet_mass_JMSUpJMRNomCorL[FJIndAr[1]];
-                    selectedHiggsFJ_InvMassPNRegress_JMSDownJMRNom_SL_L = FatJet_particleNet_mass_JMSDownJMRNomCorL[FJIndAr[1]];
-                    selectedHiggsFJ_InvMassPNRegress_JMSNomJMRUp_SL_L = FatJet_particleNet_mass_JMSNomJMRUpCorL[FJIndAr[1]];
-                    selectedHiggsFJ_InvMassPNRegress_JMSNomJMRDown_SL_L = FatJet_particleNet_mass_JMSNomJMRDownCorL[FJIndAr[1]];
+                    selectedHiggsFJ_InvMassPNRegress_JMSNomJMRNom_SL_L = FatJet_particleNet_mass_JMSNomJMRNomCor[FJIndAr[1]];
+                    selectedHiggsFJ_InvMassPNRegress_JMSUpJMRNom_SL_L = FatJet_particleNet_mass_JMSUpJMRNomCor[FJIndAr[1]];
+                    selectedHiggsFJ_InvMassPNRegress_JMSDownJMRNom_SL_L = FatJet_particleNet_mass_JMSDownJMRNomCor[FJIndAr[1]];
+                    selectedHiggsFJ_InvMassPNRegress_JMSNomJMRUp_SL_L = FatJet_particleNet_mass_JMSNomJMRUpCor[FJIndAr[1]];
+                    selectedHiggsFJ_InvMassPNRegress_JMSNomJMRDown_SL_L = FatJet_particleNet_mass_JMSNomJMRDownCor[FJIndAr[1]];
 
                     passingEvSemiLepTree->Fill();
 
