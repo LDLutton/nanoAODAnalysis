@@ -55,7 +55,12 @@
 ////////////////////////////////START OF MAIN FUNCTION////////////////////////////////
 ////////////////////////////////START OF MAIN FUNCTION////////////////////////////////
 ////////////////////////////////START OF MAIN FUNCTION////////////////////////////////
-
+double massScale(double mass, double scaleVal=1.05) { return scaleVal*mass; }
+double massSmear(double mass, unsigned long lumi, unsigned long event, double sigma=0.1) 
+{
+    TRandom3 rnd((lumi << 10) + event);
+    return rnd.Gaus(1, sigma)*mass; 
+}
 //Script for calculating the JER, and Rochester corrections for the HLT output files
 //Output should be the same but with additional branches for the corrections and efficiencies
 //Apply JER before BTagging Efficencies
@@ -204,12 +209,7 @@ void calc042024JERRoch(string datasetString){
     
     //05052024 Adding PN regress mass scaling and resolution correction functions
 
-    double massScale(double mass, double scaleVal=1.05) { return scaleVal*mass; }
-    double massSmear(double mass, unsigned long lumi, unsigned long event, double sigma=0.1) 
-    {
-        TRandom3 rnd((lumi << 10) + event);
-        return rnd.Gaus(1, sigma)*mass; 
-    }
+    
 
     if (BDTCuts){
         std::cout << "Using BDT cuts\n";
