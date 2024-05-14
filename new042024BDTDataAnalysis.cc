@@ -571,10 +571,10 @@ void new042024BDTDataAnalysis(string datasetString){
     passingEvSemiLepTree->Branch("tightLepTrailingMass_SL_L",&tightLepTrailingMass_SL_L,"tightLepTrailingMass_SL_L/F");
 
     //Vector array for Veto lepton indices
-    FilteredEventsTree->Branch("nVetoElec_SL_L",&nVetoElec_SL_L,"nVetoElec_SL_L/i");
-    FilteredEventsTree->Branch("nVetoMuon_SL_L",&nVetoMuon_SL_L,"nVetoMuon_SL_L/i");
-    FilteredEventsTree->Branch("vetoElecInd_SL_L",&vetoElecInd_SL_L);
-    FilteredEventsTree->Branch("vetoMuonInd_SL_L",&vetoMuonInd_SL_L);
+    passingEvSemiLepTree->Branch("nVetoElec_SL_L",&nVetoElec_SL_L,"nVetoElec_SL_L/i");
+    passingEvSemiLepTree->Branch("nVetoMuon_SL_L",&nVetoMuon_SL_L,"nVetoMuon_SL_L/i");
+    passingEvSemiLepTree->Branch("vetoElecInd_SL_L",&vetoElecInd_SL_L);
+    passingEvSemiLepTree->Branch("vetoMuonInd_SL_L",&vetoMuonInd_SL_L);
 
     //042024SFAndSuchAdditions
     //PU JetID
@@ -1320,10 +1320,10 @@ void new042024BDTDataAnalysis(string datasetString){
                     //Veto leptons
                     nVetoElec_SL_L = *nVetoElecL;
                     nVetoMuon_SL_L = *nVetoMuonL;
-                    for (UInt_t nVEItr =0; nVEItr < *nVetoElec.size();nVEItr++){
+                    for (UInt_t nVEItr =0; nVEItr < *nVetoElecL;nVEItr++){
                         vetoElecInd_SL_L.push_back(vetoElecIndL[nVEItr]);
                     }
-                    for (UInt_t nVMItr =0; nVMItr < *nVetoMuonL.size();nVMItr++){
+                    for (UInt_t nVMItr =0; nVMItr < *nVetoMuonL);nVMItr++){
                         vetoMuonInd_SL_L.push_back(vetoMuonIndL[nVMItr]);
                     }
                     

@@ -702,10 +702,10 @@ void new042024SemiLepDuplicateEventChecker(){
                 //Veto leptons
                 nVetoElec_SLU_L = *nVetoElec_SL_L;
                 nVetoMuon_SLU_L = *nVetoMuon_SL_L;
-                for (UInt_t nVEItr =0; nVEItr < *nVetoElec_SL_L.size();nVEItr++){
+                for (UInt_t nVEItr =0; nVEItr < *nVetoElec_SL_L;nVEItr++){
                     vetoElecInd_SLU_L.push_back(vetoElecInd_SL_L[nVEItr]);
                 }
-                for (UInt_t nVMItr =0; nVMItr < *nVetoMuonL.size();nVMItr++){
+                for (UInt_t nVMItr =0; nVMItr < *nVetoMuonL;nVMItr++){
                     vetoMuonInd_SLU_L.push_back(vetoMuonInd_SL_L[nVMItr]);
                 }
                 
