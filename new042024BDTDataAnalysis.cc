@@ -72,9 +72,9 @@ void new042024BDTDataAnalysis(string datasetString){
     if (datasetString == "SingleElectron16Data") SingleElectron16Data = true;
     if (datasetString == "SingleMuon16Data") SingleMuon16Data = true;
     if (datasetString == "DoubleEG17Data") DoubleEG17Data = true;
-    if (datasetString == "DoubleMuon17Data") DoubleMuonData = true;
+    if (datasetString == "DoubleMuon17Data") DoubleMuon17Data = true;
     if (datasetString == "SingleElectron17Data") SingleElectron17Data = true;
-    if (datasetString == "SingleMuon17Data") SingleMuon16Data = true;
+    if (datasetString == "SingleMuon17Data") SingleMuon17Data = true;
     if (datasetString == "DoubleMuonData") DoubleMuonData = true;
     if (datasetString == "EGammaData") EGammaData = true;
     if (datasetString == "SingleMuonData") SingleMuonData = true;
