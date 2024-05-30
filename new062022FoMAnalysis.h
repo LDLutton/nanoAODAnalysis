@@ -5,7 +5,7 @@ bool endAfter = false;
 int NToStart = 0;
 int NToEnd = 20;
 
-bool useSingleLepHLT = false;
+bool useSingleLepHLT = true;
 
 bool useTighterCut = false;
 
@@ -30,6 +30,36 @@ bool SDC2V2MCWZHReweightTrimmed = false;
 bool SDC2V2MCWZH17ReweightTrimmed = false;
 bool SDC2V2MCWZH16ReweightTrimmed = false;
 bool SDC2V2MCWZH16APVReweightTrimmed = false;
+
+bool SDC2V2MCWWHSSReweightTrimmed = false;
+bool SDC2V2MCWWHSS17ReweightTrimmed = false;
+bool SDC2V2MCWWHSS16ReweightTrimmed = false;
+bool SDC2V2MCWWHSS16APVReweightTrimmed = false;
+
+bool SDC2V2MCWWHOSReweightTrimmed = false;
+bool SDC2V2MCWWHOS17ReweightTrimmed = false;
+bool SDC2V2MCWWHOS16ReweightTrimmed = false;
+bool SDC2V2MCWWHOS16APVReweightTrimmed = false;
+
+bool MaC2V2MCZZHReweightTrimmed = false;
+bool MaC2V2MCZZH17ReweightTrimmed = false;
+bool MaC2V2MCZZH16ReweightTrimmed = false;
+bool MaC2V2MCZZH16APVReweightTrimmed = false;
+
+bool MaC2V2MCWZHReweightTrimmed = false;
+bool MaC2V2MCWZH17ReweightTrimmed = false;
+bool MaC2V2MCWZH16ReweightTrimmed = false;
+bool MaC2V2MCWZH16APVReweightTrimmed = false;
+
+bool MaC2V2MCWWHSSReweightTrimmed = false;
+bool MaC2V2MCWWHSS17ReweightTrimmed = false;
+bool MaC2V2MCWWHSS16ReweightTrimmed = false;
+bool MaC2V2MCWWHSS16APVReweightTrimmed = false;
+
+bool MaC2V2MCWWHOSReweightTrimmed = false;
+bool MaC2V2MCWWHOS17ReweightTrimmed = false;
+bool MaC2V2MCWWHOS16ReweightTrimmed = false;
+bool MaC2V2MCWWHOS16APVReweightTrimmed = false;
 
 bool testRun = false;
 bool SDC2V3MC = false;

@@ -72,6 +72,26 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
     if (datasetString == "SDC2V2MCWZH17ReweightTrimmed") SDC2V2MCWZH17ReweightTrimmed = true;
     if (datasetString == "SDC2V2MCWZH16ReweightTrimmed") SDC2V2MCWZH16ReweightTrimmed = true;
     if (datasetString == "SDC2V2MCWZH16APVReweightTrimmed") SDC2V2MCWZH16APVReweightTrimmed = true;
+    if (datasetString == "SDC2V2MCWWHSSReweightTrimmed") SDC2V2MCWWHSSReweightTrimmed = true;
+    if (datasetString == "SDC2V2MCWWHSS17ReweightTrimmed") SDC2V2MCWWHSS17ReweightTrimmed = true;
+    if (datasetString == "SDC2V2MCWWHSS16ReweightTrimmed") SDC2V2MCWWHSS16ReweightTrimmed = true;
+    if (datasetString == "SDC2V2MCWWHSS16APVReweightTrimmed") SDC2V2MCWWHSS16APVReweightTrimmed = true;
+    if (datasetString == "SDC2V2MCWWHOSReweightTrimmed") SDC2V2MCWWHOSReweightTrimmed = true;
+    if (datasetString == "SDC2V2MCWWHOS17ReweightTrimmed") SDC2V2MCWWHOS17ReweightTrimmed = true;
+    if (datasetString == "SDC2V2MCWWHOS16ReweightTrimmed") SDC2V2MCWWHOS16ReweightTrimmed = true;
+    if (datasetString == "SDC2V2MCWWHOS16APVReweightTrimmed") SDC2V2MCWWHOS16APVReweightTrimmed = true;
+    if (datasetString == "MaC2V2MCWZHReweightTrimmed") MaC2V2MCWZHReweightTrimmed = true;
+    if (datasetString == "MaC2V2MCWZH17ReweightTrimmed") MaC2V2MCWZH17ReweightTrimmed = true;
+    if (datasetString == "MaC2V2MCWZH16ReweightTrimmed") MaC2V2MCWZH16ReweightTrimmed = true;
+    if (datasetString == "MaC2V2MCWZH16APVReweightTrimmed") MaC2V2MCWZH16APVReweightTrimmed = true;
+    if (datasetString == "MaC2V2MCWWHSSReweightTrimmed") MaC2V2MCWWHSSReweightTrimmed = true;
+    if (datasetString == "MaC2V2MCWWHSS17ReweightTrimmed") MaC2V2MCWWHSS17ReweightTrimmed = true;
+    if (datasetString == "MaC2V2MCWWHSS16ReweightTrimmed") MaC2V2MCWWHSS16ReweightTrimmed = true;
+    if (datasetString == "MaC2V2MCWWHSS16APVReweightTrimmed") MaC2V2MCWWHSS16APVReweightTrimmed = true;
+    if (datasetString == "MaC2V2MCWWHOSReweightTrimmed") MaC2V2MCWWHOSReweightTrimmed = true;
+    if (datasetString == "MaC2V2MCWWHOS17ReweightTrimmed") MaC2V2MCWWHOS17ReweightTrimmed = true;
+    if (datasetString == "MaC2V2MCWWHOS16ReweightTrimmed") MaC2V2MCWWHOS16ReweightTrimmed = true;
+    if (datasetString == "MaC2V2MCWWHOS16APVReweightTrimmed") MaC2V2MCWWHOS16APVReweightTrimmed = true;
 
     if (datasetString == "LaraTest") LaraTest = true;
 
@@ -122,6 +142,181 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         //XS = ;
         isBackground = false;
         std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisSDC2V2MCWZH16APVReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (SDC2V2MCWWHSSReweightTrimmed){
+        saveName = "SDC2V2MCWWHSSReweightTrimmed";
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisSDC2V2MCWWHSSReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (SDC2V2MCWWHSS17ReweightTrimmed){
+        saveName = "SDC2V2MCWWHSS17ReweightTrimmed";
+        yearType = 1;
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisSDC2V2MCWWHSS17ReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (SDC2V2MCWWHSS16ReweightTrimmed){
+        saveName = "SDC2V2MCWWHSS16ReweightTrimmed";
+        yearType = 2;
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisSDC2V2MCWWHSS16ReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (SDC2V2MCWWHSS16APVReweightTrimmed){
+        saveName = "SDC2V2MCWWHSS16APVReweightTrimmed";
+        yearType = 3;
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisSDC2V2MCWWHSS16APVReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (SDC2V2MCWWHOSReweightTrimmed){
+        saveName = "SDC2V2MCWWHOSReweightTrimmed";
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisSDC2V2MCWWHOSReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (SDC2V2MCWWHOS17ReweightTrimmed){
+        saveName = "SDC2V2MCWWHOS17ReweightTrimmed";
+        yearType = 1;
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisSDC2V2MCWWHOS17ReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (SDC2V2MCWWHOS16ReweightTrimmed){
+        saveName = "SDC2V2MCWWHOS16ReweightTrimmed";
+        yearType = 2;
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisSDC2V2MCWWHOS16ReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (SDC2V2MCWWHOS16APVReweightTrimmed){
+        saveName = "SDC2V2MCWWHOS16APVReweightTrimmed";
+        yearType = 3;
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisSDC2V2MCWWHOS16APVReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (MaC2V2MCWZHReweightTrimmed){
+        saveName = "MaC2V2MCWZHReweightTrimmed";
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisMaC2V2MCWZHReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (MaC2V2MCWZH17ReweightTrimmed){
+        saveName = "MaC2V2MCWZH17ReweightTrimmed";
+        yearType = 1;
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisMaC2V2MCWZH17ReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (MaC2V2MCWZH16ReweightTrimmed){
+        saveName = "MaC2V2MCWZH16ReweightTrimmed";
+        yearType = 2;
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisMaC2V2MCWZH16ReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (MaC2V2MCWZH16APVReweightTrimmed){
+        saveName = "MaC2V2MCWZH16APVReweightTrimmed";
+        yearType = 3;
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisMaC2V2MCWZH16APVReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (MaC2V2MCWWHSSReweightTrimmed){
+        saveName = "MaC2V2MCWWHSSReweightTrimmed";
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisMaC2V2MCWWHSSReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (MaC2V2MCWWHSS17ReweightTrimmed){
+        saveName = "MaC2V2MCWWHSS17ReweightTrimmed";
+        yearType = 1;
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisMaC2V2MCWWHSS17ReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (MaC2V2MCWWHSS16ReweightTrimmed){
+        saveName = "MaC2V2MCWWHSS16ReweightTrimmed";
+        yearType = 2;
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisMaC2V2MCWWHSS16ReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (MaC2V2MCWWHSS16APVReweightTrimmed){
+        saveName = "MaC2V2MCWWHSS16APVReweightTrimmed";
+        yearType = 3;
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisMaC2V2MCWWHSS16APVReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (MaC2V2MCWWHOSReweightTrimmed){
+        saveName = "MaC2V2MCWWHOSReweightTrimmed";
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisMaC2V2MCWWHOSReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (MaC2V2MCWWHOS17ReweightTrimmed){
+        saveName = "MaC2V2MCWWHOS17ReweightTrimmed";
+        yearType = 1;
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisMaC2V2MCWWHOS17ReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (MaC2V2MCWWHOS16ReweightTrimmed){
+        saveName = "MaC2V2MCWWHOS16ReweightTrimmed";
+        yearType = 2;
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisMaC2V2MCWWHOS16ReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (MaC2V2MCWWHOS16APVReweightTrimmed){
+        saveName = "MaC2V2MCWWHOS16APVReweightTrimmed";
+        yearType = 3;
+        //totWeight = ;
+        //XS = ;
+        isBackground = false;
+        std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisMaC2V2MCWWHOS16APVReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (testRun){

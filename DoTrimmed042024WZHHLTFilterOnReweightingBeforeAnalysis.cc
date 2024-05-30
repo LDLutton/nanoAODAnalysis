@@ -56,6 +56,16 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
     if (datasetString == "testRun") testRun = true;
     if (datasetString == "SDC2V2MCWZHReweight") SDC2V2MCWZHReweight = true;
     if (datasetString == "SDC2V2MCWZH17Reweight") SDC2V2MCWZH17Reweight = true;
+    if (datasetString == "SDC2V2MCWWHSSReweight") SDC2V2MCWWHSSReweight = true;
+    if (datasetString == "SDC2V2MCWWHSS17Reweight") SDC2V2MCWWHSS17Reweight = true;
+    if (datasetString == "SDC2V2MCWWHOSReweight") SDC2V2MCWWHOSReweight = true;
+    if (datasetString == "SDC2V2MCWWHOS17Reweight") SDC2V2MCWWHOS17Reweight = true;
+    if (datasetString == "MaC2V2MCWZHReweight") MaC2V2MCWZHReweight = true;
+    if (datasetString == "MaC2V2MCWZH17Reweight") MaC2V2MCWZH17Reweight = true;
+    if (datasetString == "MaC2V2MCWWHSSReweight") MaC2V2MCWWHSSReweight = true;
+    if (datasetString == "MaC2V2MCWWHSS17Reweight") MaC2V2MCWWHSS17Reweight = true;
+    if (datasetString == "MaC2V2MCWWHOSReweight") MaC2V2MCWWHOSReweight = true;
+    if (datasetString == "MaC2V2MCWWHOS17Reweight") MaC2V2MCWWHOS17Reweight = true;
     //Analyzer will run over all files put into fileAr
 
     std::vector<std::string> fileAr;
@@ -86,6 +96,86 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
         isBackground = false;
         int arrSize = sizeof(SDC2V2MCWZH17ReweightAr)/sizeof(SDC2V2MCWZH17ReweightAr[0]);
         std::string tmpStrWithPath = SDC2V2MCWZH17ReweightAr[fileInd];
+        fileAr.push_back(tmpStrWithPath);
+        
+    }
+    else if (SDC2V2MCWWHSSReweight){
+        saveName = "SDC2V2MCWWHSSReweight";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V2MCWWHSSReweightAr)/sizeof(SDC2V2MCWWHSSReweightAr[0]);
+        std::string tmpStrWithPath = SDC2V2MCWWHSSReweightAr[fileInd];
+        fileAr.push_back(tmpStrWithPath);
+        
+    }
+    else if (SDC2V2MCWWHSS17Reweight){
+        saveName = "SDC2V2MCWWHSS17Reweight";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V2MCWWHSS17ReweightAr)/sizeof(SDC2V2MCWWHSS17ReweightAr[0]);
+        std::string tmpStrWithPath = SDC2V2MCWWHSS17ReweightAr[fileInd];
+        fileAr.push_back(tmpStrWithPath);
+        
+    }
+    else if (SDC2V2MCWWHOSReweight){
+        saveName = "SDC2V2MCWWHOSReweight";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V2MCWWHOSReweightAr)/sizeof(SDC2V2MCWWHOSReweightAr[0]);
+        std::string tmpStrWithPath = SDC2V2MCWWHOSReweightAr[fileInd];
+        fileAr.push_back(tmpStrWithPath);
+        
+    }
+    else if (SDC2V2MCWWHOS17Reweight){
+        saveName = "SDC2V2MCWWHOS17Reweight";
+        isBackground = false;
+        int arrSize = sizeof(SDC2V2MCWWHOS17ReweightAr)/sizeof(SDC2V2MCWWHOS17ReweightAr[0]);
+        std::string tmpStrWithPath = SDC2V2MCWWHOS17ReweightAr[fileInd];
+        fileAr.push_back(tmpStrWithPath);
+        
+    }
+    else if (MaC2V2MCWZHReweight){
+        saveName = "MaC2V2MCWZHReweight";
+        isBackground = false;
+        int arrSize = sizeof(MaC2V2MCWZHReweightAr)/sizeof(MaC2V2MCWZHReweightAr[0]);
+        std::string tmpStrWithPath = MaC2V2MCWZHReweightAr[fileInd];
+        fileAr.push_back(tmpStrWithPath);
+        
+    }
+    else if (MaC2V2MCWZH17Reweight){
+        saveName = "MaC2V2MCWZH17Reweight";
+        isBackground = false;
+        int arrSize = sizeof(MaC2V2MCWZH17ReweightAr)/sizeof(MaC2V2MCWZH17ReweightAr[0]);
+        std::string tmpStrWithPath = MaC2V2MCWZH17ReweightAr[fileInd];
+        fileAr.push_back(tmpStrWithPath);
+        
+    }
+    else if (MaC2V2MCWWHSSReweight){
+        saveName = "MaC2V2MCWWHSSReweight";
+        isBackground = false;
+        int arrSize = sizeof(MaC2V2MCWWHSSReweightAr)/sizeof(MaC2V2MCWWHSSReweightAr[0]);
+        std::string tmpStrWithPath = MaC2V2MCWWHSSReweightAr[fileInd];
+        fileAr.push_back(tmpStrWithPath);
+        
+    }
+    else if (MaC2V2MCWWHSS17Reweight){
+        saveName = "MaC2V2MCWWHSS17Reweight";
+        isBackground = false;
+        int arrSize = sizeof(MaC2V2MCWWHSS17ReweightAr)/sizeof(MaC2V2MCWWHSS17ReweightAr[0]);
+        std::string tmpStrWithPath = MaC2V2MCWWHSS17ReweightAr[fileInd];
+        fileAr.push_back(tmpStrWithPath);
+        
+    }
+    else if (MaC2V2MCWWHOSReweight){
+        saveName = "MaC2V2MCWWHOSReweight";
+        isBackground = false;
+        int arrSize = sizeof(MaC2V2MCWWHOSReweightAr)/sizeof(MaC2V2MCWWHOSReweightAr[0]);
+        std::string tmpStrWithPath = MaC2V2MCWWHOSReweightAr[fileInd];
+        fileAr.push_back(tmpStrWithPath);
+        
+    }
+    else if (MaC2V2MCWWHOS17Reweight){
+        saveName = "MaC2V2MCWWHOS17Reweight";
+        isBackground = false;
+        int arrSize = sizeof(MaC2V2MCWWHOS17ReweightAr)/sizeof(MaC2V2MCWWHOS17ReweightAr[0]);
+        std::string tmpStrWithPath = MaC2V2MCWWHOS17ReweightAr[fileInd];
         fileAr.push_back(tmpStrWithPath);
         
     }
