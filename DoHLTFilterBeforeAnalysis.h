@@ -8,7 +8,7 @@ int NToEnd = 2500;
 bool debugGenPart = false;
 
 bool scratchDown = true;
-bool useSingleLepHLT = false;
+bool useSingleLepHLT = true;
 bool testRun = true;
 bool SDC2V3MCWZHV2 = false;
 bool SDC2Vm2p5MCWZHV2 = false;
