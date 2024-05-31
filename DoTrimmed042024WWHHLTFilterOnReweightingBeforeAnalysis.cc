@@ -718,7 +718,7 @@ void DoTrimmed042024WWHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
     Double_t sumOfGenWeights = 0;
 
 
-    std::vector<std::vector<Double_t>> genChannelWeightedCtrAr(13,zeroVec);
+    std::vector<Double_t> genChannelWeightedCtrAr(zeroVec);
 
     
     //Ctrs for HTobb
