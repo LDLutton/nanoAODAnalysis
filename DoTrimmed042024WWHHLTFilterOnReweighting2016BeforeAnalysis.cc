@@ -73,6 +73,7 @@ void DoTrimmed042024WWHHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd, 
     std::string saveName;
     float crossSection;
     bool isBackground;
+    bool isMariaSignal = false;
 
     ////////////////////////////////GETTING DATASET////////////////////////////////
     ////////////////////////////////GETTING DATASET////////////////////////////////
@@ -116,6 +117,7 @@ void DoTrimmed042024WWHHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd, 
         
     }
     else if (MaC2V2MCWWHSS16Reweight){
+        isMariaSignal = true;
         saveName = "MaC2V2MCWWHSS16Reweight";
         isBackground = false;
         int arrSize = sizeof(MaC2V2MCWWHSS16ReweightAr)/sizeof(MaC2V2MCWWHSS16ReweightAr[0]);
@@ -124,6 +126,7 @@ void DoTrimmed042024WWHHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd, 
         
     }
     else if (MaC2V2MCWWHSS16APVReweight){
+        isMariaSignal = true;
         saveName = "MaC2V2MCWWHSS16APVReweight";
         isBackground = false;
         int arrSize = sizeof(MaC2V2MCWWHSS16APVReweightAr)/sizeof(MaC2V2MCWWHSS16APVReweightAr[0]);
@@ -132,6 +135,7 @@ void DoTrimmed042024WWHHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd, 
         
     }
     else if (MaC2V2MCWWHOS16Reweight){
+        isMariaSignal = true;
         saveName = "MaC2V2MCWWHOS16Reweight";
         isBackground = false;
         int arrSize = sizeof(MaC2V2MCWWHOS16ReweightAr)/sizeof(MaC2V2MCWWHOS16ReweightAr[0]);
@@ -140,6 +144,7 @@ void DoTrimmed042024WWHHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd, 
         
     }
     else if (MaC2V2MCWWHOS16APVReweight){
+        isMariaSignal = true;
         saveName = "MaC2V2MCWWHOS16APVReweight";
         isBackground = false;
         int arrSize = sizeof(MaC2V2MCWWHOS16APVReweightAr)/sizeof(MaC2V2MCWWHOS16APVReweightAr[0]);
@@ -209,10 +214,19 @@ void DoTrimmed042024WWHHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd, 
     ////////////////////////////////DEFINING TREES////////////////////////////////
     ////////////////////////////////DEFINING TREES////////////////////////////////
 
-    std::vector<std::string> C2VNameAr {"C2W_m2p0_C2Z_m2p0","C2W_m2p0_C2Z_m1p0","C2W_m2p0_C2Z_m0p5","C2W_m2p0_C2Z_0p0","C2W_m2p0_C2Z_0p5","C2W_m2p0_C2Z_1p0","C2W_m2p0_C2Z_1p5","C2W_m2p0_C2Z_2p0","C2W_m2p0_C2Z_2p5","C2W_m2p0_C2Z_3p0","C2W_m2p0_C2Z_4p0","C2W_m1p0_C2Z_m2p0","C2W_m1p0_C2Z_m1p0","C2W_m1p0_C2Z_m0p5","C2W_m1p0_C2Z_0p0","C2W_m1p0_C2Z_0p5","C2W_m1p0_C2Z_1p0","C2W_m1p0_C2Z_1p5","C2W_m1p0_C2Z_2p0","C2W_m1p0_C2Z_2p5","C2W_m1p0_C2Z_3p0","C2W_m1p0_C2Z_4p0","C2W_m0p5_C2Z_m2p0","C2W_m0p5_C2Z_m1p0","C2W_m0p5_C2Z_m0p5","C2W_m0p5_C2Z_0p0","C2W_m0p5_C2Z_0p5","C2W_m0p5_C2Z_1p0","C2W_m0p5_C2Z_1p5","C2W_m0p5_C2Z_2p0","C2W_m0p5_C2Z_2p5","C2W_m0p5_C2Z_3p0","C2W_m0p5_C2Z_4p0","C2W_0p0_C2Z_m2p0","C2W_0p0_C2Z_m1p0","C2W_0p0_C2Z_m0p5","C2W_0p0_C2Z_0p0","C2W_0p0_C2Z_0p5","C2W_0p0_C2Z_1p0","C2W_0p0_C2Z_1p5","C2W_0p0_C2Z_2p0","C2W_0p0_C2Z_2p5","C2W_0p0_C2Z_3p0","C2W_0p0_C2Z_4p0","C2W_0p5_C2Z_m2p0","C2W_0p5_C2Z_m1p0","C2W_0p5_C2Z_m0p5","C2W_0p5_C2Z_0p0","C2W_0p5_C2Z_0p5","C2W_0p5_C2Z_1p0","C2W_0p5_C2Z_1p5","C2W_0p5_C2Z_2p0","C2W_0p5_C2Z_2p5","C2W_0p5_C2Z_3p0","C2W_0p5_C2Z_4p0","C2W_1p0_C2Z_m2p0","C2W_1p0_C2Z_m1p0","C2W_1p0_C2Z_m0p5","C2W_1p0_C2Z_0p0","C2W_1p0_C2Z_0p5","C2W_1p0_C2Z_1p0","C2W_1p0_C2Z_1p5","C2W_1p0_C2Z_2p0","C2W_1p0_C2Z_2p5","C2W_1p0_C2Z_3p0","C2W_1p0_C2Z_4p0","C2W_1p5_C2Z_m2p0","C2W_1p5_C2Z_m1p0","C2W_1p5_C2Z_m0p5","C2W_1p5_C2Z_0p0","C2W_1p5_C2Z_0p5","C2W_1p5_C2Z_1p0","C2W_1p5_C2Z_1p5","C2W_1p5_C2Z_2p0","C2W_1p5_C2Z_2p5","C2W_1p5_C2Z_3p0","C2W_1p5_C2Z_4p0","C2W_2p0_C2Z_m2p0","C2W_2p0_C2Z_m1p0","C2W_2p0_C2Z_m0p5","C2W_2p0_C2Z_0p0","C2W_2p0_C2Z_0p5","C2W_2p0_C2Z_1p0","C2W_2p0_C2Z_1p5","C2W_2p0_C2Z_2p5","C2W_2p0_C2Z_3p0","C2W_2p0_C2Z_4p0","C2W_2p5_C2Z_m2p0","C2W_2p5_C2Z_m1p0","C2W_2p5_C2Z_m0p5","C2W_2p5_C2Z_0p0","C2W_2p5_C2Z_0p5","C2W_2p5_C2Z_1p0","C2W_2p5_C2Z_1p5","C2W_2p5_C2Z_2p0","C2W_2p5_C2Z_2p5","C2W_2p5_C2Z_3p0","C2W_2p5_C2Z_4p0","C2W_3p0_C2Z_m2p0","C2W_3p0_C2Z_m1p0","C2W_3p0_C2Z_m0p5","C2W_3p0_C2Z_0p0","C2W_3p0_C2Z_0p5","C2W_3p0_C2Z_1p0","C2W_3p0_C2Z_1p5","C2W_3p0_C2Z_2p0","C2W_3p0_C2Z_2p5","C2W_3p0_C2Z_3p0","C2W_3p0_C2Z_4p0","C2W_4p0_C2Z_m2p0","C2W_4p0_C2Z_m1p0","C2W_4p0_C2Z_m0p5","C2W_4p0_C2Z_0p0","C2W_4p0_C2Z_0p5","C2W_4p0_C2Z_1p0","C2W_4p0_C2Z_1p5","C2W_4p0_C2Z_2p0","C2W_4p0_C2Z_2p5","C2W_4p0_C2Z_3p0","C2W_4p0_C2Z_4p0"};
+    std::vector<std::string> C2VNameMaAr {"C2W_m2p0_C2Z_m2p0","C2W_m2p0_C2Z_m1p0","C2W_m2p0_C2Z_m0p5","C2W_m2p0_C2Z_0p0","C2W_m2p0_C2Z_0p5","C2W_m2p0_C2Z_1p0","C2W_m2p0_C2Z_1p5","C2W_m2p0_C2Z_2p0","C2W_m2p0_C2Z_2p5","C2W_m2p0_C2Z_3p0","C2W_m2p0_C2Z_4p0","C2W_m1p0_C2Z_m2p0","C2W_m1p0_C2Z_m1p0","C2W_m1p0_C2Z_m0p5","C2W_m1p0_C2Z_0p0","C2W_m1p0_C2Z_0p5","C2W_m1p0_C2Z_1p0","C2W_m1p0_C2Z_1p5","C2W_m1p0_C2Z_2p0","C2W_m1p0_C2Z_2p5","C2W_m1p0_C2Z_3p0","C2W_m1p0_C2Z_4p0","C2W_m0p5_C2Z_m2p0","C2W_m0p5_C2Z_m1p0","C2W_m0p5_C2Z_m0p5","C2W_m0p5_C2Z_0p0","C2W_m0p5_C2Z_0p5","C2W_m0p5_C2Z_1p0","C2W_m0p5_C2Z_1p5","C2W_m0p5_C2Z_2p0","C2W_m0p5_C2Z_2p5","C2W_m0p5_C2Z_3p0","C2W_m0p5_C2Z_4p0","C2W_0p0_C2Z_m2p0","C2W_0p0_C2Z_m1p0","C2W_0p0_C2Z_m0p5","C2W_0p0_C2Z_0p0","C2W_0p0_C2Z_0p5","C2W_0p0_C2Z_1p0","C2W_0p0_C2Z_1p5","C2W_0p0_C2Z_2p0","C2W_0p0_C2Z_2p5","C2W_0p0_C2Z_3p0","C2W_0p0_C2Z_4p0","C2W_0p5_C2Z_m2p0","C2W_0p5_C2Z_m1p0","C2W_0p5_C2Z_m0p5","C2W_0p5_C2Z_0p0","C2W_0p5_C2Z_0p5","C2W_0p5_C2Z_1p0","C2W_0p5_C2Z_1p5","C2W_0p5_C2Z_2p0","C2W_0p5_C2Z_2p5","C2W_0p5_C2Z_3p0","C2W_0p5_C2Z_4p0","C2W_1p0_C2Z_m2p0","C2W_1p0_C2Z_m1p0","C2W_1p0_C2Z_m0p5","C2W_1p0_C2Z_0p0","C2W_1p0_C2Z_0p5","C2W_1p0_C2Z_1p0","C2W_1p0_C2Z_1p5","C2W_1p0_C2Z_2p0","C2W_1p0_C2Z_2p5","C2W_1p0_C2Z_3p0","C2W_1p0_C2Z_4p0","C2W_1p5_C2Z_m2p0","C2W_1p5_C2Z_m1p0","C2W_1p5_C2Z_m0p5","C2W_1p5_C2Z_0p0","C2W_1p5_C2Z_0p5","C2W_1p5_C2Z_1p0","C2W_1p5_C2Z_1p5","C2W_1p5_C2Z_2p0","C2W_1p5_C2Z_2p5","C2W_1p5_C2Z_3p0","C2W_1p5_C2Z_4p0","C2W_2p0_C2Z_m2p0","C2W_2p0_C2Z_m1p0","C2W_2p0_C2Z_m0p5","C2W_2p0_C2Z_0p0","C2W_2p0_C2Z_0p5","C2W_2p0_C2Z_1p0","C2W_2p0_C2Z_1p5","C2W_2p0_C2Z_2p5","C2W_2p0_C2Z_3p0","C2W_2p0_C2Z_4p0","C2W_2p5_C2Z_m2p0","C2W_2p5_C2Z_m1p0","C2W_2p5_C2Z_m0p5","C2W_2p5_C2Z_0p0","C2W_2p5_C2Z_0p5","C2W_2p5_C2Z_1p0","C2W_2p5_C2Z_1p5","C2W_2p5_C2Z_2p0","C2W_2p5_C2Z_2p5","C2W_2p5_C2Z_3p0","C2W_2p5_C2Z_4p0","C2W_3p0_C2Z_m2p0","C2W_3p0_C2Z_m1p0","C2W_3p0_C2Z_m0p5","C2W_3p0_C2Z_0p0","C2W_3p0_C2Z_0p5","C2W_3p0_C2Z_1p0","C2W_3p0_C2Z_1p5","C2W_3p0_C2Z_2p0","C2W_3p0_C2Z_2p5","C2W_3p0_C2Z_3p0","C2W_3p0_C2Z_4p0","C2W_4p0_C2Z_m2p0","C2W_4p0_C2Z_m1p0","C2W_4p0_C2Z_m0p5","C2W_4p0_C2Z_0p0","C2W_4p0_C2Z_0p5","C2W_4p0_C2Z_1p0","C2W_4p0_C2Z_1p5","C2W_4p0_C2Z_2p0","C2W_4p0_C2Z_2p5","C2W_4p0_C2Z_3p0","C2W_4p0_C2Z_4p0"};
+    std::vector<std::string> C2VNameAr {"-2.0","-1.75","-1.5","-1.25","-1.0","-0.75","-0.5","-0.25","0.0","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9","2.25","2.5","2.75","3.0","3.25","3.5","3.75","4.0"};
+    std::vector<std::string> typeNameMaAr {"LWLepTWLep","LWLepTWHadronic","LWHadronicTWLep","LWHadronicTWHadronic","GenOther","LWLepTWLep NoHTobb","LWLepTWHadronic NoHTobb","LWHadronicTWLep NoHTobb","LWHadronicTWHadronic NoHTobb","GenOther NoHTobb"};
+    std::vector<std::string> typeNameAr {"GenLep","GenSemiLep","GenHad","GenOther","GenLep NoHTobb","GenSemiLep NoHTobb","GenHad NoHTobb","GenOther NoHTobb"};
+    uint C2VLen = 37;
+    uint C2VMaLen = 120;
+    if (isMariaSignal) C2VLen = C2VMaLen;
+    std::vector<Double_t> zeroVec(C2VLen,0.0);
 
-    std::vector<std::string> typeNameAr {"LWLepTWLep","LWLepTWHadronic","LWHadronicTWLep","LWHadronicTWHadronic","GenOther","LWLepTWLep NoHTobb","LWLepTWHadronic NoHTobb","LWHadronicTWLep NoHTobb","LWHadronicTWHadronic NoHTobb","GenOther NoHTobb"};
-    std::vector<Double_t> zeroVec(120,0.0);
+    if (isMariaSignal) {
+        C2VNameAr = C2VNameMaAr;
+        typeNameAr = typeNameMaAr;
+    }
     std::vector<Double_t> passFlagWeightedCtrAr(zeroVec);
     std::vector<Double_t> passHLTWeightedCtrAr(zeroVec);
     std::vector<Double_t> passnFJWeightedCtrAr(zeroVec);
@@ -1540,12 +1554,24 @@ void DoTrimmed042024WWHHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd, 
     std::cout << "evRunOver: " << evRunOver << " -------------------\n";
     std::cout << "passes Flag cut: " << passFlagCtr << " -------------------\n";
 
+    std::string C2V2Str = "2p0";
+    std::string C2V2MaStr = "C2W_2p0_C2Z_2p0";
+
+    uint C2V2Point = 27;
+    uint C2V2MaPoint = 83;
+
+    if (isMariaSignal) {
+        C2V2Str = C2V2MaStr;
+        C2V2Point = C2V2MaPoint;
+
+    }
+
     for (unsigned int loopItr = 0; loopItr < C2VNameAr.size(); loopItr++){
         if (loopItr == C2VNameAr.size() - 1) {
             std::cout << "(" << C2VNameAr[loopItr] << "," << passFlagWeightedCtrAr[loopItr + 1] << ")\n";
         }
         else std::cout << "(" << C2VNameAr[loopItr] << "," << passFlagWeightedCtrAr[loopItr + 1] << "),";
-        if (loopItr == 27) {
+        if (loopItr == C2V2Point) {
             std::cout << "(C2W_2p0_C2Z_2p0," << passFlagWeightedCtrAr[0] << "),";
         }
     }
@@ -1559,7 +1585,7 @@ void DoTrimmed042024WWHHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd, 
             std::cout << "(" << C2VNameAr[loopItr] << "," << passHLTWeightedCtrAr[loopItr + 1] << ")\n";
         }
         else std::cout << "(" << C2VNameAr[loopItr] << "," << passHLTWeightedCtrAr[loopItr + 1] << "),";
-        if (loopItr == 27) {
+        if (loopItr == C2V2Point) {
             std::cout << "(C2W_2p0_C2Z_2p0," << passHLTWeightedCtrAr[0] << "),";
         }
     }
@@ -1572,7 +1598,7 @@ void DoTrimmed042024WWHHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd, 
             std::cout << "(" << C2VNameAr[loopItr] << "," << passnFJWeightedCtrAr[loopItr + 1] << ")\n";
         }
         else std::cout << "(" << C2VNameAr[loopItr] << "," << passnFJWeightedCtrAr[loopItr + 1] << "),";
-        if (loopItr == 27) {
+        if (loopItr == C2V2Point) {
             std::cout << "(C2W_2p0_C2Z_2p0," << passnFJWeightedCtrAr[0] << "),";
         }
     }
@@ -1585,7 +1611,7 @@ void DoTrimmed042024WWHHLTFilterOnReweighting2016BeforeAnalysis(UInt_t fileInd, 
             std::cout << "(" << C2VNameAr[loopItr] << "," << passnVBFWeightedCtrAr[loopItr + 1] << ")\n";
         }
         else std::cout << "(" << C2VNameAr[loopItr] << "," << passnVBFWeightedCtrAr[loopItr + 1] << "),";
-        if (loopItr == 27) {
+        if (loopItr == C2V2Point) {
             std::cout << "(C2W_2p0_C2Z_2p0," << passnVBFWeightedCtrAr[0] << "),";
         }
     }

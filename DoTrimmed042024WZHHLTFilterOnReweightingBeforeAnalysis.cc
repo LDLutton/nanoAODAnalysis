@@ -80,6 +80,7 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
     float crossSection;
     bool isBackground;
     bool isWWH = true;
+    bool isMariaSignal = false;
 
     ////////////////////////////////GETTING DATASET////////////////////////////////
     ////////////////////////////////GETTING DATASET////////////////////////////////
@@ -141,6 +142,7 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
         
     }
     else if (MaC2V2MCWZHReweight){
+        isMariaSignal = true;
         saveName = "MaC2V2MCWZHReweight";
         isBackground = false;
         int arrSize = sizeof(MaC2V2MCWZHReweightAr)/sizeof(MaC2V2MCWZHReweightAr[0]);
@@ -150,6 +152,7 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
         
     }
     else if (MaC2V2MCWZH17Reweight){
+        isMariaSignal = true;
         saveName = "MaC2V2MCWZH17Reweight";
         isBackground = false;
         int arrSize = sizeof(MaC2V2MCWZH17ReweightAr)/sizeof(MaC2V2MCWZH17ReweightAr[0]);
@@ -159,6 +162,7 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
         
     }
     else if (MaC2V2MCWWHSSReweight){
+        isMariaSignal = true;
         saveName = "MaC2V2MCWWHSSReweight";
         isBackground = false;
         int arrSize = sizeof(MaC2V2MCWWHSSReweightAr)/sizeof(MaC2V2MCWWHSSReweightAr[0]);
@@ -167,6 +171,7 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
         
     }
     else if (MaC2V2MCWWHSS17Reweight){
+        isMariaSignal = true;
         saveName = "MaC2V2MCWWHSS17Reweight";
         isBackground = false;
         int arrSize = sizeof(MaC2V2MCWWHSS17ReweightAr)/sizeof(MaC2V2MCWWHSS17ReweightAr[0]);
@@ -175,6 +180,7 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
         
     }
     else if (MaC2V2MCWWHOSReweight){
+        isMariaSignal = true;
         saveName = "MaC2V2MCWWHOSReweight";
         isBackground = false;
         int arrSize = sizeof(MaC2V2MCWWHOSReweightAr)/sizeof(MaC2V2MCWWHOSReweightAr[0]);
@@ -183,6 +189,7 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
         
     }
     else if (MaC2V2MCWWHOS17Reweight){
+        isMariaSignal = true;
         saveName = "MaC2V2MCWWHOS17Reweight";
         isBackground = false;
         int arrSize = sizeof(MaC2V2MCWWHOS17ReweightAr)/sizeof(MaC2V2MCWWHOS17ReweightAr[0]);
@@ -270,10 +277,19 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
     ////////////////////////////////DEFINING TREES////////////////////////////////
     ////////////////////////////////DEFINING TREES////////////////////////////////
 
+    std::vector<std::string> C2VNameMaAr {"C2W_m2p0_C2Z_m2p0","C2W_m2p0_C2Z_m1p0","C2W_m2p0_C2Z_m0p5","C2W_m2p0_C2Z_0p0","C2W_m2p0_C2Z_0p5","C2W_m2p0_C2Z_1p0","C2W_m2p0_C2Z_1p5","C2W_m2p0_C2Z_2p0","C2W_m2p0_C2Z_2p5","C2W_m2p0_C2Z_3p0","C2W_m2p0_C2Z_4p0","C2W_m1p0_C2Z_m2p0","C2W_m1p0_C2Z_m1p0","C2W_m1p0_C2Z_m0p5","C2W_m1p0_C2Z_0p0","C2W_m1p0_C2Z_0p5","C2W_m1p0_C2Z_1p0","C2W_m1p0_C2Z_1p5","C2W_m1p0_C2Z_2p0","C2W_m1p0_C2Z_2p5","C2W_m1p0_C2Z_3p0","C2W_m1p0_C2Z_4p0","C2W_m0p5_C2Z_m2p0","C2W_m0p5_C2Z_m1p0","C2W_m0p5_C2Z_m0p5","C2W_m0p5_C2Z_0p0","C2W_m0p5_C2Z_0p5","C2W_m0p5_C2Z_1p0","C2W_m0p5_C2Z_1p5","C2W_m0p5_C2Z_2p0","C2W_m0p5_C2Z_2p5","C2W_m0p5_C2Z_3p0","C2W_m0p5_C2Z_4p0","C2W_0p0_C2Z_m2p0","C2W_0p0_C2Z_m1p0","C2W_0p0_C2Z_m0p5","C2W_0p0_C2Z_0p0","C2W_0p0_C2Z_0p5","C2W_0p0_C2Z_1p0","C2W_0p0_C2Z_1p5","C2W_0p0_C2Z_2p0","C2W_0p0_C2Z_2p5","C2W_0p0_C2Z_3p0","C2W_0p0_C2Z_4p0","C2W_0p5_C2Z_m2p0","C2W_0p5_C2Z_m1p0","C2W_0p5_C2Z_m0p5","C2W_0p5_C2Z_0p0","C2W_0p5_C2Z_0p5","C2W_0p5_C2Z_1p0","C2W_0p5_C2Z_1p5","C2W_0p5_C2Z_2p0","C2W_0p5_C2Z_2p5","C2W_0p5_C2Z_3p0","C2W_0p5_C2Z_4p0","C2W_1p0_C2Z_m2p0","C2W_1p0_C2Z_m1p0","C2W_1p0_C2Z_m0p5","C2W_1p0_C2Z_0p0","C2W_1p0_C2Z_0p5","C2W_1p0_C2Z_1p0","C2W_1p0_C2Z_1p5","C2W_1p0_C2Z_2p0","C2W_1p0_C2Z_2p5","C2W_1p0_C2Z_3p0","C2W_1p0_C2Z_4p0","C2W_1p5_C2Z_m2p0","C2W_1p5_C2Z_m1p0","C2W_1p5_C2Z_m0p5","C2W_1p5_C2Z_0p0","C2W_1p5_C2Z_0p5","C2W_1p5_C2Z_1p0","C2W_1p5_C2Z_1p5","C2W_1p5_C2Z_2p0","C2W_1p5_C2Z_2p5","C2W_1p5_C2Z_3p0","C2W_1p5_C2Z_4p0","C2W_2p0_C2Z_m2p0","C2W_2p0_C2Z_m1p0","C2W_2p0_C2Z_m0p5","C2W_2p0_C2Z_0p0","C2W_2p0_C2Z_0p5","C2W_2p0_C2Z_1p0","C2W_2p0_C2Z_1p5","C2W_2p0_C2Z_2p5","C2W_2p0_C2Z_3p0","C2W_2p0_C2Z_4p0","C2W_2p5_C2Z_m2p0","C2W_2p5_C2Z_m1p0","C2W_2p5_C2Z_m0p5","C2W_2p5_C2Z_0p0","C2W_2p5_C2Z_0p5","C2W_2p5_C2Z_1p0","C2W_2p5_C2Z_1p5","C2W_2p5_C2Z_2p0","C2W_2p5_C2Z_2p5","C2W_2p5_C2Z_3p0","C2W_2p5_C2Z_4p0","C2W_3p0_C2Z_m2p0","C2W_3p0_C2Z_m1p0","C2W_3p0_C2Z_m0p5","C2W_3p0_C2Z_0p0","C2W_3p0_C2Z_0p5","C2W_3p0_C2Z_1p0","C2W_3p0_C2Z_1p5","C2W_3p0_C2Z_2p0","C2W_3p0_C2Z_2p5","C2W_3p0_C2Z_3p0","C2W_3p0_C2Z_4p0","C2W_4p0_C2Z_m2p0","C2W_4p0_C2Z_m1p0","C2W_4p0_C2Z_m0p5","C2W_4p0_C2Z_0p0","C2W_4p0_C2Z_0p5","C2W_4p0_C2Z_1p0","C2W_4p0_C2Z_1p5","C2W_4p0_C2Z_2p0","C2W_4p0_C2Z_2p5","C2W_4p0_C2Z_3p0","C2W_4p0_C2Z_4p0"};
     std::vector<std::string> C2VNameAr {"-2.0","-1.75","-1.5","-1.25","-1.0","-0.75","-0.5","-0.25","0.0","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9","2.25","2.5","2.75","3.0","3.25","3.5","3.75","4.0"};
+    std::vector<std::string> typeNameMaAr {"LWLepTWLep","LWLepTWHadronic","LWHadronicTWLep","LWHadronicTWHadronic","GenOther","LWLepTWLep NoHTobb","LWLepTWHadronic NoHTobb","LWHadronicTWLep NoHTobb","LWHadronicTWHadronic NoHTobb","GenOther NoHTobb"};
+    std::vector<std::string> typeNameAr {"GenLep","GenSemiLep","GenHad","GenOther","GenLep NoHTobb","GenSemiLep NoHTobb","GenHad NoHTobb","GenOther NoHTobb"};
+    uint C2VLen = 37;
+    uint C2VMaLen = 120;
+    if (isMariaSignal) C2VLen = C2VMaLen;
+    std::vector<Double_t> zeroVec(C2VLen,0.0);
 
-    std::vector<std::string> typeNameAr {"WLepZLep","WLepZHadronic","WHadronicZLep","WHadronicZHadronic","GenOther","WLepZLep NoHTobb","WLepZHadronic NoHTobb","WHadronicZLep NoHTobb","WHadronicZHadronic NoHTobb","GenOther NoHTobb"};
-    std::vector<Double_t> zeroVec(37,0.0);
+    if (isMariaSignal) {
+        C2VNameAr = C2VNameMaAr;
+        typeNameAr = typeNameMaAr;
+    }
     std::vector<std::vector<Double_t>> passFlagWeightedCtrAr(11,zeroVec);
     std::vector<std::vector<Double_t>> passHLTWeightedCtrAr(11,zeroVec);
     std::vector<std::vector<Double_t>> passnFJWeightedCtrAr(11,zeroVec);
@@ -2775,13 +2791,25 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
     std::cout << "evRunOver: " << evRunOver << " -------------------\n";
     std::cout << "passes Flag cut: " << passFlagCtr << " -------------------\n";
 
+    std::string C2V2Str = "2p0";
+    std::string C2V2MaStr = "C2W_2p0_C2Z_2p0";
+
+    uint C2V2Point = 27;
+    uint C2V2MaPoint = 83;
+
+    if (isMariaSignal) {
+        C2V2Str = C2V2MaStr;
+        C2V2Point = C2V2MaPoint;
+
+    }
+
     for (unsigned int loopItr = 0; loopItr < C2VNameAr.size(); loopItr++){
         if (loopItr == C2VNameAr.size() - 1) {
             std::cout << "(" << C2VNameAr[loopItr] << "," << passFlagWeightedCtrAr[0][loopItr + 1] << ")\n";
         }
         else std::cout << "(" << C2VNameAr[loopItr] << "," << passFlagWeightedCtrAr[0][loopItr + 1] << "),";
-        if (loopItr == 27) {
-            std::cout << "(2.0," << passFlagWeightedCtrAr[0][0] << "),";
+        if (loopItr == C2V2Point) {
+            std::cout << "(" << C2V2Str << "," << passFlagWeightedCtrAr[0][0] << "),";
         }
     }
 
@@ -2794,8 +2822,8 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
             std::cout << "(" << C2VNameAr[loopItr] << "," << passHLTWeightedCtrAr[0][loopItr + 1] << ")\n";
         }
         else std::cout << "(" << C2VNameAr[loopItr] << "," << passHLTWeightedCtrAr[0][loopItr + 1] << "),";
-        if (loopItr == 27) {
-            std::cout << "(2.0," << passHLTWeightedCtrAr[0][0] << "),";
+        if (loopItr == C2V2Point) {
+            std::cout << "(" << C2V2Str << "," << passHLTWeightedCtrAr[0][0] << "),";
         }
     }
 
@@ -2807,8 +2835,8 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
             std::cout << "(" << C2VNameAr[loopItr] << "," << passnFJWeightedCtrAr[0][loopItr + 1] << ")\n";
         }
         else std::cout << "(" << C2VNameAr[loopItr] << "," << passnFJWeightedCtrAr[0][loopItr + 1] << "),";
-        if (loopItr == 27) {
-            std::cout << "(2.0," << passnFJWeightedCtrAr[0][0] << "),";
+        if (loopItr == C2V2Point) {
+            std::cout << "(" << C2V2Str << "," << passnFJWeightedCtrAr[0][0] << "),";
         }
     }
 
@@ -2820,8 +2848,8 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
             std::cout << "(" << C2VNameAr[loopItr] << "," << passnVBFWeightedCtrAr[0][loopItr + 1] << ")\n";
         }
         else std::cout << "(" << C2VNameAr[loopItr] << "," << passnVBFWeightedCtrAr[0][loopItr + 1] << "),";
-        if (loopItr == 27) {
-            std::cout << "(2.0," << passnVBFWeightedCtrAr[0][0] << "),";
+        if (loopItr == C2V2Point) {
+            std::cout << "(" << C2V2Str << "," << passnVBFWeightedCtrAr[0][0] << "),";
         }
     }
 
@@ -2880,8 +2908,8 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
                     std::cout << "(" << C2VNameAr[loopItr] << "," << passFlagWeightedCtrAr[typeItr+1][loopItr + 1] << ")\n";
                 }
                 else std::cout << "(" << C2VNameAr[loopItr] << "," << passFlagWeightedCtrAr[typeItr+1][loopItr + 1] << "),";
-                if (loopItr == 27) {
-                    std::cout << "(2.0," << passFlagWeightedCtrAr[typeItr+1][0] << "),";
+                if (loopItr == C2V2Point) {
+                    std::cout << "(" << C2V2Str << "," << passFlagWeightedCtrAr[typeItr+1][0] << "),";
                 }
             }
         }
@@ -2893,8 +2921,8 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
                     std::cout << "(" << C2VNameAr[loopItr] << "," << passHLTWeightedCtrAr[typeItr+1][loopItr + 1] << ")\n";
                 }
                 else std::cout << "(" << C2VNameAr[loopItr] << "," << passHLTWeightedCtrAr[typeItr+1][loopItr + 1] << "),";
-                if (loopItr == 27) {
-                    std::cout << "(2.0," << passHLTWeightedCtrAr[typeItr+1][0] << "),";
+                if (loopItr == C2V2Point) {
+                    std::cout << "(" << C2V2Str << "," << passHLTWeightedCtrAr[typeItr+1][0] << "),";
                 }
             }
         }
@@ -2906,8 +2934,8 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
                     std::cout << "(" << C2VNameAr[loopItr] << "," << passnFJWeightedCtrAr[typeItr+1][loopItr + 1] << ")\n";
                 }
                 else std::cout << "(" << C2VNameAr[loopItr] << "," << passnFJWeightedCtrAr[typeItr+1][loopItr + 1] << "),";
-                if (loopItr == 27) {
-                    std::cout << "(2.0," << passnFJWeightedCtrAr[typeItr+1][0] << "),";
+                if (loopItr == C2V2Point) {
+                    std::cout << "(" << C2V2Str << "," << passnFJWeightedCtrAr[typeItr+1][0] << "),";
                 }
             }
         }
@@ -2919,8 +2947,8 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
                     std::cout << "(" << C2VNameAr[loopItr] << "," << passnVBFWeightedCtrAr[typeItr+1][loopItr + 1] << ")\n";
                 }
                 else std::cout << "(" << C2VNameAr[loopItr] << "," << passnVBFWeightedCtrAr[typeItr+1][loopItr + 1] << "),";
-                if (loopItr == 27) {
-                    std::cout << "(2.0," << passnVBFWeightedCtrAr[typeItr+1][0] << "),";
+                if (loopItr == C2V2Point) {
+                    std::cout << "(" << C2V2Str << "," << passnVBFWeightedCtrAr[typeItr+1][0] << "),";
                 }
             }
         }
@@ -2955,8 +2983,8 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
                     std::cout << "(" << C2VNameAr[loopItr] << "," << genChannelWeightedCtrAr[typeItr][loopItr + 1] << ")\n";
                 }
                 else std::cout << "(" << C2VNameAr[loopItr] << "," << genChannelWeightedCtrAr[typeItr][loopItr + 1] << "),";
-                if (loopItr == 27) {
-                    std::cout << "(2.0," << genChannelWeightedCtrAr[typeItr][0] << "),";
+                if (loopItr == C2V2Point) {
+                    std::cout << "(" << C2V2Str << "," << genChannelWeightedCtrAr[typeItr][0] << "),";
                 }
             }
         }
