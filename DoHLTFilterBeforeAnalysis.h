@@ -97,15 +97,15 @@ bool CenC2V2MCWZH17Reweight = false;
 bool CenC2V2MCWZH16Reweight = false;
 bool CenC2V2MCWZH16APVReweight = false;
 
-bool CenC2V2MCWZHSSReweight = false;
-bool CenC2V2MCWZHSS17Reweight = false;
-bool CenC2V2MCWZHSS16Reweight = false;
-bool CenC2V2MCWZHSS16APVReweight = false;
+bool CenC2V2MCWWHSSReweight = false;
+bool CenC2V2MCWWHSS17Reweight = false;
+bool CenC2V2MCWWHSS16Reweight = false;
+bool CenC2V2MCWWHSS16APVReweight = false;
 
-bool CenC2V2MCWZHOSReweight = false;
-bool CenC2V2MCWZHOS17Reweight = false;
-bool CenC2V2MCWZHOS16Reweight = false;
-bool CenC2V2MCWZHOS16APVReweight = false;
+bool CenC2V2MCWWHOSReweight = false;
+bool CenC2V2MCWWHOS17Reweight = false;
+bool CenC2V2MCWWHOS16Reweight = false;
+bool CenC2V2MCWWHOS16APVReweight = false;
 
 
 bool MaC2V2MCZZHReweight = false;
@@ -118,15 +118,15 @@ bool MaC2V2MCWZH17Reweight = false;
 bool MaC2V2MCWZH16Reweight = false;
 bool MaC2V2MCWZH16APVReweight = false;
 
-bool MaC2V2MCWZHSSReweight = false;
-bool MaC2V2MCWZHSS17Reweight = false;
-bool MaC2V2MCWZHSS16Reweight = false;
-bool MaC2V2MCWZHSS16APVReweight = false;
+bool MaC2V2MCWWHSSReweight = false;
+bool MaC2V2MCWWHSS17Reweight = false;
+bool MaC2V2MCWWHSS16Reweight = false;
+bool MaC2V2MCWWHSS16APVReweight = false;
 
-bool MaC2V2MCWZHOSReweight = false;
-bool MaC2V2MCWZHOS17Reweight = false;
-bool MaC2V2MCWZHOS16Reweight = false;
-bool MaC2V2MCWZHOS16APVReweight = false;
+bool MaC2V2MCWWHOSReweight = false;
+bool MaC2V2MCWWHOS17Reweight = false;
+bool MaC2V2MCWWHOS16Reweight = false;
+bool MaC2V2MCWWHOS16APVReweight = false;
 
 bool SDC2V2MCZZHReweight = false;
 bool SDC2V2MCZZH17Reweight = false;
@@ -138,15 +138,15 @@ bool SDC2V2MCWZH17Reweight = false;
 bool SDC2V2MCWZH16Reweight = false;
 bool SDC2V2MCWZH16APVReweight = false;
 
-bool SDC2V2MCWZHSSReweight = false;
-bool SDC2V2MCWZHSS17Reweight = false;
-bool SDC2V2MCWZHSS16Reweight = false;
-bool SDC2V2MCWZHSS16APVReweight = false;
+bool SDC2V2MCWWHSSReweight = false;
+bool SDC2V2MCWWHSS17Reweight = false;
+bool SDC2V2MCWWHSS16Reweight = false;
+bool SDC2V2MCWWHSS16APVReweight = false;
 
-bool SDC2V2MCWZHOSReweight = false;
-bool SDC2V2MCWZHOS17Reweight = false;
-bool SDC2V2MCWZHOS16Reweight = false;
-bool SDC2V2MCWZHOS16APVReweight = false;
+bool SDC2V2MCWWHOSReweight = false;
+bool SDC2V2MCWWHOS17Reweight = false;
+bool SDC2V2MCWWHOS16Reweight = false;
+bool SDC2V2MCWWHOS16APVReweight = false;
 
 bool MGC2VEtaDifCut = false;
 bool MGOSix = false;
