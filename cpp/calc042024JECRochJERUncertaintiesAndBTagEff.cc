@@ -125,6 +125,25 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
     if (datasetString == "MaC2V2MCWWHOS16ReweightTrimmed") MaC2V2MCWWHOS16ReweightTrimmed = true;
     if (datasetString == "MaC2V2MCWWHOS16APVReweightTrimmed") MaC2V2MCWWHOS16APVReweightTrimmed = true;
 
+    if (datasetString == "CenC2V2MCZZHReweightTrimmed") CenC2V2MCZZHReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCZZH17ReweightTrimmed") CenC2V2MCZZH17ReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCZZH16ReweightTrimmed") CenC2V2MCZZH16ReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCZZH16APVReweightTrimmed") CenC2V2MCZZH16APVReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCWZHReweightTrimmed") CenC2V2MCWZHReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCWZH17ReweightTrimmed") CenC2V2MCWZH17ReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCWZH16ReweightTrimmed") CenC2V2MCWZH16ReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCWZH16APVReweightTrimmed") CenC2V2MCWZH16APVReweightTrimmed = true;
+
+    if (datasetString == "CenC2V2MCWWHSSReweightTrimmed") CenC2V2MCWWHSSReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCWWHSS17ReweightTrimmed") CenC2V2MCWWHSS17ReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCWWHSS16ReweightTrimmed") CenC2V2MCWWHSS16ReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCWWHSS16APVReweightTrimmed") CenC2V2MCWWHSS16APVReweightTrimmed = true;
+
+    if (datasetString == "CenC2V2MCWWHOSReweightTrimmed") CenC2V2MCWWHOSReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCWWHOS17ReweightTrimmed") CenC2V2MCWWHOS17ReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCWWHOS16ReweightTrimmed") CenC2V2MCWWHOS16ReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCWWHOS16APVReweightTrimmed") CenC2V2MCWWHOS16APVReweightTrimmed = true;
+
 
     ////////////////////////////////GETTING DATASET////////////////////////////////
     ////////////////////////////////GETTING DATASET////////////////////////////////
@@ -383,6 +402,129 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
         yearType = 3;
         std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisMaC2V2MCWWHOS16APVReweightTrimmed"+NoSLString+"_WithJERRoch.root";
         //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMaC2V2MCWWHOS16APVReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+
+    else if (CenC2V2MCZZHReweightTrimmed){
+        saveName = "CenC2V2MCZZHReweightTrimmed";
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisCenC2V2MCZZHReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCZZHReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        //std::string tmpStrWithPath = "/afs/crc.nd.edu/user/d/dlutton/Public/condorStuff/NanoAODToHistos/nanoAODAnalysis/cpp/HLTTrimmedFilteredForAnalysisCenC2V2MCZZHReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        //std::string tmpStrWithPath = "/scratch365/dlutton/testDirectory/cpp/HLTTrimmedFilteredForAnalysisCenC2V2MCZZHReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCZZH17ReweightTrimmed){
+        saveName = "CenC2V2MCZZH17ReweightTrimmed";
+        yearType = 1;
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisCenC2V2MCZZH17ReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCZZH17ReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCZZH16ReweightTrimmed){
+        saveName = "CenC2V2MCZZH16ReweightTrimmed";
+        yearType = 2;
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisCenC2V2MCZZH16ReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCZZH16ReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCZZH16APVReweightTrimmed){
+        saveName = "CenC2V2MCZZH16APVReweightTrimmed";
+        yearType = 3;
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisCenC2V2MCZZH16APVReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCZZH16APVReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCWZHReweightTrimmed){
+        saveName = "CenC2V2MCWZHReweightTrimmed";
+        datasetType = 25;
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisCenC2V2MCWZHReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWZHReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCWZH17ReweightTrimmed){
+        saveName = "CenC2V2MCWZH17ReweightTrimmed";
+        datasetType = 25;
+        yearType = 1;
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisCenC2V2MCWZH17ReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWZH17ReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCWZH16ReweightTrimmed){
+        saveName = "CenC2V2MCWZH16ReweightTrimmed";
+        datasetType = 25;
+        yearType = 2;
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisCenC2V2MCWZH16ReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWZH16ReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCWZH16APVReweightTrimmed){
+        saveName = "CenC2V2MCWZH16APVReweightTrimmed";
+        datasetType = 25;
+        yearType = 3;
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisCenC2V2MCWZH16APVReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWZH16APVReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCWWHSSReweightTrimmed){
+        saveName = "CenC2V2MCWWHSSReweightTrimmed";
+        datasetType = 25;
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisCenC2V2MCWWHSSReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHSSReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCWWHSS17ReweightTrimmed){
+        saveName = "CenC2V2MCWWHSS17ReweightTrimmed";
+        datasetType = 25;
+        yearType = 1;
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisCenC2V2MCWWHSS17ReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHSS17ReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCWWHSS16ReweightTrimmed){
+        saveName = "CenC2V2MCWWHSS16ReweightTrimmed";
+        datasetType = 25;
+        yearType = 2;
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisCenC2V2MCWWHSS16ReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHSS16ReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCWWHSS16APVReweightTrimmed){
+        saveName = "CenC2V2MCWWHSS16APVReweightTrimmed";
+        datasetType = 25;
+        yearType = 3;
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisCenC2V2MCWWHSS16APVReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHSS16APVReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCWWHOSReweightTrimmed){
+        saveName = "CenC2V2MCWWHOSReweightTrimmed";
+        datasetType = 25;
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisCenC2V2MCWWHOSReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHOSReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCWWHOS17ReweightTrimmed){
+        saveName = "CenC2V2MCWWHOS17ReweightTrimmed";
+        datasetType = 25;
+        yearType = 1;
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisCenC2V2MCWWHOS17ReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHOS17ReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCWWHOS16ReweightTrimmed){
+        saveName = "CenC2V2MCWWHOS16ReweightTrimmed";
+        datasetType = 25;
+        yearType = 2;
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisCenC2V2MCWWHOS16ReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHOS16ReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCWWHOS16APVReweightTrimmed){
+        saveName = "CenC2V2MCWWHOS16APVReweightTrimmed";
+        datasetType = 25;
+        yearType = 3;
+        std::string tmpStrWithPath = "./HLTTrimmedFilteredForAnalysisCenC2V2MCWWHOS16APVReweightTrimmed"+NoSLString+"_WithJERRoch.root";
+        //std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHOS16APVReweightTrimmed"+NoSLString+"_WithJERRoch.root";
         fileAr.push_back(tmpStrWithPath);
     }
 

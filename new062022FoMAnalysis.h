@@ -61,6 +61,26 @@ bool MaC2V2MCWWHOS17ReweightTrimmed = false;
 bool MaC2V2MCWWHOS16ReweightTrimmed = false;
 bool MaC2V2MCWWHOS16APVReweightTrimmed = false;
 
+bool CenC2V2MCZZHReweightTrimmed = false;
+bool CenC2V2MCZZH17ReweightTrimmed = false;
+bool CenC2V2MCZZH16ReweightTrimmed = false;
+bool CenC2V2MCZZH16APVReweightTrimmed = false;
+
+bool CenC2V2MCWZHReweightTrimmed = false;
+bool CenC2V2MCWZH17ReweightTrimmed = false;
+bool CenC2V2MCWZH16ReweightTrimmed = false;
+bool CenC2V2MCWZH16APVReweightTrimmed = false;
+
+bool CenC2V2MCWWHSSReweightTrimmed = false;
+bool CenC2V2MCWWHSS17ReweightTrimmed = false;
+bool CenC2V2MCWWHSS16ReweightTrimmed = false;
+bool CenC2V2MCWWHSS16APVReweightTrimmed = false;
+
+bool CenC2V2MCWWHOSReweightTrimmed = false;
+bool CenC2V2MCWWHOS17ReweightTrimmed = false;
+bool CenC2V2MCWWHOS16ReweightTrimmed = false;
+bool CenC2V2MCWWHOS16APVReweightTrimmed = false;
+
 bool testRun = false;
 bool SDC2V3MC = false;
 bool SDC2V3MCWZH = false;

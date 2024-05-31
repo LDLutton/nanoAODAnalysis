@@ -58,6 +58,8 @@ void DoTrimmed042024HLTFilterOnReweighting2016BeforeAnalysis(int fileInd, string
     if (datasetString == "SDC2V2MCZZH16APVReweight") SDC2V2MCZZH16APVReweight = true;
     if (datasetString == "MaC2V2MCZZH16Reweight") MaC2V2MCZZH16Reweight = true;
     if (datasetString == "MaC2V2MCZZH16APVReweight") MaC2V2MCZZH16APVReweight = true;
+    if (datasetString == "CenC2V2MCZZH16Reweight") CenC2V2MCZZH16Reweight = true;
+    if (datasetString == "CenC2V2MCZZH16APVReweight") CenC2V2MCZZH16APVReweight = true;
 
     //Analyzer will run over all files put into fileAr
 
@@ -105,6 +107,22 @@ void DoTrimmed042024HLTFilterOnReweighting2016BeforeAnalysis(int fileInd, string
         isBackground = false;
         int arrSize = sizeof(MaC2V2MCZZH16APVReweightAr)/sizeof(MaC2V2MCZZH16APVReweightAr[0]);
         std::string tmpStrWithPath = MaC2V2MCZZH16APVReweightAr[fileInd];
+        fileAr.push_back(tmpStrWithPath);
+        
+    }
+    else if (CenC2V2MCZZH16Reweight){
+        saveName = "CenC2V2MCZZH16Reweight";
+        isBackground = false;
+        int arrSize = sizeof(CenC2V2MCZZH16ReweightAr)/sizeof(CenC2V2MCZZH16ReweightAr[0]);
+        std::string tmpStrWithPath = CenC2V2MCZZH16ReweightAr[fileInd];
+        fileAr.push_back(tmpStrWithPath);
+        
+    }
+    else if (CenC2V2MCZZH16APVReweight){
+        saveName = "CenC2V2MCZZH16APVReweight";
+        isBackground = false;
+        int arrSize = sizeof(CenC2V2MCZZH16APVReweightAr)/sizeof(CenC2V2MCZZH16APVReweightAr[0]);
+        std::string tmpStrWithPath = CenC2V2MCZZH16APVReweightAr[fileInd];
         fileAr.push_back(tmpStrWithPath);
         
     }

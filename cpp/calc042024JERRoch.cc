@@ -127,6 +127,25 @@ void calc042024JERRoch(string datasetString){
     if (datasetString == "MaC2V2MCWWHOS16ReweightTrimmed") MaC2V2MCWWHOS16ReweightTrimmed = true;
     if (datasetString == "MaC2V2MCWWHOS16APVReweightTrimmed") MaC2V2MCWWHOS16APVReweightTrimmed = true;
 
+    if (datasetString == "CenC2V2MCZZHReweightTrimmed") CenC2V2MCZZHReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCZZH17ReweightTrimmed") CenC2V2MCZZH17ReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCZZH16ReweightTrimmed") CenC2V2MCZZH16ReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCZZH16APVReweightTrimmed") CenC2V2MCZZH16APVReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCWZHReweightTrimmed") CenC2V2MCWZHReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCWZH17ReweightTrimmed") CenC2V2MCWZH17ReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCWZH16ReweightTrimmed") CenC2V2MCWZH16ReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCWZH16APVReweightTrimmed") CenC2V2MCWZH16APVReweightTrimmed = true;
+
+    if (datasetString == "CenC2V2MCWWHSSReweightTrimmed") CenC2V2MCWWHSSReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCWWHSS17ReweightTrimmed") CenC2V2MCWWHSS17ReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCWWHSS16ReweightTrimmed") CenC2V2MCWWHSS16ReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCWWHSS16APVReweightTrimmed") CenC2V2MCWWHSS16APVReweightTrimmed = true;
+
+    if (datasetString == "CenC2V2MCWWHOSReweightTrimmed") CenC2V2MCWWHOSReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCWWHOS17ReweightTrimmed") CenC2V2MCWWHOS17ReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCWWHOS16ReweightTrimmed") CenC2V2MCWWHOS16ReweightTrimmed = true;
+    if (datasetString == "CenC2V2MCWWHOS16APVReweightTrimmed") CenC2V2MCWWHOS16APVReweightTrimmed = true;
+
     ////////////////////////////////GETTING DATASET////////////////////////////////
     ////////////////////////////////GETTING DATASET////////////////////////////////
     ////////////////////////////////GETTING DATASET////////////////////////////////
@@ -350,6 +369,110 @@ void calc042024JERRoch(string datasetString){
         datasetType = 25;
         yearType = 3;
         std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisMaC2V2MCWWHOS16APVReweight"+NoSLString+"_0.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCZZHReweightTrimmed){
+        saveName = "CenC2V2MCZZHReweightTrimmed";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCZZHReweight"+NoSLString+"_0.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCZZH17ReweightTrimmed){
+        saveName = "CenC2V2MCZZH17ReweightTrimmed";
+        yearType = 1;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCZZH17Reweight"+NoSLString+"_0.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCZZH16ReweightTrimmed){
+        saveName = "CenC2V2MCZZH16ReweightTrimmed";
+        yearType = 2;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCZZH16Reweight"+NoSLString+"_0.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCZZH16APVReweightTrimmed){
+        saveName = "CenC2V2MCZZH16APVReweightTrimmed";
+        yearType = 3;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCZZH16APVReweight"+NoSLString+"_0.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCWZHReweightTrimmed){
+        saveName = "CenC2V2MCWZHReweightTrimmed";
+        datasetType = 25;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWZHReweight"+NoSLString+"_0.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCWZH17ReweightTrimmed){
+        saveName = "CenC2V2MCWZH17ReweightTrimmed";
+        datasetType = 25;
+        yearType = 1;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWZH17Reweight"+NoSLString+"_0.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCWZH16ReweightTrimmed){
+        saveName = "CenC2V2MCWZH16ReweightTrimmed";
+        datasetType = 25;
+        yearType = 2;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWZH16Reweight"+NoSLString+"_0.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCWZH16APVReweightTrimmed){
+        saveName = "CenC2V2MCWZH16APVReweightTrimmed";
+        datasetType = 25;
+        yearType = 3;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWZH16APVReweight"+NoSLString+"_0.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCWWHSSReweightTrimmed){
+        saveName = "CenC2V2MCWWHSSReweightTrimmed";
+        datasetType = 25;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHSSReweight"+NoSLString+"_0.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCWWHSS17ReweightTrimmed){
+        saveName = "CenC2V2MCWWHSS17ReweightTrimmed";
+        datasetType = 25;
+        yearType = 1;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHSS17Reweight"+NoSLString+"_0.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCWWHSS16ReweightTrimmed){
+        saveName = "CenC2V2MCWWHSS16ReweightTrimmed";
+        datasetType = 25;
+        yearType = 2;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHSS16Reweight"+NoSLString+"_0.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCWWHSS16APVReweightTrimmed){
+        saveName = "CenC2V2MCWWHSS16APVReweightTrimmed";
+        datasetType = 25;
+        yearType = 3;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHSS16APVReweight"+NoSLString+"_0.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCWWHOSReweightTrimmed){
+        saveName = "CenC2V2MCWWHOSReweightTrimmed";
+        datasetType = 25;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHOSReweight"+NoSLString+"_0.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCWWHOS17ReweightTrimmed){
+        saveName = "CenC2V2MCWWHOS17ReweightTrimmed";
+        datasetType = 25;
+        yearType = 1;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHOS17Reweight"+NoSLString+"_0.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCWWHOS16ReweightTrimmed){
+        saveName = "CenC2V2MCWWHOS16ReweightTrimmed";
+        datasetType = 25;
+        yearType = 2;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHOS16Reweight"+NoSLString+"_0.root";
+        fileAr.push_back(tmpStrWithPath);
+    }
+    else if (CenC2V2MCWWHOS16APVReweightTrimmed){
+        saveName = "CenC2V2MCWWHOS16APVReweightTrimmed";
+        datasetType = 25;
+        yearType = 3;
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHOS16APVReweight"+NoSLString+"_0.root";
         fileAr.push_back(tmpStrWithPath);
     }
 

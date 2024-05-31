@@ -52,7 +52,7 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
     // will probably NOT be experiment.root.
     std::cout << "start\n";
     clock_t startt = clock();
-
+    //Starting adding WWH but later decided to move that to a separate script
     if (datasetString == "testRun") testRun = true;
     if (datasetString == "SDC2V2MCWZHReweight") SDC2V2MCWZHReweight = true;
     if (datasetString == "SDC2V2MCWZH17Reweight") SDC2V2MCWZH17Reweight = true;
@@ -66,6 +66,12 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
     if (datasetString == "MaC2V2MCWWHSS17Reweight") MaC2V2MCWWHSS17Reweight = true;
     if (datasetString == "MaC2V2MCWWHOSReweight") MaC2V2MCWWHOSReweight = true;
     if (datasetString == "MaC2V2MCWWHOS17Reweight") MaC2V2MCWWHOS17Reweight = true;
+    if (datasetString == "CenC2V2MCWZHReweight") CenC2V2MCWZHReweight = true;
+    if (datasetString == "CenC2V2MCWZH17Reweight") CenC2V2MCWZH17Reweight = true;
+    if (datasetString == "CenC2V2MCWWHSSReweight") CenC2V2MCWWHSSReweight = true;
+    if (datasetString == "CenC2V2MCWWHSS17Reweight") CenC2V2MCWWHSS17Reweight = true;
+    if (datasetString == "CenC2V2MCWWHOSReweight") CenC2V2MCWWHOSReweight = true;
+    if (datasetString == "CenC2V2MCWWHOS17Reweight") CenC2V2MCWWHOS17Reweight = true;
     //Analyzer will run over all files put into fileAr
 
     std::vector<std::string> fileAr;
@@ -73,6 +79,7 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
     std::string saveName;
     float crossSection;
     bool isBackground;
+    bool isWWH = true;
 
     ////////////////////////////////GETTING DATASET////////////////////////////////
     ////////////////////////////////GETTING DATASET////////////////////////////////
@@ -89,6 +96,7 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
         int arrSize = sizeof(SDC2V2MCWZHReweightAr)/sizeof(SDC2V2MCWZHReweightAr[0]);
         std::string tmpStrWithPath = SDC2V2MCWZHReweightAr[fileInd];
         fileAr.push_back(tmpStrWithPath);
+        isWWH = false;
         
     }
     else if (SDC2V2MCWZH17Reweight){
@@ -97,6 +105,7 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
         int arrSize = sizeof(SDC2V2MCWZH17ReweightAr)/sizeof(SDC2V2MCWZH17ReweightAr[0]);
         std::string tmpStrWithPath = SDC2V2MCWZH17ReweightAr[fileInd];
         fileAr.push_back(tmpStrWithPath);
+        isWWH = false;
         
     }
     else if (SDC2V2MCWWHSSReweight){
@@ -137,6 +146,7 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
         int arrSize = sizeof(MaC2V2MCWZHReweightAr)/sizeof(MaC2V2MCWZHReweightAr[0]);
         std::string tmpStrWithPath = MaC2V2MCWZHReweightAr[fileInd];
         fileAr.push_back(tmpStrWithPath);
+        isWWH = false;
         
     }
     else if (MaC2V2MCWZH17Reweight){
@@ -145,6 +155,7 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
         int arrSize = sizeof(MaC2V2MCWZH17ReweightAr)/sizeof(MaC2V2MCWZH17ReweightAr[0]);
         std::string tmpStrWithPath = MaC2V2MCWZH17ReweightAr[fileInd];
         fileAr.push_back(tmpStrWithPath);
+        isWWH = false;
         
     }
     else if (MaC2V2MCWWHSSReweight){
@@ -176,6 +187,56 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
         isBackground = false;
         int arrSize = sizeof(MaC2V2MCWWHOS17ReweightAr)/sizeof(MaC2V2MCWWHOS17ReweightAr[0]);
         std::string tmpStrWithPath = MaC2V2MCWWHOS17ReweightAr[fileInd];
+        fileAr.push_back(tmpStrWithPath);
+        
+    }
+    else if (CenC2V2MCWZHReweight){
+        saveName = "CenC2V2MCWZHReweight";
+        isBackground = false;
+        int arrSize = sizeof(CenC2V2MCWZHReweightAr)/sizeof(CenC2V2MCWZHReweightAr[0]);
+        std::string tmpStrWithPath = CenC2V2MCWZHReweightAr[fileInd];
+        fileAr.push_back(tmpStrWithPath);
+        isWWH = false;
+        
+    }
+    else if (CenC2V2MCWZH17Reweight){
+        saveName = "CenC2V2MCWZH17Reweight";
+        isBackground = false;
+        int arrSize = sizeof(CenC2V2MCWZH17ReweightAr)/sizeof(CenC2V2MCWZH17ReweightAr[0]);
+        std::string tmpStrWithPath = CenC2V2MCWZH17ReweightAr[fileInd];
+        fileAr.push_back(tmpStrWithPath);
+        isWWH = false;
+        
+    }
+    else if (CenC2V2MCWWHSSReweight){
+        saveName = "CenC2V2MCWWHSSReweight";
+        isBackground = false;
+        int arrSize = sizeof(CenC2V2MCWWHSSReweightAr)/sizeof(CenC2V2MCWWHSSReweightAr[0]);
+        std::string tmpStrWithPath = CenC2V2MCWWHSSReweightAr[fileInd];
+        fileAr.push_back(tmpStrWithPath);
+        
+    }
+    else if (CenC2V2MCWWHSS17Reweight){
+        saveName = "CenC2V2MCWWHSS17Reweight";
+        isBackground = false;
+        int arrSize = sizeof(CenC2V2MCWWHSS17ReweightAr)/sizeof(CenC2V2MCWWHSS17ReweightAr[0]);
+        std::string tmpStrWithPath = CenC2V2MCWWHSS17ReweightAr[fileInd];
+        fileAr.push_back(tmpStrWithPath);
+        
+    }
+    else if (CenC2V2MCWWHOSReweight){
+        saveName = "CenC2V2MCWWHOSReweight";
+        isBackground = false;
+        int arrSize = sizeof(CenC2V2MCWWHOSReweightAr)/sizeof(CenC2V2MCWWHOSReweightAr[0]);
+        std::string tmpStrWithPath = CenC2V2MCWWHOSReweightAr[fileInd];
+        fileAr.push_back(tmpStrWithPath);
+        
+    }
+    else if (CenC2V2MCWWHOS17Reweight){
+        saveName = "CenC2V2MCWWHOS17Reweight";
+        isBackground = false;
+        int arrSize = sizeof(CenC2V2MCWWHOS17ReweightAr)/sizeof(CenC2V2MCWWHOS17ReweightAr[0]);
+        std::string tmpStrWithPath = CenC2V2MCWWHOS17ReweightAr[fileInd];
         fileAr.push_back(tmpStrWithPath);
         
     }
@@ -1214,7 +1275,8 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
                     tmpPDGId = LHEPart_pdgId[LHEItr];
                     if (tmpPDGId == 23){
                         tmpZCtr += 1;
-                        if (tmpZCtr > 1) std::cout << "ERROR MORE THAN 1 Z IN LHE\n";
+                        if (tmpZCtr > 1 && !isWWH) std::cout << "ERROR MORE THAN 1 Z IN LHE\n";
+                        else if (tmpZCtr > 0 && isWWH) std::cout << "ERROR MORE THAN 0 Z IN LHE\n";
                         else tmpZInd = LHEItr;
                     }
                     else if (tmpPDGId == 25){
@@ -1224,7 +1286,8 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
                     }
                     else if (abs(tmpPDGId) == 24){
                         tmpWCtr += 1;
-                        if (tmpWCtr > 1) std::cout << "ERROR MORE THAN 1 W IN LHE\n";
+                        if (tmpWCtr > 1 && !isWWH) std::cout << "ERROR MORE THAN 1 W IN LHE\n";
+                        else if (tmpWCtr > 2 && isWWH) std::cout << "ERROR MORE THAN 2 W IN LHE\n";
                         else {
                             tmpWInd = LHEItr;
                             WPDGId = tmpPDGId;
