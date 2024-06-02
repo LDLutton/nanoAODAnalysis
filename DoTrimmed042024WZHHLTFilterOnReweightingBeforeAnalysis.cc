@@ -282,7 +282,7 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
     std::vector<std::string> typeNameMaAr {"LWLepTWLep","LWLepTWHadronic","LWHadronicTWLep","LWHadronicTWHadronic","GenOther","LWLepTWLep NoHTobb","LWLepTWHadronic NoHTobb","LWHadronicTWLep NoHTobb","LWHadronicTWHadronic NoHTobb","GenOther NoHTobb"};
     std::vector<std::string> typeNameAr {"GenLep","GenSemiLep","GenHad","GenOther","GenLep NoHTobb","GenSemiLep NoHTobb","GenHad NoHTobb","GenOther NoHTobb"};
     uint C2VLen = 37;
-    uint C2VMaLen = 120;
+    uint C2VMaLen = 121;
     if (isMariaSignal) C2VLen = C2VMaLen;
     std::vector<Double_t> zeroVec(C2VLen,0.0);
 
@@ -850,7 +850,9 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
     uint tmpnLHEPdfWeightSum = 101;
     //size of 101 is hardcoded in the LHEPdfWeight branch
     std::vector<Float_t> tmpLHEPdfWeightSum(tmpnLHEPdfWeightSum,0.0);
+    uint tmpnLHEReweightingWeightMaSum = 120;
     uint tmpnLHEReweightingWeightSum = 36;
+    if (isMariaSignal) tmpnLHEReweightingWeightSum = tmpnLHEReweightingWeightMaSum;
     //size of 36 is hardcoded in the LHEReweightingWeight branch
     std::vector<Float_t> tmpLHEReweightingWeightSum(tmpnLHEReweightingWeightSum,0.0);
     float tmpLHEWeight_originalXWGTUPSum = 0;

@@ -162,16 +162,14 @@ void DoTrimmed042024HLTFilterOnReweightingBeforeAnalysis(int fileInd, string dat
 
     std::vector<std::string> C2VNameMaAr {"C2W_m2p0_C2Z_m2p0","C2W_m2p0_C2Z_m1p0","C2W_m2p0_C2Z_m0p5","C2W_m2p0_C2Z_0p0","C2W_m2p0_C2Z_0p5","C2W_m2p0_C2Z_1p0","C2W_m2p0_C2Z_1p5","C2W_m2p0_C2Z_2p0","C2W_m2p0_C2Z_2p5","C2W_m2p0_C2Z_3p0","C2W_m2p0_C2Z_4p0","C2W_m1p0_C2Z_m2p0","C2W_m1p0_C2Z_m1p0","C2W_m1p0_C2Z_m0p5","C2W_m1p0_C2Z_0p0","C2W_m1p0_C2Z_0p5","C2W_m1p0_C2Z_1p0","C2W_m1p0_C2Z_1p5","C2W_m1p0_C2Z_2p0","C2W_m1p0_C2Z_2p5","C2W_m1p0_C2Z_3p0","C2W_m1p0_C2Z_4p0","C2W_m0p5_C2Z_m2p0","C2W_m0p5_C2Z_m1p0","C2W_m0p5_C2Z_m0p5","C2W_m0p5_C2Z_0p0","C2W_m0p5_C2Z_0p5","C2W_m0p5_C2Z_1p0","C2W_m0p5_C2Z_1p5","C2W_m0p5_C2Z_2p0","C2W_m0p5_C2Z_2p5","C2W_m0p5_C2Z_3p0","C2W_m0p5_C2Z_4p0","C2W_0p0_C2Z_m2p0","C2W_0p0_C2Z_m1p0","C2W_0p0_C2Z_m0p5","C2W_0p0_C2Z_0p0","C2W_0p0_C2Z_0p5","C2W_0p0_C2Z_1p0","C2W_0p0_C2Z_1p5","C2W_0p0_C2Z_2p0","C2W_0p0_C2Z_2p5","C2W_0p0_C2Z_3p0","C2W_0p0_C2Z_4p0","C2W_0p5_C2Z_m2p0","C2W_0p5_C2Z_m1p0","C2W_0p5_C2Z_m0p5","C2W_0p5_C2Z_0p0","C2W_0p5_C2Z_0p5","C2W_0p5_C2Z_1p0","C2W_0p5_C2Z_1p5","C2W_0p5_C2Z_2p0","C2W_0p5_C2Z_2p5","C2W_0p5_C2Z_3p0","C2W_0p5_C2Z_4p0","C2W_1p0_C2Z_m2p0","C2W_1p0_C2Z_m1p0","C2W_1p0_C2Z_m0p5","C2W_1p0_C2Z_0p0","C2W_1p0_C2Z_0p5","C2W_1p0_C2Z_1p0","C2W_1p0_C2Z_1p5","C2W_1p0_C2Z_2p0","C2W_1p0_C2Z_2p5","C2W_1p0_C2Z_3p0","C2W_1p0_C2Z_4p0","C2W_1p5_C2Z_m2p0","C2W_1p5_C2Z_m1p0","C2W_1p5_C2Z_m0p5","C2W_1p5_C2Z_0p0","C2W_1p5_C2Z_0p5","C2W_1p5_C2Z_1p0","C2W_1p5_C2Z_1p5","C2W_1p5_C2Z_2p0","C2W_1p5_C2Z_2p5","C2W_1p5_C2Z_3p0","C2W_1p5_C2Z_4p0","C2W_2p0_C2Z_m2p0","C2W_2p0_C2Z_m1p0","C2W_2p0_C2Z_m0p5","C2W_2p0_C2Z_0p0","C2W_2p0_C2Z_0p5","C2W_2p0_C2Z_1p0","C2W_2p0_C2Z_1p5","C2W_2p0_C2Z_2p5","C2W_2p0_C2Z_3p0","C2W_2p0_C2Z_4p0","C2W_2p5_C2Z_m2p0","C2W_2p5_C2Z_m1p0","C2W_2p5_C2Z_m0p5","C2W_2p5_C2Z_0p0","C2W_2p5_C2Z_0p5","C2W_2p5_C2Z_1p0","C2W_2p5_C2Z_1p5","C2W_2p5_C2Z_2p0","C2W_2p5_C2Z_2p5","C2W_2p5_C2Z_3p0","C2W_2p5_C2Z_4p0","C2W_3p0_C2Z_m2p0","C2W_3p0_C2Z_m1p0","C2W_3p0_C2Z_m0p5","C2W_3p0_C2Z_0p0","C2W_3p0_C2Z_0p5","C2W_3p0_C2Z_1p0","C2W_3p0_C2Z_1p5","C2W_3p0_C2Z_2p0","C2W_3p0_C2Z_2p5","C2W_3p0_C2Z_3p0","C2W_3p0_C2Z_4p0","C2W_4p0_C2Z_m2p0","C2W_4p0_C2Z_m1p0","C2W_4p0_C2Z_m0p5","C2W_4p0_C2Z_0p0","C2W_4p0_C2Z_0p5","C2W_4p0_C2Z_1p0","C2W_4p0_C2Z_1p5","C2W_4p0_C2Z_2p0","C2W_4p0_C2Z_2p5","C2W_4p0_C2Z_3p0","C2W_4p0_C2Z_4p0"};
     std::vector<std::string> C2VNameAr {"-2.0","-1.75","-1.5","-1.25","-1.0","-0.75","-0.5","-0.25","0.0","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9","2.25","2.5","2.75","3.0","3.25","3.5","3.75","4.0"};
-    std::vector<std::string> typeNameMaAr {"LWLepTWLep","LWLepTWHadronic","LWHadronicTWLep","LWHadronicTWHadronic","GenOther","LWLepTWLep NoHTobb","LWLepTWHadronic NoHTobb","LWHadronicTWLep NoHTobb","LWHadronicTWHadronic NoHTobb","GenOther NoHTobb"};
     std::vector<std::string> typeNameAr {"GenLep","GenSemiLep","GenHad","GenOther","GenLep NoHTobb","GenSemiLep NoHTobb","GenHad NoHTobb","GenOther NoHTobb"};
     uint C2VLen = 37;
-    uint C2VMaLen = 120;
+    uint C2VMaLen = 121;
     if (isMariaSignal) C2VLen = C2VMaLen;
     std::vector<Double_t> zeroVec(C2VLen,0.0);
 
     if (isMariaSignal) {
         C2VNameAr = C2VNameMaAr;
-        typeNameAr = typeNameMaAr;
     }
     std::vector<std::vector<Double_t>> passFlagWeightedCtrAr(9,zeroVec);
     std::vector<std::vector<Double_t>> passHLTWeightedCtrAr(9,zeroVec);
@@ -883,7 +881,9 @@ void DoTrimmed042024HLTFilterOnReweightingBeforeAnalysis(int fileInd, string dat
     uint tmpnLHEPdfWeightSum = 101;
     //size of 101 is hardcoded in the LHEPdfWeight branch
     std::vector<Float_t> tmpLHEPdfWeightSum(tmpnLHEPdfWeightSum,0.0);
+    uint tmpnLHEReweightingWeightMaSum = 120;
     uint tmpnLHEReweightingWeightSum = 36;
+    if (isMariaSignal) tmpnLHEReweightingWeightSum = tmpnLHEReweightingWeightMaSum;
     //size of 36 is hardcoded in the LHEReweightingWeight branch
     std::vector<Float_t> tmpLHEReweightingWeightSum(tmpnLHEReweightingWeightSum,0.0);
     float tmpLHEWeight_originalXWGTUPSum = 0;
