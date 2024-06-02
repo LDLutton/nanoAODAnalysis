@@ -373,106 +373,106 @@ void calc042024JERRoch(string datasetString){
     }
     else if (CenC2V2MCZZHReweightTrimmed){
         saveName = "CenC2V2MCZZHReweightTrimmed";
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCZZHReweight"+NoSLString+"_0.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCZZHReweight"+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (CenC2V2MCZZH17ReweightTrimmed){
         saveName = "CenC2V2MCZZH17ReweightTrimmed";
         yearType = 1;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCZZH17Reweight"+NoSLString+"_0.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCZZH17Reweight"+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (CenC2V2MCZZH16ReweightTrimmed){
         saveName = "CenC2V2MCZZH16ReweightTrimmed";
         yearType = 2;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCZZH16Reweight"+NoSLString+"_0.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCZZH16Reweight"+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (CenC2V2MCZZH16APVReweightTrimmed){
         saveName = "CenC2V2MCZZH16APVReweightTrimmed";
         yearType = 3;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCZZH16APVReweight"+NoSLString+"_0.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCZZH16APVReweight"+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (CenC2V2MCWZHReweightTrimmed){
         saveName = "CenC2V2MCWZHReweightTrimmed";
         datasetType = 25;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWZHReweight"+NoSLString+"_0.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWZHReweight"+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (CenC2V2MCWZH17ReweightTrimmed){
         saveName = "CenC2V2MCWZH17ReweightTrimmed";
         datasetType = 25;
         yearType = 1;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWZH17Reweight"+NoSLString+"_0.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWZH17Reweight"+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (CenC2V2MCWZH16ReweightTrimmed){
         saveName = "CenC2V2MCWZH16ReweightTrimmed";
         datasetType = 25;
         yearType = 2;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWZH16Reweight"+NoSLString+"_0.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWZH16Reweight"+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (CenC2V2MCWZH16APVReweightTrimmed){
         saveName = "CenC2V2MCWZH16APVReweightTrimmed";
         datasetType = 25;
         yearType = 3;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWZH16APVReweight"+NoSLString+"_0.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWZH16APVReweight"+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (CenC2V2MCWWHSSReweightTrimmed){
         saveName = "CenC2V2MCWWHSSReweightTrimmed";
         datasetType = 25;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHSSReweight"+NoSLString+"_0.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHSSReweight"+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (CenC2V2MCWWHSS17ReweightTrimmed){
         saveName = "CenC2V2MCWWHSS17ReweightTrimmed";
         datasetType = 25;
         yearType = 1;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHSS17Reweight"+NoSLString+"_0.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHSS17Reweight"+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (CenC2V2MCWWHSS16ReweightTrimmed){
         saveName = "CenC2V2MCWWHSS16ReweightTrimmed";
         datasetType = 25;
         yearType = 2;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHSS16Reweight"+NoSLString+"_0.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHSS16Reweight"+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (CenC2V2MCWWHSS16APVReweightTrimmed){
         saveName = "CenC2V2MCWWHSS16APVReweightTrimmed";
         datasetType = 25;
         yearType = 3;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHSS16APVReweight"+NoSLString+"_0.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHSS16APVReweight"+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (CenC2V2MCWWHOSReweightTrimmed){
         saveName = "CenC2V2MCWWHOSReweightTrimmed";
         datasetType = 25;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHOSReweight"+NoSLString+"_0.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHOSReweight"+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (CenC2V2MCWWHOS17ReweightTrimmed){
         saveName = "CenC2V2MCWWHOS17ReweightTrimmed";
         datasetType = 25;
         yearType = 1;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHOS17Reweight"+NoSLString+"_0.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHOS17Reweight"+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (CenC2V2MCWWHOS16ReweightTrimmed){
         saveName = "CenC2V2MCWWHOS16ReweightTrimmed";
         datasetType = 25;
         yearType = 2;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHOS16Reweight"+NoSLString+"_0.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHOS16Reweight"+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
     else if (CenC2V2MCWWHOS16APVReweightTrimmed){
         saveName = "CenC2V2MCWWHOS16APVReweightTrimmed";
         datasetType = 25;
         yearType = 3;
-        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHOS16APVReweight"+NoSLString+"_0.root";
+        std::string tmpStrWithPath = strAdd+"HLTTrimmedFilteredForAnalysisCenC2V2MCWWHOS16APVReweight"+NoSLString+".root";
         fileAr.push_back(tmpStrWithPath);
     }
 
