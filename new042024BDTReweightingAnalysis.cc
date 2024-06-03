@@ -254,8 +254,9 @@ void new042024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
 
     ////////////////////////////////DEFINING COUNTERS////////////////////////////////
     ////////////////////////////////NEUTRAL COUNTERS////////////////////////////////
-
+    UInt_t vetoedForNoReweightingCtr = 0;
     UInt_t startingCtr = 0;
+    
 
     UInt_t passHiggsFJCtr = 0;
     UInt_t passHiggsFJSemiLepCtr = 0;
@@ -1564,6 +1565,12 @@ void new042024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
             std::vector<std::vector<Bool_t>> falseHtobbMask(2,falseTypeMask);
 
             Double_t tmpGenWeights = *genWeightL;
+            if (*nLHEReweightingWeightL == 0){
+                vetoedForNoReweightingCtr += 1;
+                continue;
+
+            }
+            
             startingCtr += 1;
             //startingWeightedCtr += tmpGenWeights;
             
@@ -3394,6 +3401,8 @@ void new042024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
 
 
     std::cout << "==============================TOTAL COUNTERS==============================\n";
+
+    std::cout << "vetoedForNoReweightingCtr " << vetoedForNoReweightingCtr << "\n";
     
     std::cout << "startingCtr: " << startingCtr << "\n";
     std::cout << "------------------------\n";
