@@ -66,6 +66,7 @@ void new042024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
     std::string saveName;
     float crossSection;
     bool isBackground = false;
+    bool isMariaSignal = false;
 
     if (datasetString == "testRun") testRun = true;
     if (datasetString == "SDC2V2MCZZHReweightTrimmed") SDC2V2MCZZHReweightTrimmed = true;
@@ -138,6 +139,7 @@ void new042024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
         fileAr.push_back(tmpStrWithPath);
     }
     else if (MaC2V2MCZZHReweightTrimmed){
+        isMariaSignal = true;
         saveName = "MaC2V2MCZZHReweightTrimmed";
         //totWeight = ;
         //XS = ;
@@ -148,6 +150,7 @@ void new042024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
         fileAr.push_back(tmpStrWithPath);
     }
     else if (MaC2V2MCZZH17ReweightTrimmed){
+        isMariaSignal = true;
         saveName = "MaC2V2MCZZH17ReweightTrimmed";
         yearType = 1;
         //totWeight = ;
@@ -158,6 +161,7 @@ void new042024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
         fileAr.push_back(tmpStrWithPath);
     }
     else if (MaC2V2MCZZH16ReweightTrimmed){
+        isMariaSignal = true;
         saveName = "MaC2V2MCZZH16ReweightTrimmed";
         yearType = 2;
         //totWeight = ;
@@ -168,6 +172,7 @@ void new042024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
         fileAr.push_back(tmpStrWithPath);
     }
     else if (MaC2V2MCZZH16APVReweightTrimmed){
+        isMariaSignal = true;
         saveName = "MaC2V2MCZZH16APVReweightTrimmed";
         yearType = 3;
         //totWeight = ;
@@ -270,12 +275,19 @@ void new042024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
 
 
     
-
+    std::vector<std::string> C2VNameMaAr {"C2W_m2p0_C2Z_m2p0","C2W_m2p0_C2Z_m1p0","C2W_m2p0_C2Z_m0p5","C2W_m2p0_C2Z_0p0","C2W_m2p0_C2Z_0p5","C2W_m2p0_C2Z_1p0","C2W_m2p0_C2Z_1p5","C2W_m2p0_C2Z_2p0","C2W_m2p0_C2Z_2p5","C2W_m2p0_C2Z_3p0","C2W_m2p0_C2Z_4p0","C2W_m1p0_C2Z_m2p0","C2W_m1p0_C2Z_m1p0","C2W_m1p0_C2Z_m0p5","C2W_m1p0_C2Z_0p0","C2W_m1p0_C2Z_0p5","C2W_m1p0_C2Z_1p0","C2W_m1p0_C2Z_1p5","C2W_m1p0_C2Z_2p0","C2W_m1p0_C2Z_2p5","C2W_m1p0_C2Z_3p0","C2W_m1p0_C2Z_4p0","C2W_m0p5_C2Z_m2p0","C2W_m0p5_C2Z_m1p0","C2W_m0p5_C2Z_m0p5","C2W_m0p5_C2Z_0p0","C2W_m0p5_C2Z_0p5","C2W_m0p5_C2Z_1p0","C2W_m0p5_C2Z_1p5","C2W_m0p5_C2Z_2p0","C2W_m0p5_C2Z_2p5","C2W_m0p5_C2Z_3p0","C2W_m0p5_C2Z_4p0","C2W_0p0_C2Z_m2p0","C2W_0p0_C2Z_m1p0","C2W_0p0_C2Z_m0p5","C2W_0p0_C2Z_0p0","C2W_0p0_C2Z_0p5","C2W_0p0_C2Z_1p0","C2W_0p0_C2Z_1p5","C2W_0p0_C2Z_2p0","C2W_0p0_C2Z_2p5","C2W_0p0_C2Z_3p0","C2W_0p0_C2Z_4p0","C2W_0p5_C2Z_m2p0","C2W_0p5_C2Z_m1p0","C2W_0p5_C2Z_m0p5","C2W_0p5_C2Z_0p0","C2W_0p5_C2Z_0p5","C2W_0p5_C2Z_1p0","C2W_0p5_C2Z_1p5","C2W_0p5_C2Z_2p0","C2W_0p5_C2Z_2p5","C2W_0p5_C2Z_3p0","C2W_0p5_C2Z_4p0","C2W_1p0_C2Z_m2p0","C2W_1p0_C2Z_m1p0","C2W_1p0_C2Z_m0p5","C2W_1p0_C2Z_0p0","C2W_1p0_C2Z_0p5","C2W_1p0_C2Z_1p0","C2W_1p0_C2Z_1p5","C2W_1p0_C2Z_2p0","C2W_1p0_C2Z_2p5","C2W_1p0_C2Z_3p0","C2W_1p0_C2Z_4p0","C2W_1p5_C2Z_m2p0","C2W_1p5_C2Z_m1p0","C2W_1p5_C2Z_m0p5","C2W_1p5_C2Z_0p0","C2W_1p5_C2Z_0p5","C2W_1p5_C2Z_1p0","C2W_1p5_C2Z_1p5","C2W_1p5_C2Z_2p0","C2W_1p5_C2Z_2p5","C2W_1p5_C2Z_3p0","C2W_1p5_C2Z_4p0","C2W_2p0_C2Z_m2p0","C2W_2p0_C2Z_m1p0","C2W_2p0_C2Z_m0p5","C2W_2p0_C2Z_0p0","C2W_2p0_C2Z_0p5","C2W_2p0_C2Z_1p0","C2W_2p0_C2Z_1p5","C2W_2p0_C2Z_2p5","C2W_2p0_C2Z_3p0","C2W_2p0_C2Z_4p0","C2W_2p5_C2Z_m2p0","C2W_2p5_C2Z_m1p0","C2W_2p5_C2Z_m0p5","C2W_2p5_C2Z_0p0","C2W_2p5_C2Z_0p5","C2W_2p5_C2Z_1p0","C2W_2p5_C2Z_1p5","C2W_2p5_C2Z_2p0","C2W_2p5_C2Z_2p5","C2W_2p5_C2Z_3p0","C2W_2p5_C2Z_4p0","C2W_3p0_C2Z_m2p0","C2W_3p0_C2Z_m1p0","C2W_3p0_C2Z_m0p5","C2W_3p0_C2Z_0p0","C2W_3p0_C2Z_0p5","C2W_3p0_C2Z_1p0","C2W_3p0_C2Z_1p5","C2W_3p0_C2Z_2p0","C2W_3p0_C2Z_2p5","C2W_3p0_C2Z_3p0","C2W_3p0_C2Z_4p0","C2W_4p0_C2Z_m2p0","C2W_4p0_C2Z_m1p0","C2W_4p0_C2Z_m0p5","C2W_4p0_C2Z_0p0","C2W_4p0_C2Z_0p5","C2W_4p0_C2Z_1p0","C2W_4p0_C2Z_1p5","C2W_4p0_C2Z_2p0","C2W_4p0_C2Z_2p5","C2W_4p0_C2Z_3p0","C2W_4p0_C2Z_4p0"};
     std::vector<std::string> C2VNameAr {"-2.0","-1.75","-1.5","-1.25","-1.0","-0.75","-0.5","-0.25","0.0","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9","2.25","2.5","2.75","3.0","3.25","3.5","3.75","4.0"};
     std::vector<std::string> htobbNameAr {"HTobb","NoHTobb"};
     std::vector<std::string> typeNameAr {"","GenLep","GenSemiLep","GenHad","GenOther"};
     std::vector<std::string> typeNameAltAr {"GenLep","GenSemiLep","GenHad","GenOther"};
-    std::vector<Double_t> zeroC2VVec(37,0.0);
+    uint C2VLen = 37;
+    uint C2VMaLen = 121;
+    if (isMariaSignal) C2VLen = C2VMaLen;
+    std::vector<Double_t> zeroC2VVec(C2VLen,0.0);
+
+    if (isMariaSignal) {
+        C2VNameAr = C2VNameMaAr;
+    }
     std::vector<std::vector<Double_t>> zeroTypeVec(5,zeroC2VVec);
 
     std::vector<std::vector<std::vector<Double_t>>> startingWeightedCtrAr(2,zeroTypeVec);
@@ -3428,6 +3440,18 @@ void new042024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
         }
         std::cout << "\n";
     }
+
+    std::string C2V2Str = "2p0";
+    std::string C2V2MaStr = "C2W_2p0_C2Z_2p0";
+
+    uint C2V2Point = 27;
+    uint C2V2MaPoint = 83;
+
+    if (isMariaSignal) {
+        C2V2Str = C2V2MaStr;
+        C2V2Point = C2V2MaPoint;
+
+    }
         
 
 
@@ -3457,8 +3481,8 @@ void new042024BDTReweightingAnalysis(string datasetString, int JECCorInd, bool J
                         std::cout << "(" << C2VNameAr[loopItr] << "," << allWeightedCtrAr[allItr][htobbItr][typeItr][loopItr + 1] << ")\n";
                     }
                     else std::cout << "(" << C2VNameAr[loopItr] << "," << allWeightedCtrAr[allItr][htobbItr][typeItr][loopItr + 1] << "),";
-                    if (loopItr == 27) {
-                        std::cout << "(2.0," << allWeightedCtrAr[allItr][htobbItr][typeItr][0] << "),";
+                    if (loopItr == C2V2Point) {
+                        std::cout << "(" << C2V2Str << "," << allWeightedCtrAr[allItr][htobbItr][typeItr][0] << "),";
                     }
                 }
             }
