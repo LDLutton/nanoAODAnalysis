@@ -161,7 +161,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         saveName = "SDC2V2MCWWHSSReweightTrimmed";
         //totWeight = ;
         //XS = ;
-        UInt_t datasetType = 91;
+        datasetType = 91;
         isBackground = false;
         std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisSDC2V2MCWWHSSReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
@@ -171,7 +171,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         yearType = 1;
         //totWeight = ;
         //XS = ;
-        UInt_t datasetType = 91;
+        datasetType = 91;
         isBackground = false;
         std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisSDC2V2MCWWHSS17ReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
@@ -181,7 +181,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         yearType = 2;
         //totWeight = ;
         //XS = ;
-        UInt_t datasetType = 91;
+        datasetType = 91;
         isBackground = false;
         std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisSDC2V2MCWWHSS16ReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
@@ -191,7 +191,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         yearType = 3;
         //totWeight = ;
         //XS = ;
-        UInt_t datasetType = 91;
+        datasetType = 91;
         isBackground = false;
         std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisSDC2V2MCWWHSS16APVReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
@@ -200,7 +200,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         saveName = "SDC2V2MCWWHOSReweightTrimmed";
         //totWeight = ;
         //XS = ;
-        UInt_t datasetType = 92;
+        datasetType = 92;
         isBackground = false;
         std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisSDC2V2MCWWHOSReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
@@ -210,7 +210,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         yearType = 1;
         //totWeight = ;
         //XS = ;
-        UInt_t datasetType = 92;
+        datasetType = 92;
         isBackground = false;
         std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisSDC2V2MCWWHOS17ReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
@@ -220,7 +220,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         yearType = 2;
         //totWeight = ;
         //XS = ;
-        UInt_t datasetType = 92;
+        datasetType = 92;
         isBackground = false;
         std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisSDC2V2MCWWHOS16ReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
@@ -230,7 +230,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         yearType = 3;
         //totWeight = ;
         //XS = ;
-        UInt_t datasetType = 92;
+        datasetType = 92;
         isBackground = false;
         std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisSDC2V2MCWWHOS16APVReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
@@ -279,7 +279,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         saveName = "MaC2V2MCWWHSSReweightTrimmed";
         //totWeight = ;
         //XS = ;
-        UInt_t datasetType = 91;
+        datasetType = 91;
         isBackground = false;
         std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisMaC2V2MCWWHSSReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
@@ -290,7 +290,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         yearType = 1;
         //totWeight = ;
         //XS = ;
-        UInt_t datasetType = 91;
+        datasetType = 91;
         isBackground = false;
         std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisMaC2V2MCWWHSS17ReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
@@ -301,7 +301,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         yearType = 2;
         //totWeight = ;
         //XS = ;
-        UInt_t datasetType = 91;
+        datasetType = 91;
         isBackground = false;
         std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisMaC2V2MCWWHSS16ReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
@@ -312,7 +312,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         yearType = 3;
         //totWeight = ;
         //XS = ;
-        UInt_t datasetType = 91;
+        datasetType = 91;
         isBackground = false;
         std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisMaC2V2MCWWHSS16APVReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
@@ -322,7 +322,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         saveName = "MaC2V2MCWWHOSReweightTrimmed";
         //totWeight = ;
         //XS = ;
-        UInt_t datasetType = 92;
+        datasetType = 92;
         isBackground = false;
         std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisMaC2V2MCWWHOSReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
@@ -333,7 +333,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         yearType = 1;
         //totWeight = ;
         //XS = ;
-        UInt_t datasetType = 92;
+        datasetType = 92;
         isBackground = false;
         std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisMaC2V2MCWWHOS17ReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
@@ -344,7 +344,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         yearType = 2;
         //totWeight = ;
         //XS = ;
-        UInt_t datasetType = 92;
+        datasetType = 92;
         isBackground = false;
         std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisMaC2V2MCWWHOS16ReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
@@ -355,7 +355,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         yearType = 3;
         //totWeight = ;
         //XS = ;
-        UInt_t datasetType = 92;
+        datasetType = 92;
         isBackground = false;
         std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisMaC2V2MCWWHOS16APVReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
@@ -399,7 +399,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         saveName = "CenC2V2MCWWHSSReweightTrimmed";
         //totWeight = ;
         //XS = ;
-        UInt_t datasetType = 91;
+        datasetType = 91;
         isBackground = false;
         std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisCenC2V2MCWWHSSReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
@@ -409,7 +409,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         yearType = 1;
         //totWeight = ;
         //XS = ;
-        UInt_t datasetType = 91;
+        datasetType = 91;
         isBackground = false;
         std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisCenC2V2MCWWHSS17ReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
@@ -419,7 +419,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         yearType = 2;
         //totWeight = ;
         //XS = ;
-        UInt_t datasetType = 91;
+        datasetType = 91;
         isBackground = false;
         std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisCenC2V2MCWWHSS16ReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
@@ -429,7 +429,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         yearType = 3;
         //totWeight = ;
         //XS = ;
-        UInt_t datasetType = 91;
+        datasetType = 91;
         isBackground = false;
         std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisCenC2V2MCWWHSS16APVReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
@@ -438,7 +438,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         saveName = "CenC2V2MCWWHOSReweightTrimmed";
         //totWeight = ;
         //XS = ;
-        UInt_t datasetType = 92;
+        datasetType = 92;
         isBackground = false;
         std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisCenC2V2MCWWHOSReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
@@ -448,7 +448,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         yearType = 1;
         //totWeight = ;
         //XS = ;
-        UInt_t datasetType = 92;
+        datasetType = 92;
         isBackground = false;
         std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisCenC2V2MCWWHOS17ReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
@@ -458,7 +458,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         yearType = 2;
         //totWeight = ;
         //XS = ;
-        UInt_t datasetType = 92;
+        datasetType = 92;
         isBackground = false;
         std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisCenC2V2MCWWHOS16ReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
@@ -468,7 +468,7 @@ void new042024WZHBDTReweightingAnalysis(string datasetString, int JECCorInd, boo
         yearType = 3;
         //totWeight = ;
         //XS = ;
-        UInt_t datasetType = 92;
+        datasetType = 92;
         isBackground = false;
         std::string tmpStrWithPath = "/scratch365/dlutton/HLT042024WithPreSel/HLTTrimmedFilteredForAnalysisCenC2V2MCWWHOS16APVReweightTrimmed"+NoSLString+"_WithPreSel_"+std::to_string(JECCorInd)+"_"+std::to_string(JECCorUpOrDown)+"_"+std::to_string(RochInd)+"_"+std::to_string(JERInd)+".root";
         fileAr.push_back(tmpStrWithPath);
