@@ -423,6 +423,13 @@ void DoTrimmed042024WWHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
     Bool_t HLT_Ele27_WPTight_GsfL;
     Bool_t HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL;
 
+    //change 2018 to IsoMu24 and remove DZ from diele trigger
+    Bool_t HLT_IsoMu24L;
+    Bool_t HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL;
+
+    //2016 in other years just set these to false
+    Bool_t HLT_IsoTkMu24L;
+
     //042024SFAndSuchAdditions
     //PU JetID
     std::vector<Int_t> Jet_puIdL;
@@ -625,6 +632,10 @@ void DoTrimmed042024WWHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
     FilteredEventsTree->Branch("HLT_Ele27_WPTight_GsfL",&HLT_Ele27_WPTight_GsfL,"HLT_Ele27_WPTight_GsfL/O");
     FilteredEventsTree->Branch("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL",&HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL,"HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL/O");
 
+    FilteredEventsTree->Branch("HLT_IsoMu24L",&HLT_IsoMu24L,"HLT_IsoMu24L/O");
+    FilteredEventsTree->Branch("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL",&HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL,"HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL/O");
+    FilteredEventsTree->Branch("HLT_IsoTkMu24L",&HLT_IsoTkMu24L,"HLT_IsoTkMu24L/O");
+
     //042024SFAndSuchAdditions
     //PU JetID
     FilteredEventsTree->Branch("Jet_puIdL",&Jet_puIdL);
@@ -824,6 +835,7 @@ void DoTrimmed042024WWHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
         TTreeReaderValue<Bool_t> HLT_DoublePhoton70(myEventsReader, "HLT_DoublePhoton70");
 
         TTreeReaderValue<Bool_t> HLT_IsoMu24(myEventsReader, "HLT_IsoMu24");
+        TTreeReaderValue<Bool_t> HLT_IsoTkMu24(myEventsReader, "HLT_IsoTkMu24");
         TTreeReaderValue<Bool_t> HLT_IsoMu27(myEventsReader, "HLT_IsoMu27");
         TTreeReaderValue<Bool_t> HLT_IsoMu30(myEventsReader, "HLT_IsoMu30");
         TTreeReaderValue<Bool_t> HLT_Mu50(myEventsReader, "HLT_Mu50");
@@ -1169,9 +1181,9 @@ void DoTrimmed042024WWHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
             if (debug){
                 std::cout <<"Passed HLT\n";
             }
-            bool passHLTBool = (*HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ || *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8);
+            bool passHLTBool = (*HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL || *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8);
             if (useSingleLepHLT) {
-                passHLTBool = (passHLTBool || *HLT_IsoMu27 || *HLT_Mu50 || *HLT_Ele32_WPTight_Gsf_L1DoubleEG);
+                passHLTBool = (passHLTBool || *HLT_IsoMu24 || *HLT_Ele32_WPTight_Gsf_L1DoubleEG);
             }
             //std::cout << testPassHLTBool << " " << passHLTBool << "\n";
             if (!passHLTBool) continue;
@@ -1397,6 +1409,13 @@ void DoTrimmed042024WWHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
             //2016
             HLT_Ele27_WPTight_GsfL = false;
             HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL = false;
+
+            //change 2018 to IsoMu24 and remove DZ from diele trigger
+            HLT_IsoMu24L = *HLT_IsoMu24;
+            HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL = *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL;
+
+            //2016 in other years just set these to false
+            HLT_IsoTkMu24L = false;
 
             //042024SFAndSuchAdditions
             //PU JetID

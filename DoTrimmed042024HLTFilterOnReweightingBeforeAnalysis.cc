@@ -414,6 +414,14 @@ void DoTrimmed042024HLTFilterOnReweightingBeforeAnalysis(int fileInd, string dat
     Bool_t HLT_Ele27_WPTight_GsfL;
     Bool_t HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL;
 
+    //change 2018 to IsoMu24 and remove DZ from diele trigger for 2018 and 2017
+    Bool_t HLT_IsoMu24L;
+    Bool_t HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL;
+
+    //2016 in other years just set these to false
+    Bool_t HLT_IsoTkMu24L;
+
+
 
     //042024SFAndSuchAdditions
     //PU JetID
@@ -624,6 +632,11 @@ void DoTrimmed042024HLTFilterOnReweightingBeforeAnalysis(int fileInd, string dat
 
     FilteredEventsTree->Branch("HLT_Ele27_WPTight_GsfL",&HLT_Ele27_WPTight_GsfL,"HLT_Ele27_WPTight_GsfL/O");
     FilteredEventsTree->Branch("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL",&HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL,"HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL/O");
+    
+    FilteredEventsTree->Branch("HLT_IsoMu24L",&HLT_IsoMu24L,"HLT_IsoMu24L/O");
+    FilteredEventsTree->Branch("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL",&HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL,"HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL/O");
+    FilteredEventsTree->Branch("HLT_IsoTkMu24L",&HLT_IsoTkMu24L,"HLT_IsoTkMu24L/O");
+
 
     //042024SFAndSuchAdditions
     //PU JetID
@@ -651,6 +664,8 @@ void DoTrimmed042024HLTFilterOnReweightingBeforeAnalysis(int fileInd, string dat
     //05052024 Additions for PN regress mass scaling and resolution corrections
     FilteredEventsTree->Branch("luminosityBlockL",&luminosityBlockL,"luminosityBlockL/i");
     FilteredEventsTree->Branch("eventL",&eventL,"eventL/l");
+
+    
 
 
 
@@ -2904,9 +2919,9 @@ void DoTrimmed042024HLTFilterOnReweightingBeforeAnalysis(int fileInd, string dat
                 std::cout <<"Passed flag\n";
             }
 
-            bool passHLTBool = (*HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ || *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8);
+            bool passHLTBool = (*HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL || *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8);
             if (useSingleLepHLT) {
-                passHLTBool = (passHLTBool || *HLT_IsoMu27 || *HLT_Mu50 || *HLT_Ele32_WPTight_Gsf_L1DoubleEG);
+                passHLTBool = (passHLTBool || *HLT_IsoMu24 || *HLT_Ele32_WPTight_Gsf_L1DoubleEG);
             }
             /*
             bool passHLTBool = (*HLT_Ele32_WPTight_Gsf_L1DoubleEG || 
@@ -3284,6 +3299,13 @@ void DoTrimmed042024HLTFilterOnReweightingBeforeAnalysis(int fileInd, string dat
             //2016
             HLT_Ele27_WPTight_GsfL = false;
             HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL = false;
+
+            //change 2018 to IsoMu24 and remove DZ from diele trigger
+            HLT_IsoMu24L = *HLT_IsoMu24;
+            HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL = *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL;
+
+            //2016 in other years just set these to false
+            HLT_IsoTkMu24L = false;
 
             //042024SFAndSuchAdditions
             //PU JetID
