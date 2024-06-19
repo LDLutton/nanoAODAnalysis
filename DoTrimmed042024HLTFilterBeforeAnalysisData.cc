@@ -381,6 +381,7 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
     ////////////////////////////////DEFINING TREES////////////////////////////////
 
     UInt_t passGoldenJSONCtr = 0;
+    UInt_t passHEMCtr = 0;
     UInt_t passFlagCtr = 0;
     UInt_t passHLTCtr = 0;
     UInt_t passnFJCtr = 0;
@@ -505,6 +506,13 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
     Bool_t HLT_Ele27_WPTight_GsfL;
     Bool_t HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL;
 
+    //change 2018 to IsoMu24 and remove DZ from diele trigger for 2018 and 2017
+    Bool_t HLT_IsoMu24L;
+    Bool_t HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL;
+
+    //2016 in other years just set these to false
+    Bool_t HLT_IsoTkMu24L;
+
     //042024SFAndSuchAdditions
     //PU JetID
     std::vector<Int_t> Jet_puIdL;
@@ -513,6 +521,7 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
     //not necessary for data but have on hand just in case
     UInt_t luminosityBlockL;
     ULong64_t eventL;
+    
 
 
     TTree *FilteredEventsTree = new TTree("FilteredEventsTree", "FilteredEventsTree");
@@ -533,6 +542,7 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
     FilteredEventsTree->Branch("Jet_jetIdL",&Jet_jetIdL);
     FilteredEventsTree->Branch("Jet_btagDeepFlavBL",&Jet_btagDeepFlavBL);
     FilteredEventsTree->Branch("fixedGridRhoFastjetAllL",&fixedGridRhoFastjetAllL,"fixedGridRhoFastjetAllL/F");
+
 
     //Fat jets
 
@@ -622,6 +632,10 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
     FilteredEventsTree->Branch("HLT_Ele27_WPTight_GsfL",&HLT_Ele27_WPTight_GsfL,"HLT_Ele27_WPTight_GsfL/O");
     FilteredEventsTree->Branch("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL",&HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL,"HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL/O");
 
+    FilteredEventsTree->Branch("HLT_IsoMu24L",&HLT_IsoMu24L,"HLT_IsoMu24L/O");
+    FilteredEventsTree->Branch("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL",&HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL,"HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL/O");
+    FilteredEventsTree->Branch("HLT_IsoTkMu24L",&HLT_IsoTkMu24L,"HLT_IsoTkMu24L/O");
+
     //042024SFAndSuchAdditions
     //PU JetID
     FilteredEventsTree->Branch("Jet_puIdL",&Jet_puIdL);
@@ -629,6 +643,19 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
     //05052024 Additions for PN regress mass scaling and resolution corrections
     FilteredEventsTree->Branch("luminosityBlockL",&luminosityBlockL,"luminosityBlockL/i");
     FilteredEventsTree->Branch("eventL",&eventL,"eventL/l");
+
+
+
+    //HEM Check Tree
+    UInt_t runForHEM;
+    ULong64_t eventForHEM;
+    Bool_t isHEMRun;
+
+    TTree *HEMCheckTree = new TTree("HEMCheckTree", "HEMCheckTree");
+
+    HEMCheckTree->Branch("runForHEM",&runForHEM,"runForHEM/i");
+    HEMCheckTree->Branch("eventForHEM",&eventForHEM,"eventForHEM/l");
+    FilteredEventsTree->Branch("isHEMRun",&isHEMRun,"isHEMRun/O");
 
 
 
@@ -694,9 +721,11 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
         TTreeReaderValue<Bool_t> HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8(myEventsReader, "HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8");
 
         TTreeReaderValue<Bool_t> HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ(myEventsReader, "HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ");
+        TTreeReaderValue<Bool_t> HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL(myEventsReader, "HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL");
         TTreeReaderValue<Bool_t> HLT_DoubleEle33_CaloIdL_MW(myEventsReader, "HLT_DoubleEle33_CaloIdL_MW");
         TTreeReaderValue<Bool_t> HLT_DoublePhoton70(myEventsReader, "HLT_DoublePhoton70");
 
+        TTreeReaderValue<Bool_t> HLT_IsoMu24(myEventsReader, "HLT_IsoMu24");
         TTreeReaderValue<Bool_t> HLT_IsoMu27(myEventsReader, "HLT_IsoMu27");
         TTreeReaderValue<Bool_t> HLT_Mu50(myEventsReader, "HLT_Mu50");
 
@@ -713,6 +742,9 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
         TTreeReaderArray<Int_t> Jet_jetId(myEventsReader, "Jet_jetId");
         TTreeReaderArray<Float_t> Jet_btagDeepFlavB(myEventsReader, "Jet_btagDeepFlavB");
         TTreeReaderValue<Float_t> fixedGridRhoFastjetAll(myEventsReader, "fixedGridRhoFastjetAll");
+        //Jet variables for HEM
+        TTreeReaderArray<Float_t> Jet_chHEF(myEventsReader, "Jet_chHEF");
+        TTreeReaderArray<Float_t> Jet_neHEF(myEventsReader, "Jet_neHEF");
 
         //Fat jets
 
@@ -857,6 +889,54 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
             if (!passGoldenJSON) continue;
             passGoldenJSONCtr += 1;
 
+            //Do new HEM 15/16 veto #05042024 UPDATE. was going to add this but for now we are waiting on adding the HEM stuff.
+            runForHEM = *run;
+            eventForHEM = *event;
+            isHEMRun = false;
+            if (yearType == 0){
+                if (*run >= 319077) {
+                    isHEMRun = true;
+                }
+                HEMCheckTree->Fill();
+            }
+            bool passesHEM = true;
+            if (yearType == 0){
+                for (int i = 0; i < *nJet; i++){
+                    if (Jet_eta[i] > -3.2 && Jet_eta[i] < -1.3){
+                        if (Jet_phi[i] > -1.57 && Jet_phi[i] < -0.87){
+                            //Check that it passes the loose selection
+                            if (Jet_pt[i] > 15){
+                                if ((Jet_pt[i] >= 50) || (Jet_puId[i] == 7)){
+                                    if (Jet_jetId[i] == 6){
+                                        passesHEM = false;
+                                        break;
+                                    }
+                                    else if (Jet_jetId[i] == 2 && Jet_chHEF[i] + Jet_neHEF[i] < 0.9){
+                                        //Check that jet does not overlap (dR<0.2) with a PF muon
+                                        bool muonOverlap = false;
+                                        for (int j = 0; j < *nMuon; j++){
+                                            if (Muon_isPFcand[j]){
+                                                if (calcDeltaR(Jet_phi[i], Jet_eta[i], Muon_phi[j], Muon_eta[j]) < 0.2){
+                                                    muonOverlap = true;
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        if (!muonOverlap){
+                                            passesHEM = false;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (!passesHEM) continue;
+            passHEMCtr += 1;
+
 
 
             //--------------KINEMATICS--------------
@@ -870,9 +950,9 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
             
 
 
-            bool passHLTBool = (*HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ || *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8);
+            bool passHLTBool = (*HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL || *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8);
             if (useSingleLepHLT) {
-                passHLTBool = (passHLTBool || *HLT_IsoMu27 || *HLT_Mu50 || *HLT_Ele32_WPTight_Gsf_L1DoubleEG);
+                passHLTBool = (passHLTBool || *HLT_IsoMu24 || *HLT_Ele32_WPTight_Gsf_L1DoubleEG);
             }
             
             if (!passHLTBool) continue;
@@ -1025,6 +1105,13 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
             HLT_Ele27_WPTight_GsfL = false;
             HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL = false;
 
+            //change 2018 to IsoMu24 and remove DZ from diele trigger
+            HLT_IsoMu24L = *HLT_IsoMu24;
+            HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL = *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL;
+
+            //2016 in other years just set these to false
+            HLT_IsoTkMu24L = false;
+
             //042024SFAndSuchAdditions
             //PU JetID
             for (UInt_t nJetItr=0; nJetItr<nJetL;nJetItr++){
@@ -1133,6 +1220,7 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
 
     std::cout << "evRunOver: " << evRunOver << " -------------------\n";
     std::cout << "passes Golden JSON: " << passGoldenJSONCtr << " ------------------- "<< "\n";
+    std::cout << "passes HEM cut: " << passHEMCtr << " ------------------- "<< "\n";
     std::cout << "passes Flag cut: " << passFlagCtr << " ------------------- "<< "\n";
     std::cout << "passes HLT cut: " << passHLTCtr << " ------------------- "<< "\n";
     std::cout << "passes nFJ cut: " << passnFJCtr << " ------------------- " << "\n";
