@@ -797,6 +797,8 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
         TTreeReaderArray<Bool_t> Muon_looseId(myEventsReader, "Muon_looseId");
 
         TTreeReaderArray<Int_t> Muon_nTrackerLayers(myEventsReader, "Muon_nTrackerLayers");
+
+        TTreeReaderArray<Bool_t> Muon_isPFcand(myEventsReader, "Muon_isPFcand");
         
         //For LepID
         TTreeReaderArray<Float_t> Electron_dxy(myEventsReader, "Electron_dxy");
@@ -893,14 +895,14 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
             runForHEM = *run;
             eventForHEM = *event;
             isHEMRun = false;
-            if (yearType == 0){
+            if (yearInd == 0){
                 if (*run >= 319077) {
                     isHEMRun = true;
                 }
                 HEMCheckTree->Fill();
             }
             bool passesHEM = true;
-            if (yearType == 0){
+            if (yearInd == 0){
                 for (int i = 0; i < *nJet; i++){
                     if (Jet_eta[i] > -3.2 && Jet_eta[i] < -1.3){
                         if (Jet_phi[i] > -1.57 && Jet_phi[i] < -0.87){
