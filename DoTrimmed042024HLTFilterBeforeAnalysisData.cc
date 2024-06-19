@@ -655,7 +655,7 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
 
     HEMCheckTree->Branch("runForHEM",&runForHEM,"runForHEM/i");
     HEMCheckTree->Branch("eventForHEM",&eventForHEM,"eventForHEM/l");
-    FilteredEventsTree->Branch("isHEMRun",&isHEMRun,"isHEMRun/O");
+    HEMCheckTree->Branch("isHEMRun",&isHEMRun,"isHEMRun/O");
 
 
 
