@@ -1235,6 +1235,7 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
     outFile->cd();
     evNumTree->Write("",TObject::kOverwrite);
     FilteredEventsTree->Write("",TObject::kOverwrite);
+    HEMCheckTree->Write("",TObject::kOverwrite);
 
     outFile->Close();
 }
