@@ -63,24 +63,14 @@ void getHEMRatio(){
     //gInterpreter->GenerateDictionary("vector<vector<vector<Double_t> > >", "vector");
     //gInterpreter->GenerateDictionary("vector<vector<vector<Int_t> > >", "vector");
 
-    std::vector<std::string> fileAr;
-
 
     std::string saveName;
     
-    const uint nDataSets = 11;
+    const uint nDataSets = 3;
 
     std::string datasetTypeStrAr[nDataSets] =  {
-    "DoubleEG16",
-    "DoubleEG17",
-    "DoubleMuon16",
-    "DoubleMuon17",
     "DoubleMuon",
     "EGamma",
-    "SingleElectron16",
-    "SingleElectron17",
-    "SingleMuon16",
-    "SingleMuon17",
     "SingleMuon"};
 
     std::string datasetStrAr[nDataSets];
