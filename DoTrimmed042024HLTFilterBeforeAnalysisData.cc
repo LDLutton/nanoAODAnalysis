@@ -891,56 +891,6 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
             if (!passGoldenJSON) continue;
             passGoldenJSONCtr += 1;
 
-            //Do new HEM 15/16 veto #05042024 UPDATE. was going to add this but for now we are waiting on adding the HEM stuff.
-            runForHEM = *run;
-            eventForHEM = *event;
-            isHEMRun = false;
-            if (yearInd == 0){
-                if (*run >= 319077) {
-                    isHEMRun = true;
-                }
-                HEMCheckTree->Fill();
-            }
-            bool passesHEM = true;
-            if (yearInd == 0){
-                for (int i = 0; i < *nJet; i++){
-                    if (Jet_eta[i] > -3.2 && Jet_eta[i] < -1.3){
-                        if (Jet_phi[i] > -1.57 && Jet_phi[i] < -0.87){
-                            //Check that it passes the loose selection
-                            if (Jet_pt[i] > 15){
-                                if ((Jet_pt[i] >= 50) || (Jet_puId[i] == 7)){
-                                    if (Jet_jetId[i] == 6){
-                                        passesHEM = false;
-                                        break;
-                                    }
-                                    else if (Jet_jetId[i] == 2 && Jet_chHEF[i] + Jet_neHEF[i] < 0.9){
-                                        //Check that jet does not overlap (dR<0.2) with a PF muon
-                                        bool muonOverlap = false;
-                                        for (int j = 0; j < *nMuon; j++){
-                                            if (Muon_isPFcand[j]){
-                                                if (calcDeltaR(Jet_phi[i], Jet_eta[i], Muon_phi[j], Muon_eta[j]) < 0.2){
-                                                    muonOverlap = true;
-                                                    break;
-                                                }
-                                            }
-                                        }
-                                        if (!muonOverlap){
-                                            passesHEM = false;
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (!passesHEM) continue;
-            passHEMCtr += 1;
-
-
-
             //--------------KINEMATICS--------------
 
             UInt_t tmpnFatJets = *nFatJet;
@@ -989,6 +939,55 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
             }
 
             passnVBFCtr += 1;
+
+
+            //Do new HEM 15/16 veto
+            runForHEM = *run;
+            eventForHEM = *event;
+            isHEMRun = false;
+            if (yearInd == 0){
+                if (*run >= 319077) {
+                    isHEMRun = true;
+                }
+                HEMCheckTree->Fill();
+            }
+            bool passesHEM = true;
+            if (yearInd == 0){
+                for (int i = 0; i < *nJet; i++){
+                    if (Jet_eta[i] > -3.2 && Jet_eta[i] < -1.3){
+                        if (Jet_phi[i] > -1.57 && Jet_phi[i] < -0.87){
+                            //Check that it passes the loose selection
+                            if (Jet_pt[i] > 15){
+                                if ((Jet_pt[i] >= 50) || (Jet_puId[i] == 7)){
+                                    if (Jet_jetId[i] == 6){
+                                        passesHEM = false;
+                                        break;
+                                    }
+                                    else if (Jet_jetId[i] == 2 && Jet_chHEF[i] + Jet_neHEF[i] < 0.9){
+                                        //Check that jet does not overlap (dR<0.2) with a PF muon
+                                        bool muonOverlap = false;
+                                        for (int j = 0; j < *nMuon; j++){
+                                            if (Muon_isPFcand[j]){
+                                                if (calcDeltaR(Jet_phi[i], Jet_eta[i], Muon_phi[j], Muon_eta[j]) < 0.2){
+                                                    muonOverlap = true;
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        if (!muonOverlap){
+                                            passesHEM = false;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (!passesHEM) continue;
+            passHEMCtr += 1;
 
             
             runL = *run;
@@ -1222,11 +1221,11 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
 
     std::cout << "evRunOver: " << evRunOver << " -------------------\n";
     std::cout << "passes Golden JSON: " << passGoldenJSONCtr << " ------------------- "<< "\n";
-    std::cout << "passes HEM cut: " << passHEMCtr << " ------------------- "<< "\n";
     std::cout << "passes Flag cut: " << passFlagCtr << " ------------------- "<< "\n";
     std::cout << "passes HLT cut: " << passHLTCtr << " ------------------- "<< "\n";
     std::cout << "passes nFJ cut: " << passnFJCtr << " ------------------- " << "\n";
     std::cout << "passes nVBF cut: " << passnVBFCtr << " ------------------- " << "\n";
+    std::cout << "passes HEM cut: " << passHEMCtr << " ------------------- "<< "\n";
 
     
 
