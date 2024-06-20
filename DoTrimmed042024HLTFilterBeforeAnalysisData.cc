@@ -952,7 +952,7 @@ void DoTrimmed042024HLTFilterBeforeAnalysisData(string datasetString,UInt_t file
                 HEMCheckTree->Fill();
             }
             bool passesHEM = true;
-            if (yearInd == 0){
+            if (yearInd == 0 && isHEMRun){
                 for (int i = 0; i < *nJet; i++){
                     if (Jet_eta[i] > -3.2 && Jet_eta[i] < -1.3){
                         if (Jet_phi[i] > -1.57 && Jet_phi[i] < -0.87){
