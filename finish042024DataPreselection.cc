@@ -324,6 +324,11 @@ void finish042024DataPreselection(string datasetString){
     //2016 in other years just set these to false
     Bool_t HLT_Ele27_WPTight_GsfL;
     Bool_t HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL;
+    //change 2018 to IsoMu24 and remove DZ from diele trigger for 2018 and 2017
+    Bool_t HLT_IsoMu24L;
+    Bool_t HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL;
+    //2016 in other years just set these to false
+    Bool_t HLT_IsoTkMu24L;
     //Tight/Veto lep variables
     Bool_t tightLepLeadIsElecL;
     Bool_t tightLepTrailingIsElecL;
@@ -477,6 +482,10 @@ void finish042024DataPreselection(string datasetString){
     //2016
     FilteredEventsTree->Branch("HLT_Ele27_WPTight_GsfL",&HLT_Ele27_WPTight_GsfL,"HLT_Ele27_WPTight_GsfL/O");
     FilteredEventsTree->Branch("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL",&HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL,"HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL/O");
+
+    FilteredEventsTree->Branch("HLT_IsoMu24L",&HLT_IsoMu24L,"HLT_IsoMu24L/O");
+    FilteredEventsTree->Branch("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL",&HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL,"HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL/O");
+    FilteredEventsTree->Branch("HLT_IsoTkMu24L",&HLT_IsoTkMu24L,"HLT_IsoTkMu24L/O");
 
     FilteredEventsTree->Branch("tightLepLeadIsElecL",&tightLepLeadIsElecL,"tightLepLeadIsElecL/O");
     FilteredEventsTree->Branch("tightLepTrailingIsElecL",&tightLepTrailingIsElecL,"tightLepTrailingIsElecL/O");
@@ -645,9 +654,12 @@ void finish042024DataPreselection(string datasetString){
         TTreeReaderArray<Float_t> FatJet_particleNetMD_Xqq(myEventsReader, "FatJet_particleNetMD_XqqL");
 
         TTreeReaderValue<Bool_t> HLT_Ele32_WPTight_Gsf_L1DoubleEG(myEventsReader,"HLT_Ele32_WPTight_Gsf_L1DoubleEGL");
+        TTreeReaderValue<Bool_t> HLT_IsoMu24(myEventsReader, "HLT_IsoMu24");
+        TTreeReaderValue<Bool_t> HLT_IsoTkMu24(myEventsReader, "HLT_IsoTkMu24");
         TTreeReaderValue<Bool_t> HLT_IsoMu27(myEventsReader,"HLT_IsoMu27L");
         TTreeReaderValue<Bool_t> HLT_Mu50(myEventsReader,"HLT_Mu50L");
         TTreeReaderValue<Bool_t> HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ(myEventsReader,"HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZL");
+        TTreeReaderValue<Bool_t> HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL(myEventsReader, "HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL");
         TTreeReaderValue<Bool_t> HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8(myEventsReader,"HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8L");
 
         TTreeReaderValue<Bool_t> HLT_Ele27_WPTight_Gsf(myEventsReader,"HLT_Ele27_WPTight_GsfL");
@@ -1053,6 +1065,13 @@ void finish042024DataPreselection(string datasetString){
 
             HLT_Ele27_WPTight_GsfL = *HLT_Ele27_WPTight_Gsf;
             HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL = *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ;
+
+            //change 2018 to IsoMu24 and remove DZ from diele trigger
+            HLT_IsoMu24L = *HLT_IsoMu24;
+            HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL = *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL;
+
+            //2016 in other years just set these to false
+            HLT_IsoTkMu24L = *HLT_IsoTkMu24;
             //Tight/Veto lep variables
             if (tightLepOnePt > tightLepTwoPt){
                 tightLepLeadIsElecL = tightLepOneIsElec;
