@@ -48,6 +48,11 @@
 
 
 void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, string datasetString){
+
+    //Precalculated HEM ratio from data
+    float HEMRatio = 0.02;
+    //divide 1 by HEMRatio to get the integer value to use as the modulo
+    uint HEMInt = floor((1./HEMRatio)+0.5);
     // Open the file. Note that the name of your file outside this class
     // will probably NOT be experiment.root.
     std::cout << "start\n";
@@ -298,6 +303,7 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
     
 
     UInt_t passFlagCtr = 0;
+    UInt_t passHEMCtr = 0;
     UInt_t passHLTCtr = 0;
     UInt_t passnFJCtr = 0;
     UInt_t passnVBFCtr = 0;
@@ -1000,6 +1006,9 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
         TTreeReaderArray<Int_t> Jet_genJetIdx(myEventsReader, "Jet_genJetIdx");
         TTreeReaderArray<Float_t> Jet_btagDeepFlavB(myEventsReader, "Jet_btagDeepFlavB");
         TTreeReaderValue<Float_t> fixedGridRhoFastjetAll(myEventsReader, "fixedGridRhoFastjetAll");
+        //Jet variables for HEM
+        TTreeReaderArray<Float_t> Jet_chHEF(myEventsReader, "Jet_chHEF");
+        TTreeReaderArray<Float_t> Jet_neHEF(myEventsReader, "Jet_neHEF");
 
         //GenJet
 
@@ -1084,6 +1093,8 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
         TTreeReaderArray<Bool_t> Muon_looseId(myEventsReader, "Muon_looseId");
         TTreeReaderArray<Int_t> Muon_nTrackerLayers(myEventsReader, "Muon_nTrackerLayers");
         TTreeReaderArray<Int_t> Muon_genPartIdx(myEventsReader, "Muon_genPartIdx");
+
+        TTreeReaderArray<Bool_t> Muon_isPFcand(myEventsReader, "Muon_isPFcand");
 
         //For LepID
         TTreeReaderArray<Float_t> Electron_dxy(myEventsReader, "Electron_dxy");
@@ -2107,6 +2118,45 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
                     }
                 }
             }
+
+            //Do 2018 HEM veto
+            bool passesHEM = true;
+            if (yearInd == 0 && ((evCount-1) % HEMInt == 0)){
+                for (int i = 0; i < *nJet; i++){
+                    if (Jet_eta[i] > -3.2 && Jet_eta[i] < -1.3){
+                        if (Jet_phi[i] > -1.57 && Jet_phi[i] < -0.87){
+                            //Check that it passes the loose selection
+                            if (Jet_pt[i] > 15){
+                                if ((Jet_pt[i] >= 50) || (Jet_puId[i] == 7)){
+                                    if (Jet_jetId[i] == 6){
+                                        passesHEM = false;
+                                        break;
+                                    }
+                                    else if (Jet_jetId[i] == 2 && Jet_chHEF[i] + Jet_neHEF[i] < 0.9){
+                                        //Check that jet does not overlap (dR<0.2) with a PF muon
+                                        bool muonOverlap = false;
+                                        for (int j = 0; j < *nMuon; j++){
+                                            if (Muon_isPFcand[j]){
+                                                if (calcDeltaR(Jet_phi[i], Jet_eta[i], Muon_phi[j], Muon_eta[j]) < 0.2){
+                                                    muonOverlap = true;
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        if (!muonOverlap){
+                                            passesHEM = false;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (!passesHEM) continue;
+            passHEMCtr += 1;
             
 
             /*
