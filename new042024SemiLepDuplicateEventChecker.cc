@@ -1,3 +1,5 @@
+#include <set>
+#include <utility>
 #include<TApplication.h>
 #include<TFile.h>
 #include<TMath.h>
@@ -409,9 +411,9 @@ void new042024SemiLepDuplicateEventChecker(){
 
 
     
-    std::vector<int> runVec;
-    std::vector<int> evVec;
-    
+    //std::vector<int> runVec;
+    //std::vector<int> evVec;
+    std::set<std::pair<UInt_t, ULong64_t>> uniqueEvents;
 
     std::cout << "Going into file loop.\n";
 
@@ -589,6 +591,8 @@ void new042024SemiLepDuplicateEventChecker(){
             evCount += 1;
             allCtr += 1;
 
+            /*
+
             bool isUnique = true;
 
             for (uint runEvInt = 0; runEvInt < runVec.size(); runEvInt++) {
@@ -598,12 +602,18 @@ void new042024SemiLepDuplicateEventChecker(){
                 }
             }
 
+            */
+
+           auto inserted = uniqueEvents.insert({*run_SL_L,*event_SL_L});
+
             
 
-            if (isUnique){
+            //if (isUnique){
+            if (inserted.second) {
+
                 uniqueCtr += 1;
-                runVec.push_back(*run_SL_L);
-                evVec.push_back(*event_SL_L);
+                //runVec.push_back(*run_SL_L);
+                //evVec.push_back(*event_SL_L);
 
             
                 //Fill BDT SemiLep Tree

@@ -1,3 +1,5 @@
+#include <set>
+#include <utility>
 #include<TApplication.h>
 #include<TFile.h>
 #include<TMath.h>
@@ -125,8 +127,9 @@ void getHEMRatio(){
 
 
 
-    std::vector<int> runVec;
-    std::vector<int> evVec;
+    //std::vector<int> runVec;
+    //std::vector<int> evVec;
+    std::set<std::pair<UInt_t, ULong64_t>> uniqueEvents;
     
 
     std::cout << "Going into file loop.\n";
@@ -167,27 +170,39 @@ void getHEMRatio(){
             if (evCount % 100000 == 0) std::cout << "Event: " << evCount << "\n";
             if (debug){
                 std::cout << "-------------------------\n";
-                std::cout << evCount+1 << " starting jets loop\n";
+                std::cout << evCount+1 << " starting HEM loop\n";
             }
             
             evCount += 1;
             allCtr += 1;
 
+            /*
+
             bool isUnique = true;
 
-            for (uint runEvInt = 0; runEvInt < runVec.size(); runEvInt++) {
-                if (runVec[runEvInt] == *runForHEM && evVec[runEvInt] == *eventForHEM) {
-                    isUnique = false;
-                    break;
+            if (k == 0){
+                isUnique = true;
+            }
+            else {
+                for (uint runEvInt = 0; runEvInt < runVec.size(); runEvInt++) {
+                    if (runVec[runEvInt] == *runForHEM && evVec[runEvInt] == *eventForHEM) {
+                        isUnique = false;
+                        break;
+                    }
                 }
             }
 
+            */
+
+           auto inserted = uniqueEvents.insert({*runForHEM,*eventForHEM});
+
             
 
-            if (isUnique){
+            //if (isUnique){
+            if (inserted.second) {
                 uniqueCtr += 1;
-                runVec.push_back(*runForHEM);
-                evVec.push_back(*eventForHEM);
+                //runVec.push_back(*runForHEM);
+                //evVec.push_back(*eventForHEM);
 
             
                 //Fill BDT SemiLep Tree
