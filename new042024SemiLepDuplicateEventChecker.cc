@@ -229,6 +229,11 @@ void new042024SemiLepDuplicateEventChecker(){
     //2016 in other years just set these to false
     Bool_t HLT_Ele27_WPTight_Gsf_SLU_L;
     Bool_t HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_SLU_L;
+    //change 2018 to IsoMu24 and remove DZ from diele trigger for 2018 and 2017
+    Bool_t HLT_IsoMu24_SLU_L;
+    Bool_t HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_SLU_L;
+    //2016 in other years just set these to false
+    Bool_t HLT_IsoTkMu24_SLU_L;
     //Tight/Veto lep variables
     Bool_t tightLepLeadIsElec_SLU_L;
     Bool_t tightLepTrailingIsElec_SLU_L;
@@ -355,9 +360,12 @@ void new042024SemiLepDuplicateEventChecker(){
     passingEvSemiLepUniqueTree->Branch("selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_SLU_L",&selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_SLU_L,"selectedZPairPlusHiggsFJPlusVBFJets_PtVecOverScalarSum_SLU_L/F");
 
     passingEvSemiLepUniqueTree->Branch("HLT_Ele32_WPTight_Gsf_L1DoubleEG_SLU_L",&HLT_Ele32_WPTight_Gsf_L1DoubleEG_SLU_L,"HLT_Ele32_WPTight_Gsf_L1DoubleEG_SLU_L/O");
+    passingEvSemiLepUniqueTree->Branch("HLT_IsoMu24_SLU_L",&HLT_IsoMu24_SLU_L,"HLT_IsoMu24_SLU_L/O");
+    passingEvSemiLepUniqueTree->Branch("HLT_IsoTkMu24_SLU_L",&HLT_IsoTkMu24_SLU_L,"HLT_IsoTkMu24_SLU_L/O");
     passingEvSemiLepUniqueTree->Branch("HLT_IsoMu27_SLU_L",&HLT_IsoMu27_SLU_L,"HLT_IsoMu27_SLU_L/O");
     passingEvSemiLepUniqueTree->Branch("HLT_Mu50_SLU_L",&HLT_Mu50_SLU_L,"HLT_Mu50_SLU_L/O");
     passingEvSemiLepUniqueTree->Branch("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_SLU_L",&HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_SLU_L,"HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_SLU_L/O");
+    passingEvSemiLepUniqueTree->Branch("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_SLU_L",&HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_SLU_L,"HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_SLU_L/O");
     passingEvSemiLepUniqueTree->Branch("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_SLU_L",&HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_SLU_L,"HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_SLU_L/O");
 
     //2016
@@ -512,6 +520,10 @@ void new042024SemiLepDuplicateEventChecker(){
 
         TTreeReaderValue<Bool_t> HLT_Ele27_WPTight_Gsf_SL_L(myEventsReader,"HLT_Ele27_WPTight_Gsf_SL_L");
         TTreeReaderValue<Bool_t> HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_SL_L(myEventsReader,"HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_SL_L");
+
+        TTreeReaderValue<Bool_t> HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_SL_L(myEventsReader, "HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_SL_L");
+        TTreeReaderValue<Bool_t> HLT_IsoMu24_SL_L(myEventsReader,"HLT_IsoMu24_SL_L");
+        TTreeReaderValue<Bool_t> HLT_IsoTkMu24_SL_L(myEventsReader, "HLT_IsoTkMu24_SL_L");
 
         //Tight Leps from Preselection
         TTreeReaderValue<Int_t> tightLepLeadInd_SL_L(myEventsReader,"tightLepLeadInd_SL_L");
@@ -694,6 +706,10 @@ void new042024SemiLepDuplicateEventChecker(){
 
                 HLT_Ele27_WPTight_Gsf_SLU_L = *HLT_Ele27_WPTight_Gsf_SL_L;
                 HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_SLU_L = *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_SL_L;
+
+                HLT_IsoMu24_SLU_L = *HLT_IsoMu24_SL_L;
+                HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_SLU_L = *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_SL_L;
+                HLT_IsoTkMu24_SLU_L = *HLT_IsoTkMu24_SL_L;
 
                 tightLepLeadIsElec_SLU_L = *tightLepLeadIsElec_SL_L;
                 tightLepTrailingIsElec_SLU_L = *tightLepTrailingIsElec_SL_L;
