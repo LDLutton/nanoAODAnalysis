@@ -1,3 +1,4 @@
+#include<cstdlib>
 #include<TApplication.h>
 #include<TFile.h>
 #include<TMath.h>
@@ -39,7 +40,10 @@
 #include<sys/stat.h>
 #include<errno.h>
 
-
+bool tryCut(double ratioToCheck = 0.65){
+    double randomFloat = (double)rand() / RAND_MAX;
+    return randomFloat < ratioToCheck;
+}
 
 ////////////////////////////////START OF MAIN FUNCTION////////////////////////////////
 ////////////////////////////////START OF MAIN FUNCTION////////////////////////////////
@@ -49,10 +53,12 @@
 
 void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, string datasetString){
 
+    srand(12345);
+
     //Precalculated HEM ratio from data
-    float HEMRatio = 0.02;
+    //float HEMRatio = 0.02;
     //divide 1 by HEMRatio to get the integer value to use as the modulo
-    uint HEMInt = floor((1./HEMRatio)+0.5);
+    //uint HEMInt = floor((1./HEMRatio)+0.5);
     // Open the file. Note that the name of your file outside this class
     // will probably NOT be experiment.root.
     std::cout << "start\n";
@@ -2121,7 +2127,8 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
 
             //Do 2018 HEM veto
             bool passesHEM = true;
-            if (yearInd == 0 && ((evCount-1) % HEMInt == 0)){
+            //if (yearInd == 0 && ((evCount-1) % HEMInt == 0)){
+            if (yearInd == 0 && tryCut()){
                 for (int i = 0; i < *nJet; i++){
                     if (Jet_eta[i] > -3.2 && Jet_eta[i] < -1.3){
                         if (Jet_phi[i] > -1.57 && Jet_phi[i] < -0.87){
@@ -2157,6 +2164,8 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
 
             if (!passesHEM) continue;
             passHEMCtr += 1;
+
+            
             
 
             /*
@@ -2524,6 +2533,8 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
                 std::cout <<"Filling Jets\n";
             }
 
+            
+
 
             //reweighting vectors
 
@@ -2861,6 +2872,7 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
 
     std::cout << "evRunOver: " << evRunOver << " -------------------\n";
     std::cout << "passes Flag cut: " << passFlagCtr << " -------------------\n";
+    std::cout << "passes HEM cut: " << passHEMCtr << " ------------------- "<< "\n";
 
     std::string C2V2Str = "2p0";
     std::string C2V2MaStr = "C2W_2p0_C2Z_2p0";
@@ -2923,6 +2935,8 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
             std::cout << "(" << C2V2Str << "," << passnVBFWeightedCtrAr[0][0] << "),";
         }
     }
+
+    
 
     
     std::cout << "sumOfGenWeights: " << sumOfGenWeights << "\n";
