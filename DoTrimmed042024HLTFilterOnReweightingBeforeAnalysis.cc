@@ -84,6 +84,8 @@ void DoTrimmed042024HLTFilterOnReweightingBeforeAnalysis(int fileInd, string dat
     bool isBackground;
     bool isMariaSignal = false;
 
+    uint yearInd = 0;
+
     ////////////////////////////////GETTING DATASET////////////////////////////////
     ////////////////////////////////GETTING DATASET////////////////////////////////
     ////////////////////////////////GETTING DATASET////////////////////////////////
@@ -102,6 +104,7 @@ void DoTrimmed042024HLTFilterOnReweightingBeforeAnalysis(int fileInd, string dat
         
     }
     else if (SDC2V2MCZZH17Reweight){
+        yearInd = 1;
         saveName = "SDC2V2MCZZH17Reweight";
         isBackground = false;
         int arrSize = sizeof(SDC2V2MCZZH17ReweightAr)/sizeof(SDC2V2MCZZH17ReweightAr[0]);
@@ -119,6 +122,7 @@ void DoTrimmed042024HLTFilterOnReweightingBeforeAnalysis(int fileInd, string dat
         
     }
     else if (MaC2V2MCZZH17Reweight){
+        yearInd = 1;
         isMariaSignal = true;
         saveName = "MaC2V2MCZZH17Reweight";
         isBackground = false;
@@ -136,6 +140,7 @@ void DoTrimmed042024HLTFilterOnReweightingBeforeAnalysis(int fileInd, string dat
         
     }
     else if (CenC2V2MCZZH17Reweight){
+        yearInd = 1;
         saveName = "CenC2V2MCZZH17Reweight";
         isBackground = false;
         int arrSize = sizeof(CenC2V2MCZZH17ReweightAr)/sizeof(CenC2V2MCZZH17ReweightAr[0]);
