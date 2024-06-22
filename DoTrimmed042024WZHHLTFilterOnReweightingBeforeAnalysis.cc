@@ -986,7 +986,6 @@ void DoTrimmed042024WZHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
         TTreeReaderValue<Bool_t> HLT_DoublePhoton70(myEventsReader, "HLT_DoublePhoton70");
 
         TTreeReaderValue<Bool_t> HLT_IsoMu24(myEventsReader, "HLT_IsoMu24");
-        TTreeReaderValue<Bool_t> HLT_IsoTkMu24(myEventsReader, "HLT_IsoTkMu24");
         TTreeReaderValue<Bool_t> HLT_IsoMu27(myEventsReader, "HLT_IsoMu27");
         TTreeReaderValue<Bool_t> HLT_IsoMu30(myEventsReader, "HLT_IsoMu30");
         TTreeReaderValue<Bool_t> HLT_Mu50(myEventsReader, "HLT_Mu50");
