@@ -798,6 +798,13 @@ void calc042024JERRoch(string datasetString){
     Bool_t HLT_Ele27_WPTight_GsfL;
     Bool_t HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL;
 
+    //change 2018 to IsoMu24 and remove DZ from diele trigger for 2018 and 2017
+    Bool_t HLT_IsoMu24L;
+    Bool_t HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL;
+
+    //2016 in other years just set these to false
+    Bool_t HLT_IsoTkMu24L;
+
     //042024SFAndSuchAdditions
     //PU JetID
     std::vector<Int_t> Jet_puIdL;
@@ -1033,6 +1040,10 @@ void calc042024JERRoch(string datasetString){
 
     FilteredEventsTree->Branch("HLT_Ele27_WPTight_GsfL",&HLT_Ele27_WPTight_GsfL,"HLT_Ele27_WPTight_GsfL/O");
     FilteredEventsTree->Branch("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL",&HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL,"HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL/O");
+
+    FilteredEventsTree->Branch("HLT_IsoMu24L",&HLT_IsoMu24L,"HLT_IsoMu24L/O");
+    FilteredEventsTree->Branch("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL",&HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL,"HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL/O");
+    FilteredEventsTree->Branch("HLT_IsoTkMu24L",&HLT_IsoTkMu24L,"HLT_IsoTkMu24L/O");
 
     //042024SFAndSuchAdditions
     //PU JetID
@@ -1323,6 +1334,10 @@ void calc042024JERRoch(string datasetString){
 
         TTreeReaderValue<Bool_t> HLT_Ele27_WPTight_Gsf(myEventsReader,"HLT_Ele27_WPTight_GsfL");
         TTreeReaderValue<Bool_t> HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ(myEventsReader,"HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL");
+
+        TTreeReaderValue<Bool_t> HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL(myEventsReader, "HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL");
+        TTreeReaderValue<Bool_t> HLT_IsoMu24(myEventsReader,"HLT_IsoMu24L");
+        TTreeReaderValue<Bool_t> HLT_IsoTkMu24(myEventsReader, "HLT_IsoTkMu24L");
 
         //042024SFAndSuchAdditions
         //PU JetID
@@ -1867,6 +1882,10 @@ void calc042024JERRoch(string datasetString){
 
             HLT_Ele27_WPTight_GsfL = *HLT_Ele27_WPTight_Gsf;
             HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL = *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ;
+
+            HLT_IsoMu24L = *HLT_IsoMu24;
+            HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL = *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL;
+            HLT_IsoTkMu24L = *HLT_IsoTkMu24;
 
             //042024SFAndSuchAdditions
             //PU JetID

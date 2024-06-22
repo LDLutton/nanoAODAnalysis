@@ -879,6 +879,13 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
     Bool_t HLT_Ele27_WPTight_GsfL;
     Bool_t HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL;
 
+    //change 2018 to IsoMu24 and remove DZ from diele trigger for 2018 and 2017
+    Bool_t HLT_IsoMu24L;
+    Bool_t HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL;
+
+    //2016 in other years just set these to false
+    Bool_t HLT_IsoTkMu24L;
+
     //042024SFAndSuchAdditions
     //PU JetID
     std::vector<Int_t> Jet_puIdL;
@@ -1127,6 +1134,10 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
     //2016
     FilteredEventsTree->Branch("HLT_Ele27_WPTight_GsfL",&HLT_Ele27_WPTight_GsfL,"HLT_Ele27_WPTight_GsfL/O");
     FilteredEventsTree->Branch("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL",&HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL,"HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL/O");
+
+    FilteredEventsTree->Branch("HLT_IsoMu24L",&HLT_IsoMu24L,"HLT_IsoMu24L/O");
+    FilteredEventsTree->Branch("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL",&HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL,"HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL/O");
+    FilteredEventsTree->Branch("HLT_IsoTkMu24L",&HLT_IsoTkMu24L,"HLT_IsoTkMu24L/O");
 
     //042024SFAndSuchAdditions
     //PU JetID
@@ -1525,6 +1536,10 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
         TTreeReaderValue<Bool_t> HLT_Ele27_WPTight_Gsf(myEventsReader,"HLT_Ele27_WPTight_GsfL");
         TTreeReaderValue<Bool_t> HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ(myEventsReader,"HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL");
 
+        TTreeReaderValue<Bool_t> HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL(myEventsReader, "HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL");
+        TTreeReaderValue<Bool_t> HLT_IsoMu24(myEventsReader,"HLT_IsoMu24L");
+        TTreeReaderValue<Bool_t> HLT_IsoTkMu24(myEventsReader, "HLT_IsoTkMu24L");
+
         //042024SFAndSuchAdditions
         //PU JetID
         TTreeReaderArray<Int_t> Jet_puId(myEventsReader, "Jet_puIdL");
@@ -1792,7 +1807,8 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                     //mass *= JEC;
                     //Do HEM15/16 correction
                     float finalPt;
-                    if (yearType == 2018){
+                    /*
+                    if (yearType == 0){
                         if(phi > -1.57 && phi < -0.87) {
                             if (eta > -3.0 && eta < -2.5){
                                 if (tmpPt > 15 && Jet_jetId[i] == 6){
@@ -1821,6 +1837,7 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                     else {
                         finalPt = tmpPt;
                     }
+                    */
                     jetAllCorPtVec.push_back(finalPt);
                     
                 }
@@ -1858,6 +1875,7 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                     //Do HEM15/16 correction
 
                     float finalPt = tmpPt;
+                    /*
                     if (yearType == 0){
                         if(phi > -1.57 && phi < -0.87) {
                             if (eta > -3.0 && eta < -2.5){
@@ -1887,6 +1905,7 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                     else {
                         finalPt = tmpPt;
                     }
+                    */
                     AK8jetAllCorPtVec.push_back(finalPt);
                     //AK8jetAllCorPtVec.push_back(tmpPt);
                 }
@@ -1921,7 +1940,8 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                         jetAllCorMassVec.push_back(Jet_mass_JERDown[i]);
                     }
                     float finalPt;
-                    if (yearType == 2018){
+                    /*
+                    if (yearType == 0){
                         if(phi > -1.57 && phi < -0.87) {
                             if (eta > -3.0 && eta < -2.5){
                                 if (tmpPt > 15 && Jet_jetId[i] == 6){
@@ -1950,6 +1970,7 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                     else {
                         finalPt = tmpPt;
                     }
+                    */
                     jetAllCorPtVec.push_back(finalPt);
                     
                 }
@@ -1982,6 +2003,7 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                     }
                     //Do HEM15/16 correction
                     float finalPt = tmpPt;
+                    /*
                     if (yearType == 0){
                         if(phi > -1.57 && phi < -0.87) {
                             if (eta > -3.0 && eta < -2.5){
@@ -2011,6 +2033,7 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                     else {
                         finalPt = tmpPt;
                     }
+                    */
                     AK8jetAllCorPtVec.push_back(finalPt);
                 }
 
@@ -2024,7 +2047,8 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                     float mass = Jet_mass_JERMid[i];
                     //jetAllCorPtVec.push_back(Jet_pt_JERMid[i]);
                     float finalPt;
-                    if (yearType == 2018){
+                    /*
+                    if (yearType == 0){
                         if(phi > -1.57 && phi < -0.87) {
                             if (eta > -3.0 && eta < -2.5){
                                 if (tmpPt > 15 && Jet_jetId[i] == 6){
@@ -2053,6 +2077,7 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                     else {
                         finalPt = tmpPt;
                     }
+                    */
                     jetAllCorPtVec.push_back(finalPt);
                     jetAllCorEtaVec.push_back(Jet_eta_JERMid[i]);
                     jetAllCorPhiVec.push_back(Jet_phi_JERMid[i]);
@@ -2073,6 +2098,7 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                     AK8jetAllCorMassVec.push_back(FatJet_mass_JERMid[i]);
                     //Do HEM15/16 correction
                     float finalPt = tmpPt;
+                    /*
                     if (yearType == 0){
                         if(phi > -1.57 && phi < -0.87) {
                             if (eta > -3.0 && eta < -2.5){
@@ -2102,6 +2128,7 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                     else {
                         finalPt = tmpPt;
                     }
+                    */
                     AK8jetAllCorPtVec.push_back(finalPt);
                 }
             }
@@ -2111,7 +2138,7 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
             bool passesHEM = true;
             //Want to do for roughly every 15 events to match the luminosity fraction of the data that this veto is also applied to
             //so check if the event number is divisible by 15
-            if (yearType == 2018 && *event % 15 == 0){
+            if (yearType == 0 && *event % 15 == 0){
                 for (int i = 0; i < *nJet; i++){
                         if (jetAllCorEtaVec[i] > -3.2 && jetAllCorEtaVec[i] < -1.3){
                             if (jetAllCorPhiVec[i] > -1.57 && jetAllCorPhiVec[i] < -0.87){
@@ -2133,8 +2160,6 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                                         a
                                     }
                                 }
-                                passesHEM = false;
-                                break;
                             }
                         }
                     }
@@ -2485,6 +2510,10 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
             //2016
             HLT_Ele27_WPTight_GsfL = *HLT_Ele27_WPTight_Gsf;
             HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZL = *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ;
+
+            HLT_IsoMu24L = *HLT_IsoMu24;
+            HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVLL = *HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL;
+            HLT_IsoTkMu24L = *HLT_IsoTkMu24;
 
             //042024SFAndSuchAdditions
             //PU JetID
