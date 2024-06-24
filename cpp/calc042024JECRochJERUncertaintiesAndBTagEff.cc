@@ -1806,7 +1806,7 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                     float tmpPt = pt * JEC;
                     //mass *= JEC;
                     //Do HEM15/16 correction
-                    float finalPt;
+                    float finalPt = tmpPt;
                     /*
                     if (yearType == 0){
                         if(phi > -1.57 && phi < -0.87) {
@@ -1939,7 +1939,7 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                         jetAllCorPhiVec.push_back(Jet_phi_JERDown[i]);
                         jetAllCorMassVec.push_back(Jet_mass_JERDown[i]);
                     }
-                    float finalPt;
+                    float finalPt = tmpPt;
                     /*
                     if (yearType == 0){
                         if(phi > -1.57 && phi < -0.87) {
@@ -2046,7 +2046,7 @@ void calc042024JECRochJERUncertaintiesAndBTagEff(string datasetString, int JECCo
                     float phi = Jet_phi_JERMid[i];
                     float mass = Jet_mass_JERMid[i];
                     //jetAllCorPtVec.push_back(Jet_pt_JERMid[i]);
-                    float finalPt;
+                    float finalPt = tmpPt;
                     /*
                     if (yearType == 0){
                         if(phi > -1.57 && phi < -0.87) {

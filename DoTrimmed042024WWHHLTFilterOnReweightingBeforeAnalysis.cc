@@ -1247,9 +1247,12 @@ void DoTrimmed042024WWHHLTFilterOnReweightingBeforeAnalysis(UInt_t fileInd, stri
             if (debug){
                 std::cout <<"Passed HLT\n";
             }
+            bool IsoMuHLTToUse = *HLT_IsoMu24;
+            if (yearInd == 1) IsoMuHLTToUse = *HLT_IsoMu27;
+
             bool passHLTBool = (*HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL || *HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8);
             if (useSingleLepHLT) {
-                passHLTBool = (passHLTBool || *HLT_IsoMu24 || *HLT_Ele32_WPTight_Gsf_L1DoubleEG);
+                passHLTBool = (passHLTBool || IsoMuHLTToUse || *HLT_Ele32_WPTight_Gsf_L1DoubleEG);
             }
             //std::cout << testPassHLTBool << " " << passHLTBool << "\n";
             if (!passHLTBool) continue;
